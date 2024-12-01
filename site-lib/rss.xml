@@ -1,4 +1,175 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>Obsidian</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sun, 01 Dec 2024 13:01:36 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 01 Dec 2024 13:01:35 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[Home]]></title><description><![CDATA[The homepage]]></description><link>index.html</link><guid isPermaLink="false">index.md</guid><pubDate>Sun, 01 Dec 2024 12:59:35 GMT</pubDate></item><item><title><![CDATA[2024-02-05 Question of HQ]]></title><description><![CDATA[ Question: Are the rack and container assembly instructions currently available in multiple languages, including Chinese, or do they require translation? Answer: The assembly instructions are currently only available in Korean. We recognize the importance of making these accessible to our team in China and plan to have them translated into English as an intermediary step. This process is expected to take approximately one week. We will explore options for translation into Chinese to ensure clarity and accessibility for all team members involved in the assembly process. Question: Do we have visual aids, such as videos, to supplement the assembly instructions? Answer: At the moment, we do not have video documentation of the assembly process. However, we acknowledge the value of visual aids in enhancing understanding and reducing the potential for errors. We will initiate the creation of video tutorials that detail the assembly process, ensuring that these resources are comprehensive and easy to follow. Question: What specific assembly procedures are currently undertaken by the Korean CM, and are we fully aware of these processes? Answer: The Korean CM handles a range of assembly procedures that are documented in our standard operating procedures. However, it's essential to conduct a thorough review to ensure that all processes are fully captured and up-to-date. We are in the process of auditing these procedures to confirm their completeness and accuracy. Question: Considering the assembly procedures performed by the Korean CM, do we believe it's feasible to replicate these processes in China without significant obstacles? Answer: Based on our initial assessment, we believe that transitioning these assembly processes to China is feasible. The procedures do not require specialized skills that cannot be replicated or taught in China. However, we must ensure that all procedural documentation is current, translated, and adapted as necessary to meet any local regulatory requirements or operational differences. Question: Are there any anticipated challenges or limitations in transferring the assembly line to China, such as differences in regulations, standards, or workforce skills? Answer: While we anticipate a smooth transition overall, we are mindful of potential challenges such as differences in regulatory standards, the need for workforce training, and the adaptation of procedures to local practices. We are committed to conducting a detailed analysis to identify any such challenges early in the process and develop strategies to address them effectively. Question: What will be the approach if there are questions raised during the meeting that cannot be immediately answered? Answer: Should any questions arise that I cannot answer directly, I will take detailed notes and follow up with my direct manager to ensure a timely and accurate response. We are committed to transparency and effective communication throughout this transition process. It's clear from your preparation that while there are areas needing attention, such as the translation of documentation and the creation of visual aids, you have a proactive plan to address these needs. Emphasizing your commitment to a thorough review and update of assembly procedures, along with a strategic approach to overcoming potential challenges, will be key to reassuring the executives of the feasibility and readiness for the transition.Youcan you make it little bit easier? my mother tongue is korean, so some of that sentences are hard to memorize for me.ChatGPTChatGPTCertainly! Let's simplify the responses for your meeting: Question: Do we need to translate the assembly instructions? Are there videos? Answer: Yes, the instructions are only in Korean now. We need to translate them into English, which will take about a week. We don't have videos yet, but we plan to make them to help everyone understand the process better. Question: Can we use the same assembly procedures in China as in Korea? Answer: The procedures we use in Korea can be used in China too. We don't see big problems with moving the assembly there. Most tasks don't need special skills. But, we need to update and translate our instructions to make sure everyone can follow them. Question: What problems might we face moving to China? Answer: We might face some challenges, like different rules or the need to train the team in China. But we believe we can handle these by planning well and updating our instructions. Question: How long will it take to get all the documentation ready for the China team? Answer: We need about one week to translate the current documents into English. Making videos and further translations might take a bit more time. Question: Will the training materials be understandable for someone who doesn't speak Korean? Answer: Yes, we will translate everything into English first, and then into Chinese if needed, to make sure everyone can understand. Question: How do we ensure the quality of the assembly process remains high after moving to China? Answer: We will train the China team using our updated guides and videos. We will also check the assembly quality regularly. Question: Are there any parts of the assembly that must stay in Korea? Answer: Right now, we think everything can move to China. But we will double-check to make sure. Question: What is our timeline for moving the assembly line to China? Answer: We are still planning, but we will share a timeline as soon as we have it. Question: How will we handle differences in work culture between Korea and China? Answer: We will learn about the work culture in China and adapt our training and management to fit well with the team there. Question: Do we need any special permissions or certifications to start manufacturing in China? Answer: We are checking on this. We will get all the needed permissions and certifications before we start. Question: How will we transfer equipment and materials to China? Answer: We are planning the best way to do this. We will make sure everything is safe and cost-effective. Question: What if we face unexpected challenges during the move? Answer: We will plan carefully and have backup plans. We will solve problems as they come. Question: How will we communicate with the team in China? Answer: We will use English for official communication. We might also use translators when needed to make sure everyone understands. Question: Will there be ongoing support from Korea to the China team? Answer: Yes, we will keep supporting the China team. We can have regular meetings and visits to make sure everything goes well. Question: How will this move affect our delivery times to customers? Answer: We plan to keep delivery times the same, or even improve them by being closer to some of our customers. ]]></description><link>works/2024-02-05-question-of-hq.html</link><guid isPermaLink="false">Works/2024-02-05 Question of HQ.md</guid><pubDate>Sun, 01 Dec 2024 10:49:27 GMT</pubDate></item><item><title><![CDATA[Power BI_통합 대시보드 구현]]></title><description><![CDATA[예전에 Power BI로 대시보드를 만들 때, 내가 원하는 수준의 기능을 구현하기 위해 참고할 만한 국문 자료가 없어서 대부분 영문 자료를 참조하거나 Microsoft Power BI Documentation을 참조했다. 구축 이후 수정할 일이 크게 없어 방치하다 보니 세세한 요청 사항이 생겼을 때, 나도 어떻게 만들었는지 기억이 안 나서(…) 다시 자료 찾아보는 일이 생겼다. 그런데 아무래도 한국에서 많이 사용을 하는 툴이 아니다 보니 여전히 국문 자료가 부족한 듯 보인다. 그래서 리포트를 만들었던 과정을 복기하는 겸, 리포트 내에 적용했던 여러 사례를 이 블로그를 통해 소개하고자 한다.
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>Obsidian</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sun, 01 Dec 2024 13:04:31 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 01 Dec 2024 13:04:23 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[Do it! 점프 투 파이썬：중학생도 첫날부터 실습하는 초고속 입문서]]></title><description><![CDATA[
+01-1 파이썬이란?
+01-2 파이썬의 특징 파이썬은 인간다운 언어이다
+문법이 쉬워 빠르게 배울 수 있다
+무료이지만 강력하다
+간결하다
+프로그래밍을 즐기게 해 준다
+개발 속도가 빠르다 01-3 파이썬으로 무엇을 할 수 있을까? 파이썬으로 할 수 있는 일
+파이썬으로 할 수 없는 일 01-4 파이썬 설치하기 윈도우에서 파이썬 설치하기
+맥에서 파이썬 설치하기 01-5 파이썬 둘러보기 파이썬 기초 실습 준비하기
+파이썬 기초 문법 따라 해 보기 01-6 파이썬과 에디터 IDLE 에디터로 파이썬 프로그램 작성하기
+명령 프롬프트 창에서 파이썬 프로그램 실행하기
+추천하는 에디터 02-1 숫자형 숫자형은 어떻게 만들고 사용할까?
+숫자형을 활용하기 위한 연산자 02-2 문자열 자료형 문자열은 어떻게 만들고 사용할까?
+문자열 안에 작은따옴표나 큰따옴표를 포함시키고 싶을 때
+여러 줄인 문자열을 변수에 대입하고 싶을 때
+문자열 연산하기
+문자열 인덱싱과 슬라이싱
+문자열 포매팅이란?
+문자열 포매팅 따라 하기
+문자열 포맷 코드
+포맷 코드와 숫자 함께 사용하기
+format 함수를 사용한 포매팅
+f 문자열 포매팅
+문자열 관련 함수들 02-3 리스트 자료형 리스트는 어떻게 만들고 사용할까?
+리스트의 인덱싱과 슬라이싱
+리스트 연산하기
+리스트의 수정과 삭제
+리스트 관련 함수 02-4 튜플 자료형 튜플은 어떻게 만들까?
+튜플의 요솟값을 지우거나 변경하려고 하면 어떻게 될까?
+튜플 다루기 02-5 딕셔너리 자료형 딕셔너리란?
+딕셔너리는 어떻게 만들까?
+딕셔너리 쌍 추가, 삭제하기
+딕셔너리를 사용하는 방법
+딕셔너리 관련 함수 02-6 집합 자료형 집합 자료형은 어떻게 만들까?
+집합 자료형의 특징
+교집합, 합집합, 차집합 구하기
+집합 자료형 관련 함수 02-7 불 자료형 불 자료형은 어떻게 사용할까?
+자료형의 참과 거짓
+불 연산 02-8 자료형의 값을 저장하는 공간, 변수 변수는 어떻게 만들까?
+변수란?
+리스트를 복사하고자 할 때
+변수를 만드는 여러 가지 방법 03-1 if 문 if 문은 왜 필요할까?
+if 문의 기본 구조
+들여쓰기 방법 알아보기
+조건문이란 무엇인가?
+다양한 조건을 판단하는 elif
+조건부 표현식 03-2 while 문 while 문의 기본 구조
+while 문 강제로 빠져나가기
+while 문의 맨 처음으로 돌아가기
+무한 루프 03-3 for 문 for 문의 기본 구조
+예제를 통해 for 문 이해하기
+for 문과 continue 문
+for 문과 함께 자주 사용하는 range 함수
+리스트 컴프리헨션 사용하기 04-1 함수 함수란 무엇인가?
+함수를 사용하는 이유는 무엇일까?
+파이썬 함수의 구조
+매개변수와 인수
+입력값과 리턴값에 따른 함수의 형태
+매개변수를 지정하여 호출하기
+입력값이 몇 개가 될지 모를 때는 어떻게 해야 할까?
+키워드 매개변수, kwargs
+함수의 리턴값은 언제나 하나이다
+매개변수에 초깃값 미리 설정하기
+함수 안에서 선언한 변수의 효력 범위
+함수 안에서 함수 밖의 변수를 변경하는 방법
+lambda 예약어 04-2 사용자 입출력 사용자 입력 활용하기
+print 자세히 알기 04-3 파일 읽고 쓰기 파일 생성하기
+파일을 쓰기 모드로 열어 내용 쓰기
+파일을 읽는 여러 가지 방법
+파일에 새로운 내용 추가하기
+with 문과 함께 사용하기 04-4 프로그램의 입출력 sys 모듈 사용하기 05-1 클래스 클래스는 왜 필요한가?
+클래스와 객체
+생성자
+클래스의 상속
+메서드 오버라이딩
+클래스 변수 05-2 모듈 모듈 만들기
+if name == "main": 의 의미
+클래스나 변수 등을 포함한 모듈
+다른 파일에서 모듈 불러오기
+다른 디렉터리에 있는 모듈을 불러오는 방법 05-3 패키지 패키지 만들기
+패키지 안의 함수 실행하기
+init.py 의 용도
+relative 패키지 05-4 예외 처리 오류는 언제 발생하는가?
+오류 예외 처리 기법
+오류 회피하기
+오류 일부러 발생시키기
+예외 만들기 05-5 내장 함수 abs
+all
+any
+chr
+dir
+divmod
+enumerate
+eval
+filter
+hex
+id
+input
+int
+isinstance
+len
+list
+map
+max
+min
+oct
+open
+ord
+pow
+range
+round
+sorted
+str
+sum
+tuple
+type
+zip 05-6 표준 라이브러리 datetime.date
+time
+math.gcd
+math.lcm
+random
+itertools.zip_longest
+itertools.combination
+functools.reduce
+operator.itemgetter
+shutil
+glob
+pickle
+os
+threading
+tempfile
+traceback
+json
+urllib
+webbrowser 05-7 외부 라이브러리 pip
+Faker
+sympy 06-1 내가 프로그램을 만들 수 있을까?
+06-2 3과 5의 배수를 모두 더하기
+06-3 게시판 페이징하기
+06-4 간단한 메모장 만들기
+06-5 탭 문자를 공백 문자 4개로 바꾸기
+06-6 하위 디렉터리 검색하기 07-1 파이썬과 유니코드 최초의 문자 셋, 아스키코드
+유니코드의 등장
+유니코드로 문자열 다루기 07-2 클로저와 데코레이터 클로저란?
+데코레이터란? 07-3 이터레이터와 제너레이터 이터레이터란?
+이터레이터 만들기
+제너레이터란?
+제너레이터 표현식
+제너레이터와 이터레이터
+제너레이터 활용하기 07-4 파이썬 타입 어노테이션
+동적 언어와 정적 언어
+파이썬 타입 어노테이션 08-1 정규 표현식 살펴보기 정규 표현식은 왜 필요한가? 08-2 정규 표현식 시작하기 정규 표현식의 기초, 메타 문자
+파이썬에서 정규 표현식을 지원하는 re 모듈
+정규식을 이용한 문자열 검색
+match 객체의 메서드
+컴파일 옵션
+역슬래시 문제 08-3 강력한 정규 표현식의 세계로 문자열 소비가 없는 메타 문자
+그루핑
+전방 탐색
+문자열 바꾸기
+greedy와 non-greedy Do it! 파이썬 코딩 면허 시험 20제
+Do it! 챗GPT와 함께 파이썬 공부하기
+]]></description><link>books/do-it-점프-투-파이썬(테스트용).html</link><guid isPermaLink="false">Books/Do it 점프 투 파이썬(테스트용).md</guid><dc:creator><![CDATA[박응용]]></dc:creator><pubDate>Thu, 01 Aug 2024 06:34:08 GMT</pubDate></item><item><title><![CDATA[0_Reading log(auto-sync)]]></title><link>books/0_reading-log(auto-sync).html</link><guid isPermaLink="false">Books/0_Reading log(auto-sync).md</guid><pubDate>Mon, 29 Jul 2024 11:05:16 GMT</pubDate><enclosure url="https://image.yes24.com/momo/TopCate388/MidCate007/4349940.jpg" length="0" type="image/jpeg"/><content:encoded>&lt;figure&gt;&lt;img src="https://image.yes24.com/momo/TopCate388/MidCate007/4349940.jpg"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[싯다르타]]></title><description><![CDATA["싯다르타"는 고대 인도의 젊은 남자 싯다르타의 영적 여정을 다룬 소설입니다. 주인공 싯다르타는 자아를 찾기 위해 다양한 삶의 방식을 경험하며 성장합니다.
+브라만의 아들 싯다르타는 존경받는 브라만 가문의 아들로 태어났으나, 전통적인 종교 교육과 생활에서 벗어나 진리를 찾기 위해 떠납니다. 사문과의 생활 친구 고빈다와 함께 고행 생활을 하는 사문이 되어 물질적 쾌락을 부정하고 명상을 통해 깨달음을 추구합니다. 고타마 붓다와의 만남 싯다르타는 고타마 붓다(석가모니)를 만나 가르침을 듣지만, 자신만의 길을 가기로 결심합니다. 고빈다는 붓다의 제자가 되지만, 싯다르타는 홀로 떠납니다. 카밀라와의 삶 싯다르타는 도시로 가서 매춘부 카밀라를 만나 사랑을 배우고, 상인 카마스와미에게서 물질적 성공을 배웁니다. 그러나 이 모든 것이 그에게 진정한 만족을 주지 못합니다. 강가의 깨달음 싯다르타는 강가에서 배를 젓는 배사공 바수데바를 만나 그의 단순한 삶을 통해 깊은 깨달음을 얻습니다. 결국, 그는 강을 통해 삶의 진정한 본질을 이해하게 됩니다. 영적 여정: 싯다르타의 삶은 자아를 찾기 위한 끝없는 탐구입니다.
+자기 발견: 다른 사람들의 가르침이 아닌, 자신의 경험을 통해 깨달음을 얻는 것이 중요하다는 메시지를 전달합니다.
+이원성의 초월: 세속적인 삶과 영적인 삶을 모두 경험하며 이 둘의 경계를 넘나드는 과정이 묘사됩니다. 영적 탐구와 철학: "싯다르타"는 동양 철학과 서양 철학을 통합한 헤세의 대표작으로, 많은 이들에게 영감과 깨달음을 주었습니다.
+개인주의와 자아 실현: 싯다르타의 이야기는 현대 사회에서도 여전히 중요한 주제인 자기 발견과 자아 실현에 대해 깊이 생각하게 합니다.
+문학적 가치: 아름다운 문체와 깊이 있는 철학적 성찰로 인해 세계 문학사에서 중요한 위치를 차지합니다. 철학과 영성에 관심 있는 독자: 자아 탐구와 영적 여정을 다룬 책을 찾는 독자에게 적합합니다.
+자기 계발서 애호가: 자신의 삶의 의미를 찾고자 하는 사람들에게 큰 영감을 줄 수 있습니다.
+문학 애호가: 헤르만 헤세의 문학적 재능과 아름다운 글쓰기를 경험하고 싶은 독자에게 추천합니다.
+MOC:: <a data-href="📚 230 Ancient, Medieval, Oriental Philosophy" href=".html" class="internal-link" target="_self" rel="noopener nofollow">📚 230 Ancient, Medieval, Oriental Philosophy</a> | <a data-href="📚 290 Comparative Religion" href=".html" class="internal-link" target="_self" rel="noopener nofollow">📚 290 Comparative Religion</a> | <a data-href="📚 800 Literature" href=".html" class="internal-link" target="_self" rel="noopener nofollow">📚 800 Literature</a> <br>Depart:: <a data-href="👤 1. Literature" href=".html" class="internal-link" target="_self" rel="noopener nofollow">👤 1. Literature</a> | <a data-href="👤 6. Philosophy" href=".html" class="internal-link" target="_self" rel="noopener nofollow">👤 6. Philosophy</a> <br><a href=".?query=tag:Siddhartha" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#Siddhartha">#Siddhartha</a> <a href=".?query=tag:HermannHesse" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#HermannHesse">#HermannHesse</a> <a href=".?query=tag:Philosophy" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#Philosophy">#Philosophy</a> <a href=".?query=tag:SpiritualJourney" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#SpiritualJourney">#SpiritualJourney</a> <a href=".?query=tag:SelfDiscovery" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#SelfDiscovery">#SelfDiscovery</a>]]></description><link>books/싯다르타(테스트용).html</link><guid isPermaLink="false">Books/싯다르타(테스트용).md</guid><dc:creator><![CDATA[헤르만 헤세, 박병덕]]></dc:creator><pubDate>Mon, 29 Jul 2024 08:31:24 GMT</pubDate></item><item><title><![CDATA[Home]]></title><description><![CDATA[The homepage]]></description><link>index.html</link><guid isPermaLink="false">index.md</guid><pubDate>Sun, 01 Dec 2024 12:59:35 GMT</pubDate></item><item><title><![CDATA[2024-02-05 Question of HQ]]></title><description><![CDATA[ Question: Are the rack and container assembly instructions currently available in multiple languages, including Chinese, or do they require translation? Answer: The assembly instructions are currently only available in Korean. We recognize the importance of making these accessible to our team in China and plan to have them translated into English as an intermediary step. This process is expected to take approximately one week. We will explore options for translation into Chinese to ensure clarity and accessibility for all team members involved in the assembly process. Question: Do we have visual aids, such as videos, to supplement the assembly instructions? Answer: At the moment, we do not have video documentation of the assembly process. However, we acknowledge the value of visual aids in enhancing understanding and reducing the potential for errors. We will initiate the creation of video tutorials that detail the assembly process, ensuring that these resources are comprehensive and easy to follow. Question: What specific assembly procedures are currently undertaken by the Korean CM, and are we fully aware of these processes? Answer: The Korean CM handles a range of assembly procedures that are documented in our standard operating procedures. However, it's essential to conduct a thorough review to ensure that all processes are fully captured and up-to-date. We are in the process of auditing these procedures to confirm their completeness and accuracy. Question: Considering the assembly procedures performed by the Korean CM, do we believe it's feasible to replicate these processes in China without significant obstacles? Answer: Based on our initial assessment, we believe that transitioning these assembly processes to China is feasible. The procedures do not require specialized skills that cannot be replicated or taught in China. However, we must ensure that all procedural documentation is current, translated, and adapted as necessary to meet any local regulatory requirements or operational differences. Question: Are there any anticipated challenges or limitations in transferring the assembly line to China, such as differences in regulations, standards, or workforce skills? Answer: While we anticipate a smooth transition overall, we are mindful of potential challenges such as differences in regulatory standards, the need for workforce training, and the adaptation of procedures to local practices. We are committed to conducting a detailed analysis to identify any such challenges early in the process and develop strategies to address them effectively. Question: What will be the approach if there are questions raised during the meeting that cannot be immediately answered? Answer: Should any questions arise that I cannot answer directly, I will take detailed notes and follow up with my direct manager to ensure a timely and accurate response. We are committed to transparency and effective communication throughout this transition process. It's clear from your preparation that while there are areas needing attention, such as the translation of documentation and the creation of visual aids, you have a proactive plan to address these needs. Emphasizing your commitment to a thorough review and update of assembly procedures, along with a strategic approach to overcoming potential challenges, will be key to reassuring the executives of the feasibility and readiness for the transition.Youcan you make it little bit easier? my mother tongue is korean, so some of that sentences are hard to memorize for me.ChatGPTChatGPTCertainly! Let's simplify the responses for your meeting: Question: Do we need to translate the assembly instructions? Are there videos? Answer: Yes, the instructions are only in Korean now. We need to translate them into English, which will take about a week. We don't have videos yet, but we plan to make them to help everyone understand the process better. Question: Can we use the same assembly procedures in China as in Korea? Answer: The procedures we use in Korea can be used in China too. We don't see big problems with moving the assembly there. Most tasks don't need special skills. But, we need to update and translate our instructions to make sure everyone can follow them. Question: What problems might we face moving to China? Answer: We might face some challenges, like different rules or the need to train the team in China. But we believe we can handle these by planning well and updating our instructions. Question: How long will it take to get all the documentation ready for the China team? Answer: We need about one week to translate the current documents into English. Making videos and further translations might take a bit more time. Question: Will the training materials be understandable for someone who doesn't speak Korean? Answer: Yes, we will translate everything into English first, and then into Chinese if needed, to make sure everyone can understand. Question: How do we ensure the quality of the assembly process remains high after moving to China? Answer: We will train the China team using our updated guides and videos. We will also check the assembly quality regularly. Question: Are there any parts of the assembly that must stay in Korea? Answer: Right now, we think everything can move to China. But we will double-check to make sure. Question: What is our timeline for moving the assembly line to China? Answer: We are still planning, but we will share a timeline as soon as we have it. Question: How will we handle differences in work culture between Korea and China? Answer: We will learn about the work culture in China and adapt our training and management to fit well with the team there. Question: Do we need any special permissions or certifications to start manufacturing in China? Answer: We are checking on this. We will get all the needed permissions and certifications before we start. Question: How will we transfer equipment and materials to China? Answer: We are planning the best way to do this. We will make sure everything is safe and cost-effective. Question: What if we face unexpected challenges during the move? Answer: We will plan carefully and have backup plans. We will solve problems as they come. Question: How will we communicate with the team in China? Answer: We will use English for official communication. We might also use translators when needed to make sure everyone understands. Question: Will there be ongoing support from Korea to the China team? Answer: Yes, we will keep supporting the China team. We can have regular meetings and visits to make sure everything goes well. Question: How will this move affect our delivery times to customers? Answer: We plan to keep delivery times the same, or even improve them by being closer to some of our customers. ]]></description><link>works/2024-02-05-question-of-hq.html</link><guid isPermaLink="false">Works/2024-02-05 Question of HQ.md</guid><pubDate>Sun, 01 Dec 2024 10:49:27 GMT</pubDate></item><item><title><![CDATA[Power BI_통합 대시보드 구현]]></title><description><![CDATA[예전에 Power BI로 대시보드를 만들 때, 내가 원하는 수준의 기능을 구현하기 위해 참고할 만한 국문 자료가 없어서 대부분 영문 자료를 참조하거나 Microsoft Power BI Documentation을 참조했다. 구축 이후 수정할 일이 크게 없어 방치하다 보니 세세한 요청 사항이 생겼을 때, 나도 어떻게 만들었는지 기억이 안 나서(…) 다시 자료 찾아보는 일이 생겼다. 그런데 아무래도 한국에서 많이 사용을 하는 툴이 아니다 보니 여전히 국문 자료가 부족한 듯 보인다. 그래서 리포트를 만들었던 과정을 복기하는 겸, 리포트 내에 적용했던 여러 사례를 이 블로그를 통해 소개하고자 한다.
 기본적인 Power BI의 기능에 대한 강의나 블로그, 영상 자료 등은 이미 있으니 이 블로그에서는 다른 사람들이 다루지 않은 부분으로 판단되는 것들만 적도록 하겠다.파편화되어 있던 데이터들을 한 곳에서 관리하고 데이터의 일관성과 무결성을 확보하기 위해 엑셀로 정리하던 기존 자료들을 모두 없애고, 데이터를 Sharepoint 서버에 등록하는 방식으로 업무의 형태를 완전히 바꾸었다. 비구조적인 데이터를 정규화화여 구조화했으므로 데이터 분석 및 시각화가 용이해졌다.
 업무 효율 극대화: raw data 원본만 서버에 등록하고 나머지 자료는 모두 raw data로부터 자동으로 파생되게 함으로써 기존에 보고 자료 등을 작성하기 위해 데이터를 2차 가공하던 일련의 과정을 모두 없앤다.
 모든 개별 엑셀 보고 자료를 없애고 하나의 대시보드에서 모든 내용을 확인할 수 있도록 한다.
