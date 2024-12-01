@@ -1,0 +1,630 @@
+{
+  "vaultName": "Obsidian",
+  "lastExport": 1733055681207,
+  "pluginVersion": "1.8.01",
+  "validBodyClasses": "publish css-settings-manager theme-dark show-inline-title show-ribbon minimal-default-dark minimal-default-light links-ext-on full-width-media minimal-readable trim-cols h1-l",
+  "useCustomHeadContent": false,
+  "useCustomFavicon": false,
+  "files": [
+    "Blogs/index.md",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/로베스피에르.md",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/파르메니데스.canvas",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/프란츠의 부인.canvas",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Kirkus Reviews - the Unbearable lightness of being.canvas",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240118201129.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119182924.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185619.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185645.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185902.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119221555.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119223112.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119225137.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230131.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230410.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230848.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119231503.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120002344.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120002708.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120004058.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120004910.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005225.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005341.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005403.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120010943.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120010954.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120120731.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120151528.png",
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Untitled.canvas",
+    "Books/Studies/참을 수 없는 존재의 가벼움/참을 수 없는 존재의 가벼움.md",
+    "Books/0_읽은 책 리스트.md",
+    "Books/싯다르타.md",
+    "Books/Do it 점프 투 파이썬.md",
+    "lib/scripts/graph-wasm.wasm",
+    "lib/fonts/94f2f163d4b698242fef.otf",
+    "lib/fonts/72505e6a122c6acd5471.woff2",
+    "lib/fonts/2d5198822ab091ce4305.woff2",
+    "lib/fonts/c8ba52b05a9ef10f4758.woff2",
+    "lib/fonts/cb10ffd7684cd9836a05.woff2",
+    "lib/fonts/b5f0f109bc88052d4000.woff2",
+    "lib/fonts/cbe0ae49c52c920fd563.woff2",
+    "lib/fonts/535a6cf662596b3bd6a6.woff2",
+    "lib/fonts/70cc7ff27245e82ad414.ttf",
+    "lib/fonts/454577c22304619db035.ttf",
+    "lib/fonts/52ac8f3034507f1d9e53.ttf",
+    "lib/fonts/05b618077343fbbd92b7.ttf",
+    "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
+    "lib/media/874d8b8e340f75575caa.svg",
+    "lib/html/file-tree.html",
+    "lib/scripts/webpage.js",
+    "lib/scripts/graph-view.js",
+    "lib/scripts/graph-wasm.js",
+    "lib/scripts/graph-render-worker.js",
+    "lib/scripts/tinycolor.js",
+    "lib/scripts/pixi.js",
+    "lib/scripts/minisearch.js",
+    "lib/media/favicon.png",
+    "lib/scripts/graph-data.js",
+    "lib/styles/obsidian.css",
+    "lib/styles/theme.css",
+    "lib/styles/global-variable-styles.css",
+    "lib/styles/supported-plugins.css",
+    "lib/styles/main-styles.css"
+  ],
+  "mainDependencies": [
+    "lib/scripts/graph-wasm.wasm",
+    "lib/fonts/94f2f163d4b698242fef.otf",
+    "lib/fonts/72505e6a122c6acd5471.woff2",
+    "lib/fonts/2d5198822ab091ce4305.woff2",
+    "lib/fonts/c8ba52b05a9ef10f4758.woff2",
+    "lib/fonts/cb10ffd7684cd9836a05.woff2",
+    "lib/fonts/b5f0f109bc88052d4000.woff2",
+    "lib/fonts/cbe0ae49c52c920fd563.woff2",
+    "lib/fonts/535a6cf662596b3bd6a6.woff2",
+    "lib/fonts/70cc7ff27245e82ad414.ttf",
+    "lib/fonts/454577c22304619db035.ttf",
+    "lib/fonts/52ac8f3034507f1d9e53.ttf",
+    "lib/fonts/05b618077343fbbd92b7.ttf",
+    "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
+    "lib/media/874d8b8e340f75575caa.svg",
+    "lib/html/file-tree.html",
+    "lib/scripts/webpage.js",
+    "lib/scripts/graph-view.js",
+    "lib/scripts/graph-wasm.js",
+    "lib/scripts/graph-render-worker.js",
+    "lib/scripts/tinycolor.js",
+    "lib/scripts/pixi.js",
+    "lib/scripts/minisearch.js",
+    "lib/media/favicon.png",
+    "lib/scripts/graph-data.js",
+    "lib/styles/obsidian.css",
+    "lib/styles/theme.css",
+    "lib/styles/global-variable-styles.css",
+    "lib/styles/supported-plugins.css",
+    "lib/styles/main-styles.css"
+  ],
+  "fileInfo": {
+    "Blogs/index.md": {
+      "modifiedTime": 1733055435635,
+      "sourceSize": 101,
+      "exportedPath": "blogs/index.html",
+      "dependencies": []
+    },
+    "lib/scripts/graph-wasm.wasm": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 23377,
+      "exportedPath": "lib/scripts/graph-wasm.wasm",
+      "dependencies": []
+    },
+    "lib/fonts/94f2f163d4b698242fef.otf": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 66800,
+      "exportedPath": "lib/fonts/94f2f163d4b698242fef.otf",
+      "dependencies": []
+    },
+    "lib/fonts/72505e6a122c6acd5471.woff2": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 104232,
+      "exportedPath": "lib/fonts/72505e6a122c6acd5471.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/2d5198822ab091ce4305.woff2": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 104332,
+      "exportedPath": "lib/fonts/2d5198822ab091ce4305.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/c8ba52b05a9ef10f4758.woff2": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 98868,
+      "exportedPath": "lib/fonts/c8ba52b05a9ef10f4758.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/cb10ffd7684cd9836a05.woff2": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 106876,
+      "exportedPath": "lib/fonts/cb10ffd7684cd9836a05.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/b5f0f109bc88052d4000.woff2": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 105804,
+      "exportedPath": "lib/fonts/b5f0f109bc88052d4000.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/cbe0ae49c52c920fd563.woff2": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 106108,
+      "exportedPath": "lib/fonts/cbe0ae49c52c920fd563.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/535a6cf662596b3bd6a6.woff2": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 111708,
+      "exportedPath": "lib/fonts/535a6cf662596b3bd6a6.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/70cc7ff27245e82ad414.ttf": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 192740,
+      "exportedPath": "lib/fonts/70cc7ff27245e82ad414.ttf",
+      "dependencies": []
+    },
+    "lib/fonts/454577c22304619db035.ttf": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 161376,
+      "exportedPath": "lib/fonts/454577c22304619db035.ttf",
+      "dependencies": []
+    },
+    "lib/fonts/52ac8f3034507f1d9e53.ttf": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 191568,
+      "exportedPath": "lib/fonts/52ac8f3034507f1d9e53.ttf",
+      "dependencies": []
+    },
+    "lib/fonts/05b618077343fbbd92b7.ttf": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 155288,
+      "exportedPath": "lib/fonts/05b618077343fbbd92b7.ttf",
+      "dependencies": []
+    },
+    "lib/fonts/4bb6ac751d1c5478ff3a.woff2": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 7876,
+      "exportedPath": "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
+      "dependencies": []
+    },
+    "lib/media/874d8b8e340f75575caa.svg": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 317,
+      "exportedPath": "lib/media/874d8b8e340f75575caa.svg",
+      "dependencies": []
+    },
+    "lib/html/file-tree.html": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 34443,
+      "exportedPath": "lib/html/file-tree.html",
+      "dependencies": []
+    },
+    "lib/scripts/webpage.js": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 47290,
+      "exportedPath": "lib/scripts/webpage.js",
+      "dependencies": []
+    },
+    "lib/scripts/graph-view.js": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 15519,
+      "exportedPath": "lib/scripts/graph-view.js",
+      "dependencies": []
+    },
+    "lib/scripts/graph-wasm.js": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 14021,
+      "exportedPath": "lib/scripts/graph-wasm.js",
+      "dependencies": []
+    },
+    "lib/scripts/graph-render-worker.js": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 5179,
+      "exportedPath": "lib/scripts/graph-render-worker.js",
+      "dependencies": []
+    },
+    "lib/scripts/tinycolor.js": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 29832,
+      "exportedPath": "lib/scripts/tinycolor.js",
+      "dependencies": []
+    },
+    "lib/scripts/pixi.js": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 449509,
+      "exportedPath": "lib/scripts/pixi.js",
+      "dependencies": []
+    },
+    "lib/scripts/minisearch.js": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 29422,
+      "exportedPath": "lib/scripts/minisearch.js",
+      "dependencies": []
+    },
+    "lib/media/favicon.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 1105,
+      "exportedPath": "lib/media/favicon.png",
+      "dependencies": []
+    },
+    "lib/scripts/graph-data.js": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 954,
+      "exportedPath": "lib/scripts/graph-data.js",
+      "dependencies": []
+    },
+    "lib/styles/obsidian.css": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 131118,
+      "exportedPath": "lib/styles/obsidian.css",
+      "dependencies": []
+    },
+    "lib/styles/theme.css": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 200977,
+      "exportedPath": "lib/styles/theme.css",
+      "dependencies": []
+    },
+    "lib/styles/global-variable-styles.css": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 311,
+      "exportedPath": "lib/styles/global-variable-styles.css",
+      "dependencies": []
+    },
+    "lib/styles/supported-plugins.css": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 171,
+      "exportedPath": "lib/styles/supported-plugins.css",
+      "dependencies": []
+    },
+    "lib/styles/main-styles.css": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 23130,
+      "exportedPath": "lib/styles/main-styles.css",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/로베스피에르.md": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 1911,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/로베스피에르.html",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/파르메니데스.canvas": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 1574,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/파르메니데스.html",
+      "dependencies": [
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119182924.png"
+      ]
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/프란츠의 부인.canvas": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 528,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/프란츠의-부인.html",
+      "dependencies": [
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185645.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185902.png"
+      ]
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Kirkus Reviews - the Unbearable lightness of being.canvas": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 2333,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/kirkus-reviews-the-unbearable-lightness-of-being.html",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240118201129.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 122282,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240118201129.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119182924.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 49134,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119182924.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185619.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 43056,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185619.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185645.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 53585,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185645.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185902.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 105320,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185902.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119221555.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 85868,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119221555.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119223112.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 87253,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119223112.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119225137.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 99026,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119225137.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230131.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 12833,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230131.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230410.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 13654,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230410.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230848.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 41911,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230848.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119231503.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 37836,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119231503.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120002344.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 60649,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002344.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120002708.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 44879,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002708.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120004058.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 47081,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004058.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120004910.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 55657,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004910.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005225.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 45034,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005225.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005341.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 145389,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005341.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005403.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 122030,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005403.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120010943.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 13456,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010943.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120010954.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 24379,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010954.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120120731.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 30858,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120120731.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120151528.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 26316,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120151528.png",
+      "dependencies": []
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Untitled.canvas": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 218,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/untitled.html",
+      "dependencies": [
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119221555.png"
+      ]
+    },
+    "Books/Studies/참을 수 없는 존재의 가벼움/참을 수 없는 존재의 가벼움.md": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 16186,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/참을-수-없는-존재의-가벼움.html",
+      "dependencies": [
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119221555.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119223112.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119225137.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230131.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230410.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230848.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119231503.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002344.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002708.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004058.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004910.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005341.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005403.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010943.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010954.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120120731.png",
+        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120151528.png"
+      ]
+    },
+    "Books/0_읽은 책 리스트.md": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 423,
+      "exportedPath": "books/0_읽은-책-리스트.html",
+      "dependencies": []
+    },
+    "Books/싯다르타.md": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 3436,
+      "exportedPath": "books/싯다르타.html",
+      "dependencies": []
+    },
+    "Books/Do it 점프 투 파이썬.md": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 8011,
+      "exportedPath": "books/do-it-점프-투-파이썬.html",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119182924.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 49134,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119182924.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185645.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 53585,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185645.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185902.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 105320,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185902.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119221555.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 85868,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119221555.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119223112.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 87253,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119223112.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119225137.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 99026,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119225137.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230131.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 12833,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230131.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230410.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 13654,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230410.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230848.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 41911,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230848.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119231503.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 37836,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119231503.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002344.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 60649,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002344.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002708.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 44879,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002708.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004058.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 47081,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004058.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004910.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 55657,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004910.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005341.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 145389,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005341.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005403.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 122030,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005403.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010943.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 13456,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010943.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010954.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 24379,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010954.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120120731.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 30858,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120120731.png",
+      "dependencies": []
+    },
+    "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120151528.png": {
+      "modifiedTime": 1733055681207,
+      "sourceSize": 26316,
+      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120151528.png",
+      "dependencies": []
+    }
+  }
+}
