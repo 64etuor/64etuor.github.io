@@ -1,44 +1,56 @@
 {
   "vaultName": "Obsidian",
-  "lastExport": 1733055681207,
+  "lastExport": 1733056485968,
   "pluginVersion": "1.8.01",
   "validBodyClasses": "publish css-settings-manager theme-dark show-inline-title show-ribbon minimal-default-dark minimal-default-light links-ext-on full-width-media minimal-readable trim-cols h1-l",
   "useCustomHeadContent": false,
   "useCustomFavicon": false,
   "files": [
-    "Blogs/index.md",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/로베스피에르.md",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/파르메니데스.canvas",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/프란츠의 부인.canvas",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Kirkus Reviews - the Unbearable lightness of being.canvas",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240118201129.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119182924.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185619.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185645.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185902.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119221555.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119223112.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119225137.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230131.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230410.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230848.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119231503.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120002344.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120002708.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120004058.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120004910.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005225.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005341.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005403.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120010943.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120010954.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120120731.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120151528.png",
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Untitled.canvas",
-    "Books/Studies/참을 수 없는 존재의 가벼움/참을 수 없는 존재의 가벼움.md",
-    "Books/0_읽은 책 리스트.md",
-    "Books/싯다르타.md",
-    "Books/Do it 점프 투 파이썬.md",
+    "Obsidian/Settings/Attachments/_15be9e72-3f6e-4276-b9a9-b6ccc1e3cab2 1.jpg",
+    "Obsidian/Settings/Attachments/개요 플러그인.png",
+    "Obsidian/Settings/Attachments/고양이 그림.png",
+    "Obsidian/Settings/Attachments/고양이 사진.png",
+    "Obsidian/Settings/Attachments/그래프 뷰 설정.png",
+    "Obsidian/Settings/Attachments/금덩이.svg",
+    "Obsidian/Settings/Attachments/금덩이 많이.svg",
+    "Obsidian/Settings/Attachments/눈동자.svg",
+    "Obsidian/Settings/Attachments/두뇌.svg",
+    "Obsidian/Settings/Attachments/로컬 그래프 뷰 설명 1.png",
+    "Obsidian/Settings/Attachments/로켓.svg",
+    "Obsidian/Settings/Attachments/리본-상태바.png",
+    "Obsidian/Settings/Attachments/메모 철학 5S.md",
+    "Obsidian/Settings/Attachments/소스모드-라이브 미리보기.png",
+    "Obsidian/Settings/Attachments/옵시디언과 친해지기 1.png",
+    "Obsidian/Settings/Attachments/원기옥.png",
+    "Obsidian/Settings/Attachments/원기옥2.png",
+    "Obsidian/Settings/Attachments/윈도우창.png",
+    "Obsidian/Settings/Attachments/자유로운 배치.png",
+    "Obsidian/Settings/Attachments/작은 지구.svg",
+    "Obsidian/Settings/Attachments/정보의 우주.jpg",
+    "Obsidian/Settings/Attachments/정보의 우주2.png",
+    "Obsidian/Settings/Attachments/정보의 홍수.jpg",
+    "Obsidian/Settings/Attachments/좋은 메모.png",
+    "Obsidian/Settings/Attachments/좋은메모 2.png",
+    "Obsidian/Settings/Attachments/좌-루트-우.png",
+    "Obsidian/Settings/Attachments/지구.svg",
+    "Obsidian/Settings/Attachments/책.svg",
+    "Obsidian/Settings/Attachments/콜아웃 CSS.png",
+    "Obsidian/Settings/Attachments/태그 플러그인.png",
+    "Obsidian/Settings/Attachments/파일 탐색기.png",
+    "Obsidian/Settings/Attachments/편집 모드-미리보기 모드.png",
+    "Obsidian/Settings/Attachments/핀 방법.png",
+    "Obsidian/Settings/Attachments/CleanShot 2023-10-06 at 00.05.49@2x.png",
+    "Obsidian/Settings/Attachments/ICBM.jpg",
+    "Obsidian/Settings/Attachments/Pasted Image 20231005221012_871.png",
+    "Obsidian/Settings/Attachments/Pasted image 20240801134920.png",
+    "Obsidian/Settings/Attachments/Pasted image 20240801140229.png",
+    "Obsidian/Settings/Templates/Dataview 노트에 연결된 페이지 보기.md",
+    "Obsidian/Settings/Templates/Template - 기본.md",
+    "Obsidian/노트 연결.md",
+    "Obsidian/INDEX RULES (DDC-based).md",
+    "Obsidian/Markdown Syntax.md",
+    "Obsidian/Obsidian Callout list.md",
+    "Obsidian/Properties 샘플.md",
     "lib/scripts/graph-wasm.wasm",
     "lib/fonts/94f2f163d4b698242fef.otf",
     "lib/fonts/72505e6a122c6acd5471.woff2",
@@ -103,407 +115,184 @@
     "lib/styles/main-styles.css"
   ],
   "fileInfo": {
-    "Blogs/index.md": {
-      "modifiedTime": 1733055435635,
-      "sourceSize": 101,
-      "exportedPath": "blogs/index.html",
-      "dependencies": []
-    },
     "lib/scripts/graph-wasm.wasm": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 23377,
       "exportedPath": "lib/scripts/graph-wasm.wasm",
       "dependencies": []
     },
     "lib/fonts/94f2f163d4b698242fef.otf": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 66800,
       "exportedPath": "lib/fonts/94f2f163d4b698242fef.otf",
       "dependencies": []
     },
     "lib/fonts/72505e6a122c6acd5471.woff2": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 104232,
       "exportedPath": "lib/fonts/72505e6a122c6acd5471.woff2",
       "dependencies": []
     },
     "lib/fonts/2d5198822ab091ce4305.woff2": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 104332,
       "exportedPath": "lib/fonts/2d5198822ab091ce4305.woff2",
       "dependencies": []
     },
     "lib/fonts/c8ba52b05a9ef10f4758.woff2": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 98868,
       "exportedPath": "lib/fonts/c8ba52b05a9ef10f4758.woff2",
       "dependencies": []
     },
     "lib/fonts/cb10ffd7684cd9836a05.woff2": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 106876,
       "exportedPath": "lib/fonts/cb10ffd7684cd9836a05.woff2",
       "dependencies": []
     },
     "lib/fonts/b5f0f109bc88052d4000.woff2": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 105804,
       "exportedPath": "lib/fonts/b5f0f109bc88052d4000.woff2",
       "dependencies": []
     },
     "lib/fonts/cbe0ae49c52c920fd563.woff2": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 106108,
       "exportedPath": "lib/fonts/cbe0ae49c52c920fd563.woff2",
       "dependencies": []
     },
     "lib/fonts/535a6cf662596b3bd6a6.woff2": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 111708,
       "exportedPath": "lib/fonts/535a6cf662596b3bd6a6.woff2",
       "dependencies": []
     },
     "lib/fonts/70cc7ff27245e82ad414.ttf": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 192740,
       "exportedPath": "lib/fonts/70cc7ff27245e82ad414.ttf",
       "dependencies": []
     },
     "lib/fonts/454577c22304619db035.ttf": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 161376,
       "exportedPath": "lib/fonts/454577c22304619db035.ttf",
       "dependencies": []
     },
     "lib/fonts/52ac8f3034507f1d9e53.ttf": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 191568,
       "exportedPath": "lib/fonts/52ac8f3034507f1d9e53.ttf",
       "dependencies": []
     },
     "lib/fonts/05b618077343fbbd92b7.ttf": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 155288,
       "exportedPath": "lib/fonts/05b618077343fbbd92b7.ttf",
       "dependencies": []
     },
     "lib/fonts/4bb6ac751d1c5478ff3a.woff2": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 7876,
       "exportedPath": "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
       "dependencies": []
     },
     "lib/media/874d8b8e340f75575caa.svg": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 317,
       "exportedPath": "lib/media/874d8b8e340f75575caa.svg",
       "dependencies": []
     },
     "lib/html/file-tree.html": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 34443,
+      "modifiedTime": 1733056485968,
+      "sourceSize": 42178,
       "exportedPath": "lib/html/file-tree.html",
       "dependencies": []
     },
     "lib/scripts/webpage.js": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 47290,
       "exportedPath": "lib/scripts/webpage.js",
       "dependencies": []
     },
     "lib/scripts/graph-view.js": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 15519,
       "exportedPath": "lib/scripts/graph-view.js",
       "dependencies": []
     },
     "lib/scripts/graph-wasm.js": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 14021,
       "exportedPath": "lib/scripts/graph-wasm.js",
       "dependencies": []
     },
     "lib/scripts/graph-render-worker.js": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 5179,
       "exportedPath": "lib/scripts/graph-render-worker.js",
       "dependencies": []
     },
     "lib/scripts/tinycolor.js": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 29832,
       "exportedPath": "lib/scripts/tinycolor.js",
       "dependencies": []
     },
     "lib/scripts/pixi.js": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 449509,
       "exportedPath": "lib/scripts/pixi.js",
       "dependencies": []
     },
     "lib/scripts/minisearch.js": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 29422,
       "exportedPath": "lib/scripts/minisearch.js",
       "dependencies": []
     },
     "lib/media/favicon.png": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 1105,
       "exportedPath": "lib/media/favicon.png",
       "dependencies": []
     },
     "lib/scripts/graph-data.js": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 954,
+      "modifiedTime": 1733056485968,
+      "sourceSize": 739,
       "exportedPath": "lib/scripts/graph-data.js",
       "dependencies": []
     },
     "lib/styles/obsidian.css": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 131118,
       "exportedPath": "lib/styles/obsidian.css",
       "dependencies": []
     },
     "lib/styles/theme.css": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 200977,
       "exportedPath": "lib/styles/theme.css",
       "dependencies": []
     },
     "lib/styles/global-variable-styles.css": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 311,
       "exportedPath": "lib/styles/global-variable-styles.css",
       "dependencies": []
     },
     "lib/styles/supported-plugins.css": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 171,
       "exportedPath": "lib/styles/supported-plugins.css",
       "dependencies": []
     },
     "lib/styles/main-styles.css": {
-      "modifiedTime": 1733055681207,
+      "modifiedTime": 1733056485968,
       "sourceSize": 23130,
       "exportedPath": "lib/styles/main-styles.css",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/로베스피에르.md": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 1911,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/로베스피에르.html",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/파르메니데스.canvas": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 1574,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/파르메니데스.html",
-      "dependencies": [
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119182924.png"
-      ]
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/프란츠의 부인.canvas": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 528,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/프란츠의-부인.html",
-      "dependencies": [
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185645.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185902.png"
-      ]
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Kirkus Reviews - the Unbearable lightness of being.canvas": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 2333,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/kirkus-reviews-the-unbearable-lightness-of-being.html",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240118201129.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 122282,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240118201129.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119182924.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 49134,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119182924.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185619.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 43056,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185619.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185645.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 53585,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185645.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119185902.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 105320,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119185902.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119221555.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 85868,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119221555.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119223112.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 87253,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119223112.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119225137.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 99026,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119225137.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230131.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 12833,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230131.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230410.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 13654,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230410.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119230848.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 41911,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230848.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240119231503.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 37836,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119231503.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120002344.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 60649,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002344.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120002708.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 44879,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002708.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120004058.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 47081,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004058.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120004910.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 55657,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004910.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005225.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 45034,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005225.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005341.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 145389,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005341.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120005403.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 122030,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005403.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120010943.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 13456,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010943.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120010954.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 24379,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010954.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120120731.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 30858,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120120731.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Pasted image 20240120151528.png": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 26316,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120151528.png",
-      "dependencies": []
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/Reference/Untitled.canvas": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 218,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/untitled.html",
-      "dependencies": [
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119221555.png"
-      ]
-    },
-    "Books/Studies/참을 수 없는 존재의 가벼움/참을 수 없는 존재의 가벼움.md": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 16186,
-      "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/참을-수-없는-존재의-가벼움.html",
-      "dependencies": [
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119221555.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119223112.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119225137.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230131.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230410.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119230848.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119231503.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002344.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120002708.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004058.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120004910.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005341.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120005403.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010943.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120010954.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120120731.png",
-        "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120151528.png"
-      ]
-    },
-    "Books/0_읽은 책 리스트.md": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 423,
-      "exportedPath": "books/0_읽은-책-리스트.html",
-      "dependencies": []
-    },
-    "Books/싯다르타.md": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 3436,
-      "exportedPath": "books/싯다르타.html",
-      "dependencies": []
-    },
-    "Books/Do it 점프 투 파이썬.md": {
-      "modifiedTime": 1733055681207,
-      "sourceSize": 8011,
-      "exportedPath": "books/do-it-점프-투-파이썬.html",
       "dependencies": []
     },
     "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240119182924.png": {
@@ -624,6 +413,305 @@
       "modifiedTime": 1733055681207,
       "sourceSize": 26316,
       "exportedPath": "books/studies/참을-수-없는-존재의-가벼움/reference/pasted-image-20240120151528.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/_15be9e72-3f6e-4276-b9a9-b6ccc1e3cab2 1.jpg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 350315,
+      "exportedPath": "obsidian/settings/attachments/_15be9e72-3f6e-4276-b9a9-b6ccc1e3cab2-1.jpg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/개요 플러그인.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 29755,
+      "exportedPath": "obsidian/settings/attachments/개요-플러그인.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/고양이 그림.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 45585,
+      "exportedPath": "obsidian/settings/attachments/고양이-그림.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/고양이 사진.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 660796,
+      "exportedPath": "obsidian/settings/attachments/고양이-사진.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/그래프 뷰 설정.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 26239,
+      "exportedPath": "obsidian/settings/attachments/그래프-뷰-설정.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/금덩이.svg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 690,
+      "exportedPath": "obsidian/settings/attachments/금덩이.svg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/금덩이 많이.svg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 1437,
+      "exportedPath": "obsidian/settings/attachments/금덩이-많이.svg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/눈동자.svg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 677,
+      "exportedPath": "obsidian/settings/attachments/눈동자.svg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/두뇌.svg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 6517,
+      "exportedPath": "obsidian/settings/attachments/두뇌.svg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/로컬 그래프 뷰 설명 1.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 89356,
+      "exportedPath": "obsidian/settings/attachments/로컬-그래프-뷰-설명-1.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/로켓.svg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 6297,
+      "exportedPath": "obsidian/settings/attachments/로켓.svg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/리본-상태바.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 137703,
+      "exportedPath": "obsidian/settings/attachments/리본-상태바.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/메모 철학 5S.md": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 4815,
+      "exportedPath": "obsidian/settings/attachments/메모-철학-5s.html",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/소스모드-라이브 미리보기.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 83475,
+      "exportedPath": "obsidian/settings/attachments/소스모드-라이브-미리보기.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/옵시디언과 친해지기 1.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 206224,
+      "exportedPath": "obsidian/settings/attachments/옵시디언과-친해지기-1.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/원기옥.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 218873,
+      "exportedPath": "obsidian/settings/attachments/원기옥.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/원기옥2.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 267570,
+      "exportedPath": "obsidian/settings/attachments/원기옥2.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/윈도우창.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 108388,
+      "exportedPath": "obsidian/settings/attachments/윈도우창.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/자유로운 배치.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 107893,
+      "exportedPath": "obsidian/settings/attachments/자유로운-배치.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/작은 지구.svg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 2399,
+      "exportedPath": "obsidian/settings/attachments/작은-지구.svg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/정보의 우주.jpg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 215279,
+      "exportedPath": "obsidian/settings/attachments/정보의-우주.jpg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/정보의 우주2.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 1733675,
+      "exportedPath": "obsidian/settings/attachments/정보의-우주2.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/정보의 홍수.jpg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 350315,
+      "exportedPath": "obsidian/settings/attachments/정보의-홍수.jpg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/좋은 메모.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 2011067,
+      "exportedPath": "obsidian/settings/attachments/좋은-메모.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/좋은메모 2.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 2011067,
+      "exportedPath": "obsidian/settings/attachments/좋은메모-2.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/좌-루트-우.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 124071,
+      "exportedPath": "obsidian/settings/attachments/좌-루트-우.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/지구.svg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 12026,
+      "exportedPath": "obsidian/settings/attachments/지구.svg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/책.svg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 1789,
+      "exportedPath": "obsidian/settings/attachments/책.svg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/콜아웃 CSS.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 63943,
+      "exportedPath": "obsidian/settings/attachments/콜아웃-css.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/태그 플러그인.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 33696,
+      "exportedPath": "obsidian/settings/attachments/태그-플러그인.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/파일 탐색기.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 33274,
+      "exportedPath": "obsidian/settings/attachments/파일-탐색기.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/편집 모드-미리보기 모드.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 67898,
+      "exportedPath": "obsidian/settings/attachments/편집-모드-미리보기-모드.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/핀 방법.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 118151,
+      "exportedPath": "obsidian/settings/attachments/핀-방법.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/CleanShot 2023-10-06 at 00.05.49@2x.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 354084,
+      "exportedPath": "obsidian/settings/attachments/cleanshot-2023-10-06-at-00.05.49@2x.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/ICBM.jpg": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 188539,
+      "exportedPath": "obsidian/settings/attachments/icbm.jpg",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/Pasted Image 20231005221012_871.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 83810,
+      "exportedPath": "obsidian/settings/attachments/pasted-image-20231005221012_871.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/Pasted image 20240801134920.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 1630534,
+      "exportedPath": "obsidian/settings/attachments/pasted-image-20240801134920.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Attachments/Pasted image 20240801140229.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 1914218,
+      "exportedPath": "obsidian/settings/attachments/pasted-image-20240801140229.png",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Templates/Dataview 노트에 연결된 페이지 보기.md": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 51,
+      "exportedPath": "obsidian/settings/templates/dataview-노트에-연결된-페이지-보기.html",
+      "dependencies": []
+    },
+    "Obsidian/Settings/Templates/Template - 기본.md": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 69,
+      "exportedPath": "obsidian/settings/templates/template-기본.html",
+      "dependencies": []
+    },
+    "Obsidian/노트 연결.md": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 2036,
+      "exportedPath": "obsidian/노트-연결.html",
+      "dependencies": [
+        "obsidian/settings/attachments/태그-플러그인.png",
+        "obsidian/settings/attachments/cleanshot-2023-10-06-at-00.05.49@2x.png",
+        "obsidian/settings/attachments/로컬-그래프-뷰-설명-1.png",
+        "obsidian/settings/attachments/그래프-뷰-설정.png"
+      ]
+    },
+    "Obsidian/INDEX RULES (DDC-based).md": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 4505,
+      "exportedPath": "obsidian/index-rules-(ddc-based).html",
+      "dependencies": []
+    },
+    "Obsidian/Markdown Syntax.md": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 33871,
+      "exportedPath": "obsidian/markdown-syntax.html",
+      "dependencies": []
+    },
+    "Obsidian/Obsidian Callout list.md": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 1890,
+      "exportedPath": "obsidian/obsidian-callout-list.html",
+      "dependencies": []
+    },
+    "Obsidian/Properties 샘플.md": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 635,
+      "exportedPath": "obsidian/properties-샘플.html",
+      "dependencies": []
+    },
+    "obsidian/settings/attachments/태그-플러그인.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 33696,
+      "exportedPath": "obsidian/settings/attachments/태그-플러그인.png",
+      "dependencies": []
+    },
+    "obsidian/settings/attachments/cleanshot-2023-10-06-at-00.05.49@2x.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 354084,
+      "exportedPath": "obsidian/settings/attachments/cleanshot-2023-10-06-at-00.05.49@2x.png",
+      "dependencies": []
+    },
+    "obsidian/settings/attachments/로컬-그래프-뷰-설명-1.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 89356,
+      "exportedPath": "obsidian/settings/attachments/로컬-그래프-뷰-설명-1.png",
+      "dependencies": []
+    },
+    "obsidian/settings/attachments/그래프-뷰-설정.png": {
+      "modifiedTime": 1733056485968,
+      "sourceSize": 26239,
+      "exportedPath": "obsidian/settings/attachments/그래프-뷰-설정.png",
       "dependencies": []
     }
   }
