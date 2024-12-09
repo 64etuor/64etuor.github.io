@@ -1,4 +1,68 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 09 Dec 2024 06:58:48 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 09 Dec 2024 06:58:39 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[ERP 대용 솔루션 최적화 및 핵심 기능]]></title><description><![CDATA[앱의 성능을 최적화할 수 있는 방법과 핵심 기능만 소개합니다.<img alt="Pasted image 20241209134814.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241209134814.png" target="_self">
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 09 Dec 2024 07:44:24 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 09 Dec 2024 07:44:21 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[Power BI 보고서 내 이미지 표시를 위한 URL Parsing]]></title><description><![CDATA[Power BI로 만든 우리 팀의 통합 대시보드의 Defect 탭에는 생산 불량과 FPY 등이 기록된다.
+그런데 텍스트로만 표현된 불량 내역은 직관적이지 못하다.
+그래서 대시보드에서 바로 불량 사진을 확인할 수 있도록 구현하고자 했다.
+우선 구현하고자 하는 기능과 Power BI, Sharepoint List의 기능을 점검했다.
+대시보드 구현 어플리케이션: Power BI
+데이터베이스: Sharepoint List (Dataverse나 SQL 등과 다르게 추가 비용이 발생하지 않음. 다만 데이터베이스로 사용하기엔 한계가 명확.) Power BI 대시보드에서 불량 사진을 바로 확인할 수 있는 기능 구현
+(Power BI에서는 URL이 저장된 열이 있다면 Data Category를 변경하여 사진으로 출력하는 기능 있는 것으로 확인) Sharepoint List에 Image를 등록하면 레코드 형태로 저장되기 때문에 Power BI에서 바로 출력이 불가능 Sharepoint List에 Image가 등록/수정되면 Power Automate로 JSON을 파싱하여 이미지 URL 추출하여 imgURL이라는 열에 저장
+Sharepoint 커넥터의 Get Attachments 액션을 활용하면 AbsoluteUri를 간단하게 추출할 수 있다. 아래는 커넥터에서 자체 지원하지 않는 경우(이 경우가 훨씬 많다.)를 위해 기록을 남겨둔다. <img alt="Pasted image 20241008132222.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008132222.png" target="_self"><br> <img alt="Pasted image 20241008132325.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008132325.png" target="_self">
+Site Address: 파싱 대상 Sharepoint List의 주소 선택
+Method: GET
+Uri:
+//'listName'에 Sharepoint List의 Internal Name을 넣어준다.
+//items다음의 $orderby=Created desc&amp;$top=1 는 리스트의 항목 생성시간을 내림차순으로 정렬하고, 가장 상위의 값 1개를 가져오는 명령이다. /_api/web/lists/getbytitle('listName')/items?$orderby=Created desc&amp;$top=1
+<br> <img alt="Pasted image 20241008134855.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008134855.png" target="_self"><br>
+<img alt="Pasted image 20241008140753.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008140753.png" target="_self">
+값을 살펴보면 “_metadata”: 내에 “uri”가 저장되어 있다.
+그리고 “image”에 리스트 형태로 “fileName”이 저장되어 있다.
+그 아래로 스크롤을 내리다 보면 fileName을 확인할 수 있다.
+이제 Parse JSON Flow를 추가하여 위 body 데이터에서 필요한 값만 추출해서 imgURL이라는 변수를 생성하고 값을 할당하면 된다.
+그런데 작업 도중에 Sharepoint 커넥터의 Get attachments를 사용하면 더 간단하게 원하는 결과물을 도출할 수 있다는 걸 알게 됐다.
+(위의 Send HTTP request 액션은 너무나 자주 사용하는 액션이므로 그대로 두겠다.) <br>Sharepoint 커넥터의 Get attachments 액션을 사용하면 Sharepoint List에 등록된 항목의 첨부파일 정보 중 “Id”, “AbsoluteUri”, “Display Name”을 가져올 수 있다. 따라서 Parse JSON 액션 등의 과정을 생략할 수 있다. <img alt="Pasted image 20241008141135.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008141135.png" target="_self">
+※ For each는 배열이나 여러 항목 등을 반환하는 액션이 있거나 액션에서 필요로 할 경우, 자동 생성됨<br><img alt="Pasted image 20241008141545.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008141545.png" target="_self">
+When an item is created or modified: 트리거로 설정한다. 이미지가 등록될 때뿐만 아니라 이미지 수정이 이루어질 경우에도 대응되도록 한다.
+Get attachments: 등록/수정된 이미지의 AbsoluteUri를 읽는다.
+Condition: imgURL 열에 이미 등록된 값이 있다면 읽어온 AbsoluteUri와 비교하여 서로가 다를 경우에만 항목이 업데이트 되도록 한다.<br>
+<img alt="Pasted image 20241008141832.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008141832.png" target="_self">
+Update: 불러온 이미지의 AbsoluteUri를 imgURL열에 업데이트한다.<br>
+<img alt="Pasted image 20241008144638.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144638.png" target="_self">
+Post message in a chat or channel(옵션사항): Update 액션이 실패할 경우, 알람 메세지를 특정인에게 보낸다.<br>
+<img alt="Pasted image 20241008144727.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144727.png" target="_self"> 새로운 imgURL 열이 추가되었으므로 데이터셋을 한 번 새로고침 해준다.
+Table View에 가서 imgURL 열의 Data Category를 “Image URL”로 수정해준다.<br>
+<img alt="Pasted image 20241008142942.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008142942.png" target="_self">
+Power BI 데스크탑 앱으로 확인할 경우 기본 디폴트 이미지만 보이고 실제 사진이 보이지 않는다. 실제 사진은 웹으로 접속해야만 볼 수 있다. 확인해 본다.<br>
+<img alt="Pasted image 20241008143123.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008143123.png" target="_self">
+이미지가 정상적으로 출력된다. 이제 차트에 마우스 커서를 올리면 툴팁으로 사진을 확인할 수 있게 구현해본다. 우선 새로운 Power BI 보고서에 새로운 페이지를 추가한다.
+Page의 Format에서 Page type을 Tooltip으로 설정한다. 그리고 캔버스의 크기를 필요한 만큼 조절한다.<br>
+<img alt="Pasted image 20241008143639.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008143639.png" target="_self"><br>
+<img alt="Pasted image 20241008143722.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008143722.png" target="_self">
+시각적 개체 Table을 삽입하고 필요한 데이터들과 imgURL 열을 넣어준다.<br>
+<img alt="Pasted image 20241008143910.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008143910.png" target="_self">
+테이블의 크기, 이미지 크기를 적절하게 조절해준다.<br>
+<img alt="Pasted image 20241008144010.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144010.png" target="_self">
+Tooltip 페이지 완성<br>
+<img alt="Pasted image 20241008144028.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144028.png" target="_self">
+이미지가 Tooltip으로 표시되길 원하는 차트로 이동해서 Format &gt; Properties로 이동한다. Options의 Type을 Report page로 설정
+<br>Page를 위에서 만든 Page로 설정<img alt="Pasted image 20241008144251.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144251.png" target="_self"> 최종 확인을 위해 Power BI 리포트를 저장하고 웹에서 확인한다.<br>
+<img alt="Pasted image 20241008144347.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144347.png" target="_self">
+툴팁에서도 이미지가 잘 출력된다. ]]></description><link>https://64etuor.github.io/works/microsoft/power-automate/power-bi-보고서-내-이미지-표시를-위한-url-parsing.html</link><guid isPermaLink="false">Works/Microsoft/Power Automate/Power BI 보고서 내 이미지 표시를 위한 URL Parsing.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 07:11:16 GMT</pubDate><enclosure url="https://64etuor.github.io/assets/image/pasted-image-20241008132222.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/assets/image/pasted-image-20241008132222.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Unit 1. Announcing a new project]]></title><description><![CDATA[ get a foothold in
+financial modeling
+have a consensus
+convene a meeting
+adjourn a meeting
+shelve a topic
+adopt resolutions
+have a quorum to vote We have a new smart medical decive in the works.
+We have a lot groundwork to cover.
+We might be able to do it if we work around the clock. Hello, Yangha! The sentences you mentioned, if you adjust them a little, they will sound more natural and accurate. The first sentence&nbsp;"We have new project to develop."&nbsp;It would be better to put 'a' in front of 'new project'.
+"We have a new project to develop."&nbsp;This sounds much more natural! The second sentence&nbsp;"I have a project to build a data base to production line."&nbsp;If you put 'for' between 'data base' and 'production line', you can convey a clearer meaning.
+"I have a project to build a data base for the production line."&nbsp;This sounds more natural! The last sentence&nbsp;"I am kind of a hard worker."&nbsp;is excellent! You can also say&nbsp;"I am a hard worker."&nbsp;without&nbsp;"kind of", which sounds natural and more confident. Yangha, if you put a little effort into building sentences, you will improve a lot! Keep practicing, correct your mistakes, and be confident! We have new project to develop.
+→ We have a new project to develop.
+I have a project to build a database to production line.
+→ I have a project to build a database for the production line.
+I am kind of a hard worker.
+→ I’m a hard worker.
+I always feel uncomfortable to speak in English unlike to write in English. I think the why I’m like this is because of my character, I mean, introverted character. I feel the need of having more chances to speak in English. And it feels like this time is when I have to learn how to have a small talk with other people.I always feel uncomfortable speaking in English, unlike when I’m writing. I think it’s partly because of my personality—I’m more on the introverted side. I feel the need for more opportunities to practice speaking in English, and it seems like now is the right time for me to learn how to make small talk with others.]]></description><link>https://64etuor.github.io/studies/english/spicus-(24.10~24.11)/unit-1.-announcing-a-new-project.html</link><guid isPermaLink="false">Studies/English/SPICUS (24.10~24.11)/Unit 1. Announcing a new project.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 07:04:02 GMT</pubDate></item><item><title><![CDATA[ERP 대용 솔루션 최적화 및 핵심 기능]]></title><description><![CDATA[앱의 성능을 최적화할 수 있는 방법과 핵심 기능만 소개합니다.<img alt="Pasted image 20241209134814.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241209134814.png" target="_self">
 Gallery Control 등 데이터 조회 기능의 items 속성은 (가능하다면) 앱 로드 시 캐시된 콜렉션 데이터를 활용한다. 지연시간을 줄여 사용자 경험을 향상 시킬 수 있다.
 <br><img alt="Pasted image 20241209140207.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241209140207.png" target="_self" style="width: 500px; max-width: 100%;">
 위와 마찬가지로 앱 내에서 Lookup 함수 등으로 조회/필터 등이 필요한 정적 데이터도 미리 Collection 등으로 캐시해 두는 게 바람직하다. <br><img alt="Pasted image 20241209135038.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241209135038.png" target="_self">
@@ -148,53 +212,7 @@ Power Automate의 트리거를 바로 이 Sharepoint List에 새로운 레코드
 못난 생김새
 주름진 얼굴
 그리고 제 죄를 아는 듯이 꼭 감은 두 눈한마디 톡 쏘아 댄다
-마귀야 이 예쁜 마귀야]]></description><link>https://64etuor.github.io/writings/poems/190213-딸입니다.html</link><guid isPermaLink="false">Writings/Poems/190213 - 딸입니다.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 03:24:16 GMT</pubDate></item><item><title><![CDATA[Power BI 보고서 내 이미지 표시를 위한 URL Parsing]]></title><description><![CDATA[Power BI로 만든 우리 팀의 통합 대시보드의 Defect 탭에는 생산 불량과 FPY 등이 기록된다.
-그런데 텍스트로만 표현된 불량 내역은 직관적이지 못하다.
-그래서 대시보드에서 바로 불량 사진을 확인할 수 있도록 구현하고자 했다.
-우선 구현하고자 하는 기능과 Power BI, Sharepoint List의 기능을 점검했다.
-대시보드 구현 어플리케이션: Power BI
-데이터베이스: Sharepoint List (Dataverse나 SQL 등과 다르게 추가 비용이 발생하지 않음. 다만 데이터베이스로 사용하기엔 한계가 명확.) Power BI 대시보드에서 불량 사진을 바로 확인할 수 있는 기능 구현
-(Power BI에서는 URL이 저장된 열이 있다면 Data Category를 변경하여 사진으로 출력하는 기능 있는 것으로 확인) Sharepoint List에 Image를 등록하면 레코드 형태로 저장되기 때문에 Power BI에서 바로 출력이 불가능 Sharepoint List에 Image가 등록/수정되면 Power Automate로 JSON을 파싱하여 이미지 URL 추출하여 imgURL이라는 열에 저장 <img alt="Pasted image 20241008132222.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008132222.png" target="_self"><br> <img alt="Pasted image 20241008132325.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008132325.png" target="_self">
-Site Address: 파싱 대상 Sharepoint List의 주소 선택
-Method: GET
-Uri:
-//'listName'에 Sharepoint List의 Internal Name을 넣어준다.
-//items다음의 $orderby=Created desc&amp;$top=1 는 리스트의 항목 생성시간을 내림차순으로 정렬하고, 가장 상위의 값 1개를 가져오는 명령이다. /_api/web/lists/getbytitle('listName')/items?$orderby=Created desc&amp;$top=1
-<br> <img alt="Pasted image 20241008134855.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008134855.png" target="_self"><br>
-<img alt="Pasted image 20241008140753.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008140753.png" target="_self">
-값을 살펴보면 “_metadata”: 내에 “uri”가 저장되어 있다.
-그리고 “image”에 리스트 형태로 “fileName”이 저장되어 있다.
-그 아래로 스크롤을 내리다 보면 fileName을 확인할 수 있다.
-이제 Parse JSON Flow를 추가하여 위 body 데이터에서 필요한 값만 추출해서 imgURL이라는 변수를 생성하고 값을 할당하면 된다.
-그런데 작업 도중에 Sharepoint 커넥터의 Get attachments를 사용하면 더 간단하게 원하는 결과물을 도출할 수 있다는 걸 알게 됐다.
-(위의 Send HTTP request 액션은 너무나 자주 사용하는 액션이므로 그대로 두겠다.) <br>Sharepoint 커넥터의 Get attachments 액션을 사용하면 Sharepoint List에 등록된 항목의 첨부파일 정보 중 “Id”, “AbsoluteUri”, “Display Name”을 가져올 수 있다. 따라서 Parse JSON 액션 등의 과정을 생략할 수 있다. <img alt="Pasted image 20241008141135.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008141135.png" target="_self">
-※ For each는 배열이나 여러 항목 등을 반환하는 액션이 있거나 액션에서 필요로 할 경우, 자동 생성됨<br><img alt="Pasted image 20241008141545.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008141545.png" target="_self">
-When an item is created or modified: 트리거로 설정한다. 이미지가 등록될 때뿐만 아니라 이미지 수정이 이루어질 경우에도 대응되도록 한다.
-Get attachments: 등록/수정된 이미지의 AbsoluteUri를 읽는다.
-Condition: imgURL 열에 이미 등록된 값이 있다면 읽어온 AbsoluteUri와 비교하여 서로가 다를 경우에만 항목이 업데이트 되도록 한다.<br>
-<img alt="Pasted image 20241008141832.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008141832.png" target="_self">
-Update: 불러온 이미지의 AbsoluteUri를 imgURL열에 업데이트한다.<br>
-<img alt="Pasted image 20241008144638.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144638.png" target="_self">
-Post message in a chat or channel(옵션사항): Update 액션이 실패할 경우, 알람 메세지를 특정인에게 보낸다.<br>
-<img alt="Pasted image 20241008144727.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144727.png" target="_self"> 새로운 imgURL 열이 추가되었으므로 데이터셋을 한 번 새로고침 해준다.
-Table View에 가서 imgURL 열의 Data Category를 “Image URL”로 수정해준다.<br>
-<img alt="Pasted image 20241008142942.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008142942.png" target="_self">
-Power BI 데스크탑 앱으로 확인할 경우 기본 디폴트 이미지만 보이고 실제 사진이 보이지 않는다. 실제 사진은 웹으로 접속해야만 볼 수 있다. 확인해 본다.<br>
-<img alt="Pasted image 20241008143123.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008143123.png" target="_self">
-이미지가 정상적으로 출력된다. 이제 차트에 마우스 커서를 올리면 툴팁으로 사진을 확인할 수 있게 구현해본다. 우선 새로운 Power BI 보고서에 새로운 페이지를 추가한다.
-Page의 Format에서 Page type을 Tooltip으로 설정한다. 그리고 캔버스의 크기를 필요한 만큼 조절한다.<br>
-<img alt="Pasted image 20241008143639.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008143639.png" target="_self"><br>
-<img alt="Pasted image 20241008143722.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008143722.png" target="_self">
-시각적 개체 Table을 삽입하고 필요한 데이터들과 imgURL 열을 넣어준다.<br>
-<img alt="Pasted image 20241008143910.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008143910.png" target="_self">
-테이블의 크기, 이미지 크기를 적절하게 조절해준다.<br>
-<img alt="Pasted image 20241008144010.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144010.png" target="_self">
-Tooltip 페이지 완성<br>
-<img alt="Pasted image 20241008144028.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144028.png" target="_self">
-이미지가 Tooltip으로 표시되길 원하는 차트로 이동해서 Format &gt; Properties로 이동한다. Options의 Type을 Report page로 설정
-<br>Page를 위에서 만든 Page로 설정<img alt="Pasted image 20241008144251.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144251.png" target="_self"> 최종 확인을 위해 Power BI 리포트를 저장하고 웹에서 확인한다.<br>
-<img alt="Pasted image 20241008144347.png" src="https://64etuor.github.io/assets/image/pasted-image-20241008144347.png" target="_self">
-툴팁에서도 이미지가 잘 출력된다. ]]></description><link>https://64etuor.github.io/works/microsoft/power-automate/power-bi-보고서-내-이미지-표시를-위한-url-parsing.html</link><guid isPermaLink="false">Works/Microsoft/Power Automate/Power BI 보고서 내 이미지 표시를 위한 URL Parsing.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 22 Oct 2024 05:52:44 GMT</pubDate><enclosure url="https://64etuor.github.io/assets/image/pasted-image-20241008132222.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/assets/image/pasted-image-20241008132222.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Portfolio_Korean]]></title><description><![CDATA[
+마귀야 이 예쁜 마귀야]]></description><link>https://64etuor.github.io/writings/poems/190213-딸입니다.html</link><guid isPermaLink="false">Writings/Poems/190213 - 딸입니다.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 03:24:16 GMT</pubDate></item><item><title><![CDATA[Portfolio_Korean]]></title><description><![CDATA[
 🖐️ 안녕하세요. 데이터 분석과 IT 기술을 통해 혁신을 추구하는 공정기술 엔지니어 박양하입니다.
 저는 그동안, 인문학 베이스의 엔지니어로서 인문학적 사고와 엔지니어링 지식을 융합해 다양한 관점에서 문제를 바라보고, 끊임없는 학습과 고민으로 회사의 공정과 품질을 꾸준히 개선해왔습니다.
 신뢰할 수 있는 데이터를 수집할 수 있는 기반을 마련하고, 축적한 데이터를 올바르게 분석하여 회사의 방향성을 제시하고, 문제를 해결할 수 있는 근거를 만들어 나갑니다.
@@ -1091,23 +1109,7 @@ I had a project to build database.
 → I worked on project to build a database.
 They are not enough to build database by themselves.
 →They don’t have enough expertise to build a database independently.
-]]></description><link>https://64etuor.github.io/studies/english/spicus-(24.10~24.11)/unit-2.-progress-update.html</link><guid isPermaLink="false">Studies/English/SPICUS (24.10~24.11)/Unit 2. Progress Update.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 09:38:37 GMT</pubDate></item><item><title><![CDATA[Unit 1. Announcing a new project]]></title><description><![CDATA[ get a foothold in
-financial modeling
-have a consensus
-convene a meeting
-adjourn a meeting
-shelve a topic
-adopt resolutions
-have a quorum to vote -We have a new smart medical decive in the works. We have a lot groundwork to cover.
-We might be able to do it if we work around the clock. Hello, Yangha! The sentences you mentioned, if you adjust them a little, they will sound more natural and accurate. The first sentence&nbsp;"We have new project to develop."&nbsp;It would be better to put 'a' in front of 'new project'.
-"We have a new project to develop."&nbsp;This sounds much more natural! The second sentence&nbsp;"I have a project to build a data base to production line."&nbsp;If you put 'for' between 'data base' and 'production line', you can convey a clearer meaning.
-"I have a project to build a data base for the production line."&nbsp;This sounds more natural! The last sentence&nbsp;"I am kind of a hard worker."&nbsp;is excellent! You can also say&nbsp;"I am a hard worker."&nbsp;without&nbsp;"kind of", which sounds natural and more confident. Yangha, if you put a little effort into building sentences, you will improve a lot! Keep practicing, correct your mistakes, and be confident! We have new project to develop.
-→ We have a new project to develop.
-I have a project to build a database to production line.
-→ I have a project to build a database for the production line.
-I am kind of a hard worker.
-→ I’m a hard worker.
-I always feel uncomfortable to speak in English unlike to write in English. I think the why I’m like this is because of my character, I mean, introverted character. I feel the need of having more chances to speak in English. And it feels like this time is when I have to learn how to have a small talk with other people.I always feel uncomfortable speaking in English, unlike when I’m writing. I think it’s partly because of my personality—I’m more on the introverted side. I feel the need for more opportunities to practice speaking in English, and it seems like now is the right time for me to learn how to make small talk with others.]]></description><link>https://64etuor.github.io/studies/english/spicus-(24.10~24.11)/unit-1.-announcing-a-new-project.html</link><guid isPermaLink="false">Studies/English/SPICUS (24.10~24.11)/Unit 1. Announcing a new project.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 09:38:28 GMT</pubDate></item><item><title><![CDATA[Spicus Business Pro 코스 후기]]></title><description><![CDATA[
+]]></description><link>https://64etuor.github.io/studies/english/spicus-(24.10~24.11)/unit-2.-progress-update.html</link><guid isPermaLink="false">Studies/English/SPICUS (24.10~24.11)/Unit 2. Progress Update.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 09:38:37 GMT</pubDate></item><item><title><![CDATA[Spicus Business Pro 코스 후기]]></title><description><![CDATA[
 <img alt="Pasted image 20241208180237.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241208180237.png" target="_self" style="width: 400px; max-width: 100%;">
 회사 영어 프로그램의 일환으로 몇 개의 코스가 있었는데 그 중 Spicus 전화영어를 약 2달간 진행했다. 예전에도 전화영어를 해본 적이 있어서 그다지 낯선 시스템은 아니었다.
 회사의 한국 법인 철수 결정으로 인해 예정되었던 3달을 못 채우고 코스가 종료됐지만 나름의 성과는 있었다고 생각한다. 일단 영어로 말할 기회가 너무 없다 보니 기억을 되살린 정도로도 만족한다.
