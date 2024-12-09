@@ -1,7 +1,7 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 09 Dec 2024 00:13:49 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 09 Dec 2024 00:13:42 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[2024.10 자동화 설비 MES 구축 프로젝트]]></title><description><![CDATA[github.com/64etuor/simes- Frontend React 18.2.0 TypeScript 4.9.5 Material-UI 5.x Ant Design Electron
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 09 Dec 2024 01:11:10 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 09 Dec 2024 01:10:55 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[2024.10 자동화 설비 MES 구축 프로젝트]]></title><description><![CDATA[github.com/64etuor/simes- Frontend React 18.2.0 TypeScript 4.9.5 Material-UI 5.x Ant Design Electron
 - Backend Django 4.2 Django REST Framework 3.14 Python 3.11
 - Database PostgreSQL 17
-Key Feature 생산 정보 등록(바코드 리더 스캔)
+Key Features 생산 정보 등록(바코드 리더 스캔)
 반제품 공정 이력 검증
 S/N 유효성 검증
 Cell Grade 검증
@@ -20,11 +20,52 @@ S/N 유효성 검사 등록 폼
 <br><img alt="Pasted image 20241202160214.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160214.png" target="_self"><br>
 <img alt="Pasted image 20241202160230.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160230.png" target="_self">
 Backend - Django 프레임워크
-<br><img alt="Pasted image 20241202160723.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160723.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.10-자동화-설비-mes-구축-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.10 자동화 설비 MES 구축 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 00:13:35 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2023.10 공정 데이터 관리 시스템 개발 프로젝트]]></title><description><![CDATA[github.com/64etuor/MS_PA_SPT-Solution- Development tool : Power Apps
+<br><img alt="Pasted image 20241202160723.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160723.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.10-자동화-설비-mes-구축-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.10 자동화 설비 MES 구축 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:40 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2024.08 개발품 DV 데이터 전산 관리 프로젝트]]></title><description><![CDATA[Github 레포지토리 없음- Development tool : Google Appsheet
+- Data Visualization : Google Sheets
+- RPA : Google Apps Script
+- Database : Google Sheet
+Key Features S/N 유효성 및 고유성 검증
+공정 이력 검증
+부품 사양 검증(QR 등록 시)
+재작업 목록
+실시간 대시보드(5분 간격 업데이트)
+QR 코드 제품 생산 이력 조회 작업 화면 (모듈)
+<img alt="batch_2024-12-09 08 29 05 1.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" target="_self" style="width: 400px; max-width: 100%;"><br>
+<img alt="batch_2024-12-09 08 29 37.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-37.png" target="_self" style="width: 400px; max-width: 100%;">
+작업 화면 (BPU)<br>
+<img alt="batch_2024-12-09 08 40 47.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-40-47.png" target="_self"> 작업화면 (System Rack)
+<br><img alt="batch_2024-12-09 08 35 09.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-35-09.png" target="_self" style="width: 400px; max-width: 100%;"><br>
+<img alt="batch_2024-12-09 08 35 21.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-35-21.png" target="_self" style="width: 400px; max-width: 100%;">
+Google Sheet 데이터 및 쿼리 화면
+<br><img alt="batch_2024-12-08 23 42 23 1.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-42-23-1.png" target="_self"><br><img alt="batch_2024-12-08 23 41 58.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-41-58.png" target="_self">
+Google Sheet 실시간 대시보드
+<br><img alt="batch_2024-12-08 23 39 34.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-39-34.png" target="_self">
+QR Code 생산 이력 조회 화면
+<br><img alt="batch_2024-12-09 08 37 33.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png" target="_self">
+Google Apps Script
+<br><img alt="batch_2024-12-09 08 38 12.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-38-12.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.08-개발품-dv-데이터-전산-관리-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.08 개발품 DV 데이터 전산 관리 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:36 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2024.03 공정 추적성 관리 시스템 개발 프로젝트]]></title><description><![CDATA[Github 레포지토리 없음- Development tool : Power Apps
 - Data Visualization : Power BI
 - RPA : Power Automate
 - Database : Sharepoint List
-Key Feature 워크 오더, 작업 이력, 생산 계획 등 조회 및 등록
+Key Features S/N 유효성 및 고유성 검증
+공정 이력 검증
+부품 사양 검증(QR 등록 시)
+제품 사진 등록
+모바일 체크리스트
+재작업 목록
+검사 목록
+Power BI 대시보드 연결 기본 화면
+<img alt="Pasted image 20241202163306.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" target="_self" style="width: 400px; max-width: 100%;">
+생산자 자주 검사, 체크리스트
+<br><img alt="Pasted image 20241202163355.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163355.png" target="_self" style="width: 400px; max-width: 100%;">
+이력 조회
+<br><img alt="Pasted image 20241202163454.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163454.png" target="_self" style="width: 400px; max-width: 100%;">
+이슈는 이메일과 Teams 채팅으로 즉시 발송
+<br><img alt="Pasted image 20241202163518.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163518.png" target="_self" style="width: 400px; max-width: 100%;">]]></description><link>https://64etuor.github.io/works/project/2024.03-공정-추적성-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.03 공정 추적성 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:33 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2023.10 공정 데이터 관리 시스템 개발 프로젝트]]></title><description><![CDATA[github.com/64etuor/MS_PA_SPT-Solution- Development tool : Power Apps
+- Data Visualization : Power BI
+- RPA : Power Automate
+- Database : Sharepoint List
+Key Features 워크 오더, 작업 이력, 생산 계획 등 조회 및 등록
 OPEX 관리, 근태 관리
 근태 현황과 작업 공수 비교 검증
 불량 이력, 사진 등록
@@ -69,25 +110,7 @@ Power BI 대시보드 - HR 관련 페이지
 Power BI 대시보드 - 근태 현황
 <br><img alt="Pasted image 20241205182304.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182304.png" target="_self">
 Power BI 대시보드 - OPEX 비용 분석
-<br><img alt="Pasted image 20241205182339.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182339.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2023.10-공정-데이터-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2023.10 공정 데이터 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 00:06:59 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2024.03 공정 추적성 관리 시스템 개발 프로젝트]]></title><description><![CDATA[Github 레포지토리 없음- Development tool : Power Apps
-- Data Visualization : Power BI
-- RPA : Power Automate
-- Database : Sharepoint List
-Key Feature S/N 유효성 및 고유성 검증
-공정 이력 검증
-부품 사양 검증(QR 등록 시)
-제품 사진 등록
-모바일 체크리스트
-재작업 목록
-검사 목록
-Power BI 대시보드 연결 기본 화면
-<img alt="Pasted image 20241202163306.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" target="_self" style="width: 400px; max-width: 100%;">
-생산자 자주 검사, 체크리스트
-<br><img alt="Pasted image 20241202163355.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163355.png" target="_self" style="width: 400px; max-width: 100%;">
-이력 조회
-<br><img alt="Pasted image 20241202163454.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163454.png" target="_self" style="width: 400px; max-width: 100%;">
-이슈는 이메일과 Teams 채팅으로 즉시 발송
-<br><img alt="Pasted image 20241202163518.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163518.png" target="_self" style="width: 400px; max-width: 100%;">]]></description><link>https://64etuor.github.io/works/project/2024.03-공정-추적성-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.03 공정 추적성 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 00:01:36 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
+<br><img alt="Pasted image 20241205182339.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182339.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2023.10-공정-데이터-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2023.10 공정 데이터 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:30 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
 🖐️ Hello, I'm Yang-ha Park, a Process Technology Engineer pursuing innovation through data analysis and IT technology.
 Throughout my career, I have: As an engineer with a humanities background, I've consistently improved company processes and quality by combining humanistic thinking with engineering knowledge, viewing problems from diverse perspectives through continuous learning and contemplation.
 Created foundations for collecting reliable data, properly analyzing accumulated data to suggest company directions, and building evidence to solve problems.
@@ -202,30 +225,7 @@ Power BI 확장 : 생산 이력 데이터를 대시보드에서 확인하고 추
 검사 Jig 개조로 Core-pack Function Test C/T 49% 단축 ( 55sec &gt; 28sec )
 소형 배터리팩 라인 LOB 개선 생산성 24% 향상, 연환산 4437만원 절감 효과
 MES 활용 공정 현황 실시간 분석 프로세스 도입 WBS, Gantt Chart, 공유 업무 보드 등을 활용한 인적 자원, 프로젝트 관리 도입 불합리 개선 : 3정5S 활동 추진 및 기타 불합리 개선 생산관련문서 불합리 개선, 엑셀 자동화 양식 제작하여 업무 효율성 및 보고 정확성 개선 라벨 프린트 S/N 유효성 검증 프로그램 제작(Python) 연계/소속회사 : 중소기업진흥청 / 은성 추진 배경 : 기업에 스마트 팩토리 기초 솔루션을 도입하여 데이터를 전산화하고 업무 절차를 체계화하기 위해 중소기업진흥청 지원 프로그램 신청
-수행 기간 : 2021.08 ~ 2022.01 (약 6개월) 주요 역할 : 프로젝트 신청, 프로젝트 매니지먼트, 개발 요구사항 수립 업무 성과 : 물류 실수 방지 및 재고 관리 현황 파악을 위한 ERP 연계 바코드 관리 시스템 도입 모바일 태블릿을 활용한 수작업 라인 생산현황 파악 시스템 도입 제 열정을 십분 발휘하여 귀사에서 함께 성장해 가고 싶습니다.여기까지 읽어 주셔서 정말 감사합니다!]]></description><link>https://64etuor.github.io/portfolio/portfolio_korean.html</link><guid isPermaLink="false">PORTFOLIO/Portfolio_Korean.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 23:59:27 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2024.08 개발품 DV 데이터 전산 관리 프로젝트]]></title><description><![CDATA[Github 레포지토리 없음- Development tool : Google Appsheet
-- Data Visualization : Google Sheets
-- RPA : Google Apps Script
-- Database : Google Sheet
-Key Feature S/N 유효성 및 고유성 검증
-공정 이력 검증
-부품 사양 검증(QR 등록 시)
-재작업 목록
-실시간 대시보드(5분 간격 업데이트)
-QR 코드 제품 생산 이력 조회 작업 화면 (모듈)
-<img alt="batch_2024-12-09 08 29 05 1.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" target="_self" style="width: 400px; max-width: 100%;"><br>
-<img alt="batch_2024-12-09 08 29 37.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-37.png" target="_self" style="width: 400px; max-width: 100%;">
-작업 화면 (BPU)<br>
-<img alt="batch_2024-12-09 08 40 47.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-40-47.png" target="_self"> 작업화면 (System Rack)
-<br><img alt="batch_2024-12-09 08 35 09.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-35-09.png" target="_self" style="width: 400px; max-width: 100%;"><br>
-<img alt="batch_2024-12-09 08 35 21.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-35-21.png" target="_self" style="width: 400px; max-width: 100%;">
-Google Sheet 데이터 및 쿼리 화면
-<br><img alt="batch_2024-12-08 23 42 23 1.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-42-23-1.png" target="_self"><br><img alt="batch_2024-12-08 23 41 58.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-41-58.png" target="_self">
-Google Sheet 실시간 대시보드
-<br><img alt="batch_2024-12-08 23 39 34.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-39-34.png" target="_self">
-QR Code 생산 이력 조회 화면
-<br><img alt="batch_2024-12-09 08 37 33.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png" target="_self">
-Google Apps Script
-<br><img alt="batch_2024-12-09 08 38 12.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-38-12.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.08-개발품-dv-데이터-전산-관리-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.08 개발품 DV 데이터 전산 관리 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 23:58:28 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Obsidian Common Template 연구]]></title><description><![CDATA[ title
+수행 기간 : 2021.08 ~ 2022.01 (약 6개월) 주요 역할 : 프로젝트 신청, 프로젝트 매니지먼트, 개발 요구사항 수립 업무 성과 : 물류 실수 방지 및 재고 관리 현황 파악을 위한 ERP 연계 바코드 관리 시스템 도입 모바일 태블릿을 활용한 수작업 라인 생산현황 파악 시스템 도입 제 열정을 십분 발휘하여 귀사에서 함께 성장해 가고 싶습니다.여기까지 읽어 주셔서 정말 감사합니다!]]></description><link>https://64etuor.github.io/portfolio/portfolio_korean.html</link><guid isPermaLink="false">PORTFOLIO/Portfolio_Korean.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 23:59:27 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Obsidian Common Template 연구]]></title><description><![CDATA[ title
 author
 create_at
 modified_at ]]></description><link>https://64etuor.github.io/obsidian/obsidian-common-template-연구.html</link><guid isPermaLink="false">Obsidian/Obsidian Common Template 연구.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 23:31:58 GMT</pubDate></item><item><title><![CDATA[Second Brain - PARA Management]]></title><description><![CDATA[세컨드 브레인 부스트를 읽고 내용 정리할 곳]]></description><link>https://64etuor.github.io/self-management/second-brain-para-management.html</link><guid isPermaLink="false">Self-Management/Second Brain - PARA Management.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 12:16:07 GMT</pubDate></item><item><title><![CDATA[Power BI_통합 대시보드 구현]]></title><description><![CDATA[예전에 Power BI로 대시보드를 만들 때, 내가 원하는 수준의 기능을 구현하기 위해 참고할 만한 국문 자료가 없어서 대부분 영문 자료를 참조하거나 Microsoft Power BI Documentation을 참조했다. 구축 이후 수정할 일이 크게 없어 방치하다 보니 세세한 요청 사항이 생겼을 때, 나도 어떻게 만들었는지 기억이 안 나서(…) 다시 자료 찾아보는 일이 생겼다. 그런데 아무래도 한국에서 많이 사용을 하는 툴이 아니다 보니 여전히 국문 자료가 부족한 듯 보인다. 그래서 리포트를 만들었던 과정을 복기하는 겸, 리포트 내에 적용했던 여러 사례를 이 블로그를 통해 소개하고자 한다.
