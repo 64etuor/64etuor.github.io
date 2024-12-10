@@ -1,4 +1,440 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 10 Dec 2024 11:20:05 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 10 Dec 2024 11:20:03 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[Minimalism_Home]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:19:54 GMT</pubDate></item><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 10 Dec 2024 11:26:58 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 10 Dec 2024 11:26:47 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[Window]]></title><description><![CDATA[Window functions in SQL perform calculations across a set of table rows related to the current row. Unlike aggregate functions (e.g., SUM, AVG), window functions do not collapse rows into a single output row. Instead, they provide a result for each row while considering a "window" or subset of rows defined by a specific criterion.window_function(expression) OVER (PARTITION BY column_name ORDER BY column_name) window_function: The specific function to apply, such as ROW_NUMBER(), RANK(), SUM(), AVG(), etc.
+OVER: Specifies that the function is a window function.
+PARTITION BY: (Optional) Divides the rows into partitions to perform the calculation within each partition.
+ORDER BY: (Optional) Defines the order of rows within the partition. Assigns a unique sequential number to each row within a partition.
+SELECT EmployeeID, Department, Salary, ROW_NUMBER() OVER (PARTITION BY Department ORDER BY Salary DESC) AS RowNum
+FROM Employees; Assigns a rank to each row. Ties receive the same rank, and gaps are left in the ranking sequence.
+SELECT EmployeeID, Department, Salary, RANK() OVER (PARTITION BY Department ORDER BY Salary DESC) AS Rank
+FROM Employees; Similar to RANK(), but does not leave gaps in the ranking sequence for ties.
+SELECT EmployeeID, Department, Salary, DENSE_RANK() OVER (PARTITION BY Department ORDER BY Salary DESC) AS DenseRank
+FROM Employees; Calculates the running total within each partition.
+SELECT EmployeeID, Department, Salary, SUM(Salary) OVER (PARTITION BY Department ORDER BY EmployeeID) AS RunningTotal
+FROM Employees; Calculates the running average within each partition.
+SELECT EmployeeID, Department, Salary, AVG(Salary) OVER (PARTITION BY Department ORDER BY EmployeeID) AS RunningAverage
+FROM Employees; Finds the maximum or minimum value within the partition or window.
+SELECT EmployeeID, Department, Salary, MAX(Salary) OVER (PARTITION BY Department) AS MaxSalary
+FROM Employees; Accesses the value from the next row within the partition.
+SELECT EmployeeID, Department, Salary, LEAD(Salary) OVER (PARTITION BY Department ORDER BY EmployeeID) AS NextSalary
+FROM Employees; Accesses the value from the previous row within the partition.
+SELECT EmployeeID, Department, Salary, LAG(Salary) OVER (PARTITION BY Department ORDER BY EmployeeID) AS PrevSalary
+FROM Employees; Running Totals and Averages Track cumulative sums or averages within groups of data (e.g., monthly sales totals). Ranking and Sorting Rank rows within categories (e.g., top 3 salaries by department). Comparing Rows Compare current row values to previous or next rows (e.g., detecting trends or changes). Data Analysis Perform analytics without collapsing rows (e.g., finding maximum values within groups while retaining original data). Indexing: Ensure columns used in PARTITION BY and ORDER BY clauses are indexed to improve performance. Large Datasets: Window functions can be computationally expensive on large datasets; optimize queries by limiting rows with WHERE clauses or pre-aggregating data. Memory Usage: Be mindful of memory usage when dealing with large partitions, as the window functions may need to maintain large intermediate result sets. Window functions are powerful tools for performing calculations across a set of rows related to the current row without reducing the result set.
+They enhance SQL's capability for data analysis, providing insights such as rankings, running totals, and comparisons.
+Proper use of window functions can lead to more efficient and readable queries, especially when dealing with complex analytical tasks.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/window.html</link><guid isPermaLink="false">Works/SQL/Window.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:23 GMT</pubDate></item><item><title><![CDATA[Views]]></title><description><![CDATA[
+Views and Materialized Views are essential database objects that allow you to simplify and optimize your SQL queries. They provide a way to store query results for easier and faster access.
+Views are virtual tables representing the result of a query, while Materialized Views physically store the query results for faster retrieval. A View is a virtual table based on the result of a SELECT query.
+It does not store data physically but provides a saved query that dynamically retrieves data from underlying tables when queried.
+Changes to the underlying tables are reflected in the view.
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+CREATE VIEW HighSalaryEmployees AS
+SELECT EmployeeID, FirstName, LastName, Salary
+FROM Employees
+WHERE Salary &gt; 50000;
+SELECT * FROM HighSalaryEmployees; If the view is based on a simple query, you can sometimes update the underlying table through the view.
+UPDATE HighSalaryEmployees
+SET Salary = 60000
+WHERE EmployeeID = 101; Simplifies Complex Queries: Store frequently used complex queries for easy reuse. Security: Restrict access to specific columns or rows by granting permissions on the view, not the base table. Abstraction: Provide a layer of abstraction, allowing changes to underlying tables without affecting queries using the view. Performance: Since views are virtual, querying a view can be slower for large datasets due to dynamic computation. Cannot Always Be Updated: Views with complex joins, aggregations, or subqueries may not be updatable. A Materialized View is a physical copy of the result of a query that is stored on disk.
+Unlike regular views, materialized views store the data, making queries against them much faster.
+Materialized views need to be refreshed periodically to stay up-to-date with the underlying data.
+CREATE MATERIALIZED VIEW mv_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+CREATE MATERIALIZED VIEW HighSalaryEmployeesMV AS
+SELECT EmployeeID, FirstName, LastName, Salary
+FROM Employees
+WHERE Salary &gt; 50000; Materialized views can be refreshed manually or automatically to reflect changes in the underlying tables.
+REFRESH MATERIALIZED VIEW HighSalaryEmployeesMV;
+CREATE MATERIALIZED VIEW HighSalaryEmployeesMV
+BUILD IMMEDIATE
+REFRESH FAST ON COMMIT
+AS
+SELECT EmployeeID, FirstName, LastName, Salary
+FROM Employees
+WHERE Salary &gt; 50000; Performance: Faster query performance for large datasets because data is precomputed and stored. Precomputed Data: Useful for complex calculations or aggregations that don't change frequently. Reduced Database Load: Reduces the load on the database by avoiding repeated complex computations. Storage Overhead: Requires additional storage space for the precomputed data. Stale Data: Data can become outdated unless the materialized view is refreshed regularly. Maintenance Overhead: Refreshing materialized views can add maintenance complexity and resource usage. Use Views When: You need to simplify complex queries.
+You want to provide a security layer by restricting access to specific columns or rows. Use Materialized Views When: Performance is critical for querying large datasets.
+You have complex aggregations or calculations that do not change frequently. Optimize Refresh Strategies: For frequently changing data, use incremental (FAST) refresh where possible.
+For infrequently changing data, use manual or periodic refresh to save resources. Views and Materialized Views are powerful tools for managing and optimizing SQL queries.
+Choosing between them depends on your performance needs, data freshness requirements, and storage considerations.
+Understanding their differences and appropriate use cases can help you design more efficient and maintainable database solutions.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/views.html</link><guid isPermaLink="false">Works/SQL/Views.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:21 GMT</pubDate></item><item><title><![CDATA[Subqueries]]></title><description><![CDATA[
+Subqueries (also known as inner queries) are queries nested inside other SQL statements, such as SELECT, INSERT, UPDATE, or DELETE. They allow you to dynamically use the results of one query as input or conditions for another.
+Correlated subqueries are a special type of subquery that references one or more columns from the outer query. Unlike a regular subquery, a correlated subquery is evaluated once for each row processed by the outer query, making it more dynamic but potentially less performant.
+Subqueries can be categorized based on the type of results they return and how they are used:A scalar subquery returns a single value (one row, one column). It is often used in the SELECT clause or WHERE clause.SELECT EmployeeID, FirstName, LastName, (SELECT MAX(Salary) FROM Employees) AS MaxSalary
+FROM Employees; Explanation: The subquery returns the maximum salary. The outer query then shows each employee's details along with this maximum salary.
+A row subquery returns a single row with multiple columns. It is used with conditions that expect multiple values, such as WHERE or IN clauses.SELECT *
+FROM Employees
+WHERE (DepartmentID, Salary) = ( SELECT DepartmentID, MAX(Salary) FROM Employees WHERE DepartmentName = 'Sales'
+); Explanation: The subquery finds the DepartmentID and the highest salary for the "Sales" department. The outer query returns employees who match both these criteria.
+A column subquery returns a single column with multiple rows. It is typically used with the IN clause to filter based on multiple values.SELECT EmployeeID, FirstName, LastName
+FROM Employees
+WHERE DepartmentID IN ( SELECT DepartmentID FROM Departments WHERE Location = 'New York'
+); Explanation: The subquery retrieves all DepartmentIDs located in New York. The outer query returns employees who belong to any of these departments.
+A table subquery returns multiple rows and columns, essentially functioning like a derived table. It is used in the FROM clause.SELECT d.DepartmentName, e.EmployeeCount
+FROM ( SELECT DepartmentID, COUNT(*) AS EmployeeCount FROM Employees GROUP BY DepartmentID
+) e
+INNER JOIN Departments d ON d.DepartmentID = e.DepartmentID; Explanation: The subquery aggregates employees by department. The outer query joins this result with the Departments table to get department names and employee counts.
+An EXISTS subquery checks if any rows meet the conditions specified in the subquery and returns a Boolean value (TRUE or FALSE).SELECT FirstName, LastName
+FROM Employees e
+WHERE EXISTS ( SELECT 1 FROM Orders o WHERE o.EmployeeID = e.EmployeeID
+); Explanation: The subquery checks if there are any orders linked to each employee. The outer query returns employees who have processed at least one order.
+A regular subquery is a query enclosed in parentheses and embedded inside a larger query. It can be executed independently of the outer query. Filtering Results in a WHERE Clause:
+SELECT EmployeeID, FirstName, LastName
+FROM Employees
+WHERE DepartmentID = ( SELECT DepartmentID FROM Departments WHERE DepartmentName = 'Sales'
+); Using Subqueries in the FROM Clause (Derived Tables):
+SELECT d.DepartmentName, e.EmployeeCount
+FROM ( SELECT DepartmentID, COUNT(*) AS EmployeeCount FROM Employees GROUP BY DepartmentID
+) e
+INNER JOIN Departments d ON d.DepartmentID = e.DepartmentID; Subqueries in the SELECT List:
+SELECT FirstName, LastName, (SELECT COUNT(*) FROM Orders WHERE Orders.EmployeeID = Employees.EmployeeID) AS OrderCount
+FROM Employees; A correlated subquery references columns from the outer query, making it dependent on the outer query's current row.SELECT e.EmployeeID, e.FirstName, e.LastName
+FROM Employees e
+WHERE e.Salary &gt; ( SELECT AVG(Salary) FROM Employees e2 WHERE e2.DepartmentID = e.DepartmentID
+); Explanation: The subquery calculates the average salary for each employee's department. The outer query returns employees whose salaries exceed this average. Choose the Right Subquery Type: Use scalar subqueries for single-value lookups.
+Use table subqueries when you need derived tables.
+Use correlated subqueries for row-specific logic. Optimize Correlated Subqueries: Replace with joins, CTEs, or window functions where possible.
+Ensure columns used in subquery conditions are indexed. Example Optimization:
+WITH DeptAvgSalary AS ( SELECT DepartmentID, AVG(Salary) AS AvgSalary FROM Employees GROUP BY DepartmentID
+)
+SELECT e.EmployeeID, e.FirstName, e.LastName
+FROM Employees e
+JOIN DeptAvgSalary das ON e.DepartmentID = das.DepartmentID
+WHERE e.Salary &gt; das.AvgSalary; Subqueries and correlated subqueries are essential tools for dynamic and complex SQL queries.
+Choose the appropriate type of subquery based on the requirement to balance readability and performance.
+Always consider optimizing correlated subqueries for large datasets to avoid performance bottlenecks.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/subqueries.html</link><guid isPermaLink="false">Works/SQL/Subqueries.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:18 GMT</pubDate></item><item><title><![CDATA[SQL Syntax]]></title><description><![CDATA[SQL (Structured Query Language) is a standard language for interacting with relational databases. SQL is used to perform operations such as querying data, updating records, and managing database objects. Understanding SQL syntax is crucial for writing clear, efficient, and error-free SQL statements.SQL statements generally follow this structure:SELECT column1, column2, ...
+FROM table_name
+WHERE condition
+GROUP BY column
+HAVING condition
+ORDER BY column ASC | DESC; SELECT: Specifies the columns to retrieve.
+FROM: Specifies the table(s) to retrieve data from.
+WHERE: Filters rows based on specified conditions.
+GROUP BY: Groups rows that have the same values into summary rows.
+HAVING: Filters grouped rows based on conditions.
+ORDER BY: Sorts the result set.
+SQL keywords are case-insensitive, but it's a common practice to write them in uppercase for readability.Retrieves data from a table.SELECT FirstName, LastName
+FROM Employees
+WHERE Department = 'Sales';
+Adds new rows to a table.INSERT INTO Employees (FirstName, LastName, Department, Salary)
+VALUES ('Alice', 'Smith', 'HR', 60000);
+Modifies existing rows in a table.UPDATE Employees
+SET Salary = 70000
+WHERE EmployeeID = 1;
+Removes rows from a table.DELETE FROM Employees
+WHERE EmployeeID = 1;
+Filters rows based on a condition.SELECT * FROM Products
+WHERE Price &gt; 100;
+Groups rows with the same values.SELECT Department, COUNT(*) AS EmployeeCount
+FROM Employees
+GROUP BY Department;
+Filters groups based on conditions (used with GROUP BY).SELECT Department, COUNT(*) AS EmployeeCount
+FROM Employees
+GROUP BY Department
+HAVING COUNT(*) &gt; 5;
+Sorts results in ascending or descending order.SELECT FirstName, LastName, Salary
+FROM Employees
+ORDER BY Salary DESC;
+Combines results of two or more SELECT statements (removes duplicates).SELECT FirstName FROM Employees
+UNION
+SELECT FirstName FROM Customers;
+Combines results without removing duplicates.SELECT FirstName FROM Employees
+UNION ALL
+SELECT FirstName FROM Customers;
+CREATE TABLE Employees ( EmployeeID INT PRIMARY KEY, FirstName VARCHAR(50) NOT NULL, Salary FLOAT CHECK (Salary &gt; 0)
+); SQL syntax forms the foundation for interacting with relational databases.
+Knowing how to use common clauses (SELECT, FROM, WHERE, GROUP BY, ORDER BY, etc.) enables you to write effective queries.
+Combining SQL statements with constraints, operators, and data types helps you build robust database solutions.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/sql-syntax.html</link><guid isPermaLink="false">Works/SQL/SQL Syntax.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:16 GMT</pubDate></item><item><title><![CDATA[PIVOT, UNPIVOT]]></title><description><![CDATA[
+PIVOT and UNPIVOT are SQL operations used to transform data between row-oriented and column-oriented formats.
+PIVOT turns unique values from one column into multiple columns, restructuring rows into a cross-tabular format.
+UNPIVOT does the opposite: it converts columns into rows, flattening a cross-tabular structure back into a normalized format.
+The PIVOT operator transforms rows into columns, aggregating data based on specified criteria.SELECT column1, column2, [pivoted_column1], [pivoted_column2], ...
+FROM (source_query)
+PIVOT ( aggregation_function(value_column) FOR pivot_column IN ([pivoted_value1], [pivoted_value2], ...)
+) AS alias;
+Suppose we have the following Sales table:We want to pivot the Month values so that each month becomes a separate column.SELECT Employee, [January], [February]
+FROM ( SELECT Employee, Month, Sales FROM Sales
+) AS SourceTable
+PIVOT ( SUM(Sales) FOR Month IN ([January], [February])
+) AS PivotTable; Source Query:
+The inner query retrieves the data to be pivoted.
+Aggregation:
+The SUM(Sales) function aggregates the sales data.
+Pivot Column:
+The FOR Month IN ([January], [February]) clause specifies the unique values to pivot.
+The UNPIVOT operator converts columns into rows, effectively reversing a PIVOT operation.SELECT column1, column2, pivot_column, value_column
+FROM (source_query)
+UNPIVOT ( value_column FOR pivot_column IN ([pivoted_column1], [pivoted_column2], ...)
+) AS alias;
+Suppose we have the following SalesSummary table (which is the result of the previous PIVOT):We want to unpivot the January and February columns back into rows.SELECT Employee, Month, Sales
+FROM SalesSummary
+UNPIVOT ( Sales FOR Month IN ([January], [February])
+) AS UnpivotTable; Source Table:
+The SalesSummary table is the starting point for the UNPIVOT.
+Sales:
+The Sales column holds the values from the unpivoted columns.
+FOR Month IN ([January], [February]):
+The column names January and February are converted into row values under the Month column. Generating Reports: Creating summary reports where categories (e.g., months, products) become columns. Data Analysis: Comparing data across multiple dimensions (e.g., sales per region). Normalizing Data: Transforming wide tables into a normalized form suitable for analysis. Preparing Data for Visualization: Many visualization tools work better with long-format data. Unique Values: For PIVOT, the values specified in the IN clause should be unique in the pivot column. Aggregation: PIVOT requires an aggregation function like SUM, COUNT, or AVG. Aliases: Always provide aliases for subqueries and the resulting PIVOT or UNPIVOT tables. SQL Dialect: PIVOT and UNPIVOT are supported in SQL Server and Oracle. In MySQL and PostgreSQL, you can achieve similar results using conditional aggregation or custom queries. PIVOT and UNPIVOT are powerful SQL operations for reshaping data.
+PIVOT transforms rows into columns, while UNPIVOT does the opposite.
+Knowing when and how to use these operations helps you manage data effectively for reporting and analysis.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/pivot,-unpivot.html</link><guid isPermaLink="false">Works/SQL/PIVOT, UNPIVOT.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:14 GMT</pubDate></item><item><title><![CDATA[MERGE]]></title><description><![CDATA[The MERGE statement in SQL allows you to perform upsert operations (update or insert) in a single query. It helps synchronize data between two tables by conditionally inserting, updating, or deleting rows based on whether certain conditions are met.The MERGE statement is also known as UPSERT (a combination of UPDATE and INSERT) because it allows you to insert new records or update existing records depending on whether a match is found.MERGE INTO target_table AS target
+USING source_table AS source
+ON target.key = source.key
+WHEN MATCHED THEN UPDATE SET target.column1 = source.column1
+WHEN NOT MATCHED THEN INSERT (column1, column2) VALUES (source.column1, source.column2); target_table: The table that will be updated or inserted into.
+source_table: The table or data source providing the data for comparison.
+ON: The condition to determine if rows in the target_table and source_table match.
+WHEN MATCHED: The action to perform when a match is found (usually an UPDATE).
+WHEN NOT MATCHED: The action to perform when no match is found (usually an INSERT).
+This example updates records if they exist and inserts them if they don’t.MERGE INTO Employees AS target
+USING NewEmployeeData AS source
+ON target.EmployeeID = source.EmployeeID
+WHEN MATCHED THEN UPDATE SET target.FirstName = source.FirstName, target.LastName = source.LastName, target.Salary = source.Salary
+WHEN NOT MATCHED THEN INSERT (EmployeeID, FirstName, LastName, Salary) VALUES (source.EmployeeID, source.FirstName, source.LastName, source.Salary); Explanation: If an employee in the target table matches an employee in the source table by EmployeeID, the FirstName, LastName, and Salary are updated.
+If no match is found, a new employee record is inserted. You can also delete rows from the target table if certain conditions are met.MERGE INTO Employees AS target
+USING UpdatedEmployeeData AS source
+ON target.EmployeeID = source.EmployeeID
+WHEN MATCHED AND source.IsTerminated = 1 THEN DELETE
+WHEN NOT MATCHED THEN INSERT (EmployeeID, FirstName, LastName, Salary) VALUES (source.EmployeeID, source.FirstName, source.LastName, source.Salary); Explanation: If an employee exists in both tables and IsTerminated is set to 1 in the source table, the employee record is deleted from the target table.
+If no match is found, a new employee record is inserted. You can have multiple WHEN MATCHED or WHEN NOT MATCHED clauses to handle different conditions.MERGE INTO Products AS target
+USING NewProducts AS source
+ON target.ProductID = source.ProductID
+WHEN MATCHED AND source.Price &lt;&gt; target.Price THEN UPDATE SET target.Price = source.Price
+WHEN MATCHED AND source.Discontinued = 1 THEN DELETE
+WHEN NOT MATCHED THEN INSERT (ProductID, ProductName, Price) VALUES (source.ProductID, source.ProductName, source.Price); Explanation: Updates the price if it differs.
+Deletes the product if it is marked as discontinued.
+Inserts new products if they don't exist in the target table. Atomic Operation: The MERGE statement is atomic, meaning all operations (insert, update, delete) happen within a single transaction. Efficiency: Combines multiple DML operations into one, reducing the number of separate queries and improving performance. Flexibility: You can mix and match UPDATE, INSERT, and DELETE operations based on conditions. Error Handling: Ensure proper error handling and logging, especially when dealing with complex conditions. Indexing: Ensure the join columns in the ON clause are indexed for faster performance. Batch Size: For large datasets, consider breaking the MERGE into smaller batches to avoid locking issues. Transaction Management: Since MERGE is a single transaction, ensure your database can handle long-running transactions if processing large data. Logging and Auditing: Keep track of changes made by the MERGE operation for audit purposes. The MERGE statement is a powerful tool for performing upserts and synchronizing data between tables.
+It combines INSERT, UPDATE, and DELETE operations into a single, atomic statement, improving both readability and performance.
+Proper indexing, batching, and error handling can help you maximize the efficiency of MERGE operations.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/merge.html</link><guid isPermaLink="false">Works/SQL/MERGE.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:11 GMT</pubDate></item><item><title><![CDATA[LEAD, LAG]]></title><description><![CDATA[
+The LEAD() and LAG() functions are window functions in SQL used to access data from a subsequent (next) or preceding (previous) row relative to the current row.
+They are commonly used for tasks like calculating differences between consecutive rows, comparing current and previous values, or tracking trends over time. The LEAD() function retrieves the value from a subsequent row within the same result set.
+It allows you to look ahead by a specified number of rows and is useful for comparing current values with future values.
+LEAD(expression, offset, default) OVER (PARTITION BY column ORDER BY column) expression: The column or expression to return from the subsequent row.
+offset: The number of rows to look ahead (default is 1).
+default: The value to return if there is no subsequent row (optional).
+PARTITION BY: Divides the result set into partitions to apply the function separately within each group (optional).
+ORDER BY: Specifies the order of rows within each partition.
+SELECT EmployeeID, FirstName, Salary, LEAD(Salary, 1) OVER (ORDER BY Salary DESC) AS NextSalary
+FROM Employees;
+Explanation:
+For each employee, the LEAD() function retrieves the salary of the next employee in descending order of salary. The LAG() function retrieves the value from a preceding row within the same result set.
+It allows you to look back by a specified number of rows and is useful for comparing current values with past values.
+LAG(expression, offset, default) OVER (PARTITION BY column ORDER BY column) expression: The column or expression to return from the preceding row.
+offset: The number of rows to look back (default is 1).
+default: The value to return if there is no preceding row (optional).
+PARTITION BY: Divides the result set into partitions to apply the function separately within each group (optional).
+ORDER BY: Specifies the order of rows within each partition.
+SELECT EmployeeID, FirstName, Salary, LAG(Salary, 1, 0) OVER (ORDER BY Salary DESC) AS PreviousSalary
+FROM Employees;
+Explanation:
+For each employee, the LAG() function retrieves the salary of the previous employee in descending order of salary. If there is no previous row, it returns 0 as the default value.
+You can use PARTITION BY to apply LEAD() and LAG() separately within each group.SELECT Department, EmployeeID, FirstName, Salary, LAG(Salary) OVER (PARTITION BY Department ORDER BY Salary DESC) AS PrevSalary, LEAD(Salary) OVER (PARTITION BY Department ORDER BY Salary DESC) AS NextSalary
+FROM Employees;
+Explanation:
+The LAG() and LEAD() functions are applied within each department partition, ordered by salary in descending order. Calculating Differences Between Rows
+Compare current and previous rows to calculate differences.
+SELECT SalesDate, SalesAmount, LAG(SalesAmount) OVER (ORDER BY SalesDate) AS PreviousSales, SalesAmount - LAG(SalesAmount) OVER (ORDER BY SalesDate) AS SalesDifference
+FROM Sales; Identifying Trends
+Use LEAD() to identify upcoming values and detect trends.
+SELECT StockDate, StockPrice, LEAD(StockPrice) OVER (ORDER BY StockDate) AS NextStockPrice, CASE WHEN LEAD(StockPrice) OVER (ORDER BY StockDate) &gt; StockPrice THEN 'Up' ELSE 'Down' END AS Trend
+FROM StockPrices; Calculating Rolling Averages
+Calculate rolling averages by combining LAG() with window functions.
+SELECT EmployeeID, Salary, (Salary + LAG(Salary) OVER (ORDER BY EmployeeID) + LEAD(Salary) OVER (ORDER BY EmployeeID)) / 3 AS RollingAverage
+FROM Employees; Indexing: Ensure columns used in the ORDER BY clause are indexed for better performance. Large Datasets: Window functions can be resource-intensive for large datasets. Consider limiting rows with WHERE clauses or optimizing partitions. Memory Usage: The database engine needs to maintain intermediate results for window functions, which can affect memory usage. LEAD() and LAG() are powerful for analyzing data trends, calculating differences, and performing row-by-row comparisons.
+They work with the OVER clause, supporting PARTITION BY and ORDER BY for flexibility.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/lead,-lag.html</link><guid isPermaLink="false">Works/SQL/LEAD, LAG.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:08 GMT</pubDate></item><item><title><![CDATA[JOIN]]></title><description><![CDATA[In SQL, the JOIN clause is used to combine rows from two or more tables based on a related column between them. This is a fundamental concept in relational databases for querying data stored in different tables. JOIN operations allow you to create meaningful relationships and retrieve comprehensive datasets.
+An INNER JOIN returns rows where there is a match in both tables.
+If a row in one table does not have a corresponding row in the other table, that row is excluded from the result.
+SELECT t1.column, t2.column
+FROM table1 t1
+INNER JOIN table2 t2 ON t1.common_column = t2.common_column;
+SELECT Employees.EmployeeID, Employees.FirstName, Departments.DepartmentName
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID; A LEFT JOIN returns all rows from the left table and the matching rows from the right table.
+If there is no match, NULL values are returned for columns from the right table.
+SELECT t1.column, t2.column
+FROM table1 t1
+LEFT JOIN table2 t2 ON t1.common_column = t2.common_column;
+SELECT Employees.EmployeeID, Employees.FirstName, Departments.DepartmentName
+FROM Employees
+LEFT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID; A RIGHT JOIN returns all rows from the right table and the matching rows from the left table.
+If there is no match, NULL values are returned for columns from the left table.
+SELECT t1.column, t2.column
+FROM table1 t1
+RIGHT JOIN table2 t2 ON t1.common_column = t2.common_column;
+SELECT Employees.EmployeeID, Employees.FirstName, Departments.DepartmentName
+FROM Employees
+RIGHT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID; A FULL JOIN returns all rows from both tables.
+If there is no match, NULL values are returned for columns from the table without a match.
+SELECT t1.column, t2.column
+FROM table1 t1
+FULL JOIN table2 t2 ON t1.common_column = t2.common_column;
+SELECT Employees.EmployeeID, Employees.FirstName, Departments.DepartmentName
+FROM Employees
+FULL JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID; A CROSS JOIN returns the Cartesian product of two tables, meaning every row in the first table is combined with every row in the second table.
+SELECT t1.column, t2.column
+FROM table1 t1
+CROSS JOIN table2 t2;
+SELECT Employees.FirstName, Departments.DepartmentName
+FROM Employees
+CROSS JOIN Departments;
+A self-join is a join where a table is joined with itself. It is useful for comparing rows within the same table.SELECT e1.EmployeeID, e1.FirstName, e2.ManagerID, e2.FirstName AS ManagerName
+FROM Employees e1
+INNER JOIN Employees e2 ON e1.ManagerID = e2.EmployeeID; Indexing: Ensure the columns used in the ON clause are indexed to improve performance. Use Aliases: Use table aliases for better readability, especially in complex queries. Filter Early: Apply WHERE conditions as early as possible to reduce the number of rows processed by the join. Avoid Cartesian Products: Be cautious with CROSS JOIN as it can generate a large number of rows. Understand NULL Handling: Be aware of how LEFT, RIGHT, and FULL joins handle NULL values in unmatched rows. JOIN operations are fundamental for working with relational databases and combining data from multiple tables.
+Choosing the right type of JOIN (INNER, LEFT, RIGHT, FULL, CROSS) depends on the specific requirements of your query.
+Understanding how each JOIN works helps you write efficient and accurate SQL queries.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/join.html</link><guid isPermaLink="false">Works/SQL/JOIN.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:06 GMT</pubDate></item><item><title><![CDATA[Indexing Strategies]]></title><description><![CDATA[Indexing is a database optimization technique that helps improve the speed and efficiency of query execution. An index acts like a lookup table that allows the database engine to quickly locate specific rows without scanning the entire table.Proper indexing strategies are essential for maintaining optimal database performance, especially as data volumes grow. However, improper use of indexes can degrade performance and increase storage overhead.
+An index is a data structure that provides quick access to rows in a table.
+Indexes are created on one or more columns to facilitate faster retrieval of data.
+Think of an index like an index in a book, which helps you quickly find information without reading every page. An index on a single column.
+Useful for queries that filter or sort based on a single column.
+CREATE INDEX idx_employee_lastname ON Employees (LastName); An index on multiple columns.
+Useful when queries filter or sort by more than one column.
+CREATE INDEX idx_employee_department_lastname ON Employees (DepartmentID, LastName); Ensures that the indexed column(s) contain only unique values.
+Automatically created with a PRIMARY KEY or UNIQUE constraint.
+CREATE UNIQUE INDEX idx_unique_email ON Employees (Email); Determines the physical order of data in a table.
+Each table can have only one clustered index.
+Typically created on the primary key.
+CREATE CLUSTERED INDEX idx_employee_id ON Employees (EmployeeID); A separate structure that contains pointers to the physical rows.
+A table can have multiple non-clustered indexes.
+CREATE NONCLUSTERED INDEX idx_employee_salary ON Employees (Salary); Enables full-text search capabilities for textual data.
+Useful for searching large text fields.
+CREATE FULLTEXT INDEX idx_employee_bio ON Employees (Bio); Create indexes on columns that are often used in: WHERE clauses
+JOIN conditions
+ORDER BY clauses
+GROUP BY clauses CREATE INDEX idx_orders_customerid ON Orders (CustomerID); When queries filter by multiple columns, a composite index can improve performance.
+The order of columns in the index matters.
+CREATE INDEX idx_orders_customer_date ON Orders (CustomerID, OrderDate); This index benefits queries like:
+SELECT * FROM Orders
+WHERE CustomerID = 123 AND OrderDate &gt; '2024-01-01'; Clustered Index: Best for columns with unique, sequential values (e.g., primary keys).
+Non-Clustered Index: Best for columns with frequent lookups but non-sequential values.
+Unique Index: For ensuring data integrity on unique fields (e.g., email addresses). Too many indexes can: Slow down write operations (INSERT, UPDATE, DELETE).
+Increase storage requirements. Only create indexes that benefit frequent queries. Index columns with high selectivity (columns with many distinct values).
+Avoid indexing low-selectivity columns (e.g., columns with few unique values like Gender). An index that contains all the columns needed for a query.
+Reduces the need for the database to access the table itself.
+CREATE INDEX idx_orders_covering ON Orders (CustomerID, OrderDate, TotalAmount); This index covers queries like:
+SELECT CustomerID, OrderDate, TotalAmount
+FROM Orders
+WHERE CustomerID = 123; Index only a subset of rows based on a condition.
+Supported in some databases like PostgreSQL.
+CREATE INDEX idx_active_customers ON Customers (LastName) WHERE IsActive = TRUE; Regularly monitor index usage with database tools.
+Use commands like EXPLAIN (MySQL) or EXECUTION PLAN (SQL Server) to analyze query performance.
+Periodically rebuild or reorganize indexes to maintain efficiency. Write Performance: Indexes can slow down write operations (INSERT, UPDATE, DELETE) because the index needs to be updated. Query Optimization: Use EXPLAIN or QUERY PLAN to check if your queries are using indexes. Storage Overhead: Each index consumes additional storage.
+Balance the number of indexes with performance needs. Index Fragmentation: Over time, indexes can become fragmented.
+Regularly rebuild or reorganize indexes to optimize performance. Small Tables: Indexes on small tables may not improve performance significantly. Frequently Updated Columns: Columns that are frequently updated can degrade performance if indexed. Low Selectivity Columns: Columns with a small number of unique values (e.g., Gender, Status) may not benefit from indexing. Index frequently queried columns.
+Use composite indexes for multi-column filters.
+Balance the number of indexes to avoid write overhead.
+Regularly monitor and maintain indexes.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/indexing-strategies.html</link><guid isPermaLink="false">Works/SQL/Indexing Strategies.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:03 GMT</pubDate></item><item><title><![CDATA[CTE, WITH]]></title><description><![CDATA[The WITH clause in SQL, also known as a Common Table Expression (CTE), allows you to define temporary result sets that can be referenced within a SELECT, INSERT, UPDATE, or DELETE statement. This makes your SQL queries more modular, readable, and easier to maintain.WITH cte_name (optional_columns) AS ( subquery_definition
+)
+SELECT * FROM cte_name; cte_name: The name of the temporary result set (CTE).
+optional_columns: An optional list of column names for the CTE.
+subquery_definition: The query that defines the CTE.
+WITH HighSalaryEmployees AS ( SELECT EmployeeID, FirstName, LastName, Salary FROM Employees WHERE Salary &gt; 50000
+)
+SELECT * FROM HighSalaryEmployees; Explanation:
+The HighSalaryEmployees CTE stores employees with a salary greater than 50,000. The final SELECT query retrieves all employees from this temporary result set. Improved Readability: CTEs allow you to break down complex queries into smaller, manageable parts. Reusability: You can reference the same CTE multiple times within a query. Recursion: CTEs can be recursive, allowing you to work with hierarchical or tree-structured data. Avoiding Subquery Repetition: Instead of repeating the same subquery, define it once using a CTE. Recursive CTEs allow you to perform operations on hierarchical data, such as organizational charts or parent-child relationships.WITH RECURSIVE EmployeeHierarchy AS ( -- Anchor member (base case) SELECT EmployeeID, ManagerID, FirstName, 1 AS Level FROM Employees WHERE ManagerID IS NULL UNION ALL -- Recursive member SELECT e.EmployeeID, e.ManagerID, e.FirstName, eh.Level + 1 FROM Employees e JOIN EmployeeHierarchy eh ON e.ManagerID = eh.EmployeeID
+)
+SELECT * FROM EmployeeHierarchy; Explanation:
+This query retrieves an employee hierarchy starting from top-level managers and recursively includes their subordinates.
+You can define multiple CTEs in a single query.WITH SalesByRegion AS ( SELECT Region, SUM(Sales) AS TotalSales FROM SalesData GROUP BY Region
+),
+TopRegions AS ( SELECT Region FROM SalesByRegion WHERE TotalSales &gt; 100000
+)
+SELECT s.*
+FROM SalesData s
+JOIN TopRegions t ON s.Region = t.Region; Explanation: SalesByRegion: Aggregates total sales by region.
+TopRegions: Filters regions where total sales exceed 100,000.
+The final query joins the original SalesData with TopRegions to get detailed sales information for high-performing regions. Use CTEs for Complex Queries: Break down complex queries into multiple CTEs to enhance clarity. Optimize Performance: CTEs may be materialized (evaluated once) or inlined (evaluated as needed) depending on the SQL engine. Recursive CTEs for Hierarchies: Use recursive CTEs for hierarchical data like organizational charts or file systems. The WITH clause (CTE) is a powerful tool in SQL for improving query readability, reusability, and supporting recursion.
+Combining CTEs with window functions, subqueries, and advanced SQL techniques can make your data analysis and query logic more efficient and maintainable.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/cte,-with.html</link><guid isPermaLink="false">Works/SQL/CTE, WITH.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:26:00 GMT</pubDate></item><item><title><![CDATA[Bitwise Operation]]></title><description><![CDATA[
+본 문서는 MySQL 등 데이터베이스 환경에서 선택 항목을 효율적으로 관리하고 검색하는 방법 중 하나인 비트연산(bit operation)에 대해 다룹니다.
+LIKE, OR 등을 사용하는 전통적인 검색 방식 대비 높은 성능 향상과 간단한 쿼리 구조를 제공하는 비트연산 접근법의 이점과 활용 방법을 소개합니다. 비트연산은 데이터를 2진수 형태로 처리할 때, 각 비트 단위로 연산을 수행하는 기법입니다.
+흔히 사용하는 비트연산자는 다음과 같습니다. AND (&amp;): 두 비트가 모두 1일 때 1을 반환
+OR (|): 두 비트 중 하나라도 1이면 1을 반환
+XOR (^): 두 비트 중 하나만 1일 때 1을 반환
+NOT (~): 비트를 반전 (1은 0으로, 0은 1로) 비트연산은 단순한 정수 연산보다 빠르고, 문자열 비교 등의 연산보다 훨씬 더 효율적입니다.
+데이터베이스에서 AND (&amp;) 연산을 통해 특정 비트 패턴을 빠르게 필터링함으로써 LIKE나 OR 연산보다 높은 성능을 얻을 수 있습니다.
+예를 들어, 다중 선택 가능한 항목 A~P까지 총 16개가 있다고 가정합니다.
+각 항목에 고유한 2진 비트를 할당합니다. 예:
+A: 0000 0000 0000 0001 (10진수: 1)
+B: 0000 0000 0000 0010 (10진수: 2)
+C: 0000 0000 0000 0100 (10진수: 4)
+D: 0000 0000 0000 1000 (10진수: 8)
+E: 0000 0000 0001 0000 (10진수: 16)
+F: 0000 0000 0010 0000 (10진수: 32)
+G: 0000 0000 0100 0000 (10진수: 64)
+H: 0000 0000 1000 0000 (10진수: 128)
+I: 0000 0001 0000 0000 (10진수: 256)
+J: 0000 0010 0000 0000 (10진수: 512)
+K: 0000 0100 0000 0000 (10진수: 1024)
+L: 0000 1000 0000 0000 (10진수: 2048)
+M: 0001 0000 0000 0000 (10진수: 4096)
+N: 0010 0000 0000 0000 (10진수: 8192)
+O: 0100 0000 0000 0000 (10진수: 16384)
+P: 1000 0000 0000 0000 (10진수: 32768) 여러 항목을 동시에 선택할 경우, 각 항목의 값을 더한(OR 연산과 동일한 결과) 10진수 값을 DB에 저장합니다. 예: A(1) + B(2) = 3 (2진수로 0000 0000 0000 0011)
+A(1) + D(8) + E(16)을 선택하면 1+8+16=25 (2진수로 0000 0000 0001 1001) 모든 항목을 선택하면 1+2+4+8+...+32768 = 65535 (2진수로 1111 1111 1111 1111) 특정 값들이 포함된 필드를 검색할 때, 전통적인 방법은 다음과 같이 LIKE와 OR을 혼합하여 사용합니다. 예: 값 2 혹은 5를 포함하는 레코드를 찾을 때
+WHERE 필드 LIKE '%2|%' OR 필드 LIKE '%5|%' 이러한 LIKE + OR 쿼리는 문자열 검색이며, 인덱스 활용이 어렵고 성능 저하를 야기합니다. 데이터베이스에 25(0000 0000 0001 1001)가 저장되어 있다고 가정합니다. 이는 A(1), D(8), E(16)가 선택되었다는 의미입니다. A, B, C 중 하나라도 포함하는 레코드를 찾으려면 A(1)+B(2)+C(4)=7을 활용합니다.
+SELECT * FROM 테이블 WHERE 필드 &amp; 7 &gt; 0; 필드 &amp; 7 연산 결과로 0보다 큰 값이 나오면, 필드 내에 A, B, C 중 하나 이상이 포함됨을 의미합니다.
+필드(25) AND 7:
+0000 0000 0001 1001 (25)
+&amp; 0000 0000 0000 0111 (7)
+----------------------- 0000 0000 0000 0001 (1, 이는 0보다 큼) 따라서 해당 레코드는 조건에 부합합니다. D(8)와 E(16) 모두를 포함한 레코드를 찾고 싶다면 8+16=24입니다. 단순히 필드 &amp; 24 &gt; 0으로는 D나 E 중 하나만 포함해도 성립합니다. 두 비트를 모두 포함하는지 확인하려면 bit_count() 함수를 활용할 수 있습니다.
+SELECT * FROM 테이블 WHERE BIT_COUNT(필드 &amp; 24) = 2; 필드(25) AND 24:
+0000 0000 0001 1001 (25)
+&amp; 0000 0000 0001 1000 (24)
+----------------------- 0000 0000 0001 1000 (24) 이 값의 비트 1의 개수는 2개이므로 D와 E 모두 선택되었음을 알 수 있습니다. 기존 쿼리:
+WHERE 필드 LIKE '%A%' OR (필드 LIKE '%D%' AND 필드 LIKE '%E%') 비트연산 쿼리:
+SELECT * FROM 테이블
+WHERE 필드 &amp; 1 &gt; 0 -- A 포함 OR BIT_COUNT(필드 &amp; 24) = 2; -- D와 E 모두 포함 이렇게 비트연산을 활용하면 WHERE 조건문을 훨씬 단순화하고, 문자열 기반 검색보다 빠른 검색을 구현할 수 있습니다.&lt;?php
+$aMultiSelect = Array( "1"=&gt;"A","2"=&gt;"B","4"=&gt;"C","8"=&gt;"D", "16"=&gt;"E","32"=&gt;"F","64"=&gt;"G","128"=&gt;"H", "256"=&gt;"I","512"=&gt;"J","1024"=&gt;"K","2048"=&gt;"L", "4096"=&gt;"M","8192"=&gt;"N","16384"=&gt;"O","32768"=&gt;"P"
+);
+echo "&lt;form method='post' action='2.php'&gt;";
+foreach ($aMultiSelect as $sKey =&gt; $sVal) { echo "&lt;input type='checkbox' name='multiselect[]' value='$sKey'&gt;$sVal&lt;br /&gt;";
+}
+echo "&lt;input type='submit' value='submit'&gt;";
+echo "&lt;/form&gt;";
+?&gt; 위 예제에서 사용자는 체크박스를 통해 A~P를 다중 선택할 수 있습니다.
+&lt;?php
+$sSum = 0;
+foreach ($_POST['multiselect'] as $sVal) { $sSum += $sVal;
+}
+// $sSum 값을 DB에 저장. 예를 들어 A, D, E를 선택하면 $sSum = 25
+?&gt; 사용자가 선택한 항목 값을 모두 더한 값을 DB 필드에 저장합니다. 이는 비트마스크 형태로 선택 상태를 기록하는 것입니다. 속도 향상: 문자열 비교(LIKE)나 복잡한 조건(OR 조합)보다 비트연산이 훨씬 빠릅니다. 쿼리 단순화: 복잡한 조건문의 단순화로 유지보수가 용이해집니다. 확장성: 비트 수를 늘려 나가면 선택 옵션을 확대하는 데 어려움이 없습니다. (1비트 당 1개 항목) 항목이 매우 많아 비트 수가 커질 경우 정수 범위에 유의해야 합니다.
+DB 자료형(예: UNSIGNED INT)을 적절히 선택하십시오.
+BIT_COUNT 함수나 비트연산 최적화 전략을 적절히 활용하십시오.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/bitwise-operation.html</link><guid isPermaLink="false">Works/SQL/Bitwise Operation.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:25:57 GMT</pubDate></item><item><title><![CDATA[CASE]]></title><description><![CDATA[The CASE statement in SQL is a conditional expression that allows you to perform different actions or return different values based on conditions. It is similar to an IF-THEN-ELSE structure in other programming languages and is particularly useful for creating dynamic columns, conditional aggregations, and complex filtering.CASE expression WHEN value1 THEN result1 WHEN value2 THEN result2 ELSE default_result
+END expression: The column or expression to evaluate.
+WHEN: Specifies the condition to match.
+THEN: Specifies the result if the condition is met.
+ELSE: (Optional) The default result if none of the conditions are met.
+END: Marks the end of the CASE statement.
+CASE WHEN condition1 THEN result1 WHEN condition2 THEN result2 ELSE default_result
+END Instead of matching an expression, the WHEN clause contains a full condition.
+SELECT EmployeeID, FirstName, DepartmentID, CASE DepartmentID WHEN 1 THEN 'Sales' WHEN 2 THEN 'Engineering' WHEN 3 THEN 'HR' ELSE 'Other' END AS DepartmentName
+FROM Employees; Explanation: The CASE statement converts DepartmentID values to their corresponding department names.
+SELECT EmployeeID, FirstName, Salary, CASE WHEN Salary &gt; 80000 THEN 'High Salary' WHEN Salary BETWEEN 50000 AND 80000 THEN 'Medium Salary' ELSE 'Low Salary' END AS SalaryCategory
+FROM Employees; Explanation: The CASE statement categorizes employees based on their salary ranges.
+SELECT *
+FROM Orders
+WHERE CASE WHEN OrderDate &gt;= '2024-01-01' THEN 'Recent' ELSE 'Old' END = 'Recent'; Explanation: Filters orders where the order date is recent (after January 1, 2024).
+SELECT ProductID, ProductName, Category, Price
+FROM Products
+ORDER BY CASE Category WHEN 'Electronics' THEN 1 WHEN 'Clothing' THEN 2 ELSE 3 END; Explanation: Orders products based on the Category column, with Electronics listed first, followed by Clothing, and then others.
+SELECT DepartmentID, COUNT(CASE WHEN Gender = 'Male' THEN 1 ELSE NULL END) AS MaleCount, COUNT(CASE WHEN Gender = 'Female' THEN 1 ELSE NULL END) AS FemaleCount
+FROM Employees
+GROUP BY DepartmentID; Explanation: Counts male and female employees in each department by conditionally counting rows based on gender.
+You can nest CASE statements to handle more complex conditions.SELECT EmployeeID, FirstName, Salary, CASE WHEN Salary &gt; 80000 THEN 'High' WHEN Salary &gt; 50000 THEN CASE WHEN Salary &lt;= 70000 THEN 'Medium-High' ELSE 'Medium' END ELSE 'Low' END AS SalaryCategory
+FROM Employees; Explanation: This CASE statement categorizes salaries into more detailed categories using nested conditions. Readable Conditions: Keep WHEN conditions readable and straightforward to improve query clarity. Default Values: Always provide an ELSE clause to handle unexpected values and avoid NULL results. Performance Consideration: Complex CASE statements can impact performance. Optimize by simplifying conditions where possible. Consistent Data Types: Ensure all THEN and ELSE results return the same data type to avoid type conversion errors. The CASE statement is a versatile tool for introducing conditional logic in SQL queries.
+It can be used in SELECT, WHERE, ORDER BY, and aggregate functions to handle a wide range of dynamic scenarios.
+Understanding CASE statements allows you to write more powerful and flexible SQL queries.
+📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/case.html</link><guid isPermaLink="false">Works/SQL/CASE.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:25:47 GMT</pubDate></item><item><title><![CDATA[Minimalism_Home]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:24:23 GMT</pubDate></item><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
 🖐️ Hello, I'm Yang-ha Park, a Process Technology Engineer pursuing innovation through data analysis and IT technology.
 Throughout my career, I have: As an engineer with a humanities background, I've consistently improved company processes and quality by combining humanistic thinking with engineering knowledge, viewing problems from diverse perspectives through continuous learning and contemplation.
 Created foundations for collecting reliable data, properly analyzing accumulated data to suggest company directions, and building evidence to solve problems.
@@ -510,443 +946,7 @@ fig.show() &nbsp;핵심 개념 이해
 코드를 직접 치면서, 정확히 어떤 의도로 어떤 데이터를 연결 시키고 어떤 인사이트를 도출하겠다라는 명확한 설계를 구상하는 건 의외로 재미가 있었다.
 다음에 개선할 점:
 기능을 배우는 것보다 어떻게 응용 하는지가 더 중요하다. 강의를 들으면서 계속 아이디어를 떠올려 보면 어떨까 생각이 든다.
-]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/2w-데이터-분석-입문-1.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/2W - 데이터 분석 입문 1.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 30 Nov 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[📚 613 Natural Language Processing]]></title><link>https://64etuor.github.io/indexing-files/📚-613-natural-language-processing.html</link><guid isPermaLink="false">INDEXING FILES/📚 613 Natural Language Processing.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:48:58 GMT</pubDate></item><item><title><![CDATA[📚 617 AI Tools]]></title><link>https://64etuor.github.io/indexing-files/📚-617-ai-tools.html</link><guid isPermaLink="false">INDEXING FILES/📚 617 AI Tools.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:48:51 GMT</pubDate></item><item><title><![CDATA[📚 615 AI Applications]]></title><link>https://64etuor.github.io/indexing-files/📚-615-ai-applications.html</link><guid isPermaLink="false">INDEXING FILES/📚 615 AI Applications.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:48:36 GMT</pubDate></item><item><title><![CDATA[Remarkble Github Repositories]]></title><description><![CDATA[Index: <a data-href="📖 610 Generative AI" href="https://64etuor.github.io/indexing-files/📖-610-generative-ai.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 610 Generative AI</a>]]></description><link>https://64etuor.github.io/ai/remarkble-github-repositories.html</link><guid isPermaLink="false">AI/Remarkble Github Repositories.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:48:25 GMT</pubDate></item><item><title><![CDATA[Useful AI tools]]></title><link>https://64etuor.github.io/ai/useful-ai-tools.html</link><guid isPermaLink="false">AI/Useful AI tools.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:47:55 GMT</pubDate></item><item><title><![CDATA[📚 803 Fiction]]></title><link>https://64etuor.github.io/indexing-files/📚-803-fiction.html</link><guid isPermaLink="false">INDEXING FILES/📚 803 Fiction.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:47:05 GMT</pubDate></item><item><title><![CDATA[📚 804 Essays]]></title><link>https://64etuor.github.io/indexing-files/📚-804-essays.html</link><guid isPermaLink="false">INDEXING FILES/📚 804 Essays.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:47:01 GMT</pubDate></item><item><title><![CDATA[📚 801 Poetry]]></title><link>https://64etuor.github.io/indexing-files/📚-801-poetry.html</link><guid isPermaLink="false">INDEXING FILES/📚 801 Poetry.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:46:59 GMT</pubDate></item><item><title><![CDATA[📖 800 Literature]]></title><link>https://64etuor.github.io/indexing-files/📖-800-literature.html</link><guid isPermaLink="false">INDEXING FILES/📖 800 Literature.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:46:57 GMT</pubDate></item><item><title><![CDATA[📖 610 Generative AI]]></title><link>https://64etuor.github.io/indexing-files/📖-610-generative-ai.html</link><guid isPermaLink="false">INDEXING FILES/📖 610 Generative AI.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:45:42 GMT</pubDate></item><item><title><![CDATA[UX Design]]></title><link>https://64etuor.github.io/indexing-files/📖-640-ui/ux-design.html</link><guid isPermaLink="false">INDEXING FILES/📖 640 UI/UX Design.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:45:34 GMT</pubDate></item><item><title><![CDATA[📚 635 Web Development]]></title><link>https://64etuor.github.io/indexing-files/📚-635-web-development.html</link><guid isPermaLink="false">INDEXING FILES/📚 635 Web Development.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:45:00 GMT</pubDate></item><item><title><![CDATA[📚 634 Software Development]]></title><link>https://64etuor.github.io/indexing-files/📚-634-software-development.html</link><guid isPermaLink="false">INDEXING FILES/📚 634 Software Development.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:44:58 GMT</pubDate></item><item><title><![CDATA[📚 631 Programming Languages]]></title><link>https://64etuor.github.io/indexing-files/📚-631-programming-languages.html</link><guid isPermaLink="false">INDEXING FILES/📚 631 Programming Languages.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:44:51 GMT</pubDate></item><item><title><![CDATA[📖 630 Programming]]></title><link>https://64etuor.github.io/indexing-files/📖-630-programming.html</link><guid isPermaLink="false">INDEXING FILES/📖 630 Programming.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:44:38 GMT</pubDate></item><item><title><![CDATA[📚 629 Cloud Databases]]></title><link>https://64etuor.github.io/indexing-files/📚-629-cloud-databases.html</link><guid isPermaLink="false">INDEXING FILES/📚 629 Cloud Databases.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:44:25 GMT</pubDate></item><item><title><![CDATA[Bitwise Operation]]></title><description><![CDATA[
-본 문서는 MySQL 등 데이터베이스 환경에서 선택 항목을 효율적으로 관리하고 검색하는 방법 중 하나인 비트연산(bit operation)에 대해 다룹니다.
-LIKE, OR 등을 사용하는 전통적인 검색 방식 대비 높은 성능 향상과 간단한 쿼리 구조를 제공하는 비트연산 접근법의 이점과 활용 방법을 소개합니다. 비트연산은 데이터를 2진수 형태로 처리할 때, 각 비트 단위로 연산을 수행하는 기법입니다.
-흔히 사용하는 비트연산자는 다음과 같습니다. AND (&amp;): 두 비트가 모두 1일 때 1을 반환
-OR (|): 두 비트 중 하나라도 1이면 1을 반환
-XOR (^): 두 비트 중 하나만 1일 때 1을 반환
-NOT (~): 비트를 반전 (1은 0으로, 0은 1로) 비트연산은 단순한 정수 연산보다 빠르고, 문자열 비교 등의 연산보다 훨씬 더 효율적입니다.
-데이터베이스에서 AND (&amp;) 연산을 통해 특정 비트 패턴을 빠르게 필터링함으로써 LIKE나 OR 연산보다 높은 성능을 얻을 수 있습니다.
-예를 들어, 다중 선택 가능한 항목 A~P까지 총 16개가 있다고 가정합니다.
-각 항목에 고유한 2진 비트를 할당합니다. 예:
-A: 0000 0000 0000 0001 (10진수: 1)
-B: 0000 0000 0000 0010 (10진수: 2)
-C: 0000 0000 0000 0100 (10진수: 4)
-D: 0000 0000 0000 1000 (10진수: 8)
-E: 0000 0000 0001 0000 (10진수: 16)
-F: 0000 0000 0010 0000 (10진수: 32)
-G: 0000 0000 0100 0000 (10진수: 64)
-H: 0000 0000 1000 0000 (10진수: 128)
-I: 0000 0001 0000 0000 (10진수: 256)
-J: 0000 0010 0000 0000 (10진수: 512)
-K: 0000 0100 0000 0000 (10진수: 1024)
-L: 0000 1000 0000 0000 (10진수: 2048)
-M: 0001 0000 0000 0000 (10진수: 4096)
-N: 0010 0000 0000 0000 (10진수: 8192)
-O: 0100 0000 0000 0000 (10진수: 16384)
-P: 1000 0000 0000 0000 (10진수: 32768) 여러 항목을 동시에 선택할 경우, 각 항목의 값을 더한(OR 연산과 동일한 결과) 10진수 값을 DB에 저장합니다. 예: A(1) + B(2) = 3 (2진수로 0000 0000 0000 0011)
-A(1) + D(8) + E(16)을 선택하면 1+8+16=25 (2진수로 0000 0000 0001 1001) 모든 항목을 선택하면 1+2+4+8+...+32768 = 65535 (2진수로 1111 1111 1111 1111) 특정 값들이 포함된 필드를 검색할 때, 전통적인 방법은 다음과 같이 LIKE와 OR을 혼합하여 사용합니다. 예: 값 2 혹은 5를 포함하는 레코드를 찾을 때
-WHERE 필드 LIKE '%2|%' OR 필드 LIKE '%5|%' 이러한 LIKE + OR 쿼리는 문자열 검색이며, 인덱스 활용이 어렵고 성능 저하를 야기합니다. 데이터베이스에 25(0000 0000 0001 1001)가 저장되어 있다고 가정합니다. 이는 A(1), D(8), E(16)가 선택되었다는 의미입니다. A, B, C 중 하나라도 포함하는 레코드를 찾으려면 A(1)+B(2)+C(4)=7을 활용합니다.
-SELECT * FROM 테이블 WHERE 필드 &amp; 7 &gt; 0; 필드 &amp; 7 연산 결과로 0보다 큰 값이 나오면, 필드 내에 A, B, C 중 하나 이상이 포함됨을 의미합니다.
-필드(25) AND 7:
-0000 0000 0001 1001 (25)
-&amp; 0000 0000 0000 0111 (7)
------------------------ 0000 0000 0000 0001 (1, 이는 0보다 큼) 따라서 해당 레코드는 조건에 부합합니다. D(8)와 E(16) 모두를 포함한 레코드를 찾고 싶다면 8+16=24입니다. 단순히 필드 &amp; 24 &gt; 0으로는 D나 E 중 하나만 포함해도 성립합니다. 두 비트를 모두 포함하는지 확인하려면 bit_count() 함수를 활용할 수 있습니다.
-SELECT * FROM 테이블 WHERE BIT_COUNT(필드 &amp; 24) = 2; 필드(25) AND 24:
-0000 0000 0001 1001 (25)
-&amp; 0000 0000 0001 1000 (24)
------------------------ 0000 0000 0001 1000 (24) 이 값의 비트 1의 개수는 2개이므로 D와 E 모두 선택되었음을 알 수 있습니다. 기존 쿼리:
-WHERE 필드 LIKE '%A%' OR (필드 LIKE '%D%' AND 필드 LIKE '%E%') 비트연산 쿼리:
-SELECT * FROM 테이블
-WHERE 필드 &amp; 1 &gt; 0 -- A 포함 OR BIT_COUNT(필드 &amp; 24) = 2; -- D와 E 모두 포함 이렇게 비트연산을 활용하면 WHERE 조건문을 훨씬 단순화하고, 문자열 기반 검색보다 빠른 검색을 구현할 수 있습니다.&lt;?php
-$aMultiSelect = Array( "1"=&gt;"A","2"=&gt;"B","4"=&gt;"C","8"=&gt;"D", "16"=&gt;"E","32"=&gt;"F","64"=&gt;"G","128"=&gt;"H", "256"=&gt;"I","512"=&gt;"J","1024"=&gt;"K","2048"=&gt;"L", "4096"=&gt;"M","8192"=&gt;"N","16384"=&gt;"O","32768"=&gt;"P"
-);
-echo "&lt;form method='post' action='2.php'&gt;";
-foreach ($aMultiSelect as $sKey =&gt; $sVal) { echo "&lt;input type='checkbox' name='multiselect[]' value='$sKey'&gt;$sVal&lt;br /&gt;";
-}
-echo "&lt;input type='submit' value='submit'&gt;";
-echo "&lt;/form&gt;";
-?&gt; 위 예제에서 사용자는 체크박스를 통해 A~P를 다중 선택할 수 있습니다.
-&lt;?php
-$sSum = 0;
-foreach ($_POST['multiselect'] as $sVal) { $sSum += $sVal;
-}
-// $sSum 값을 DB에 저장. 예를 들어 A, D, E를 선택하면 $sSum = 25
-?&gt; 사용자가 선택한 항목 값을 모두 더한 값을 DB 필드에 저장합니다. 이는 비트마스크 형태로 선택 상태를 기록하는 것입니다. 속도 향상: 문자열 비교(LIKE)나 복잡한 조건(OR 조합)보다 비트연산이 훨씬 빠릅니다. 쿼리 단순화: 복잡한 조건문의 단순화로 유지보수가 용이해집니다. 확장성: 비트 수를 늘려 나가면 선택 옵션을 확대하는 데 어려움이 없습니다. (1비트 당 1개 항목) 항목이 매우 많아 비트 수가 커질 경우 정수 범위에 유의해야 합니다.
-DB 자료형(예: UNSIGNED INT)을 적절히 선택하십시오.
-BIT_COUNT 함수나 비트연산 최적화 전략을 적절히 활용하십시오.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/bitwise-operation.html</link><guid isPermaLink="false">Works/SQL/Bitwise Operation.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:43:01 GMT</pubDate></item><item><title><![CDATA[BigQuery Syntax]]></title><description><![CDATA[<a data-tooltip-position="top" aria-label="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax" rel="noopener nofollow" class="external-link is-unresolved" href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax" target="_self">Query syntax &nbsp;|&nbsp; BigQuery &nbsp;|&nbsp; Google Cloud</a><br>📇 DDC INDEX : <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a><a data-href="📚 629 Cloud Databases" href="https://64etuor.github.io/indexing-files/📚-629-cloud-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 629 Cloud Databases</a>]]></description><link>https://64etuor.github.io/works/google/bigquery/bigquery-syntax.html</link><guid isPermaLink="false">Works/Google/BigQuery/BigQuery Syntax.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:42:00 GMT</pubDate></item><item><title><![CDATA[Window]]></title><description><![CDATA[Window functions in SQL perform calculations across a set of table rows related to the current row. Unlike aggregate functions (e.g., SUM, AVG), window functions do not collapse rows into a single output row. Instead, they provide a result for each row while considering a "window" or subset of rows defined by a specific criterion.window_function(expression) OVER (PARTITION BY column_name ORDER BY column_name) window_function: The specific function to apply, such as ROW_NUMBER(), RANK(), SUM(), AVG(), etc.
-OVER: Specifies that the function is a window function.
-PARTITION BY: (Optional) Divides the rows into partitions to perform the calculation within each partition.
-ORDER BY: (Optional) Defines the order of rows within the partition. Assigns a unique sequential number to each row within a partition.
-SELECT EmployeeID, Department, Salary, ROW_NUMBER() OVER (PARTITION BY Department ORDER BY Salary DESC) AS RowNum
-FROM Employees; Assigns a rank to each row. Ties receive the same rank, and gaps are left in the ranking sequence.
-SELECT EmployeeID, Department, Salary, RANK() OVER (PARTITION BY Department ORDER BY Salary DESC) AS Rank
-FROM Employees; Similar to RANK(), but does not leave gaps in the ranking sequence for ties.
-SELECT EmployeeID, Department, Salary, DENSE_RANK() OVER (PARTITION BY Department ORDER BY Salary DESC) AS DenseRank
-FROM Employees; Calculates the running total within each partition.
-SELECT EmployeeID, Department, Salary, SUM(Salary) OVER (PARTITION BY Department ORDER BY EmployeeID) AS RunningTotal
-FROM Employees; Calculates the running average within each partition.
-SELECT EmployeeID, Department, Salary, AVG(Salary) OVER (PARTITION BY Department ORDER BY EmployeeID) AS RunningAverage
-FROM Employees; Finds the maximum or minimum value within the partition or window.
-SELECT EmployeeID, Department, Salary, MAX(Salary) OVER (PARTITION BY Department) AS MaxSalary
-FROM Employees; Accesses the value from the next row within the partition.
-SELECT EmployeeID, Department, Salary, LEAD(Salary) OVER (PARTITION BY Department ORDER BY EmployeeID) AS NextSalary
-FROM Employees; Accesses the value from the previous row within the partition.
-SELECT EmployeeID, Department, Salary, LAG(Salary) OVER (PARTITION BY Department ORDER BY EmployeeID) AS PrevSalary
-FROM Employees; Running Totals and Averages Track cumulative sums or averages within groups of data (e.g., monthly sales totals). Ranking and Sorting Rank rows within categories (e.g., top 3 salaries by department). Comparing Rows Compare current row values to previous or next rows (e.g., detecting trends or changes). Data Analysis Perform analytics without collapsing rows (e.g., finding maximum values within groups while retaining original data). Indexing: Ensure columns used in PARTITION BY and ORDER BY clauses are indexed to improve performance. Large Datasets: Window functions can be computationally expensive on large datasets; optimize queries by limiting rows with WHERE clauses or pre-aggregating data. Memory Usage: Be mindful of memory usage when dealing with large partitions, as the window functions may need to maintain large intermediate result sets. Window functions are powerful tools for performing calculations across a set of rows related to the current row without reducing the result set.
-They enhance SQL's capability for data analysis, providing insights such as rankings, running totals, and comparisons.
-Proper use of window functions can lead to more efficient and readable queries, especially when dealing with complex analytical tasks.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/window.html</link><guid isPermaLink="false">Works/SQL/Window.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:41:20 GMT</pubDate></item><item><title><![CDATA[Views]]></title><description><![CDATA[
-Views and Materialized Views are essential database objects that allow you to simplify and optimize your SQL queries. They provide a way to store query results for easier and faster access.
-Views are virtual tables representing the result of a query, while Materialized Views physically store the query results for faster retrieval. A View is a virtual table based on the result of a SELECT query.
-It does not store data physically but provides a saved query that dynamically retrieves data from underlying tables when queried.
-Changes to the underlying tables are reflected in the view.
-CREATE VIEW view_name AS
-SELECT column1, column2, ...
-FROM table_name
-WHERE condition;
-CREATE VIEW HighSalaryEmployees AS
-SELECT EmployeeID, FirstName, LastName, Salary
-FROM Employees
-WHERE Salary &gt; 50000;
-SELECT * FROM HighSalaryEmployees; If the view is based on a simple query, you can sometimes update the underlying table through the view.
-UPDATE HighSalaryEmployees
-SET Salary = 60000
-WHERE EmployeeID = 101; Simplifies Complex Queries: Store frequently used complex queries for easy reuse. Security: Restrict access to specific columns or rows by granting permissions on the view, not the base table. Abstraction: Provide a layer of abstraction, allowing changes to underlying tables without affecting queries using the view. Performance: Since views are virtual, querying a view can be slower for large datasets due to dynamic computation. Cannot Always Be Updated: Views with complex joins, aggregations, or subqueries may not be updatable. A Materialized View is a physical copy of the result of a query that is stored on disk.
-Unlike regular views, materialized views store the data, making queries against them much faster.
-Materialized views need to be refreshed periodically to stay up-to-date with the underlying data.
-CREATE MATERIALIZED VIEW mv_name AS
-SELECT column1, column2, ...
-FROM table_name
-WHERE condition;
-CREATE MATERIALIZED VIEW HighSalaryEmployeesMV AS
-SELECT EmployeeID, FirstName, LastName, Salary
-FROM Employees
-WHERE Salary &gt; 50000; Materialized views can be refreshed manually or automatically to reflect changes in the underlying tables.
-REFRESH MATERIALIZED VIEW HighSalaryEmployeesMV;
-CREATE MATERIALIZED VIEW HighSalaryEmployeesMV
-BUILD IMMEDIATE
-REFRESH FAST ON COMMIT
-AS
-SELECT EmployeeID, FirstName, LastName, Salary
-FROM Employees
-WHERE Salary &gt; 50000; Performance: Faster query performance for large datasets because data is precomputed and stored. Precomputed Data: Useful for complex calculations or aggregations that don't change frequently. Reduced Database Load: Reduces the load on the database by avoiding repeated complex computations. Storage Overhead: Requires additional storage space for the precomputed data. Stale Data: Data can become outdated unless the materialized view is refreshed regularly. Maintenance Overhead: Refreshing materialized views can add maintenance complexity and resource usage. Use Views When: You need to simplify complex queries.
-You want to provide a security layer by restricting access to specific columns or rows. Use Materialized Views When: Performance is critical for querying large datasets.
-You have complex aggregations or calculations that do not change frequently. Optimize Refresh Strategies: For frequently changing data, use incremental (FAST) refresh where possible.
-For infrequently changing data, use manual or periodic refresh to save resources. Views and Materialized Views are powerful tools for managing and optimizing SQL queries.
-Choosing between them depends on your performance needs, data freshness requirements, and storage considerations.
-Understanding their differences and appropriate use cases can help you design more efficient and maintainable database solutions.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/views.html</link><guid isPermaLink="false">Works/SQL/Views.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:41:16 GMT</pubDate></item><item><title><![CDATA[Subqueries]]></title><description><![CDATA[
-Subqueries (also known as inner queries) are queries nested inside other SQL statements, such as SELECT, INSERT, UPDATE, or DELETE. They allow you to dynamically use the results of one query as input or conditions for another.
-Correlated subqueries are a special type of subquery that references one or more columns from the outer query. Unlike a regular subquery, a correlated subquery is evaluated once for each row processed by the outer query, making it more dynamic but potentially less performant.
-Subqueries can be categorized based on the type of results they return and how they are used:A scalar subquery returns a single value (one row, one column). It is often used in the SELECT clause or WHERE clause.SELECT EmployeeID, FirstName, LastName, (SELECT MAX(Salary) FROM Employees) AS MaxSalary
-FROM Employees; Explanation: The subquery returns the maximum salary. The outer query then shows each employee's details along with this maximum salary.
-A row subquery returns a single row with multiple columns. It is used with conditions that expect multiple values, such as WHERE or IN clauses.SELECT *
-FROM Employees
-WHERE (DepartmentID, Salary) = ( SELECT DepartmentID, MAX(Salary) FROM Employees WHERE DepartmentName = 'Sales'
-); Explanation: The subquery finds the DepartmentID and the highest salary for the "Sales" department. The outer query returns employees who match both these criteria.
-A column subquery returns a single column with multiple rows. It is typically used with the IN clause to filter based on multiple values.SELECT EmployeeID, FirstName, LastName
-FROM Employees
-WHERE DepartmentID IN ( SELECT DepartmentID FROM Departments WHERE Location = 'New York'
-); Explanation: The subquery retrieves all DepartmentIDs located in New York. The outer query returns employees who belong to any of these departments.
-A table subquery returns multiple rows and columns, essentially functioning like a derived table. It is used in the FROM clause.SELECT d.DepartmentName, e.EmployeeCount
-FROM ( SELECT DepartmentID, COUNT(*) AS EmployeeCount FROM Employees GROUP BY DepartmentID
-) e
-INNER JOIN Departments d ON d.DepartmentID = e.DepartmentID; Explanation: The subquery aggregates employees by department. The outer query joins this result with the Departments table to get department names and employee counts.
-An EXISTS subquery checks if any rows meet the conditions specified in the subquery and returns a Boolean value (TRUE or FALSE).SELECT FirstName, LastName
-FROM Employees e
-WHERE EXISTS ( SELECT 1 FROM Orders o WHERE o.EmployeeID = e.EmployeeID
-); Explanation: The subquery checks if there are any orders linked to each employee. The outer query returns employees who have processed at least one order.
-A regular subquery is a query enclosed in parentheses and embedded inside a larger query. It can be executed independently of the outer query. Filtering Results in a WHERE Clause:
-SELECT EmployeeID, FirstName, LastName
-FROM Employees
-WHERE DepartmentID = ( SELECT DepartmentID FROM Departments WHERE DepartmentName = 'Sales'
-); Using Subqueries in the FROM Clause (Derived Tables):
-SELECT d.DepartmentName, e.EmployeeCount
-FROM ( SELECT DepartmentID, COUNT(*) AS EmployeeCount FROM Employees GROUP BY DepartmentID
-) e
-INNER JOIN Departments d ON d.DepartmentID = e.DepartmentID; Subqueries in the SELECT List:
-SELECT FirstName, LastName, (SELECT COUNT(*) FROM Orders WHERE Orders.EmployeeID = Employees.EmployeeID) AS OrderCount
-FROM Employees; A correlated subquery references columns from the outer query, making it dependent on the outer query's current row.SELECT e.EmployeeID, e.FirstName, e.LastName
-FROM Employees e
-WHERE e.Salary &gt; ( SELECT AVG(Salary) FROM Employees e2 WHERE e2.DepartmentID = e.DepartmentID
-); Explanation: The subquery calculates the average salary for each employee's department. The outer query returns employees whose salaries exceed this average. Choose the Right Subquery Type: Use scalar subqueries for single-value lookups.
-Use table subqueries when you need derived tables.
-Use correlated subqueries for row-specific logic. Optimize Correlated Subqueries: Replace with joins, CTEs, or window functions where possible.
-Ensure columns used in subquery conditions are indexed. Example Optimization:
-WITH DeptAvgSalary AS ( SELECT DepartmentID, AVG(Salary) AS AvgSalary FROM Employees GROUP BY DepartmentID
-)
-SELECT e.EmployeeID, e.FirstName, e.LastName
-FROM Employees e
-JOIN DeptAvgSalary das ON e.DepartmentID = das.DepartmentID
-WHERE e.Salary &gt; das.AvgSalary; Subqueries and correlated subqueries are essential tools for dynamic and complex SQL queries.
-Choose the appropriate type of subquery based on the requirement to balance readability and performance.
-Always consider optimizing correlated subqueries for large datasets to avoid performance bottlenecks.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/subqueries.html</link><guid isPermaLink="false">Works/SQL/Subqueries.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:41:10 GMT</pubDate></item><item><title><![CDATA[SQL Syntax]]></title><description><![CDATA[SQL (Structured Query Language) is a standard language for interacting with relational databases. SQL is used to perform operations such as querying data, updating records, and managing database objects. Understanding SQL syntax is crucial for writing clear, efficient, and error-free SQL statements.SQL statements generally follow this structure:SELECT column1, column2, ...
-FROM table_name
-WHERE condition
-GROUP BY column
-HAVING condition
-ORDER BY column ASC | DESC; SELECT: Specifies the columns to retrieve.
-FROM: Specifies the table(s) to retrieve data from.
-WHERE: Filters rows based on specified conditions.
-GROUP BY: Groups rows that have the same values into summary rows.
-HAVING: Filters grouped rows based on conditions.
-ORDER BY: Sorts the result set.
-SQL keywords are case-insensitive, but it's a common practice to write them in uppercase for readability.Retrieves data from a table.SELECT FirstName, LastName
-FROM Employees
-WHERE Department = 'Sales';
-Adds new rows to a table.INSERT INTO Employees (FirstName, LastName, Department, Salary)
-VALUES ('Alice', 'Smith', 'HR', 60000);
-Modifies existing rows in a table.UPDATE Employees
-SET Salary = 70000
-WHERE EmployeeID = 1;
-Removes rows from a table.DELETE FROM Employees
-WHERE EmployeeID = 1;
-Filters rows based on a condition.SELECT * FROM Products
-WHERE Price &gt; 100;
-Groups rows with the same values.SELECT Department, COUNT(*) AS EmployeeCount
-FROM Employees
-GROUP BY Department;
-Filters groups based on conditions (used with GROUP BY).SELECT Department, COUNT(*) AS EmployeeCount
-FROM Employees
-GROUP BY Department
-HAVING COUNT(*) &gt; 5;
-Sorts results in ascending or descending order.SELECT FirstName, LastName, Salary
-FROM Employees
-ORDER BY Salary DESC;
-Combines results of two or more SELECT statements (removes duplicates).SELECT FirstName FROM Employees
-UNION
-SELECT FirstName FROM Customers;
-Combines results without removing duplicates.SELECT FirstName FROM Employees
-UNION ALL
-SELECT FirstName FROM Customers;
-CREATE TABLE Employees ( EmployeeID INT PRIMARY KEY, FirstName VARCHAR(50) NOT NULL, Salary FLOAT CHECK (Salary &gt; 0)
-); SQL syntax forms the foundation for interacting with relational databases.
-Knowing how to use common clauses (SELECT, FROM, WHERE, GROUP BY, ORDER BY, etc.) enables you to write effective queries.
-Combining SQL statements with constraints, operators, and data types helps you build robust database solutions.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/sql-syntax.html</link><guid isPermaLink="false">Works/SQL/SQL Syntax.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:41:06 GMT</pubDate></item><item><title><![CDATA[PIVOT, UNPIVOT]]></title><description><![CDATA[
-PIVOT and UNPIVOT are SQL operations used to transform data between row-oriented and column-oriented formats.
-PIVOT turns unique values from one column into multiple columns, restructuring rows into a cross-tabular format.
-UNPIVOT does the opposite: it converts columns into rows, flattening a cross-tabular structure back into a normalized format.
-The PIVOT operator transforms rows into columns, aggregating data based on specified criteria.SELECT column1, column2, [pivoted_column1], [pivoted_column2], ...
-FROM (source_query)
-PIVOT ( aggregation_function(value_column) FOR pivot_column IN ([pivoted_value1], [pivoted_value2], ...)
-) AS alias;
-Suppose we have the following Sales table:We want to pivot the Month values so that each month becomes a separate column.SELECT Employee, [January], [February]
-FROM ( SELECT Employee, Month, Sales FROM Sales
-) AS SourceTable
-PIVOT ( SUM(Sales) FOR Month IN ([January], [February])
-) AS PivotTable; Source Query:
-The inner query retrieves the data to be pivoted.
-Aggregation:
-The SUM(Sales) function aggregates the sales data.
-Pivot Column:
-The FOR Month IN ([January], [February]) clause specifies the unique values to pivot.
-The UNPIVOT operator converts columns into rows, effectively reversing a PIVOT operation.SELECT column1, column2, pivot_column, value_column
-FROM (source_query)
-UNPIVOT ( value_column FOR pivot_column IN ([pivoted_column1], [pivoted_column2], ...)
-) AS alias;
-Suppose we have the following SalesSummary table (which is the result of the previous PIVOT):We want to unpivot the January and February columns back into rows.SELECT Employee, Month, Sales
-FROM SalesSummary
-UNPIVOT ( Sales FOR Month IN ([January], [February])
-) AS UnpivotTable; Source Table:
-The SalesSummary table is the starting point for the UNPIVOT.
-Sales:
-The Sales column holds the values from the unpivoted columns.
-FOR Month IN ([January], [February]):
-The column names January and February are converted into row values under the Month column. Generating Reports: Creating summary reports where categories (e.g., months, products) become columns. Data Analysis: Comparing data across multiple dimensions (e.g., sales per region). Normalizing Data: Transforming wide tables into a normalized form suitable for analysis. Preparing Data for Visualization: Many visualization tools work better with long-format data. Unique Values: For PIVOT, the values specified in the IN clause should be unique in the pivot column. Aggregation: PIVOT requires an aggregation function like SUM, COUNT, or AVG. Aliases: Always provide aliases for subqueries and the resulting PIVOT or UNPIVOT tables. SQL Dialect: PIVOT and UNPIVOT are supported in SQL Server and Oracle. In MySQL and PostgreSQL, you can achieve similar results using conditional aggregation or custom queries. PIVOT and UNPIVOT are powerful SQL operations for reshaping data.
-PIVOT transforms rows into columns, while UNPIVOT does the opposite.
-Knowing when and how to use these operations helps you manage data effectively for reporting and analysis.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/pivot,-unpivot.html</link><guid isPermaLink="false">Works/SQL/PIVOT, UNPIVOT.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:41:00 GMT</pubDate></item><item><title><![CDATA[MERGE]]></title><description><![CDATA[The MERGE statement in SQL allows you to perform upsert operations (update or insert) in a single query. It helps synchronize data between two tables by conditionally inserting, updating, or deleting rows based on whether certain conditions are met.The MERGE statement is also known as UPSERT (a combination of UPDATE and INSERT) because it allows you to insert new records or update existing records depending on whether a match is found.MERGE INTO target_table AS target
-USING source_table AS source
-ON target.key = source.key
-WHEN MATCHED THEN UPDATE SET target.column1 = source.column1
-WHEN NOT MATCHED THEN INSERT (column1, column2) VALUES (source.column1, source.column2); target_table: The table that will be updated or inserted into.
-source_table: The table or data source providing the data for comparison.
-ON: The condition to determine if rows in the target_table and source_table match.
-WHEN MATCHED: The action to perform when a match is found (usually an UPDATE).
-WHEN NOT MATCHED: The action to perform when no match is found (usually an INSERT).
-This example updates records if they exist and inserts them if they don’t.MERGE INTO Employees AS target
-USING NewEmployeeData AS source
-ON target.EmployeeID = source.EmployeeID
-WHEN MATCHED THEN UPDATE SET target.FirstName = source.FirstName, target.LastName = source.LastName, target.Salary = source.Salary
-WHEN NOT MATCHED THEN INSERT (EmployeeID, FirstName, LastName, Salary) VALUES (source.EmployeeID, source.FirstName, source.LastName, source.Salary); Explanation: If an employee in the target table matches an employee in the source table by EmployeeID, the FirstName, LastName, and Salary are updated.
-If no match is found, a new employee record is inserted. You can also delete rows from the target table if certain conditions are met.MERGE INTO Employees AS target
-USING UpdatedEmployeeData AS source
-ON target.EmployeeID = source.EmployeeID
-WHEN MATCHED AND source.IsTerminated = 1 THEN DELETE
-WHEN NOT MATCHED THEN INSERT (EmployeeID, FirstName, LastName, Salary) VALUES (source.EmployeeID, source.FirstName, source.LastName, source.Salary); Explanation: If an employee exists in both tables and IsTerminated is set to 1 in the source table, the employee record is deleted from the target table.
-If no match is found, a new employee record is inserted. You can have multiple WHEN MATCHED or WHEN NOT MATCHED clauses to handle different conditions.MERGE INTO Products AS target
-USING NewProducts AS source
-ON target.ProductID = source.ProductID
-WHEN MATCHED AND source.Price &lt;&gt; target.Price THEN UPDATE SET target.Price = source.Price
-WHEN MATCHED AND source.Discontinued = 1 THEN DELETE
-WHEN NOT MATCHED THEN INSERT (ProductID, ProductName, Price) VALUES (source.ProductID, source.ProductName, source.Price); Explanation: Updates the price if it differs.
-Deletes the product if it is marked as discontinued.
-Inserts new products if they don't exist in the target table. Atomic Operation: The MERGE statement is atomic, meaning all operations (insert, update, delete) happen within a single transaction. Efficiency: Combines multiple DML operations into one, reducing the number of separate queries and improving performance. Flexibility: You can mix and match UPDATE, INSERT, and DELETE operations based on conditions. Error Handling: Ensure proper error handling and logging, especially when dealing with complex conditions. Indexing: Ensure the join columns in the ON clause are indexed for faster performance. Batch Size: For large datasets, consider breaking the MERGE into smaller batches to avoid locking issues. Transaction Management: Since MERGE is a single transaction, ensure your database can handle long-running transactions if processing large data. Logging and Auditing: Keep track of changes made by the MERGE operation for audit purposes. The MERGE statement is a powerful tool for performing upserts and synchronizing data between tables.
-It combines INSERT, UPDATE, and DELETE operations into a single, atomic statement, improving both readability and performance.
-Proper indexing, batching, and error handling can help you maximize the efficiency of MERGE operations.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/merge.html</link><guid isPermaLink="false">Works/SQL/MERGE.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:40:54 GMT</pubDate></item><item><title><![CDATA[LEAD, LAG]]></title><description><![CDATA[
-The LEAD() and LAG() functions are window functions in SQL used to access data from a subsequent (next) or preceding (previous) row relative to the current row.
-They are commonly used for tasks like calculating differences between consecutive rows, comparing current and previous values, or tracking trends over time. The LEAD() function retrieves the value from a subsequent row within the same result set.
-It allows you to look ahead by a specified number of rows and is useful for comparing current values with future values.
-LEAD(expression, offset, default) OVER (PARTITION BY column ORDER BY column) expression: The column or expression to return from the subsequent row.
-offset: The number of rows to look ahead (default is 1).
-default: The value to return if there is no subsequent row (optional).
-PARTITION BY: Divides the result set into partitions to apply the function separately within each group (optional).
-ORDER BY: Specifies the order of rows within each partition.
-SELECT EmployeeID, FirstName, Salary, LEAD(Salary, 1) OVER (ORDER BY Salary DESC) AS NextSalary
-FROM Employees;
-Explanation:
-For each employee, the LEAD() function retrieves the salary of the next employee in descending order of salary. The LAG() function retrieves the value from a preceding row within the same result set.
-It allows you to look back by a specified number of rows and is useful for comparing current values with past values.
-LAG(expression, offset, default) OVER (PARTITION BY column ORDER BY column) expression: The column or expression to return from the preceding row.
-offset: The number of rows to look back (default is 1).
-default: The value to return if there is no preceding row (optional).
-PARTITION BY: Divides the result set into partitions to apply the function separately within each group (optional).
-ORDER BY: Specifies the order of rows within each partition.
-SELECT EmployeeID, FirstName, Salary, LAG(Salary, 1, 0) OVER (ORDER BY Salary DESC) AS PreviousSalary
-FROM Employees;
-Explanation:
-For each employee, the LAG() function retrieves the salary of the previous employee in descending order of salary. If there is no previous row, it returns 0 as the default value.
-You can use PARTITION BY to apply LEAD() and LAG() separately within each group.SELECT Department, EmployeeID, FirstName, Salary, LAG(Salary) OVER (PARTITION BY Department ORDER BY Salary DESC) AS PrevSalary, LEAD(Salary) OVER (PARTITION BY Department ORDER BY Salary DESC) AS NextSalary
-FROM Employees;
-Explanation:
-The LAG() and LEAD() functions are applied within each department partition, ordered by salary in descending order. Calculating Differences Between Rows
-Compare current and previous rows to calculate differences.
-SELECT SalesDate, SalesAmount, LAG(SalesAmount) OVER (ORDER BY SalesDate) AS PreviousSales, SalesAmount - LAG(SalesAmount) OVER (ORDER BY SalesDate) AS SalesDifference
-FROM Sales; Identifying Trends
-Use LEAD() to identify upcoming values and detect trends.
-SELECT StockDate, StockPrice, LEAD(StockPrice) OVER (ORDER BY StockDate) AS NextStockPrice, CASE WHEN LEAD(StockPrice) OVER (ORDER BY StockDate) &gt; StockPrice THEN 'Up' ELSE 'Down' END AS Trend
-FROM StockPrices; Calculating Rolling Averages
-Calculate rolling averages by combining LAG() with window functions.
-SELECT EmployeeID, Salary, (Salary + LAG(Salary) OVER (ORDER BY EmployeeID) + LEAD(Salary) OVER (ORDER BY EmployeeID)) / 3 AS RollingAverage
-FROM Employees; Indexing: Ensure columns used in the ORDER BY clause are indexed for better performance. Large Datasets: Window functions can be resource-intensive for large datasets. Consider limiting rows with WHERE clauses or optimizing partitions. Memory Usage: The database engine needs to maintain intermediate results for window functions, which can affect memory usage. LEAD() and LAG() are powerful for analyzing data trends, calculating differences, and performing row-by-row comparisons.
-They work with the OVER clause, supporting PARTITION BY and ORDER BY for flexibility.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/lead,-lag.html</link><guid isPermaLink="false">Works/SQL/LEAD, LAG.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:40:35 GMT</pubDate></item><item><title><![CDATA[JOIN]]></title><description><![CDATA[In SQL, the JOIN clause is used to combine rows from two or more tables based on a related column between them. This is a fundamental concept in relational databases for querying data stored in different tables. JOIN operations allow you to create meaningful relationships and retrieve comprehensive datasets.
-An INNER JOIN returns rows where there is a match in both tables.
-If a row in one table does not have a corresponding row in the other table, that row is excluded from the result.
-SELECT t1.column, t2.column
-FROM table1 t1
-INNER JOIN table2 t2 ON t1.common_column = t2.common_column;
-SELECT Employees.EmployeeID, Employees.FirstName, Departments.DepartmentName
-FROM Employees
-INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID; A LEFT JOIN returns all rows from the left table and the matching rows from the right table.
-If there is no match, NULL values are returned for columns from the right table.
-SELECT t1.column, t2.column
-FROM table1 t1
-LEFT JOIN table2 t2 ON t1.common_column = t2.common_column;
-SELECT Employees.EmployeeID, Employees.FirstName, Departments.DepartmentName
-FROM Employees
-LEFT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID; A RIGHT JOIN returns all rows from the right table and the matching rows from the left table.
-If there is no match, NULL values are returned for columns from the left table.
-SELECT t1.column, t2.column
-FROM table1 t1
-RIGHT JOIN table2 t2 ON t1.common_column = t2.common_column;
-SELECT Employees.EmployeeID, Employees.FirstName, Departments.DepartmentName
-FROM Employees
-RIGHT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID; A FULL JOIN returns all rows from both tables.
-If there is no match, NULL values are returned for columns from the table without a match.
-SELECT t1.column, t2.column
-FROM table1 t1
-FULL JOIN table2 t2 ON t1.common_column = t2.common_column;
-SELECT Employees.EmployeeID, Employees.FirstName, Departments.DepartmentName
-FROM Employees
-FULL JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID; A CROSS JOIN returns the Cartesian product of two tables, meaning every row in the first table is combined with every row in the second table.
-SELECT t1.column, t2.column
-FROM table1 t1
-CROSS JOIN table2 t2;
-SELECT Employees.FirstName, Departments.DepartmentName
-FROM Employees
-CROSS JOIN Departments;
-A self-join is a join where a table is joined with itself. It is useful for comparing rows within the same table.SELECT e1.EmployeeID, e1.FirstName, e2.ManagerID, e2.FirstName AS ManagerName
-FROM Employees e1
-INNER JOIN Employees e2 ON e1.ManagerID = e2.EmployeeID; Indexing: Ensure the columns used in the ON clause are indexed to improve performance. Use Aliases: Use table aliases for better readability, especially in complex queries. Filter Early: Apply WHERE conditions as early as possible to reduce the number of rows processed by the join. Avoid Cartesian Products: Be cautious with CROSS JOIN as it can generate a large number of rows. Understand NULL Handling: Be aware of how LEFT, RIGHT, and FULL joins handle NULL values in unmatched rows. JOIN operations are fundamental for working with relational databases and combining data from multiple tables.
-Choosing the right type of JOIN (INNER, LEFT, RIGHT, FULL, CROSS) depends on the specific requirements of your query.
-Understanding how each JOIN works helps you write efficient and accurate SQL queries.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/join.html</link><guid isPermaLink="false">Works/SQL/JOIN.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:40:25 GMT</pubDate></item><item><title><![CDATA[Indexing Strategies]]></title><description><![CDATA[Indexing is a database optimization technique that helps improve the speed and efficiency of query execution. An index acts like a lookup table that allows the database engine to quickly locate specific rows without scanning the entire table.Proper indexing strategies are essential for maintaining optimal database performance, especially as data volumes grow. However, improper use of indexes can degrade performance and increase storage overhead.
-An index is a data structure that provides quick access to rows in a table.
-Indexes are created on one or more columns to facilitate faster retrieval of data.
-Think of an index like an index in a book, which helps you quickly find information without reading every page. An index on a single column.
-Useful for queries that filter or sort based on a single column.
-CREATE INDEX idx_employee_lastname ON Employees (LastName); An index on multiple columns.
-Useful when queries filter or sort by more than one column.
-CREATE INDEX idx_employee_department_lastname ON Employees (DepartmentID, LastName); Ensures that the indexed column(s) contain only unique values.
-Automatically created with a PRIMARY KEY or UNIQUE constraint.
-CREATE UNIQUE INDEX idx_unique_email ON Employees (Email); Determines the physical order of data in a table.
-Each table can have only one clustered index.
-Typically created on the primary key.
-CREATE CLUSTERED INDEX idx_employee_id ON Employees (EmployeeID); A separate structure that contains pointers to the physical rows.
-A table can have multiple non-clustered indexes.
-CREATE NONCLUSTERED INDEX idx_employee_salary ON Employees (Salary); Enables full-text search capabilities for textual data.
-Useful for searching large text fields.
-CREATE FULLTEXT INDEX idx_employee_bio ON Employees (Bio); Create indexes on columns that are often used in: WHERE clauses
-JOIN conditions
-ORDER BY clauses
-GROUP BY clauses CREATE INDEX idx_orders_customerid ON Orders (CustomerID); When queries filter by multiple columns, a composite index can improve performance.
-The order of columns in the index matters.
-CREATE INDEX idx_orders_customer_date ON Orders (CustomerID, OrderDate); This index benefits queries like:
-SELECT * FROM Orders
-WHERE CustomerID = 123 AND OrderDate &gt; '2024-01-01'; Clustered Index: Best for columns with unique, sequential values (e.g., primary keys).
-Non-Clustered Index: Best for columns with frequent lookups but non-sequential values.
-Unique Index: For ensuring data integrity on unique fields (e.g., email addresses). Too many indexes can: Slow down write operations (INSERT, UPDATE, DELETE).
-Increase storage requirements. Only create indexes that benefit frequent queries. Index columns with high selectivity (columns with many distinct values).
-Avoid indexing low-selectivity columns (e.g., columns with few unique values like Gender). An index that contains all the columns needed for a query.
-Reduces the need for the database to access the table itself.
-CREATE INDEX idx_orders_covering ON Orders (CustomerID, OrderDate, TotalAmount); This index covers queries like:
-SELECT CustomerID, OrderDate, TotalAmount
-FROM Orders
-WHERE CustomerID = 123; Index only a subset of rows based on a condition.
-Supported in some databases like PostgreSQL.
-CREATE INDEX idx_active_customers ON Customers (LastName) WHERE IsActive = TRUE; Regularly monitor index usage with database tools.
-Use commands like EXPLAIN (MySQL) or EXECUTION PLAN (SQL Server) to analyze query performance.
-Periodically rebuild or reorganize indexes to maintain efficiency. Write Performance: Indexes can slow down write operations (INSERT, UPDATE, DELETE) because the index needs to be updated. Query Optimization: Use EXPLAIN or QUERY PLAN to check if your queries are using indexes. Storage Overhead: Each index consumes additional storage.
-Balance the number of indexes with performance needs. Index Fragmentation: Over time, indexes can become fragmented.
-Regularly rebuild or reorganize indexes to optimize performance. Small Tables: Indexes on small tables may not improve performance significantly. Frequently Updated Columns: Columns that are frequently updated can degrade performance if indexed. Low Selectivity Columns: Columns with a small number of unique values (e.g., Gender, Status) may not benefit from indexing. Index frequently queried columns.
-Use composite indexes for multi-column filters.
-Balance the number of indexes to avoid write overhead.
-Regularly monitor and maintain indexes.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/indexing-strategies.html</link><guid isPermaLink="false">Works/SQL/Indexing Strategies.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:39:59 GMT</pubDate></item><item><title><![CDATA[CTE, WITH]]></title><description><![CDATA[The WITH clause in SQL, also known as a Common Table Expression (CTE), allows you to define temporary result sets that can be referenced within a SELECT, INSERT, UPDATE, or DELETE statement. This makes your SQL queries more modular, readable, and easier to maintain.WITH cte_name (optional_columns) AS ( subquery_definition
-)
-SELECT * FROM cte_name; cte_name: The name of the temporary result set (CTE).
-optional_columns: An optional list of column names for the CTE.
-subquery_definition: The query that defines the CTE.
-WITH HighSalaryEmployees AS ( SELECT EmployeeID, FirstName, LastName, Salary FROM Employees WHERE Salary &gt; 50000
-)
-SELECT * FROM HighSalaryEmployees; Explanation:
-The HighSalaryEmployees CTE stores employees with a salary greater than 50,000. The final SELECT query retrieves all employees from this temporary result set. Improved Readability: CTEs allow you to break down complex queries into smaller, manageable parts. Reusability: You can reference the same CTE multiple times within a query. Recursion: CTEs can be recursive, allowing you to work with hierarchical or tree-structured data. Avoiding Subquery Repetition: Instead of repeating the same subquery, define it once using a CTE. Recursive CTEs allow you to perform operations on hierarchical data, such as organizational charts or parent-child relationships.WITH RECURSIVE EmployeeHierarchy AS ( -- Anchor member (base case) SELECT EmployeeID, ManagerID, FirstName, 1 AS Level FROM Employees WHERE ManagerID IS NULL UNION ALL -- Recursive member SELECT e.EmployeeID, e.ManagerID, e.FirstName, eh.Level + 1 FROM Employees e JOIN EmployeeHierarchy eh ON e.ManagerID = eh.EmployeeID
-)
-SELECT * FROM EmployeeHierarchy; Explanation:
-This query retrieves an employee hierarchy starting from top-level managers and recursively includes their subordinates.
-You can define multiple CTEs in a single query.WITH SalesByRegion AS ( SELECT Region, SUM(Sales) AS TotalSales FROM SalesData GROUP BY Region
-),
-TopRegions AS ( SELECT Region FROM SalesByRegion WHERE TotalSales &gt; 100000
-)
-SELECT s.*
-FROM SalesData s
-JOIN TopRegions t ON s.Region = t.Region; Explanation: SalesByRegion: Aggregates total sales by region.
-TopRegions: Filters regions where total sales exceed 100,000.
-The final query joins the original SalesData with TopRegions to get detailed sales information for high-performing regions. Use CTEs for Complex Queries: Break down complex queries into multiple CTEs to enhance clarity. Optimize Performance: CTEs may be materialized (evaluated once) or inlined (evaluated as needed) depending on the SQL engine. Recursive CTEs for Hierarchies: Use recursive CTEs for hierarchical data like organizational charts or file systems. The WITH clause (CTE) is a powerful tool in SQL for improving query readability, reusability, and supporting recursion.
-Combining CTEs with window functions, subqueries, and advanced SQL techniques can make your data analysis and query logic more efficient and maintainable.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/cte,-with.html</link><guid isPermaLink="false">Works/SQL/CTE, WITH.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:39:48 GMT</pubDate></item><item><title><![CDATA[CASE]]></title><description><![CDATA[The CASE statement in SQL is a conditional expression that allows you to perform different actions or return different values based on conditions. It is similar to an IF-THEN-ELSE structure in other programming languages and is particularly useful for creating dynamic columns, conditional aggregations, and complex filtering.CASE expression WHEN value1 THEN result1 WHEN value2 THEN result2 ELSE default_result
-END expression: The column or expression to evaluate.
-WHEN: Specifies the condition to match.
-THEN: Specifies the result if the condition is met.
-ELSE: (Optional) The default result if none of the conditions are met.
-END: Marks the end of the CASE statement.
-CASE WHEN condition1 THEN result1 WHEN condition2 THEN result2 ELSE default_result
-END Instead of matching an expression, the WHEN clause contains a full condition.
-SELECT EmployeeID, FirstName, DepartmentID, CASE DepartmentID WHEN 1 THEN 'Sales' WHEN 2 THEN 'Engineering' WHEN 3 THEN 'HR' ELSE 'Other' END AS DepartmentName
-FROM Employees; Explanation: The CASE statement converts DepartmentID values to their corresponding department names.
-SELECT EmployeeID, FirstName, Salary, CASE WHEN Salary &gt; 80000 THEN 'High Salary' WHEN Salary BETWEEN 50000 AND 80000 THEN 'Medium Salary' ELSE 'Low Salary' END AS SalaryCategory
-FROM Employees; Explanation: The CASE statement categorizes employees based on their salary ranges.
-SELECT *
-FROM Orders
-WHERE CASE WHEN OrderDate &gt;= '2024-01-01' THEN 'Recent' ELSE 'Old' END = 'Recent'; Explanation: Filters orders where the order date is recent (after January 1, 2024).
-SELECT ProductID, ProductName, Category, Price
-FROM Products
-ORDER BY CASE Category WHEN 'Electronics' THEN 1 WHEN 'Clothing' THEN 2 ELSE 3 END; Explanation: Orders products based on the Category column, with Electronics listed first, followed by Clothing, and then others.
-SELECT DepartmentID, COUNT(CASE WHEN Gender = 'Male' THEN 1 ELSE NULL END) AS MaleCount, COUNT(CASE WHEN Gender = 'Female' THEN 1 ELSE NULL END) AS FemaleCount
-FROM Employees
-GROUP BY DepartmentID; Explanation: Counts male and female employees in each department by conditionally counting rows based on gender.
-You can nest CASE statements to handle more complex conditions.SELECT EmployeeID, FirstName, Salary, CASE WHEN Salary &gt; 80000 THEN 'High' WHEN Salary &gt; 50000 THEN CASE WHEN Salary &lt;= 70000 THEN 'Medium-High' ELSE 'Medium' END ELSE 'Low' END AS SalaryCategory
-FROM Employees; Explanation: This CASE statement categorizes salaries into more detailed categories using nested conditions. Readable Conditions: Keep WHEN conditions readable and straightforward to improve query clarity. Default Values: Always provide an ELSE clause to handle unexpected values and avoid NULL results. Performance Consideration: Complex CASE statements can impact performance. Optimize by simplifying conditions where possible. Consistent Data Types: Ensure all THEN and ELSE results return the same data type to avoid type conversion errors. The CASE statement is a versatile tool for introducing conditional logic in SQL queries.
-It can be used in SELECT, WHERE, ORDER BY, and aggregate functions to handle a wide range of dynamic scenarios.
-Understanding CASE statements allows you to write more powerful and flexible SQL queries.
-📇 DDC Index: <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>]]></description><link>https://64etuor.github.io/works/sql/case.html</link><guid isPermaLink="false">Works/SQL/CASE.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:39:43 GMT</pubDate></item><item><title><![CDATA[📖 620 Databases]]></title><link>https://64etuor.github.io/indexing-files/📖-620-databases.html</link><guid isPermaLink="false">INDEXING FILES/📖 620 Databases.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:38:43 GMT</pubDate></item><item><title><![CDATA[📚 623 SQL]]></title><link>https://64etuor.github.io/indexing-files/📚-623-sql.html</link><guid isPermaLink="false">INDEXING FILES/📚 623 SQL.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 08:25:01 GMT</pubDate></item><item><title><![CDATA[2W - 실습 과제]]></title><description><![CDATA[ 과제 배점: 각 문제당 10점, 총점 100점입니다. 부분 점수는 제공되지 않습니다. 채점 기준: 출력 결과 일치: 제출한 코드가 제시된 출력 결과와 일치하는 경우에만 정답으로 인정됩니다. 코드의 다양성 인정: 출력 결과가 동일하다면 다양한 접근 방식을 존중하여 정답으로 인정합니다. 데이터 "데이터분석가 입문 Python 부트캠프ㅣ마케팅 데이터 매출 분석ㅣ제품 포트폴리오 데이터 시각화" 수업 데이터 eda_order.csv
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/2w-데이터-분석-입문-1.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/2W - 데이터 분석 입문 1.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 30 Nov 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[📚 613 Natural Language Processing]]></title><link>https://64etuor.github.io/indexing-files/📚-613-natural-language-processing.html</link><guid isPermaLink="false">INDEXING FILES/📚 613 Natural Language Processing.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:48:58 GMT</pubDate></item><item><title><![CDATA[📚 617 AI Tools]]></title><link>https://64etuor.github.io/indexing-files/📚-617-ai-tools.html</link><guid isPermaLink="false">INDEXING FILES/📚 617 AI Tools.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:48:51 GMT</pubDate></item><item><title><![CDATA[📚 615 AI Applications]]></title><link>https://64etuor.github.io/indexing-files/📚-615-ai-applications.html</link><guid isPermaLink="false">INDEXING FILES/📚 615 AI Applications.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:48:36 GMT</pubDate></item><item><title><![CDATA[Remarkble Github Repositories]]></title><description><![CDATA[Index: <a data-href="📖 610 Generative AI" href="https://64etuor.github.io/indexing-files/📖-610-generative-ai.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 610 Generative AI</a>]]></description><link>https://64etuor.github.io/ai/remarkble-github-repositories.html</link><guid isPermaLink="false">AI/Remarkble Github Repositories.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:48:25 GMT</pubDate></item><item><title><![CDATA[Useful AI tools]]></title><link>https://64etuor.github.io/ai/useful-ai-tools.html</link><guid isPermaLink="false">AI/Useful AI tools.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:47:55 GMT</pubDate></item><item><title><![CDATA[📚 803 Fiction]]></title><link>https://64etuor.github.io/indexing-files/📚-803-fiction.html</link><guid isPermaLink="false">INDEXING FILES/📚 803 Fiction.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:47:05 GMT</pubDate></item><item><title><![CDATA[📚 804 Essays]]></title><link>https://64etuor.github.io/indexing-files/📚-804-essays.html</link><guid isPermaLink="false">INDEXING FILES/📚 804 Essays.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:47:01 GMT</pubDate></item><item><title><![CDATA[📚 801 Poetry]]></title><link>https://64etuor.github.io/indexing-files/📚-801-poetry.html</link><guid isPermaLink="false">INDEXING FILES/📚 801 Poetry.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:46:59 GMT</pubDate></item><item><title><![CDATA[📖 800 Literature]]></title><link>https://64etuor.github.io/indexing-files/📖-800-literature.html</link><guid isPermaLink="false">INDEXING FILES/📖 800 Literature.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:46:57 GMT</pubDate></item><item><title><![CDATA[📖 610 Generative AI]]></title><link>https://64etuor.github.io/indexing-files/📖-610-generative-ai.html</link><guid isPermaLink="false">INDEXING FILES/📖 610 Generative AI.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:45:42 GMT</pubDate></item><item><title><![CDATA[UX Design]]></title><link>https://64etuor.github.io/indexing-files/📖-640-ui/ux-design.html</link><guid isPermaLink="false">INDEXING FILES/📖 640 UI/UX Design.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:45:34 GMT</pubDate></item><item><title><![CDATA[📚 635 Web Development]]></title><link>https://64etuor.github.io/indexing-files/📚-635-web-development.html</link><guid isPermaLink="false">INDEXING FILES/📚 635 Web Development.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:45:00 GMT</pubDate></item><item><title><![CDATA[📚 634 Software Development]]></title><link>https://64etuor.github.io/indexing-files/📚-634-software-development.html</link><guid isPermaLink="false">INDEXING FILES/📚 634 Software Development.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:44:58 GMT</pubDate></item><item><title><![CDATA[📚 631 Programming Languages]]></title><link>https://64etuor.github.io/indexing-files/📚-631-programming-languages.html</link><guid isPermaLink="false">INDEXING FILES/📚 631 Programming Languages.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:44:51 GMT</pubDate></item><item><title><![CDATA[📖 630 Programming]]></title><link>https://64etuor.github.io/indexing-files/📖-630-programming.html</link><guid isPermaLink="false">INDEXING FILES/📖 630 Programming.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:44:38 GMT</pubDate></item><item><title><![CDATA[📚 629 Cloud Databases]]></title><link>https://64etuor.github.io/indexing-files/📚-629-cloud-databases.html</link><guid isPermaLink="false">INDEXING FILES/📚 629 Cloud Databases.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:44:25 GMT</pubDate></item><item><title><![CDATA[BigQuery Syntax]]></title><description><![CDATA[<a data-tooltip-position="top" aria-label="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax" rel="noopener nofollow" class="external-link is-unresolved" href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax" target="_self">Query syntax &nbsp;|&nbsp; BigQuery &nbsp;|&nbsp; Google Cloud</a><br>📇 DDC INDEX : <a data-href="📖 620 Databases" href="https://64etuor.github.io/indexing-files/📖-620-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 620 Databases</a> | <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a><a data-href="📚 629 Cloud Databases" href="https://64etuor.github.io/indexing-files/📚-629-cloud-databases.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 629 Cloud Databases</a>]]></description><link>https://64etuor.github.io/works/google/bigquery/bigquery-syntax.html</link><guid isPermaLink="false">Works/Google/BigQuery/BigQuery Syntax.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:42:00 GMT</pubDate></item><item><title><![CDATA[📖 620 Databases]]></title><link>https://64etuor.github.io/indexing-files/📖-620-databases.html</link><guid isPermaLink="false">INDEXING FILES/📖 620 Databases.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 09:38:43 GMT</pubDate></item><item><title><![CDATA[📚 623 SQL]]></title><link>https://64etuor.github.io/indexing-files/📚-623-sql.html</link><guid isPermaLink="false">INDEXING FILES/📚 623 SQL.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 08:25:01 GMT</pubDate></item><item><title><![CDATA[2W - 실습 과제]]></title><description><![CDATA[ 과제 배점: 각 문제당 10점, 총점 100점입니다. 부분 점수는 제공되지 않습니다. 채점 기준: 출력 결과 일치: 제출한 코드가 제시된 출력 결과와 일치하는 경우에만 정답으로 인정됩니다. 코드의 다양성 인정: 출력 결과가 동일하다면 다양한 접근 방식을 존중하여 정답으로 인정합니다. 데이터 "데이터분석가 입문 Python 부트캠프ㅣ마케팅 데이터 매출 분석ㅣ제품 포트폴리오 데이터 시각화" 수업 데이터 eda_order.csv
 eda_purchase.csv
 eda_visit.csv # pandas 라이브러리 불러오기
 # data_1 폴더에서 "eda_purchase.csv", "eda_order.csv" 파일 불러오기
