@@ -1,4 +1,188 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 10 Dec 2024 02:01:46 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 10 Dec 2024 02:01:40 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[Apps Script를 활용하여 웹에서 제품 정보 표시 구현(for battery passport)]]></title><description><![CDATA[Apps Script란?
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 10 Dec 2024 04:03:36 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 10 Dec 2024 04:03:32 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[emoji]]></title><description><![CDATA[제가 사용하는 아이콘은 주로 이모지 (Emoji)입니다. 이는 플랫폼에 상관없이 대부분의 환경에서 잘 보이고, 별도의 설정이나 플러그인 없이 마크다운 문서에 쉽게 삽입할 수 있습니다.✅ 작업 완료 ❌ 작업 실패 🚀 프로젝트 시작 💡 새로운 아이디어 📅 오늘 날짜: 2024-06-10 🔗 [링크](https://example.com) ✅ 작업 완료
+❌ 작업 실패
+🚀 프로젝트 시작
+💡 새로운 아이디어
+📅 오늘 날짜: 2024-06-10
+🔗 <a data-tooltip-position="top" aria-label="https://example.com/" rel="noopener nofollow" class="external-link is-unresolved" href="https://example.com/" target="_self">링크</a>]]></description><link>https://64etuor.github.io/obsidian/emoji.html</link><guid isPermaLink="false">Obsidian/emoji.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 03:53:59 GMT</pubDate></item><item><title><![CDATA[Templater]]></title><description><![CDATA[Templater의 기본 변수 삽입 구문은 &lt;% %&gt;입니다.&lt;% tp.file.title %&gt; // 파일 제목 삽입
+&lt;% tp.date.now("YYYY-MM-DD") %&gt; // 현재 날짜 삽입
+Templater에서 JavaScript 주석을 사용할 수 있습니다.&lt;% /* 이 부분은 주석입니다 */ %&gt;
+파일 제목: &lt;% tp.file.title %&gt; 파일 경로: &lt;% tp.file.path %&gt; 오늘 날짜: &lt;% tp.date.now("YYYY-MM-DD") %&gt; 어제 날짜: &lt;% tp.date.now("YYYY-MM-DD", -1, "days") %&gt; 다음 주 날짜: &lt;% tp.date.now("YYYY-MM-DD", 7, "days") %&gt; 이름: &lt;% tp.system.prompt("이름을 입력하세요") %&gt; 선택: &lt;% tp.system.suggester(["Python", "JavaScript"], ["Python 언어", "JavaScript 언어"]) %&gt; JavaScript 조건문을 사용해 동적 처리를 할 수 있습니다.&lt;% if (tp.date.now("dddd") === "Saturday" || tp.date.now("dddd") === "Sunday") { %&gt;
+오늘은 주말입니다!
+&lt;% } else { %&gt;
+오늘은 평일입니다.
+&lt;% } %&gt;
+반복문을 사용해 리스트를 자동 생성할 수 있습니다.&lt;% for (let i = 1; i &lt;= 5; i++) { %&gt;
+- 할 일 &lt;% i %&gt;
+&lt;% } %&gt;
+- 할 일 1 - 할 일 2 - 할 일 3 - 할 일 4 - 할 일 5 템플릿에서 사용자 정의 함수를 호출할 수 있습니다.템플릿 파일 예제:&lt;%* let greet = (name) =&gt; `Hello, ${name}!`; %&gt;
+&lt;% greet("Yangha") %&gt;
+Hello, Yangha!
+Templater는 비동기 작업도 지원합니다.&lt;%* let response = await fetch("https://api.github.com"); %&gt;
+&lt;% await response.json() %&gt;
+---
+title: "Daily Note - &lt;% tp.date.now("YYYY-MM-DD") %&gt;"
+date: &lt;% tp.date.now("YYYY-MM-DD") %&gt;
+tags: [daily, journal]
+--- # 📅 &lt;% tp.date.now("dddd, MMMM DD, YYYY") %&gt; ## 📝 오늘의 할 일 &lt;% for (let i = 1; i &lt;= 3; i++) { %&gt;
+- [ ] &lt;% tp.system.prompt(`할 일 ${i}을 입력하세요`) %&gt;
+&lt;% } %&gt; ## 🧠 오늘의 생각 &lt;% tp.system.prompt("오늘의 주요 생각이나 깨달음을 입력하세요") %&gt; <a data-tooltip-position="top" aria-label="https://silentvoid13.github.io/Templater/" rel="noopener nofollow" class="external-link is-unresolved" href="https://silentvoid13.github.io/Templater/" target="_self">Templater Official document</a>]]></description><link>https://64etuor.github.io/obsidian/community-plugin/templater.html</link><guid isPermaLink="false">Obsidian/Community Plugin/Templater.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 03:48:39 GMT</pubDate></item><item><title><![CDATA[1984]]></title><description><![CDATA[{{author}}2024-12-10 ]]></description><link>https://64etuor.github.io/books/1984.html</link><guid isPermaLink="false">Books/1984.md</guid><dc:creator><![CDATA[조지 오웰, 정회성]]></dc:creator><pubDate>Tue, 10 Dec 2024 03:31:57 GMT</pubDate></item><item><title><![CDATA[<% tp.file.title %>]]></title><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(24.11~25.03)/1주차.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(24.11~25.03)/1주차.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[Obsidian Common Template Research]]></title><description><![CDATA[ title
+author
+create_at
+modified_at
+description
+tags
+categories
+slug
+status ]]></description><link>https://64etuor.github.io/obsidian/obsidian-common-template-research.html</link><guid isPermaLink="false">Obsidian/Obsidian Common Template Research.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 02:37:49 GMT</pubDate></item><item><title><![CDATA[2023.10 공정 데이터 관리 시스템 개발 프로젝트]]></title><description><![CDATA[github.com/64etuor/MS_PA_SPT-Solution- Development tool : Power Apps
+- Data Visualization : Power BI
+- RPA : Power Automate
+- Database : Sharepoint List
+Key Features 워크 오더, 작업 이력, 생산 계획 등 조회 및 등록
+OPEX 관리, 근태 관리
+근태 현황과 작업 공수 비교 검증
+불량 이력, 사진 등록
+KPI 관리, Process 코드 등 공정 관련 데이터 관리
+Power BI 데이터셋 업데이트 기능
+Power BI 대시보드 연결 솔루션 - 랜딩 페이지
+<img alt="Pasted image 20241202161931.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png" target="_self">
+솔루션 - 미니 대시보드
+<br><img alt="Pasted image 20241205182519.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182519.png" target="_self">
+솔루션 - 작업 이력 입력
+<br><img alt="Pasted image 20241205180919.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205180919.png" target="_self">
+솔루션 - 워크 오더 조회
+<br><img alt="Pasted image 20241205180948.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205180948.png" target="_self">
+솔루션 - 불량 내역 입력
+<br><img alt="Pasted image 20241205180904.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205180904.png" target="_self">
+솔루션 - 공정 이력 조회
+<br><img alt="Pasted image 20241205181022.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181022.png" target="_self"><br>불량 사진을 등록하면 불량이 식별될 정도로 준수한 화질 이미지가 용량 400kb 내외로 저장된다. 저장된 사진은 Power BI의 대시보드 연동되어 볼 수 있도록 RPA가 구성되어 있다.
+<img alt="Pasted image 20241205181107.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181107.png" target="_self"> 솔루션 - 데이터 제출 확인
+<br><img alt="Pasted image 20241205181008.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181008.png" target="_self">Commit을 하면 연결된 Power BI dataset이 업데이트를 진행하고, 정상적으로 완료되면 관계자들에게 Teams 채팅으로 알림이 가는 RPA로 구성되어 있다. (업데이트 실패시 관리자에게 알람 발송)
+Power BI 대시보드 - 종합 생산 현황 및 지표
+<br><img alt="Pasted image 20241205181302.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181302.png" target="_self">막대 그래프의 막대에 커서를 올리면 세부 계획과 생산 내역이 툴팁으로 표시된다.
+Power BI 대시보드 - 개별 라인 생산 현황 및 세부 지표(ST, UPPH)
+<br><img alt="Pasted image 20241205181430.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181430.png" target="_self">
+Power BI 대시보드 - 개별 라인 공정별 생산 현황 및 불량
+<br><img alt="Pasted image 20241205181555.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181555.png" target="_self">
+Power BI 대시보드 - 세부공정별 생산 현황
+<br><img alt="Pasted image 20241205181909.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181909.png" target="_self">
+Power Bi 대시보드 - OEE / Downtime 내역 및 공수 손실 금액 환산
+<br><img alt="Pasted image 20241205181957.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181957.png" target="_self">
+Power BI 대시보드 - 불량 현황 및 공수 손실 금액 환산
+<br><img alt="Pasted image 20241205181756.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181756.png" target="_self">불량 막대 그래프에 마우스를 올리면 세부 내역이 툴팁에 표시된다.
+Power BI 대시보드 - 불량 상세 내역
+<br><img alt="Pasted image 20241205181820.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181820.png" target="_self">
+Power BI 대시보드 - 작업오더별 세부 생산 정보 및 진행율
+<br><img alt="Pasted image 20241205182140.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182140.png" target="_self">
+Power BI 대시보드 - KPI
+<br><img alt="Pasted image 20241205181627.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181627.png" target="_self">
+Power BI 대시보드 - 공수 분석
+<br><img alt="Pasted image 20241205181718.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181718.png" target="_self">
+Power BI 대시보드 - HR 관련 페이지
+<br><img alt="Pasted image 20241205182230.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182230.png" target="_self">
+Power BI 대시보드 - 근태 현황
+<br><img alt="Pasted image 20241205182304.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182304.png" target="_self">
+Power BI 대시보드 - OPEX 비용 분석
+<br><img alt="Pasted image 20241205182339.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182339.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2023.10-공정-데이터-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2023.10 공정 데이터 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 00:06:59 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2024.03 공정 추적성 관리 시스템 개발 프로젝트]]></title><description><![CDATA[Github 레포지토리 없음- Development tool : Power Apps
+- Data Visualization : Power BI
+- RPA : Power Automate
+- Database : Sharepoint List
+Key Features S/N 유효성 및 고유성 검증
+공정 이력 검증
+부품 사양 검증(QR 등록 시)
+제품 사진 등록
+모바일 체크리스트
+재작업 목록
+검사 목록
+Power BI 대시보드 연결 기본 화면
+<img alt="Pasted image 20241202163306.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" target="_self" style="width: 400px; max-width: 100%;">
+생산자 자주 검사, 체크리스트
+<br><img alt="Pasted image 20241202163355.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163355.png" target="_self" style="width: 400px; max-width: 100%;">
+이력 조회
+<br><img alt="Pasted image 20241202163454.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163454.png" target="_self" style="width: 400px; max-width: 100%;">
+이슈는 이메일과 Teams 채팅으로 즉시 발송
+<br><img alt="Pasted image 20241202163518.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163518.png" target="_self" style="width: 400px; max-width: 100%;">]]></description><link>https://64etuor.github.io/works/project/2024.03-공정-추적성-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.03 공정 추적성 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 00:01:36 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Minimalism]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 02:30:00 GMT</pubDate></item><item><title><![CDATA[Portfolio_Korean]]></title><description><![CDATA[
+🖐️ 안녕하세요. 데이터 분석과 IT 기술을 통해 혁신을 추구하는 공정기술 엔지니어 박양하입니다.
+저는 그동안, 인문학 베이스의 엔지니어로서 인문학적 사고와 엔지니어링 지식을 융합해 다양한 관점에서 문제를 바라보고, 끊임없는 학습과 고민으로 회사의 공정과 품질을 꾸준히 개선해왔습니다.
+신뢰할 수 있는 데이터를 수집할 수 있는 기반을 마련하고, 축적한 데이터를 올바르게 분석하여 회사의 방향성을 제시하고, 문제를 해결할 수 있는 근거를 만들어 나갑니다.
+오랜 현장 경험을 통해 문제를 직관적으로 파악할 수 있는 능력을 갖췄습니다. 인지하기 어려운 불합리를 발견하고 개선하기 위해 항상 주의를 기울입니다.
+일의 우선 순위를 정량적 성과 위주로만 치중하지 않습니다. 숫자와 데이터에만 매몰되지 않고 정말로 중대하고 긴급한 ‘실존하는 문제의 근본’을 파악하기 위해 항상 합리적인 회의주의를 가지고 업무에 임합니다. <img alt="Pasted image 20241204183153.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" target="_self" style="width: 700px; max-width: 100%;">”측정할 수 없는 건 관리할 수 없다는 생각은 잘못 됐다. 그건 값비싼 신화다.” - W. Edwards Deming
+”기존의 패러다임을 깨고 실체를 찾는 과정”, 이런 활동들이 역사에 ‘혁신’으로 기록됩니다. 혁신의 실마리를 찾기 위해 항상 고민하고 생각합니다.
+아래에서 제가 실무에서 공정과 품질을 개선하기 위해 활용한 IT기술들과 제가 직접 기획하고 추진했던 프로젝트에 대해 간단히 소개 드리겠습니다. 귀한 시간을 내주셔서 정말 감사합니다!
+<br>* 프로젝트명 오른쪽 Preview 문구에 마우스를 올리시면 참고 사진을 보실 수 있습니다 😊 (이 기능은 저의 Git Page에서만 작동합니다. 아래의 링크로 이동)
+<a data-tooltip-position="top" aria-label="https://64etuor.github.io/portfolio/portfolio_korean.html" rel="noopener nofollow" class="external-link is-unresolved" href="https://64etuor.github.io/portfolio/portfolio_korean.html" target="_self">박양하의 Github Page 링크</a>
+<br>Tech Stack
+<img alt="Pasted image 20241204172655.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204172655.png" target="_self">
+Project 연계/소속회사 : 아산 ETS / 솔라엣지테크놀로지스 코리아
+추진 배경 : 워터파우치 자동화 설비 예산 30만불이 초과된 상황에서 MES 외주 개발비 절감을 위해 자체 개발 기획
+수행 기간 : 2024.10 ~ 2024.12 (약 2개월) * 사업 종료로 프로젝트 중단
+주요 역할 : 프로젝트 기획, SW 개발, 데이터베이스 아키텍쳐 설계
+업무 성과 : 구형 OCV/IR 검사 장비 데이터 연동 : Python
+Backend 개발 : Python Django, Django REST Framework
+Frontend 개발 : React, Typescript, Electron을 활용, UI/UX 디자인 ETL 개발 : Python OPC UA 설비 데이터 수집, TCP/IP 비전 데이터 수집 Database 아키텍쳐 설계 : PostgreSQL 연계/소속회사 : 솔라엣지테크놀로지스 코리아
+추진 배경 : 한정된 기간 동안 진행되는 DV 단계에서 고품질의 데이터를 더 많이 확보하고, 여러 현장에서 동시 진행되는 DV 현황을 실시간으로 파악하기 위해 프로젝트 기획
+수행 기간 : 2024.08 ~ 2024.10 (약 2개월)
+주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화
+업무 성과 : 앱 개발 : Google Appsheet 생산실적, 불량내역 등록 앱 개발(프로토타입) 공정 데이터 분석 SW 개발 : Python Matplotlib 활용 공정 데이터 분석(CPK 등)
+데이터 시각화 : Google Spreadsheet 활용 실시간 업데이트 대시보드 구현 데이터 추적 : 제품 S/N QR Code를 조회하면 웹에서 생산 이력 정보를 확인하는 Appscript QR 이력 추적 시스템(프로토타입) * EU 배터리 패스포트 대응 시험 *2024 Core Value Award 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
+추진 배경 : 필드에서 원자재 불량이 발견되었으나 S/N 관리 미흡(수기)으로 리스크 범위 측정 불가능한 상황 발생. 문제 재발 방지를 위해 앱 개발을 기획
+수행 기간 : 2024.03 ~ 2024.06 (약 3개월) 주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화, UI/UX 디자인
+업무 성과 : 커스텀 솔루션 개발 : Power Apps 모바일 실적 등록, 모바일 체크리스트
+프로세스 개선 : 조립/검사 데이터가 등록되지 않은 제품이 상위 공정에서 조립되는 것을 방지, S/N 검증, 부품 혼입 방지 등 공정 품질 검증 기능 적용
+Power BI 확장 : 생산 이력 데이터를 대시보드에서 확인하고 추적할 수 있도록 확장 검사성적서 자동 발행 : Power Automate 활용, 검사 완료 제품의 검사 성적서 서버에 자동 발행 *2023 MOC Best Employee 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
+추진 배경 : 문서 관리 효율화, 데이터 무결성 확보, 데이터 분석 및 시각화 개선
+수행 기간 : 2023.10 ~ 2023.12 (약 3개월) 주요 역할 : 프로젝트 기획, 현황 조사, 데이터베이스 아키텍쳐 설계, 솔루션 개발, 데이터 분석/시각화, UI/UX 디자인
+업무 성과 : 엑셀 개별 문서 관리 방식에서 데이터베이스 활용으로 업무 자동화 구축, 사무 공수 일 451분 감축, 연간 약 5천만원 절감 효과
+제품 ST 실 데이터 확보 근거 확보 &gt; 제품 ST 50% 감축 (공정 개선이 아닌 ST 정상화)
+커스텀 솔루션 개발 : 엑셀 VBA 솔루션 개발, 작업 지시, 생산 계획, 생산 실적, 불량 등 DB 저장 데이터 무결성 확보 : 매뉴얼 입력 데이터 무결성 검증 로직 구현 데이터 신뢰성 확보 : 엑셀로 관리하던 공수 등 작업 데이터의 신뢰성을 확보함으로써 실제 투입되는 공수, 생산현황 등을 투명하게 집계 사무 자동화 : 엑셀 쿼리&lt;&gt;Microsoft 서버간 On-premises Gateway 설치, 자동 업데이트 구현 데이터 시각화 : Power BI를 활용한 통합 대시보드 구축(생산현황, 불량현황, KPI 등) 보고서 통합 : 기존에 작성하던 각종 보고서를 Script화하여 자동 보고서 생성 연계/소속회사 : 삼성전자 상생협력 아카데미 / 이랜텍 추진 배경 : 제조 창고의 재고 비용 감축 및 물류 흐름 개선
+수행 기간 : 2023.03 ~ 2023.05 (약 3개월) 주요 역할 : 개선 과제 설정, 개선 방법 도출, 프로젝트 매니지먼트 업무 성과 : 재고자산회전율 17% 향상(프로젝트 KPI)
+삼성전자 멘토링 지원받아 구매, 영업, 제조, 생산관리 멤버의 TF 구성, 3개월간 프로젝트 리딩 면책 구역 지정, 제조-영업 재고 이관 전산 프로세스 개선 제조 및 영업 창고 3정 5S 진행 연계/소속회사 : 다비치 비전, TOS / 이랜텍 추진 배경 : 유휴 설비를 폐기하지 않고 일부를 재활용함으로써 비용을 절약하고, 비전 검사를 적용하지 못한 공정에 비전 검사를 도입함으로써 품질 확보
+수행 기간 : 2022.12 ~ 2023.04 (약 5개월) 주요 역할 : 프로젝트 기획, 설비 활용 방안 검토, 업체 컨택 및 업무 진행 업무 성과 : 유휴 비전 검사 M/C 4대 활용 방법 모색 1대분, 의료키트 반자동 조립 설비 제작 사급 장비로 활용하여 비전 검사 시스템 비용 일부 절약, 견적가액 약 4백만원 절감
+1대분, 범용 비전 검사 소프트웨어 활용: 사출 파트 인서트, 너트 누락 검사 1대분, 범용 비전 검사 소프트웨어 활용: 배터리 모듈 역삽 방지 비전 검사 1대 예비 장비로 보관 연계/소속회사 : 이랜텍 추진 배경 : 초음파 용착 불량으로 폐기되던 사출물 케이스와 불량 재작업으로 발생하는 낭비를 개선하기 위해 프로젝트 기획, 이후 다양한 과제들을 추가하여 프로젝트 확장
+수행 기간 : 2022.11 ~ 2023.09 (약 10개월) 주요 역할 : 혁신 과제 설정, 개선 과제 실행, 보고서 작성, 업무 배분
+업무 성과 : 초음파 용착 조건 DOE, 개선을 통해 불량율 15% 감축 &gt; 0%대로 감소, 재작업공수비용 연 환산 3천2백만원 절감 효과(초당 임율 6.3원 기준)
+폐기 비용 연환산 3천6백만원 절감 효과(단위 폐기 비용 7,688원) 커팅 Jig 개발로 Neck 공정 C/T 31% 단축 ( 16.72sec &gt; 12.76sec )
+검사 Jig 개조로 Core-pack Function Test C/T 49% 단축 ( 55sec &gt; 28sec )
+소형 배터리팩 라인 LOB 개선 생산성 24% 향상, 연환산 4437만원 절감 효과
+MES 활용 공정 현황 실시간 분석 프로세스 도입 WBS, Gantt Chart, 공유 업무 보드 등을 활용한 인적 자원, 프로젝트 관리 도입 불합리 개선 : 3정5S 활동 추진 및 기타 불합리 개선 생산관련문서 불합리 개선, 엑셀 자동화 양식 제작 &gt; 업무 효율성 및 보고 정확성 개선 라벨 프린트 S/N 유효성 검증 프로그램 제작(Python) 연계/소속회사 : 중소기업진흥청 / 은성 추진 배경 : 기업에 스마트 팩토리 기초 솔루션을 도입하여 데이터를 전산화하고 업무 절차를 체계화하기 위해 중소기업진흥청 지원 프로그램 신청
+수행 기간 : 2021.08 ~ 2022.01 (약 6개월) 주요 역할 : 프로젝트 신청, 프로젝트 매니지먼트, 개발 요구사항 수립 업무 성과 : 물류 실수 방지 및 재고 관리 현황 파악을 위한 ERP 연계 바코드 관리 시스템 도입 모바일 태블릿을 활용한 수작업 라인 생산현황 파악 시스템 도입 제 열정을 십분 발휘하여 귀사에서 함께 성장해 가고 싶습니다.여기까지 읽어 주셔서 정말 감사합니다!]]></description><link>https://64etuor.github.io/portfolio/portfolio_korean.html</link><guid isPermaLink="false">PORTFOLIO/Portfolio_Korean.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 02:28:04 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Checklist for my page]]></title><description><![CDATA[Check-list md 파일 구성 가시성 테스트 Reading log auto-sync (dataview plug-in 정상 출력)
+Internal links
+Custom head Back links
+Tag links
+Anchor links
+Graph view Canvas rendering
+Document preview
+Table of contents
+Google Analytics
+GPTs prompt testing - Markdown format ]]></description><link>https://64etuor.github.io/obsidian/checklist-for-my-page.html</link><guid isPermaLink="false">Obsidian/Checklist for my page.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 02:27:18 GMT</pubDate></item><item><title><![CDATA[0_Reading log]]></title><description><![CDATA[2025y 목표 읽은 책 돌아보기
+읽을 책 기록하기
+북노트 작성하기 ]]></description><link>https://64etuor.github.io/books/0_reading-log.html</link><guid isPermaLink="false">Books/0_Reading log.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 02:24:46 GMT</pubDate><enclosure url="https://image.yes24.com/goods/372300/XL" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src="https://image.yes24.com/goods/372300/XL"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[참을 수 없는 존재의 가벼움]]></title><description><![CDATA[너무 어려워서 정리를 해가며 읽었다. 도저히 평가할 수 없는 위대한 작품이라고 생각한다.
+<a data-tooltip-position="top" aria-label="참을 수 없는 존재의 가벼움 > 1부 가벼움과 무거움" data-href="참을 수 없는 존재의 가벼움#1부 가벼움과 무거움" href="https://64etuor.github.io/books/참을-수-없는-존재의-가벼움.html#1부_가벼움과_무거움_0" class="internal-link" target="_self" rel="noopener nofollow">1부 가벼움과 무거움</a>
+2부 영혼과 육체 67
+3부 이해받지 못한 말들 139
+4부 영혼과 육체 213
+5부 가벼움과 무거움 287
+6부 대장정 393
+7부 카레닌의 미소 463
+작중 주요 대비니체의 영원회귀<br>
+<a data-href="로베스피에르" href="https://64etuor.github.io/books/assets/canvas/로베스피에르.html#_0" class="internal-link" target="_self" rel="noopener nofollow">로베스피에르</a> vs 히틀러 (영원회귀에 속해 있지 않은 두 인물에 대한 모순점)<br><a data-tooltip-position="top" aria-label="파르메니데스.canvas" data-href="파르메니데스.canvas" href="https://64etuor.github.io/books/assets/canvas/파르메니데스.html#_0" class="internal-link" target="_self" rel="noopener nofollow">파르메니데스</a>의 이분법 <a href="https://64etuor.github.io?query=tag:파르메니데스" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#파르메니데스">#파르메니데스</a> <br>테레사 : 송진으로 방수된 바구니에 넣어져 강물에 버려진 아기 <a href="https://64etuor.github.io?query=tag:동정심" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#동정심">#동정심</a>
+'einmal ist keinmal. (한 번은 중요치 않다. 한 번뿐인 것은 전혀 없었던 것과 같다. 한 번만 산다는 것은 전혀 살지 않는다는 것과 마찬가지다.)' ≒ 무거움 → 토마시가 두려워 하는 것<br>가벼움을 추구하는 토마시에게 우연히 찾아온 테레자 <a href="https://64etuor.github.io?query=tag:오이디푸스" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#오이디푸스">#오이디푸스</a><br>사비나 : '당신은 모든 점에서 키치와는 정반대라서 당신을 사랑하는 거야.' <a href="https://64etuor.github.io?query=tag:키치" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#키치">#키치</a> <a href="https://64etuor.github.io?query=tag:모순" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#모순">#모순</a>테레자의 고집<br>동료와 춤을 추는 테레자를 보고 질투를 하는 토마시 → 사랑과 성행위과 별개라고 말하던 본인의 삶의 방식과의 모순 <a href="https://64etuor.github.io?query=tag:모순" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#모순">#모순</a><br>테레자의 꿈 - 수영장에서의 행진, 시체가 가득한 영구차에 실려가는 꿈 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a><br>동정. <a href="https://64etuor.github.io?query=tag:동정심" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#동정심">#동정심</a>
+강함과 나약함의 대비.토마시의 변화카레닌의 등장<br>소련군의 사진을 찍는 테레자 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a>
+둡체크
+취리히로의 망명<br>'토마시는 달팽이가 자신의 집을 메고 다니듯 자기도 자신의 삶의 방식을 휴대하고 다닌다는 생각을 하며 행복을 느꼈다. 테레자와 사비나는 그의 삶에 있어서 두 극점, 서로 멀리 떨어져 화해가 불가능하지만 하나같이 아름다운 극점을 표상했다.' <a href="https://64etuor.github.io?query=tag:가벼움vs무거움" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#가벼움vs무거움">#가벼움vs무거움</a>
+토마시를 떠난 테레자기존의 삶의 방식과 테레자 사이에서의 토마시의 갈등'Es muss sein.'<br>
+운명이라고 말하며 테레자를 따라가는 토마시 <a href="https://64etuor.github.io?query=tag:우연vs운명" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#우연vs운명">#우연vs운명</a>운명(무거움)에 대한 베토벤의 해석과 토마시의 고민(가벼움 vs 무거움)
+토마시가 느낀 동정심이 사랑인지?(대등하지 못한 관계에서만 성립할 수 있는 감정의 모호함)<br>
+선택과 결과의 불확실성 <a href="https://64etuor.github.io?query=tag:동정심" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#동정심">#동정심</a><br>토마시와 테라자, 우연과 운명 <a href="https://64etuor.github.io?query=tag:우연vs운명" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#우연vs운명">#우연vs운명</a>
+테레자와의 사랑이 우연에 불과하다고 느끼고 우울해진 토마시<br><img alt="Pasted image 20240119221555.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119221555.png" target="_self" style="width: 400px; max-width: 100%;">영혼과 육체의 이원성<br>거울을 보는 테레사 (창문을 보는 인물들과 대비됨) <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a><br>테레자의 어머니 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a>테레자와 모성애<br>테레자 어머니의 육체에 대한 추락의 욕구 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a> <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a><br>과장된 테레자 어머니의 행동 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a> <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a> <br>자신의 영혼을 찾고자 하는 테레자와 책으로 묘사된 테레자의 상승 욕구 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a>
+토마시와의 첫 만남<br>우연과 사랑 <a href="https://64etuor.github.io?query=tag:우연vs운명" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#우연vs운명">#우연vs운명</a><br>우연에서 운명을 느낀 테레자 <a href="https://64etuor.github.io?query=tag:우연vs운명" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#우연vs운명">#우연vs운명</a>안나 카레니나 - 소설적 대칭과 우연성<br><img alt="Pasted image 20240119223112.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119223112.png" target="_self" style="width: 400px; max-width: 100%;"><br>안나 카레니나를 겨드랑이에 끼고 토마시를 방문한 테레자 - 토마시의 세계로 들어가기 위한(자신의 세계를 도피하기 위한) 입장권 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a><br>
+테레자의 배에서 난 꾸르륵 소리 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a>테레자의 이상과 집착<br>'신분 상승'의 욕구에 맞물린 '사진'에 대한 테레자의 열정 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a>
+토마시의 질투<br>수영장의 행진 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a>
+토마시로부터 자신의 영혼(육체와 별개의)을 부정당하는 듯한 기분을 느끼는 테레자테레자의 꿈들
+자신의 잘못을 알지만 스스로를 바꿀 수 없는 토마시<br>테레자에게 찾아온 추락에 대한 욕구 <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a><br>
+바닥 = 포기할 것이 없는 세계, 영혼을 포기한 세계 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a> <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a><br>토마시의 바람기를 알면서 질투 외의 행동을 할 수 없는 테레자 <a href="https://64etuor.github.io?query=tag:나약함" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#나약함">#나약함</a><br>
+현기증, 추락 욕구 <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a><br><img alt="Pasted image 20240119225137.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119225137.png" target="_self" style="width: 400px; max-width: 100%;"><br>
+자신의 나약함을 극복하지 못하고 육체로의 추락 욕구를 느끼는 테레자 <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a> <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a> <a href="https://64etuor.github.io?query=tag:나약함" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#나약함">#나약함</a>사비나와 테레자의 만남<br>사비나와 토마시, <a href="https://64etuor.github.io?query=tag:중산모자" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#중산모자">#중산모자</a> <a href="https://64etuor.github.io?query=tag:키치" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#키치">#키치</a> <br>알몸으로 사진을 찍는 사비나와 테레자 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a> <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a> 프라하의 봄과 체코 사람들<br>
+소련군의 사진을 찍는 테레사 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a>]]></description><link>https://64etuor.github.io/books/참을-수-없는-존재의-가벼움.html</link><guid isPermaLink="false">Books/참을 수 없는 존재의 가벼움.md</guid><dc:creator><![CDATA[밀란 쿤데라, 이재룡]]></dc:creator><pubDate>Tue, 10 Dec 2024 02:23:23 GMT</pubDate><enclosure url="https://64etuor.github.io/assets/image/pasted-image-20240119221555.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/assets/image/pasted-image-20240119221555.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Apps Script를 활용하여 웹에서 제품 정보 표시 구현(for battery passport)]]></title><description><![CDATA[Apps Script란?
 Google Apps Script는 Google Workspace (예: Gmail, Google Sheets, Google Docs, Google Forms 등)와 함께 사용되는&nbsp;JavaScript 기반의 스크립트 언어이다. Google의 여러 서비스 및 앱을 자동화하고 확장하는 데 활용할 수 있다. 직접 코드를 작성할 수 있기 때문에 활용법은 무궁무진. <a data-href="Appsheet를 활용한 작업 일보 어플리케이션 최단기간 구현 - 1" href="https://64etuor.github.io/works/google/appsheet/appsheet를-활용한-작업-일보-어플리케이션-최단기간-구현-1.html#_0" class="internal-link" target="_self" rel="noopener nofollow">Appsheet를 활용한 작업 일보 어플리케이션 최단기간 구현 - 1</a>
 <br><a data-href="sheet dash" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">sheet dash</a> <br><a data-href="Appsheet를 활용한 작업 일보 어플리케이션 최단기간 구현 - 1" href="https://64etuor.github.io/works/google/appsheet/appsheet를-활용한-작업-일보-어플리케이션-최단기간-구현-1.html#_0" class="internal-link" target="_self" rel="noopener nofollow">Appsheet를 활용한 작업 일보 어플리케이션 최단기간 구현 - 1</a>의 앱을 만들 때부터 어떤 툴을 활용해서 어떤 식으로 필요한 기능들을 구현해야 겠다는 구상이 있었다.
 앱을 통해 엔드유저로부터 입력된 데이터를 기반으로 대시보드는 간단하게 Sheets로, 그리고 QR 제품 이력 조회는 Apps Script로 구현하면 호스팅 같은 번거로운 문제 없이 최단 기간 내에 원하는 모든 프로토타입을 만들고 시연해 볼 수 있다.
@@ -17,7 +201,7 @@ code.gs 총 5개의 파일로 구성했고 코드는 간단하다.
 http://yourScriptURL?parameter=value 과 같이 쿼리 파라미터를 URL에 추가하면 해당하는 정보를 조회할 수 있다.
 위 URL을 Embedded한 QR 코드를 출력하여 DV 제품에 부착하고 조회해 보면,
 위에서 테스트 삼아 설정한 공정 이력들이 아래와 출력된다.
-<br><img alt="batch_2024-12-09 08 37 33.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png" target="_self">]]></description><link>https://64etuor.github.io/works/google/apps-script/apps-script를-활용하여-웹에서-제품-정보-표시-구현(for-battery-passport).html</link><guid isPermaLink="false">Works/Google/Apps Script/Apps Script를 활용하여 웹에서 제품 정보 표시 구현(for battery passport).md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 02:00:59 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Minimalism]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 01:22:47 GMT</pubDate></item><item><title><![CDATA[Excel VBA_E-BOM to M-BOM 자동 변환 모듈]]></title><description><![CDATA[입사를 한 지 얼마 안되는 시기였을 때다. 우리 부서의 담당자가 Agile에 등록된 E-BOM을 기반으로 M-BOM을 만드는 업무를 수년간 하고 있었다. 그런데 이 작업을 수작업으로 하고 있다 보니 시간도 엄청나게 오래 걸릴 뿐더러, 실수가 발생할 가능성도 보였다. 따라서 그런 문제점들을 없애고자 E-BOM to M-BOM 자동 변환 모듈 개발을 시작했다.
+<br><img alt="batch_2024-12-09 08 37 33.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png" target="_self">]]></description><link>https://64etuor.github.io/works/google/apps-script/apps-script를-활용하여-웹에서-제품-정보-표시-구현(for-battery-passport).html</link><guid isPermaLink="false">Works/Google/Apps Script/Apps Script를 활용하여 웹에서 제품 정보 표시 구현(for battery passport).md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 02:00:59 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Excel VBA_E-BOM to M-BOM 자동 변환 모듈]]></title><description><![CDATA[입사를 한 지 얼마 안되는 시기였을 때다. 우리 부서의 담당자가 Agile에 등록된 E-BOM을 기반으로 M-BOM을 만드는 업무를 수년간 하고 있었다. 그런데 이 작업을 수작업으로 하고 있다 보니 시간도 엄청나게 오래 걸릴 뿐더러, 실수가 발생할 가능성도 보였다. 따라서 그런 문제점들을 없애고자 E-BOM to M-BOM 자동 변환 모듈 개발을 시작했다.
 Agile E-BoM Level 열 앞에 11개 열을 만들고 각 열의 이름을 0~10까지의 순서대로 나열, 그리고 Level의 숫자를 매칭되는 열에 입력.
 M-BoM에서 사용하지 않는 열 삭제 및 필요한 열의 순서 정렬
 특정 위치에 BLANK 열 추가
@@ -154,7 +338,7 @@ I have a project to build a database to production line.
 → I have a project to build a database for the production line.
 I am kind of a hard worker.
 → I’m a hard worker.
-I always feel uncomfortable to speak in English unlike to write in English. I think the why I’m like this is because of my character, I mean, introverted character. I feel the need of having more chances to speak in English. And it feels like this time is when I have to learn how to have a small talk with other people.I always feel uncomfortable speaking in English, unlike when I’m writing. I think it’s partly because of my personality—I’m more on the introverted side. I feel the need for more opportunities to practice speaking in English, and it seems like now is the right time for me to learn how to make small talk with others.]]></description><link>https://64etuor.github.io/studies/english/spicus-(24.10~24.11)/unit-1.-announcing-a-new-project.html</link><guid isPermaLink="false">Studies/English/SPICUS (24.10~24.11)/Unit 1. Announcing a new project.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 07:04:02 GMT</pubDate></item><item><title><![CDATA[1주차]]></title><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(24.11~25.03)/1주차.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(24.11~25.03)/1주차.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 06:42:20 GMT</pubDate></item><item><title><![CDATA[4M 절차 전자결재 Flow]]></title><description><![CDATA[<img alt="4Mchange_processFlow.png" src="https://64etuor.github.io/settings/attachments/4mchange_processflow.png" target="_self">]]></description><link>https://64etuor.github.io/works/microsoft/power-automate/4m-절차-전자결재-flow.html</link><guid isPermaLink="false">Works/Microsoft/Power Automate/4M 절차 전자결재 Flow.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 04:38:53 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/4mchange_processflow.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/4mchange_processflow.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[검사 성적서 자동 발행 Flow]]></title><description><![CDATA[<img alt="InspectionCertiFlow.png" src="https://64etuor.github.io/settings/attachments/inspectioncertiflow.png" target="_self">]]></description><link>https://64etuor.github.io/works/microsoft/power-automate/검사-성적서-자동-발행-flow.html</link><guid isPermaLink="false">Works/Microsoft/Power Automate/검사 성적서 자동 발행 Flow.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 04:38:49 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/inspectioncertiflow.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/inspectioncertiflow.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Power BI Dataset update Flow]]></title><description><![CDATA[<img alt="PowerBIupdateFlow.png" src="https://64etuor.github.io/settings/attachments/powerbiupdateflow.png" target="_self">]]></description><link>https://64etuor.github.io/works/microsoft/power-automate/power-bi-dataset-update-flow.html</link><guid isPermaLink="false">Works/Microsoft/Power Automate/Power BI Dataset update Flow.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 04:38:42 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/powerbiupdateflow.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/powerbiupdateflow.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[231129 - 위대한 유산]]></title><description><![CDATA[틀림없이 새로 쓰는 글이 분명함에도
+I always feel uncomfortable to speak in English unlike to write in English. I think the why I’m like this is because of my character, I mean, introverted character. I feel the need of having more chances to speak in English. And it feels like this time is when I have to learn how to have a small talk with other people.I always feel uncomfortable speaking in English, unlike when I’m writing. I think it’s partly because of my personality—I’m more on the introverted side. I feel the need for more opportunities to practice speaking in English, and it seems like now is the right time for me to learn how to make small talk with others.]]></description><link>https://64etuor.github.io/studies/english/spicus-(24.10~24.11)/unit-1.-announcing-a-new-project.html</link><guid isPermaLink="false">Studies/English/SPICUS (24.10~24.11)/Unit 1. Announcing a new project.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 07:04:02 GMT</pubDate></item><item><title><![CDATA[4M 절차 전자결재 Flow]]></title><description><![CDATA[<img alt="4Mchange_processFlow.png" src="https://64etuor.github.io/settings/attachments/4mchange_processflow.png" target="_self">]]></description><link>https://64etuor.github.io/works/microsoft/power-automate/4m-절차-전자결재-flow.html</link><guid isPermaLink="false">Works/Microsoft/Power Automate/4M 절차 전자결재 Flow.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 04:38:53 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/4mchange_processflow.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/4mchange_processflow.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[검사 성적서 자동 발행 Flow]]></title><description><![CDATA[<img alt="InspectionCertiFlow.png" src="https://64etuor.github.io/settings/attachments/inspectioncertiflow.png" target="_self">]]></description><link>https://64etuor.github.io/works/microsoft/power-automate/검사-성적서-자동-발행-flow.html</link><guid isPermaLink="false">Works/Microsoft/Power Automate/검사 성적서 자동 발행 Flow.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 04:38:49 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/inspectioncertiflow.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/inspectioncertiflow.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Power BI Dataset update Flow]]></title><description><![CDATA[<img alt="PowerBIupdateFlow.png" src="https://64etuor.github.io/settings/attachments/powerbiupdateflow.png" target="_self">]]></description><link>https://64etuor.github.io/works/microsoft/power-automate/power-bi-dataset-update-flow.html</link><guid isPermaLink="false">Works/Microsoft/Power Automate/Power BI Dataset update Flow.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 04:38:42 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/powerbiupdateflow.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/powerbiupdateflow.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[231129 - 위대한 유산]]></title><description><![CDATA[틀림없이 새로 쓰는 글이 분명함에도
 나의 글은 벌써부터 낡았다.
 낡은 사람이 쓰기에 그러하기도 하고
 낡은 것을 좋아하는 사람이라 그러하기도 하다.
@@ -278,51 +462,7 @@ I always feel uncomfortable to speak in English unlike to write in English. I th
 못난 생김새
 주름진 얼굴
 그리고 제 죄를 아는 듯이 꼭 감은 두 눈한마디 톡 쏘아 댄다
-마귀야 이 예쁜 마귀야]]></description><link>https://64etuor.github.io/writings/poems/190213-딸입니다.html</link><guid isPermaLink="false">Writings/Poems/190213 - 딸입니다.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 03:24:16 GMT</pubDate></item><item><title><![CDATA[Portfolio_Korean]]></title><description><![CDATA[
-🖐️ 안녕하세요. 데이터 분석과 IT 기술을 통해 혁신을 추구하는 공정기술 엔지니어 박양하입니다.
-저는 그동안, 인문학 베이스의 엔지니어로서 인문학적 사고와 엔지니어링 지식을 융합해 다양한 관점에서 문제를 바라보고, 끊임없는 학습과 고민으로 회사의 공정과 품질을 꾸준히 개선해왔습니다.
-신뢰할 수 있는 데이터를 수집할 수 있는 기반을 마련하고, 축적한 데이터를 올바르게 분석하여 회사의 방향성을 제시하고, 문제를 해결할 수 있는 근거를 만들어 나갑니다.
-오랜 현장 경험을 통해 문제를 직관적으로 파악할 수 있는 능력을 갖췄습니다. 관행과 관습으로 포장된 불합리를 발견하고 개선하기 위해 항상 주의를 기울입니다.
-일의 우선 순위를 정량적 성과 위주로만 치중하지 않습니다. 숫자와 데이터에만 매몰되지 않고 정말로 중대하고 긴급한 ‘실존하는 문제의 근본’을 파악하기 위해 항상 합리적인 회의주의를 가지고 업무에 임합니다. <img alt="Pasted image 20241204183153.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" target="_self" style="width: 700px; max-width: 100%;">”측정할 수 없는 건 관리할 수 없다는 생각은 잘못 됐다. 그건 값비싼 신화다.” - W. Edwards Deming
-”기존의 패러다임을 깨고 실체를 찾는 과정”, 이런 활동들이 역사에 ‘혁신’으로 기록됩니다. 혁신의 실마리를 찾기 위해 항상 고민하고 생각합니다.
-아래에서 제가 실무에서 공정과 품질을 개선하기 위해 활용한 IT기술들과 제가 직접 기획하고 추진했던 프로젝트에 대해 간단히 소개 드리겠습니다. 귀한 시간을 내주셔서 정말 감사합니다!
-<br>* 프로젝트명 오른쪽 Preview 문구에 마우스를 올리시면 참고 사진을 보실 수 있습니다 😊 (이 기능은 저의 Git Page에서만 작동합니다. 아래의 링크로 이동)
-<a data-tooltip-position="top" aria-label="https://64etuor.github.io/portfolio/portfolio_korean.html" rel="noopener nofollow" class="external-link is-unresolved" href="https://64etuor.github.io/portfolio/portfolio_korean.html" target="_self">박양하의 Github Page 링크</a>
-<br>Tech Stack
-<img alt="Pasted image 20241204172655.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204172655.png" target="_self">
-Project 연계/소속회사 : 아산 ETS / 솔라엣지테크놀로지스 코리아
-추진 배경 : 워터파우치 자동화 설비 예산 30만불이 초과된 상황에서 MES 외주 개발비 절감을 위해 자체 개발 기획
-수행 기간 : 2024.10 ~ 2024.12 (약 2개월) * 사업 종료로 프로젝트 중단
-주요 역할 : 프로젝트 기획, SW 개발, 데이터베이스 아키텍쳐 설계
-업무 성과 : 구형 OCV/IR 검사 장비 데이터 연동 : Python
-Backend 개발 : Python Django, Django REST Framework
-Frontend 개발 : React, Typescript, Electron을 활용, UI/UX 디자인 ETL 개발 : Python OPC UA 설비 데이터 수집, TCP/IP 비전 데이터 수집 Database 아키텍쳐 설계 : PostgreSQL 연계/소속회사 : 솔라엣지테크놀로지스 코리아
-추진 배경 : 한정된 기간 동안 진행되는 DV 단계에서 고품질의 데이터를 더 많이 확보하고, 여러 현장에서 동시 진행되는 DV 현황을 실시간으로 파악하기 위해 프로젝트 기획
-수행 기간 : 2024.08 ~ 2024.10 (약 2개월)
-주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화
-업무 성과 : 앱 개발 : Google Appsheet 생산실적, 불량내역 등록 앱 개발(프로토타입) 공정 데이터 분석 SW 개발 : Python Matplotlib 활용 공정 데이터 분석(CPK 등)
-데이터 시각화 : Google Spreadsheet 활용 실시간 업데이트 대시보드 구현 데이터 추적 : 제품 S/N QR Code를 조회하면 웹에서 생산 이력 정보를 확인하는 Appscript QR 이력 추적 시스템(프로토타입) * EU 배터리 패스포트 대응 시험 *2024 Core Value Award 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
-추진 배경 : 필드에서 원자재 불량이 발견되었으나 S/N 관리 미흡(수기)으로 리스크 범위 측정 불가능한 상황 발생. 문제 재발 방지를 위해 앱 개발을 기획
-수행 기간 : 2024.03 ~ 2024.06 (약 3개월) 주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화, UI/UX 디자인
-업무 성과 : 커스텀 솔루션 개발 : Power Apps 모바일 실적 등록, 모바일 체크리스트
-프로세스 개선 : 조립/검사 데이터가 등록되지 않은 제품이 상위 공정에서 조립되는 것을 방지, S/N 검증, 부품 혼입 방지 등 공정 품질 검증 기능 적용
-Power BI 확장 : 생산 이력 데이터를 대시보드에서 확인하고 추적할 수 있도록 확장 검사성적서 자동 발행 : Power Automate 활용, 검사 완료 제품의 검사 성적서 서버에 자동 발행 *2023 MOC Best Employee 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
-추진 배경 : 문서 관리 효율화, 데이터 무결성 확보, 데이터 분석 및 시각화 개선
-수행 기간 : 2023.10 ~ 2023.12 (약 3개월) 주요 역할 : 프로젝트 기획, 현황 조사, 데이터베이스 아키텍쳐 설계, 솔루션 개발, 데이터 분석/시각화, UI/UX 디자인
-업무 성과 : 엑셀 개별 문서 관리 방식에서 데이터베이스 활용으로 업무 자동화 구축, 사무 공수 일 451분 감축, 연간 약 5천만원 절감 효과
-제품 ST 실 데이터 확보 근거 확보 &gt; 제품 ST 50% 감축 (공정 개선이 아닌 ST 정상화)
-커스텀 솔루션 개발 : 엑셀 VBA 솔루션 개발, 작업 지시, 생산 계획, 생산 실적, 불량 등 DB 저장 데이터 무결성 확보 : 매뉴얼 입력 데이터 무결성 검증 로직 구현 데이터 신뢰성 확보 : 엑셀로 관리하던 공수 등 작업 데이터의 신뢰성을 확보함으로써 실제 투입되는 공수, 생산현황 등을 투명하게 집계 사무 자동화 : 엑셀 쿼리&lt;&gt;Microsoft 서버간 On-premises Gateway 설치, 자동 업데이트 구현 데이터 시각화 : Power BI를 활용한 통합 대시보드 구축(생산현황, 불량현황, KPI 등) 보고서 통합 : 기존에 작성하던 각종 보고서를 Script화하여 자동 보고서 생성 연계/소속회사 : 삼성전자 상생협력 아카데미 / 이랜텍 추진 배경 : 제조 창고의 재고 비용 감축 및 물류 흐름 개선
-수행 기간 : 2023.03 ~ 2023.05 (약 3개월) 주요 역할 : 개선 과제 설정, 개선 방법 도출, 프로젝트 매니지먼트 업무 성과 : 재고자산회전율 17% 향상(프로젝트 KPI)
-삼성전자 멘토링 지원받아 구매, 영업, 제조, 생산관리 멤버의 TF 구성, 3개월간 프로젝트 리딩 면책 구역 지정, 제조-영업 재고 이관 전산 프로세스 개선 제조 및 영업 창고 3정 5S 진행 연계/소속회사 : 다비치 비전, TOS / 이랜텍 추진 배경 : 유휴 설비를 폐기하지 않고 일부를 재활용함으로써 비용을 절약하고, 비전 검사를 적용하지 못한 공정에 비전 검사를 도입함으로써 품질 확보
-수행 기간 : 2022.12 ~ 2023.04 (약 5개월) 주요 역할 : 프로젝트 기획, 설비 활용 방안 검토, 업체 컨택 및 업무 진행 업무 성과 : 유휴 비전 검사 M/C 4대 활용 방법 모색 1대분, 의료키트 반자동 조립 설비 제작 사급 장비로 활용하여 비전 검사 시스템 비용 일부 절약, 견적가액 약 4백만원 절감
-1대분, 범용 비전 검사 소프트웨어 활용: 사출 파트 인서트, 너트 누락 검사 1대분, 범용 비전 검사 소프트웨어 활용: 배터리 모듈 역삽 방지 비전 검사 1대 예비 장비로 보관 연계/소속회사 : 이랜텍 추진 배경 : 초음파 용착 불량으로 폐기되던 사출물 케이스와 불량 재작업으로 발생하는 낭비를 개선하기 위해 프로젝트 기획, 이후 다양한 과제들을 추가하여 프로젝트 확장
-수행 기간 : 2022.11 ~ 2023.09 (약 10개월) 주요 역할 : 혁신 과제 설정, 개선 과제 실행, 보고서 작성, 업무 배분
-업무 성과 : 초음파 용착 조건 DOE, 개선을 통해 불량율 15% 감축 &gt; 0%대로 감소, 재작업공수비용 연 환산 3천2백만원 절감 효과(초당 임율 6.3원 기준)
-폐기 비용 연환산 3천6백만원 절감 효과(단위 폐기 비용 7,688원) 커팅 Jig 개발로 Neck 공정 C/T 31% 단축 ( 16.72sec &gt; 12.76sec )
-검사 Jig 개조로 Core-pack Function Test C/T 49% 단축 ( 55sec &gt; 28sec )
-소형 배터리팩 라인 LOB 개선 생산성 24% 향상, 연환산 4437만원 절감 효과
-MES 활용 공정 현황 실시간 분석 프로세스 도입 WBS, Gantt Chart, 공유 업무 보드 등을 활용한 인적 자원, 프로젝트 관리 도입 불합리 개선 : 3정5S 활동 추진 및 기타 불합리 개선 생산관련문서 불합리 개선, 엑셀 자동화 양식 제작 &gt; 업무 효율성 및 보고 정확성 개선 라벨 프린트 S/N 유효성 검증 프로그램 제작(Python) 연계/소속회사 : 중소기업진흥청 / 은성 추진 배경 : 기업에 스마트 팩토리 기초 솔루션을 도입하여 데이터를 전산화하고 업무 절차를 체계화하기 위해 중소기업진흥청 지원 프로그램 신청
-수행 기간 : 2021.08 ~ 2022.01 (약 6개월) 주요 역할 : 프로젝트 신청, 프로젝트 매니지먼트, 개발 요구사항 수립 업무 성과 : 물류 실수 방지 및 재고 관리 현황 파악을 위한 ERP 연계 바코드 관리 시스템 도입 모바일 태블릿을 활용한 수작업 라인 생산현황 파악 시스템 도입 제 열정을 십분 발휘하여 귀사에서 함께 성장해 가고 싶습니다.여기까지 읽어 주셔서 정말 감사합니다!]]></description><link>https://64etuor.github.io/portfolio/portfolio_korean.html</link><guid isPermaLink="false">PORTFOLIO/Portfolio_Korean.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 02:44:20 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
+마귀야 이 예쁜 마귀야]]></description><link>https://64etuor.github.io/writings/poems/190213-딸입니다.html</link><guid isPermaLink="false">Writings/Poems/190213 - 딸입니다.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 03:24:16 GMT</pubDate></item><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
 🖐️ Hello, I'm Yang-ha Park, a Process Technology Engineer pursuing innovation through data analysis and IT technology.
 Throughout my career, I have: As an engineer with a humanities background, I've consistently improved company processes and quality by combining humanistic thinking with engineering knowledge, viewing problems from diverse perspectives through continuous learning and contemplation.
 Created foundations for collecting reliable data, properly analyzing accumulated data to suggest company directions, and building evidence to solve problems.
@@ -440,74 +580,7 @@ Google Sheet 실시간 대시보드
 QR Code 생산 이력 조회 화면
 <br><img alt="batch_2024-12-09 08 37 33.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png" target="_self">
 Google Apps Script
-<br><img alt="batch_2024-12-09 08 38 12.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-38-12.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.08-개발품-dv-데이터-전산-관리-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.08 개발품 DV 데이터 전산 관리 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:36 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2024.03 공정 추적성 관리 시스템 개발 프로젝트]]></title><description><![CDATA[Github 레포지토리 없음- Development tool : Power Apps
-- Data Visualization : Power BI
-- RPA : Power Automate
-- Database : Sharepoint List
-Key Features S/N 유효성 및 고유성 검증
-공정 이력 검증
-부품 사양 검증(QR 등록 시)
-제품 사진 등록
-모바일 체크리스트
-재작업 목록
-검사 목록
-Power BI 대시보드 연결 기본 화면
-<img alt="Pasted image 20241202163306.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" target="_self" style="width: 400px; max-width: 100%;">
-생산자 자주 검사, 체크리스트
-<br><img alt="Pasted image 20241202163355.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163355.png" target="_self" style="width: 400px; max-width: 100%;">
-이력 조회
-<br><img alt="Pasted image 20241202163454.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163454.png" target="_self" style="width: 400px; max-width: 100%;">
-이슈는 이메일과 Teams 채팅으로 즉시 발송
-<br><img alt="Pasted image 20241202163518.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163518.png" target="_self" style="width: 400px; max-width: 100%;">]]></description><link>https://64etuor.github.io/works/project/2024.03-공정-추적성-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.03 공정 추적성 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:33 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2023.10 공정 데이터 관리 시스템 개발 프로젝트]]></title><description><![CDATA[github.com/64etuor/MS_PA_SPT-Solution- Development tool : Power Apps
-- Data Visualization : Power BI
-- RPA : Power Automate
-- Database : Sharepoint List
-Key Features 워크 오더, 작업 이력, 생산 계획 등 조회 및 등록
-OPEX 관리, 근태 관리
-근태 현황과 작업 공수 비교 검증
-불량 이력, 사진 등록
-KPI 관리, Process 코드 등 공정 관련 데이터 관리
-Power BI 데이터셋 업데이트 기능
-Power BI 대시보드 연결 솔루션 - 랜딩 페이지
-<img alt="Pasted image 20241202161931.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png" target="_self">
-솔루션 - 미니 대시보드
-<br><img alt="Pasted image 20241205182519.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182519.png" target="_self">
-솔루션 - 작업 이력 입력
-<br><img alt="Pasted image 20241205180919.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205180919.png" target="_self">
-솔루션 - 워크 오더 조회
-<br><img alt="Pasted image 20241205180948.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205180948.png" target="_self">
-솔루션 - 불량 내역 입력
-<br><img alt="Pasted image 20241205180904.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205180904.png" target="_self">
-솔루션 - 공정 이력 조회
-<br><img alt="Pasted image 20241205181022.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181022.png" target="_self"><br>불량 사진을 등록하면 불량이 식별될 정도로 준수한 화질 이미지가 용량 400kb 내외로 저장된다. 저장된 사진은 Power BI의 대시보드 연동되어 볼 수 있도록 RPA가 구성되어 있다.
-<img alt="Pasted image 20241205181107.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181107.png" target="_self"> 솔루션 - 데이터 제출 확인
-<br><img alt="Pasted image 20241205181008.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181008.png" target="_self">Commit을 하면 연결된 Power BI dataset이 업데이트를 진행하고, 정상적으로 완료되면 관계자들에게 Teams 채팅으로 알림이 가는 RPA로 구성되어 있다. (업데이트 실패시 관리자에게 알람 발송)
-Power BI 대시보드 - 종합 생산 현황 및 지표
-<br><img alt="Pasted image 20241205181302.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181302.png" target="_self">막대 그래프의 막대에 커서를 올리면 세부 계획과 생산 내역이 툴팁으로 표시된다.
-Power BI 대시보드 - 개별 라인 생산 현황 및 세부 지표(ST, UPPH)
-<br><img alt="Pasted image 20241205181430.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181430.png" target="_self">
-Power BI 대시보드 - 개별 라인 공정별 생산 현황 및 불량
-<br><img alt="Pasted image 20241205181555.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181555.png" target="_self">
-Power BI 대시보드 - 세부공정별 생산 현황
-<br><img alt="Pasted image 20241205181909.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181909.png" target="_self">
-Power Bi 대시보드 - OEE / Downtime 내역 및 공수 손실 금액 환산
-<br><img alt="Pasted image 20241205181957.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181957.png" target="_self">
-Power BI 대시보드 - 불량 현황 및 공수 손실 금액 환산
-<br><img alt="Pasted image 20241205181756.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181756.png" target="_self">불량 막대 그래프에 마우스를 올리면 세부 내역이 툴팁에 표시된다.
-Power BI 대시보드 - 불량 상세 내역
-<br><img alt="Pasted image 20241205181820.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181820.png" target="_self">
-Power BI 대시보드 - 작업오더별 세부 생산 정보 및 진행율
-<br><img alt="Pasted image 20241205182140.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182140.png" target="_self">
-Power BI 대시보드 - KPI
-<br><img alt="Pasted image 20241205181627.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181627.png" target="_self">
-Power BI 대시보드 - 공수 분석
-<br><img alt="Pasted image 20241205181718.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205181718.png" target="_self">
-Power BI 대시보드 - HR 관련 페이지
-<br><img alt="Pasted image 20241205182230.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182230.png" target="_self">
-Power BI 대시보드 - 근태 현황
-<br><img alt="Pasted image 20241205182304.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182304.png" target="_self">
-Power BI 대시보드 - OPEX 비용 분석
-<br><img alt="Pasted image 20241205182339.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241205182339.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2023.10-공정-데이터-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2023.10 공정 데이터 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:30 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202161931.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Obsidian Common Template 연구]]></title><description><![CDATA[ title
+<br><img alt="batch_2024-12-09 08 38 12.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-38-12.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.08-개발품-dv-데이터-전산-관리-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.08 개발품 DV 데이터 전산 관리 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:36 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Obsidian Common Template 연구]]></title><description><![CDATA[ title
 author
 create_at
 modified_at ]]></description><link>https://64etuor.github.io/obsidian/obsidian-common-template-연구.html</link><guid isPermaLink="false">Obsidian/Obsidian Common Template 연구.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 23:31:58 GMT</pubDate></item><item><title><![CDATA[Second Brain - PARA Management]]></title><description><![CDATA[세컨드 브레인 부스트를 읽고 내용 정리할 곳]]></description><link>https://64etuor.github.io/self-management/second-brain-para-management.html</link><guid isPermaLink="false">Self-Management/Second Brain - PARA Management.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 12:16:07 GMT</pubDate></item><item><title><![CDATA[Power BI_통합 대시보드 구현]]></title><description><![CDATA[예전에 Power BI로 대시보드를 만들 때, 내가 원하는 수준의 기능을 구현하기 위해 참고할 만한 국문 자료가 없어서 대부분 영문 자료를 참조하거나 Microsoft Power BI Documentation을 참조했다. 구축 이후 수정할 일이 크게 없어 방치하다 보니 세세한 요청 사항이 생겼을 때, 나도 어떻게 만들었는지 기억이 안 나서(…) 다시 자료 찾아보는 일이 생겼다. 그런데 아무래도 한국에서 많이 사용을 하는 툴이 아니다 보니 여전히 국문 자료가 부족한 듯 보인다. 그래서 리포트를 만들었던 과정을 복기하는 겸, 리포트 내에 적용했던 여러 사례를 이 블로그를 통해 소개하고자 한다.
@@ -1157,7 +1230,7 @@ FROM Employees; SQL syntax provides a powerful and intuitive way to interact wit
 By mastering DDL, DML, and SELECT queries, you can handle most database operations.
 Advanced features like indexing, views, and stored procedures enhance performance and maintainability.
 Regular practice, along with consulting official documentation and reputable guides, will solidify your SQL skills.
-]]></description><link>https://64etuor.github.io/works/sql/sql-syntax.html</link><guid isPermaLink="false">Works/SQL/SQL Syntax.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 09:48:06 GMT</pubDate></item><item><title><![CDATA[0_Reading log]]></title><description><![CDATA[2025y 개인 Project - 읽은 책 돌아보기, 읽을 책 기록하기]]></description><link>https://64etuor.github.io/books/0_reading-log.html</link><guid isPermaLink="false">Books/0_Reading log.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 09:42:48 GMT</pubDate><enclosure url="https://image.yes24.com/goods/372300/XL" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src="https://image.yes24.com/goods/372300/XL"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Unit 2. Progress Update]]></title><description><![CDATA[ distribution rights
+]]></description><link>https://64etuor.github.io/works/sql/sql-syntax.html</link><guid isPermaLink="false">Works/SQL/SQL Syntax.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 09:48:06 GMT</pubDate></item><item><title><![CDATA[Unit 2. Progress Update]]></title><description><![CDATA[ distribution rights
 exclusive license
 reach an agreement
 term sheet
@@ -3409,10 +3482,7 @@ book_note: ❌undefined프롤로그: 마음에 걸리는 얼굴을 유심히 바
 제15장 _317
 제16장 _329
 제17장 _348
-제18장 _364옮긴이의 말: 현재를 예언하는 소설 _390]]></description><link>https://64etuor.github.io/books/멋진-신세계.html</link><guid isPermaLink="false">Books/멋진 신세계.md</guid><dc:creator><![CDATA[올더스 헉슬리, 안정효]]></dc:creator><pubDate>Sun, 01 Dec 2024 17:06:52 GMT</pubDate></item><item><title><![CDATA[1984]]></title><description><![CDATA[undefined제 1부
-제 2부
-제 3부
-부록 : 신어의 원리]]></description><link>https://64etuor.github.io/books/1984.html</link><guid isPermaLink="false">Books/1984.md</guid><dc:creator><![CDATA[조지 오웰, 정회성]]></dc:creator><pubDate>Sun, 01 Dec 2024 17:06:38 GMT</pubDate></item><item><title><![CDATA[이방인]]></title><description><![CDATA[undefined이방인1부
+제18장 _364옮긴이의 말: 현재를 예언하는 소설 _390]]></description><link>https://64etuor.github.io/books/멋진-신세계.html</link><guid isPermaLink="false">Books/멋진 신세계.md</guid><dc:creator><![CDATA[올더스 헉슬리, 안정효]]></dc:creator><pubDate>Sun, 01 Dec 2024 17:06:52 GMT</pubDate></item><item><title><![CDATA[이방인]]></title><description><![CDATA[undefined이방인1부
 2부『이방인』에 대한 편지 - 알베르 카뮈
 미국판 서문 - 알베르 카뮈
 『이방인』을 다시 읽는다 - 로제키요작품해설 - 김화영
@@ -4218,44 +4288,7 @@ start_read_date: 2024-12-02
 finish_read_date: 2024-12-02
 my_rate: 0
 book_note: ❌신에게 버림받은 돌연변이 레드 드래곤. 앞날의 운명조차 알 수 없는 그의 숨 막히는 생존기!
-사내의 입에서 터져 나오는 괴성. 그리고 그의 몸은 점점 거대해져 갔다. 그의 피부는 이미 사람의 것이 아니었다. 마치 갑옷처럼 촘촘하게 엮어진 붉은 색의 비늘이 자라나고 있었고, 몸은 이제 사람의 몇 배 이상 거대해져 있었다. 천천히 그의 등을 뚫고 자라나는 붉은 날개. 그 날개의 웅장함이란 이루 말할 수가 없었다.undefined]]></description><link>https://64etuor.github.io/books/주홍글씨.html</link><guid isPermaLink="false">Books/주홍글씨.md</guid><dc:creator><![CDATA[나다니엘 호손, 조승국]]></dc:creator><pubDate>Sun, 01 Dec 2024 17:02:59 GMT</pubDate></item><item><title><![CDATA[카라마조프 가의 형제들 세트]]></title><description><![CDATA[undefinedundefined]]></description><link>https://64etuor.github.io/books/카라마조프-가의-형제들-세트.html</link><guid isPermaLink="false">Books/카라마조프 가의 형제들 세트.md</guid><dc:creator><![CDATA[표도르 도스토예프스키, 김연경]]></dc:creator><pubDate>Sun, 01 Dec 2024 17:02:52 GMT</pubDate></item><item><title><![CDATA[참을 수 없는 존재의 가벼움]]></title><description><![CDATA[너무 어려워서 정리를 해가며 읽었다. 도저히 평가할 수 없는 위대한 작품이라고 생각한다.
-<a data-tooltip-position="top" aria-label="참을 수 없는 존재의 가벼움 > 1부 가벼움과 무거움" data-href="참을 수 없는 존재의 가벼움#1부 가벼움과 무거움" href="https://64etuor.github.io/books/참을-수-없는-존재의-가벼움.html#1부_가벼움과_무거움_0" class="internal-link" target="_self" rel="noopener nofollow">1부 가벼움과 무거움</a>
-2부 영혼과 육체 67
-3부 이해받지 못한 말들 139
-4부 영혼과 육체 213
-5부 가벼움과 무거움 287
-6부 대장정 393
-7부 카레닌의 미소 463
-작중 주요 대비니체의 영원회귀<br>
-<a data-href="로베스피에르" href="https://64etuor.github.io/books/assets/canvas/로베스피에르.html#_0" class="internal-link" target="_self" rel="noopener nofollow">로베스피에르</a> vs 히틀러 (영원회귀에 속해 있지 않은 두 인물에 대한 모순점)<br><a data-tooltip-position="top" aria-label="파르메니데스.canvas" data-href="파르메니데스.canvas" href="https://64etuor.github.io/books/assets/canvas/파르메니데스.html#_0" class="internal-link" target="_self" rel="noopener nofollow">파르메니데스</a>의 이분법 <a href="https://64etuor.github.io?query=tag:파르메니데스" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#파르메니데스">#파르메니데스</a> <br>테레사 : 송진으로 방수된 바구니에 넣어져 강물에 버려진 아기 <a href="https://64etuor.github.io?query=tag:동정심" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#동정심">#동정심</a>
-'einmal ist keinmal. (한 번은 중요치 않다. 한 번뿐인 것은 전혀 없었던 것과 같다. 한 번만 산다는 것은 전혀 살지 않는다는 것과 마찬가지다.)' ≒ 무거움 → 토마시가 두려워 하는 것<br>가벼움을 추구하는 토마시에게 우연히 찾아온 테레자 <a href="https://64etuor.github.io?query=tag:오이디푸스" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#오이디푸스">#오이디푸스</a><br>사비나 : '당신은 모든 점에서 키치와는 정반대라서 당신을 사랑하는 거야.' <a href="https://64etuor.github.io?query=tag:키치" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#키치">#키치</a> <a href="https://64etuor.github.io?query=tag:모순" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#모순">#모순</a>테레자의 고집<br>동료와 춤을 추는 테레자를 보고 질투를 하는 토마시 → 사랑과 성행위과 별개라고 말하던 본인의 삶의 방식과의 모순 <a href="https://64etuor.github.io?query=tag:모순" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#모순">#모순</a><br>테레자의 꿈 - 수영장에서의 행진, 시체가 가득한 영구차에 실려가는 꿈 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a><br>동정. <a href="https://64etuor.github.io?query=tag:동정심" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#동정심">#동정심</a>
-강함과 나약함의 대비.토마시의 변화카레닌의 등장<br>소련군의 사진을 찍는 테레자 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a>
-둡체크
-취리히로의 망명<br>'토마시는 달팽이가 자신의 집을 메고 다니듯 자기도 자신의 삶의 방식을 휴대하고 다닌다는 생각을 하며 행복을 느꼈다. 테레자와 사비나는 그의 삶에 있어서 두 극점, 서로 멀리 떨어져 화해가 불가능하지만 하나같이 아름다운 극점을 표상했다.' <a href="https://64etuor.github.io?query=tag:가벼움vs무거움" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#가벼움vs무거움">#가벼움vs무거움</a>
-토마시를 떠난 테레자기존의 삶의 방식과 테레자 사이에서의 토마시의 갈등'Es muss sein.'<br>
-운명이라고 말하며 테레자를 따라가는 토마시 <a href="https://64etuor.github.io?query=tag:우연vs운명" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#우연vs운명">#우연vs운명</a>운명(무거움)에 대한 베토벤의 해석과 토마시의 고민(가벼움 vs 무거움)
-토마시가 느낀 동정심이 사랑인지?(대등하지 못한 관계에서만 성립할 수 있는 감정의 모호함)<br>
-선택과 결과의 불확실성 <a href="https://64etuor.github.io?query=tag:동정심" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#동정심">#동정심</a><br>토마시와 테라자, 우연과 운명 <a href="https://64etuor.github.io?query=tag:우연vs운명" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#우연vs운명">#우연vs운명</a>
-테레자와의 사랑이 우연에 불과하다고 느끼고 우울해진 토마시<br><img alt="Pasted image 20240119221555.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119221555.png" target="_self" style="width: 400px; max-width: 100%;">영혼과 육체의 이원성<br>거울을 보는 테레사 (창문을 보는 인물들과 대비됨) <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a><br>테레자의 어머니 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a>테레자와 모성애<br>테레자 어머니의 육체에 대한 추락의 욕구 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a> <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a><br>과장된 테레자 어머니의 행동 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a> <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a> <br>자신의 영혼을 찾고자 하는 테레자와 책으로 묘사된 테레자의 상승 욕구 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a>
-토마시와의 첫 만남<br>우연과 사랑 <a href="https://64etuor.github.io?query=tag:우연vs운명" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#우연vs운명">#우연vs운명</a><br>우연에서 운명을 느낀 테레자 <a href="https://64etuor.github.io?query=tag:우연vs운명" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#우연vs운명">#우연vs운명</a>안나 카레니나 - 소설적 대칭과 우연성<br><img alt="Pasted image 20240119223112.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119223112.png" target="_self" style="width: 400px; max-width: 100%;"><br>안나 카레니나를 겨드랑이에 끼고 토마시를 방문한 테레자 - 토마시의 세계로 들어가기 위한(자신의 세계를 도피하기 위한) 입장권 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a><br>
-테레자의 배에서 난 꾸르륵 소리 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a>테레자의 이상과 집착<br>'신분 상승'의 욕구에 맞물린 '사진'에 대한 테레자의 열정 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a>
-토마시의 질투<br>수영장의 행진 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a>
-토마시로부터 자신의 영혼(육체와 별개의)을 부정당하는 듯한 기분을 느끼는 테레자테레자의 꿈들
-자신의 잘못을 알지만 스스로를 바꿀 수 없는 토마시<br>테레자에게 찾아온 추락에 대한 욕구 <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a><br>
-바닥 = 포기할 것이 없는 세계, 영혼을 포기한 세계 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a> <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a><br>토마시의 바람기를 알면서 질투 외의 행동을 할 수 없는 테레자 <a href="https://64etuor.github.io?query=tag:나약함" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#나약함">#나약함</a><br>
-현기증, 추락 욕구 <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a><br><img alt="Pasted image 20240119225137.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119225137.png" target="_self" style="width: 400px; max-width: 100%;"><br>
-자신의 나약함을 극복하지 못하고 육체로의 추락 욕구를 느끼는 테레자 <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a> <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a> <a href="https://64etuor.github.io?query=tag:나약함" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#나약함">#나약함</a>사비나와 테레자의 만남<br>사비나와 토마시, <a href="https://64etuor.github.io?query=tag:중산모자" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#중산모자">#중산모자</a> <a href="https://64etuor.github.io?query=tag:키치" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#키치">#키치</a> <br>알몸으로 사진을 찍는 사비나와 테레자 <a href="https://64etuor.github.io?query=tag:육체" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#육체">#육체</a> <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a> 프라하의 봄과 체코 사람들<br>
-소련군의 사진을 찍는 테레사 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a>소련군 사진과 나체 사진선인장 사진<br>
-소련군의 사진을 찍는 행위 ≒ 안나 카레니나 ≒ 토마스의 곁에 살기 위한 수단 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a><br>
-<img alt="Pasted image 20240119230131.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119230131.png" target="_self" style="width: 400px; max-width: 100%;"><br>
-모순된 테레자의 행동 <a href="https://64etuor.github.io?query=tag:나약함" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#나약함">#나약함</a> <a href="https://64etuor.github.io?query=tag:모순" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#모순">#모순</a>둡체크의 연설을 생각하는 테레자<br>
-더이상 경멸감을 느끼지 않는 테레자의 심경 변화 <a href="https://64etuor.github.io?query=tag:나약함" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#나약함">#나약함</a> <a href="https://64etuor.github.io?query=tag:동정심" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#동정심">#동정심</a><br>
-<img alt="Pasted image 20240119230410.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119230410.png" target="_self" style="width: 400px; max-width: 100%;"><br>
-토마시와 대등해지고 싶은 테레자의 욕구 <a href="https://64etuor.github.io?query=tag:관계" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#관계">#관계</a>카레닌이 가진 동물로서의 순수함 → 시간의 원운동<br>
-<img alt="Pasted image 20240119230848.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119230848.png" target="_self" style="width: 400px; max-width: 100%;"><br>
-대등하지 못한 관계에서의 불완전성, 독립적, 주체적 의지의 상실 <a href="https://64etuor.github.io?query=tag:관계" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#관계">#관계</a><br>토마시를 떠난 테레자, 추락욕구 <a href="https://64etuor.github.io?query=tag:추락" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#추락">#추락</a>
-테레자를 뒤쫓아온 토마시<br>
-<img alt="Pasted image 20240119231503.png" src="https://64etuor.github.io/assets/image/pasted-image-20240119231503.png" target="_self" style="width: 400px; max-width: 100%;">]]></description><link>https://64etuor.github.io/books/참을-수-없는-존재의-가벼움.html</link><guid isPermaLink="false">Books/참을 수 없는 존재의 가벼움.md</guid><dc:creator><![CDATA[밀란 쿤데라, 이재룡]]></dc:creator><pubDate>Sun, 01 Dec 2024 17:01:35 GMT</pubDate><enclosure url="https://64etuor.github.io/assets/image/pasted-image-20240119221555.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/assets/image/pasted-image-20240119221555.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[싯다르타]]></title><description><![CDATA[테스트 용 파일"싯다르타"는 고대 인도의 젊은 남자 싯다르타의 영적 여정을 다룬 소설입니다. 주인공 싯다르타는 자아를 찾기 위해 다양한 삶의 방식을 경험하며 성장합니다.
+사내의 입에서 터져 나오는 괴성. 그리고 그의 몸은 점점 거대해져 갔다. 그의 피부는 이미 사람의 것이 아니었다. 마치 갑옷처럼 촘촘하게 엮어진 붉은 색의 비늘이 자라나고 있었고, 몸은 이제 사람의 몇 배 이상 거대해져 있었다. 천천히 그의 등을 뚫고 자라나는 붉은 날개. 그 날개의 웅장함이란 이루 말할 수가 없었다.undefined]]></description><link>https://64etuor.github.io/books/주홍글씨.html</link><guid isPermaLink="false">Books/주홍글씨.md</guid><dc:creator><![CDATA[나다니엘 호손, 조승국]]></dc:creator><pubDate>Sun, 01 Dec 2024 17:02:59 GMT</pubDate></item><item><title><![CDATA[카라마조프 가의 형제들 세트]]></title><description><![CDATA[undefinedundefined]]></description><link>https://64etuor.github.io/books/카라마조프-가의-형제들-세트.html</link><guid isPermaLink="false">Books/카라마조프 가의 형제들 세트.md</guid><dc:creator><![CDATA[표도르 도스토예프스키, 김연경]]></dc:creator><pubDate>Sun, 01 Dec 2024 17:02:52 GMT</pubDate></item><item><title><![CDATA[싯다르타]]></title><description><![CDATA[테스트 용 파일"싯다르타"는 고대 인도의 젊은 남자 싯다르타의 영적 여정을 다룬 소설입니다. 주인공 싯다르타는 자아를 찾기 위해 다양한 삶의 방식을 경험하며 성장합니다.
 브라만의 아들 싯다르타는 존경받는 브라만 가문의 아들로 태어났으나, 전통적인 종교 교육과 생활에서 벗어나 진리를 찾기 위해 떠납니다. 사문과의 생활 친구 고빈다와 함께 고행 생활을 하는 사문이 되어 물질적 쾌락을 부정하고 명상을 통해 깨달음을 추구합니다. 고타마 붓다와의 만남 싯다르타는 고타마 붓다(석가모니)를 만나 가르침을 듣지만, 자신만의 길을 가기로 결심합니다. 고빈다는 붓다의 제자가 되지만, 싯다르타는 홀로 떠납니다. 카밀라와의 삶 싯다르타는 도시로 가서 매춘부 카밀라를 만나 사랑을 배우고, 상인 카마스와미에게서 물질적 성공을 배웁니다. 그러나 이 모든 것이 그에게 진정한 만족을 주지 못합니다. 강가의 깨달음 싯다르타는 강가에서 배를 젓는 배사공 바수데바를 만나 그의 단순한 삶을 통해 깊은 깨달음을 얻습니다. 결국, 그는 강을 통해 삶의 진정한 본질을 이해하게 됩니다. 영적 여정: 싯다르타의 삶은 자아를 찾기 위한 끝없는 탐구입니다.
 자기 발견: 다른 사람들의 가르침이 아닌, 자신의 경험을 통해 깨달음을 얻는 것이 중요하다는 메시지를 전달합니다.
 이원성의 초월: 세속적인 삶과 영적인 삶을 모두 경험하며 이 둘의 경계를 넘나드는 과정이 묘사됩니다. 영적 탐구와 철학: "싯다르타"는 동양 철학과 서양 철학을 통합한 헤세의 대표작으로, 많은 이들에게 영감과 깨달음을 주었습니다.
