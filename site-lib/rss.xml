@@ -1,4 +1,145 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 10 Dec 2024 11:02:19 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 10 Dec 2024 11:02:16 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[INDEX RULES]]></title><description><![CDATA[<a data-href="📖 000 General Works" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">📖 000 General Works</a>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 10 Dec 2024 11:13:23 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 10 Dec 2024 11:13:20 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
+🖐️ Hello, I'm Yang-ha Park, a Process Technology Engineer pursuing innovation through data analysis and IT technology.
+Throughout my career, I have: As an engineer with a humanities background, I've consistently improved company processes and quality by combining humanistic thinking with engineering knowledge, viewing problems from diverse perspectives through continuous learning and contemplation.
+Created foundations for collecting reliable data, properly analyzing accumulated data to suggest company directions, and building evidence to solve problems.
+Developed intuitive problem identification abilities through extensive field experience. I always remain vigilant in discovering and improving unreasonable practices disguised as conventions and customs.
+Avoid focusing solely on quantitative results when prioritizing work. I approach tasks with rational skepticism to identify the fundamental root of truly significant and urgent 'existing problems' without getting lost in numbers and data alone. <img alt="Pasted image 20241204183153.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" target="_self" style="width: 700px; max-width: 100%;">
+"The process of breaking existing paradigms and finding reality" - these activities are recorded in history as 'innovation'. I constantly think and contemplate to find the threads of innovation.
+Below, I'll briefly introduce the IT technologies I've utilized to improve processes and quality in practice, and the projects I've personally planned and executed. Thank you very much for your valuable time!
+<br>You can see reference images by hovering over the Preview text on the right side of project names 😊 (This feature only works on my Git Page)
+<a data-tooltip-position="top" aria-label="https://64etuor.github.io/portfolio/portfolio_english.html" rel="noopener nofollow" class="external-link is-unresolved" href="https://64etuor.github.io/portfolio/portfolio_english.html" target="_self">Yang-ha Park's Github Page Link</a>
+<br>Tech Stack
+<img alt="Pasted image 20241204172655.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204172655.png" target="_self">
+Projects Company: Asan ETS / SolarEdge Technologies Korea
+Background: Self-development planned to reduce MES outsourcing costs while water pouch automation equipment budget exceeded $300,000
+Period: 2024.10 ~ 2024.12 (about 2 months) * Project suspended due to business closure
+Key Roles: Project planning, SW development, Database architecture design, UI/UX design
+Achievements: Legacy OCV/IR inspection equipment data integration: Python
+Backend development: Python Django, Django REST Framework
+Frontend development: React, Typescript, Electron for UI/UX design
+ETL development: Python OPC UA equipment data collection, TCP/IP Vision data collection
+Database architecture design: PostgreSQL Company: SolarEdge Technologies Korea
+Background: Planned to secure more high-quality data during limited DV phase and monitor real-time DV status across multiple sites
+Period: 2024.08 ~ 2024.10 (about 2 months)
+Key Roles: Project planning, app development, data analysis/visualization
+Achievements: App Development: Google Appsheet production performance and defect registration app (prototype)
+Process Data Analysis SW Development: Process data analysis using Python Matplotlib (CPK etc.)
+Data Visualization: Real-time update dashboard implementation using Sheets
+Data Tracking: QR history tracking system prototype using Apps Script (EU battery passport response test) *2024 Core Value Award Winner Company: SolarEdge Technologies Korea
+Background: Planned app development to prevent recurrence of issues after raw material defects were discovered in field but risk scope couldn't be measured due to poor S/N management
+Period: 2024.03 ~ 2024.06 (about 3 months)
+Key Roles: Project planning, app development, data analysis/visualization, UI/UX design
+Achievements: Custom Solution Development: Power Apps mobile performance registration, mobile checklist
+Process Improvement: Prevention of assembly without proper data registration, S/N verification, part mix prevention
+Power BI Extension: Production history tracking dashboard
+Automatic Test Report Generation: Server automation using Power Automate *2023 MOC Best Employee Award Company: SolarEdge Technologies Korea
+Background: Document management efficiency, data integrity assurance, data analysis and visualization improvement
+Period: 2023.10 ~ 2023.12 (about 3 months)
+Key Roles: Project planning, status investigation, database architecture design, solution development, data analysis/visualization, UI/UX design
+Achievements: Automated workflow through database implementation, reducing office work by 451 minutes daily, annual savings of approximately 50 million won
+Secured product ST data evidence &gt; 50% ST reduction (normalization rather than process improvement)
+Custom Solution Development: Excel VBA solutions for work orders, production planning, performance tracking
+Data Integrity: Manual input validation logic implementation
+Data Reliability: Transparent tracking of actual labor input and production status Office Automation: Excel query&lt;&gt;Microsoft server On-premises Gateway installation
+Data Visualization: Integrated Power BI dashboard construction
+Report Integration: Automated report generation through scripting Company: Samsung Electronics Shared Growth Academy / Elentec
+Background: Inventory cost reduction and logistics flow improvement in manufacturing warehouse
+Period: 2023.03 ~ 2023.05 (about 3 months)
+Key Roles: Improvement task setting, solution development, project management
+Achievements: 17% improvement in inventory asset turnover (Project KPI)
+Led 3-month TF with Samsung Electronics mentoring support
+Improved manufacturing-sales inventory transfer process
+Implemented 3S 5S in manufacturing and sales warehouses Company: Davichi Vision, TOS / Elentec
+Background: Cost savings through equipment recycling and quality assurance through vision inspection
+Period: 2022.12 ~ 2023.04 (about 5 months)
+Key Roles: Project planning, equipment utilization review, vendor contact
+Achievements: Repurposed 4 idle vision inspection machines
+Saved approximately 4 million won in vision system costs
+Implemented universal vision inspection software for various applications
+Maintained one unit as backup equipment Company: Elentec
+Background: Project expansion from initial ultrasonic welding improvement to various tasks
+Period: 2022.11 ~ 2023.09 (about 10 months)
+Key Roles: Innovation task setting, improvement implementation, reporting, work distribution
+Achievements: Reduced defect rate to 0%, annual savings of 68 million won
+31% reduction in Neck process C/T
+49% reduction in Core-pack Function Test C/T
+24% productivity improvement in small battery pack line
+Implemented real-time process analysis
+Introduced project management tools and methodologies
+Developed S/N validation program (Python) Company: KOSMES / Eunsung
+Background: Smart factory basic solution implementation for data digitization
+Period: 2021.08 ~ 2022.01 (about 6 months)
+Key Roles: Project application, management, requirement specification
+Achievements: Implemented ERP-linked barcode management system
+Introduced mobile tablet-based production monitoring system I wish to grow together with your company by fully utilizing my passion.Thank you very much for reading this far!]]></description><link>https://64etuor.github.io/portfolio/portfolio_english.html</link><guid isPermaLink="false">PORTFOLIO/Portfolio_English.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:13:07 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Portfolio_Korean]]></title><description><![CDATA[
+🖐️ 안녕하세요. 데이터 분석과 IT 기술을 통해 혁신을 추구하는 공정기술 엔지니어 박양하입니다.
+저는 그동안, 인문학 베이스의 엔지니어로서 인문학적 사고와 엔지니어링 지식을 융합해 다양한 관점에서 문제를 바라보고, 끊임없는 학습과 고민으로 회사의 공정과 품질을 꾸준히 개선해왔습니다.
+신뢰할 수 있는 데이터를 수집할 수 있는 기반을 마련하고, 축적한 데이터를 올바르게 분석하여 회사의 방향성을 제시하고, 문제를 해결할 수 있는 근거를 만들어 나갑니다.
+오랜 현장 경험을 통해 문제를 직관적으로 파악할 수 있는 능력을 갖췄습니다. 인지하기 어려운 불합리를 발견하고 개선하기 위해 항상 주의를 기울입니다.
+일의 우선 순위를 정량적 성과 위주로만 치중하지 않습니다. 숫자와 데이터에만 매몰되지 않고 정말로 중대하고 긴급한 ‘실존하는 문제의 근본’을 파악하기 위해 항상 합리적인 회의주의를 가지고 업무에 임합니다. <img alt="Pasted image 20241204183153.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" target="_self" style="width: 700px; max-width: 100%;">”측정할 수 없는 건 관리할 수 없다는 생각은 잘못 됐다. 그건 값비싼 신화다.” - W. Edwards Deming
+”기존의 패러다임을 깨고 실체를 찾는 과정”, 이런 활동들이 역사에 ‘혁신’으로 기록됩니다. 혁신의 실마리를 찾기 위해 항상 고민하고 생각합니다.
+아래에서 제가 실무에서 공정과 품질을 개선하기 위해 활용한 IT기술들과 제가 직접 기획하고 추진했던 프로젝트에 대해 간단히 소개 드리겠습니다. 귀한 시간을 내주셔서 정말 감사합니다!
+<br>* 프로젝트명 오른쪽 Preview 문구에 마우스를 올리시면 참고 사진을 보실 수 있습니다 😊 (이 기능은 저의 Git Page에서만 작동합니다. 아래의 링크로 이동)
+<a data-tooltip-position="top" aria-label="https://64etuor.github.io/portfolio/portfolio_korean.html" rel="noopener nofollow" class="external-link is-unresolved" href="https://64etuor.github.io/portfolio/portfolio_korean.html" target="_self">박양하의 Github Page 링크</a>
+<br>Tech Stack
+<img alt="Pasted image 20241204172655.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204172655.png" target="_self">
+Project 연계/소속회사 : 아산 ETS / 솔라엣지테크놀로지스 코리아
+추진 배경 : 워터파우치 자동화 설비 예산 30만불이 초과된 상황에서 MES 외주 개발비 절감을 위해 자체 개발 기획
+수행 기간 : 2024.10 ~ 2024.12 (약 2개월) * 사업 종료로 프로젝트 중단
+주요 역할 : 프로젝트 기획, SW 개발, 데이터베이스 아키텍쳐 설계
+업무 성과 : 구형 OCV/IR 검사 장비 데이터 연동 : Python
+Backend 개발 : Python Django, Django REST Framework
+Frontend 개발 : React, Typescript, Electron을 활용, UI/UX 디자인 ETL 개발 : Python OPC UA 설비 데이터 수집, TCP/IP 비전 데이터 수집 Database 아키텍쳐 설계 : PostgreSQL 연계/소속회사 : 솔라엣지테크놀로지스 코리아
+추진 배경 : 한정된 기간 동안 진행되는 DV 단계에서 고품질의 데이터를 더 많이 확보하고, 여러 현장에서 동시 진행되는 DV 현황을 실시간으로 파악하기 위해 프로젝트 기획
+수행 기간 : 2024.08 ~ 2024.10 (약 2개월)
+주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화
+업무 성과 : 앱 개발 : Google Appsheet 생산실적, 불량내역 등록 앱 개발(프로토타입) 공정 데이터 분석 SW 개발 : Python Matplotlib 활용 공정 데이터 분석(CPK 등)
+데이터 시각화 : Sheets 활용 실시간 업데이트 대시보드 구현 데이터 추적 : 제품 S/N QR Code를 조회하면 웹에서 생산 이력 정보를 확인하는 App script QR 이력 추적 시스템(프로토타입) * EU 배터리 패스포트 대응 시험 *2024 Core Value Award 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
+추진 배경 : 필드에서 원자재 불량이 발견되었으나 S/N 관리 미흡(수기)으로 리스크 범위 측정 불가능한 상황 발생. 문제 재발 방지를 위해 앱 개발을 기획
+수행 기간 : 2024.03 ~ 2024.06 (약 3개월) 주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화, UI/UX 디자인
+업무 성과 : 커스텀 솔루션 개발 : Power Apps 모바일 실적 등록, 모바일 체크리스트
+프로세스 개선 : 조립/검사 데이터가 등록되지 않은 제품이 상위 공정에서 조립되는 것을 방지, S/N 검증, 부품 혼입 방지 등 공정 품질 검증 기능 적용
+Power BI 확장 : 생산 이력 데이터를 대시보드에서 확인하고 추적할 수 있도록 확장 검사성적서 자동 발행 : Power Automate 활용, 검사 완료 제품의 검사 성적서 서버에 자동 발행 *2023 MOC Best Employee 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
+추진 배경 : 문서 관리 효율화, 데이터 무결성 확보, 데이터 분석 및 시각화 개선
+수행 기간 : 2023.10 ~ 2023.12 (약 3개월) 주요 역할 : 프로젝트 기획, 현황 조사, 데이터베이스 아키텍쳐 설계, 솔루션 개발, 데이터 분석/시각화, UI/UX 디자인
+업무 성과 : 엑셀 개별 문서 관리 방식에서 데이터베이스 활용으로 업무 자동화 구축, 사무 공수 일 451분 감축, 연간 약 5천만원 절감 효과
+제품 ST 실 데이터 확보 근거 확보 &gt; 제품 ST 50% 감축 (공정 개선이 아닌 ST 정상화)
+커스텀 솔루션 개발 : 엑셀 VBA 솔루션 개발, 작업 지시, 생산 계획, 생산 실적, 불량 등 DB 저장 데이터 무결성 확보 : 매뉴얼 입력 데이터 무결성 검증 로직 구현 데이터 신뢰성 확보 : 엑셀로 관리하던 공수 등 작업 데이터의 신뢰성을 확보함으로써 실제 투입되는 공수, 생산현황 등을 투명하게 집계 사무 자동화 : 엑셀 쿼리&lt;&gt;Microsoft 서버간 On-premises Gateway 설치, 자동 업데이트 구현 데이터 시각화 : Power BI를 활용한 통합 대시보드 구축(생산현황, 불량현황, KPI 등) 보고서 통합 : 기존에 작성하던 각종 보고서를 Script화하여 자동 보고서 생성 연계/소속회사 : 삼성전자 상생협력 아카데미 / 이랜텍 추진 배경 : 제조 창고의 재고 비용 감축 및 물류 흐름 개선
+수행 기간 : 2023.03 ~ 2023.05 (약 3개월) 주요 역할 : 개선 과제 설정, 개선 방법 도출, 프로젝트 매니지먼트 업무 성과 : 재고자산회전율 17% 향상(프로젝트 KPI)
+삼성전자 멘토링 지원받아 구매, 영업, 제조, 생산관리 멤버의 TF 구성, 3개월간 프로젝트 리딩 면책 구역 지정, 제조-영업 재고 이관 전산 프로세스 개선 제조 및 영업 창고 3정 5S 진행 연계/소속회사 : 다비치 비전, TOS / 이랜텍 추진 배경 : 유휴 설비를 폐기하지 않고 일부를 재활용함으로써 비용을 절약하고, 비전 검사를 적용하지 못한 공정에 비전 검사를 도입함으로써 품질 확보
+수행 기간 : 2022.12 ~ 2023.04 (약 5개월) 주요 역할 : 프로젝트 기획, 설비 활용 방안 검토, 업체 컨택 및 업무 진행 업무 성과 : 유휴 비전 검사 M/C 4대 활용 방법 모색 1대분, 의료키트 반자동 조립 설비 제작 사급 장비로 활용하여 비전 검사 시스템 비용 일부 절약, 견적가액 약 4백만원 절감
+1대분, 범용 비전 검사 소프트웨어 활용: 사출 파트 인서트, 너트 누락 검사 1대분, 범용 비전 검사 소프트웨어 활용: 배터리 모듈 역삽 방지 비전 검사 1대 예비 장비로 보관 연계/소속회사 : 이랜텍 추진 배경 : 초음파 용착 불량으로 폐기되던 사출물 케이스와 불량 재작업으로 발생하는 낭비를 개선하기 위해 프로젝트 기획, 이후 다양한 과제들을 추가하여 프로젝트 확장
+수행 기간 : 2022.11 ~ 2023.09 (약 10개월) 주요 역할 : 혁신 과제 설정, 개선 과제 실행, 보고서 작성, 업무 배분
+업무 성과 : 초음파 용착 조건 DOE, 개선을 통해 불량율 15% 감축 &gt; 0%대로 감소, 재작업공수비용 연 환산 3천2백만원 절감 효과(초당 임율 6.3원 기준)
+폐기 비용 연환산 3천6백만원 절감 효과(단위 폐기 비용 7,688원) 커팅 Jig 개발로 Neck 공정 C/T 31% 단축 ( 16.72sec &gt; 12.76sec )
+검사 Jig 개조로 Core-pack Function Test C/T 49% 단축 ( 55sec &gt; 28sec )
+소형 배터리팩 라인 LOB 개선 생산성 24% 향상, 연환산 4437만원 절감 효과
+MES 활용 공정 현황 실시간 분석 프로세스 도입 WBS, Gantt Chart, 공유 업무 보드 등을 활용한 인적 자원, 프로젝트 관리 도입 불합리 개선 : 3정5S 활동 추진 및 기타 불합리 개선 생산관련문서 불합리 개선, 엑셀 자동화 양식 제작 &gt; 업무 효율성 및 보고 정확성 개선 라벨 프린트 S/N 유효성 검증 프로그램 제작(Python) 연계/소속회사 : 중소기업진흥청 / 은성 추진 배경 : 기업에 스마트 팩토리 기초 솔루션을 도입하여 데이터를 전산화하고 업무 절차를 체계화하기 위해 중소기업진흥청 지원 프로그램 신청
+수행 기간 : 2021.08 ~ 2022.01 (약 6개월) 주요 역할 : 프로젝트 신청, 프로젝트 매니지먼트, 개발 요구사항 수립 업무 성과 : 물류 실수 방지 및 재고 관리 현황 파악을 위한 ERP 연계 바코드 관리 시스템 도입 모바일 태블릿을 활용한 수작업 라인 생산현황 파악 시스템 도입 제 열정을 십분 발휘하여 귀사에서 함께 성장해 가고 싶습니다.여기까지 읽어 주셔서 정말 감사합니다!]]></description><link>https://64etuor.github.io/portfolio/portfolio_korean.html</link><guid isPermaLink="false">PORTFOLIO/Portfolio_Korean.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:12:41 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2024.08 개발품 DV 데이터 전산 관리 프로젝트]]></title><description><![CDATA[Github 레포지토리 없음- Development tool : Google Appsheet
+- Data Visualization : Google Sheets
+- RPA : Google Apps Script
+- Database : Google Sheet
+Key Features S/N 유효성 및 고유성 검증
+공정 이력 검증
+부품 사양 검증(QR 등록 시)
+재작업 목록
+실시간 대시보드(5분 간격 업데이트)
+QR 코드 제품 생산 이력 조회 작업 화면 (모듈)
+<img alt="batch_2024-12-09 08 29 05 1.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" target="_self" style="width: 400px; max-width: 100%;"><br>
+<img alt="batch_2024-12-09 08 29 37.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-37.png" target="_self" style="width: 400px; max-width: 100%;">
+작업 화면 (BPU)
+<br><img alt="batch_2024-12-09 08 40 47.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-40-47.png" target="_self">
+작업 화면 (System Rack)
+<br><img alt="batch_2024-12-09 08 35 09.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-35-09.png" target="_self" style="width: 400px; max-width: 100%;"><br>
+<img alt="batch_2024-12-09 08 35 21.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-35-21.png" target="_self" style="width: 400px; max-width: 100%;">
+Google Sheet 데이터 및 쿼리 화면
+<br><img alt="batch_2024-12-08 23 42 23 1.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-42-23-1.png" target="_self"><br><img alt="batch_2024-12-08 23 41 58.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-41-58.png" target="_self">
+Google Sheet 실시간 대시보드
+<br><img alt="batch_2024-12-08 23 39 34.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-39-34.png" target="_self">
+QR Code 생산 이력 조회 화면
+<br><img alt="batch_2024-12-09 08 37 33.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png" target="_self">
+Google Apps Script
+<br><img alt="batch_2024-12-09 08 38 12.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-38-12.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.08-개발품-dv-데이터-전산-관리-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.08 개발품 DV 데이터 전산 관리 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 11:12:03 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[INDEX RULES]]></title><description><![CDATA[<a data-href="📖 000 General Works" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">📖 000 General Works</a>
 <br><a data-href="📚 001 Knowledge" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">📚 001 Knowledge</a>
 <br><a data-href="📚 002 Bibliography" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">📚 002 Bibliography</a>
 <br><a data-href="📚 003 Encyclopedias" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">📚 003 Encyclopedias</a>
@@ -1378,51 +1519,7 @@ Power BI 대시보드 연결 기본 화면
 이력 조회
 <br><img alt="Pasted image 20241202163454.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163454.png" target="_self" style="width: 400px; max-width: 100%;">
 이슈는 이메일과 Teams 채팅으로 즉시 발송
-<br><img alt="Pasted image 20241202163518.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163518.png" target="_self" style="width: 400px; max-width: 100%;">]]></description><link>https://64etuor.github.io/works/project/2024.03-공정-추적성-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.03 공정 추적성 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 00:01:36 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Portfolio_Korean]]></title><description><![CDATA[
-🖐️ 안녕하세요. 데이터 분석과 IT 기술을 통해 혁신을 추구하는 공정기술 엔지니어 박양하입니다.
-저는 그동안, 인문학 베이스의 엔지니어로서 인문학적 사고와 엔지니어링 지식을 융합해 다양한 관점에서 문제를 바라보고, 끊임없는 학습과 고민으로 회사의 공정과 품질을 꾸준히 개선해왔습니다.
-신뢰할 수 있는 데이터를 수집할 수 있는 기반을 마련하고, 축적한 데이터를 올바르게 분석하여 회사의 방향성을 제시하고, 문제를 해결할 수 있는 근거를 만들어 나갑니다.
-오랜 현장 경험을 통해 문제를 직관적으로 파악할 수 있는 능력을 갖췄습니다. 인지하기 어려운 불합리를 발견하고 개선하기 위해 항상 주의를 기울입니다.
-일의 우선 순위를 정량적 성과 위주로만 치중하지 않습니다. 숫자와 데이터에만 매몰되지 않고 정말로 중대하고 긴급한 ‘실존하는 문제의 근본’을 파악하기 위해 항상 합리적인 회의주의를 가지고 업무에 임합니다. <img alt="Pasted image 20241204183153.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" target="_self" style="width: 700px; max-width: 100%;">”측정할 수 없는 건 관리할 수 없다는 생각은 잘못 됐다. 그건 값비싼 신화다.” - W. Edwards Deming
-”기존의 패러다임을 깨고 실체를 찾는 과정”, 이런 활동들이 역사에 ‘혁신’으로 기록됩니다. 혁신의 실마리를 찾기 위해 항상 고민하고 생각합니다.
-아래에서 제가 실무에서 공정과 품질을 개선하기 위해 활용한 IT기술들과 제가 직접 기획하고 추진했던 프로젝트에 대해 간단히 소개 드리겠습니다. 귀한 시간을 내주셔서 정말 감사합니다!
-<br>* 프로젝트명 오른쪽 Preview 문구에 마우스를 올리시면 참고 사진을 보실 수 있습니다 😊 (이 기능은 저의 Git Page에서만 작동합니다. 아래의 링크로 이동)
-<a data-tooltip-position="top" aria-label="https://64etuor.github.io/portfolio/portfolio_korean.html" rel="noopener nofollow" class="external-link is-unresolved" href="https://64etuor.github.io/portfolio/portfolio_korean.html" target="_self">박양하의 Github Page 링크</a>
-<br>Tech Stack
-<img alt="Pasted image 20241204172655.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204172655.png" target="_self">
-Project 연계/소속회사 : 아산 ETS / 솔라엣지테크놀로지스 코리아
-추진 배경 : 워터파우치 자동화 설비 예산 30만불이 초과된 상황에서 MES 외주 개발비 절감을 위해 자체 개발 기획
-수행 기간 : 2024.10 ~ 2024.12 (약 2개월) * 사업 종료로 프로젝트 중단
-주요 역할 : 프로젝트 기획, SW 개발, 데이터베이스 아키텍쳐 설계
-업무 성과 : 구형 OCV/IR 검사 장비 데이터 연동 : Python
-Backend 개발 : Python Django, Django REST Framework
-Frontend 개발 : React, Typescript, Electron을 활용, UI/UX 디자인 ETL 개발 : Python OPC UA 설비 데이터 수집, TCP/IP 비전 데이터 수집 Database 아키텍쳐 설계 : PostgreSQL 연계/소속회사 : 솔라엣지테크놀로지스 코리아
-추진 배경 : 한정된 기간 동안 진행되는 DV 단계에서 고품질의 데이터를 더 많이 확보하고, 여러 현장에서 동시 진행되는 DV 현황을 실시간으로 파악하기 위해 프로젝트 기획
-수행 기간 : 2024.08 ~ 2024.10 (약 2개월)
-주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화
-업무 성과 : 앱 개발 : Google Appsheet 생산실적, 불량내역 등록 앱 개발(프로토타입) 공정 데이터 분석 SW 개발 : Python Matplotlib 활용 공정 데이터 분석(CPK 등)
-데이터 시각화 : Google Spreadsheet 활용 실시간 업데이트 대시보드 구현 데이터 추적 : 제품 S/N QR Code를 조회하면 웹에서 생산 이력 정보를 확인하는 Appscript QR 이력 추적 시스템(프로토타입) * EU 배터리 패스포트 대응 시험 *2024 Core Value Award 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
-추진 배경 : 필드에서 원자재 불량이 발견되었으나 S/N 관리 미흡(수기)으로 리스크 범위 측정 불가능한 상황 발생. 문제 재발 방지를 위해 앱 개발을 기획
-수행 기간 : 2024.03 ~ 2024.06 (약 3개월) 주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화, UI/UX 디자인
-업무 성과 : 커스텀 솔루션 개발 : Power Apps 모바일 실적 등록, 모바일 체크리스트
-프로세스 개선 : 조립/검사 데이터가 등록되지 않은 제품이 상위 공정에서 조립되는 것을 방지, S/N 검증, 부품 혼입 방지 등 공정 품질 검증 기능 적용
-Power BI 확장 : 생산 이력 데이터를 대시보드에서 확인하고 추적할 수 있도록 확장 검사성적서 자동 발행 : Power Automate 활용, 검사 완료 제품의 검사 성적서 서버에 자동 발행 *2023 MOC Best Employee 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
-추진 배경 : 문서 관리 효율화, 데이터 무결성 확보, 데이터 분석 및 시각화 개선
-수행 기간 : 2023.10 ~ 2023.12 (약 3개월) 주요 역할 : 프로젝트 기획, 현황 조사, 데이터베이스 아키텍쳐 설계, 솔루션 개발, 데이터 분석/시각화, UI/UX 디자인
-업무 성과 : 엑셀 개별 문서 관리 방식에서 데이터베이스 활용으로 업무 자동화 구축, 사무 공수 일 451분 감축, 연간 약 5천만원 절감 효과
-제품 ST 실 데이터 확보 근거 확보 &gt; 제품 ST 50% 감축 (공정 개선이 아닌 ST 정상화)
-커스텀 솔루션 개발 : 엑셀 VBA 솔루션 개발, 작업 지시, 생산 계획, 생산 실적, 불량 등 DB 저장 데이터 무결성 확보 : 매뉴얼 입력 데이터 무결성 검증 로직 구현 데이터 신뢰성 확보 : 엑셀로 관리하던 공수 등 작업 데이터의 신뢰성을 확보함으로써 실제 투입되는 공수, 생산현황 등을 투명하게 집계 사무 자동화 : 엑셀 쿼리&lt;&gt;Microsoft 서버간 On-premises Gateway 설치, 자동 업데이트 구현 데이터 시각화 : Power BI를 활용한 통합 대시보드 구축(생산현황, 불량현황, KPI 등) 보고서 통합 : 기존에 작성하던 각종 보고서를 Script화하여 자동 보고서 생성 연계/소속회사 : 삼성전자 상생협력 아카데미 / 이랜텍 추진 배경 : 제조 창고의 재고 비용 감축 및 물류 흐름 개선
-수행 기간 : 2023.03 ~ 2023.05 (약 3개월) 주요 역할 : 개선 과제 설정, 개선 방법 도출, 프로젝트 매니지먼트 업무 성과 : 재고자산회전율 17% 향상(프로젝트 KPI)
-삼성전자 멘토링 지원받아 구매, 영업, 제조, 생산관리 멤버의 TF 구성, 3개월간 프로젝트 리딩 면책 구역 지정, 제조-영업 재고 이관 전산 프로세스 개선 제조 및 영업 창고 3정 5S 진행 연계/소속회사 : 다비치 비전, TOS / 이랜텍 추진 배경 : 유휴 설비를 폐기하지 않고 일부를 재활용함으로써 비용을 절약하고, 비전 검사를 적용하지 못한 공정에 비전 검사를 도입함으로써 품질 확보
-수행 기간 : 2022.12 ~ 2023.04 (약 5개월) 주요 역할 : 프로젝트 기획, 설비 활용 방안 검토, 업체 컨택 및 업무 진행 업무 성과 : 유휴 비전 검사 M/C 4대 활용 방법 모색 1대분, 의료키트 반자동 조립 설비 제작 사급 장비로 활용하여 비전 검사 시스템 비용 일부 절약, 견적가액 약 4백만원 절감
-1대분, 범용 비전 검사 소프트웨어 활용: 사출 파트 인서트, 너트 누락 검사 1대분, 범용 비전 검사 소프트웨어 활용: 배터리 모듈 역삽 방지 비전 검사 1대 예비 장비로 보관 연계/소속회사 : 이랜텍 추진 배경 : 초음파 용착 불량으로 폐기되던 사출물 케이스와 불량 재작업으로 발생하는 낭비를 개선하기 위해 프로젝트 기획, 이후 다양한 과제들을 추가하여 프로젝트 확장
-수행 기간 : 2022.11 ~ 2023.09 (약 10개월) 주요 역할 : 혁신 과제 설정, 개선 과제 실행, 보고서 작성, 업무 배분
-업무 성과 : 초음파 용착 조건 DOE, 개선을 통해 불량율 15% 감축 &gt; 0%대로 감소, 재작업공수비용 연 환산 3천2백만원 절감 효과(초당 임율 6.3원 기준)
-폐기 비용 연환산 3천6백만원 절감 효과(단위 폐기 비용 7,688원) 커팅 Jig 개발로 Neck 공정 C/T 31% 단축 ( 16.72sec &gt; 12.76sec )
-검사 Jig 개조로 Core-pack Function Test C/T 49% 단축 ( 55sec &gt; 28sec )
-소형 배터리팩 라인 LOB 개선 생산성 24% 향상, 연환산 4437만원 절감 효과
-MES 활용 공정 현황 실시간 분석 프로세스 도입 WBS, Gantt Chart, 공유 업무 보드 등을 활용한 인적 자원, 프로젝트 관리 도입 불합리 개선 : 3정5S 활동 추진 및 기타 불합리 개선 생산관련문서 불합리 개선, 엑셀 자동화 양식 제작 &gt; 업무 효율성 및 보고 정확성 개선 라벨 프린트 S/N 유효성 검증 프로그램 제작(Python) 연계/소속회사 : 중소기업진흥청 / 은성 추진 배경 : 기업에 스마트 팩토리 기초 솔루션을 도입하여 데이터를 전산화하고 업무 절차를 체계화하기 위해 중소기업진흥청 지원 프로그램 신청
-수행 기간 : 2021.08 ~ 2022.01 (약 6개월) 주요 역할 : 프로젝트 신청, 프로젝트 매니지먼트, 개발 요구사항 수립 업무 성과 : 물류 실수 방지 및 재고 관리 현황 파악을 위한 ERP 연계 바코드 관리 시스템 도입 모바일 태블릿을 활용한 수작업 라인 생산현황 파악 시스템 도입 제 열정을 십분 발휘하여 귀사에서 함께 성장해 가고 싶습니다.여기까지 읽어 주셔서 정말 감사합니다!]]></description><link>https://64etuor.github.io/portfolio/portfolio_korean.html</link><guid isPermaLink="false">PORTFOLIO/Portfolio_Korean.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 02:28:04 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Checklist for my page]]></title><description><![CDATA[Check-list md 파일 구성 가시성 테스트 Reading log auto-sync (dataview plug-in 정상 출력)
+<br><img alt="Pasted image 20241202163518.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163518.png" target="_self" style="width: 400px; max-width: 100%;">]]></description><link>https://64etuor.github.io/works/project/2024.03-공정-추적성-관리-시스템-개발-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.03 공정 추적성 관리 시스템 개발 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 00:01:36 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202163306.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Checklist for my page]]></title><description><![CDATA[Check-list md 파일 구성 가시성 테스트 Reading log auto-sync (dataview plug-in 정상 출력)
 Internal links
 Custom head Back links
 Tag links
@@ -1740,80 +1837,7 @@ I always feel uncomfortable to speak in English unlike to write in English. I th
 못난 생김새
 주름진 얼굴
 그리고 제 죄를 아는 듯이 꼭 감은 두 눈한마디 톡 쏘아 댄다
-마귀야 이 예쁜 마귀야]]></description><link>https://64etuor.github.io/writings/poems/190213-딸입니다.html</link><guid isPermaLink="false">Writings/Poems/190213 - 딸입니다.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 03:24:16 GMT</pubDate></item><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
-🖐️ Hello, I'm Yang-ha Park, a Process Technology Engineer pursuing innovation through data analysis and IT technology.
-Throughout my career, I have: As an engineer with a humanities background, I've consistently improved company processes and quality by combining humanistic thinking with engineering knowledge, viewing problems from diverse perspectives through continuous learning and contemplation.
-Created foundations for collecting reliable data, properly analyzing accumulated data to suggest company directions, and building evidence to solve problems.
-Developed intuitive problem identification abilities through extensive field experience. I always remain vigilant in discovering and improving unreasonable practices disguised as conventions and customs.
-Avoid focusing solely on quantitative results when prioritizing work. I approach tasks with rational skepticism to identify the fundamental root of truly significant and urgent 'existing problems' without getting lost in numbers and data alone. <img alt="Pasted image 20241204183153.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" target="_self" style="width: 700px; max-width: 100%;">
-"The process of breaking existing paradigms and finding reality" - these activities are recorded in history as 'innovation'. I constantly think and contemplate to find the threads of innovation.
-Below, I'll briefly introduce the IT technologies I've utilized to improve processes and quality in practice, and the projects I've personally planned and executed. Thank you very much for your valuable time!
-<br>You can see reference images by hovering over the Preview text on the right side of project names 😊 (This feature only works on my Git Page)
-<a data-tooltip-position="top" aria-label="https://64etuor.github.io/portfolio/portfolio_english.html" rel="noopener nofollow" class="external-link is-unresolved" href="https://64etuor.github.io/portfolio/portfolio_english.html" target="_self">Yang-ha Park's Github Page Link</a>
-<br>Tech Stack
-<img alt="Pasted image 20241204172655.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204172655.png" target="_self">
-Projects Company: Asan ETS / SolarEdge Technologies Korea
-Background: Self-development planned to reduce MES outsourcing costs while water pouch automation equipment budget exceeded $300,000
-Period: 2024.10 ~ 2024.12 (about 2 months) * Project suspended due to business closure
-Key Roles: Project planning, SW development, Database architecture design, UI/UX design
-Achievements: Legacy OCV/IR inspection equipment data integration: Python
-Backend development: Python Django, Django REST Framework
-Frontend development: React, Typescript, Electron for UI/UX design
-ETL development: Python OPC UA equipment data collection, TCP/IP Vision data collection
-Database architecture design: PostgreSQL Company: SolarEdge Technologies Korea
-Background: Planned to secure more high-quality data during limited DV phase and monitor real-time DV status across multiple sites
-Period: 2024.08 ~ 2024.10 (about 2 months)
-Key Roles: Project planning, app development, data analysis/visualization
-Achievements: App Development: Google Appsheet production performance and defect registration app (prototype)
-Process Data Analysis SW Development: Process data analysis using Python Matplotlib (CPK etc.)
-Data Visualization: Real-time update dashboard implementation using Google Spreadsheet
-Data Tracking: QR history tracking system prototype using Appscript (EU battery passport response test) *2024 Core Value Award Winner Company: SolarEdge Technologies Korea
-Background: Planned app development to prevent recurrence of issues after raw material defects were discovered in field but risk scope couldn't be measured due to poor S/N management
-Period: 2024.03 ~ 2024.06 (about 3 months)
-Key Roles: Project planning, app development, data analysis/visualization, UI/UX design
-Achievements: Custom Solution Development: Power Apps mobile performance registration, mobile checklist
-Process Improvement: Prevention of assembly without proper data registration, S/N verification, part mix prevention
-Power BI Extension: Production history tracking dashboard
-Automatic Test Report Generation: Server automation using Power Automate *2023 MOC Best Employee Award Company: SolarEdge Technologies Korea
-Background: Document management efficiency, data integrity assurance, data analysis and visualization improvement
-Period: 2023.10 ~ 2023.12 (about 3 months)
-Key Roles: Project planning, status investigation, database architecture design, solution development, data analysis/visualization, UI/UX design
-Achievements: Automated workflow through database implementation, reducing office work by 451 minutes daily, annual savings of approximately 50 million won
-Secured product ST data evidence &gt; 50% ST reduction (normalization rather than process improvement)
-Custom Solution Development: Excel VBA solutions for work orders, production planning, performance tracking
-Data Integrity: Manual input validation logic implementation
-Data Reliability: Transparent tracking of actual labor input and production status Office Automation: Excel query&lt;&gt;Microsoft server On-premises Gateway installation
-Data Visualization: Integrated Power BI dashboard construction
-Report Integration: Automated report generation through scripting Company: Samsung Electronics Shared Growth Academy / Elentec
-Background: Inventory cost reduction and logistics flow improvement in manufacturing warehouse
-Period: 2023.03 ~ 2023.05 (about 3 months)
-Key Roles: Improvement task setting, solution development, project management
-Achievements: 17% improvement in inventory asset turnover (Project KPI)
-Led 3-month TF with Samsung Electronics mentoring support
-Improved manufacturing-sales inventory transfer process
-Implemented 3S 5S in manufacturing and sales warehouses Company: Davichi Vision, TOS / Elentec
-Background: Cost savings through equipment recycling and quality assurance through vision inspection
-Period: 2022.12 ~ 2023.04 (about 5 months)
-Key Roles: Project planning, equipment utilization review, vendor contact
-Achievements: Repurposed 4 idle vision inspection machines
-Saved approximately 4 million won in vision system costs
-Implemented universal vision inspection software for various applications
-Maintained one unit as backup equipment Company: Elentec
-Background: Project expansion from initial ultrasonic welding improvement to various tasks
-Period: 2022.11 ~ 2023.09 (about 10 months)
-Key Roles: Innovation task setting, improvement implementation, reporting, work distribution
-Achievements: Reduced defect rate to 0%, annual savings of 68 million won
-31% reduction in Neck process C/T
-49% reduction in Core-pack Function Test C/T
-24% productivity improvement in small battery pack line
-Implemented real-time process analysis
-Introduced project management tools and methodologies
-Developed S/N validation program (Python) Company: KOSMES / Eunsung
-Background: Smart factory basic solution implementation for data digitization
-Period: 2021.08 ~ 2022.01 (about 6 months)
-Key Roles: Project application, management, requirement specification
-Achievements: Implemented ERP-linked barcode management system
-Introduced mobile tablet-based production monitoring system I wish to grow together with your company by fully utilizing my passion.Thank you very much for reading this far!]]></description><link>https://64etuor.github.io/portfolio/portfolio_english.html</link><guid isPermaLink="false">PORTFOLIO/Portfolio_English.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 02:36:59 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[AI, ML, RPA Github Repositories]]></title><link>https://64etuor.github.io/ai/ai,-ml,-rpa-github-repositories.html</link><guid isPermaLink="false">AI/AI, ML, RPA Github Repositories.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:23:58 GMT</pubDate></item><item><title><![CDATA[2024.10 자동화 설비 MES 구축 프로젝트]]></title><description><![CDATA[github.com/64etuor/simes- Frontend React 18.2.0 TypeScript 4.9.5 Material-UI 5.x Ant Design Electron
+마귀야 이 예쁜 마귀야]]></description><link>https://64etuor.github.io/writings/poems/190213-딸입니다.html</link><guid isPermaLink="false">Writings/Poems/190213 - 딸입니다.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 03:24:16 GMT</pubDate></item><item><title><![CDATA[AI, ML, RPA Github Repositories]]></title><link>https://64etuor.github.io/ai/ai,-ml,-rpa-github-repositories.html</link><guid isPermaLink="false">AI/AI, ML, RPA Github Repositories.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:23:58 GMT</pubDate></item><item><title><![CDATA[2024.10 자동화 설비 MES 구축 프로젝트]]></title><description><![CDATA[github.com/64etuor/simes- Frontend React 18.2.0 TypeScript 4.9.5 Material-UI 5.x Ant Design Electron
 - Backend Django 4.2 Django REST Framework 3.14 Python 3.11
 - Database PostgreSQL 17
 Key Features 생산 정보 등록(바코드 리더 스캔)
@@ -1835,30 +1859,7 @@ S/N 유효성 검사 등록 폼
 <br><img alt="Pasted image 20241202160214.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160214.png" target="_self"><br>
 <img alt="Pasted image 20241202160230.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160230.png" target="_self">
 Backend - Django 프레임워크
-<br><img alt="Pasted image 20241202160723.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160723.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.10-자동화-설비-mes-구축-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.10 자동화 설비 MES 구축 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:40 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2024.08 개발품 DV 데이터 전산 관리 프로젝트]]></title><description><![CDATA[Github 레포지토리 없음- Development tool : Google Appsheet
-- Data Visualization : Google Sheets
-- RPA : Google Apps Script
-- Database : Google Sheet
-Key Features S/N 유효성 및 고유성 검증
-공정 이력 검증
-부품 사양 검증(QR 등록 시)
-재작업 목록
-실시간 대시보드(5분 간격 업데이트)
-QR 코드 제품 생산 이력 조회 작업 화면 (모듈)
-<img alt="batch_2024-12-09 08 29 05 1.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" target="_self" style="width: 400px; max-width: 100%;"><br>
-<img alt="batch_2024-12-09 08 29 37.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-37.png" target="_self" style="width: 400px; max-width: 100%;">
-작업 화면 (BPU)<br>
-<img alt="batch_2024-12-09 08 40 47.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-40-47.png" target="_self"> 작업화면 (System Rack)
-<br><img alt="batch_2024-12-09 08 35 09.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-35-09.png" target="_self" style="width: 400px; max-width: 100%;"><br>
-<img alt="batch_2024-12-09 08 35 21.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-35-21.png" target="_self" style="width: 400px; max-width: 100%;">
-Google Sheet 데이터 및 쿼리 화면
-<br><img alt="batch_2024-12-08 23 42 23 1.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-42-23-1.png" target="_self"><br><img alt="batch_2024-12-08 23 41 58.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-41-58.png" target="_self">
-Google Sheet 실시간 대시보드
-<br><img alt="batch_2024-12-08 23 39 34.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-08-23-39-34.png" target="_self">
-QR Code 생산 이력 조회 화면
-<br><img alt="batch_2024-12-09 08 37 33.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-37-33.png" target="_self">
-Google Apps Script
-<br><img alt="batch_2024-12-09 08 38 12.png" src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-38-12.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.08-개발품-dv-데이터-전산-관리-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.08 개발품 DV 데이터 전산 관리 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:36 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/batch_2024-12-09-08-29-05-1.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Obsidian Common Template 연구]]></title><description><![CDATA[ title
+<br><img alt="Pasted image 20241202160723.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160723.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.10-자동화-설비-mes-구축-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.10 자동화 설비 MES 구축 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:40 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Obsidian Common Template 연구]]></title><description><![CDATA[ title
 author
 create_at
 modified_at ]]></description><link>https://64etuor.github.io/obsidian/obsidian-common-template-연구.html</link><guid isPermaLink="false">Obsidian/Obsidian Common Template 연구.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 23:31:58 GMT</pubDate></item><item><title><![CDATA[Second Brain - PARA Management]]></title><description><![CDATA[세컨드 브레인 부스트를 읽고 내용 정리할 곳]]></description><link>https://64etuor.github.io/self-management/second-brain-para-management.html</link><guid isPermaLink="false">Self-Management/Second Brain - PARA Management.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 12:16:07 GMT</pubDate></item><item><title><![CDATA[Power BI_통합 대시보드 구현]]></title><description><![CDATA[예전에 Power BI로 대시보드를 만들 때, 내가 원하는 수준의 기능을 구현하기 위해 참고할 만한 국문 자료가 없어서 대부분 영문 자료를 참조하거나 Microsoft Power BI Documentation을 참조했다. 구축 이후 수정할 일이 크게 없어 방치하다 보니 세세한 요청 사항이 생겼을 때, 나도 어떻게 만들었는지 기억이 안 나서(…) 다시 자료 찾아보는 일이 생겼다. 그런데 아무래도 한국에서 많이 사용을 하는 툴이 아니다 보니 여전히 국문 자료가 부족한 듯 보인다. 그래서 리포트를 만들었던 과정을 복기하는 겸, 리포트 내에 적용했던 여러 사례를 이 블로그를 통해 소개하고자 한다.
