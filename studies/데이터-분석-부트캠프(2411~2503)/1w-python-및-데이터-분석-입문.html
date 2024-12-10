@@ -1,0 +1,351 @@
+<!DOCTYPE html> <html lang="en"><head>
+<title>1주차 - Python 및 데이터 분석 입문</title>
+<base href="../..">
+<meta name="pathname" content="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html">
+<meta name="description" content="Documents - 1주차 - Python 및 데이터 분석 입문">
+<meta property="og:title" content="1주차 - Python 및 데이터 분석 입문">
+<meta property="og:description" content="Documents - 1주차 - Python 및 데이터 분석 입문">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html">
+<meta property="og:image" content="https://64etuor.github.io/app:/cad29ca68597dac1d52e3ac76f64e43e9b49/C:/Users/skywe/OneDrive/Obsidian/Settings/Attachments/Pasted image 20241210145850.png?1733810330339">
+<meta name="author" content="Yangha Park"></head><body class="publish css-settings-manager show-inline-title show-ribbon is-focused"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="parsed-feature-container" style="display: contents;"><link itemprop="include" href="site-lib/html/custom-head-content-content.html"></div><meta property="og:site_name" content="Documents"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0"><meta charset="UTF-8"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://64etuor.github.io/site-lib/rss.xml"><script async="" id="webpage-script" src="site-lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-wasm-script" src="site-lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="site-lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="site-lib/media/favicon.png"><link rel="stylesheet" href="site-lib/styles/obsidian.css"><link rel="stylesheet" href="site-lib/styles/theme.css"><link rel="preload" href="site-lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="site-lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/supported-plugins.css"></noscript><link rel="preload" href="site-lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/main-styles.css"></noscript><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-vertical-spacing:1.3em;--sidebar-margin:12px}:root{background-color:#202124}.sidebar{height:100%;font-size:14px;z-index:10;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));position:relative;overflow:hidden;overflow:clip;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}#left-sidebar{left:0}#right-sidebar{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}.sidebar.floating{position:absolute}.sidebar .leaf-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .leaf-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}#left-sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}#right-sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar #left-sidebar-content,.sidebar #right-sidebar-content{contain:none!important;container-type:normal!important;animation:none!important}.sidebar:has(.leaf-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:2em;width:var(--sidebar-width);top:var(--sidebar-margin);padding-inline:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}#left-sidebar .sidebar-topbar{left:0;flex-direction:row}#right-sidebar .sidebar-topbar{right:0;flex-direction:row-reverse}#left-sidebar .topbar-content{margin-right:calc(2.3em + var(--sidebar-margin));flex-direction:row}#right-sidebar .topbar-content{margin-left:calc(2.3em + var(--sidebar-margin));flex-direction:row-reverse}.topbar-content{overflow:hidden visible;overflow:clip visible;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:2px!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}#left-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}#right-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.feature-title{margin-left:4px;text-transform:uppercase;letter-spacing:.06em;margin-top:.75em;margin-bottom:.75em}.feature-header{display:flex;align-items:center;padding-top:0;font-size:1em;padding-left:0}body.floating-sidebars .sidebar{position:absolute}body{transition:background-color var(--color-fade-speed) ease-in-out}#layout{display:flex;flex-direction:row;height:100%;width:100%;align-items:stretch;justify-content:center}#center-content{flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0!important;transition:opacity .2s ease-in-out;pointer-events:none}#center-content>.obsidian-document{padding-left:2em;padding-right:1em;margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}body #center-content>.obsidian-document>.markdown-preview-sizer{padding-bottom:80vh;width:100%;max-width:var(--line-width);flex-basis:var(--line-width);transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document>div{width:100%!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document:not([data-type=markdown]).embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}#center-content>.obsidian-document:not([data-type=markdown]).embed>*{max-width:100%;max-height:100%;object-fit:contain}:not(h1,h2,h3,h4,h5,h6):has(> :is(.math:not(.math-inline),table)){overflow-x:auto!important}#center-content>.obsidian-document:not([data-type=markdown]){overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.obsidian-document[data-type=attachment]{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%}.obsidian-document[data-type=attachment]>*{outline:0;border:none;box-shadow:none}.obsidian-document[data-type=attachment] :is(img){max-width:90%;max-height:90%;object-fit:contain}.obsidian-document[data-type=attachment]>:is(audio){width:100%;max-width:min(90%,var(--line-width))}.obsidian-document[data-type=attachment]>:is(embed,iframe,video){width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}.canvas-wrapper>:is(.header,.footer){z-index:100;position:absolute;display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){let e=document.querySelectorAll("link[itemprop='include']");for(const t of e){let e=t.getAttribute("href");try{let o="";if(e.startsWith("https:")||e.startsWith("http:")||"file:"!=window.location.protocol){const l=await fetch(e);if(!l.ok){console.log("Could not include file: "+e),t?.remove();continue}o=await l.text()}else{const t=document.getElementById(btoa(encodeURI(e)));if(t){const e=JSON.parse(decodeURI(atob(t.getAttribute("value")??"")));o=e?.data??""}}let l=document.createRange().createContextualFragment(o),n=Array.from(l.children);for(let e of n)e?.classList?.add("hide"),e.style.transition="opacity 0.5s ease-in-out",setTimeout((()=>{e?.classList?.remove("hide")}),10);t.before(l),t.remove(),console.log("Included text: "+o),console.log("Included file: "+e)}catch(o){t?.remove(),console.log("Could not include file: "+e,o);continue}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script")));!function e(l){let n=o[l],c=l+1;n?(n&&"true"!=n.getAttribute("loaded")||l<o.length&&e(c),l<o.length&&n.addEventListener("load",(()=>e(c)))):l<o.length?e(c):t()}(0)}</script><div id="layout"><div id="left-content" class="leaf" style="--sidebar-width: var(--sidebar-width-left);"><div id="left-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><div id="search-container"><div id="search-wrapper"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div aria-label="Clear search" id="search-clear-button"></div></div></div></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="left-sidebar-content" class="leaf-content"><link itemprop="include" href="site-lib/html/file-tree-content.html"></div></div><script defer="">let ls = document.querySelector("#left-sidebar"); ls.classList.toggle("is-collapsed", window.innerWidth < 768); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div></div><div id="center-content" class="leaf"><div class="obsidian-document markdown-preview-view markdown-rendered node-insert-event is-readable-line-width allow-fold-headings show-indentation-guide allow-fold-lists show-properties" data-type="markdown"><style id="MJX-CHTML-styles"></style><pre class="frontmatter language-yaml" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">title</span><span class="token punctuation">:</span> 1주차 <span class="token punctuation">-</span> Python 및 데이터 분석 입문
+<span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token datetime number">2024-11-23</span>
+<span class="token key atrule">course</span><span class="token punctuation">:</span> <span class="token string">"데이터 분석 부트 캠프"</span>
+<span class="token key atrule">module</span><span class="token punctuation">:</span> <span class="token string">"Python Basic"</span>
+<span class="token key atrule">lesson</span><span class="token punctuation">:</span> 파이썬 기초
+<span class="token key atrule">instructor</span><span class="token punctuation">:</span> 이상훈
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> data
+  <span class="token punctuation">-</span> analysis
+  <span class="token punctuation">-</span> bootcamp
+  <span class="token punctuation">-</span> notes
+  <span class="token punctuation">-</span> Python
+  <span class="token punctuation">-</span> lesson</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre><div class="markdown-preview-sizer markdown-preview-section"><div class="header"><h1 class="page-title heading inline-title" id="1주차_-_Python_및_데이터_분석_입문_0">1주차 - Python 및 데이터 분석 입문</h1><div class="data-bar"></div></div><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="el-h1"><h1 data-heading="📚 파이썬 기초" dir="auto" class="heading" id="📚_파이썬_기초_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>📚 파이썬 기초</h1></div><div class="el-h2"><h2 data-heading="📅 수업 일자" dir="auto" class="heading" id="📅_수업_일자_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>📅 수업 일자</h2></div><div class="el-p"><p dir="auto"><strong>2024-11-23</strong></p></div><div class="el-h2"><h2 data-heading="📝 학습 목표" dir="auto" class="heading" id="📝_학습_목표_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>📝 학습 목표</h2></div><div class="el-blockquote"><blockquote dir="auto">
+<ol>
+<li data-line="0" dir="auto">Python의 데이터 타입을 이해한다.</li>
+<li data-line="1" dir="auto">Python의 자료형을 이해한다.</li>
+<li data-line="2" dir="auto">조건문과 반복문을 이해한다.</li>
+<li data-line="3" dir="auto">예외처리를 이해한다.</li>
+<li data-line="4" dir="auto">Python 의 기초 라이브러리 ( Numpy, Pandas )를 살펴 본다.</li>
+</ol>
+</blockquote></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="🧠 **핵심 개념**" dir="auto" class="heading" id="🧠_**핵심_개념**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>🧠 <strong>핵심 개념</strong></h2></div><div class="el-h3"><h3 data-heading="1. **파이썬 데이터 타입과 자료형 특징**" dir="auto" class="heading" id="1._**파이썬_데이터_타입과_자료형_특징**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1. <strong>파이썬 데이터 타입과 자료형 특징</strong></h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p>파이썬은 <strong>동적 타입 언어</strong>로, 변수의 데이터 타입(자료형)을 명시적으로 선언하지 않아도 됩니다. 변수에 값을 할당하면 파이썬이 자동으로 데이터 타입을 결정합니다.</p>
+</blockquote></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr"><strong>데이터 타입</strong></th>
+<th dir="ltr"><strong>설명</strong></th>
+<th dir="ltr"><strong>특징</strong></th>
+<th dir="ltr"><strong>예제</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong><code>int</code></strong></td>
+<td dir="ltr">정수를 표현</td>
+<td dir="ltr">크기 제한이 없으며 필요한 만큼 메모리 사용</td>
+<td dir="ltr"><code>x = 42</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>float</code></strong></td>
+<td dir="ltr">소수점이 있는 실수</td>
+<td dir="ltr">부동 소수점으로 표현되며 오차 발생 가능</td>
+<td dir="ltr"><code>pi = 3.14</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>str</code></strong></td>
+<td dir="ltr">텍스트 데이터를 표현</td>
+<td dir="ltr">불변형(Immutable), 작은따옴표 또는 큰따옴표 사용</td>
+<td dir="ltr"><code>name = "Alice"</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>bool</code></strong></td>
+<td dir="ltr">참(<code>True</code>)과 거짓(<code>False</code>)을 표현</td>
+<td dir="ltr">조건문에서 자주 사용, <code>0</code>은 <code>False</code>, 그 외는 <code>True</code></td>
+<td dir="ltr"><code>is_valid = True</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>list</code></strong></td>
+<td dir="ltr">순서가 있는 가변 컬렉션</td>
+<td dir="ltr">대괄호 <code>[]</code> 사용, 요소 수정 및 추가 가능</td>
+<td dir="ltr"><code>fruits = ["apple", "banana"]</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>tuple</code></strong></td>
+<td dir="ltr">순서가 있는 불변 컬렉션</td>
+<td dir="ltr">소괄호 <code>()</code> 사용, 수정 불가능</td>
+<td dir="ltr"><code>coordinates = (10, 20)</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>dict</code></strong></td>
+<td dir="ltr">키-값 쌍으로 이루어진 컬렉션</td>
+<td dir="ltr">중괄호 <code>{}</code> 사용, 키는 고유해야 함</td>
+<td dir="ltr"><code>person = {"name": "Bob"}</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>set</code></strong></td>
+<td dir="ltr">중복되지 않는 요소들의 집합</td>
+<td dir="ltr">중괄호 <code>{}</code> 사용, 순서 없음</td>
+<td dir="ltr"><code>unique_numbers = {1, 2, 3}</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>NoneType</code></strong></td>
+<td dir="ltr">값이 없음을 나타냄</td>
+<td dir="ltr"><code>None</code> 값으로 표현됨</td>
+<td dir="ltr"><code>result = None</code></td>
+</tr>
+</tbody>
+</table></div><div class="el-hr"><hr></div><div class="el-h3"><h3 data-heading="2.&nbsp;**반복문과 조건문**" dir="auto" class="heading" id="2.&nbsp;**반복문과_조건문**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2.&nbsp;<strong>반복문과 조건문</strong></h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p>파이썬에서&nbsp;<strong>반복문</strong>과&nbsp;<strong>조건문</strong>은 프로그램의 흐름을 제어하는 데 필수적인 요소입니다. 반복문은 특정 코드를 여러 번 실행할 때 사용하며, 조건문은 특정 조건에 따라 코드 실행 여부를 결정합니다.</p>
+</blockquote></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr"><strong>구문</strong></th>
+<th dir="ltr"><strong>설명</strong></th>
+<th dir="ltr"><strong>예제</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong><code>for</code> 반복문</strong></td>
+<td dir="ltr">시퀀스의 각 항목에 대해 반복 실행</td>
+<td dir="ltr"><code>for i in range(3): print(i)</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>while</code> 반복문</strong></td>
+<td dir="ltr">조건이 <code>True</code>일 동안 반복 실행</td>
+<td dir="ltr"><code>while count &lt; 3: count += 1</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>if</code></strong></td>
+<td dir="ltr">조건이 <code>True</code>일 때 코드 실행</td>
+<td dir="ltr"><code>if x &gt; 0: print("Positive")</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>if-else</code></strong></td>
+<td dir="ltr">조건에 따라 두 가지 경로 중 하나 실행</td>
+<td dir="ltr"><code>if x &gt; 0: print("Positive") else: print("Negative")</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>if-elif-else</code></strong></td>
+<td dir="ltr">여러 조건 중 하나를 선택</td>
+<td dir="ltr"><code>if score &gt;= 90: print("A") elif: print("B")</code></td>
+</tr>
+</tbody>
+</table></div><div class="el-hr"><hr></div><div class="el-h3"><h3 data-heading="3. **함수와 클래스**" dir="auto" class="heading" id="3._**함수와_클래스**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3. <strong>함수와 클래스</strong></h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p>파이썬에서 <strong>함수</strong>와 <strong>클래스</strong>는 코드의 재사용성과 모듈화를 높이는 핵심 요소입니다. 함수를 사용하면 반복되는 작업을 하나의 블록으로 묶어 호출할 수 있으며, 클래스를 사용하면 객체 지향적 프로그래밍(OOP)을 구현할 수 있습니다.</p>
+</blockquote></div><div class="el-h4"><h4 data-heading="**함수(Function) 개요**" dir="auto" class="heading" id="**함수(Function)_개요**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><strong>함수(Function) 개요</strong></h4></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>설명</strong>:<br>
+특정 작업을 수행하는 코드 블록입니다. 필요할 때 호출하여 실행할 수 있습니다.<br>
+</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>문법</strong>:
+<pre class="language-python" tabindex="0"><code data-line="5" class="language-python is-loaded"><span class="token keyword">def</span> 함수이름<span class="token punctuation">(</span>매개변수<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    수행할 작업
+    <span class="token keyword">return</span> 반환값
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</li>
+<li data-line="11" dir="auto"><span class="list-bullet"></span><strong>예제</strong>:
+<pre class="language-python" tabindex="0"><code data-line="13" class="language-python is-loaded"><span class="token keyword">def</span> <span class="token function">greet</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f"Hello, </span><span class="token interpolation"><span class="token punctuation">{</span>name<span class="token punctuation">}</span></span><span class="token string">!"</span></span>
+
+message <span class="token operator">=</span> greet<span class="token punctuation">(</span><span class="token string">"Alice"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span>  <span class="token comment"># Hello, Alice!</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</li>
+</ul></div><div class="el-h4"><h4 data-heading="✅ **함수 특징**" dir="auto" class="heading" id="✅_**함수_특징**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>✅ <strong>함수 특징</strong></h4></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>매개변수</strong>: 함수에 값을 전달할 수 있습니다.</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>반환값</strong>: <code>return</code> 키워드를 사용해 값을 반환할 수 있습니다.</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>재사용성</strong>: 동일한 로직을 여러 번 호출할 수 있습니다.</li>
+</ul></div><div class="el-h4"><h4 data-heading="**클래스(Class) 개요**" dir="auto" class="heading" id="**클래스(Class)_개요**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><strong>클래스(Class) 개요</strong></h4></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>설명</strong>:<br>
+객체를 생성하기 위한 설계도입니다. 클래스에는 속성(데이터)과 메서드(함수)가 포함됩니다.<br>
+</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>문법</strong>:
+<pre class="language-python" tabindex="0"><code data-line="5" class="language-python is-loaded"><span class="token keyword">class</span> 클래스이름<span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> 속성<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>속성 <span class="token operator">=</span> 속성
+
+    <span class="token keyword">def</span> 메서드이름<span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        수행할 작업
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</li>
+<li data-line="14" dir="auto"><span class="list-bullet"></span><strong>예제</strong>:
+<pre class="language-python" tabindex="0"><code data-line="16" class="language-python is-loaded"><span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>name<span class="token punctuation">}</span></span><span class="token string"> says woof!"</span></span>
+
+dog1 <span class="token operator">=</span> Dog<span class="token punctuation">(</span><span class="token string">"Buddy"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>dog1<span class="token punctuation">.</span>bark<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># Buddy says woof!</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</li>
+</ul></div><div class="el-h4"><h4 data-heading="✅ **클래스 특징**" dir="auto" class="heading" id="✅_**클래스_특징**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>✅ <strong>클래스 특징</strong></h4></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>속성</strong>: 클래스 내에서 정의된 변수입니다.</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>메서드</strong>: 클래스 내에서 정의된 함수입니다.</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>생성자</strong>: <code>__init__</code> 메서드를 사용해 객체 생성 시 초기값을 설정합니다.</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>객체 지향적 설계</strong>: 클래스는 데이터와 기능을 묶어 하나의 단위로 관리합니다.</li>
+</ul></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr"><strong>구분</strong></th>
+<th dir="ltr"><strong>설명</strong></th>
+<th dir="ltr"><strong>특징</strong></th>
+<th dir="ltr"><strong>예제</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>함수</strong></td>
+<td dir="ltr">특정 작업을 수행하는 코드 블록</td>
+<td dir="ltr">- 매개변수와 반환값<br>- 재사용성</td>
+<td dir="ltr"><code>def greet(name): return f"Hello, {name}"</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong>클래스</strong></td>
+<td dir="ltr">객체를 생성하기 위한 설계도</td>
+<td dir="ltr">- 속성(데이터)과 메서드(기능)<br>- 객체 지향적 설계</td>
+<td dir="ltr"><code>class Dog: def bark(self): return "Woof"</code></td>
+</tr>
+</tbody>
+</table></div><div class="el-hr"><hr></div><div class="el-h3"><h3 data-heading="4. **예외 처리**" dir="auto" class="heading" id="4._**예외_처리**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4. <strong>예외 처리</strong></h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p>파이썬에서 <strong>예외 처리</strong>는 프로그램 실행 중 발생할 수 있는 오류를 제어하고, 오류가 발생해도 프로그램이 종료되지 않도록 도와줍니다.</p>
+</blockquote></div><div class="el-h4"><h4 data-heading="📝 **예외 처리 개요**" dir="auto" class="heading" id="📝_**예외_처리_개요**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>📝 <strong>예외 처리 개요</strong></h4></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>설명</strong>:<br>
+코드 실행 중 예외(에러)가 발생했을 때 이를 처리하여 프로그램이 비정상적으로 종료되지 않도록 합니다.<br>
+</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>기본 문법</strong>:
+<pre class="language-python" tabindex="0"><code data-line="5" class="language-python is-loaded"><span class="token keyword">try</span><span class="token punctuation">:</span>
+    <span class="token comment"># 예외가 발생할 수 있는 코드</span>
+<span class="token keyword">except</span> 예외종류<span class="token punctuation">:</span>
+    <span class="token comment"># 예외가 발생했을 때 실행할 코드</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token comment"># 예외가 발생하지 않았을 때 실행할 코드</span>
+<span class="token keyword">finally</span><span class="token punctuation">:</span>
+    <span class="token comment"># 예외 발생 여부와 관계없이 항상 실행할 코드</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</li>
+</ul></div><div class="el-h4"><h4 data-heading="✅ **주요 예외 처리 예제**" dir="auto" class="heading" id="✅_**주요_예외_처리_예제**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>✅ <strong>주요 예외 처리 예제</strong></h4></div><div class="el-pre"><pre class="language-python" tabindex="0"><code data-line="0" class="language-python is-loaded"><span class="token keyword">try</span><span class="token punctuation">:</span>
+    num <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"Enter a number: "</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    result <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">/</span> num
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Result: </span><span class="token interpolation"><span class="token punctuation">{</span>result<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">except</span> ZeroDivisionError<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error: Division by zero is not allowed."</span><span class="token punctuation">)</span>
+<span class="token keyword">except</span> ValueError<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error: Invalid input. Please enter a number."</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Division successful!"</span><span class="token punctuation">)</span>
+<span class="token keyword">finally</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Program execution completed."</span><span class="token punctuation">)</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-p"><p dir="auto"><strong>설명</strong>:</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong><code>try</code></strong>: 예외가 발생할 가능성이 있는 코드 블록입니다.</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong><code>except</code></strong>: 특정 예외가 발생했을 때 실행할 코드입니다.</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong><code>else</code></strong>: 예외가 발생하지 않았을 때 실행되는 코드입니다.</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong><code>finally</code></strong>: 예외 발생 여부와 관계없이 항상 실행되는 코드입니다.</li>
+</ul></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr"><strong>예외</strong></th>
+<th dir="ltr"><strong>설명</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong><code>ZeroDivisionError</code></strong></td>
+<td dir="ltr">0으로 나누려고 할 때 발생하는 예외</td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>ValueError</code></strong></td>
+<td dir="ltr">잘못된 타입의 값을 입력했을 때 발생하는 예외</td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>IndexError</code></strong></td>
+<td dir="ltr">리스트나 튜플의 인덱스 범위를 벗어날 때 발생</td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>KeyError</code></strong></td>
+<td dir="ltr">딕셔너리에서 존재하지 않는 키를 참조할 때 발생</td>
+</tr>
+<tr>
+<td dir="ltr"><strong><code>TypeError</code></strong></td>
+<td dir="ltr">잘못된 타입의 연산이나 함수 호출 시 발생</td>
+</tr>
+</tbody>
+</table></div><div class="el-hr"><hr></div><div class="el-h3"><h3 data-heading="5. **Numpy와 Pandas 개요**" dir="auto" class="heading" id="5._**Numpy와_Pandas_개요**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5. <strong>Numpy와 Pandas 개요</strong></h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>Numpy</strong>와 <strong>Pandas</strong>는 파이썬에서 데이터 처리를 위한 강력한 라이브러리입니다.</p>
+</blockquote></div><div class="el-h4"><h4 data-heading="📝 **Numpy 개요**" dir="auto" class="heading" id="📝_**Numpy_개요**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>📝 <strong>Numpy 개요</strong></h4></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>설명</strong>:<br>
+Numpy(넘파이)는 <strong>수치 계산을 위한 라이브러리</strong>로, 다차원 배열과 행렬을 효율적으로 처리할 수 있습니다.<br>
+</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><strong>주요 특징</strong>:
+<ul class="has-list-bullet">
+<li data-line="5" dir="auto"><span class="list-bullet"></span><strong>다차원 배열 (<code>ndarray</code>)</strong> 지원</li>
+<li data-line="6" dir="auto"><span class="list-bullet"></span>벡터화 연산으로 빠른 계산</li>
+<li data-line="7" dir="auto"><span class="list-bullet"></span>과학 계산 및 선형대수 지원</li>
+</ul>
+</li>
+<li data-line="8" dir="auto"><span class="list-bullet"></span><strong>예제</strong>:
+<pre class="language-python" tabindex="0"><code data-line="10" class="language-python is-loaded"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+<span class="token comment"># 1차원 배열 생성</span>
+arr <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment"># [1 2 3 4 5]</span>
+
+<span class="token comment"># 배열의 기본 연산</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>arr <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment"># [2 4 6 8 10]</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</li>
+<li data-line="20" dir="auto"><span class="list-bullet"></span><span alt="Pasted image 20241210145850.png" src="settings/attachments/pasted-image-20241210145850.png" class="internal-embed media-embed image-embed is-loaded" target="_self"><img alt="Pasted image 20241210145850.png" src="settings/attachments/pasted-image-20241210145850.png" target="_self"></span></li>
+</ul></div><div class="el-h4"><h4 data-heading="📝 **Pandas 개요**" dir="auto" class="heading" id="📝_**Pandas_개요**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>📝 <strong>Pandas 개요</strong></h4></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>설명</strong>:<br>
+Pandas(판다스)는 <strong>데이터 분석과 처리를 위한 라이브러리</strong>로, 표 형식의 데이터를 쉽게 다룰 수 있습니다.<br>
+</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><strong>주요 특징</strong>:
+<ul class="has-list-bullet">
+<li data-line="5" dir="auto"><span class="list-bullet"></span><strong><code>DataFrame</code></strong>과 <strong><code>Series</code></strong> 객체 제공</li>
+<li data-line="6" dir="auto"><span class="list-bullet"></span>데이터 정리, 필터링, 변환 기능</li>
+<li data-line="7" dir="auto"><span class="list-bullet"></span>CSV, Excel, SQL 등 다양한 데이터 소스와 호환</li>
+</ul>
+</li>
+<li data-line="8" dir="auto"><span class="list-bullet"></span><strong>예제</strong>:
+<pre class="language-python" tabindex="0"><code data-line="10" class="language-python is-loaded"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+
+<span class="token comment"># 데이터프레임 생성</span>
+data <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">"Name"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"Alice"</span><span class="token punctuation">,</span> <span class="token string">"Bob"</span><span class="token punctuation">,</span> <span class="token string">"Charlie"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"Age"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">35</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"City"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"Seoul"</span><span class="token punctuation">,</span> <span class="token string">"Busan"</span><span class="token punctuation">,</span> <span class="token string">"Incheon"</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+df <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df<span class="token punctuation">)</span>
+
+<span class="token comment"># 데이터 필터링</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df<span class="token punctuation">[</span>df<span class="token punctuation">[</span><span class="token string">"Age"</span><span class="token punctuation">]</span> <span class="token operator">&gt;</span> <span class="token number">28</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+  <strong>출력 결과</strong>:
+<pre><code data-line="29">     Name  Age    City
+0   Alice   25   Seoul
+1     Bob   30   Busan
+2  Charlie   35  Incheon
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</li>
+<li data-line="35" dir="auto"><span class="list-bullet"></span>  <span alt="Pasted image 20241210150126.png" src="settings/attachments/pasted-image-20241210150126.png" class="internal-embed media-embed image-embed is-loaded" target="_self"><img alt="Pasted image 20241210150126.png" src="settings/attachments/pasted-image-20241210150126.png" target="_self"></span></li>
+</ul></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="✅&nbsp;**복습 체크리스트**" dir="auto" class="heading" id="✅&nbsp;**복습_체크리스트**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>✅&nbsp;<strong>복습 체크리스트</strong></h2></div><div class="el-ul"><ul class="contains-task-list has-list-bullet">
+<li data-line="0" data-task="x" class="task-list-item is-checked" dir="auto"><span class="list-bullet"></span><input data-line="0" checked="" type="checkbox" class="task-list-item-checkbox">&nbsp;핵심 개념 이해</li>
+<li data-line="1" data-task="x" class="task-list-item is-checked" dir="auto"><span class="list-bullet"></span><input data-line="1" checked="" type="checkbox" class="task-list-item-checkbox">&nbsp;추가 자료 조사</li>
+</ul></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="📈&nbsp;**오늘의 인사이트**" dir="auto" class="heading" id="📈&nbsp;**오늘의_인사이트**_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>📈&nbsp;<strong>오늘의 인사이트</strong></h2></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>배운 점:</strong><br>
+파이썬의 기초를 오랜만에 다시 돌아 보았다.</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>느낀 점:</strong><br>
+사실 대부분 아는 내용이라고 자만해서 강의를 대충 봤는데, 누가 질문을 한다고 가정하면 정확하게 대답할 자신이 없다.</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span><strong>다음에 개선할 점:</strong><br>
+객관적으로 판단해서 내 지식이 완전하지 않다고 느끼는 부분은 집중해서 강의를 들을 것</li>
+</ul></div><div class="footer"><div class="data-bar"></div></div></div></div></div><div id="right-content" class="leaf" style="--sidebar-width: var(--sidebar-width-right);"><div id="right-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme-toggle-input" id=""><input class="theme-toggle-input" type="checkbox" id="theme-toggle-input"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="right-sidebar-content" class="leaf-content"><div class="graph-view-wrapper"><div class="feature-header"><div class="feature-title">Interactive Graph</div></div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<div class="graph-icon graph-global" role="button" aria-label="Global Graph" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-git-fork"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div id="outline" class=" tree-container"><div class="feature-header"><div class="feature-title">Table Of Contents</div><button class="clickable-icon nav-action-button tree-collapse-all" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-item" data-depth="1"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#1주차_-_Python_및_데이터_분석_입문_0" data-path="#1주차_-_Python_및_데이터_분석_입문_0"><div class="tree-item-inner heading-link" heading-name="1주차 - Python 및 데이터 분석 입문">1주차 - Python 및 데이터 분석 입문</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#📚_파이썬_기초_0" data-path="#📚_파이썬_기초_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="📚 파이썬 기초">📚 파이썬 기초</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#📅_수업_일자_0" data-path="#📅_수업_일자_0"><div class="tree-item-inner heading-link" heading-name="📅 수업 일자">📅 수업 일자</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#📝_학습_목표_0" data-path="#📝_학습_목표_0"><div class="tree-item-inner heading-link" heading-name="📝 학습 목표">📝 학습 목표</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#🧠_**핵심_개념**_0" data-path="#🧠_**핵심_개념**_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="🧠 **핵심 개념**">🧠 <strong>핵심 개념</strong></div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#1._**파이썬_데이터_타입과_자료형_특징**_0" data-path="#1._**파이썬_데이터_타입과_자료형_특징**_0"><div class="tree-item-inner heading-link" heading-name="1. **파이썬 데이터 타입과 자료형 특징**">1. 파이썬 데이터 타입과 자료형 특징</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#2.&nbsp;**반복문과_조건문**_0" data-path="#2.&nbsp;**반복문과_조건문**_0"><div class="tree-item-inner heading-link" heading-name="2.&nbsp;**반복문과 조건문**">2.&nbsp;<strong>반복문과 조건문</strong></div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="3"><a class="tree-item-self is-clickable mod-collapsible" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#3._**함수와_클래스**_0" data-path="#3._**함수와_클래스**_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="3. **함수와 클래스**">3. 함수와 클래스</div></a><div class="tree-item-children"><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#**함수(Function)_개요**_0" data-path="#**함수(Function)_개요**_0"><div class="tree-item-inner heading-link" heading-name="**함수(Function) 개요**"><strong>함수(Function) 개요</strong></div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#✅_**함수_특징**_0" data-path="#✅_**함수_특징**_0"><div class="tree-item-inner heading-link" heading-name="✅ **함수 특징**">✅ <strong>함수 특징</strong></div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#**클래스(Class)_개요**_0" data-path="#**클래스(Class)_개요**_0"><div class="tree-item-inner heading-link" heading-name="**클래스(Class) 개요**"><strong>클래스(Class) 개요</strong></div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#✅_**클래스_특징**_0" data-path="#✅_**클래스_특징**_0"><div class="tree-item-inner heading-link" heading-name="✅ **클래스 특징**">✅ <strong>클래스 특징</strong></div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="3"><a class="tree-item-self is-clickable mod-collapsible" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#4._**예외_처리**_0" data-path="#4._**예외_처리**_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="4. **예외 처리**">4. 예외 처리</div></a><div class="tree-item-children"><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#📝_**예외_처리_개요**_0" data-path="#📝_**예외_처리_개요**_0"><div class="tree-item-inner heading-link" heading-name="📝 **예외 처리 개요**">📝 <strong>예외 처리 개요</strong></div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#✅_**주요_예외_처리_예제**_0" data-path="#✅_**주요_예외_처리_예제**_0"><div class="tree-item-inner heading-link" heading-name="✅ **주요 예외 처리 예제**">✅ <strong>주요 예외 처리 예제</strong></div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="3"><a class="tree-item-self is-clickable mod-collapsible" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#5._**Numpy와_Pandas_개요**_0" data-path="#5._**Numpy와_Pandas_개요**_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="5. **Numpy와 Pandas 개요**">5. Numpy와 Pandas 개요</div></a><div class="tree-item-children"><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#📝_**Numpy_개요**_0" data-path="#📝_**Numpy_개요**_0"><div class="tree-item-inner heading-link" heading-name="📝 **Numpy 개요**">📝 <strong>Numpy 개요</strong></div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#📝_**Pandas_개요**_0" data-path="#📝_**Pandas_개요**_0"><div class="tree-item-inner heading-link" heading-name="📝 **Pandas 개요**">📝 <strong>Pandas 개요</strong></div></a><div class="tree-item-children"></div></div></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#✅&nbsp;**복습_체크리스트**_0" data-path="#✅&nbsp;**복습_체크리스트**_0"><div class="tree-item-inner heading-link" heading-name="✅&nbsp;**복습 체크리스트**">✅&nbsp;<strong>복습 체크리스트</strong></div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="studies/데이터-분석-부트캠프(2411~2503)/1w-python-및-데이터-분석-입문.html#📈&nbsp;**오늘의_인사이트**_0" data-path="#📈&nbsp;**오늘의_인사이트**_0"><div class="tree-item-inner heading-link" heading-name="📈&nbsp;**오늘의 인사이트**">📈&nbsp;<strong>오늘의 인사이트</strong></div></a><div class="tree-item-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector("#right-sidebar"); rs.classList.toggle("is-collapsed", window.innerWidth < 768); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></div></body></html>
