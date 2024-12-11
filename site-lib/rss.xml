@@ -1,4 +1,179 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Wed, 11 Dec 2024 07:32:52 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 11 Dec 2024 07:32:50 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[독서 대시보드]]></title><description><![CDATA[독서 대시보드 2025년 목표 : ]]></description><link>https://64etuor.github.io/books/독서-대시보드.html</link><guid isPermaLink="false">Books/독서 대시보드.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:29:22 GMT</pubDate><enclosure url="https://image.yes24.com/goods/119826327/XL" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src="https://image.yes24.com/goods/119826327/XL"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[보랏빛 소가 온다：21세기 최고의 마케팅 바이블]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/보랏빛-소가-온다.html</link><guid isPermaLink="false">Books/Bookshelf/보랏빛 소가 온다.md</guid><dc:creator><![CDATA[세스 고딘, 이주형, 남수영]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:18:02 GMT</pubDate></item><item><title><![CDATA[세컨드 브레인 부스트]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/세컨드-브레인-부스트.html</link><guid isPermaLink="false">Books/Bookshelf/세컨드 브레인 부스트.md</guid><dc:creator><![CDATA[티아고 포르테, 이희령]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:17:58 GMT</pubDate></item><item><title><![CDATA[실용주의 프로그래머]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/실용주의-프로그래머.html</link><guid isPermaLink="false">Books/Bookshelf/실용주의 프로그래머.md</guid><dc:creator><![CDATA[데이비드 토머스, 앤드류 헌트, 정지용, 김창준]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:10:17 GMT</pubDate></item><item><title><![CDATA[참을 수 없는 존재의 가벼움]]></title><description><![CDATA[너무 어려워서 정리를 해가며 읽었다. 도저히 평가할 수 없는 위대한 작품이라고 생각한다.
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Wed, 11 Dec 2024 23:56:16 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 11 Dec 2024 23:56:04 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[Rhizomatic Document Management System]]></title><description><![CDATA[
+📂 0_Inbox 🔗 <a data-href="Quick Capture" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Quick Capture</a>
+<br>🔗 <a data-href="Daily Notes" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Daily Notes</a> 📂 1_Projects <br>🔗 <a data-href="Active Projects" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Active Projects</a>
+<br>🔗 <a data-href="Project Archive" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Project Archive</a> 📂 2_Areas <br>🔗 <a data-href="Knowledge Base" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Knowledge Base</a>
+<br>🔗 <a data-href="Reference Materials" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Reference Materials</a> 📂 3_Resources <br>🔗 <a data-href="Templates" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Templates</a>
+<br>🔗 <a data-href="Assets" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Assets</a> 📂 4_Archives <br>🔗 <a data-href="Completed Projects" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Completed Projects</a>
+<br>🔗 <a data-href="Review Logs" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Review Logs</a> 📂 ProjectName_YYYY-YYYY/
+├── 📂 000_Reference/
+├── 📂 100_Input/
+├── 📂 200_Process/
+├── 📂 300_Output/
+└── 📄 project_index.md 000-099: 참조자료
+100-199: 입력문서
+200-299: 프로세스문서
+300-399: 산출물
+400+: 보관자료
+🔗 [Local Files](hook://file/localPath)
+🔗 [Cloud Files](hook://file/cloudPath)
+🔗 [[GDrive_ProjectFolder]]
+🔗 [[GDrive_SharedDocs]]
+- 📑 [[Project Template]]
+- 📑 [[Document Template]]
+- 📑 [[Review Template]] <br><a href="https://64etuor.github.io?query=tag:project" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#project">#project</a>
+<br><a href="https://64etuor.github.io?query=tag:reference" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#reference">#reference</a>
+<br><a href="https://64etuor.github.io?query=tag:process" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#process">#process</a>
+<br><a href="https://64etuor.github.io?query=tag:output" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#output">#output</a>
+<br><a href="https://64etuor.github.io?query=tag:archive" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#archive">#archive</a>
+---
+title: Document Title
+id: DOC_YYYY_NNN
+type: [reference|input|process|output]
+project: Project Name
+created: YYYY-MM-DD
+status: [active|archived]
+links: - [[Related Doc 1]] - [[Related Doc 2]]
+--- 🔍 프로젝트별 검색
+🔍 문서 유형별 검색
+🔍 상태별 검색
+🔍 날짜별 검색 📅 주간 리뷰
+📅 월간 리뷰
+📅 프로젝트 종료 리뷰
+]]></description><link>https://64etuor.github.io/templates/rhizomatic-document-management-system.html</link><guid isPermaLink="false">Templates/Rhizomatic Document Management System.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 22:28:14 GMT</pubDate></item><item><title><![CDATA[Project 회고(Agile 원칙)]]></title><description><![CDATA[<a data-href="Project 회고(Agile 원칙)" href="https://64etuor.github.io/templates/project-회고(agile-원칙).html#_0" class="internal-link" target="_self" rel="noopener nofollow">Project 회고(Agile 원칙)</a> 버릴 것 1. 추가할 것 계속 유지할 것 앞선 DAKI를 통해서 무엇을 얻을 수 있었는데. ,
+회고를 통해서 어떤 것을 얻을 수 있었는지 결정해야할 사항
+]]></description><link>https://64etuor.github.io/templates/project-회고(agile-원칙).html</link><guid isPermaLink="false">Templates/Project 회고(Agile 원칙).md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 22:20:25 GMT</pubDate></item><item><title><![CDATA[Project Rhizomatic Arrangement]]></title><description><![CDATA[
+프로젝트명: {{title}}
+생성 날짜: {{date}}
+강도(Intensity): {{high|medium|low}}
+리좀 연결점들: {{related_projects}} 프로젝트 헌장: {{charter_url}} 생산적 욕망의 명시
+잠재적 가능성 매핑
+초기 강도 설정 이해관계자 리좀 핵심 행위자들: {{stakeholders_url}}
+욕망의 교차점: {{requirements_url}}
+잠재적 동맹관계: {{alliances_url}} 자원 흐름도: {{resource_flow_url}}
+예산 흐름도: {{budget_flow_url}}
+시간 흐름도: {{timeline_flow_url}} 작업흐름: {{workflow_1_url}}
+강도측정: {{intensity_1}}
+접속지점: {{connection_1}} 작업흐름: {{workflow_2_url}}
+강도측정: {{intensity_2}}
+접속지점: {{connection_2}} 작업흐름: {{workflow_3_url}}
+강도측정: {{intensity_3}}
+접속지점: {{connection_3}} 통합적 차이 이슈 지도: {{issues_map_url}}
+변이 기록: {{changes_log_url}} 범위의 주름 경계변형 추적: {{scope_changes_url}}
+영토확장 기록: {{scope_evolution_url}} 시간의 리듬 리듬분석: {{rhythm_analysis_url}}
+변주기록: {{variation_log_url}} 자원의 흐름 흐름도: {{resource_flow_url}}
+강도맵: {{intensity_map_url}} 품질의 차이 차이생성 기록: {{quality_diff_url}}
+강도변화 추적: {{quality_intensity_url}} 커뮤니케이션 리좀 소통맵: {{communication_map_url}}
+접속점 기록: {{connection_points_url}} 위험-기회 지도 탈주선 분석: {{risk_lines_url}}
+잠재성 지도: {{opportunity_map_url}} 성과의 주름들: {{outcomes_url}}
+학습된 변이들: {{lessons_url}}
+새로운 잠재성: {{potentials_url}} 연구 노트: {{research_notes_url}}
+참조 접속점: {{references_url}}
+북마크 평면: {{bookmarks_url}} 연관 프로젝트들: {{related_projects_url}}
+미디어 접속점들: {{media_coverage_url}}
+{{meta_notes}}
+#{{project_type}} #{{intensity_level}} #{{connection_types}}
+연결된 노드들: <a data-href="{{connected_node_1}}" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">{{connected_node_1}}</a> <a data-href="{{connected_node_2}}" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">{{connected_node_2}}</a> <a data-href="{{connected_node_3}}" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">{{connected_node_3}}</a>]]></description><link>https://64etuor.github.io/templates/project-rhizomatic-arrangement.html</link><guid isPermaLink="false">Templates/Project Rhizomatic Arrangement.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 22:06:09 GMT</pubDate></item><item><title><![CDATA[Project Template_PMBOK(Government Initiative)]]></title><description><![CDATA[
+프로젝트 헌장 (구글 드라이브 URL / Hook)
+주요 목표 및 성공 기준 (구글 드라이브 URL / Hook) 이해관계자 목록 (구글 드라이브 URL / Hook)
+이해관계자 요구사항 문서 (구글 드라이브 URL / Hook) 초기 예산 개요 (구글 드라이브 URL / Hook)
+주요 제약조건 및 가정사항 (구글 드라이브 URL / Hook) WBS (구글 드라이브 URL / Hook)
+주요 마일스톤 및 일정표 (구글 드라이브 URL / Hook) 예산 계획 (구글 드라이브 URL / Hook)
+자원 배정 계획 (구글 드라이브 URL / Hook) 위험 목록 (구글 드라이브 URL / Hook)
+위험 대응 전략 (구글 드라이브 URL / Hook) 커뮤니케이션 전략 문서 (구글 드라이브 URL / Hook) Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook)
+Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook)
+Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook)
+Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) 이슈 로그 (구글 드라이브 URL / Hook)
+변경 요청서 (구글 드라이브 URL / Hook) 범위 변경 요청서 (구글 드라이브 URL / Hook)
+범위 검토 기록 (구글 드라이브 URL / Hook) 진행 상황 대조표 (구글 드라이브 URL / Hook)
+일정 변경 기록 (구글 드라이브 URL / Hook) 예산 사용 내역 (구글 드라이브 URL / Hook)
+원가 편차 분석 (구글 드라이브 URL / Hook) 품질 점검 보고서 (구글 드라이브 URL / Hook)
+품질 관리 대장 (구글 드라이브 URL / Hook) 자원 활용 현황 (구글 드라이브 URL / Hook)
+자원 재조정 계획 (구글 드라이브 URL / Hook) 의사소통 로그 (구글 드라이브 URL / Hook)
+보고서 템플릿 (구글 드라이브 URL / Hook) 위험 발생 기록 (구글 드라이브 URL / Hook)
+위험 대응 현황 (구글 드라이브 URL / Hook) 계약 상태 보고서 (구글 드라이브 URL / Hook)
+조달 현황 기록 (구글 드라이브 URL / Hook) 이해관계자 주요 커뮤니케이션 기록 (구글 드라이브 URL / Hook)
+이해관계자 변경 기록 (구글 드라이브 URL / Hook) 최종 산출물 리스트 (구글 드라이브 URL / Hook)
+검수 및 승인 기록 (구글 드라이브 URL / Hook) 프로젝트 성과 요약 (구글 드라이브 URL / Hook)
+교훈 및 개선사항 기록 (구글 드라이브 URL / Hook) 주요 아이디어 기록 (구글 드라이브 URL / Hook)
+연구 결과 문서 (구글 드라이브 URL / Hook) 참고 문서 및 자료 링크 (구글 드라이브 URL / Hook) 중요 참고 사이트 및 도구 링크 (구글 드라이브 URL / Hook) 관련 프로젝트/업무 링크 (구글 드라이브 URL / Hook)
+연관 문서 및 기록 (구글 드라이브 URL / Hook) 주요 보도 내용 (구글 드라이브 URL / Hook)
+보도자료 PDF (구글 드라이브 URL / Hook)
+]]></description><link>https://64etuor.github.io/templates/project-template_pmbok(government-initiative).html</link><guid isPermaLink="false">Templates/Project Template_PMBOK(Government Initiative).md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 22:00:37 GMT</pubDate></item><item><title><![CDATA[Second Brain Architecture]]></title><description><![CDATA[<img alt="Pasted image 20241212065305.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065305.png" target="_self"><br>
+<img alt="Pasted image 20241212065644.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065644.png" target="_self"><br><img alt="Pasted image 20241212065632.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065632.png" target="_self"><br><img alt="Pasted image 20241212065657.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065657.png" target="_self">]]></description><link>https://64etuor.github.io/self-management/second-brain-architecture.html</link><guid isPermaLink="false">Self-Management/Second Brain Architecture.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 21:56:59 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241212065305.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065305.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[독서 대시보드]]></title><description><![CDATA[2025년의 목표 ]]></description><link>https://64etuor.github.io/books/독서-대시보드.html</link><guid isPermaLink="false">Books/독서 대시보드.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:44:31 GMT</pubDate><enclosure url="https://image.yes24.com/goods/119826327/XL" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src="https://image.yes24.com/goods/119826327/XL"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Booknote]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/templates/booknote.html</link><guid isPermaLink="false">Templates/Booknote.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 05:43:06 GMT</pubDate></item><item><title><![CDATA[<% tp.file.title %>]]></title><description><![CDATA[ 프로젝트의 목표를 작성한다. 프로젝트의 일정을 작성한다.
+프로젝트의 일정을 표현하는 라는 태그를 달아서 tasks에서 볼 수 있도록 한다.
+내가 설정한 Milestone 마감 기한도 이곳에 작성한다. ## 💎Milestones
+&gt; 중간 지점을 표현한다
+각 마일스톤을 달성하기 위해서 필요한 태스크들을 하나씩 열거한다.
+할당시간과 그에 따른 마감일 기록한다. 스케쥴을 바탕으로 Gantt 차트를 작성한다. ## Reference]]></description><link>https://64etuor.github.io/templates/project-gantt-chart.html</link><guid isPermaLink="false">Templates/Project Gantt Chart.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 23:59:15 GMT</pubDate></item><item><title><![CDATA[<% tp.file.title %>]]></title><description><![CDATA[&lt;% tp.date.now("YYYY-MM-DD") %&gt; 목표 1 목표 2 목표 3 # 여기에 실습 코드나 예제를 작성하세요 질문 1: 답변 또는 논의 내용 질문 2: 답변 또는 논의 내용 &nbsp;핵심 개념 이해
+&nbsp;실습 코드 실행 및 분석
+&nbsp;추가 자료 조사 배운 점: 느낀 점: 다음에 개선할 점:
+]]></description><link>https://64etuor.github.io/templates/data-analysis-bootcamp-lesson-note.html</link><guid isPermaLink="false">Templates/Data Analysis Bootcamp Lesson Note.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[2024.10 자동화 설비 MES 구축 프로젝트]]></title><description><![CDATA[github.com/64etuor/simes- Frontend React 18.2.0 TypeScript 4.9.5 Material-UI 5.x Ant Design Electron
+- Backend Django 4.2 Django REST Framework 3.14 Python 3.11
+- Database PostgreSQL 17
+Key Features 생산 정보 등록(바코드 리더 스캔)
+반제품 공정 이력 검증
+S/N 유효성 검증
+Cell Grade 검증
+제품 조회 기능 (S/N과 관련된 모든 정보 자동 출력)
+기타 MES 기본 기능
+Wireless 환경 Latency 150ms 이내
+Database : OPC UA 서버 데이터 ETL
+Database : OCV/IR 검사 장비 데이터 ETL
+Database : 비전 데이터 ETL 수작업 라인 제품 등록 폼
+<img alt="Pasted image 20241202155547.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png" target="_self"><br>
+<img alt="Pasted image 20241202155608.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155608.png" target="_self">
+조회 폼 - Django ORM
+<br><img alt="Pasted image 20241202155628.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155628.png" target="_self"><br>
+<img alt="Pasted image 20241202160003.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160003.png" target="_self">
+S/N 유효성 검사 등록 폼
+<br><img alt="Pasted image 20241202160214.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160214.png" target="_self"><br>
+<img alt="Pasted image 20241202160230.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160230.png" target="_self">
+Backend - Django 프레임워크
+<br><img alt="Pasted image 20241202160723.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160723.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.10-자동화-설비-mes-구축-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.10 자동화 설비 MES 구축 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 00:13:35 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Portfolio_Korean]]></title><description><![CDATA[
+🖐️ 안녕하세요. 데이터 분석과 IT 기술을 통해 혁신을 추구하는 공정기술 엔지니어 박양하입니다.
+저는 그동안, 인문학 베이스의 엔지니어로서 인문학적 사고와 엔지니어링 지식을 융합해 다양한 관점에서 문제를 바라보고, 끊임없는 학습과 고민으로 회사의 공정과 품질을 꾸준히 개선해왔습니다.
+신뢰할 수 있는 데이터를 수집할 수 있는 기반을 마련하고, 축적한 데이터를 올바르게 분석하여 회사의 방향성을 제시하고, 문제를 해결할 수 있는 근거를 만들어 나갑니다.
+오랜 현장 경험을 통해 문제를 직관적으로 파악할 수 있는 능력을 갖췄습니다. 관행과 관습으로 포장된 불합리를 발견하고 개선하기 위해 항상 주의를 기울입니다.
+일의 우선 순위를 정량적 성과 위주로만 치중하지 않습니다. 숫자와 데이터에만 매몰되지 않고 정말로 중대하고 긴급한 ‘실존하는 문제의 근본’을 파악하기 위해 항상 합리적인 회의주의를 가지고 업무에 임합니다. <img alt="Pasted image 20241204183153.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" target="_self" style="width: 700px; max-width: 100%;">”측정할 수 없는 건 관리할 수 없다는 생각은 잘못 됐다. 그건 값비싼 신화다.” - W. Edwards Deming
+”기존의 패러다임을 깨고 실체를 찾는 과정”, 이런 활동들이 역사에 ‘혁신’으로 기록됩니다. 혁신의 실마리를 찾기 위해 항상 고민하고 생각합니다.
+아래에서 제가 실무에서 공정과 품질을 개선하기 위해 활용한 IT기술들과 제가 직접 기획하고 추진했던 프로젝트에 대해 간단히 소개 드리겠습니다. 귀한 시간을 내주셔서 정말 감사합니다!
+<br>* 프로젝트명 오른쪽 Preview 문구에 마우스를 올리시면 참고 사진을 보실 수 있습니다 😊 (이 기능은 저의 Git Page에서만 작동합니다. 아래의 링크로 이동)
+<a data-tooltip-position="top" aria-label="https://64etuor.github.io/portfolio/portfolio_korean.html" rel="noopener nofollow" class="external-link is-unresolved" href="https://64etuor.github.io/portfolio/portfolio_korean.html" target="_self">박양하의 Github Page 링크</a>
+<br>Tech Stack
+<img alt="Pasted image 20241204172655.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241204172655.png" target="_self">
+Project 연계/소속회사 : 아산 ETS / 솔라엣지테크놀로지스 코리아
+추진 배경 : 워터파우치 자동화 설비 예산 30만불이 초과된 상황에서 MES 외주 개발비 절감을 위해 자체 개발 기획
+수행 기간 : 2024.10 ~ 2024.12 (약 2개월) * 사업 종료로 프로젝트 중단
+주요 역할 : 프로젝트 기획, SW 개발, 데이터베이스 아키텍쳐 설계
+업무 성과 : 구형 OCV/IR 검사 장비 데이터 연동 : Python
+Backend 개발 : Python Django, Django REST Framework
+Frontend 개발 : React, Typescript, Electron을 활용, UI/UX 디자인 ETL 개발 : Python OPC UA 설비 데이터 수집, TCP/IP 비전 데이터 수집 Database 아키텍쳐 설계 : PostgreSQL 연계/소속회사 : 솔라엣지테크놀로지스 코리아
+추진 배경 : 한정된 기간 동안 진행되는 DV 단계에서 고품질의 데이터를 더 많이 확보하고, 여러 현장에서 동시 진행되는 DV 현황을 실시간으로 파악하기 위해 프로젝트 기획
+수행 기간 : 2024.08 ~ 2024.10 (약 2개월)
+주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화
+업무 성과 : 앱 개발 : Google Appsheet 생산실적, 불량내역 등록 앱 개발(프로토타입) 공정 데이터 분석 SW 개발 : Python Matplotlib 활용 공정 데이터 분석(CPK 등)
+데이터 시각화 : Google Spreadsheet 활용 실시간 업데이트 대시보드 구현 데이터 추적 : 제품 S/N QR Code를 조회하면 웹에서 생산 이력 정보를 확인하는 Appscript QR 이력 추적 시스템(프로토타입) * EU 배터리 패스포트 대응 시험 *2024 Core Value Award 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
+추진 배경 : 필드에서 원자재 불량이 발견되었으나 S/N 관리 미흡(수기)으로 리스크 범위 측정 불가능한 상황 발생. 문제 재발 방지를 위해 앱 개발을 기획
+수행 기간 : 2024.03 ~ 2024.06 (약 3개월) 주요 역할 : 프로젝트 기획, 앱 개발, 데이터 분석/시각화, UI/UX 디자인
+업무 성과 : 커스텀 솔루션 개발 : Power Apps 모바일 실적 등록, 모바일 체크리스트
+프로세스 개선 : 조립/검사 데이터가 등록되지 않은 제품이 상위 공정에서 조립되는 것을 방지, S/N 검증, 부품 혼입 방지 등 공정 품질 검증 기능 적용
+Power BI 확장 : 생산 이력 데이터를 대시보드에서 확인하고 추적할 수 있도록 확장 검사성적서 자동 발행 : Power Automate 활용, 검사 완료 제품의 검사 성적서 서버에 자동 발행 *2023 MOC Best Employee 수상 연계/소속회사 : 솔라엣지테크놀로지스 코리아
+추진 배경 : 문서 관리 효율화, 데이터 무결성 확보, 데이터 분석 및 시각화 개선
+수행 기간 : 2023.10 ~ 2023.12 (약 3개월) 주요 역할 : 프로젝트 기획, 현황 조사, 데이터베이스 아키텍쳐 설계, 솔루션 개발, 데이터 분석/시각화, UI/UX 디자인
+업무 성과 : 엑셀 개별 문서 관리 방식에서 데이터베이스 활용으로 업무 자동화 구축, 사무 공수 일 451분 감축, 연간 약 5천만원 절감 효과
+제품 ST 실 데이터 확보 근거 확보 &gt; 제품 ST 50% 감축 (공정 개선이 아닌 ST 정상화)
+커스텀 솔루션 개발 : 엑셀 VBA 솔루션 개발, 작업 지시, 생산 계획, 생산 실적, 불량 등 DB 저장 데이터 무결성 확보 : 매뉴얼 입력 데이터 무결성 검증 로직 구현 데이터 신뢰성 확보 : 엑셀로 관리하던 공수 등 작업 데이터의 신뢰성을 확보함으로써 실제 투입되는 공수, 생산현황 등을 투명하게 집계 사무 자동화 : 엑셀 쿼리&lt;&gt;Microsoft 서버간 On-premises Gateway 설치, 자동 업데이트 구현 데이터 시각화 : Power BI를 활용한 통합 대시보드 구축(생산현황, 불량현황, KPI 등) 보고서 통합 : 기존에 작성하던 각종 보고서를 Script화하여 자동 보고서 생성 연계/소속회사 : 삼성전자 상생협력 아카데미 / 이랜텍 추진 배경 : 제조 창고의 재고 비용 감축 및 물류 흐름 개선
+수행 기간 : 2023.03 ~ 2023.05 (약 3개월) 주요 역할 : 개선 과제 설정, 개선 방법 도출, 프로젝트 매니지먼트 업무 성과 : 재고자산회전율 17% 향상(프로젝트 KPI)
+삼성전자 멘토링 지원받아 구매, 영업, 제조, 생산관리 멤버의 TF 구성, 3개월간 프로젝트 리딩 면책 구역 지정, 제조-영업 재고 이관 전산 프로세스 개선 제조 및 영업 창고 3정 5S 진행 연계/소속회사 : 다비치 비전, TOS / 이랜텍 추진 배경 : 유휴 설비를 폐기하지 않고 일부를 재활용함으로써 비용을 절약하고, 비전 검사를 적용하지 못한 공정에 비전 검사를 도입함으로써 품질 확보
+수행 기간 : 2022.12 ~ 2023.04 (약 5개월) 주요 역할 : 프로젝트 기획, 설비 활용 방안 검토, 업체 컨택 및 업무 진행 업무 성과 : 유휴 비전 검사 M/C 4대 활용 방법 모색 1대분, 의료키트 반자동 조립 설비 제작 사급 장비로 활용하여 비전 검사 시스템 비용 일부 절약, 견적가액 약 4백만원 절감
+1대분, 범용 비전 검사 소프트웨어 활용: 사출 파트 인서트, 너트 누락 검사 1대분, 범용 비전 검사 소프트웨어 활용: 배터리 모듈 역삽 방지 비전 검사 1대 예비 장비로 보관 연계/소속회사 : 이랜텍 추진 배경 : 초음파 용착 불량으로 폐기되던 사출물 케이스와 불량 재작업으로 발생하는 낭비를 개선하기 위해 프로젝트 기획, 이후 다양한 과제들을 추가하여 프로젝트 확장
+수행 기간 : 2022.11 ~ 2023.09 (약 10개월) 주요 역할 : 혁신 과제 설정, 개선 과제 실행, 보고서 작성, 업무 배분
+업무 성과 : 초음파 용착 조건 DOE, 개선을 통해 불량율 15% 감축 &gt; 0%대로 감소, 재작업공수비용 연 환산 3천2백만원 절감 효과(초당 임율 6.3원 기준)
+폐기 비용 연환산 3천6백만원 절감 효과(단위 폐기 비용 7,688원) 커팅 Jig 개발로 Neck 공정 C/T 31% 단축 ( 16.72sec &gt; 12.76sec )
+검사 Jig 개조로 Core-pack Function Test C/T 49% 단축 ( 55sec &gt; 28sec )
+소형 배터리팩 라인 LOB 개선 생산성 24% 향상, 연환산 4437만원 절감 효과
+MES 활용 공정 현황 실시간 분석 프로세스 도입 WBS, Gantt Chart, 공유 업무 보드 등을 활용한 인적 자원, 프로젝트 관리 도입 불합리 개선 : 3정5S 활동 추진 및 기타 불합리 개선 생산관련문서 불합리 개선, 엑셀 자동화 양식 제작 &gt; 업무 효율성 및 보고 정확성 개선 라벨 프린트 S/N 유효성 검증 프로그램 제작(Python) 연계/소속회사 : 중소기업진흥청 / 은성 추진 배경 : 기업에 스마트 팩토리 기초 솔루션을 도입하여 데이터를 전산화하고 업무 절차를 체계화하기 위해 중소기업진흥청 지원 프로그램 신청
+수행 기간 : 2021.08 ~ 2022.01 (약 6개월) 주요 역할 : 프로젝트 신청, 프로젝트 매니지먼트, 개발 요구사항 수립 업무 성과 : 물류 실수 방지 및 재고 관리 현황 파악을 위한 ERP 연계 바코드 관리 시스템 도입 모바일 태블릿을 활용한 수작업 라인 생산현황 파악 시스템 도입 제 열정을 십분 발휘하여 귀사에서 함께 성장해 가고 싶습니다.여기까지 읽어 주셔서 정말 감사합니다!]]></description><link>https://64etuor.github.io/portfolio/portfolio_korean-박양하’s-macbook-air.html</link><guid isPermaLink="false">PORTFOLIO/Portfolio_Korean-박양하’s MacBook Air.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 23:59:27 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241204183153.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[{{title}}]]></title><link>https://64etuor.github.io/templates/metadata.html</link><guid isPermaLink="false">Templates/Metadata.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 07:07:30 GMT</pubDate></item><item><title><![CDATA[Backlink]]></title><description><![CDATA[<a data-href="|🔙이전 문서로 돌아가기" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">|🔙이전 문서로 돌아가기</a>]]></description><link>https://64etuor.github.io/templates/backlink.html</link><guid isPermaLink="false">Templates/Backlink.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 01 Dec 2024 16:06:18 GMT</pubDate></item><item><title><![CDATA[보랏빛 소가 온다：21세기 최고의 마케팅 바이블]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/보랏빛-소가-온다.html</link><guid isPermaLink="false">Books/Bookshelf/보랏빛 소가 온다.md</guid><dc:creator><![CDATA[세스 고딘, 이주형, 남수영]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:18:02 GMT</pubDate></item><item><title><![CDATA[세컨드 브레인 부스트]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/세컨드-브레인-부스트.html</link><guid isPermaLink="false">Books/Bookshelf/세컨드 브레인 부스트.md</guid><dc:creator><![CDATA[티아고 포르테, 이희령]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:17:58 GMT</pubDate></item><item><title><![CDATA[실용주의 프로그래머]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/실용주의-프로그래머.html</link><guid isPermaLink="false">Books/Bookshelf/실용주의 프로그래머.md</guid><dc:creator><![CDATA[데이비드 토머스, 앤드류 헌트, 정지용, 김창준]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:10:17 GMT</pubDate></item><item><title><![CDATA[참을 수 없는 존재의 가벼움]]></title><description><![CDATA[너무 어려워서 정리를 해가며 읽었다. 도저히 평가할 수 없는 위대한 작품이라고 생각한다.
 <a data-tooltip-position="top" aria-label="참을 수 없는 존재의 가벼움 > 1부 가벼움과 무거움" data-href="참을 수 없는 존재의 가벼움#1부 가벼움과 무거움" href="https://64etuor.github.io/books/bookshelf/참을-수-없는-존재의-가벼움.html#1부_가벼움과_무거움_0" class="internal-link" target="_self" rel="noopener nofollow">1부 가벼움과 무거움</a>
 2부 영혼과 육체 67
 3부 이해받지 못한 말들 139
@@ -4152,29 +4327,7 @@ I always feel uncomfortable to speak in English unlike to write in English. I th
 못난 생김새
 주름진 얼굴
 그리고 제 죄를 아는 듯이 꼭 감은 두 눈한마디 톡 쏘아 댄다
-마귀야 이 예쁜 마귀야]]></description><link>https://64etuor.github.io/writings/poems/190213-딸입니다.html</link><guid isPermaLink="false">Writings/Poems/190213 - 딸입니다.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 03:24:16 GMT</pubDate></item><item><title><![CDATA[AI, ML, RPA Github Repositories]]></title><link>https://64etuor.github.io/ai/ai,-ml,-rpa-github-repositories.html</link><guid isPermaLink="false">AI/AI, ML, RPA Github Repositories.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:23:58 GMT</pubDate></item><item><title><![CDATA[2024.10 자동화 설비 MES 구축 프로젝트]]></title><description><![CDATA[github.com/64etuor/simes- Frontend React 18.2.0 TypeScript 4.9.5 Material-UI 5.x Ant Design Electron
-- Backend Django 4.2 Django REST Framework 3.14 Python 3.11
-- Database PostgreSQL 17
-Key Features 생산 정보 등록(바코드 리더 스캔)
-반제품 공정 이력 검증
-S/N 유효성 검증
-Cell Grade 검증
-제품 조회 기능 (S/N과 관련된 모든 정보 자동 출력)
-기타 MES 기본 기능
-Wireless 환경 Latency 150ms 이내
-Database : OPC UA 서버 데이터 ETL
-Database : OCV/IR 검사 장비 데이터 ETL
-Database : 비전 데이터 ETL 수작업 라인 제품 등록 폼
-<img alt="Pasted image 20241202155547.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png" target="_self"><br>
-<img alt="Pasted image 20241202155608.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155608.png" target="_self">
-조회 폼 - Django ORM
-<br><img alt="Pasted image 20241202155628.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155628.png" target="_self"><br>
-<img alt="Pasted image 20241202160003.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160003.png" target="_self">
-S/N 유효성 검사 등록 폼
-<br><img alt="Pasted image 20241202160214.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160214.png" target="_self"><br>
-<img alt="Pasted image 20241202160230.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160230.png" target="_self">
-Backend - Django 프레임워크
-<br><img alt="Pasted image 20241202160723.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241202160723.png" target="_self">]]></description><link>https://64etuor.github.io/works/project/2024.10-자동화-설비-mes-구축-프로젝트.html</link><guid isPermaLink="false">Works/Project/2024.10 자동화 설비 MES 구축 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:10:40 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241202155547.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Obsidian Common Template 연구]]></title><description><![CDATA[ title
+마귀야 이 예쁜 마귀야]]></description><link>https://64etuor.github.io/writings/poems/190213-딸입니다.html</link><guid isPermaLink="false">Writings/Poems/190213 - 딸입니다.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 03:24:16 GMT</pubDate></item><item><title><![CDATA[AI, ML, RPA Github Repositories]]></title><link>https://64etuor.github.io/ai/ai,-ml,-rpa-github-repositories.html</link><guid isPermaLink="false">AI/AI, ML, RPA Github Repositories.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 01:23:58 GMT</pubDate></item><item><title><![CDATA[Obsidian Common Template 연구]]></title><description><![CDATA[ title
 author
 create_at
 modified_at ]]></description><link>https://64etuor.github.io/obsidian/obsidian-common-template-연구.html</link><guid isPermaLink="false">Obsidian/Obsidian Common Template 연구.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 23:31:58 GMT</pubDate></item><item><title><![CDATA[Power BI_통합 대시보드 구현]]></title><description><![CDATA[예전에 Power BI로 대시보드를 만들 때, 내가 원하는 수준의 기능을 구현하기 위해 참고할 만한 국문 자료가 없어서 대부분 영문 자료를 참조하거나 Microsoft Power BI Documentation을 참조했다. 구축 이후 수정할 일이 크게 없어 방치하다 보니 세세한 요청 사항이 생겼을 때, 나도 어떻게 만들었는지 기억이 안 나서(…) 다시 자료 찾아보는 일이 생겼다. 그런데 아무래도 한국에서 많이 사용을 하는 툴이 아니다 보니 여전히 국문 자료가 부족한 듯 보인다. 그래서 리포트를 만들었던 과정을 복기하는 겸, 리포트 내에 적용했던 여러 사례를 이 블로그를 통해 소개하고자 한다.
