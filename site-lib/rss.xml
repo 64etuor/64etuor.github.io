@@ -1,9 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sat, 14 Dec 2024 12:57:11 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 14 Dec 2024 12:57:08 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[Untitled]]></title><description><![CDATA[ 프로젝트의 목표를 작성한다. 프로젝트의 일정을 작성한다.
-프로젝트의 일정을 표현하는 라는 태그를 달아서 tasks에서 볼 수 있도록 한다.
-내가 설정한 Milestone 마감 기한도 이곳에 작성한다. ## 💎Milestones
-&gt; 중간 지점을 표현한다
-각 마일스톤을 달성하기 위해서 필요한 태스크들을 하나씩 열거한다.
-할당시간과 그에 따른 마감일 기록한다. 스케쥴을 바탕으로 Gantt 차트를 작성한다. ## Reference]]></description><link>https://64etuor.github.io/project-management/project-gantt.html</link><guid isPermaLink="false">Project Management/Project Gantt.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:57:03 GMT</pubDate></item><item><title><![CDATA[Minimalism_Home]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:55:24 GMT</pubDate></item><item><title><![CDATA[4W - 재무&고객 데이터 분석]]></title><description><![CDATA[2024-12-14 Python과 MySQL 연동 이해
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sat, 14 Dec 2024 14:47:52 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 14 Dec 2024 14:47:46 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[4W - 재무&고객 데이터 분석]]></title><description><![CDATA[2024-12-14 Python과 MySQL 연동 이해
 재무 및 고객 데이터 분석
 시각화 및 실습 프로젝트 라이브러리:&nbsp;mysql.connector를 사용해 MySQL 데이터베이스와 Python을 연결 목표: 고객 중에서 구매 금액이 높은 VIP 고객을 식별합니다.
 분석 방법: MySQL에서 고객별 총 구매 금액을 계산합니다.
@@ -11,7 +6,7 @@
 분석 방법: 고객 ID별로 주문 횟수를 계산합니다.
 Python의&nbsp;matplotlib이나&nbsp;seaborn을 사용해 시각화합니다. 목표: 고객을 여러 그룹으로 나누고 맞춤형 마케팅 전략을 수립합니다.
 분석 방법: 구매 빈도, 평균 구매 금액, 마지막 구매 일자 등을 기준으로 고객을 세분화합니다.
-<a data-tooltip-position="top" aria-label="K-평균 클러스터링 알고리즘" data-href="K-평균 클러스터링 알고리즘" href="https://64etuor.github.io/machine-learning/algorithm/k-평균-클러스터링-알고리즘.html#_0" class="internal-link" target="_self" rel="noopener nofollow">K-평균 클러스트링</a>과 같은 머신러닝 기법을 활용합니다. 목표: 지역별 매출 차이를 분석합니다.
+<a data-tooltip-position="top" aria-label="K-Means Clustering Algorithm" data-href="K-Means Clustering Algorithm" href="https://64etuor.github.io/machine-learning/algorithm/k-means-clustering-algorithm.html#_0" class="internal-link" target="_self" rel="noopener nofollow">K-평균 클러스트링</a>과 같은 머신러닝 기법을 활용합니다. 목표: 지역별 매출 차이를 분석합니다.
 분석 방법: MySQL에서 각 지역의 총 매출을 집계합니다.
 Python으로 지도 시각화 또는 바 차트를 그려 비교합니다. 목표: 카테고리별 매출을 분석하여 주력 제품군을 파악합니다.
 분석 방법: 제품 카테고리와 판매 데이터를 결합합니다.
@@ -33,7 +28,243 @@ Python으로 지도 시각화 또는 바 차트를 그려 비교합니다. 목�
 머신러닝 알고리즘의 적용 예가 처음으로 등장했다. 앞으로는 좀 재밌는 분석 방법이 많이 등장했으면 좋겠다.
 다음에 개선할 점:<br>
 제품 캐즘의 극복과 PLM 관리를 위해 위와 같은 분석을 적용하면 어떨까 찾아 보던 중 2019년에 작성된 기사를 하나 발견했다. <a data-tooltip-position="top" aria-label="https://www.2e.co.kr/news/articleView.html?idxno=205794" rel="noopener nofollow" class="external-link is-unresolved" href="https://www.2e.co.kr/news/articleView.html?idxno=205794" target="_self">빅데이터 캐즘 극복 과제</a> 그런데 실제로 연구가 된 결과는 찾아 보기가 어려웠다. 아마 기업 내부 데이터들로만 보관하는 걸까. 시간이 허락한다면 더 자세히 조사해 보도록 해야겠다. <a href="https://64etuor.github.io?query=tag:todo" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#todo">#todo</a>
-]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/4w-재무&amp;고객-데이터-분석.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/4W - 재무&amp;고객 데이터 분석.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[3W - 커머스 데이터 분석]]></title><description><![CDATA[ 우수민 강사님 vlog <a rel="noopener nofollow" class="external-link is-unresolved" href="https://velog.io/@yuuuye/" target="_self">https://velog.io/@yuuuye/</a>
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/4w-재무&amp;고객-데이터-분석.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/4W - 재무&amp;고객 데이터 분석.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[4W - 유통&이커머스 데이터 분석]]></title><description><![CDATA[2024-12-14 Adidas 미국 판매 데이터 분석 일원배치 분산분석 (ANOVA) 및 최소자승법 (OLS)을 활용해 판매 데이터에 대한 통계적 검증을 수행합니다. E-Commerce 데이터 분석 EDA 시각화를 기반으로 Streamlit 대시보드를 구축합니다. 일원배치 분산분석은 두 개 이상의 그룹 간 평균 차이를 검정하는 통계 기법입니다. 이 분석을 통해 판매 수량과 지역별 매출의 차이를 검증할 수 있습니다.
+가설 설정: 귀무가설 (H₀): 그룹 간 평균에 차이가 없다.
+대립가설 (H₁): 적어도 하나의 그룹에서 평균 차이가 있다. import pandas as pd
+from statsmodels.formula.api import ols
+from statsmodels.stats.anova import anova_lm # 데이터 로드
+adidas = pd.read_csv('/content/drive/MyDrive/Colab Notebooks/Data/Adidas US Sales Datasets.csv') # 데이터 타입 변환 (Units Sold가 숫자형이 아닌 경우 변환)
+adidas['Units Sold'] = adidas['Units Sold'].str.replace('[%$,]', '', regex=True).astype('float') # OLS 모델 생성 (Region에 따른 Units Sold 분석)
+model = ols('Q("Units Sold") ~ C(Region)', data=adidas).fit() # ANOVA 수행
+anova_results = anova_lm(model) # ANOVA 결과 출력
+print(anova_results) # 결과 해석
+p_value = anova_results['PR(&gt;F)'][0]
+if p_value &lt; 0.05: print("귀무가설을 기각합니다: 그룹 간 평균에 차이가 있습니다.")
+else: print("귀무가설을 채택합니다: 그룹 간 평균에 차이가 없습니다.") 데이터 타입 변환: Units Sold가 문자열로 되어 있는 경우, 특수문자를 제거하고 숫자형으로 변환합니다. OLS 모델 생성: Q("Units Sold"): 컬럼 이름에 공백이나 특수문자가 있을 경우 Q()로 감쌉니다.
+C(Region): Region을 범주형 변수로 지정합니다. ANOVA 수행: anova_lm(model): 생성된 OLS 모델을 기반으로 ANOVA 분석을 수행합니다. 결과 해석: p-value가 0.05 미만이면 귀무가설을 기각하고, 그룹 간 평균에 차이가 있다고 결론을 내립니다. 최소자승법 (OLS)은 선형 회귀에서 가장 많이 사용되는 방법으로, 독립변수와 종속변수 간의 관계를 설명합니다. 목표: 판매 금액(Total Sales)과 제품 가격(Price per Unit) 및 판매 수량(Units Sold) 사이의 관계를 분석합니다.
+import statsmodels.api as sm # 독립변수와 종속변수 설정
+X = adidas[['Price per Unit', 'Units Sold']]
+y = adidas['Total Sales'] # 상수항 추가 (절편 포함)
+X = sm.add_constant(X) # OLS 회귀 모델 생성 및 적합
+model = sm.OLS(y, X).fit() # 결과 요약
+print(model.summary())
+해석:
+R-squared 값이 높을수록 모델이 데이터를 잘 설명합니다.
+p-value가 0.05 미만인 변수는 통계적으로 유의미합니다. <a data-href="EDA" href="https://64etuor.github.io/machine-learning/eda.html#_0" class="internal-link" target="_self" rel="noopener nofollow">EDA</a>(탐색적 데이터 분석)를 위해 Streamlit을 활용하면 웹 기반 대시보드를 간편하게 생성할 수 있습니다. Streamlit 설치:
+pip install streamlit 대시보드 코드 (app.py):
+import streamlit as st
+import pandas as pd
+import plotly.express as px # 데이터 로드
+data = pd.read_csv('ecommerce_data.csv') # 제목
+st.title("E-Commerce 데이터 분석 대시보드") # 월별 판매량 시각화
+st.header("📈 월별 판매 수량")
+monthly_sales = data.groupby('yearmonth')['Quantity'].sum().reset_index()
+fig1 = px.line(monthly_sales, x='yearmonth', y='Quantity', title='Monthly Sales Quantity')
+st.plotly_chart(fig1) # 카테고리별 판매량 시각화
+st.header("📊 카테고리별 판매 수량")
+category_sales = data.groupby('Category')['Quantity'].sum().reset_index()
+fig2 = px.bar(category_sales, x='Category', y='Quantity', title='Sales by Category')
+st.plotly_chart(fig2) 대시보드 실행:
+streamlit run app.py 간편한 인터페이스: Python 코드만으로 웹 대시보드 생성
+실시간 대화형 시각화: Plotly 그래프와 상호작용
+빠른 배포: 데이터 분석 결과를 공유하기 용이 &nbsp;핵심 개념 이해
+&nbsp;실습 코드 실행 및 분석
+&nbsp;추가 자료 조사 배운 점:
+통계 검증을 위한 간단한 방법을 배웠다.
+느낀 점:
+분명히 예전에 경영 통계에서 배웠던 내용인데 실무에서 쓸 일이 없으니 정말 하나도 기억이 나지 않았다.
+다음에 개선할 점:<br>
+직접 배운 내용을 반복해서 사용해보지 않으면 장기 기억으로 아무래도 치환되기가 어렵다. Kaggle을 병행해서 학습을 하면 좋을 것 같다! <a href="https://64etuor.github.io?query=tag:todo" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#todo">#todo</a>
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/4w-유통&amp;이커머스-데이터-분석.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/4W - 유통&amp;이커머스 데이터 분석.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[OLS]]></title><description><![CDATA[OLS (Ordinary Least Squares, 최소자승법)는 회귀 분석에서 가장 많이 사용되는 기법으로, 독립변수와 종속변수 간의 관계를 선형 모델로 표현하고 그 모델을 최적화하는 방법입니다. OLS는 오차 제곱합 (Sum of Squared Errors, SSE)을 최소화하는 방식으로 회귀 계수를 추정합니다. 회귀 모델 (Regression Model) 독립변수 XX와 종속변수 YY 간의 관계를 설명하는 선형식입니다. 단순 선형 회귀 모델 예제: Y=β0+β1X+ϵY = \beta_0 + \beta_1 X + \epsilon β0\beta_0: 절편 (Intercept)
+β1\beta_1: 기울기 (Slope)
+ϵ\epsilon: 오차항 (Error Term) 오차 (Residuals) 실제 값 YiY_i와 예측 값 Y^i\hat{Y}_i 간의 차이입니다. 오차 eie_i는 다음과 같이 정의합니다: ei=Yi−Y^ie_i = Y_i - \hat{Y}_i 오차 제곱합 (SSE, Sum of Squared Errors) 모든 오차의 제곱합으로, OLS는 이를 최소화하는 β0\beta_0와 β1\beta_1을 찾습니다. SSE=∑i=1n(Yi−Y^i)2\text{SSE} = \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2 목표 오차 제곱합을 최소화하는 회귀 계수 β0\beta_0와 β1\beta_1을 찾는 것입니다. 모델 설정 종속변수 YY와 독립변수 XX 간의 선형 관계를 설정합니다. 회귀 계수 추정 최소자승법을 사용하여 β0\beta_0 (절편)과 β1\beta_1 (기울기)를 추정합니다. 모델 평가 R-squared (결정계수), p-value, F-statistic을 통해 모델의 성능을 평가합니다. 잔차 분석 모델이 적합한지 확인하기 위해 잔차를 분석합니다. import pandas as pd
+import statsmodels.api as sm # 예제 데이터
+data = { 'X': [1, 2, 3, 4, 5], 'Y': [2.2, 2.8, 4.5, 3.7, 5.5]
+}
+df = pd.DataFrame(data) # 독립변수와 종속변수 설정
+X = df['X']
+y = df['Y'] # 상수항 추가 (절편 포함)
+X = sm.add_constant(X) # OLS 모델 생성 및 적합
+model = sm.OLS(y, X).fit() # 결과 요약 출력
+print(model.summary()) OLS Regression Results ==============================================================================
+Dep. Variable: Y R-squared: 0.855
+Model: OLS Adj. R-squared: 0.807
+Method: Least Squares F-statistic: 17.91
+Date: Thu, 20 Jun 2024 Prob (F-statistic): 0.0233
+============================================================================== coef std err t P&gt;|t| [0.025 0.975]
+------------------------------------------------------------------------------
+const 1.1000 0.456 2.412 0.077 -0.157 2.357
+X 0.9000 0.213 4.231 0.023 0.202 1.598
+============================================================================== R-squared (결정계수) 모델이 종속변수의 변동을 얼마나 설명하는지 나타냅니다.
+예: R2=0.855R^2 = 0.855는 데이터의 85.5%가 모델에 의해 설명된다는 의미입니다. coef (회귀 계수) const: 절편 (β0\beta_0) 값
+X: 기울기 (β1\beta_1) 값 p-value 회귀 계수가 통계적으로 유의미한지 판단합니다.
+p-value &lt; 0.05이면 해당 계수는 유의미합니다. F-statistic 전체 모델의 유의성을 검정합니다. 모델이 잘 맞는지 확인하기 위해 잔차를 분석합니다.import matplotlib.pyplot as plt # 잔차 계산
+residuals = model.resid # 잔차 플롯
+plt.scatter(df['X'], residuals)
+plt.axhline(y=0, color='r', linestyle='--')
+plt.xlabel('X')
+plt.ylabel('Residuals')
+plt.title('Residual Plot')
+plt.show()
+OLS 회귀 분석을 수행할 때 다음 4가지 가정을 만족해야 합니다: 선형성 (Linearity) 독립변수와 종속변수 간의 관계가 선형입니다. 정규성 (Normality) 잔차가 정규 분포를 따릅니다. 등분산성 (Homoscedasticity) 모든 수준에서 잔차의 분산이 동일합니다. 독립성 (Independence) 각 관측치는 서로 독립적입니다. OLS는 선형 회귀 분석에서 가장 많이 사용되는 기법입니다.
+오차 제곱합을 최소화하여 최적의 회귀 계수를 추정합니다.
+모델 평가와 잔차 분석을 통해 결과의 신뢰성을 검증해야 합니다.
+OLS를 사용할 때는 선형성, 정규성, 등분산성, 독립성의 가정을 확인하는 것이 중요합니다.
+]]></description><link>https://64etuor.github.io/machine-learning/ols.html</link><guid isPermaLink="false">Machine Learning/OLS.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 14:44:09 GMT</pubDate></item><item><title><![CDATA[K-Means Clustering Algorithm]]></title><description><![CDATA[K-평균 클러스터링은 비지도 학습(unsupervised learning) 방식의 군집화(clustering) 알고리즘입니다. 데이터를 K개의 클러스터로 나누고, 각 클러스터에 속하는 데이터들이 최대한 비슷하게 되도록 하는 알고리즘입니다. 비지도 학습: 정답(레이블) 없이 데이터를 그룹화하는 학습 방식입니다. 클러스터: 비슷한 특성을 가진 데이터들의 그룹입니다. 중심점(센트로이드): 각 클러스터의 중심을 나타내는 점입니다.
+K-평균 클러스터링에서는 이 중심점을 기준으로 데이터를 나눕니다. K개의 초기 중심점(centroids)을 무작위로 설정합니다.
+각 데이터 포인트를 가장 가까운 중심점에 할당하여 클러스터를 형성합니다.
+각 클러스터에 대해 새로운 중심점을 계산합니다 (클러스터 내 데이터들의 평균값).
+중심점이 더 이상 변화하지 않을 때까지 2번과 3번 단계를 반복합니다.
+import numpy as np
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt # 데이터 생성
+data = np.array([[1, 2], [1, 4], [1, 0], [4, 2], [4, 4], [4, 0]]) # K-평균 클러스터링 모델 생성 (K=2)
+kmeans = KMeans(n_clusters=2, random_state=0).fit(data) # 예측된 클러스터 레이블
+print(kmeans.labels_) # 클러스터 중심점 출력
+print(kmeans.cluster_centers_) # 시각화
+plt.scatter(data[:, 0], data[:, 1], c=kmeans.labels_, cmap='viridis')
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='red', marker='x')
+plt.title("K-Means Clustering")
+plt.show() 간단하고 빠른 연산: 비교적 간단한 수학적 원리로 구현되며 빠르게 동작합니다.
+대규모 데이터에 효율적: 큰 데이터셋에서도 효율적으로 군집화할 수 있습니다. K값 설정 필요: 클러스터 개수(K)를 사전에 지정해야 합니다.
+초기 중심점에 민감: 초기 중심점에 따라 결과가 달라질 수 있습니다.
+비구형 데이터에 부적합: 클러스터가 구형(원형)에 가까운 경우에 적합하며, 복잡한 형태의 데이터는 잘 분류하지 못합니다. 고객 세분화: 고객 데이터를 기반으로 그룹화하여 타겟 마케팅에 활용합니다.
+이미지 압축: 비슷한 색상을 하나의 클러스터로 묶어 이미지 크기를 줄입니다.
+이상 탐지: 비정상적인 데이터 패턴을 감지합니다.
+]]></description><link>https://64etuor.github.io/machine-learning/algorithm/k-means-clustering-algorithm.html</link><guid isPermaLink="false">Machine Learning/Algorithm/K-Means Clustering Algorithm.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:35:42 GMT</pubDate></item><item><title><![CDATA[LaTeX Suite]]></title><description><![CDATA[<a data-tooltip-position="top" aria-label="https://github.com/artisticat1/obsidian-latex-suite" rel="noopener nofollow" class="external-link is-unresolved" href="https://github.com/artisticat1/obsidian-latex-suite" target="_self"><strong></strong></a>Obsidian LaTeX Suite는 Obsidian에서 LaTeX 수식을 작성하고 효율적으로 관리할 수 있도록 돕는 강력한 플러그인입니다. LaTeX 자동 완성, 단축키, 코드 스니펫과 같은 기능을 제공하여 LaTeX 사용을 간편하게 만듭니다.
+Obsidian Settings → Community Plugins → Browse로 이동합니다.
+"LaTeX Suite"를 검색하고 설치합니다.
+설치 후 Enable을 클릭하여 플러그인을 활성화합니다.
+LaTeX 수식을 입력할 때 자동으로 명령어를 완성해 줍니다.
+예제: \frac을 입력하면 자동으로 \frac{}{}로 완성됩니다.
+사용 방법: 수식 모드에서 \를 입력합니다.
+필요한 명령어를 입력하면 자동 완성 제안이 나타납니다.
+Tab 또는 Enter 키를 눌러 선택합니다. 반복적으로 사용되는 LaTeX 명령어를 단축키로 빠르게 입력할 수 있습니다.
+Ctrl + L: 인라인 수식 $...$ 삽입
+Ctrl + Shift + L: 블록 수식 $$...$$ 삽입
+Ctrl + Shift + M: 매트릭스 템플릿 삽입
+설정에서 단축키를 사용자 정의할 수 있습니다:
+Settings → Hotkeys로 이동합니다.
+LaTeX Suite 관련 단축키를 찾아 원하는 키 조합으로 변경합니다.
+자주 사용하는 LaTeX 템플릿을 스니펫으로 저장하고 쉽게 불러올 수 있습니다.
+분수 템플릿:
+\frac{numerator}{denominator} 행렬 템플릿:
+\begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix} 사용 방법:
+Ctrl + Space를 누르면 스니펫 목록이 표시됩니다.
+원하는 스니펫을 선택합니다.
+LaTeX 수식을 작성하면서 실시간으로 미리보기를 확인할 수 있습니다.
+미리보기 활성화: Settings → Editor → "Show inline math"를 활성화합니다.
+수식을 입력하면 즉시 렌더링된 결과가 표시됩니다. begin과 end로 이루어진 LaTeX 환경을 자동으로 삽입합니다.
+매트릭스 환경 자동 삽입:
+\begin{bmatrix} \end{bmatrix} 사용 방법:
+\begin{을 입력합니다.
+사용할 환경 이름을 선택하면 \end{}가 자동으로 추가됩니다.
+플러그인의 다양한 기능을 사용자 환경에 맞게 설정할 수 있습니다.
+Settings → LaTeX Suite로 이동합니다.
+자동 완성, 단축키, 스니펫 등을 원하는 대로 조정합니다.
+인라인 수식: $\frac{a}{b}$ 블록 수식: $$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$
+$$
+\begin{bmatrix}
+1 &amp; 2 \\
+3 &amp; 4
+\end{bmatrix}
+$$ \frac 입력 → 자동 완성
+Ctrl + L로 인라인 수식 템플릿 삽입
+]]></description><link>https://64etuor.github.io/obsidian/community-plugin/latex-suite.html</link><guid isPermaLink="false">Obsidian/Community Plugin/LaTeX Suite.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 14:13:55 GMT</pubDate></item><item><title><![CDATA[ANOVA]]></title><description><![CDATA[ANOVA (Analysis of Variance, 분산분석)는 두 개 이상의 그룹 간 평균의 차이를 검정하는 통계 기법입니다. 일반적으로 독립변수가 범주형이고 종속변수가 연속형일 때 사용됩니다. ANOVA는 그룹 간 평균 차이가 우연에 의한 것인지, 아니면 통계적으로 유의미한 차이인지를 판단하는 데 도움을 줍니다. 귀무가설 (Null Hypothesis, H₀) 모든 그룹의 평균이 서로 같다.
+예: "모든 지역의 판매량 평균은 동일하다." 대립가설 (Alternative Hypothesis, H₁) 적어도 하나의 그룹 평균은 다르다.
+예: "적어도 한 지역의 판매량 평균은 다르다." F-통계량 (F-statistic) 그룹 간 분산과 그룹 내 분산의 비율입니다.
+F값이 클수록 그룹 간 평균 차이가 크다는 의미입니다. p-value 귀무가설을 기각할지 결정하는 기준입니다.
+p-value &lt; 0.05이면 귀무가설을 기각하고, 그룹 간 평균에 차이가 있다고 결론 내립니다. 일원배치 분산분석 (One-Way ANOVA) 한 개의 요인(독립변수)에 대해 두 개 이상의 그룹 평균을 비교합니다.
+예: "동일한 제품을 판매하는 3개의 지역에서 판매량 평균에 차이가 있는가?" 이원배치 분산분석 (Two-Way ANOVA) 두 개의 요인(독립변수)에 대해 그룹 평균을 비교합니다.
+예: "지역과 판매 방법(온라인/오프라인)에 따라 판매량 평균에 차이가 있는가?" 반복측정 분산분석 (Repeated Measures ANOVA) 동일한 그룹에 대해 여러 시점에서 측정된 데이터를 비교합니다.
+예: "같은 참가자가 3가지 조건에서 수행한 테스트 점수를 비교한다." 그룹 간 분산 (Between-Group Variance) 그룹 평균들 간의 차이에서 오는 분산입니다. 그룹 내 분산 (Within-Group Variance) 각 그룹 내부에서 발생하는 분산입니다. F-통계량 계산
+F=그룹&nbsp;간&nbsp;평균&nbsp;제곱&nbsp;(Between-Group&nbsp;MS)그룹&nbsp;내&nbsp;평균&nbsp;제곱&nbsp;(Within-Group&nbsp;MS)F = \frac{\text{그룹 간 평균 제곱 (Between-Group MS)}}{\text{그룹 내 평균 제곱 (Within-Group MS)}} p-value 해석 p-value가 0.05 미만이면 귀무가설을 기각합니다. import pandas as pd
+from statsmodels.formula.api import ols
+from statsmodels.stats.anova import anova_lm # 데이터 로드
+data = pd.DataFrame({ 'Units Sold': [23, 20, 22, 21, 24, 30, 32, 29, 31, 28, 25, 27, 26, 24, 28], 'Region': ['East'] * 5 + ['West'] * 5 + ['Central'] * 5
+}) # OLS 모델 생성
+model = ols('Q("Units Sold") ~ C(Region)', data=data).fit() # ANOVA 수행
+anova_results = anova_lm(model)
+print(anova_results) df sum_sq mean_sq F PR(&gt;F)
+C(Region) 2.0 123.733 61.867 13.298 0.0012
+Residual 12.0 55.867 4.656 F = 13.298: 그룹 간 분산이 그룹 내 분산보다 약 13배 큽니다.
+p-value = 0.0012: 0.05 미만이므로 귀무가설을 기각하고, 그룹 간 평균에 통계적으로 유의미한 차이가 있다고 결론 내립니다.
+import seaborn as sns
+import matplotlib.pyplot as plt sns.boxplot(x='Region', y='Units Sold', data=data)
+plt.title('Units Sold by Region')
+plt.show()
+잔차 플롯을 통해 모델이 잘 맞는지 확인합니다.import statsmodels.api as sm residuals = model.resid
+sm.qqplot(residuals, line='s')
+plt.title('Q-Q Plot of Residuals')
+plt.show()
+ANOVA를 적용하기 위해서는 다음 3가지 가정이 필요합니다: 정규성 (Normality) 각 그룹의 데이터가 정규 분포를 따릅니다.
+검정 방법: Shapiro-Wilk 검정, Q-Q 플롯 등분산성 (Homoscedasticity) 모든 그룹의 분산이 동일합니다.
+검정 방법: Levene 검정, Bartlett 검정 독립성 (Independence) 각 관측치는 서로 독립적입니다. ANOVA는 두 개 이상의 그룹 평균을 비교하는 강력한 도구입니다.
+F-통계량과 p-value를 통해 그룹 간 차이의 유의성을 평가합니다.
+시각화와 잔차 분석을 통해 결과의 신뢰성을 검증할 수 있습니다.
+정규성, 등분산성, 독립성의 가정을 만족하는지 꼭 확인해야 합니다.
+]]></description><link>https://64etuor.github.io/machine-learning/anova.html</link><guid isPermaLink="false">Machine Learning/ANOVA.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 14:03:33 GMT</pubDate></item><item><title><![CDATA[EDA]]></title><description><![CDATA[Exploratory Data Analysis (EDA)는 데이터를 이해하고 주요 특성을 파악하기 위한 초기 분석 과정입니다. EDA는 통계적 요약과 시각화를 통해 데이터를 직관적으로 파악하고, 데이터에 숨겨진 패턴, 이상치(Outlier), 결측치(Missing Value), 변수 간 관계 등을 탐색합니다. 존 튜키(John Tukey)가 처음으로 제안한 개념으로, 데이터 분석이나 머신러닝 모델링의 기초를 마련하는 중요한 단계입니다. 데이터의 분포 이해 각 변수의 값들이 어떻게 분포되어 있는지 확인하고, 정규 분포 여부를 파악합니다. 이상치 (Outlier) 탐지 데이터에서 통계적으로 비정상적인 값을 찾아내고, 분석에서의 영향을 평가합니다. 결측치 (Missing Value) 탐색 결측치가 있는지 확인하고, 이를 제거, 대체, 보간하는 전략을 세웁니다. 변수 간 관계성 파악 상관관계, 다변량 관계 등을 확인하여 가설 수립에 필요한 인사이트를 도출합니다. 데이터 정제 및 전처리 방향 설정 데이터 정제, 변환, 스케일링 등의 전처리 전략을 결정합니다. 가설 수립 및 모델링 준비 데이터를 기반으로 잠재적인 가설을 수립하고, 분석 또는 모델링의 다음 단계를 준비합니다. 데이터의 중심 경향성 (Central Tendency)과 퍼짐 (Dispersion)을 요약합니다.
+중심 경향성: 평균 (Mean): 모든 값을 더한 후 개수로 나눈 값
+중앙값 (Median): 데이터의 중간값
+최빈값 (Mode): 가장 많이 나타난 값 퍼짐 정도: 분산 (Variance): 데이터가 평균으로부터 얼마나 떨어져 있는지
+표준편차 (Standard Deviation): 분산의 제곱근으로, 데이터의 산포도를 나타냅니다.
+사분위수 (Quartiles): 데이터의 25%, 50%, 75%에 해당하는 값 df.describe() # 수치형 변수에 대한 기술 통계
+EDA에서 시각화는 데이터의 패턴과 관계를 직관적으로 이해하는 데 필수적입니다.
+단변량 분석 (Univariate Analysis) 히스토그램 (Histogram): 변수의 분포 확인
+박스플롯 (Box Plot): 이상치와 분포의 퍼짐 정도 확인
+커널 밀도 추정 (KDE Plot): 데이터의 확률 밀도 함수 시각화 import seaborn as sns
+sns.histplot(df['Price'])
+sns.boxplot(df['Price']) 이변량 분석 (Bivariate Analysis) 산점도 (Scatter Plot): 두 변수 간 관계 파악
+상관 행렬 (Correlation Matrix): 상관계수를 시각화
+바이올린 플롯 (Violin Plot): 분포 및 범주별 차이 확인 sns.scatterplot(x='Price', y='Sales', data=df)
+sns.heatmap(df.corr(), annot=True) 다변량 분석 (Multivariate Analysis) 페어 플롯 (Pair Plot): 여러 변수 간 관계를 한눈에 확인
+3D 산점도: 3차원 공간에서 변수 간 관계 확인 sns.pairplot(df) 결측치가 있는지 확인하고, 결측치 비율이 높으면 제거하거나 평균, 중앙값, 최빈값으로 대체합니다.
+df.isnull().sum() # 결측치 확인
+df.dropna() # 결측치 제거
+df.fillna(df.mean()) # 평균으로 결측치 대체
+이상치는 데이터를 왜곡할 수 있으므로, IQR (Interquartile Range) 또는 Z-점수 (Z-Score)를 사용해 탐지합니다.
+IQR 기반 탐지:
+Q1 = df['Price'].quantile(0.25)
+Q3 = df['Price'].quantile(0.75)
+IQR = Q3 - Q1
+outliers = df[(df['Price'] &lt; (Q1 - 1.5 * IQR)) | (df['Price'] &gt; (Q3 + 1.5 * IQR))] Z-점수 기반 탐지:
+from scipy import stats
+df['z_score'] = stats.zscore(df['Price'])
+outliers = df[df['z_score'].abs() &gt; 3] 변수 간의 상관관계를 분석하여 강한 양/음의 상관관계를 확인합니다.correlation_matrix = df.corr()
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm') 데이터 로드 및 확인:
+df.head()
+df.info() 기술 통계 요약:
+df.describe() 결측치 탐색 및 처리:
+df.isnull().sum()
+df.fillna(method='ffill') 시각화를 통한 분포 및 관계 확인:
+sns.histplot(df['Sales'])
+sns.scatterplot(x='Price', y='Sales', data=df) 이상치 탐지 및 처리:
+outliers = df[df['Price'] &gt; threshold] 상관관계 분석:
+sns.heatmap(df.corr(), annot=True) EDA는 데이터 분석 및 모델링의 기반이 되는 중요한 과정입니다.
+시각화와 통계 요약을 통해 데이터를 직관적으로 이해하고, 잠재적인 문제를 발견하며, 분석 방향을 설정합니다.
+철저한 EDA를 통해 신뢰성 있는 모델링과 가설 검증이 가능합니다.
+]]></description><link>https://64etuor.github.io/machine-learning/eda.html</link><guid isPermaLink="false">Machine Learning/EDA.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 14:01:32 GMT</pubDate></item><item><title><![CDATA[3W - SQL 문법]]></title><description><![CDATA[2024-12-6 SQL의 기본 문법을 이해한다. <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a>
+SQL은 따로 정리해 둔 문서가 있어서 내용을 정리하진 않았다.
+<br>backlink 생성 이슈로 현재 빈 페이지로 연결됨 2024.12.10 시간날 때 해결..) <a href="https://64etuor.github.io?query=tag:issue" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#issue">#issue</a> <a href="https://64etuor.github.io?query=tag:todo" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#todo">#todo</a>
+&nbsp;핵심 개념 이해
+&nbsp;실습 코드 실행 및 분석
+&nbsp;추가 자료 조사 배운 점:
+추가 조사를 통해 SQL의 구조를 한 번 다시금 훑어 보는 계기가 되었다.
+느낀 점:
+적당히 쓰는 건 어렵지 않은데, 잘 쓰긴 어려운 SQL…
+다음에 개선할 점:
+생각해 보면 빅데이터로 부를 만한 큰 데이터를 다룬 적은 크게 없는 것 같다. 우선 BigQuery에서 공공 데이터로 Indexing 테스트를 해봐야 겠다.
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/3w-sql-문법.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/3W - SQL 문법.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 05 Dec 2024 15:00:00 GMT</pubDate></item><item><title><![CDATA[Untitled]]></title><description><![CDATA[ 프로젝트의 목표를 작성한다. 프로젝트의 일정을 작성한다.
+프로젝트의 일정을 표현하는 라는 태그를 달아서 tasks에서 볼 수 있도록 한다.
+내가 설정한 Milestone 마감 기한도 이곳에 작성한다. ## 💎Milestones
+&gt; 중간 지점을 표현한다
+각 마일스톤을 달성하기 위해서 필요한 태스크들을 하나씩 열거한다.
+할당시간과 그에 따른 마감일 기록한다. 스케쥴을 바탕으로 Gantt 차트를 작성한다. ## Reference]]></description><link>https://64etuor.github.io/project-management/project-gantt.html</link><guid isPermaLink="false">Project Management/Project Gantt.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:57:03 GMT</pubDate></item><item><title><![CDATA[Minimalism_Home]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:55:24 GMT</pubDate></item><item><title><![CDATA[3W - 커머스 데이터 분석]]></title><description><![CDATA[ 우수민 강사님 vlog <a rel="noopener nofollow" class="external-link is-unresolved" href="https://velog.io/@yuuuye/" target="_self">https://velog.io/@yuuuye/</a>
 2024-12-7 Google BigQuery 데이터를 Pandas로 분석하는 방법을 이해한다.
 각종 마케팅 데이터 분석 기법을 이해한다. 핵심 내용: Pandas 기본 사용법 Series와 DataFrame 생성
 s = pd.Series([1, 3, 5, np.nan, 6, 8]) # Series 생성
@@ -93,17 +324,7 @@ plt.show() 간단하고 빠른 연산: 비교적 간단한 수학적 원리로 �
 비구형 데이터에 부적합: 클러스터가 구형(원형)에 가까운 경우에 적합하며, 복잡한 형태의 데이터는 잘 분류하지 못합니다. 고객 세분화: 고객 데이터를 기반으로 그룹화하여 타겟 마케팅에 활용합니다.
 이미지 압축: 비슷한 색상을 하나의 클러스터로 묶어 이미지 크기를 줄입니다.
 이상 탐지: 비정상적인 데이터 패턴을 감지합니다.
-]]></description><link>https://64etuor.github.io/machine-learning/algorithm/k-평균-클러스터링-알고리즘.html</link><guid isPermaLink="false">Machine Learning/Algorithm/K-평균 클러스터링 알고리즘.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:35:42 GMT</pubDate></item><item><title><![CDATA[3W - SQL 문법]]></title><description><![CDATA[2024-12-6 SQL의 기본 문법을 이해한다. <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a><br>
-//backlink 생성 이슈로 현재 빈 페이지로 연결됨 2024.12.10 원인 찾는 중) <a href="https://64etuor.github.io?query=tag:issue" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#issue">#issue</a>
-SQL은 따로 정리해 둔 문서가 있어서 내용을 정리하진 않았다. &nbsp;핵심 개념 이해
-&nbsp;실습 코드 실행 및 분석
-&nbsp;추가 자료 조사 배운 점:
-추가 조사를 통해 SQL의 구조를 한 번 다시금 훑어 보는 계기가 되었다.
-느낀 점:
-적당히 쓰는 건 어렵지 않은데, 잘 쓰긴 어려운 SQL…
-다음에 개선할 점:
-생각해 보면 빅데이터로 부를 만한 큰 데이터를 다룬 적은 크게 없는 것 같다. 우선 BigQuery에서 공공 데이터로 Indexing 테스트를 해봐야 겠다.
-]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/3w-sql-문법.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/3W - SQL 문법.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 05 Dec 2024 15:00:00 GMT</pubDate></item><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
+]]></description><link>https://64etuor.github.io/machine-learning/algorithm/k-평균-클러스터링-알고리즘.html</link><guid isPermaLink="false">Machine Learning/Algorithm/K-평균 클러스터링 알고리즘.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:35:42 GMT</pubDate></item><item><title><![CDATA[Portfolio_English]]></title><description><![CDATA[
 🖐️ Hello, I'm Yang-ha Park, a Process Technology Engineer pursuing innovation through data analysis and IT technology.
 I have developed the following skills through my experience in production management, process management, and quality control. As an engineer with a humanities background, I've consistently improved company processes and quality by combining humanistic thinking with engineering knowledge, viewing problems from diverse perspectives through continuous learning and contemplation.
 Created foundations for collecting reliable data, properly analyzing accumulated data to suggest company directions, and building evidence to solve problems.
