@@ -1,25 +1,9 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sat, 14 Dec 2024 12:36:18 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 14 Dec 2024 12:36:15 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[K-평균 클러스터링 알고리즘]]></title><description><![CDATA[K-평균 클러스터링은 비지도 학습(unsupervised learning) 방식의 군집화(clustering) 알고리즘입니다. 데이터를 K개의 클러스터로 나누고, 각 클러스터에 속하는 데이터들이 최대한 비슷하게 되도록 하는 알고리즘입니다. 비지도 학습: 정답(레이블) 없이 데이터를 그룹화하는 학습 방식입니다. 클러스터: 비슷한 특성을 가진 데이터들의 그룹입니다. 중심점(센트로이드): 각 클러스터의 중심을 나타내는 점입니다.
-K-평균 클러스터링에서는 이 중심점을 기준으로 데이터를 나눕니다. K개의 초기 중심점(centroids)을 무작위로 설정합니다.
-각 데이터 포인트를 가장 가까운 중심점에 할당하여 클러스터를 형성합니다.
-각 클러스터에 대해 새로운 중심점을 계산합니다 (클러스터 내 데이터들의 평균값).
-중심점이 더 이상 변화하지 않을 때까지 2번과 3번 단계를 반복합니다.
-import numpy as np
-from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt # 데이터 생성
-data = np.array([[1, 2], [1, 4], [1, 0], [4, 2], [4, 4], [4, 0]]) # K-평균 클러스터링 모델 생성 (K=2)
-kmeans = KMeans(n_clusters=2, random_state=0).fit(data) # 예측된 클러스터 레이블
-print(kmeans.labels_) # 클러스터 중심점 출력
-print(kmeans.cluster_centers_) # 시각화
-plt.scatter(data[:, 0], data[:, 1], c=kmeans.labels_, cmap='viridis')
-plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='red', marker='x')
-plt.title("K-Means Clustering")
-plt.show() 간단하고 빠른 연산: 비교적 간단한 수학적 원리로 구현되며 빠르게 동작합니다.
-대규모 데이터에 효율적: 큰 데이터셋에서도 효율적으로 군집화할 수 있습니다. K값 설정 필요: 클러스터 개수(K)를 사전에 지정해야 합니다.
-초기 중심점에 민감: 초기 중심점에 따라 결과가 달라질 수 있습니다.
-비구형 데이터에 부적합: 클러스터가 구형(원형)에 가까운 경우에 적합하며, 복잡한 형태의 데이터는 잘 분류하지 못합니다. 고객 세분화: 고객 데이터를 기반으로 그룹화하여 타겟 마케팅에 활용합니다.
-이미지 압축: 비슷한 색상을 하나의 클러스터로 묶어 이미지 크기를 줄입니다.
-이상 탐지: 비정상적인 데이터 패턴을 감지합니다.
-]]></description><link>https://64etuor.github.io/machine-learning/algorithm/k-평균-클러스터링-알고리즘.html</link><guid isPermaLink="false">Machine Learning/Algorithm/K-평균 클러스터링 알고리즘.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:35:42 GMT</pubDate></item><item><title><![CDATA[4W - 재무&고객 데이터 분석]]></title><description><![CDATA[2024-12-14 Python과 MySQL 연동 이해
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sat, 14 Dec 2024 12:57:11 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 14 Dec 2024 12:57:08 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[Untitled]]></title><description><![CDATA[ 프로젝트의 목표를 작성한다. 프로젝트의 일정을 작성한다.
+프로젝트의 일정을 표현하는 라는 태그를 달아서 tasks에서 볼 수 있도록 한다.
+내가 설정한 Milestone 마감 기한도 이곳에 작성한다. ## 💎Milestones
+&gt; 중간 지점을 표현한다
+각 마일스톤을 달성하기 위해서 필요한 태스크들을 하나씩 열거한다.
+할당시간과 그에 따른 마감일 기록한다. 스케쥴을 바탕으로 Gantt 차트를 작성한다. ## Reference]]></description><link>https://64etuor.github.io/project-management/project-gantt.html</link><guid isPermaLink="false">Project Management/Project Gantt.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:57:03 GMT</pubDate></item><item><title><![CDATA[Minimalism_Home]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:55:24 GMT</pubDate></item><item><title><![CDATA[4W - 재무&고객 데이터 분석]]></title><description><![CDATA[2024-12-14 Python과 MySQL 연동 이해
 재무 및 고객 데이터 분석
 시각화 및 실습 프로젝트 라이브러리:&nbsp;mysql.connector를 사용해 MySQL 데이터베이스와 Python을 연결 목표: 고객 중에서 구매 금액이 높은 VIP 고객을 식별합니다.
 분석 방법: MySQL에서 고객별 총 구매 금액을 계산합니다.
@@ -43,8 +27,73 @@ Python으로 지도 시각화 또는 바 차트를 그려 비교합니다. 목�
 분석 방법: 월별 또는 분기별 판매 데이터를 수집합니다.
 트렌드를 분석하고 마케팅 전략에 반영합니다. &nbsp;핵심 개념 이해
 &nbsp;실습 코드 실행 및 분석
-&nbsp;추가 자료 조사 배운 점: 느낀 점: 다음에 개선할 점:
-]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/4w-재무&amp;고객-데이터-분석.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/4W - 재무&amp;고객 데이터 분석.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[3W - SQL 문법]]></title><description><![CDATA[2024-12-6 SQL의 기본 문법을 이해한다. <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a><br>
+&nbsp;추가 자료 조사 배운 점:
+고객 세분화에 널리 사용되는 K-평균 클러스터링이 간략하게 소개되어 추가적인 자료 조사를 했다.
+느낀 점:
+머신러닝 알고리즘의 적용 예가 처음으로 등장했다. 앞으로는 좀 재밌는 분석 방법이 많이 등장했으면 좋겠다.
+다음에 개선할 점:<br>
+제품 캐즘의 극복과 PLM 관리를 위해 위와 같은 분석을 적용하면 어떨까 찾아 보던 중 2019년에 작성된 기사를 하나 발견했다. <a data-tooltip-position="top" aria-label="https://www.2e.co.kr/news/articleView.html?idxno=205794" rel="noopener nofollow" class="external-link is-unresolved" href="https://www.2e.co.kr/news/articleView.html?idxno=205794" target="_self">빅데이터 캐즘 극복 과제</a> 그런데 실제로 연구가 된 결과는 찾아 보기가 어려웠다. 아마 기업 내부 데이터들로만 보관하는 걸까. 시간이 허락한다면 더 자세히 조사해 보도록 해야겠다. <a href="https://64etuor.github.io?query=tag:todo" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#todo">#todo</a>
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/4w-재무&amp;고객-데이터-분석.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/4W - 재무&amp;고객 데이터 분석.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[3W - 커머스 데이터 분석]]></title><description><![CDATA[ 우수민 강사님 vlog <a rel="noopener nofollow" class="external-link is-unresolved" href="https://velog.io/@yuuuye/" target="_self">https://velog.io/@yuuuye/</a>
+2024-12-7 Google BigQuery 데이터를 Pandas로 분석하는 방법을 이해한다.
+각종 마케팅 데이터 분석 기법을 이해한다. 핵심 내용: Pandas 기본 사용법 Series와 DataFrame 생성
+s = pd.Series([1, 3, 5, np.nan, 6, 8]) # Series 생성
+df = pd.DataFrame(np.random.randn(6, 4), columns=['A', 'B', 'C', 'D']) # DataFrame 생성 데이터 확인 head(), tail()로 데이터의 처음과 끝 확인
+df.head()
+df.tail() 딕셔너리로 DataFrame 생성
+df_dict = pd.DataFrame({ 'A': 1., 'B': pd.Timestamp('20130101'), 'C': pd.Series(1, index=list(range(4)), dtype='float32'), 'D': np.array([3]*4, dtype='int32'), 'E': pd.Categorical(['test', 'train', 'test', 'train']), 'F': 'str'
+}) 핵심 내용: BigQuery 연동
+from google.oauth2 import service_account
+from google.cloud import bigquery SERVICE_ACCOUNT_FILE = "./api_key.json"
+credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE)
+client = bigquery.Client(credentials=credentials, project="project-id") 쿼리 실행 및 데이터 불러오기
+def import_bigquery_data(query): query_job = client.query(query) return query_job.to_dataframe() data = import_bigquery_data(""" SELECT * FROM `public-data` LIMIT 10
+""") BigQuery 데이터를 Pandas로 처리
+products = import_bigquery_data("SELECT * FROM `public-data.table`") 핵심 내용: 매출 분석 매출 데이터 전처리 및 병합
+using_order_items = order_items[~order_items['status'].isin(['Cancelled', 'Returned'])]
+using_orders = orders[['order_id', 'user_id', 'num_of_item']]
+using_merge_data = pd.merge(using_order_items, using_orders, on='order_id')
+using_merge_data['revenue'] = using_merge_data['num_of_item'] * using_merge_data['sale_price'] 월별 매출 집계
+result1 = using_merge_data.groupby('month')[['order_id', 'user_id', 'revenue']].agg({ 'order_id': 'nunique', 'user_id': 'nunique', 'revenue': 'sum'
+}) 핵심 내용: 파레토 차트 분석 파레토 법칙을 적용하여 주요 카테고리 분석
+count_data = using_data['category'].value_counts()
+ratio = (count_data / count_data.sum()).cumsum() 파레토 차트 시각화
+fig, ax = plt.subplots(figsize=(20, 12))
+ax.bar(count_data.index, count_data.values)
+line_chart = ax.twinx()
+line_chart.plot(count_data.index, ratio, '-g^', alpha=0.5) 핵심 내용: 퍼널 분석 (AARRR 모델) 획득, 활성화, 유지, 매출, 추천 단계 분석 using_merge_data = pd.merge(order_items, orders, on='order_id')
+using_merge_data['revenue'] = using_merge_data['num_of_item'] * using_merge_data['sale_price'] 핵심 내용: 리텐션 분석 (Cohort Analysis) 코호트별 사용자 유지율 분석
+first_order_data = using_order_data.groupby('user_id')['order_dt'].min().reset_index()
+merge_data = pd.merge(using_order_data, first_order_data, on='user_id')
+user_retention = cohorts.divide(cohorts[0], axis=0) 리텐션 시각화
+sns.heatmap(user_retention, annot=True, fmt=".0%") &nbsp;핵심 개념 이해
+&nbsp;실습 코드 실행 및 분석
+&nbsp;추가 자료 조사 배운 점:
+마케팅 분석에 사용하는 여러 가지 기법에 대한 이해도가 생겼다.
+느낀 점:
+구글 클라우드를 이전에 사용해 본 적이 있어서 BigQuery 연동은 어렵지 않았다. 다만 BigQuery를 연결 확인하는 과정에서 강의 화면에 처음 보는 테이블이 연결되어 있길래 내가 강의를 대충 봐서 뭔갈 놓친 줄 알고 그전 강의를 다 돌려봤다. 결국 찾지 못하고 아무 테이블이나 연결해서 연동 테스트를 했는데 나중에 해당 테이블 주소를 강사님이 고치시더라… 또 몰려오는 피로감.
+다음에 개선할 점:
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/3w-커머스-데이터-분석.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/3W - 커머스 데이터 분석.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 06 Dec 2024 15:00:00 GMT</pubDate></item><item><title><![CDATA[K-평균 클러스터링 알고리즘]]></title><description><![CDATA[K-평균 클러스터링은 비지도 학습(unsupervised learning) 방식의 군집화(clustering) 알고리즘입니다. 데이터를 K개의 클러스터로 나누고, 각 클러스터에 속하는 데이터들이 최대한 비슷하게 되도록 하는 알고리즘입니다. 비지도 학습: 정답(레이블) 없이 데이터를 그룹화하는 학습 방식입니다. 클러스터: 비슷한 특성을 가진 데이터들의 그룹입니다. 중심점(센트로이드): 각 클러스터의 중심을 나타내는 점입니다.
+K-평균 클러스터링에서는 이 중심점을 기준으로 데이터를 나눕니다. K개의 초기 중심점(centroids)을 무작위로 설정합니다.
+각 데이터 포인트를 가장 가까운 중심점에 할당하여 클러스터를 형성합니다.
+각 클러스터에 대해 새로운 중심점을 계산합니다 (클러스터 내 데이터들의 평균값).
+중심점이 더 이상 변화하지 않을 때까지 2번과 3번 단계를 반복합니다.
+import numpy as np
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt # 데이터 생성
+data = np.array([[1, 2], [1, 4], [1, 0], [4, 2], [4, 4], [4, 0]]) # K-평균 클러스터링 모델 생성 (K=2)
+kmeans = KMeans(n_clusters=2, random_state=0).fit(data) # 예측된 클러스터 레이블
+print(kmeans.labels_) # 클러스터 중심점 출력
+print(kmeans.cluster_centers_) # 시각화
+plt.scatter(data[:, 0], data[:, 1], c=kmeans.labels_, cmap='viridis')
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='red', marker='x')
+plt.title("K-Means Clustering")
+plt.show() 간단하고 빠른 연산: 비교적 간단한 수학적 원리로 구현되며 빠르게 동작합니다.
+대규모 데이터에 효율적: 큰 데이터셋에서도 효율적으로 군집화할 수 있습니다. K값 설정 필요: 클러스터 개수(K)를 사전에 지정해야 합니다.
+초기 중심점에 민감: 초기 중심점에 따라 결과가 달라질 수 있습니다.
+비구형 데이터에 부적합: 클러스터가 구형(원형)에 가까운 경우에 적합하며, 복잡한 형태의 데이터는 잘 분류하지 못합니다. 고객 세분화: 고객 데이터를 기반으로 그룹화하여 타겟 마케팅에 활용합니다.
+이미지 압축: 비슷한 색상을 하나의 클러스터로 묶어 이미지 크기를 줄입니다.
+이상 탐지: 비정상적인 데이터 패턴을 감지합니다.
+]]></description><link>https://64etuor.github.io/machine-learning/algorithm/k-평균-클러스터링-알고리즘.html</link><guid isPermaLink="false">Machine Learning/Algorithm/K-평균 클러스터링 알고리즘.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:35:42 GMT</pubDate></item><item><title><![CDATA[3W - SQL 문법]]></title><description><![CDATA[2024-12-6 SQL의 기본 문법을 이해한다. <a data-href="📚 623 SQL" href="https://64etuor.github.io/indexing-files/📚-623-sql.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📚 623 SQL</a><br>
 //backlink 생성 이슈로 현재 빈 페이지로 연결됨 2024.12.10 원인 찾는 중) <a href="https://64etuor.github.io?query=tag:issue" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#issue">#issue</a>
 SQL은 따로 정리해 둔 문서가 있어서 내용을 정리하진 않았다. &nbsp;핵심 개념 이해
 &nbsp;실습 코드 실행 및 분석
@@ -325,12 +374,7 @@ Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) 이슈 로그 (구글 드
 연구 결과 문서 (구글 드라이브 URL / Hook) 참고 문서 및 자료 링크 (구글 드라이브 URL / Hook) 중요 참고 사이트 및 도구 링크 (구글 드라이브 URL / Hook) 관련 프로젝트/업무 링크 (구글 드라이브 URL / Hook)
 연관 문서 및 기록 (구글 드라이브 URL / Hook) 주요 보도 내용 (구글 드라이브 URL / Hook)
 보도자료 PDF (구글 드라이브 URL / Hook)
-]]></description><link>https://64etuor.github.io/project-management/project_pmbok(goverment-initiative).html</link><guid isPermaLink="false">Project Management/Project_PMBOK(Goverment Initiative).md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:08:18 GMT</pubDate></item><item><title><![CDATA[Untitled]]></title><description><![CDATA[ 프로젝트의 목표를 작성한다. 프로젝트의 일정을 작성한다.
-프로젝트의 일정을 표현하는 라는 태그를 달아서 tasks에서 볼 수 있도록 한다.
-내가 설정한 Milestone 마감 기한도 이곳에 작성한다. ## 💎Milestones
-&gt; 중간 지점을 표현한다
-각 마일스톤을 달성하기 위해서 필요한 태스크들을 하나씩 열거한다.
-할당시간과 그에 따른 마감일 기록한다. 스케쥴을 바탕으로 Gantt 차트를 작성한다. ## Reference]]></description><link>https://64etuor.github.io/project-management/project-gantt.html</link><guid isPermaLink="false">Project Management/Project Gantt.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:08:02 GMT</pubDate></item><item><title><![CDATA[Project Rhizomatic Arrangement]]></title><description><![CDATA[
+]]></description><link>https://64etuor.github.io/project-management/project_pmbok(goverment-initiative).html</link><guid isPermaLink="false">Project Management/Project_PMBOK(Goverment Initiative).md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:08:18 GMT</pubDate></item><item><title><![CDATA[Project Rhizomatic Arrangement]]></title><description><![CDATA[
 프로젝트명: {{title}}
 생성 날짜: {{date}}
 강도(Intensity): {{high|medium|low}}
@@ -392,7 +436,7 @@ Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) 이슈 로그 (구글 드
 소련군의 사진을 찍는 테레사 <a href="https://64etuor.github.io?query=tag:영혼" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#영혼">#영혼</a>]]></description><link>https://64etuor.github.io/books/bookshelf/참을-수-없는-존재의-가벼움.html</link><guid isPermaLink="false">Books/Bookshelf/참을 수 없는 존재의 가벼움.md</guid><dc:creator><![CDATA[밀란 쿤데라, 이재룡]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:10:01 GMT</pubDate><enclosure url="https://64etuor.github.io/assets/image/pasted-image-20240119221555.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/assets/image/pasted-image-20240119221555.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Obsidian Callout list]]></title><description><![CDATA[☑️
 ✔️
 📋
-🕒<img alt="Pasted image 20241211085510.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241211085510.png" target="_self">&gt; 이미지 출처 : Naver Cafe 옵시디언 사용자 모임 <a rel="noopener nofollow" class="external-link is-unresolved" href="https://cafe.naver.com/obsidianary" target="_self">https://cafe.naver.com/obsidianary</a>]]></description><link>https://64etuor.github.io/obsidian/obsidian-callout-list.html</link><guid isPermaLink="false">Obsidian/Obsidian Callout list.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 04:54:43 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241211085510.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241211085510.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Minimalism_Home]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 03:27:24 GMT</pubDate></item><item><title><![CDATA[AI-related Websites and Apps List]]></title><description><![CDATA[AI 관련 유용한 툴의 공식 홈페이지 및 Github Repositories 입니다.Index: <a data-href="📖 610 Generative AI" href="https://64etuor.github.io/indexing-files/📖-610-generative-ai.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 610 Generative AI</a>]]></description><link>https://64etuor.github.io/ai/ai-related-websites-and-apps-list.html</link><guid isPermaLink="false">AI/AI-related Websites and Apps List.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 03:25:01 GMT</pubDate></item><item><title><![CDATA[Window]]></title><description><![CDATA[Window functions in SQL perform calculations across a set of table rows related to the current row. Unlike aggregate functions (e.g., SUM, AVG), window functions do not collapse rows into a single output row. Instead, they provide a result for each row while considering a "window" or subset of rows defined by a specific criterion.window_function(expression) OVER (PARTITION BY column_name ORDER BY column_name) window_function: The specific function to apply, such as ROW_NUMBER(), RANK(), SUM(), AVG(), etc.
+🕒<img alt="Pasted image 20241211085510.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241211085510.png" target="_self">&gt; 이미지 출처 : Naver Cafe 옵시디언 사용자 모임 <a rel="noopener nofollow" class="external-link is-unresolved" href="https://cafe.naver.com/obsidianary" target="_self">https://cafe.naver.com/obsidianary</a>]]></description><link>https://64etuor.github.io/obsidian/obsidian-callout-list.html</link><guid isPermaLink="false">Obsidian/Obsidian Callout list.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 04:54:43 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241211085510.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241211085510.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[AI-related Websites and Apps List]]></title><description><![CDATA[AI 관련 유용한 툴의 공식 홈페이지 및 Github Repositories 입니다.Index: <a data-href="📖 610 Generative AI" href="https://64etuor.github.io/indexing-files/📖-610-generative-ai.html#_0" class="internal-link" target="_self" rel="noopener nofollow">📖 610 Generative AI</a>]]></description><link>https://64etuor.github.io/ai/ai-related-websites-and-apps-list.html</link><guid isPermaLink="false">AI/AI-related Websites and Apps List.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 03:25:01 GMT</pubDate></item><item><title><![CDATA[Window]]></title><description><![CDATA[Window functions in SQL perform calculations across a set of table rows related to the current row. Unlike aggregate functions (e.g., SUM, AVG), window functions do not collapse rows into a single output row. Instead, they provide a result for each row while considering a "window" or subset of rows defined by a specific criterion.window_function(expression) OVER (PARTITION BY column_name ORDER BY column_name) window_function: The specific function to apply, such as ROW_NUMBER(), RANK(), SUM(), AVG(), etc.
 OVER: Specifies that the function is a window function.
 PARTITION BY: (Optional) Divides the rows into partitions to perform the calculation within each partition.
 ORDER BY: (Optional) Defines the order of rows within the partition. Assigns a unique sequential number to each row within a partition.
