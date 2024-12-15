@@ -1,4 +1,189 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sat, 14 Dec 2024 14:47:52 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 14 Dec 2024 14:47:46 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[4W - 재무&고객 데이터 분석]]></title><description><![CDATA[2024-12-14 Python과 MySQL 연동 이해
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sun, 15 Dec 2024 05:23:56 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 15 Dec 2024 05:23:48 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[git commands]]></title><description><![CDATA[Git은 분산 버전 관리 시스템(Distributed Version Control System)으로, 소스 코드나 문서 등의 파일 변경 이력을 효율적으로 관리하고 협업을 돕습니다. 로컬 저장소(Local Repository)와 원격 저장소(Remote Repository)를 함께 사용함으로써 협업 시 충돌 관리, 히스토리 추적, 백업 및 복원이 용이합니다.<a data-tooltip-position="top" aria-label="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fn-1" rel="noopener nofollow" class="external-link is-unresolved" href="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fn-1" target="_self">1</a>이 문서에서는 가장 자주 사용되는 Git 명령어들을 아주 자세히 정리합니다. 사용자 정보 설정 Git은 모든 커밋에 작성자 정보를 담습니다.
+전역 설정(모든 저장소에 적용)
+git config --global user.name "사용자이름"
+git config --global user.email "사용자이메일@example.com" 특정 저장소 내에서만 설정
+git config user.name "사용자이름"
+git config user.email "사용자이메일@example.com" 기본 에디터 설정 Git 명령어 실행 중 편집기 호출 시 사용할 에디터 지정
+git config --global core.editor "vim" 환경 설정 확인 현재 Git 설정값 확인
+git config --list 저장소 초기화 현재 디렉토리를 로컬 Git 저장소로 초기화합니다.
+git init 실행 후 .git 디렉토리가 생성되며, 여기에는 Git 히스토리와 설정파일이 들어있습니다. 원격 저장소 복제 (Clone) 원격 저장소(remote repository)를 로컬로 복제
+git clone &lt;원격저장소URL&gt; [로컬디렉토리명] 옵션 --depth 1: 히스토리를 가장 최근 커밋까지만 가져오는 "shallow clone"
+예제
+git clone https://github.com/username/repo.git 상태 확인 (Status) 현재 작업 디렉토리의 변경 사항 추적 상황을 표시합니다.
+git status 추적되지 않은 파일, 수정되었으나 스테이징하지 않은 파일, 스테이징된 파일을 구분해서 보여줍니다. 변경사항 비교 (Diff) 작업 디렉토리와 스테이징 영역의 차이 비교
+git diff 스테이징 영역과 마지막 커밋의 차이 비교
+git diff --staged 특정 파일 변경사항 비교
+git diff &lt;파일명&gt; 파일 추가 (Add) 작업 디렉토리의 변경 사항(추가/수정/삭제)을 스테이징 영역으로 올립니다.
+git add &lt;파일명 또는 디렉토리명&gt; 모든 변경사항 스테이징
+git add . 특정 확장자 파일 전체 스테이징
+git add *.txt 커밋 (Commit) 스테이징 영역에 있는 변경사항을 기록(커밋)합니다.
+git commit -m "커밋 메시지" 마지막 커밋 메시지 수정
+git commit --amend -m "수정된 커밋 메시지" <br>수정된 커밋은 새로운 커밋 해시를 가지며, 원격에 이미 푸시된 경우 주의가 필요합니다.<a data-tooltip-position="top" aria-label="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fn-2" rel="noopener nofollow" class="external-link is-unresolved" href="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fn-2" target="_self">2</a> 브랜치 조회
+git branch 현재 로컬에 존재하는 브랜치를 보여주며, 현재 체크아웃된 브랜치는 앞에 * 표시가 있습니다. 브랜치 생성
+git branch &lt;브랜치명&gt; 현재 HEAD 기준으로 새로운 브랜치를 생성합니다. 브랜치 변경(체크아웃, Checkout)
+git checkout &lt;브랜치명&gt; 다른 브랜치로 이동(HEAD 포인터를 해당 브랜치로 변경)합니다.
+새 브랜치 생성과 동시에 체크아웃
+git checkout -b &lt;브랜치명&gt; 브랜치 삭제
+git branch -d &lt;브랜치명&gt; 해당 브랜치를 삭제합니다.
+병합되지 않은 변경사항이 있으면 안전을 위해 -D 옵션을 사용해야 합니다. 브랜치 병합(Merge)
+git merge &lt;합칠브랜치명&gt; 현재 체크아웃된 브랜치에 &lt;합칠브랜치명&gt;의 변경사항을 병합합니다. Merge 두 브랜치의 히스토리를 통합하는 명령어입니다.
+별도의 병합 커밋(Merge commit)을 생성하는 경우, 히스토리가 분기 후 다시 합쳐지는 형태를 남깁니다. Rebase
+git rebase &lt;기준브랜치&gt; 히스토리를 재정렬하여, 마치 한 줄로 이어진 것처럼 만듭니다.
+<br>병합 커밋 없이 깔끔한 히스토리를 유지하지만, 이미 공유된 커밋을 재베이스하는 것은 충돌 및 혼선을 야기할 수 있으므로 주의가 필요합니다.<a data-tooltip-position="top" aria-label="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fn-3" rel="noopener nofollow" class="external-link is-unresolved" href="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fn-3" target="_self">3</a> 원격 저장소 추가 (Remote Add)
+git remote add &lt;원격이름&gt; &lt;원격URL&gt; 보통 origin이라는 이름으로 원격 저장소를 추가합니다. 원격 저장소 조회 (Remote -v)
+git remote -v 현재 로컬 저장소와 연결된 원격 저장소 목록 및 URL을 확인합니다. 원격 저장소로 푸시 (Push)
+git push &lt;원격이름&gt; &lt;브랜치명&gt; 로컬의 변경사항을 원격 저장소로 업로드합니다.
+예:
+git push origin main 원격 저장소로부터 가져오기 (Fetch, Pull) 원격 저장소의 변경사항을 로컬에 가져오기
+git fetch &lt;원격이름&gt; 이 명령어는 원격의 변경사항을 로컬 저장소의 원격 추적 브랜치(remote tracking branch)에 반영하지만, 현재 작업 브랜치에는 합치지 않습니다. 원격 변경사항을 로컬 브랜치에 병합(Fetch + Merge)
+git pull &lt;원격이름&gt; &lt;브랜치명&gt; 예:
+git pull origin main git pull은 내부적으로 git fetch 후 git merge를 자동으로 수행합니다. 충돌(Conflict) 발생 시 충돌 파일을 수정한 뒤 스테이징, 커밋을 통해 해결합니다. 원격 브랜치 추적하기
+git checkout -b &lt;로컬브랜치명&gt; &lt;원격이름&gt;/&lt;원격브랜치명&gt; 원격 브랜치를 로컬 브랜치로 체크아웃하여 추적 브랜치를 생성합니다. 로그 조회 (Log)
+git log 커밋 히스토리를 표시합니다.
+옵션 --oneline: 한 줄로 간단히 표시
+--graph: 그래픽 형태(텍스트 기반)로 브랜치 구조 표시
+--decorate: 레퍼런스(브랜치, 태그) 표시
+예:
+git log --oneline --graph --decorate 특정 파일 히스토리 조회
+git log -- &lt;파일명&gt; 해당 파일의 변경 히스토리만 추적합니다. 커밋간 차이 비교
+git diff &lt;커밋해시1&gt; &lt;커밋해시2&gt; 두 특정 커밋 간의 변경사항을 비교합니다. Reset
+git reset &lt;옵션&gt; &lt;커밋해시&gt; 로컬 히스토리를 특정 커밋 시점으로 되돌립니다.
+옵션 --soft: 워킹 디렉토리와 스테이징 영역은 유지, HEAD만 옮김
+--mixed: 스테이징 영역은 초기화, 워킹 디렉토리는 유지
+--hard: 워킹 디렉토리, 스테이징 영역 모두 해당 커밋 상태로 돌아감 주의: 이미 원격에 푸시한 커밋을 reset하는 것은 협업에 혼선을 줄 수 있습니다. Revert
+git revert &lt;커밋해시&gt; 지정한 커밋을 취소하는 "새로운 커밋"을 추가합니다.
+<br>기존 히스토리는 유지하면서, 특정 변경사항을 되돌리는 안전한 방식입니다.<a data-tooltip-position="top" aria-label="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fn-4" rel="noopener nofollow" class="external-link is-unresolved" href="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fn-4" target="_self">4</a> Checkout (커밋 혹은 파일 상태로 돌아가기)
+git checkout &lt;커밋해시&gt; -- &lt;파일명&gt; 특정 커밋 시점의 파일 상태로 돌아가고, 그 상태를 현재 워킹 디렉토리에 반영합니다.
+이후 git add와 git commit으로 변경사항을 반영할 수 있습니다. Stash 생성
+git stash 현재 워킹 디렉토리의 변경사항을 스택처럼 쌓아두어 임시 보관합니다.
+워킹 디렉토리를 깨끗한 상태로 만들며, 추후 다시 복원할 수 있습니다. Stash 목록 확인
+git stash list 쌓여있는 stash들의 목록을 표시합니다. Stash 복원 (적용)
+git stash apply [stash@{n}] stash에 임시 보관했던 변경사항을 다시 워킹 디렉토리에 반영합니다.
+stash@{n}을 지정하지 않으면 가장 최근 stash를 적용합니다. Stash 삭제
+git stash drop [stash@{n}] 지정한 stash 항목을 삭제합니다. Stash 팝
+git stash pop 가장 최근 stash를 적용하고 해당 stash를 목록에서 제거합니다. 태그 생성
+git tag &lt;태그명&gt; [커밋해시] 현재 커밋(HEAD)이나 지정한 커밋에 태그를 추가합니다.
+예:
+git tag v1.0.0 태그 목록 확인
+git tag 태그 푸시
+git push &lt;원격이름&gt; &lt;태그명&gt; 특정 태그만 원격으로 푸시합니다.
+모든 태그 푸시
+git push &lt;원격이름&gt; --tags 태그 삭제
+git tag -d &lt;태그명&gt; 로컬 태그 삭제 후 원격 태그도 삭제하려면
+git push &lt;원격이름&gt; :refs/tags/&lt;태그명&gt; 브랜치 리네임(Rename)
+git branch -m &lt;기존브랜치명&gt; &lt;새브랜치명&gt; 커밋 메시지 변경 (Amend)
+git commit --amend -m "새로운 메시지" 스테이징된 변경사항을 마지막 커밋에 포함시키고 메시지도 수정합니다. 원격 브랜치 삭제
+git push &lt;원격이름&gt; --delete &lt;브랜치명&gt; 원격 저장소에서 특정 브랜치를 삭제합니다. Git 무시 파일(.gitignore) .gitignore 파일을 생성하여 Git이 추적하지 않을 파일 패턴을 지정할 수 있습니다.
+예: *.log, node_modules/ 등을 .gitignore에 추가하면 해당 파일/디렉토리는 Git이 추적하지 않습니다. Git은 효율적인 버전 관리와 협업을 위한 핵심 도구입니다.
+기본적인 명령어(git init, git add, git commit, git push)에서부터 고급 명령어(git rebase, git revert, git stash)까지 익히면 다양한 상황에서 버전 관리를 원활하게 수행할 수 있습니다.
+항상 원격에 공유된 히스토리를 변경할 때는 팀원과 소통하고, 안전한 revert나 merge를 우선적으로 고려해야 합니다. <br>Chacon, S., &amp; Straub, B. (2014). Pro Git. Apress. <a data-tooltip-position="top" aria-label="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fnref-1" rel="noopener nofollow" class="external-link is-unresolved" href="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fnref-1" target="_self">↩</a>
+<br>이미 원격에 푸시한 커밋을 변경하는 것은 git push --force와 함께 사용할 수 있으나 협업 시 주의가 필요합니다. <a data-tooltip-position="top" aria-label="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fnref-2" rel="noopener nofollow" class="external-link is-unresolved" href="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fnref-2" target="_self">↩</a>
+<br>rebase는 팀원들과의 협의 후 사용하는 것이 좋습니다. 이미 공유된 히스토리를 재작성하면 충돌과 혼선을 야기할 수 있습니다. <a data-tooltip-position="top" aria-label="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fnref-3" rel="noopener nofollow" class="external-link is-unresolved" href="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fnref-3" target="_self">↩</a>
+<br>revert는 기존 히스토리를 파괴하지 않기 때문에 협업 시 안전한 선택입니다. <a data-tooltip-position="top" aria-label="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fnref-4" rel="noopener nofollow" class="external-link is-unresolved" href="https://chatgpt.com/c/675d9986-4754-800a-9db5-e342cb762543#user-content-fnref-4" target="_self">↩</a>
+]]></description><link>https://64etuor.github.io/works/git/git-commands.html</link><guid isPermaLink="false">Works/git/git commands.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 15 Dec 2024 01:34:06 GMT</pubDate></item><item><title><![CDATA[Second Brain Architecture]]></title><description><![CDATA[<img alt="Pasted image 20241212065305.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065305.png" target="_self"><br>
+<img alt="Pasted image 20241212065644.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065644.png" target="_self"><br><img alt="Pasted image 20241212065632.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065632.png" target="_self"><br><img alt="Pasted image 20241212065657.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065657.png" target="_self">]]></description><link>https://64etuor.github.io/project-management/second-brain-architecture.html</link><guid isPermaLink="false">Project Management/Second Brain Architecture.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 15 Dec 2024 01:29:28 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241212065305.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065305.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Rhizomatic Document Management System]]></title><description><![CDATA[
+📂 0_Inbox 🔗 <a data-href="Quick Capture" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Quick Capture</a>
+<br>🔗 <a data-href="Daily Notes" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Daily Notes</a> 📂 1_Projects <br>🔗 <a data-href="Active Projects" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Active Projects</a>
+<br>🔗 <a data-href="Project Archive" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Project Archive</a> 📂 2_Areas <br>🔗 <a data-href="Knowledge Base" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Knowledge Base</a>
+<br>🔗 <a data-href="Reference Materials" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Reference Materials</a> 📂 3_Resources <br>🔗 <a data-href="Templates" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Templates</a>
+<br>🔗 <a data-href="Assets" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Assets</a> 📂 4_Archives <br>🔗 <a data-href="Completed Projects" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Completed Projects</a>
+<br>🔗 <a data-href="Review Logs" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Review Logs</a> 📂 ProjectName_YYYY-YYYY/
+├── 📂 000_Reference/
+├── 📂 100_Input/
+├── 📂 200_Process/
+├── 📂 300_Output/
+└── 📄 project_index.md 000-099: 참조자료
+100-199: 입력문서
+200-299: 프로세스문서
+300-399: 산출물
+400+: 보관자료
+🔗 [Local Files](hook://file/localPath)
+🔗 [Cloud Files](hook://file/cloudPath)
+🔗 [[GDrive_ProjectFolder]]
+🔗 [[GDrive_SharedDocs]]
+- 📑 [[Project Template]]
+- 📑 [[Document Template]]
+- 📑 [[Review Template]] <br><a href="https://64etuor.github.io?query=tag:project" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#project">#project</a>
+<br><a href="https://64etuor.github.io?query=tag:reference" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#reference">#reference</a>
+<br><a href="https://64etuor.github.io?query=tag:process" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#process">#process</a>
+<br><a href="https://64etuor.github.io?query=tag:output" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#output">#output</a>
+<br><a href="https://64etuor.github.io?query=tag:archive" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#archive">#archive</a>
+---
+title: Document Title
+id: DOC_YYYY_NNN
+type: [reference|input|process|output]
+project: Project Name
+created: YYYY-MM-DD
+status: [active|archived]
+links: - [[Related Doc 1]] - [[Related Doc 2]]
+--- 🔍 프로젝트별 검색
+🔍 문서 유형별 검색
+🔍 상태별 검색
+🔍 날짜별 검색 📅 주간 리뷰
+📅 월간 리뷰
+📅 프로젝트 종료 리뷰
+]]></description><link>https://64etuor.github.io/project-management/rhizomatic-document-management-system.html</link><guid isPermaLink="false">Project Management/Rhizomatic Document Management System.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 15 Dec 2024 01:28:59 GMT</pubDate></item><item><title><![CDATA[Project_PMBOK(Goverment Initiative)]]></title><description><![CDATA[
+프로젝트 헌장 (구글 드라이브 URL / Hook)
+주요 목표 및 성공 기준 (구글 드라이브 URL / Hook) 이해관계자 목록 (구글 드라이브 URL / Hook)
+이해관계자 요구사항 문서 (구글 드라이브 URL / Hook) 초기 예산 개요 (구글 드라이브 URL / Hook)
+주요 제약조건 및 가정사항 (구글 드라이브 URL / Hook) WBS (구글 드라이브 URL / Hook)
+주요 마일스톤 및 일정표 (구글 드라이브 URL / Hook) 예산 계획 (구글 드라이브 URL / Hook)
+자원 배정 계획 (구글 드라이브 URL / Hook) 위험 목록 (구글 드라이브 URL / Hook)
+위험 대응 전략 (구글 드라이브 URL / Hook) 커뮤니케이션 전략 문서 (구글 드라이브 URL / Hook) Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook)
+Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook)
+Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook)
+Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) 이슈 로그 (구글 드라이브 URL / Hook)
+변경 요청서 (구글 드라이브 URL / Hook) 범위 변경 요청서 (구글 드라이브 URL / Hook)
+범위 검토 기록 (구글 드라이브 URL / Hook) 진행 상황 대조표 (구글 드라이브 URL / Hook)
+일정 변경 기록 (구글 드라이브 URL / Hook) 예산 사용 내역 (구글 드라이브 URL / Hook)
+원가 편차 분석 (구글 드라이브 URL / Hook) 품질 점검 보고서 (구글 드라이브 URL / Hook)
+품질 관리 대장 (구글 드라이브 URL / Hook) 자원 활용 현황 (구글 드라이브 URL / Hook)
+자원 재조정 계획 (구글 드라이브 URL / Hook) 의사소통 로그 (구글 드라이브 URL / Hook)
+보고서 템플릿 (구글 드라이브 URL / Hook) 위험 발생 기록 (구글 드라이브 URL / Hook)
+위험 대응 현황 (구글 드라이브 URL / Hook) 계약 상태 보고서 (구글 드라이브 URL / Hook)
+조달 현황 기록 (구글 드라이브 URL / Hook) 이해관계자 주요 커뮤니케이션 기록 (구글 드라이브 URL / Hook)
+이해관계자 변경 기록 (구글 드라이브 URL / Hook) 최종 산출물 리스트 (구글 드라이브 URL / Hook)
+검수 및 승인 기록 (구글 드라이브 URL / Hook) 프로젝트 성과 요약 (구글 드라이브 URL / Hook)
+교훈 및 개선사항 기록 (구글 드라이브 URL / Hook) 주요 아이디어 기록 (구글 드라이브 URL / Hook)
+연구 결과 문서 (구글 드라이브 URL / Hook) 참고 문서 및 자료 링크 (구글 드라이브 URL / Hook) 중요 참고 사이트 및 도구 링크 (구글 드라이브 URL / Hook) 관련 프로젝트/업무 링크 (구글 드라이브 URL / Hook)
+연관 문서 및 기록 (구글 드라이브 URL / Hook) 주요 보도 내용 (구글 드라이브 URL / Hook)
+보도자료 PDF (구글 드라이브 URL / Hook)
+]]></description><link>https://64etuor.github.io/project-management/project_pmbok(goverment-initiative).html</link><guid isPermaLink="false">Project Management/Project_PMBOK(Goverment Initiative).md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 15 Dec 2024 01:28:07 GMT</pubDate></item><item><title><![CDATA[Project Rhizomatic Arrangement]]></title><description><![CDATA[
+프로젝트명: {{title}}
+생성 날짜: {{date}}
+강도(Intensity): {{high|medium|low}}
+리좀 연결점들: {{related_projects}} 프로젝트 헌장: {{charter_url}} 생산적 욕망의 명시
+잠재적 가능성 매핑
+초기 강도 설정 이해관계자 리좀 핵심 행위자들: {{stakeholders_url}}
+욕망의 교차점: {{requirements_url}}
+잠재적 동맹관계: {{alliances_url}} 자원 흐름도: {{resource_flow_url}}
+예산 흐름도: {{budget_flow_url}}
+시간 흐름도: {{timeline_flow_url}} 작업흐름: {{workflow_1_url}}
+강도측정: {{intensity_1}}
+접속지점: {{connection_1}} 작업흐름: {{workflow_2_url}}
+강도측정: {{intensity_2}}
+접속지점: {{connection_2}} 작업흐름: {{workflow_3_url}}
+강도측정: {{intensity_3}}
+접속지점: {{connection_3}} 통합적 차이 이슈 지도: {{issues_map_url}}
+변이 기록: {{changes_log_url}} 범위의 주름 경계변형 추적: {{scope_changes_url}}
+영토확장 기록: {{scope_evolution_url}} 시간의 리듬 리듬분석: {{rhythm_analysis_url}}
+변주기록: {{variation_log_url}} 자원의 흐름 흐름도: {{resource_flow_url}}
+강도맵: {{intensity_map_url}} 품질의 차이 차이생성 기록: {{quality_diff_url}}
+강도변화 추적: {{quality_intensity_url}} 커뮤니케이션 리좀 소통맵: {{communication_map_url}}
+접속점 기록: {{connection_points_url}} 위험-기회 지도 탈주선 분석: {{risk_lines_url}}
+잠재성 지도: {{opportunity_map_url}} 성과의 주름들: {{outcomes_url}}
+학습된 변이들: {{lessons_url}}
+새로운 잠재성: {{potentials_url}} 연구 노트: {{research_notes_url}}
+참조 접속점: {{references_url}}
+북마크 평면: {{bookmarks_url}} 연관 프로젝트들: {{related_projects_url}}
+미디어 접속점들: {{media_coverage_url}}
+{{meta_notes}}
+#{{project_type}} #{{intensity_level}} #{{connection_types}}
+연결된 노드들: <a data-href="{{connected_node_1}}" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">{{connected_node_1}}</a> <a data-href="{{connected_node_2}}" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">{{connected_node_2}}</a> <a data-href="{{connected_node_3}}" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">{{connected_node_3}}</a>]]></description><link>https://64etuor.github.io/project-management/project-rhizomatic-arrangement.html</link><guid isPermaLink="false">Project Management/Project Rhizomatic Arrangement.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 15 Dec 2024 01:27:44 GMT</pubDate></item><item><title><![CDATA[Resume_English]]></title><description><![CDATA[Here is my English résumé providing a brief overview of my career. I appreciate your consideration.]]></description><link>https://64etuor.github.io/portfolio/resume_english.html</link><guid isPermaLink="false">PORTFOLIO/Resume_English.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 15 Dec 2024 01:26:58 GMT</pubDate></item><item><title><![CDATA[Project Gantt]]></title><description><![CDATA[ 프로젝트의 목표를 작성한다. 프로젝트의 일정을 작성한다.
+프로젝트의 일정을 표현하는 라는 태그를 달아서 tasks에서 볼 수 있도록 한다.
+내가 설정한 Milestone 마감 기한도 이곳에 작성한다. 중간 지점을 표현한다 각 마일스톤을 달성하기 위해서 필요한 태스크들을 하나씩 열거한다.
+할당시간과 그에 따른 마감일 기록한다. 스케쥴을 바탕으로 Gantt 차트를 작성한다.
+]]></description><link>https://64etuor.github.io/project-management/project-gantt.html</link><guid isPermaLink="false">Project Management/Project Gantt.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 15 Dec 2024 01:19:50 GMT</pubDate></item><item><title><![CDATA[4W - 재무&고객 데이터 분석]]></title><description><![CDATA[2024-12-14 Python과 MySQL 연동 이해
 재무 및 고객 데이터 분석
 시각화 및 실습 프로젝트 라이브러리:&nbsp;mysql.connector를 사용해 MySQL 데이터베이스와 Python을 연결 목표: 고객 중에서 구매 금액이 높은 VIP 고객을 식별합니다.
 분석 방법: MySQL에서 고객별 총 구매 금액을 계산합니다.
@@ -259,12 +444,7 @@ SQL은 따로 정리해 둔 문서가 있어서 내용을 정리하진 않았다
 적당히 쓰는 건 어렵지 않은데, 잘 쓰긴 어려운 SQL…
 다음에 개선할 점:
 생각해 보면 빅데이터로 부를 만한 큰 데이터를 다룬 적은 크게 없는 것 같다. 우선 BigQuery에서 공공 데이터로 Indexing 테스트를 해봐야 겠다.
-]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/3w-sql-문법.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/3W - SQL 문법.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 05 Dec 2024 15:00:00 GMT</pubDate></item><item><title><![CDATA[Untitled]]></title><description><![CDATA[ 프로젝트의 목표를 작성한다. 프로젝트의 일정을 작성한다.
-프로젝트의 일정을 표현하는 라는 태그를 달아서 tasks에서 볼 수 있도록 한다.
-내가 설정한 Milestone 마감 기한도 이곳에 작성한다. ## 💎Milestones
-&gt; 중간 지점을 표현한다
-각 마일스톤을 달성하기 위해서 필요한 태스크들을 하나씩 열거한다.
-할당시간과 그에 따른 마감일 기록한다. 스케쥴을 바탕으로 Gantt 차트를 작성한다. ## Reference]]></description><link>https://64etuor.github.io/project-management/project-gantt.html</link><guid isPermaLink="false">Project Management/Project Gantt.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:57:03 GMT</pubDate></item><item><title><![CDATA[Minimalism_Home]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:55:24 GMT</pubDate></item><item><title><![CDATA[3W - 커머스 데이터 분석]]></title><description><![CDATA[ 우수민 강사님 vlog <a rel="noopener nofollow" class="external-link is-unresolved" href="https://velog.io/@yuuuye/" target="_self">https://velog.io/@yuuuye/</a>
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/3w-sql-문법.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/3W - SQL 문법.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 05 Dec 2024 15:00:00 GMT</pubDate></item><item><title><![CDATA[Minimalism_Home]]></title><description><![CDATA[On the route 46]]></description><link>https://64etuor.github.io/index.html</link><guid isPermaLink="false">index.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 14 Dec 2024 12:55:24 GMT</pubDate></item><item><title><![CDATA[3W - 커머스 데이터 분석]]></title><description><![CDATA[ 우수민 강사님 vlog <a rel="noopener nofollow" class="external-link is-unresolved" href="https://velog.io/@yuuuye/" target="_self">https://velog.io/@yuuuye/</a>
 2024-12-7 Google BigQuery 데이터를 Pandas로 분석하는 방법을 이해한다.
 각종 마케팅 데이터 분석 기법을 이해한다. 핵심 내용: Pandas 기본 사용법 Series와 DataFrame 생성
 s = pd.Series([1, 3, 5, np.nan, 6, 8]) # Series 생성
@@ -528,106 +708,7 @@ MES 활용 공정 현황 실시간 분석 프로세스 도입 WBS, Gantt Chart, 
 눈에 담기지 않은 모든 풍경이 기화하여
 깡그리 마른 마음으로 얄궂게 빨려 들어가고, 이내 토해져
 이 종이 위에 가나다라마바사를 나열하고 이내는
-연기와 함께 흩어졌다]]></description><link>https://64etuor.github.io/writings/poems/210605-가나다라마바사.html</link><guid isPermaLink="false">Writings/Poems/210605 - 가나다라마바사.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 13 Dec 2024 13:06:10 GMT</pubDate></item><item><title><![CDATA[Reference]]></title><description><![CDATA[자소서 쓰는 법 <a rel="noopener nofollow" class="external-link is-unresolved" href="https://brunch.co.kr/@onthepaper/23" target="_self">https://brunch.co.kr/@onthepaper/23</a>]]></description><link>https://64etuor.github.io/self-management/reference.html</link><guid isPermaLink="false">Self-Management/Reference.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:13:28 GMT</pubDate></item><item><title><![CDATA[Rhizomatic Document Management System]]></title><description><![CDATA[
-📂 0_Inbox 🔗 <a data-href="Quick Capture" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Quick Capture</a>
-<br>🔗 <a data-href="Daily Notes" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Daily Notes</a> 📂 1_Projects <br>🔗 <a data-href="Active Projects" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Active Projects</a>
-<br>🔗 <a data-href="Project Archive" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Project Archive</a> 📂 2_Areas <br>🔗 <a data-href="Knowledge Base" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Knowledge Base</a>
-<br>🔗 <a data-href="Reference Materials" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Reference Materials</a> 📂 3_Resources <br>🔗 <a data-href="Templates" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Templates</a>
-<br>🔗 <a data-href="Assets" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Assets</a> 📂 4_Archives <br>🔗 <a data-href="Completed Projects" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Completed Projects</a>
-<br>🔗 <a data-href="Review Logs" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">Review Logs</a> 📂 ProjectName_YYYY-YYYY/
-├── 📂 000_Reference/
-├── 📂 100_Input/
-├── 📂 200_Process/
-├── 📂 300_Output/
-└── 📄 project_index.md 000-099: 참조자료
-100-199: 입력문서
-200-299: 프로세스문서
-300-399: 산출물
-400+: 보관자료
-🔗 [Local Files](hook://file/localPath)
-🔗 [Cloud Files](hook://file/cloudPath)
-🔗 [[GDrive_ProjectFolder]]
-🔗 [[GDrive_SharedDocs]]
-- 📑 [[Project Template]]
-- 📑 [[Document Template]]
-- 📑 [[Review Template]] <br><a href="https://64etuor.github.io?query=tag:project" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#project">#project</a>
-<br><a href="https://64etuor.github.io?query=tag:reference" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#reference">#reference</a>
-<br><a href="https://64etuor.github.io?query=tag:process" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#process">#process</a>
-<br><a href="https://64etuor.github.io?query=tag:output" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#output">#output</a>
-<br><a href="https://64etuor.github.io?query=tag:archive" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#archive">#archive</a>
----
-title: Document Title
-id: DOC_YYYY_NNN
-type: [reference|input|process|output]
-project: Project Name
-created: YYYY-MM-DD
-status: [active|archived]
-links: - [[Related Doc 1]] - [[Related Doc 2]]
---- 🔍 프로젝트별 검색
-🔍 문서 유형별 검색
-🔍 상태별 검색
-🔍 날짜별 검색 📅 주간 리뷰
-📅 월간 리뷰
-📅 프로젝트 종료 리뷰
-]]></description><link>https://64etuor.github.io/project-management/rhizomatic-document-management-system.html</link><guid isPermaLink="false">Project Management/Rhizomatic Document Management System.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:08:52 GMT</pubDate></item><item><title><![CDATA[Project_PMBOK(Goverment Initiative)]]></title><description><![CDATA[
-프로젝트 헌장 (구글 드라이브 URL / Hook)
-주요 목표 및 성공 기준 (구글 드라이브 URL / Hook) 이해관계자 목록 (구글 드라이브 URL / Hook)
-이해관계자 요구사항 문서 (구글 드라이브 URL / Hook) 초기 예산 개요 (구글 드라이브 URL / Hook)
-주요 제약조건 및 가정사항 (구글 드라이브 URL / Hook) WBS (구글 드라이브 URL / Hook)
-주요 마일스톤 및 일정표 (구글 드라이브 URL / Hook) 예산 계획 (구글 드라이브 URL / Hook)
-자원 배정 계획 (구글 드라이브 URL / Hook) 위험 목록 (구글 드라이브 URL / Hook)
-위험 대응 전략 (구글 드라이브 URL / Hook) 커뮤니케이션 전략 문서 (구글 드라이브 URL / Hook) Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook)
-Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook)
-Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook)
-Work name(yyyy-mm-dd) (구글 드라이브 URL / Hook) 이슈 로그 (구글 드라이브 URL / Hook)
-변경 요청서 (구글 드라이브 URL / Hook) 범위 변경 요청서 (구글 드라이브 URL / Hook)
-범위 검토 기록 (구글 드라이브 URL / Hook) 진행 상황 대조표 (구글 드라이브 URL / Hook)
-일정 변경 기록 (구글 드라이브 URL / Hook) 예산 사용 내역 (구글 드라이브 URL / Hook)
-원가 편차 분석 (구글 드라이브 URL / Hook) 품질 점검 보고서 (구글 드라이브 URL / Hook)
-품질 관리 대장 (구글 드라이브 URL / Hook) 자원 활용 현황 (구글 드라이브 URL / Hook)
-자원 재조정 계획 (구글 드라이브 URL / Hook) 의사소통 로그 (구글 드라이브 URL / Hook)
-보고서 템플릿 (구글 드라이브 URL / Hook) 위험 발생 기록 (구글 드라이브 URL / Hook)
-위험 대응 현황 (구글 드라이브 URL / Hook) 계약 상태 보고서 (구글 드라이브 URL / Hook)
-조달 현황 기록 (구글 드라이브 URL / Hook) 이해관계자 주요 커뮤니케이션 기록 (구글 드라이브 URL / Hook)
-이해관계자 변경 기록 (구글 드라이브 URL / Hook) 최종 산출물 리스트 (구글 드라이브 URL / Hook)
-검수 및 승인 기록 (구글 드라이브 URL / Hook) 프로젝트 성과 요약 (구글 드라이브 URL / Hook)
-교훈 및 개선사항 기록 (구글 드라이브 URL / Hook) 주요 아이디어 기록 (구글 드라이브 URL / Hook)
-연구 결과 문서 (구글 드라이브 URL / Hook) 참고 문서 및 자료 링크 (구글 드라이브 URL / Hook) 중요 참고 사이트 및 도구 링크 (구글 드라이브 URL / Hook) 관련 프로젝트/업무 링크 (구글 드라이브 URL / Hook)
-연관 문서 및 기록 (구글 드라이브 URL / Hook) 주요 보도 내용 (구글 드라이브 URL / Hook)
-보도자료 PDF (구글 드라이브 URL / Hook)
-]]></description><link>https://64etuor.github.io/project-management/project_pmbok(goverment-initiative).html</link><guid isPermaLink="false">Project Management/Project_PMBOK(Goverment Initiative).md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:08:18 GMT</pubDate></item><item><title><![CDATA[Project Rhizomatic Arrangement]]></title><description><![CDATA[
-프로젝트명: {{title}}
-생성 날짜: {{date}}
-강도(Intensity): {{high|medium|low}}
-리좀 연결점들: {{related_projects}} 프로젝트 헌장: {{charter_url}} 생산적 욕망의 명시
-잠재적 가능성 매핑
-초기 강도 설정 이해관계자 리좀 핵심 행위자들: {{stakeholders_url}}
-욕망의 교차점: {{requirements_url}}
-잠재적 동맹관계: {{alliances_url}} 자원 흐름도: {{resource_flow_url}}
-예산 흐름도: {{budget_flow_url}}
-시간 흐름도: {{timeline_flow_url}} 작업흐름: {{workflow_1_url}}
-강도측정: {{intensity_1}}
-접속지점: {{connection_1}} 작업흐름: {{workflow_2_url}}
-강도측정: {{intensity_2}}
-접속지점: {{connection_2}} 작업흐름: {{workflow_3_url}}
-강도측정: {{intensity_3}}
-접속지점: {{connection_3}} 통합적 차이 이슈 지도: {{issues_map_url}}
-변이 기록: {{changes_log_url}} 범위의 주름 경계변형 추적: {{scope_changes_url}}
-영토확장 기록: {{scope_evolution_url}} 시간의 리듬 리듬분석: {{rhythm_analysis_url}}
-변주기록: {{variation_log_url}} 자원의 흐름 흐름도: {{resource_flow_url}}
-강도맵: {{intensity_map_url}} 품질의 차이 차이생성 기록: {{quality_diff_url}}
-강도변화 추적: {{quality_intensity_url}} 커뮤니케이션 리좀 소통맵: {{communication_map_url}}
-접속점 기록: {{connection_points_url}} 위험-기회 지도 탈주선 분석: {{risk_lines_url}}
-잠재성 지도: {{opportunity_map_url}} 성과의 주름들: {{outcomes_url}}
-학습된 변이들: {{lessons_url}}
-새로운 잠재성: {{potentials_url}} 연구 노트: {{research_notes_url}}
-참조 접속점: {{references_url}}
-북마크 평면: {{bookmarks_url}} 연관 프로젝트들: {{related_projects_url}}
-미디어 접속점들: {{media_coverage_url}}
-{{meta_notes}}
-#{{project_type}} #{{intensity_level}} #{{connection_types}}
-연결된 노드들: <a data-href="{{connected_node_1}}" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">{{connected_node_1}}</a> <a data-href="{{connected_node_2}}" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">{{connected_node_2}}</a> <a data-href="{{connected_node_3}}" href="https://64etuor.github.io/.html" class="internal-link" target="_self" rel="noopener nofollow">{{connected_node_3}}</a>]]></description><link>https://64etuor.github.io/project-management/project-rhizomatic-arrangement.html</link><guid isPermaLink="false">Project Management/Project Rhizomatic Arrangement.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:07:31 GMT</pubDate></item><item><title><![CDATA[Second Brain Architecture]]></title><description><![CDATA[<img alt="Pasted image 20241212065305.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065305.png" target="_self"><br>
-<img alt="Pasted image 20241212065644.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065644.png" target="_self"><br><img alt="Pasted image 20241212065632.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065632.png" target="_self"><br><img alt="Pasted image 20241212065657.png" src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065657.png" target="_self">]]></description><link>https://64etuor.github.io/project-management/second-brain-architecture.html</link><guid isPermaLink="false">Project Management/Second Brain Architecture.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 21:56:59 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241212065305.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241212065305.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[독서 대시보드]]></title><description><![CDATA[2025년의 목표 ]]></description><link>https://64etuor.github.io/books/독서-대시보드.html</link><guid isPermaLink="false">Books/독서 대시보드.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:44:31 GMT</pubDate><enclosure url="https://image.yes24.com/goods/119826327/XL" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src="https://image.yes24.com/goods/119826327/XL"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[보랏빛 소가 온다：21세기 최고의 마케팅 바이블]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/보랏빛-소가-온다.html</link><guid isPermaLink="false">Books/Bookshelf/보랏빛 소가 온다.md</guid><dc:creator><![CDATA[세스 고딘, 이주형, 남수영]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:18:02 GMT</pubDate></item><item><title><![CDATA[세컨드 브레인 부스트]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/세컨드-브레인-부스트.html</link><guid isPermaLink="false">Books/Bookshelf/세컨드 브레인 부스트.md</guid><dc:creator><![CDATA[티아고 포르테, 이희령]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:17:58 GMT</pubDate></item><item><title><![CDATA[실용주의 프로그래머]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/실용주의-프로그래머.html</link><guid isPermaLink="false">Books/Bookshelf/실용주의 프로그래머.md</guid><dc:creator><![CDATA[데이비드 토머스, 앤드류 헌트, 정지용, 김창준]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:10:17 GMT</pubDate></item><item><title><![CDATA[참을 수 없는 존재의 가벼움]]></title><description><![CDATA[너무 어려워서 정리를 해가며 읽었다. 도저히 평가할 수 없는 위대한 작품이라고 생각한다.
+연기와 함께 흩어졌다]]></description><link>https://64etuor.github.io/writings/poems/210605-가나다라마바사.html</link><guid isPermaLink="false">Writings/Poems/210605 - 가나다라마바사.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 13 Dec 2024 13:06:10 GMT</pubDate></item><item><title><![CDATA[Reference]]></title><description><![CDATA[자소서 쓰는 법 <a rel="noopener nofollow" class="external-link is-unresolved" href="https://brunch.co.kr/@onthepaper/23" target="_self">https://brunch.co.kr/@onthepaper/23</a>]]></description><link>https://64etuor.github.io/self-management/reference.html</link><guid isPermaLink="false">Self-Management/Reference.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:13:28 GMT</pubDate></item><item><title><![CDATA[독서 대시보드]]></title><description><![CDATA[2025년의 목표 ]]></description><link>https://64etuor.github.io/books/독서-대시보드.html</link><guid isPermaLink="false">Books/독서 대시보드.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:44:31 GMT</pubDate><enclosure url="https://image.yes24.com/goods/119826327/XL" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src="https://image.yes24.com/goods/119826327/XL"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[보랏빛 소가 온다：21세기 최고의 마케팅 바이블]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/보랏빛-소가-온다.html</link><guid isPermaLink="false">Books/Bookshelf/보랏빛 소가 온다.md</guid><dc:creator><![CDATA[세스 고딘, 이주형, 남수영]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:18:02 GMT</pubDate></item><item><title><![CDATA[세컨드 브레인 부스트]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/세컨드-브레인-부스트.html</link><guid isPermaLink="false">Books/Bookshelf/세컨드 브레인 부스트.md</guid><dc:creator><![CDATA[티아고 포르테, 이희령]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:17:58 GMT</pubDate></item><item><title><![CDATA[실용주의 프로그래머]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/실용주의-프로그래머.html</link><guid isPermaLink="false">Books/Bookshelf/실용주의 프로그래머.md</guid><dc:creator><![CDATA[데이비드 토머스, 앤드류 헌트, 정지용, 김창준]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:10:17 GMT</pubDate></item><item><title><![CDATA[참을 수 없는 존재의 가벼움]]></title><description><![CDATA[너무 어려워서 정리를 해가며 읽었다. 도저히 평가할 수 없는 위대한 작품이라고 생각한다.
 <a data-tooltip-position="top" aria-label="참을 수 없는 존재의 가벼움 > 1부 가벼움과 무거움" data-href="참을 수 없는 존재의 가벼움#1부 가벼움과 무거움" href="https://64etuor.github.io/books/bookshelf/참을-수-없는-존재의-가벼움.html#1부_가벼움과_무거움_0" class="internal-link" target="_self" rel="noopener nofollow">1부 가벼움과 무거움</a>
 2부 영혼과 육체 67
 3부 이해받지 못한 말들 139
@@ -1683,7 +1764,7 @@ Power Automate의 트리거를 바로 이 Sharepoint List에 새로운 레코드
 조건부 UI 제어
 사용자 세션 정보 저장
 데이터 캐싱
-기타 필요에 의한 상황 ]]></description><link>https://64etuor.github.io/works/microsoft/power-apps/erp-대용-솔루션-최적화-및-핵심-기능.html</link><guid isPermaLink="false">Works/Microsoft/Power Apps/ERP 대용 솔루션 최적화 및 핵심 기능.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 11:34:44 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241209135038.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241209135038.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Resume_English]]></title><description><![CDATA[Here is my English résumé providing a brief overview of my career. I appreciate your consideration.]]></description><link>https://64etuor.github.io/portfolio/resume_english.html</link><guid isPermaLink="false">PORTFOLIO/Resume_English.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 08:22:53 GMT</pubDate></item><item><title><![CDATA[Power BI 보고서 내 이미지 표시를 위한 URL Parsing]]></title><description><![CDATA[Power BI로 만든 우리 팀의 통합 대시보드의 Defect 탭에는 생산 불량과 FPY 등이 기록된다.
+기타 필요에 의한 상황 ]]></description><link>https://64etuor.github.io/works/microsoft/power-apps/erp-대용-솔루션-최적화-및-핵심-기능.html</link><guid isPermaLink="false">Works/Microsoft/Power Apps/ERP 대용 솔루션 최적화 및 핵심 기능.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 09 Dec 2024 11:34:44 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241209135038.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241209135038.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Power BI 보고서 내 이미지 표시를 위한 URL Parsing]]></title><description><![CDATA[Power BI로 만든 우리 팀의 통합 대시보드의 Defect 탭에는 생산 불량과 FPY 등이 기록된다.
 그런데 텍스트로만 표현된 불량 내역은 직관적이지 못하다.
 그래서 대시보드에서 바로 불량 사진을 확인할 수 있도록 구현하고자 했다.
 우선 구현하고자 하는 기능과 Power BI, Sharepoint List의 기능을 점검했다.
