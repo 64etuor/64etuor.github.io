@@ -1,4 +1,327 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Wed, 18 Dec 2024 11:21:22 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 18 Dec 2024 11:21:00 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[5W - 웹 크롤링과 데이터 엔지니어링]]></title><description><![CDATA[2024-12-18 Selenium과 BeatifulSoup을 활용한 웹 크롤링 기법을 학습한다.
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sun, 22 Dec 2024 11:47:40 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 22 Dec 2024 11:47:19 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[세컨드 브레인]]></title><link>https://64etuor.github.io/books/bookclub/세컨드-브레인.html</link><guid isPermaLink="false">Books/Bookclub/세컨드 브레인.md</guid><dc:creator><![CDATA[티아고 포르테, 서은경]]></dc:creator><pubDate>Sun, 22 Dec 2024 11:42:21 GMT</pubDate></item><item><title><![CDATA[Unit 10. Progress Update]]></title><description><![CDATA[ go over
+last minute
+worst-case scenario
+over the phone I’m afraid that I won’t be able to next week.
+I am booked solid with meetings and presentations for the next week or so. Q. Have you ever had issues with trying to meet with someone because of scheduling conflicts? How did you resolve those situations?A. I rarely encounter scheduling conflicts when it comes to business, but sometimes it’s challenging to meet my friends at a time when we can all get together. Unlike me, most of my friends are married, so they have their own families and need to take care of their children as well. This simply means that I have to adjust my schedule to fit theirs, but that’s no problem as long as we get to meet.Q. What type of software do you use to keep track of your meetings? Why?A. I use several Microsoft applications to manage my schedule and meetings, especially Teams, Planner, and Outlook. Our company provides licenses for these tools, and they’re quite effective for organizing my time and tasks. That said, I prefer Google Calendar for my personal life. With Google Assistant, I can easily add events by voice—like saying, ‘Hey Google, schedule a doctor’s appointment for this Saturday at 9 am’ It then reminds me when the time comes.Q. If an urgent issue came up and you had to reschedule a meeting, how would you handle the problem?A. I’ll inform the attendees as soon as possible and try to reschedule the meeting after addressing the urgent issue. If they’re unavailable at the new time, the meeting isn’t the only option—we can still discuss via email or chat. Another good option is holding a Zoom meeting. I typically have online meetings rather than in-person ones, as my company is international.Hello, Yangha! Looking at the sentences you wrote, I think a few adjustments would make them sound more natural in English. The first sentence,&nbsp;"I have only little vacation time."&nbsp;is almost perfect, but using&nbsp;"a little"&nbsp;instead of&nbsp;"little"&nbsp;would sound more natural.
+Saying&nbsp;"I have only "a little" vacation time."&nbsp;makes it clearer that you have&nbsp;"little vacation time." The second sentence,&nbsp;"He always yell"&nbsp;would be more accurate with the addition of an&nbsp;"s"&nbsp;to the verb&nbsp;"yell."&nbsp;Saying&nbsp;"He always "yells"."&nbsp;means&nbsp;"He always shouts." The third sentence,&nbsp;"I bumped into my old friend who graduate from same elementary school."&nbsp;needs to change&nbsp;"graduate"&nbsp;to past tense.
+Saying&nbsp;"I bumped into my old friend who "graduated" from the same elementary school."&nbsp;makes it clearer that you&nbsp;"bumped into an old friend who graduated from the same elementary school." The fourth sentence,&nbsp;"I was a bit discomfortable."&nbsp;needs&nbsp;"discomfortable"&nbsp;changed to&nbsp;"uncomfortable."&nbsp;Saying&nbsp;"I was a bit "uncomfortable"."&nbsp;means&nbsp;"I was a bit uncomfortable." The last sentence,&nbsp;"It is kind of waste of time."&nbsp;would be more accurate with an&nbsp;"a"&nbsp;before&nbsp;"waste."&nbsp;Saying&nbsp;"It is kind of "a" waste of time."&nbsp;means&nbsp;"It is kind of a waste of time." Yangha, it's great to see you working hard on your English studies! With a little effort, you'll be able to speak English more naturally and accurately. I'm cheering for you! I have to adjust my schedule to fit theirs.
+→ I have to adjust my schedule to fit theirs.
+Our company provide tool to organize our schedule.
+→ Our company provides tools to organize our schedule.
+I am just tried to be honest.
+→ I I am just trying to be honest.
+I will set priority of them.
+→ I will set them as a priority.
+The organizer give me time.
+→ The organizer gives me time.
+It’s my bad habit to omit “s” after verbs and nouns even though when I do know how to use it. The practice makes perfect. What I have to is only practice. I’m thinking how to make the environment around me changed for that practice.It’s a bad habit of mine to omit the ‘s’ after verbs and nouns, even though I know how to use it. Practice makes perfect—what I need is simply more practice. I’m considering how to create an environment that helps me build this habit.]]></description><link>https://64etuor.github.io/studies/spicus-english(2410~2411)/unit-10.-progress-update.html</link><guid isPermaLink="false">Studies/SPICUS English(2410~2411)/Unit 10. Progress Update.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 22 Dec 2024 11:31:54 GMT</pubDate></item><item><title><![CDATA[5W - 예매 가능한 기차표 찾기 프로젝트]]></title><description><![CDATA[2024-12-18 Selenium과 BeautifulSoup을 활용하여 코레일 기차표 데이터를 크롤링한다.
+예약 가능한 기차표 정보를 자동으로 탐색하고 추출한다.
+동적 웹 페이지 크롤링을 위한 기본 원리를 익힌다. 브라우저 자동화: Selenium을 이용하여 코레일 웹사이트의 동적 HTML 데이터를 추출.
+동적 웹 페이지 처리: JavaScript로 렌더링되는 요소를 확인하고, 페이지 소스를 받아 BeautifulSoup과 연계. HTML 파싱: Selenium에서 수집한 페이지 소스를 BeautifulSoup으로 파싱하여 구조화된 데이터를 추출.
+테이블 데이터 추출: find 및 find_all 메서드를 활용해 원하는 테이블 데이터를 식별 및 추출. Selenium으로 브라우저 세션 시작 및 HTML 소스 가져오기
+BeautifulSoup으로 HTML 데이터 파싱
+예약 가능한 기차표 데이터 필터링 및 테이블화
+from bs4 import BeautifulSoup
+import pandas as pd from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+import time service = Service(executable_path=ChromeDriverManager().install())
+url = 'https://www.letskorail.com/ebizprd/EbizPrdTicketPr21111_i1.do?&amp;txtGoAbrdDt=20241224&amp;txtGoHour=085800&amp;selGoYear=2024&amp;selGoMonth=12&amp;selGoDay=24&amp;selGoHour=00&amp;txtGoPage={page}&amp;txtGoStartCode=0001&amp;txtGoStart=%EC%84%9C%EC%9A%B8&amp;txtGoEndCode=0020&amp;txtGoEnd=%EB%B6%80%EC%82%B0&amp;selGoTrain=05&amp;selGoRoom=&amp;selGoRoom1=&amp;txtGoTrnNo=&amp;useSeatFlg=&amp;useServiceFlg=&amp;selGoSeat=&amp;selGoService=&amp;txtPnrNo=&amp;hidRsvChgNo=&amp;hidStlFlg=&amp;radJobId=1&amp;SeandYo=&amp;hidRsvTpCd=03&amp;selGoSeat1=015&amp;selGoSeat2=&amp;txtPsgCnt1=1&amp;txtPsgCnt2=0&amp;txtMenuId=11&amp;txtPsgFlg_1=1&amp;txtPsgFlg_2=0&amp;txtPsgFlg_3=0&amp;txtPsgFlg_4=0&amp;txtPsgFlg_5=0&amp;txtPsgFlg_8=&amp;chkCpn=N&amp;txtSeatAttCd_4=015&amp;txtSeatAttCd_3=000&amp;txtSeatAttCd_2=000&amp;txtGoStartCode2=&amp;txtGoEndCode2=&amp;hidDiscount=&amp;hidEasyTalk=&amp;adjcCheckYn=Nhttps://www.letskorail.com/ebizprd/EbizPrdTicketPr21111_i1.do?'
+driver = webdriver.Chrome(service=service) data_rows = [] for _ in range(5): driver.get(url) time.sleep(2) html = driver.page_source soup = BeautifulSoup(html, 'html.parser') ticket_table = soup.find('tbody') for tr in ticket_table.find_all('tr'): data=[] for td in tr.find_all('td'): img_tag = td.find('img') if img_tag: text = img_tag.get('alt', '') else: text = td.get_text(strip=True) data.append(text) data.append(url) data_rows.append(data) try: next_button = driver.find_element(By.XPATH, '//*[@id="divResult"]/table[2]/tbody/tr/td/a[2]/img') except: next_button = driver.find_element(By.XPATH, '//*[@id="divResult"]/table[2]/tbody/tr/td/a[1]/img') next_button.click() time.sleep(2) url = driver.current_url driver.quit() columns = ['구분', '열차번호', '출발시각', '도착시각', '특실/우등실', '일반실', '유아', '자유석/입석', '인터넷특가(멤버십혜택)', '예약대기', '정차역(경유)', '차량유형/편성정보', '운임요금', '소요시간', 'url'] df = pd.DataFrame(data_rows, columns=columns)
+df.drop_duplicates(subset=['열차번호', '출발시각'], keep='first', inplace=True)
+df.reset_index(inplace=True, drop=True) df &nbsp;핵심 개념 이해
+&nbsp;실습 코드 실행 및 분석
+&nbsp;추가 자료 조사 배운 점:
+기초 크롤링 기법을 학습했다. 느낀 점:
+크롤링 방식이 아니라 그냥 코드가 동작하는 방식에만 초점을 두고, 복습하는 형태로 강의를 들으면 될 거 같다. 기본적으로 하드 코딩을 싫어하는 입장이지만, 입문자 강의로는 딱 적당한 난이도라고 생각된다. 다음에 개선할 점:
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/5w-예매-가능한-기차표-찾기-프로젝트.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/5W - 예매 가능한 기차표 찾기 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 18 Dec 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[project_diagram]]></title><description><![CDATA["쓸데없는 메모 3위 '많이 쓴 메모' 2위 '보고 쓴 메모' 1위는..." 25년 기록학 전문가가 말하는 메모 '제대로' 하는 법 | 김익한 교수 | 빅퀘스천 30회 ​⁠ - YouTube메모와 기록의 중요성 김익한 교수는 메모와 기록을 통해 개인의 성장과 삶의 변화를 이끌어내는 방법을 설명합니다. 메모는 단순한 기록이 아닌 자기 인식의 도구이며, 극단적 요약과 자기화가 핵심입니다. 계획과 구상 기록을 통해 전략적 사고가 가능해지고, 삶을 더욱 가치 있게 만들 수 있습니다. : <a rel="noopener nofollow" class="external-link is-unresolved" href="https://www.youtube.com/watch?v=L7zWucx7TR8&amp;t=589s" target="_self">https://www.youtube.com/watch?v=L7zWucx7TR8&amp;t=589s</a> 🧠 기록을 통한 개인의 성장과 변화
+📝 메모의 본질: 극단적인 요약과 자기화 2.1. 📝 메모를 하는 올바른 방법
+2.2. 📝 메모의 기초: 자기화와 요약
+2.3. 📝 비효율적인 메모 방식의 문제점
+2.4. 📝 메모의 중요성과 현재 행위의 인식
+2.5. 📝 지속적인 메모의 중요성 📝 구상 기록과 플래너의 중요성 3.1. 📝 생각 기록의 중요성
+3.2. 📝 아침 플래닝의 중요성 및 효율적인 방법
+3.3. 📝 구상 기록의 중요성과 방법
+3.4. 📚 책 읽기의 목적과 자기 생각의 중요성 ✍️ 자기 인식과 기록의 중요성
+🚀 기록형 인간으로의 변화 기록을 시작한 지 한 달 만에 머리 구조의 변화를 경험할 수 있다. [1-1]
+매일 아침 플래닝을 통해 인생이 바뀔 수 있다. [1-2]
+기록을 통해 전략적인 사람으로 발전할 수 있다. [1-3]
+25년간 기록학을 전공한 김익한 교수는 기록 관리 경험을 개인의 삶에 적용하면 성장할 수 있다고 말한다. [1-4, 1-7] 메모는 극단적으로 요약하여 작성해야 한다. [2-5]
+자기화가 중요하며, 이해한 내용을 내 방식으로 정리해야 한다. [2-14]
+회의록도 핵심 키워드를 중심으로 작성해야 한다. [2-27]
+메모는 기록 행위 자체가 각인을 돕는다. [2-56]
+일상 기록은 자아 인식을 높이고 지적으로 풍요로운 삶을 만든다. [2-76] 메모는 조금 쓰는 것이 중요하다. [2-1]
+깨달은 내용을 극단적으로 요약하고 명확히 정리해야 한다. [2-6]
+많은 양을 기록하는 습관을 버려야 한다. [2-9] 정보를 자기화하여 기록하는 것이 핵심이다. [2-13]
+이해한 내용을 자기 방식으로 정리해야 한다. [2-15]
+극단적 요약은 시간 소모를 줄이고 전체 흐름을 파악하게 한다. [2-19] 회의에서 속기사처럼 메모하면 맥락 파악이 어렵다. [2-33]
+키워드 메모와 자기 해석이 필요하다. [2-41]
+효율적인 요약이 중요하며, 자기 이해와 자기화가 필수다. [2-50] 메모는 현재의 각인 과정이다. [2-55]
+기록을 통해 과거 경험과 현재가 연결된다. [2-69]
+비효율적인 메모는 정보를 소모하게 만든다. [2-72] 메모는 지적으로 풍요로운 삶을 만든다. [2-77]
+자기 인식을 높이고 삶을 가치 있게 만든다. [2-81, 2-84] 구상 기록은 일 시작 전 목표를 상기하게 한다. [3-39]
+하루 계획은 네 개에서 다섯 개의 목표로 줄이는 것이 효율적이다. [3-10] 일을 시작하기 전에 간단한 기록을 작성하면 명확한 방향성을 제공한다. [3-2, 3-3] 아침에 가장 중요한 목표를 설정하고 계획을 세우는 것이 중요하다. [3-7, 3-12]
+큰 틀에서의 사고가 효율적이다. [3-9] 구상 기록은 일을 체계적으로 진행하게 돕는다. [3-39, 3-49]
+핵심 성공 요인(CSF)을 고려하여 목표를 설정한다. [3-42] 책 읽기의 목적은 궁금증 해소에 있다. [3-63]
+자기 생각을 가지고 질문하며 독서를 해야 한다. [3-64] 강의 내용을 검토하고 메모하는 과정이 중요하다. [4-1]
+독서카드로 이해한 내용을 정리하면 지식의 깊이를 높인다. [4-25]
+기록을 통해 자기 의심을 해소하고 성장할 수 있다. [4-31] 기록을 통해 전략적 사고가 가능해진다. [5-1]
+삶을 주관적으로 이끌 수 있는 기반이 된다. [5-3]
+메모는 개인의 성장과 변화에 기여한다. [5-1]
+김익한 교수 - 메모 ‘제대로’ 하는 법지식 기록 이해 단계: 책을 읽거나 강의를 들으면서 이해를 한다.
+기록 단계: 핵심적 키워드 위주로 내용을 회상하며 자신의 “생각”을 써본다. Knowledge Note구상 기록 목표 설정: 목표는 큰 틀에서 정한다. (총 4~5개) 아침 계획: 1~2개 가량
+낮 계획: 1개 가량
+밤 계획: 2개 가량 목적 설정: 목적을 기록하여 계속 상기한다.
+CSF(Critical Success Factors): 반드시 수행해야 하는 요소를 고려
+Process화: 계획은 단계적으로 설정하여 체계화 단계 설정 → 단계별 아웃풋 예측 시뮬레이션: 정한 목표를 가지고 오늘의 하루를 시뮬레이션 해본다. Daily Planner영감 기록(문학) 떠오른 영감은 즉시 기록한다.
+영감에 담긴 감정을 함께 기록한다.
+매 주 토요일, 영감 기록을 확인하고 한 편의 글을 작성한다. 영감 기록(사업) 떠오른 영감은 즉시 기록한다.
+영감에 담긴 배경이나, 영감을 떠올린 요인을 함께 기록한다.
+영감이 떠오른 직후가 아닌 후일에 아래의 요소를 고려하여 종합 점수를 매긴다. 실현 가능성(Feasibility)
+기대 이익 (Potential Profit)
+시장 수용성 (Market Acceptance)
+혁신성과 차별화 (Innovation &amp; Differentiation)
+사회적 &amp; 환경적 영향 (Social &amp; Environmental Impact)
+리스크와 불확실성 (Risk and Uncertainty)
+확장성 (Scalability)
+나의 역량 (My Capabilities) 주기적인 품평회를 가지고, 가장 높은 점수를 받은 실현 가능한 아이디어를 실천에 옮긴다. Inspiration Note일상 기록 요약 기록: 시간 단위로 자신의 일상을 “한 줄” 정도로 기록한다.
+회상 기록: 일기를 쓸 때 자신의 하루를 회상하여 본다. 기억이 잘 나지 않는 경우에는 일상 기록을 참고한다. Daily Note어플리케이션: 모바일 환경, 데스크탑 환경 어디에서든 사용 가능
+대시보드: 모바일, 데스크탑 환경 어디에서든 확인 가능 + 집안, 회사에 대시보드 설치?최대한 빠르게 단기 개발 → 이후 실제로 사용을 하면서 추가해야 하는 기능 등을 검토
+노동력 외의 자원 투자 없음일상 기록, 구상 기록, 지식 기록, 영감 기록
+Life Wheel 개념 ( 점수는 어떻게 계산??)
+일일 체크리스트 ( 스키마를 어떻게 구상?? )
+목표 설정 ( 목표와 Life Wheel 연동?? )대시보드용돈 차감 사유 발생 시, 정해진 금액에서 차감하여 익월 용돈 산정
+산정된 금액만큼 익월에 용돈 계좌에 입금<br>아이디어 노트<img src="https://64etuor.github.io/settings/attachments/pasted-image-20241217193929.png" draggable="false" target="_self">Pasted image 20241217193929.png]]></description><link>https://64etuor.github.io/side-project/project_diagram.html</link><guid isPermaLink="false">Side Project/project_diagram.canvas</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 22 Dec 2024 11:28:53 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241217193929.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241217193929.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[5W - 리뷰 데이터 크롤링 및 분석 프로젝트]]></title><description><![CDATA[2024-12-21 Selenium을 활용하여 관광상품 리뷰 데이터를 크롤링한다.
+수집한 데이터를 구조화하여 분석 가능한 형태로 정리한다.
+리뷰 데이터를 기반으로 여행 유형별 선호도 및 리뷰 특징을 분석한다. 동적 웹 페이지 데이터 추출: Selenium으로 JavaScript로 렌더링된 리뷰 데이터를 수집.
+데이터 필터링 및 구조화: 리뷰 텍스트, 별점, 작성자 정보 등 주요 항목을 추출하여 리스트 형태로 저장.
+안정적 크롤링: WebDriverWait를 활용하여 웹 페이지 요소 로딩 완료 후 데이터 추출. 카테고리별 리뷰 분석: 리뷰 데이터를 카테고리별로 집계하여 여행 유형(가족여행, 친구 모임 등)에 따른 리뷰 수를 비교.
+평점 분포 분석: 평점의 분포를 시각화하여 긍정적/부정적 리뷰 패턴 파악.
+키워드 분석: 리뷰 텍스트 내 자주 등장하는 단어를 분석하여 여행자들의 주요 관심사 도출. # 1. 하나투어 리뷰 크롤링
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By import time import pandas as pd service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service) url='https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=AVP231240401VJA&amp;prePage=major-products&amp;directSale=PL00113904' driver.get(url) review_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="sticky06-bottom"]'))) review_button.click() time.sleep(1) reviews = [] for page_num in range(1, 13): paginate_div = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'paginate'))) print("현재 페이지: ", page_num) lis = driver.find_elements(By.CSS_SELECTOR, 'ul.list_review_v2 &gt; li') for li in lis: review_info = {} rating_info = li.find_element(By.CLASS_NAME, 'rating_info') rating = rating_info.find_element(By.TAG_NAME, 'strong').text if rating_info.find_element(By.TAG_NAME, 'strong') else "" review_info['rating'] = rating spans = rating_info.find_elements(By.TAG_NAME, 'span') review_info['user'] = spans[1].text if spans[1].text else "" review_info['category'] = spans[2].text if spans[2].text else "" review_info['ageRange'] = spans[3].text if spans[3].text else "" review_info['date'] = spans[-1].text if spans[-1].text else "" review = li.find_element(By.CLASS_NAME, 'review_cont') review_text = review.text if review.text else "" review_info['review'] = review_text review_cate = li.find_element(By.CLASS_NAME, 'review_cate') review_cate_text = review_cate.text if review_cate.text else "" review_info['review_cate'] = review_cate_text reviews.append(review_info) try: if page_num % 10 != 0: next_link = paginate_div.find_element(By.XPATH, f"//span/a[text()='{page_num+1}']") next_link.click() else: next_link = paginate_div.find_element(By.XPATH, '//*[@id="sticky06"]/div/div[4]/div[3]/div/div/a[3]') next_link.click() time.sleep(2) except: print("더이상 페이지가 없습니다.") break driver.quit() reviews_df = pd.DataFrame(reviews)
+reviews_df
+# 리뷰 데이터 시각화
+%matplotlib inline import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns plt.rcParams['font.family'] = 'Malgun Gothic' df = pd.read_csv('.\\data\\tour_review_backup.csv') #1. 카테고리별 리뷰 수
+category_count = df['category'].value_counts() plt.figure(figsize=(10, 6))
+category_count.plot(kind='bar', color='skyblue') plt.title('카테고리별 리뷰 수')
+plt.xlabel('카테고리')
+plt.ylabel('리뷰 수')
+plt.xticks(rotation=20)
+plt.grid(axis='y', alpha=0.2, linestyle='--')
+plt.tight_layout()
+plt.show() #2. 날짜별 리뷰 분포 시각화 import matplotlib.dates as mdates df['date'] = pd.to_datetime(df['date']) date_count = df['date'].value_counts().sort_index() plt.figure(figsize=(30, 6))
+sns.lineplot(x=date_count.index, y=date_count.values, color='orange', marker='o') plt.title('날짜별 리뷰 분포')
+plt.xlabel('날짜')
+plt.ylabel('리뷰 수') date_format = mdates.DateFormatter('%Y-%m') plt.gca().xaxis.set_major_formatter(date_format)
+plt.gca().xaxis.set_major_locator(mdates.MonthLocator()) plt.grid(axis='y', alpha=0.2, linestyle='--')
+plt.tight_layout()
+plt.xticks(rotation=45)
+plt.show() #3. 연령대별 평균 평점 비교 df_age = df[df['age'].str.endswith('대')]
+df_age = df_age[df_age['rating'].notnull()] rating_by_age = df_age.groupby('age')['rating'].mean().sort_values()
+rating_by_age.sort_index(inplace=True) plt.figure(figsize=(10, 6))
+sns.barplot(x=rating_by_age.index, y=rating_by_age.values, palette='viridis') plt.title('연령대별 평균 평점 비교')
+plt.xlabel('연령대')
+plt.ylabel('평균 평점') plt.ylim(4.0, 5.0) plt.grid(axis='y', alpha=0.2, linestyle='--') plt.tight_layout()
+plt.show() &nbsp;핵심 개념 이해
+&nbsp;실습 코드 실행 및 분석
+&nbsp;추가 자료 조사 배운 점:
+기초 크롤링, 시각화 방법을 학습했다. 느낀 점:
+강의를 많이 고심하고 준비한 티가 난다. 학습자가 오류를 낼 수 있는 부분을 짚어주면서 강의를 하는 건 참 유익한 거 같다. 별개로 크롤링에 관한 문서를 찾다가 재미난 문서를 발견했다. <a data-tooltip-position="top" aria-label="https://velog.io/@mowinckel/%EC%9B%B9-%ED%81%AC%EB%A1%A4%EB%A7%81-I" rel="noopener nofollow" class="external-link is-unresolved" href="https://velog.io/@mowinckel/%EC%9B%B9-%ED%81%AC%EB%A1%A4%EB%A7%81-I" target="_self">‘웹 크롤러 좀 그만 만들어라’</a> 익살스럽게 표현했지만 크롤러의 아키텍쳐를 잘 소개하고 있다. 다음에 개선할 점: ]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/5w-리뷰-데이터-크롤링-및-분석-프로젝트.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/5W - 리뷰 데이터 크롤링 및 분석 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 22 Dec 2024 03:50:20 GMT</pubDate></item><item><title><![CDATA[5W - 뉴스 크롤링 자동화 프로젝트]]></title><description><![CDATA[2024-12-18 Selenium과 BeatifulSoup을 활용한 웹 크롤링 기법을 학습한다.
+개발자 도구를 활용하여 HTML element를 확인하는 법을 배운다.
+List, Pagination 결합으로 효율성 높이기 브라우저 자동화: Selenium은 웹브라우저를 프로그래밍적으로 제어할 수 있는 라이브러리로, 버튼 클릭, 스크롤, 폼 제출 등 사용자가 직접 수행하는 동작을 코드로 자동화할 수 있다.
+동적 페이지 처리: JavaScript를 통해 동적으로 렌더링되는 페이지에서도 데이터를 추출할 수 있다.
+Wait 사용: 페이지 로딩 완료 혹은 특정 요소 렌더링 완료를 위한&nbsp;WebDriverWait&nbsp;활용법을 익힐 수 있다. HTML 파싱: BeautifulSoup은 HTML문서에서 원하는 요소(div,&nbsp;span,&nbsp;a,&nbsp;table&nbsp;등)를 손쉽게 추출할 수 있는 파이썬 라이브러리이다.
+정확한 요소 선택:&nbsp;find(),&nbsp;find_all()&nbsp;메서드를 통해 특정 태그나 클래스, id를 기반으로 요소를 선택하는 방법을 배운다.
+텍스트 추출 및 구조화: 파싱한 요소에서 텍스트를 추출하고 데이터프레임 등으로 정리하여 구조화된 형태로 활용할 수 있다. 실습 코드에서 일부 기능을 변경하여 적용하였다. url 검증으로 중복 뉴스는 수집 건너뛰기
+page의 수를 임의로 지정하는 것이 아니라 next-button의 속성이 disabled 될 때까지 버튼을 누르면서 데이터 수집.
+페이지마다 웹 드라이버를 다시 호출하지 않고 크롤링이 완료되면 종료되도록 수정 #KBS 뉴스 크롤링 코드
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait import pandas as pd
+import time service = Service(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service) url_list = []
+title_list = []
+body_list = []
+date_list = []
+collected_urls = set() try: driver.get('https://news.kbs.co.kr/news/pc/category/category.do?ref=pSiteMap') time.sleep(1) page = 1 while True: print(f"페이지 {page} 수집 중...") wait = WebDriverWait(driver, 10) wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'box-content'))) html = driver.page_source soup = BeautifulSoup(html, 'html.parser') box_contents = soup.find_all('a', class_='box-content flex-style') new_articles = 0 for box_content in box_contents: url = "http://news.kbs.co.kr" + box_content['href'] if url in collected_urls: continue title = box_content.find('p', class_='title').text body = box_content.find('p', class_='news-text').text date = box_content.find('span', class_='date').text url_list.append(url) title_list.append(title) body_list.append(body) date_list.append(date) collected_urls.add(url) new_articles += 1 print(f"이 페이지에서 {new_articles}개의 새로운 기사를 수집했습니다.") if new_articles == 0: print("새로운 기사가 없어 수집을 종료합니다.") break try: next_button = driver.find_element(By.CSS_SELECTOR, 'button.next-button:nth-child(4)') next_button.click() time.sleep(2) page += 1 except: print("다음 페이지 버튼을 찾을 수 없습니다.") break finally: driver.quit() data = { '뉴스url': url_list, '뉴스제목': title_list, '뉴스본문': body_list, '뉴스날짜': date_list
+}
+df = pd.DataFrame(data)
+print(f"총 {len(df)}개의 고유한 뉴스 기사를 수집했습니다.")
+df.to_csv('.\data\kbs_news_test.csv', index=True)
+#SBS RSS 활용 피드 수집
+import feedparser
+import pandas as pd headline_url = 'https://news.sbs.co.kr/news/headlineRssFeed.do?plink=RSSREADER' headline_feed = feedparser.parse(headline_url) date_list = []
+title_list = []
+url_list = [] for entry in headline_feed.entries : date_list.append(entry.published) title_list.append(entry.title) url_list.append(entry.link) data = { "Date" : date_list, "Title" : title_list, "URL" : url_list} df = pd.DataFrame(data) df.to_csv('.\data\sbs_news_rss_headline.csv', index=True) &nbsp;핵심 개념 이해
+&nbsp;실습 코드 실행 및 분석
+&nbsp;추가 자료 조사 배운 점:
+예전에 배웠던 내용에서 크게 달라진 건 없어서 큰 무리 없이 학습을 마쳤다. 기본적인 웹 크롤링 기법을 복습하였다. 느낀 점:
+예전에 네이버 카페 데이터를 크롤링할 때 로그인 인증 방식이 자꾸 바뀌어서 골치였는데, 생각해보니 그렇게 고생한 덕분에 아직까지 이 챕터의 내용은 잘 기억이 난다. 적당한 시련은 항상 도움이 된다. 다만 DOM이 조금이라도 변경되면 유지보수가 필요한 이러한 코드를 ‘크롤러’라고 부를 수 있는지는 글쎄…
+다음에 개선할 점:
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/5w-뉴스-크롤링-자동화-프로젝트.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/5W - 뉴스 크롤링 자동화 프로젝트.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 18 Dec 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[특강 - 프로덕트 데이터 분석 실무 프로세스]]></title><description><![CDATA[강사명 : 황수현
+강연자 배경: 문과 출신에서 데이터 분석가로 전향. 파이썬을 배우며 데이터 분석에 흥미를 느끼고 데이터 관련 학문을 복수 전공.
+데이터 분석가의 역할: 조직의 의사결정을 데이터 기반으로 지원하며, 프로덕트 개선 및 전략 도출.
+프로덕트 데이터 분석가: 앱/웹에서 유저 행동 데이터를 분석하여 프로덕트 개선 기여.
+강의 주요 내용: 데이터 분석에 필요한 툴, 스킬, 애티튜드.
+KPI 모니터링, 인사이트 도출, 결과 분석 등 실제 업무 사례.
+Q&amp;A를 통해 데이터 분석가 직무에 대한 이해 제공. 주요 업무: KPI 모니터링 및 인사이트 도출.
+데이터 파이프라인 생성 참여 및 데이터 엔지니어링 작업.
+통계 및 머신러닝을 활용한 전략 도출. 조직 구조: 전통적 대기업: 기능 중심 사업부 조직.
+IT/스타트업: 스쿼드 조직으로 빠른 협업 가능. 프로젝트 성격: 기능 중심 조직: 데이터 팀 간 협업.
+스쿼드 조직: 다양한 직군 간 협업, 빠른 의사결정. 로그 데이터 분석: 유저 행동 패턴 파악 및 개선안 도출.
+AB 테스트: 개선안 검증을 위한 실험 설계 및 결과 분석.
+기술 활용: 스파크로 대용량 로그 데이터 처리.
+데이터 설계 및 ETL 작업 수행. 교육 및 데이터 리터러시: 팀 내 데이터 이해도 향상에 기여. 필수 기술: SQL, 파이썬: 대부분 과정에서 필수.
+통계 지식: AB 테스트 분석 및 개선안 검증.
+대시보드 툴: 데이터 시각화 및 모니터링. 기타 스킬: 커뮤니케이션: 분석 결과 공유 및 협업.
+도메인 지식: 로그 설계 및 데이터 처리 이해.
+데이터 마트 구축 및 자동화. A/B 테스트 설계: 테스트 기간(2주) 및 대상 설정.
+최소 실험군 유저 수(약 14,000명) 계산. 데이터 처리: SQL 및 파이썬으로 CTR 계산 및 시각화.
+p-value 분석을 통해 통계적 유의미성 검증. 결과 활용: 프로덕트 배포 및 전략 수립에 반영. 프로세스: 목표 지표 설정 → 로그 설계 → 데이터 마트 구축 → 대시보드 제작.
+분석 결과를 바탕으로 피드백 공유 및 다음 계획 수립. RFM 분석: 유저 세그먼트 분류를 통해 맞춤형 전략 수립. (Recency, Frequency, Money tree)
+사례: 유저 특성에 따른 맞춤형 광고 푸시 발송. 역량 요구: 다분야에 대한 지식 및 기술 요구.
+초기에는 모든 역량을 갖추기 어려우며, 이후 데이터 엔지니어링 기술 습득. 머신러닝과의 차이점: 데이터 분석가는 유저 행동 및 의사결정 지원에 초점.
+머신러닝 엔지니어는 모델 개발 및 고급 분석 담당. ]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/특강-프로덕트-데이터-분석-실무-프로세스.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/특강 - 프로덕트 데이터 분석 실무 프로세스.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sat, 21 Dec 2024 11:12:02 GMT</pubDate></item><item><title><![CDATA[221029 - 여자로 살아간다는 것]]></title><description><![CDATA[고민해본 적 없는 일을 고민해보는 것은 제법 유쾌한 일이다. 성전환자의 심리를 궁금해한 적은 있지만서도 여자로 살아가는 것에 대해 생각해 본 일은 통 없다. 나기를 남자로 났으니 그럴 수도 있고, 굳이 성별을 나누어 무언가를 생각한다는 게 익숙하지 않은 탓도 있겠다. 그래서 한번 유쾌한 고민을 해본다. 내가 여자라고 가정을 해본다. 본래 주관이 강하니 지금 내 모습과 별반 다를 것도 없겠다는 생각을 한다. 그리고 나는 지금 아무 생각이 없다. 정말 아무 생각이 없기 때문이다. 없는 말을 지어내고 꾸미는 재주가 없으니 사는 일이 매양 건조하기 이를 데 없는 사람은 바로 이렇다. 남자라서 그러한 것이 아니고, 그냥 사람이 이러하니 이런 것이다. 아마 내가 여자였다면 조금은 더 감성적일까 같은 물음은 애초에 염두의 말미를 건드리지조차 못한다. 남자라서, 아니면 여자라서, 애초에 그 둘을 구별하여 얻을 실익이 어디에 있는지 분간이 없으니, 나는 상대에 대한 배려가 없는 통 못 쓸 인간일 수도 있겠다. 못 쓸 남자가 아니라, 못 쓸 인간 말이다. 한 명의 페미니스트였던 어머니의 등을 기억한다. 그 모습은 일면 여리지만 강인했고, 또 당신의 넓지 않은 그 등속에 마치 바다를 닮은 사랑을 간직했음을 기억한다. 소외된 사람, 약자를 지나치지 못하는 어머니의 심성과 행동들은, 내 속마음 깊숙이 당최 닿기 어려운 외딴곳에 작은 씨앗을 하나 심어 놓았다. 그리고 메마른 토지와 같은 내 마음에 심어진 그 씨앗이 기어코 살아남고 발아하여 사랑이라는 낱말이 되었다. 대상의 구별이 없는 지극하고 고귀한 사랑은 아닐지 언정, 내 주변 정도는 다소 아름답고 온화하게 가꾸는 고마운 말이다. 평등은 그 해석과 의미가 다양한 말이다. 배움이 짧아 아직 평등의 실마리를 잡지 못하였지만, 언뜻 느끼길 내 마음의 그 작고 소중한 낱말이 평등을 이해하는 데 큰 도움을 줄 것만 같다. 그러므로 나는 비록 ‘여성으로 살아가는 것’이 어떤 일인지 짐작조차 못 하면서도 그 어감의 단초를 잡아, 추론을 한다. 그리고 마땅히 세상에 여러 부류의 사람이 있음을 생각하고, 그저 작은 스푼 하나로 내 마음의 눈곱만한 좋은 부분을 눈곱의 눈곱만큼 정도는 덜어내어 주기를 결심한다.‘나와 다른 것을 인정하고, 이해하려고 노력하는 것.’ 같이 살아간다는 것은 단순한 이익관계에 의한 화합 따위는 아닐 테다. 계산이 있는 곳엔 숫자가 남을 것이고, 배려가 있는 곳엔 온기가 남을 것이다. 그리고 그 온기는 다른 사람의 마음 또한 온화하게 덥혀 또 다른 이의 시린 맘을 감싸주지 않겠는가. 다분히 이상적인 말일 테지만, 내가 없는 말을 보태어 특별히 여성을 옹호하는 가식을 내비치기 보단 이 편이 나은 듯싶다. 적어도 내가 본 많은 여성들은, 옹호할 대상이 아니라 존중할 대상이었고, 개개의 삶이 훌륭해 때로 우러러볼 일도 많았던 기억이 난다. 그리고 이 얘기는 꼭 여성에 국한된 얘기만은 아닐 것이다. 마찬가지로 내 어머니가 그토록 아름다울 수 있었던 이유가 꼭 여자이기 때문만은 아니길 소망하며 이즈음 한가지 기대를 품어 본다.
+나 또한 먼 훗날 언젠가 내가 받은 씨앗에서 열매를 맺고, 그 씨앗을 또한 누군가의 마음에 심어줄 수 있기를. 그리고 그 씨앗 또한 언젠가 열매를 맺기를. 그 작고 볼품없는 씨앗은 보기와 달리 어찌나 강인한지,
+한겨울에도,
+꿋꿋하게 싹을 틔우더라.]]></description><link>https://64etuor.github.io/writings/essays/221029-여자로-살아간다는-것.html</link><guid isPermaLink="false">Writings/Essays/221029 - 여자로 살아간다는 것.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 19 Dec 2024 14:22:01 GMT</pubDate></item><item><title><![CDATA[070721 - 이십일세기 이십일세]]></title><description><![CDATA[바닥을 눌은 장판으로 덮고
+미리 늙은 살갗을 우에 포갠 방구석
+벌레와 함께 기어 올라타는 습기와
+내달리기만 배우고 난 날뛰고 들끓는 마음
+육평 남짓 지평선에 분주해 공기마저 뿌옇고 남의 신발만 오다니는 창문
+달빛 비집고 와 소리치니
+그 훤한 굉음에 날개 없는 모습 들킬까
+한 켠에 물러난 소인, 이십일세기의 아무개 나는 재주 없어 서러운 이
+달에 오를 헛된 희망 품지 않으니 복이다
+복이로다
+가난한 자의 복이로다]]></description><link>https://64etuor.github.io/writings/poems/070721-이십일세기-이십일세.html</link><guid isPermaLink="false">Writings/Poems/070721 - 이십일세기 이십일세.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 18 Jan 2024 10:42:40 GMT</pubDate></item><item><title><![CDATA[결제 태도 분석]]></title><description><![CDATA[2025년 목표 나의 결제 태도에 대해 분석해 보고 나와 같은 유형의 사람에게 유효한 마케팅 요소를 도출한다. ]]></description><link>https://64etuor.github.io/self-management/결제-태도-분석.html</link><guid isPermaLink="false">Self-Management/결제 태도 분석.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 18 Dec 2024 13:12:38 GMT</pubDate></item><item><title><![CDATA[독서 대시보드]]></title><description><![CDATA[2025년의 목표 지식 기록 관리하기 ]]></description><link>https://64etuor.github.io/books/독서-대시보드.html</link><guid isPermaLink="false">Books/독서 대시보드.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 18 Dec 2024 13:02:04 GMT</pubDate><enclosure url="https://image.yes24.com/goods/119826327/XL" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src="https://image.yes24.com/goods/119826327/XL"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[4W - 실습 과제 2]]></title><description><![CDATA[후기 문제지가 2개로 나뉘어 있는 걸 모르고 하나만 제출했다.
+Streamlit 관련된 문제 3개 답안을 보완해서 제출 완료.
+엑셀에서 피벗 테이블을 많이 사용해 봐서 피벗 개념이 익숙한 건 많이 도움이 된다. Streamlit 라이브러리 활용한 대시보드 구성 버튼에 의한 동작 수행
+하나의 화면 내에 열을 나누어서 요소를 표현 OS 라이브러리 활용 반복문 조건문을 통해 디렉토리내에서 원하는 파일만 선택 import streamlit as st
+import pandas as pd
+import os folder_path = '.\\Data_Streamlit' def scan_files(): if os.path.isdir(folder_path): files = os.listdir(folder_path) csv_files = [file for file in files if file.lower().endswith('.csv')] other_files = [file for file in files if not file.lower().endswith('.csv')] csv_df = pd.DataFrame(csv_files, columns=["CSV_파일"]) other_df = pd.DataFrame(other_files, columns=["기타_파일"]) col1, col2 = st.columns(2) with col1: st.subheader("CSV 파일 목록") if not csv_df.empty: st.write(csv_df) else: st.write("CSV 파일이 없습니다.") with col2: st.subheader("기타 파일 목록") if not other_df.empty: st.write(other_df) else: st.write("기타 파일이 없습니다.") else: st.write("폴더가 없습니다.") if st.button("csv 파일 확인"): scan_files() 시각화 라이브러리 활용 역량 Streamlit 환경에서의 시각화 라이브러리활용
+값이 큰 순서대로 좌측부터 시각화 데이터 집계 능력 거래량 상위 3개 데이터 집계
+해당 데이터에 대한 정렬 import streamlit as st
+import pandas as pd
+import plotly.express as px def load_data(): Olist = pd.read_csv('.\\Data_Streamlit\\List of Orders.csv') Detail = pd.read_csv('.\\Data_Streamlit\\Order Details.csv') state_orders = Olist.groupby('State').size() state_orders = state_orders.reset_index(name='Count') orderCount_df = state_orders.sort_values('Count', ascending=False).head(3) category_counts = Detail.groupby('Category').size() category_counts = category_counts.reset_index(name='Count') categoryCount_df = category_counts.sort_values('Count', ascending=False).head(3) col1, col2 = st.columns(2) with col1: st.dataframe(orderCount_df) orderCount_fig = px.bar(orderCount_df, x='State', y='Count', title='State 분석') st.plotly_chart(orderCount_fig) with col2: st.dataframe(categoryCount_df) categoryCount_fig = px.bar(categoryCount_df, x='Category', y='Count', title='Category 분석') st.plotly_chart(categoryCount_fig) if st.button("상위 데이터 집계"): load_data() 데이터 전처리, 집계 데이터 프레임 간 병합 역량
+Pivot Table을 통한 데이터 집계수행 데이터 시각화 Streamlit 환경에서의 데이터 시각화 import streamlit as st
+import pandas as pd
+import plotly.express as px def load_data(): Olist = pd.read_csv('.\\Data_Streamlit\\List of Orders.csv') Detail = pd.read_csv('.\\Data_Streamlit\\Order Details.csv') merged_data = Olist.merge(Detail, on='Order ID') state_pivot = pd.pivot_table( merged_data, index='State', values='Profit', aggfunc='mean' ).reset_index() profit_state_df = state_pivot.sort_values('Profit', ascending=False) st.dataframe(profit_state_df) profit_state_fig = px.bar(profit_state_df, x='State', y='Profit', title='State별 평균 Profit 분석') st.plotly_chart(profit_state_fig) if st.button("병합 및 State Profit 분석"): load_data()
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/4w-실습-과제-2.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/4W - 실습 과제 2.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 18 Dec 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[4W - 실습 과제 1]]></title><description><![CDATA[후기 몇몇 문제의 내용을 이해할 수 없어서 시간을 너무 많이 허비했다.
+결국 답안으로 제시된 출력 형태를 보고 역으로 문제가 뭔지 해석해야 되는 경우가 생겼다.
+Q6 은 계속해서 답안의 출력물과 내가 작성한 쿼리 결과가 달라서 문제가 될 수 있는 부분을 하나하나 살펴 보았으나 잘못된 점을 찾을 수 없었다. 각 문제 10점(총점 100점), 부분 점수 없음 채점 기준 동일한 출력 결과를 나타내는 코드를 작성
+"쿼리 작성"으로 적힌 문제는 쿼리로 문제 풀이, Python 코드로 풀 경우 0점 처리 BigQuery 데이터 추출 실패하면, csv 파일 참고 데이터 : bigquery-public-data - thelook_ecommerce
+출처 : Google BigQuery 연동
+사용 데이터 : thelook_ecommerce의 orders 테이블
+가져올 정보 : order_id, user_id, status, gender, created_at
+조건 : 2023년에 발생한 주문이면서, Complete 상태인 데이터, 쿼리로 데이터 추출
+※ 최종적으로 추출한 데이터를 CSV 파일로 저장
+※ BigQuery를 활용한 데이터 추출이 아닌 경우, 0점으로 처리
+from google.oauth2 import service_account
+from google.cloud import bigquery
+import pandas as pd
+import os SERVICE_ACCOUNT_FILE = "/content/drive/MyDrive/Colab Notebooks/bigquery-project-444103-bc9f716b6f5e.json" credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE) project_id = "bigquery-project-444103" client = bigquery.Client(credentials=credentials, project=project_id) def import_bigquery_data(query): query_job = client.query(query) return query_job.to_dataframe() # order_id, user_id, status, gender, created_at
+# 2023년에 발생한 주문이면서, Complete 상태인 데이터, 쿼리로 데이터 추출
+orders_2023_completed = import_bigquery_data(''' SELECT order_id, user_id, status, gender, created_at FROM `bigquery-public-data.thelook_ecommerce.orders` WHERE EXTRACT(YEAR FROM created_at) = 2023 AND status = 'Complete';
+''') csv_path = "/content/drive/MyDrive/Assignment/4W/orders_2023_completed.csv" orders_2023_completed.to_csv(csv_path, index=False)
+print(f"CSV saved: {csv_path}") def check_csv(file_path): if os.path.exists(file_path): print(f"CSV exists: {file_path}") df = pd.read_csv(file_path) print("CSV preview:") print(df.head()) else: print("CSV doesn't exist.") check_csv(csv_path)
+from google.colab import drive
+drive.mount('/content/drive')
+이 작업의 목표는 BigQuery를 통해 thelook_ecommerce의 users 테이블에서 데이터를 추출하고, Pandas를 활용해 전처리를 수행한 후, Folium을 사용해 버블 차트를 시각화하는 것입니다. 버블 차트는 각 지역별 유저 분포를 직관적으로 표현하기 위한 시각화 방법입니다.
+테이블 : thelook_ecommerce의 users 테이블
+컬럼 : id,country, latitude, longitude, state 컬럼
+따로 정렬은 수행하지 않고, 첫 5000개의 데이터만 가져올 것 ※ BigQuery를 활용한 데이터 추출이 아닌 경우, 0점으로 처리
+데이터 추출 이후에는 Pandas를 통한 전처리 수행첫 번째 출력 데이터프레임
+BigQuery를 통해 추출한 원본 데이터프레임
+두 번째 출력 데이터프레임
+latitude, logitude를 기준으로 중복 데이터를 삭제한 데이터프레임
+state별 위도, 경도 정보를 가진 데이터프레임 생성
+세 번째 출력 데이터프레임
+latitude, logitude를 기준으로 user_id를 집계한 데이터프레임
+state별 유저 숫자를 가진 데이터프레임 생성
+집계방식에 있어서, count, nunique 등의 옵션 중 어떤 방법을 선택할지 잘 선택할 것
+네 번째 출력 데이터프레임
+두 번째와 세 번째 데이터프레임 merge 결과
+방식은 inner를 통해 수행할 것
+유저 집계 컬럼명은 'user_count'로 변경할 것
+마지막 단계, 버블 차트 시각화
+Folium 라이브러리를 활용하여 통해 버블 차트 시각화 진행
+버블의 크기는 유저 집계 결과로 정할 것(=각 버블의 크기는 유저 수 (user_count)로 결정됩니다.)
+지도 중심 위치는 데이터의 평균 위도와 경도를 사용하여 설정됩니다.
+CircleMarker를 사용해 각 데이터 포인트를 시각적으로 표현합니다.
+users = import_bigquery_data(''' SELECT id,country, latitude, longitude, state FROM `bigquery-public-data.thelook_ecommerce.users` LIMIT(5000) ;
+''') duplicates = users['id'].duplicated()
+print(f"중복 id: {duplicates.sum()}") # 첫 번째 출력 데이터프레임
+# - BigQuery를 통해 추출한 원본 데이터프레임
+users.info() display(users)
+# 두 번째 출력 데이터프레임
+# - latitude, logitude를 기준으로 중복 데이터를 삭제한 데이터프레임
+# - state별 위도, 경도 정보를 가진 데이터프레임 생성 unique_coords_state = users.drop_duplicates(subset=['latitude', 'longitude']).drop(columns=['id','country'])
+unique_coords_state.head(10) # 세 번째 출력 데이터프레임
+# - latitude, logitude를 기준으로 user_id를 집계한 데이터프레임
+# - state별 유저 숫자를 가진 데이터프레임 생성
+# - 집계방식에 있어서, count, nunique 등의 옵션 중 어떤 방법을 선택할지 잘 선택할 것 coords_users = ( users.groupby(['latitude', 'longitude'])['id'] .nunique() .reset_index() .sort_values(by='id', ascending=False)
+) # 결과 확인 (상위 10개)
+print(coords_users.head(10))
+# 네 번째 출력 데이터프레임
+# - 두 번째와 세 번째 데이터프레임 merge 결과
+# - 방식은 inner를 통해 수행할 것
+# - 유저 집계 컬럼명은 'user_count'로 변경할 것 merged_df = pd.merge(unique_coords_state, coords_users, on=['latitude','longitude'], how='inner').sort_values(by='id', ascending=False).reset_index().rename(columns={'id' : 'user_count'})
+merged_df = merged_df[['latitude', 'longitude', 'user_count', 'state']] merged_df.head(20)
+# 마지막 단계, 버블 차트 시각화
+# - Folium 라이브러리를 활용하여 통해 버블 차트 시각화 진행
+# - 버블의 크기는 유저 집계 결과로 정할 것(=각 버블의 크기는 유저 수 (`user_count`)로 결정됩니다.)
+# - 지도 중심 위치는 데이터의 평균 위도와 경도를 사용하여 설정됩니다.
+# - CircleMarker를 사용해 각 데이터 포인트를 시각적으로 표현합니다. import folium
+from folium import CircleMarker map_center = [merged_df['latitude'].mean(), merged_df['longitude'].mean()] bubble_map = folium.Map(location=map_center, zoom_start=3) for _, row in merged_df.iterrows(): CircleMarker( location=[row['latitude'], row['longitude']], radius=row['user_count'] ** 0.2 ).add_to(bubble_map) bubble_map
+입력변수 : 데이터프레임 데이터는 위에서 추출한 orders 테이블 사용함수 이름은 gender_cal로 지정할 것함수 동작
+created_at 컬럼을 월 단위로 변환하여 새로운 time 컬럼 생성 (dt.to_period('M') 사용).
+time(연-월)과 gender(성별)를 기준으로 user_id의 고유 개수를 집계한 pivot table 생성. 결과는 각 연-월별로 'Female Users'(여성 사용자 수)와 'Male Users'(남성 사용자 수)로 구성된 데이터프레임. 최종적으로 전처리된 pivot table을 반환.
+반환값:
+성별 및 연-월별로 집계된 유저 수를 나타내는 전처리 완료된 데이터프레임.
+시각화:
+반환된 pivot table을 막대 그래프로 시각화하여 시간에 따른 성별 사용자의 추이를 분석합니다.
+X축: 시간 (연-월 단위), Y축: 사용자 수, 색상: 성별(Female, Male).
+이 시각화를 통해 시간에 따른 성별 사용자 분포의 변화를 확인할 수 있습니다.
+import pandas as pd
+import matplotlib.pyplot as plt def gender_cal(df): df['time'] = pd.to_datetime(df['created_at']).dt.to_period('M') pivot_table = df.pivot_table( index='time', columns='gender', values='user_id', aggfunc='nunique', fill_value=0 ) pivot_table.columns = ['Female Users' if col == 'F' else 'Male Users' for col in pivot_table.columns] return pivot_table gender_cal(orders_2023_completed)
+# 시각화:
+# - 반환된 pivot table을 막대 그래프로 시각화하여 시간에 따른 성별 사용자의 추이를 분석합니다.
+# - X축: 시간 (연-월 단위), Y축: 사용자 수, 색상: 성별(Female, Male).
+# - 이 시각화를 통해 시간에 따른 성별 사용자 분포의 변화를 확인할 수 있습니다. pivot_table = gender_cal(orders_2023_completed) pivot_table.plot( kind='bar', figsize=(8, 5)
+) plt.xlabel('time')
+plt.xticks(rotation=45) plt.show()
+!pip install mysql.connector
+목표
+추출된 데이터를 통해 주문 상태가 'Shipped'인 제품과 고객 정보 확인
+데이터베이스 : SQL &amp; Python 연결 수업 classicmodels
+mysql.connector를 통해 classicmodels 데이터베이스 연결
+status가 'Shipped'인 데이터만 가져올 것
+JOIN은 INNER 방식으로 진행
+해당 테이블들의 공통된 key는 ORDERNUMBER, CUSTOMERNUMBER
+import mysql.connector
+import pandas as pd
+import matplotlib.pyplot as plt plt.rcParams['font.family'] = 'Malgun Gothic' DB_CONFIG = { 'host': '127.0.0.1', 'user': 'root', 'password': 'password', 'database': 'classicmodels', 'port': 3306
+} def create_connection(): try: conn = mysql.connector.connect(**DB_CONFIG) return conn except mysql.connector.Error as err: print(f"연결 오류: {err}") return None def execute_query(query, title): conn = create_connection() if not conn: return try: df = pd.read_sql_query(query, conn) print(f"\n{title}") print(df) except Exception as err: print(f"데이터 추출 오류: {err}") finally: if 'conn' in locals() and conn.is_connected(): conn.close() def get_shipped_orders(): query = """ SELECT * FROM orders o INNER JOIN customers c ON o.customerNumber = c.customerNumber INNER JOIN orderdetails od ON o.orderNumber = od.orderNumber INNER JOIN products p ON od.productCode = p.productCode WHERE o.status = 'Shipped' """ execute_query(query, "Shipped Orders") if __name__ == "__main__": get_shipped_orders()
+유형 : "쿼리 작성" 사용 테이블 : ORDERS, ORDERDETAILSSHIPPEDDATE - ORDERDATE의 결과를 나타내는 컬럼 생성(컬럼 이름 'SHIPPING_DAYS'로 설정)배송 카테고리 분류 (CASE WHEN 활용)
+아래 조건에 따라 텍스트를 나타내는 SHIPPING_URGENCY 컬럼 생성(컬럼 이름 'SHIPPING_URGENCY'으로 설정 필요) : SHIPPEDDATE - ORDERDATE가 2 이하면 'Express' : SHIPPEDDATE - ORDERDATE가 3 이상 5 이하이면 'Standard' : SHIPPEDDATE - ORDERDATE에서 이외의 경우는 'Delayed'로 처리
+SALE 컬럼은 priceEach 컬럼과 QUANTITYORDERED 컬럼을 곱하여 만들 것
+priceEach*QUANTITYORDERED
+출력 컬럼 : ORDERNUMBER, SHIPPING_DAYS, SHIPPING_URGENCY, PRODUCTCODE SALESdef get_shipping_categories(): query = """ SELECT o.orderNumber, DATEDIFF(o.shippedDate, o.orderDate) AS shipping_days, CASE WHEN DATEDIFF(o.shippedDate, o.orderDate) &lt;= 2 THEN 'Express' WHEN DATEDIFF(o.shippedDate, o.orderDate) BETWEEN 3 AND 5 THEN 'Standard' ELSE 'Delayed' END AS shipping_urgency, od.productCode, (od.priceEach * od.quantityOrdered) AS sales FROM orders o INNER JOIN orderdetails od ON o.orderNumber = od.orderNumber WHERE o.shippedDate IS NOT NULL ORDER BY o.orderNumber """ execute_query(query, "Shipping Categories") if __name__ == "__main__": get_shipping_categories()
+country 정보는 CUSTOMERS 테이블에 존재 orderdate 정보는 ORDERS 테이블에 존재 amount 정보는 PAYMENTS 테이블에 존재테이블들의 공통된 key는 customerNumber 테이블들을 Join하면, c.customerNumber, c.country, o.orderNumber, p.amount 컬럼 테이블 생성 가능 JOIN 방식은 INNER JOIN으로 진행 alias는 원하는 이름으로 지정country별로 orders 횟수, amount 합계를 출력 order, amount 집계를 위해 어떤 컬럼을 사용할지, 어떤 집계 함수를 사용할지 잘 판단할 것각 컬럼의 이름은 order_info, amount_info로 설정def get_countrywise_order_summary(): query = """ SELECT c.country, SUM(order_summary.order_info) AS order_info, SUM(payment_summary.amount_info) AS amount_info FROM customers AS c INNER JOIN ( SELECT customerNumber, COUNT(orderNumber) AS order_info FROM orders GROUP BY customerNumber ) AS order_summary ON c.customerNumber = order_summary.customerNumber INNER JOIN ( SELECT customerNumber, SUM(amount) AS amount_info FROM payments GROUP BY customerNumber ) AS payment_summary ON c.customerNumber = payment_summary.customerNumber GROUP BY c.country """ execute_query(query, "Country-wise Order Summary") if __name__ == "__main__": get_countrywise_order_summary()
+productName 정보는 PRODUCTS 테이블에 존재 priceEach 정보는 ORDERDETAILS 테이블에 존재 alias는 원하는 이름으로 지정두 테이블의 공통된 key는 productCode 테이블 JOIN하면 p.productName, o.priceEach 컬럼 테이블 생성 가능 JOIN은 INNER 방식으로 진행product별로 평균 priceEach 집계 집계 컬럼 이름은 price_info로 설장 price_info 상위 5개 productName 선택 출력시각화 타이틀은 "price_info 상위 5개 productName 평균 가격" 반드시 한글 출력을 지킬 것def get_top_5_products_by_avg_price(): query = """ SELECT p.productName, ROUND(AVG(od.priceEach), 2) AS price_info FROM products AS p INNER JOIN orderdetails AS od ON p.productCode = od.productCode GROUP BY p.productName ORDER BY price_info DESC LIMIT 5 """ conn = create_connection() if not conn: return try: df = pd.read_sql_query(query, conn) print(df) plt.figure(figsize=(8, 6)) plt.bar(df['productName'], df['price_info'], label='price_avg') plt.title("price_info 상위 5개 productName 평균 가격") plt.xlabel("Product Name") plt.legend() plt.xticks(rotation=45) plt.show() except Exception as err: print(f"데이터 추출 오류: {err}") finally: if 'conn' in locals() and conn.is_connected(): conn.close() if __name__ == "__main__": get_top_5_products_by_avg_price()
+]]></description><link>https://64etuor.github.io/studies/데이터-분석-부트캠프(2411~2503)/4w-실습-과제-1.html</link><guid isPermaLink="false">Studies/데이터 분석 부트캠프(2411~2503)/4W - 실습 과제 1.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 10 Dec 2024 00:00:00 GMT</pubDate></item><item><title><![CDATA[5W - 웹 크롤링과 데이터 엔지니어링]]></title><description><![CDATA[2024-12-18 Selenium과 BeatifulSoup을 활용한 웹 크롤링 기법을 학습한다.
 개발자 도구를 활용하여 HTML element를 확인하는 법을 배운다.
 List, Pagination 결합으로 효율성 높이기 브라우저 자동화: Selenium은 웹브라우저를 프로그래밍적으로 제어할 수 있는 라이브러리로, 버튼 클릭, 스크롤, 폼 제출 등 사용자가 직접 수행하는 동작을 코드로 자동화할 수 있다.
 동적 페이지 처리: JavaScript를 통해 동적으로 렌더링되는 페이지에서도 데이터를 추출할 수 있다.
@@ -59,64 +382,7 @@ Index: <a data-href="📖 610 Generative AI" href="https://64etuor.github.io/ind
 전략적 유연성 확보 리스크 관리 불확실성 정량화
 시나리오 분석
 대응 계획 수립
-]]></description><link>https://64etuor.github.io/prompt-engineering/integrated-bayesian-strategic-framework.html</link><guid isPermaLink="false">Prompt Engineering/Integrated Bayesian Strategic Framework.md</guid><dc:creator><![CDATA[달의이성]]></dc:creator><pubDate>Wed, 18 Dec 2024 04:10:09 GMT</pubDate></item><item><title><![CDATA[결제 태도 분석]]></title><link>https://64etuor.github.io/self-management/결제-태도-분석.html</link><guid isPermaLink="false">Self-Management/결제 태도 분석.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 17 Dec 2024 14:29:19 GMT</pubDate></item><item><title><![CDATA[project_diagram]]></title><description><![CDATA["쓸데없는 메모 3위 '많이 쓴 메모' 2위 '보고 쓴 메모' 1위는..." 25년 기록학 전문가가 말하는 메모 '제대로' 하는 법 | 김익한 교수 | 빅퀘스천 30회 ​⁠ - YouTube메모와 기록의 중요성 김익한 교수는 메모와 기록을 통해 개인의 성장과 삶의 변화를 이끌어내는 방법을 설명합니다. 메모는 단순한 기록이 아닌 자기 인식의 도구이며, 극단적 요약과 자기화가 핵심입니다. 계획과 구상 기록을 통해 전략적 사고가 가능해지고, 삶을 더욱 가치 있게 만들 수 있습니다. : <a rel="noopener nofollow" class="external-link is-unresolved" href="https://www.youtube.com/watch?v=L7zWucx7TR8&amp;t=589s" target="_self">https://www.youtube.com/watch?v=L7zWucx7TR8&amp;t=589s</a> 🧠 기록을 통한 개인의 성장과 변화
-📝 메모의 본질: 극단적인 요약과 자기화 2.1. 📝 메모를 하는 올바른 방법
-2.2. 📝 메모의 기초: 자기화와 요약
-2.3. 📝 비효율적인 메모 방식의 문제점
-2.4. 📝 메모의 중요성과 현재 행위의 인식
-2.5. 📝 지속적인 메모의 중요성 📝 구상 기록과 플래너의 중요성 3.1. 📝 생각 기록의 중요성
-3.2. 📝 아침 플래닝의 중요성 및 효율적인 방법
-3.3. 📝 구상 기록의 중요성과 방법
-3.4. 📚 책 읽기의 목적과 자기 생각의 중요성 ✍️ 자기 인식과 기록의 중요성
-🚀 기록형 인간으로의 변화 기록을 시작한 지 한 달 만에 머리 구조의 변화를 경험할 수 있다. [1-1]
-매일 아침 플래닝을 통해 인생이 바뀔 수 있다. [1-2]
-기록을 통해 전략적인 사람으로 발전할 수 있다. [1-3]
-25년간 기록학을 전공한 김익한 교수는 기록 관리 경험을 개인의 삶에 적용하면 성장할 수 있다고 말한다. [1-4, 1-7] 메모는 극단적으로 요약하여 작성해야 한다. [2-5]
-자기화가 중요하며, 이해한 내용을 내 방식으로 정리해야 한다. [2-14]
-회의록도 핵심 키워드를 중심으로 작성해야 한다. [2-27]
-메모는 기록 행위 자체가 각인을 돕는다. [2-56]
-일상 기록은 자아 인식을 높이고 지적으로 풍요로운 삶을 만든다. [2-76] 메모는 조금 쓰는 것이 중요하다. [2-1]
-깨달은 내용을 극단적으로 요약하고 명확히 정리해야 한다. [2-6]
-많은 양을 기록하는 습관을 버려야 한다. [2-9] 정보를 자기화하여 기록하는 것이 핵심이다. [2-13]
-이해한 내용을 자기 방식으로 정리해야 한다. [2-15]
-극단적 요약은 시간 소모를 줄이고 전체 흐름을 파악하게 한다. [2-19] 회의에서 속기사처럼 메모하면 맥락 파악이 어렵다. [2-33]
-키워드 메모와 자기 해석이 필요하다. [2-41]
-효율적인 요약이 중요하며, 자기 이해와 자기화가 필수다. [2-50] 메모는 현재의 각인 과정이다. [2-55]
-기록을 통해 과거 경험과 현재가 연결된다. [2-69]
-비효율적인 메모는 정보를 소모하게 만든다. [2-72] 메모는 지적으로 풍요로운 삶을 만든다. [2-77]
-자기 인식을 높이고 삶을 가치 있게 만든다. [2-81, 2-84] 구상 기록은 일 시작 전 목표를 상기하게 한다. [3-39]
-하루 계획은 네 개에서 다섯 개의 목표로 줄이는 것이 효율적이다. [3-10] 일을 시작하기 전에 간단한 기록을 작성하면 명확한 방향성을 제공한다. [3-2, 3-3] 아침에 가장 중요한 목표를 설정하고 계획을 세우는 것이 중요하다. [3-7, 3-12]
-큰 틀에서의 사고가 효율적이다. [3-9] 구상 기록은 일을 체계적으로 진행하게 돕는다. [3-39, 3-49]
-핵심 성공 요인(CSF)을 고려하여 목표를 설정한다. [3-42] 책 읽기의 목적은 궁금증 해소에 있다. [3-63]
-자기 생각을 가지고 질문하며 독서를 해야 한다. [3-64] 강의 내용을 검토하고 메모하는 과정이 중요하다. [4-1]
-독서카드로 이해한 내용을 정리하면 지식의 깊이를 높인다. [4-25]
-기록을 통해 자기 의심을 해소하고 성장할 수 있다. [4-31] 기록을 통해 전략적 사고가 가능해진다. [5-1]
-삶을 주관적으로 이끌 수 있는 기반이 된다. [5-3]
-메모는 개인의 성장과 변화에 기여한다. [5-1]
-김익한 교수 - 메모 ‘제대로’ 하는 법지식 기록 이해 단계: 책을 읽거나 강의를 들으면서 이해를 한다.
-기록 단계: 핵심적 키워드 위주로 내용을 회상하며 자신의 “생각”을 써본다. Knowledge Note구상 기록 목표 설정: 목표는 큰 틀에서 정한다. (총 4~5개) 아침 계획: 1~2개 가량
-낮 계획: 1개 가량
-밤 계획: 2개 가량 목적 설정: 목적을 기록하여 계속 상기한다.
-CSF(Critical Success Factors): 반드시 수행해야 하는 요소를 고려
-Process화: 계획은 단계적으로 설정하여 체계화 단계 설정 → 단계별 아웃풋 예측 시뮬레이션: 정한 목표를 가지고 오늘의 하루를 시뮬레이션 해본다. Daily Planner영감 기록(문학) 떠오른 영감은 즉시 기록한다.
-영감에 담긴 감정을 함께 기록한다.
-매 주 토요일, 영감 기록을 확인하고 한 편의 글을 작성한다. 영감 기록(사업) 떠오른 영감은 즉시 기록한다.
-영감에 담긴 배경이나, 영감을 떠올린 요인을 함께 기록한다.
-영감이 떠오른 직후가 아닌 후일에 아래의 요소를 고려하여 종합 점수를 매긴다. 실현 가능성(Feasibility)
-기대 이익 (Potential Profit)
-시장 수용성 (Market Acceptance)
-혁신성과 차별화 (Innovation &amp; Differentiation)
-사회적 &amp; 환경적 영향 (Social &amp; Environmental Impact)
-리스크와 불확실성 (Risk and Uncertainty)
-확장성 (Scalability)
-나의 역량 (My Capabilities) 주기적인 품평회를 가지고, 가장 높은 점수를 받은 실현 가능한 아이디어를 실천에 옮긴다. Inspiration Note일상 기록 요약 기록: 시간 단위로 자신의 일상을 “한 줄” 정도로 기록한다.
-회상 기록: 일기를 쓸 때 자신의 하루를 회상하여 본다. 기억이 잘 나지 않는 경우에는 일상 기록을 참고한다. Daily Note어플리케이션: 모바일 환경, 데스크탑 환경 어디에서든 사용 가능
-대시보드: 모바일, 데스크탑 환경 어디에서든 확인 가능 + 집안, 회사에 대시보드 설치?최대한 빠르게 단기 개발 → 이후 실제로 사용을 하면서 추가해야 하는 기능 등을 검토
-노동력 외의 자원 투자 없음일상 기록, 구상 기록, 지식 기록, 영감 기록
-Life Wheel 개념 ( 점수는 어떻게 계산??)
-일일 체크리스트 ( 스키마를 어떻게 구상?? )
-목표 설정 ( 목표와 Life Wheel 연동?? )대시보드용돈 차감 사유 발생 시, 정해진 금액에서 차감하여 익월 용돈 산정
-산정된 금액만큼 익월에 용돈 계좌에 입금<br>아이디어 노트<img src="https://64etuor.github.io/settings/attachments/pasted-image-20241217193929.png" draggable="false" target="_self">Pasted image 20241217193929.png]]></description><link>https://64etuor.github.io/side-project/project_diagram.html</link><guid isPermaLink="false">Side Project/project_diagram.canvas</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 17 Dec 2024 14:08:41 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20241217193929.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20241217193929.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[김익한 교수 - 메모 ‘제대로’ 하는 법]]></title><description><![CDATA[메모와 기록의 중요성 김익한 교수는 메모와 기록을 통해 개인의 성장과 삶의 변화를 이끌어내는 방법을 설명합니다. 메모는 단순한 기록이 아닌 자기 인식의 도구이며, 극단적 요약과 자기화가 핵심입니다. 계획과 구상 기록을 통해 전략적 사고가 가능해지고, 삶을 더욱 가치 있게 만들 수 있습니다. : <a rel="noopener nofollow" class="external-link is-unresolved" href="https://www.youtube.com/watch?v=L7zWucx7TR8&amp;t=589s" target="_self">https://www.youtube.com/watch?v=L7zWucx7TR8&amp;t=589s</a> 🧠 기록을 통한 개인의 성장과 변화
+]]></description><link>https://64etuor.github.io/prompt-engineering/integrated-bayesian-strategic-framework.html</link><guid isPermaLink="false">Prompt Engineering/Integrated Bayesian Strategic Framework.md</guid><dc:creator><![CDATA[달의이성]]></dc:creator><pubDate>Wed, 18 Dec 2024 04:10:09 GMT</pubDate></item><item><title><![CDATA[김익한 교수 - 메모 ‘제대로’ 하는 법]]></title><description><![CDATA[메모와 기록의 중요성 김익한 교수는 메모와 기록을 통해 개인의 성장과 삶의 변화를 이끌어내는 방법을 설명합니다. 메모는 단순한 기록이 아닌 자기 인식의 도구이며, 극단적 요약과 자기화가 핵심입니다. 계획과 구상 기록을 통해 전략적 사고가 가능해지고, 삶을 더욱 가치 있게 만들 수 있습니다. : <a rel="noopener nofollow" class="external-link is-unresolved" href="https://www.youtube.com/watch?v=L7zWucx7TR8&amp;t=589s" target="_self">https://www.youtube.com/watch?v=L7zWucx7TR8&amp;t=589s</a> 🧠 기록을 통한 개인의 성장과 변화
 📝 메모의 본질: 극단적인 요약과 자기화 2.1. 📝 메모를 하는 올바른 방법
 2.2. 📝 메모의 기초: 자기화와 요약
 2.3. 📝 비효율적인 메모 방식의 문제점
@@ -1055,12 +1321,7 @@ MES 활용 공정 현황 실시간 분석 프로세스 도입 WBS, Gantt Chart, 
 이번 점괘는 차라리 내가 애당초 예상한 ‘점의 모호함’과 매우 흡사하였다. 말하자면 귀에 걸면 귀걸이 코에 걸면 코걸이라는 투로 표현 자체를 뭉뚱그려 놓았기 때문에 정확한 해석이 불가하다. 처음에 본 점괘와 일치하는 부분도, 그다지 일치하지 않는다고 볼 만한 부분도 찾기 어렵기 때문에 마찬가지로 이 두 가지 사례만 가지고 점괘의 효력을 짐작하기도 어렵다. 이 두 가지 점괘를 보고 갑자기 든 생각이 있다. 바로 점을 본 사람의 심리에 대해서다.만약 내가 이 점을 보지 않았다면 나는 내 배우자가 될 사람의 얼굴형이나 체형, 성격 등을 특정 짓지 않았을 것이다. 애초에 남에게 큰 관심을 두는 성격이 아니라 남의 얼굴을 자세히 들여다 본 일이 없지만, 이제는 만나게 되는 사람들의 얼굴형을 신경 쓸 것이 분명하다. 나는 내가 진실로 이 점괘들을 믿거나 믿지 않거나 관계없이 이미 점괘가 내린 판결에 구속이 되었다는 말이다. 원인은 두 번째 점괘의 마지막에 묘사된 ‘애인 부부운’이 몹시 좋기 때문이다. 만약에 이 점괘가 옳다면?나같이 잠재위험을 가급적 기피하고 실속을 챙기는 사람으로서는 논리적으로 설명하는 게 불가능한 이 점괘를 그대로 무시하는 게 어렵게 되었다. 세상 모든 일이 논리를 기반으로 작동하는 게 아니라는 것 또한 ‘이성적으로’ 이해하고 있기 때문이다. 종교를 주제로 다룰 때 주로 등장하게 되는 말이지만, 여기서 또한 통용될 것 같다.
 “맞다고 할 수 없지만, 그렇다고 틀리다고도 할 수 없다.”
 뭐, 긍정적인 효과를 굳이 유추하자면 그전의 모래알처럼 수많은 사람 중에 한 명이 내 배우자가 된다는 막연한 경우의 수보다는 그나마 해변 하나의 모래알 수 정도로 분명히 범위가 줄었다.그리고 바로 재밌는 상상을 했다.‘만약에 내가 마치 서로가 처음부터 한 짝이었던 것처럼 마음도 잘 맞고, 같이 시간을 보내는데 굳이 서로 눈치를 보지 않아도 일말의 불편함도 없는 사람을 만나서 결혼을 하기로 하였는데 그 사람의 얼굴이 둥근 계란형이 아니라면?’나는 바로 답을 유추할 수 있다. 이 경우라면 나는 즉시 점괘를 무시할 것이다. 근거가 부족한 점괘보다 나 자신의 느낌과 내게 그런 느낌을 주는 상대방을 더 믿을 것이기 때문이다. 점괘를 운명으로 치환해서 보자면, 운명을 따르는 것도, 따르지 않는 것도 양쪽 다 내게는 각각 다른 매력이 있는 길로만 여겨진다.그럼 또 바로 재밌는 상상이 든다.‘만약에 그렇게 결혼을 했는데 우리 부부가 정말 예측할 수 없는 불행들로 인해 삶이 궁핍하고 고달파진다면? 그리고 아무리 노력을 해도 나아지지 않는다면? 그때는 점괘를 따르지 않은 걸 후회하게 될까?’또 바로 답이 예상이 된다. 나를 만난 배우자야 모르겠지만, 나는 후회할 리가 없다. 애초에 점괘를 무시하기로 결정한 순간부터 점괘 자체를 머릿속에서 싹 지워버릴 것 같다. 나 자신이 어려움에 굴복하는 걸 치욕으로 여기는 까닭도 있고, 이제껏 내가 살아온 과정으로 증명된 나의 특이한 반항심을 고려하면 역시 그 어떤 일이 생긴들 내가 후회할 거란 생각을 할 수가 없다. 그간 내가 옳지 않다고 여긴 여러 가지 사건들에 저항해온 역사들이 조금 더 연장될 뿐이다. 아마 이 경우에는 운명이 내가 저항할 대상이 될 테다.운명이 마치 나를 고문하듯 괴롭히면서 나에게 후회를 하라 강요한들 죽는 한이 있어도 웃는 얼굴로 ‘아니오.’를 외칠 자신이 있다. 나의 배우자 또한 나를 믿었기 때문에 결혼을 한 것이 아닌가. 그런 사람을 배신한다는 건 상상할 수가 없다. 다른 이들에게 결혼이 어떤 의미인지 깊게 탐구한 일은 없지만, 적어도 내게 결혼이란 그런 의미이다. 한평생 서로를 믿겠다는 다짐과 약속이 현실의 제도, 풍습과 결합하여 나타난 형태의 결과물이란 것이다.일어나지도 않을 쓸모없는 상상을 이렇게 길게 하는 점과, 그리고 그 내용을 따져보면 첫 번째 점괘에 묘사된 나의 성격이 아주 꼭 들어맞다. 그러고 보면 어떤 성향의 사람이 어떤 사람에게 끌리는지는 이미 오랫동안 축적되어 온 결혼의 역사를 통해 짐작하기가 어렵지 않은 일로 보인다. 나처럼 별 쓸모없는 일(물론 이건 나에게는 쓸모 있는 일이지만, 다른 많은 사람들의 기준에서 쓸모없는 일이라는 얘기다. 내가 살면서 가장 많이 들은 말을 토대로 여기서 ‘쓸모없는 일’의 정의를 내리자면 ‘돈이 되지 않고’, ‘취직에 도움이 안 되고’, 혹은 ‘이성에게 매력적으로 보이기에 도움이 되지 않는’ 따위의 일 등이 그렇다.)에 궁리하기 좋아하는 사람이, 그저 외견만 아름답고(보편적 기준에서) 생각에 깊이가 없거나, 또는 속물인 사람에게 매력을 느낄 리는 없다. 결혼을 할 요인을 느끼기도 어렵다. 나는 이미 그 결혼생활이 어떻게 서서히 망조를 보일지 겪어보지 않아도 예측이 되기 때문이다. 한 가지 가능성이라면 성욕에 뇌가 마취가 되어서 아무런 판단을 못 하는 상태에서 관계를 가지고 우연히 아이가 생겨 버리는 경우가 있겠지만, 그것도 나 같은 성격을 가진 사람에게는 매우 힘든 일이다.
-중학교 때 성교육을 받고 한 생각과 그 순서는 이렇다. 성관계시 피임을 제대로 하지 않으면 임신을 할 수 있다. 완벽하게 피임을 하는 것은 어렵다. 내가 만약에 누군갈 임신시켰을 경우, 내 성격을 미루어 보면 낙태를 하지도, 아이를 낳고 입양을 보내지도 못할 게 예상된다. 그러므로 결혼을 하고 싶지 않은 사람과는 성관계를 자제해야 한다. 이렇게 생각하면 점은 단순히 못 믿을 것으로 치부하기 어렵다는 생각이 든다.위의 점괘들은 어떤 성격의 사람의 어떤 취향, 경향을 분석한 결과물일 수도 있다.(정확한 사실을 조사해 본 바 없으니 아마 이럴 것 같다고 예측만 할 뿐이다.) 다시 말하면 인간의 유형을 나누고, 어떤 유형의 사람이 어떻게 살아가는지 여러 사례들을 분석하여 가장 높은 확률의 결과를 ‘점괘’로 내놓는 것이다. 인간은 성장환경에 의해 몹시 변하지만 타고난 경향이 확고하다면 성장환경으로 인한 개개인의 차이는 좁혀질 수도 있다.나의 경우를 예로 들자면, 나는 어려서부터 세상을 바라보는 관점 자체가 특이한 편이었다. 이 때문에 오해를 산 적도 많고, 다른 사람들과 대화하기가 어려운 일(서로 동문서답을 하는)도 종종 있었다. 가령 초등학생 시절, 친구들이 H.O.T.(90년대 5인조 남성아이돌그룹) 노래 중에 뭘 제일 좋아하냐고 물었을 때, 나는 ‘빛’(‘강타’라는 멤버가 직접 작곡하고 부른 곡으로 알고 있다.)이라고 대답했다. 그런데 뜻밖에 나는 그 후 친구들이 모여 H.O.T. 멤버 중에 누가 제일인지를 가리는 토론(점잖게 표현했지만 사실은 말싸움)에서 강타를 옹호해야 하는 ‘강타파’에 강제로 편입되었다. 실제로는 나는 강타라는 사람에 대해 관심도 없고, 좋아하지도 않았다. 애초에 한 번도 연예인을 좋아해 본 일이 없다. 그 사람을 만나본 적도 없고, 만날 일도 없으며, 그 사람이 어떻게 살아가는지 알지도 못하는데 무엇을 보고 호감을 표할 수 있는지 알 수도 없었을 뿐더러 누가 제일인지 가려서 어쩌자는 건지 도무지 이해할 수가 없었다. 난 당초에 말 그대로 ‘빛’이라는 노래만 좋아했을 뿐이다. 지금도 음악을 듣는 걸 즐기지만 항상 노래와 가수는 내게 각각 별개의 존재이다.(박효신은 제외, 이 사람은 그냥 마음씨가 예쁜 게 너무 티가 난다. 이 말인즉슨, 박효신이 가수가 아니었어도 나는 박효신이라는 사람 자체에 호감을 느꼈을 거란 말이다.)이 별개의 존재라는 개념이 어릴 때부터 나의 가치판단의 근본이었다. 예를 들기 좋은 소재가 있다. 독서와 컴퓨터 게임 두 가지를 놓고 비교해보면, 일부 사람들은 독서는 유익하고 게임은 무익하고 시간 낭비라고 종종 말하지만 내 가치판단의 방식으로는 애초에 둘을 비교하지 않는다. 두 행위는 별개로 존재할 뿐이다. 무엇이 더 나은지 가릴 필요나 그 두 행위 간에 가치의 우위가 있다고 느끼지 못한다는 뜻이다. 마찬가지로 책을 많이 읽고 지식을 쌓은 사람과 게임을 많이 하는 사람 둘이 내 앞에 있다한들 비교하거나 우열을 정하지 않는다. 그냥 각각 별개의 사람으로만 인식할 뿐이다. 내가 만약에 자녀를 갖게 되도 책 읽는 걸 권장하거나, 혹은 자녀가 게임을 많이 한다고 꾸짖을 일도 없을 것이다.(실제로 어머니가 나를 이렇게 키우신 영향이 크다.) 그렇게 생각하게 될 수 있었던 이유를 아래 밝힌다.나는 내가 태어나 자라던 시골에서 소문난 독서광이었다. 어른들과 선생님들은 내가 책을 많이 읽는 걸 칭찬할 때가 많았다. 나는 단순히 하고 싶은 걸 할 뿐인데 칭찬을 듣는 건 정말 이상한 일이었다. 내가 책읽기를 즐긴 게 된 건 단순한 이유다. 책을 읽는 것을 내가 좋아하기 때문이다. 이게 무슨 말장난이냐는 반문을 받을 수 있다는 생각을 한다. 그러므로 이렇게 표현할 수밖에 없는 사유를 적는다.책을 읽는다는 행위는 내게 처음부터 공부를 잘하기 위해서, 혹은 좋은 학교에 가기 위해서 따위의 목적이 없는 단순한 놀이였다. 책읽기는 내가 세상에 태어나 처음으로 스스로 찾은 ‘좋아하는 놀이 1호’였다. 그렇게 된 이유는 또 간단하다. 내가 6살 때, 하루는 같은 동네에 살던 한 살 터울 사촌 누나가 유치원에서 한글을 공부해서 학교 앞에 세워진 안내판(학교 반경 200m 이내에 유흥업소 등의 영업을 할 수 없다는 안내 취지의)을 읽는 걸 보게 되었다. 나는 그게 몹시 시샘이 나서 사촌 누나가 읽는 걸 그대로 듣고 외워서 글자 하나하나 읽는 법을 혼자 익혔다. 그리고 어느 정도 자신감이 생기자 유치원에서 보육 교사분이 동화를 읽어주는 시간에 내가 대신 읽어주겠다며 나섰다. 자신감과는 다르게, 또 분하게도 어물어물하며 반도 제대로 읽지 못했다. 안내판에는 없던 모르는 글자가 많았기 때문이다. 그 후로는 계속 남들을 귀찮게 하면서 모르는 글자를 하나하나 익혀나갔다. 동화를 하나하나 더 읽을 수 있게 되는 과정이 무척 재밌었다.그리고 컴퓨터를 배우기 시작하면서 컴퓨터 게임의 존재를 알게 되었다. 나는 여기에 몹시 매료되었다. 처음에는 집에 컴퓨터가 없어 매일같이 남의 집에 놀러 가서 게임을 하거나 구경을 하곤 했다. 이후에 컴퓨터를 배우는데 썩 성과가 나오자 부모님은 내가 다니던 컴퓨터 학원에서 판매하던 컴퓨터를 한 대 사주셨다. 내 기쁨은 말로 형용할 수 없었다. 집에 컴퓨터가 생기자 한 번 매달리면 시간 가는 줄 모르고 게임을 하곤 했다. 그게 얼마나 집요했는지, 간혹 컴퓨터에 오류가 생겨 부팅이 안 되거나 하는 문제가 생기면, 컴퓨터 학원에 맡겨서 수리를 의뢰하는 그 시간조차 아까워서 어떻게든 직접 문제를 찾아내고 고칠 정도였다. 그 과정조차 모두 즐거웠다. 이 모든 게 내가 생각하는 내가 스스로 찾은 ‘좋아하는 놀이 2호’이다.첫 번째 놀이는 우연히도 어른들이 보시기에 마땅히 좋은 행동이었고, 두 번째 놀이는 그렇지 못하였다. 나는 똑같은 원인에서 비롯된 두 가지 행위에 상반된 평가가 이어지는 게 꽤나 놀라웠고, 내가 정말 좋아하는 것들을 남들이 함부로 평가하는 데에 맘속에서 적잖이 분노하였다.(혹시나 내 의견이 불편한 사람이 있을 것 같아 사족을 단다. 가치관은 서로 다른 게 당연한 일이고, 내가 가장 중요하게 여기는 것은 내가 정한 가치이다. 그리고 내가 정한 가치의 최우선순위는 행위나 생각의 당부당에 대한 내 자신의 판단 결과다. 내 어머니는 단지 나에게 바르게 자라는 걸 바라셨고, 난 그게 옳다고 판단하고 따르려고 노력했다.만약에 내가 게임 대신 사람들이 말하는 좀 더 건설적인 취미를 가졌다면, 공부를 더 했다면 내 인생이 더 나아졌을까? 따위의 생각을 해본 적도 없다. 마음이 즐거운 일을 했고, 여전히 마음이 즐겁다. 더 나은 인생이란 게 무엇인지도 모른다. 누군가 좋은 직업을 갖는 것이나, 권력이나 명예를 얻거나, 돈을 많이 벌고, 더 좋은 집에 살거나, 좋은 차를 모는 것이 더 좋은 인생이라 말한다면, 나는 그것도 참 옳은 의견이라고 답변하겠다. 그것도 존중받아야 할 누군가의 가치관이니까. 할 말이 많지만 사실 이 글은 그런 논의가 주된 목적이 아니기도 하고 나의 의식 수준이 다른 이들보다 높다고 생각지도 않기에 여기서 짧게 마친다.)이런 내 가치판단 방식과, 행동방식은 몹시 명확한 성향을 가졌다. 스스로 판단하고, 스스로 행동한다는 것이다. 첫 번째 점괘에서 묘사한 것과 일치한다. 또 이런 뚜렷한 성향을 가진 아이가 여러 명 있다고 가정했을 때 서로 그 과정은 다르겠지만 어느 정도 유사한 환경(특히 부모의 성향이 가장 중요한 것 같다.)에서 자란다면 성장한 후의 모습에는 서로 유사한 가치관을 가질 가능성이 충분히 클 것이다. 그리고 비슷한 생각을 하는 사람들은 비슷한 취향을 갖게 마련이 아닌가. 충분히 가능성 있는 일이라 여겨지는데 직접 확인을 해볼 수도, 실험을 할 수도 없는 일이라 아쉽다.나는 성향이 독특한 만큼 외모에 대한 취향도 독특한 편인데 내가 보통 예쁘다고 생각하는 얼굴이(얼굴에 착하다고 대놓고 쓰여 있는 얼굴), 내 친구들이 생각하는 예쁜 얼굴(특히 서양 미녀에 대해 의견이 극심하게 갈렸는데 나는 눈도 크고, 코도 크고, 입도 큰 그들의 얼굴이 좀 무섭다고 느낀다. 어디까지나 개인적인 의견이다.)과 종종 다른 걸 보면 성격이 외모 취향에도 영향을 준다는 가설 또한 세울 수 있다. 그럼 이건 관상과도 연결점이 있겠다는 생각이 든다. 그럼 배우자의 외모를 일러주는 점괘 또한 조금 수긍이 간다.그런데 점괘를 이렇게 ‘분석과 관찰의 결과물’로 여기자면 또 이해할 수 없는 일이 생긴다. 나는 점괘를 얻기 위해 내가 태어난 날과 이름만을 적었을 뿐인데, 그것에 따라 인간의 유형과 성격이 나뉜다는 것만은 도저히 믿을 수가 없다. 나와 한날한시에 태어나고 비슷한 이름을 가진 사람들은 높은 확률로 나와 비슷한 성격을 가지고, 비슷한 행보를 보이며 인생을 살고 있다는 말이 되기 때문이다. 생각이 더 뻗지 못하고 잠시 멈춘다.‘점’은 참으로 오묘한 것이구나! 감탄이 절로 나온다.[1번 결말 - 나는 갑자기 나와 한날한시에 태어난 남자들이 어떻게 살고 있는지 궁금해지기 시작했다. 그러나 이러한 궁금증은 잠시 뒤로 미뤄야 한다.나는 올해 결혼을 할 것이고, 장금이의 미각을 지닌 내 배우자의 입맛에 맞을만한 맛집을 미리 많이 알아두어야 하기 때문이다.둥근 얼굴형에 보통 몸매이며, 눈매가 촉촉하고, 얼굴에 장난기가 있으나 여린 감성을 지녔고, 지적이고, 관심사가 다양하고 활동적인 사람들이 어떤 음식을 좋아하는 경향이 있는지 알려주는 점이 없는 것이 아쉽다. 이것은 내가 후에 태어날 나 같은 별종들을 위해 꼭 정리해 놓도록 하겠다.아니, 그런데.나와 한날한시에 태어난 동명이인의 남자가 내 배우자 될 사람을 가로채 가면 어쩐다?][2번 결말 - 전에 근무하던 직장에서 매일 본인의 운세를 확인하던 직원분이 있었다.(가끔 내 운세도 같이 봐주셨다.) 요즘 세상에 그런 걸 매번 챙겨 보냐고 농처럼 말을 던진 기억이 난다. 그 분은 별다른 대꾸 없이 웃고 마셨지만, 사실은 점의 신묘하고 깊은 이치를 벌써 깨닫고 계셨고 우매하고 무지한 나의 질문에 굳이 대답을 할 필요조차 느끼지 못하셨던 건 아닐까.마치 내가 다른 사람들에게 ‘쓸데없는 일’로 보이는 일에 골몰할 때, 그 사람들이 내게 와서 왜 그런 걸 하냐고 물었던 것처럼.‘내가 나로 행복하게 살기 위해서’‘나의 소중한 시간을 내가 원하는 곳에 제대로 사용하고 싶어서’‘즐거우니까’‘남이 해준 맛있는 음식을 아무 생각 없이 먹는 것도 좋지만, 서툴고 모자란 솜씨로 재밌게 요리를 한 과정과 그 기억, 그렇게 완성된 맛없는 요리를 먹으면, 시간과 돈을 얼마나 썼는데! 하며 기가 막혀서 웃음이 터지곤 하는 일들이 내 머릿속 추억의 앨범 안에 차곡차곡 쌓여 더 오래 남을 기억이라는 걸 알아서’‘심심해서’‘다른 일을 접하는 게 내 사고의 폭을 넓힐 수 있으니까’‘소중한 사람들과 좀 더 기억에 남을 만한 추억을 남기고 싶어서’‘재밌어 보이니까’‘그냥 갑자기 그런 일이 하고 싶은 변덕이 들어서’내 진심을 그 사람들에게 표현해 본 일이 있었는지 모르겠다.그런 질문을 한다는 게 어차피 내 행동원리를 이해하지 못할 거란 반증일 텐데, 도무지 설득할 자신이 없어 그냥 미소나 짓지 않았을까.Anyway,[아무튼, 이라고 적는 게 나을지?]시간이 날 적에, 같이 근무하던 그 직원 분에게 연락을 해서 근황을 전해야겠다.올해 내 점괘가 아주 기가 막히다고,난 틀림없이 올해 결혼한다고.청첩장 곧 보내겠다고.]///////////////////////삭제1.이 두 가지 사례로 내가 배운 것이 있다. 하나는 마음이 진정 기꺼이 하는 일이라면, 그리고 옳다고 믿는 일이라면 세상 누가 그게 지루한 일이라고 훈수를 둔 들, 아니면 칭찬을 한 들, 혹은 무의미한 일이라 비판을 한들 개의치 않게 된다는 것이다. 나는 이러한 경험을 통해 처음으로 나 자신의 의견을 품게 되었고, 그게 설령 모두가 반대하는 의견이어도 무작정 휩쓸리지 않는 품성을 갖게 되었다. 나는 이것에 감사한다.////////////삭제2.그리고 둘째는 내 마음이 깊은 곳에서부터 정말 즐거운 경험을 하였다면, 설령 그 경험의 결과가 무의미한 것으로 끝난다 한들 후회하지 않는다는 것이다. 사람은 누구나 자신의 인생 밖에 살지 못한다. 나와 가장 친했던 친구의 말을 되새기게 된다. 그 친구는 한창 고시 공부 중이던 내게 그런 말을 곧잘 하곤 했다. 그렇게 인생을 즐기지 못하고 책상 앞에 틀어 박혀 있다가 혹시라도 비행기 사고라도, 차 사고라도 나서 죽게 되면 아깝지 않겠느냐고. 그렇지 않다고 답했다. 그저 그때는 어쩌다가 우연찮게 공부가 재밌었을 뿐이라고. 그런데 그보다 더 우연찮게 정말 그 공부는 완전히 무의미해 보이는 형태로 끝이 났다. 그리고 말도 안 되는 일이지만 그 무의미한 공부를 하던 나는 살고, 친구는 먼저 세상을 떠났다. 이건 여전히 아픈 일이다.//////삭제3.그런데 정말이지 친구의 의견을 그럴싸하다. 어차피 모두가 사형선고를 받고 태어난 죽음을 향해 달리는 인생이 아닌가. 모든 행동에는 근본이 중요하다. 근본이 바른 뿌리도 썩은 과실을 맺기도 하는데, 근본이 옳지 않은 행위는 어떠할 텐가?]]></description><link>https://64etuor.github.io/writings/essays/210403-점을-본-이야기.html</link><guid isPermaLink="false">Writings/Essays/210403 - 점을 본 이야기.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 13 Dec 2024 13:21:59 GMT</pubDate></item><item><title><![CDATA[221029 - 여자로 살아간다는 것]]></title><description><![CDATA[고민해본 적 없는 일을 고민해보는 것은 제법 유쾌한 일이다. 성전환자의 심리를 궁금해한 적은 있지만서도 여자로 살아가는 것에 대해 생각해 본 일은 통 없다. 나기를 남자로 났으니 그럴 수도 있고, 굳이 성별을 나누어 무언가를 생각한다는 게 익숙하지 않은 탓도 있겠다. 그래서 한번 유쾌한 고민을 해본다. 내가 여자라고 가정을 해본다. 본래 주관이 강하니 지금 내 모습과 별반 다를 것도 없겠다는 생각을 한다. 그리고 나는 지금 아무 생각이 없다. 정말 아무 생각이 없기 때문이다. 없는 말을 지어내고 꾸미는 재주가 없으니 사는 일이 매양 건조하기 이를 데 없는 사람은 바로 이렇다. 남자라서 그러한 것이 아니고, 그냥 사람이 이러하니 이런 것이다. 아마 내가 여자였다면 조금은 더 감성적일까 같은 물음은 애초에 염두의 말미를 건드리지조차 못한다. 남자라서, 아니면 여자라서, 애초에 그 둘을 구별하여 얻을 실익이 어디에 있는지 분간이 없으니, 나는 상대에 대한 배려가 없는 통 못 쓸 인간일 수도 있겠다. 못 쓸 남자가 아니라, 못 쓸 인간 말이다. 한 명의 페미니스트였던 어머니의 등을 기억한다. 그 모습은 일면 여리지만 강인했고, 또 당신의 넓지 않은 그 등속에 마치 바다를 닮은 사랑을 간직했음을 기억한다. 소외된 사람, 약자를 지나치지 못하는 어머니의 심성과 행동들은, 내 속마음 깊숙이 당최 닿기 어려운 외딴곳에 작은 씨앗을 하나 심어 놓았다. 그리고 메마른 토지와 같은 내 마음에 심어진 그 씨앗이 기어코 살아남고 발아하여 사랑이라는 낱말이 되었다. 대상의 구별이 없는 지극하고 고귀한 사랑은 아닐지 언정, 내 주변 정도는 다소 아름답고 온화하게 가꾸는 고마운 말이다. 평등은 그 해석과 의미가 다양한 말이다. 배움이 짧아 아직 평등의 실마리를 잡지 못하였지만, 언뜻 느끼길 내 마음의 그 작고 소중한 낱말이 평등을 이해하는 데 큰 도움을 줄 것만 같다. 그러므로 나는 비록 ‘여성으로 살아가는 것’이 어떤 일인지 짐작조차 못 하면서도 그 어감의 단초를 잡아, 추론을 한다. 그리고 마땅히 세상에 여러 부류의 사람이 있음을 생각하고, 그저 작은 스푼 하나로 내 마음의 눈곱만한 좋은 부분을 눈곱의 눈곱만큼 정도는 덜어내어 주기를 결심한다.‘나와 다른 것을 인정하고, 이해하려고 노력하는 것.’ 같이 살아간다는 것은 단순한 이익관계에 의한 화합 따위는 아닐 테다. 계산이 있는 곳엔 숫자가 남을 것이고, 배려가 있는 곳엔 온기가 남을 것이다. 그리고 그 온기는 다른 사람의 마음 또한 온화하게 덥혀 또 다른 이의 시린 맘을 감싸주지 않겠는가. 다분히 이상적인 말일 테지만, 내가 없는 말을 보태어 특별히 여성을 옹호하는 가식을 내비치기 보단 이 편이 나은 듯싶다. 적어도 내가 본 많은 여성들은, 옹호할 대상이 아니라 존중할 대상이었고, 개개의 삶이 훌륭해 때로 우러러볼 일도 많았던 기억이 난다. 그리고 이 얘기는 꼭 여성에 국한된 얘기만은 아닐 것이다. 마찬가지로 내 어머니가 그토록 아름다울 수 있었던 이유가 꼭 여자이기 때문만은 아니길 소망하며 이즈음 한가지 기대를 품어 본다.
-나 또한 먼 훗날 언젠가 내가 받은 씨앗에서 열매를 맺고, 그 씨앗을 또한 누군가의 마음에 심어줄 수 있기를. 그리고 그 씨앗 또한 언젠가 열매를 맺기를. 그 작고 볼품없는 씨앗은 보기와 달리 어찌나 강인한지,
-한겨울에도,
-싹을 틔우더라.후기
-이 글을 읽은 어떤 분이 "여자의 입장도 좀 생각하시며 사시죠." 라는 코멘트를 달았다. 나는 젠더 갈등의 근본 원인에 대해 다시금 생각하지 않을 수 없었다.
-]]></description><link>https://64etuor.github.io/writings/essays/221029-여자로-살아간다는-것.html</link><guid isPermaLink="false">Writings/Essays/221029 - 여자로 살아간다는 것.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 13 Dec 2024 13:13:58 GMT</pubDate></item><item><title><![CDATA[241126 - 뜻 있는 행동이 죄 뜻 없게 되는 걸 본다]]></title><description><![CDATA[명상이 되지 못하고 떠돌던 마음이,
+중학교 때 성교육을 받고 한 생각과 그 순서는 이렇다. 성관계시 피임을 제대로 하지 않으면 임신을 할 수 있다. 완벽하게 피임을 하는 것은 어렵다. 내가 만약에 누군갈 임신시켰을 경우, 내 성격을 미루어 보면 낙태를 하지도, 아이를 낳고 입양을 보내지도 못할 게 예상된다. 그러므로 결혼을 하고 싶지 않은 사람과는 성관계를 자제해야 한다. 이렇게 생각하면 점은 단순히 못 믿을 것으로 치부하기 어렵다는 생각이 든다.위의 점괘들은 어떤 성격의 사람의 어떤 취향, 경향을 분석한 결과물일 수도 있다.(정확한 사실을 조사해 본 바 없으니 아마 이럴 것 같다고 예측만 할 뿐이다.) 다시 말하면 인간의 유형을 나누고, 어떤 유형의 사람이 어떻게 살아가는지 여러 사례들을 분석하여 가장 높은 확률의 결과를 ‘점괘’로 내놓는 것이다. 인간은 성장환경에 의해 몹시 변하지만 타고난 경향이 확고하다면 성장환경으로 인한 개개인의 차이는 좁혀질 수도 있다.나의 경우를 예로 들자면, 나는 어려서부터 세상을 바라보는 관점 자체가 특이한 편이었다. 이 때문에 오해를 산 적도 많고, 다른 사람들과 대화하기가 어려운 일(서로 동문서답을 하는)도 종종 있었다. 가령 초등학생 시절, 친구들이 H.O.T.(90년대 5인조 남성아이돌그룹) 노래 중에 뭘 제일 좋아하냐고 물었을 때, 나는 ‘빛’(‘강타’라는 멤버가 직접 작곡하고 부른 곡으로 알고 있다.)이라고 대답했다. 그런데 뜻밖에 나는 그 후 친구들이 모여 H.O.T. 멤버 중에 누가 제일인지를 가리는 토론(점잖게 표현했지만 사실은 말싸움)에서 강타를 옹호해야 하는 ‘강타파’에 강제로 편입되었다. 실제로는 나는 강타라는 사람에 대해 관심도 없고, 좋아하지도 않았다. 애초에 한 번도 연예인을 좋아해 본 일이 없다. 그 사람을 만나본 적도 없고, 만날 일도 없으며, 그 사람이 어떻게 살아가는지 알지도 못하는데 무엇을 보고 호감을 표할 수 있는지 알 수도 없었을 뿐더러 누가 제일인지 가려서 어쩌자는 건지 도무지 이해할 수가 없었다. 난 당초에 말 그대로 ‘빛’이라는 노래만 좋아했을 뿐이다. 지금도 음악을 듣는 걸 즐기지만 항상 노래와 가수는 내게 각각 별개의 존재이다.(박효신은 제외, 이 사람은 그냥 마음씨가 예쁜 게 너무 티가 난다. 이 말인즉슨, 박효신이 가수가 아니었어도 나는 박효신이라는 사람 자체에 호감을 느꼈을 거란 말이다.)이 별개의 존재라는 개념이 어릴 때부터 나의 가치판단의 근본이었다. 예를 들기 좋은 소재가 있다. 독서와 컴퓨터 게임 두 가지를 놓고 비교해보면, 일부 사람들은 독서는 유익하고 게임은 무익하고 시간 낭비라고 종종 말하지만 내 가치판단의 방식으로는 애초에 둘을 비교하지 않는다. 두 행위는 별개로 존재할 뿐이다. 무엇이 더 나은지 가릴 필요나 그 두 행위 간에 가치의 우위가 있다고 느끼지 못한다는 뜻이다. 마찬가지로 책을 많이 읽고 지식을 쌓은 사람과 게임을 많이 하는 사람 둘이 내 앞에 있다한들 비교하거나 우열을 정하지 않는다. 그냥 각각 별개의 사람으로만 인식할 뿐이다. 내가 만약에 자녀를 갖게 되도 책 읽는 걸 권장하거나, 혹은 자녀가 게임을 많이 한다고 꾸짖을 일도 없을 것이다.(실제로 어머니가 나를 이렇게 키우신 영향이 크다.) 그렇게 생각하게 될 수 있었던 이유를 아래 밝힌다.나는 내가 태어나 자라던 시골에서 소문난 독서광이었다. 어른들과 선생님들은 내가 책을 많이 읽는 걸 칭찬할 때가 많았다. 나는 단순히 하고 싶은 걸 할 뿐인데 칭찬을 듣는 건 정말 이상한 일이었다. 내가 책읽기를 즐긴 게 된 건 단순한 이유다. 책을 읽는 것을 내가 좋아하기 때문이다. 이게 무슨 말장난이냐는 반문을 받을 수 있다는 생각을 한다. 그러므로 이렇게 표현할 수밖에 없는 사유를 적는다.책을 읽는다는 행위는 내게 처음부터 공부를 잘하기 위해서, 혹은 좋은 학교에 가기 위해서 따위의 목적이 없는 단순한 놀이였다. 책읽기는 내가 세상에 태어나 처음으로 스스로 찾은 ‘좋아하는 놀이 1호’였다. 그렇게 된 이유는 또 간단하다. 내가 6살 때, 하루는 같은 동네에 살던 한 살 터울 사촌 누나가 유치원에서 한글을 공부해서 학교 앞에 세워진 안내판(학교 반경 200m 이내에 유흥업소 등의 영업을 할 수 없다는 안내 취지의)을 읽는 걸 보게 되었다. 나는 그게 몹시 시샘이 나서 사촌 누나가 읽는 걸 그대로 듣고 외워서 글자 하나하나 읽는 법을 혼자 익혔다. 그리고 어느 정도 자신감이 생기자 유치원에서 보육 교사분이 동화를 읽어주는 시간에 내가 대신 읽어주겠다며 나섰다. 자신감과는 다르게, 또 분하게도 어물어물하며 반도 제대로 읽지 못했다. 안내판에는 없던 모르는 글자가 많았기 때문이다. 그 후로는 계속 남들을 귀찮게 하면서 모르는 글자를 하나하나 익혀나갔다. 동화를 하나하나 더 읽을 수 있게 되는 과정이 무척 재밌었다.그리고 컴퓨터를 배우기 시작하면서 컴퓨터 게임의 존재를 알게 되었다. 나는 여기에 몹시 매료되었다. 처음에는 집에 컴퓨터가 없어 매일같이 남의 집에 놀러 가서 게임을 하거나 구경을 하곤 했다. 이후에 컴퓨터를 배우는데 썩 성과가 나오자 부모님은 내가 다니던 컴퓨터 학원에서 판매하던 컴퓨터를 한 대 사주셨다. 내 기쁨은 말로 형용할 수 없었다. 집에 컴퓨터가 생기자 한 번 매달리면 시간 가는 줄 모르고 게임을 하곤 했다. 그게 얼마나 집요했는지, 간혹 컴퓨터에 오류가 생겨 부팅이 안 되거나 하는 문제가 생기면, 컴퓨터 학원에 맡겨서 수리를 의뢰하는 그 시간조차 아까워서 어떻게든 직접 문제를 찾아내고 고칠 정도였다. 그 과정조차 모두 즐거웠다. 이 모든 게 내가 생각하는 내가 스스로 찾은 ‘좋아하는 놀이 2호’이다.첫 번째 놀이는 우연히도 어른들이 보시기에 마땅히 좋은 행동이었고, 두 번째 놀이는 그렇지 못하였다. 나는 똑같은 원인에서 비롯된 두 가지 행위에 상반된 평가가 이어지는 게 꽤나 놀라웠고, 내가 정말 좋아하는 것들을 남들이 함부로 평가하는 데에 맘속에서 적잖이 분노하였다.(혹시나 내 의견이 불편한 사람이 있을 것 같아 사족을 단다. 가치관은 서로 다른 게 당연한 일이고, 내가 가장 중요하게 여기는 것은 내가 정한 가치이다. 그리고 내가 정한 가치의 최우선순위는 행위나 생각의 당부당에 대한 내 자신의 판단 결과다. 내 어머니는 단지 나에게 바르게 자라는 걸 바라셨고, 난 그게 옳다고 판단하고 따르려고 노력했다.만약에 내가 게임 대신 사람들이 말하는 좀 더 건설적인 취미를 가졌다면, 공부를 더 했다면 내 인생이 더 나아졌을까? 따위의 생각을 해본 적도 없다. 마음이 즐거운 일을 했고, 여전히 마음이 즐겁다. 더 나은 인생이란 게 무엇인지도 모른다. 누군가 좋은 직업을 갖는 것이나, 권력이나 명예를 얻거나, 돈을 많이 벌고, 더 좋은 집에 살거나, 좋은 차를 모는 것이 더 좋은 인생이라 말한다면, 나는 그것도 참 옳은 의견이라고 답변하겠다. 그것도 존중받아야 할 누군가의 가치관이니까. 할 말이 많지만 사실 이 글은 그런 논의가 주된 목적이 아니기도 하고 나의 의식 수준이 다른 이들보다 높다고 생각지도 않기에 여기서 짧게 마친다.)이런 내 가치판단 방식과, 행동방식은 몹시 명확한 성향을 가졌다. 스스로 판단하고, 스스로 행동한다는 것이다. 첫 번째 점괘에서 묘사한 것과 일치한다. 또 이런 뚜렷한 성향을 가진 아이가 여러 명 있다고 가정했을 때 서로 그 과정은 다르겠지만 어느 정도 유사한 환경(특히 부모의 성향이 가장 중요한 것 같다.)에서 자란다면 성장한 후의 모습에는 서로 유사한 가치관을 가질 가능성이 충분히 클 것이다. 그리고 비슷한 생각을 하는 사람들은 비슷한 취향을 갖게 마련이 아닌가. 충분히 가능성 있는 일이라 여겨지는데 직접 확인을 해볼 수도, 실험을 할 수도 없는 일이라 아쉽다.나는 성향이 독특한 만큼 외모에 대한 취향도 독특한 편인데 내가 보통 예쁘다고 생각하는 얼굴이(얼굴에 착하다고 대놓고 쓰여 있는 얼굴), 내 친구들이 생각하는 예쁜 얼굴(특히 서양 미녀에 대해 의견이 극심하게 갈렸는데 나는 눈도 크고, 코도 크고, 입도 큰 그들의 얼굴이 좀 무섭다고 느낀다. 어디까지나 개인적인 의견이다.)과 종종 다른 걸 보면 성격이 외모 취향에도 영향을 준다는 가설 또한 세울 수 있다. 그럼 이건 관상과도 연결점이 있겠다는 생각이 든다. 그럼 배우자의 외모를 일러주는 점괘 또한 조금 수긍이 간다.그런데 점괘를 이렇게 ‘분석과 관찰의 결과물’로 여기자면 또 이해할 수 없는 일이 생긴다. 나는 점괘를 얻기 위해 내가 태어난 날과 이름만을 적었을 뿐인데, 그것에 따라 인간의 유형과 성격이 나뉜다는 것만은 도저히 믿을 수가 없다. 나와 한날한시에 태어나고 비슷한 이름을 가진 사람들은 높은 확률로 나와 비슷한 성격을 가지고, 비슷한 행보를 보이며 인생을 살고 있다는 말이 되기 때문이다. 생각이 더 뻗지 못하고 잠시 멈춘다.‘점’은 참으로 오묘한 것이구나! 감탄이 절로 나온다.[1번 결말 - 나는 갑자기 나와 한날한시에 태어난 남자들이 어떻게 살고 있는지 궁금해지기 시작했다. 그러나 이러한 궁금증은 잠시 뒤로 미뤄야 한다.나는 올해 결혼을 할 것이고, 장금이의 미각을 지닌 내 배우자의 입맛에 맞을만한 맛집을 미리 많이 알아두어야 하기 때문이다.둥근 얼굴형에 보통 몸매이며, 눈매가 촉촉하고, 얼굴에 장난기가 있으나 여린 감성을 지녔고, 지적이고, 관심사가 다양하고 활동적인 사람들이 어떤 음식을 좋아하는 경향이 있는지 알려주는 점이 없는 것이 아쉽다. 이것은 내가 후에 태어날 나 같은 별종들을 위해 꼭 정리해 놓도록 하겠다.아니, 그런데.나와 한날한시에 태어난 동명이인의 남자가 내 배우자 될 사람을 가로채 가면 어쩐다?][2번 결말 - 전에 근무하던 직장에서 매일 본인의 운세를 확인하던 직원분이 있었다.(가끔 내 운세도 같이 봐주셨다.) 요즘 세상에 그런 걸 매번 챙겨 보냐고 농처럼 말을 던진 기억이 난다. 그 분은 별다른 대꾸 없이 웃고 마셨지만, 사실은 점의 신묘하고 깊은 이치를 벌써 깨닫고 계셨고 우매하고 무지한 나의 질문에 굳이 대답을 할 필요조차 느끼지 못하셨던 건 아닐까.마치 내가 다른 사람들에게 ‘쓸데없는 일’로 보이는 일에 골몰할 때, 그 사람들이 내게 와서 왜 그런 걸 하냐고 물었던 것처럼.‘내가 나로 행복하게 살기 위해서’‘나의 소중한 시간을 내가 원하는 곳에 제대로 사용하고 싶어서’‘즐거우니까’‘남이 해준 맛있는 음식을 아무 생각 없이 먹는 것도 좋지만, 서툴고 모자란 솜씨로 재밌게 요리를 한 과정과 그 기억, 그렇게 완성된 맛없는 요리를 먹으면, 시간과 돈을 얼마나 썼는데! 하며 기가 막혀서 웃음이 터지곤 하는 일들이 내 머릿속 추억의 앨범 안에 차곡차곡 쌓여 더 오래 남을 기억이라는 걸 알아서’‘심심해서’‘다른 일을 접하는 게 내 사고의 폭을 넓힐 수 있으니까’‘소중한 사람들과 좀 더 기억에 남을 만한 추억을 남기고 싶어서’‘재밌어 보이니까’‘그냥 갑자기 그런 일이 하고 싶은 변덕이 들어서’내 진심을 그 사람들에게 표현해 본 일이 있었는지 모르겠다.그런 질문을 한다는 게 어차피 내 행동원리를 이해하지 못할 거란 반증일 텐데, 도무지 설득할 자신이 없어 그냥 미소나 짓지 않았을까.Anyway,[아무튼, 이라고 적는 게 나을지?]시간이 날 적에, 같이 근무하던 그 직원 분에게 연락을 해서 근황을 전해야겠다.올해 내 점괘가 아주 기가 막히다고,난 틀림없이 올해 결혼한다고.청첩장 곧 보내겠다고.]///////////////////////삭제1.이 두 가지 사례로 내가 배운 것이 있다. 하나는 마음이 진정 기꺼이 하는 일이라면, 그리고 옳다고 믿는 일이라면 세상 누가 그게 지루한 일이라고 훈수를 둔 들, 아니면 칭찬을 한 들, 혹은 무의미한 일이라 비판을 한들 개의치 않게 된다는 것이다. 나는 이러한 경험을 통해 처음으로 나 자신의 의견을 품게 되었고, 그게 설령 모두가 반대하는 의견이어도 무작정 휩쓸리지 않는 품성을 갖게 되었다. 나는 이것에 감사한다.////////////삭제2.그리고 둘째는 내 마음이 깊은 곳에서부터 정말 즐거운 경험을 하였다면, 설령 그 경험의 결과가 무의미한 것으로 끝난다 한들 후회하지 않는다는 것이다. 사람은 누구나 자신의 인생 밖에 살지 못한다. 나와 가장 친했던 친구의 말을 되새기게 된다. 그 친구는 한창 고시 공부 중이던 내게 그런 말을 곧잘 하곤 했다. 그렇게 인생을 즐기지 못하고 책상 앞에 틀어 박혀 있다가 혹시라도 비행기 사고라도, 차 사고라도 나서 죽게 되면 아깝지 않겠느냐고. 그렇지 않다고 답했다. 그저 그때는 어쩌다가 우연찮게 공부가 재밌었을 뿐이라고. 그런데 그보다 더 우연찮게 정말 그 공부는 완전히 무의미해 보이는 형태로 끝이 났다. 그리고 말도 안 되는 일이지만 그 무의미한 공부를 하던 나는 살고, 친구는 먼저 세상을 떠났다. 이건 여전히 아픈 일이다.//////삭제3.그런데 정말이지 친구의 의견을 그럴싸하다. 어차피 모두가 사형선고를 받고 태어난 죽음을 향해 달리는 인생이 아닌가. 모든 행동에는 근본이 중요하다. 근본이 바른 뿌리도 썩은 과실을 맺기도 하는데, 근본이 옳지 않은 행위는 어떠할 텐가?]]></description><link>https://64etuor.github.io/writings/essays/210403-점을-본-이야기.html</link><guid isPermaLink="false">Writings/Essays/210403 - 점을 본 이야기.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 13 Dec 2024 13:21:59 GMT</pubDate></item><item><title><![CDATA[241126 - 뜻 있는 행동이 죄 뜻 없게 되는 걸 본다]]></title><description><![CDATA[명상이 되지 못하고 떠돌던 마음이,
 가문 날씨 탓에 수분을 잃어,
 더이상 사람의 태생임을 입증치 못 할 지경에 이르면,
 빼빼 마른 글자가 되어 땅바닥에 널브러졌다.늘어진 글자를 보고 긍휼히 여길 사연 가진 이 없는 탓에,
@@ -1111,7 +1372,7 @@ MES 활용 공정 현황 실시간 분석 프로세스 도입 WBS, Gantt Chart, 
 눈에 담기지 않은 모든 풍경이 기화하여
 깡그리 마른 마음으로 얄궂게 빨려 들어가고, 이내 토해져
 이 종이 위에 가나다라마바사를 나열하고 이내는
-연기와 함께 흩어졌다]]></description><link>https://64etuor.github.io/writings/poems/210605-가나다라마바사.html</link><guid isPermaLink="false">Writings/Poems/210605 - 가나다라마바사.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 13 Dec 2024 13:06:10 GMT</pubDate></item><item><title><![CDATA[Reference]]></title><description><![CDATA[자소서 쓰는 법 <a rel="noopener nofollow" class="external-link is-unresolved" href="https://brunch.co.kr/@onthepaper/23" target="_self">https://brunch.co.kr/@onthepaper/23</a>]]></description><link>https://64etuor.github.io/self-management/reference.html</link><guid isPermaLink="false">Self-Management/Reference.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:13:28 GMT</pubDate></item><item><title><![CDATA[독서 대시보드]]></title><description><![CDATA[2025년의 목표 ]]></description><link>https://64etuor.github.io/books/독서-대시보드.html</link><guid isPermaLink="false">Books/독서 대시보드.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:44:31 GMT</pubDate><enclosure url="https://image.yes24.com/goods/119826327/XL" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src="https://image.yes24.com/goods/119826327/XL"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[보랏빛 소가 온다：21세기 최고의 마케팅 바이블]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/보랏빛-소가-온다.html</link><guid isPermaLink="false">Books/Bookshelf/보랏빛 소가 온다.md</guid><dc:creator><![CDATA[세스 고딘, 이주형, 남수영]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:18:02 GMT</pubDate></item><item><title><![CDATA[세컨드 브레인 부스트]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/세컨드-브레인-부스트.html</link><guid isPermaLink="false">Books/Bookshelf/세컨드 브레인 부스트.md</guid><dc:creator><![CDATA[티아고 포르테, 이희령]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:17:58 GMT</pubDate></item><item><title><![CDATA[실용주의 프로그래머]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/실용주의-프로그래머.html</link><guid isPermaLink="false">Books/Bookshelf/실용주의 프로그래머.md</guid><dc:creator><![CDATA[데이비드 토머스, 앤드류 헌트, 정지용, 김창준]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:10:17 GMT</pubDate></item><item><title><![CDATA[참을 수 없는 존재의 가벼움]]></title><description><![CDATA[너무 어려워서 정리를 해가며 읽었다. 도저히 평가할 수 없는 위대한 작품이라고 생각한다.
+연기와 함께 흩어졌다]]></description><link>https://64etuor.github.io/writings/poems/210605-가나다라마바사.html</link><guid isPermaLink="false">Writings/Poems/210605 - 가나다라마바사.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 13 Dec 2024 13:06:10 GMT</pubDate></item><item><title><![CDATA[Reference]]></title><description><![CDATA[자소서 쓰는 법 <a rel="noopener nofollow" class="external-link is-unresolved" href="https://brunch.co.kr/@onthepaper/23" target="_self">https://brunch.co.kr/@onthepaper/23</a>]]></description><link>https://64etuor.github.io/self-management/reference.html</link><guid isPermaLink="false">Self-Management/Reference.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 12 Dec 2024 00:13:28 GMT</pubDate></item><item><title><![CDATA[보랏빛 소가 온다：21세기 최고의 마케팅 바이블]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/보랏빛-소가-온다.html</link><guid isPermaLink="false">Books/Bookshelf/보랏빛 소가 온다.md</guid><dc:creator><![CDATA[세스 고딘, 이주형, 남수영]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:18:02 GMT</pubDate></item><item><title><![CDATA[세컨드 브레인 부스트]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/세컨드-브레인-부스트.html</link><guid isPermaLink="false">Books/Bookshelf/세컨드 브레인 부스트.md</guid><dc:creator><![CDATA[티아고 포르테, 이희령]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:17:58 GMT</pubDate></item><item><title><![CDATA[실용주의 프로그래머]]></title><description><![CDATA[ ]]></description><link>https://64etuor.github.io/books/bookshelf/실용주의-프로그래머.html</link><guid isPermaLink="false">Books/Bookshelf/실용주의 프로그래머.md</guid><dc:creator><![CDATA[데이비드 토머스, 앤드류 헌트, 정지용, 김창준]]></dc:creator><pubDate>Wed, 11 Dec 2024 07:10:17 GMT</pubDate></item><item><title><![CDATA[참을 수 없는 존재의 가벼움]]></title><description><![CDATA[너무 어려워서 정리를 해가며 읽었다. 도저히 평가할 수 없는 위대한 작품이라고 생각한다.
 <a data-tooltip-position="top" aria-label="참을 수 없는 존재의 가벼움 > 1부 가벼움과 무거움" data-href="참을 수 없는 존재의 가벼움#1부 가벼움과 무거움" href="https://64etuor.github.io/books/bookshelf/참을-수-없는-존재의-가벼움.html#1부_가벼움과_무거움_0" class="internal-link" target="_self" rel="noopener nofollow">1부 가벼움과 무거움</a>
 2부 영혼과 육체 67
 3부 이해받지 못한 말들 139
@@ -2753,23 +3014,7 @@ Q. Have you had any interesting situations that occurred while traveling for bus
 Hello, Park Yangha/David!
 Looking at the sentences you mentioned, I see that a few small adjustments could make them even more natural English sentences! In the first sentence,&nbsp;"It take me to two hours to get the hotel."&nbsp;you should change&nbsp;"It take"&nbsp;to&nbsp;"It takes.""It takes"&nbsp;means&nbsp;"it takes time,"&nbsp;while&nbsp;"take"&nbsp;means&nbsp;"to take up time,"&nbsp;so it was used incorrectly.
 "to"&nbsp;indicates a&nbsp;"destination,"&nbsp;so changing it to&nbsp;"get to the hotel"&nbsp;would be more natural. In the second sentence,&nbsp;"There are so many bike driver."&nbsp;you should change it to&nbsp;"There are so many bike drivers."&nbsp;"driver"&nbsp;means&nbsp;"driver,"&nbsp;and the plural form is&nbsp;"drivers." The third sentence,&nbsp;"Maybe in the next year, I will go to Bohol."&nbsp;is well written, but it could also be written as&nbsp;"Maybe next year, I will go to Bohol."&nbsp;It's a simpler way to express it. In the fourth sentence,&nbsp;"Bohol is one of the best spot for scuba diving."&nbsp;you should change it to&nbsp;"Bohol is one of the best spots for scuba diving."&nbsp;"spot"&nbsp;means&nbsp;"place,"&nbsp;and the plural form is&nbsp;"spots." In the last sentence,&nbsp;"The taxi driver was waiting to me."&nbsp;you should change it to&nbsp;"The taxi driver was waiting for me."&nbsp;"waiting for"&nbsp;means&nbsp;"waiting,"&nbsp;so using&nbsp;"for"&nbsp;instead of&nbsp;"to"&nbsp;would be more natural. Good job, David! Keep practicing and you'll be able to write perfect English sentences.
-I’m able to recognize my mistakes when I speak in English, I still omit “s”, use singular form very often. I understand how to use “s” in a proper way but it seems hard to get used to it. I want to count how many days will it take. As long as I achieve that, nothing matters.I can recognize my mistakes when I speak English, but I still often omit the ‘s’ and use singular forms. I understand the correct way to use ‘s,’ but it’s hard to get used to. I want to track how many days it will take to improve. As long as I achieve this, nothing else matters.]]></description><link>https://64etuor.github.io/studies/spicus-english(2410~2411)/unit-11.-telling-a-story.html</link><guid isPermaLink="false">Studies/SPICUS English(2410~2411)/Unit 11. Telling a story.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 08:47:48 GMT</pubDate></item><item><title><![CDATA[Unit 10. Progress Update]]></title><description><![CDATA[ go over
-last minute
-worst-case scenario
-over the phone I’m afraid that I won’t be able to next week.
-I am booked solid with meetings and presentations for the next week or so. Q. Have you ever had issues with trying to meet with someone because of scheduling conflicts? How did you resolve those situations?A. I rarely encounter scheduling conflicts when it comes to business, but sometimes it’s challenging to meet my friends at a time when we can all get together. Unlike me, most of my friends are married, so they have their own families and need to take care of their children as well. This simply means that I have to adjust my schedule to fit theirs, but that’s no problem as long as we get to meet.Q. What type of software do you use to keep track of your meetings? Why?A. I use several Microsoft applications to manage my schedule and meetings, especially Teams, Planner, and Outlook. Our company provides licenses for these tools, and they’re quite effective for organizing my time and tasks. That said, I prefer Google Calendar for my personal life. With Google Assistant, I can easily add events by voice—like saying, ‘Hey Google, schedule a doctor’s appointment for this Saturday at 9 am’ It then reminds me when the time comes.Q. If an urgent issue came up and you had to reschedule a meeting, how would you handle the problem?A. I’ll inform the attendees as soon as possible and try to reschedule the meeting after addressing the urgent issue. If they’re unavailable at the new time, the meeting isn’t the only option—we can still discuss via email or chat. Another good option is holding a Zoom meeting. I typically have online meetings rather than in-person ones, as my company is international.Hello, Yangha! Looking at the sentences you wrote, I think a few adjustments would make them sound more natural in English. The first sentence,&nbsp;"I have only little vacation time."&nbsp;is almost perfect, but using&nbsp;"a little"&nbsp;instead of&nbsp;"little"&nbsp;would sound more natural.
-Saying&nbsp;"I have only "a little" vacation time."&nbsp;makes it clearer that you have&nbsp;"little vacation time." The second sentence,&nbsp;"He always yell"&nbsp;would be more accurate with the addition of an&nbsp;"s"&nbsp;to the verb&nbsp;"yell."&nbsp;Saying&nbsp;"He always "yells"."&nbsp;means&nbsp;"He always shouts." The third sentence,&nbsp;"I bumped into my old friend who graduate from same elementary school."&nbsp;needs to change&nbsp;"graduate"&nbsp;to past tense.
-Saying&nbsp;"I bumped into my old friend who "graduated" from the same elementary school."&nbsp;makes it clearer that you&nbsp;"bumped into an old friend who graduated from the same elementary school." The fourth sentence,&nbsp;"I was a bit discomfortable."&nbsp;needs&nbsp;"discomfortable"&nbsp;changed to&nbsp;"uncomfortable."&nbsp;Saying&nbsp;"I was a bit "uncomfortable"."&nbsp;means&nbsp;"I was a bit uncomfortable." The last sentence,&nbsp;"It is kind of waste of time."&nbsp;would be more accurate with an&nbsp;"a"&nbsp;before&nbsp;"waste."&nbsp;Saying&nbsp;"It is kind of "a" waste of time."&nbsp;means&nbsp;"It is kind of a waste of time." Yangha, it's great to see you working hard on your English studies! With a little effort, you'll be able to speak English more naturally and accurately. I'm cheering for you! I have to adjust my schedule to fit theirs.
-→ I have to adjust my schedule to fit theirs.
-Our company provide tool to organize our schedule.
-→ Our company provides tools to organize our schedule.
-I am just tried to be honest.
-→ I I am just trying to be honest.
-I will set priority of them.
-→ I will set them as a priority.
-The organizer give me time.
-→ The organizer gives me time.
-It’s my bad habit to omit “s” after verbs and nouns even though when I do know how to use it. The practice makes perfect. What I have to is only practice. I’m thinking how to make the environment around me changed for that practice.It’s a bad habit of mine to omit the ‘s’ after verbs and nouns, even though I know how to use it. Practice makes perfect—what I need is simply more practice. I’m considering how to create an environment that helps me build this habit.]]></description><link>https://64etuor.github.io/studies/spicus-english(2410~2411)/unit-10.-progress-update.html</link><guid isPermaLink="false">Studies/SPICUS English(2410~2411)/Unit 10. Progress Update.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 08:44:58 GMT</pubDate></item><item><title><![CDATA[Unit 9. Catching up with Others]]></title><description><![CDATA[ hectic
+I’m able to recognize my mistakes when I speak in English, I still omit “s”, use singular form very often. I understand how to use “s” in a proper way but it seems hard to get used to it. I want to count how many days will it take. As long as I achieve that, nothing matters.I can recognize my mistakes when I speak English, but I still often omit the ‘s’ and use singular forms. I understand the correct way to use ‘s,’ but it’s hard to get used to. I want to track how many days it will take to improve. As long as I achieve this, nothing else matters.]]></description><link>https://64etuor.github.io/studies/spicus-english(2410~2411)/unit-11.-telling-a-story.html</link><guid isPermaLink="false">Studies/SPICUS English(2410~2411)/Unit 11. Telling a story.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 08 Dec 2024 08:47:48 GMT</pubDate></item><item><title><![CDATA[Unit 9. Catching up with Others]]></title><description><![CDATA[ hectic
 extension: 내선 번호
 show someone around I’ve been here for about three years, going on four this July.
 Welcome aboard.
