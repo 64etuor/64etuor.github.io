@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신고 관리 | Newbit</title>
+    <link rel="stylesheet" href="admin-report.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>신고 관리</h1>
+            <div class="view-options">
+                <select id="report-type">
+                    <option value="all">모든 신고</option>
+                    <option value="posts">게시글 신고</option>
+                    <option value="comments">댓글 신고</option>
+                    <option value="users">회원 신고</option>
+                    <option value="false-reports">허위 신고</option>
+                </select>
+                <select id="report-status">
+                    <option value="all">모든 상태</option>
+                    <option value="pending">미처리</option>
+                    <option value="processed">처리 완료</option>
+                    <option value="rejected">거부됨</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="tab-container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="posts">게시글 신고</button>
+                <button class="tab-btn" data-tab="comments">댓글 신고</button>
+            </div>
+            
+            <div class="tab-content active" id="posts-tab">
+                <div class="report-count">
+                    <p>총 <span class="count-number">124</span>건의 게시글 신고가 있습니다.</p>
+                </div>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>신고 대상</th>
+                            <th>신고 사유</th>
+                            <th>신고자</th>
+                            <th>신고 일시</th>
+                            <th>누적 신고</th>
+                            <th>상태</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td class="content-cell">
+                                <a href="#" class="content-link">부적절한 내용의 게시글입니다.</a>
+                                <span class="writer">작성자: user123</span>
+                            </td>
+                            <td>욕설/혐오/차별적 표현</td>
+                            <td>hong_gil</td>
+                            <td>2025-04-22 14:30</td>
+                            <td><span class="report-count-high">52</span></td>
+                            <td><span class="status pending">미처리</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn delete-btn">삭제</button>
+                                    <button class="action-btn false-btn">허위신고</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="content-cell">
+                                <a href="#" class="content-link">스팸 광고 게시글</a>
+                                <span class="writer">작성자: spam_user</span>
+                            </td>
+                            <td>스팸/광고</td>
+                            <td>kim_min</td>
+                            <td>2025-04-22 13:15</td>
+                            <td><span class="report-count-medium">32</span></td>
+                            <td><span class="status pending">미처리</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn delete-btn">삭제</button>
+                                    <button class="action-btn false-btn">허위신고</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td class="content-cell">
+                                <a href="#" class="content-link">개인정보 노출 게시글</a>
+                                <span class="writer">작성자: leaker</span>
+                            </td>
+                            <td>개인정보 침해</td>
+                            <td>park_ji</td>
+                            <td>2025-04-21 09:45</td>
+                            <td><span class="report-count-low">5</span></td>
+                            <td><span class="status processed">처리완료</span></td>
+                            <td>
+                                <div class="action-buttons disabled">
+                                    <button class="action-btn delete-btn" disabled>삭제됨</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button class="page-btn">&lt;</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">4</button>
+                    <button class="page-btn">5</button>
+                    <button class="page-btn">&gt;</button>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="comments-tab">
+                <div class="report-count">
+                    <p>총 <span class="count-number">78</span>건의 댓글 신고가 있습니다.</p>
+                </div>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>신고 대상</th>
+                            <th>원글</th>
+                            <th>신고 사유</th>
+                            <th>신고자</th>
+                            <th>신고 일시</th>
+                            <th>누적 신고</th>
+                            <th>상태</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td class="content-cell">
+                                <div class="comment-content">이건 진짜 말도 안되는 댓글입니다.</div>
+                                <span class="writer">작성자: troll_user</span>
+                            </td>
+                            <td><a href="#" class="post-link">개발 이야기</a></td>
+                            <td>욕설/혐오/차별적 표현</td>
+                            <td>lee_su</td>
+                            <td>2025-04-22 17:10</td>
+                            <td><span class="report-count-high">51</span></td>
+                            <td><span class="status pending">미처리</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn delete-btn">삭제</button>
+                                    <button class="action-btn false-btn">허위신고</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="content-cell">
+                                <div class="comment-content">광고 링크: www.spam-site.com</div>
+                                <span class="writer">작성자: ad_poster</span>
+                            </td>
+                            <td><a href="#" class="post-link">질문있습니다</a></td>
+                            <td>스팸/광고</td>
+                            <td>choi_woo</td>
+                            <td>2025-04-22 12:35</td>
+                            <td><span class="report-count-medium">24</span></td>
+                            <td><span class="status pending">미처리</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn delete-btn">삭제</button>
+                                    <button class="action-btn false-btn">허위신고</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td class="content-cell">
+                                <div class="comment-content">개인 전화번호: 010-1234-5678</div>
+                                <span class="writer">작성자: info_share</span>
+                            </td>
+                            <td><a href="#" class="post-link">연락처 공유</a></td>
+                            <td>개인정보 침해</td>
+                            <td>jung_min</td>
+                            <td>2025-04-21 14:22</td>
+                            <td><span class="report-count-low">3</span></td>
+                            <td><span class="status rejected">거부됨</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn delete-btn">삭제</button>
+                                    <button class="action-btn false-btn disabled" disabled>허위신고 등록됨</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button class="page-btn">&lt;</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and content
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = button.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Action buttons functionality (simplified for demo)
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                if(!this.disabled) {
+                    const row = this.closest('tr');
+                    if(confirm('해당 콘텐츠를 삭제하시겠습니까?')) {
+                        // Here you would call an API to delete the content
+                        alert('콘텐츠가 삭제되었습니다.');
+                        const statusCell = row.querySelector('.status');
+                        statusCell.className = 'status processed';
+                        statusCell.textContent = '처리완료';
+                        
+                        this.textContent = '삭제됨';
+                        this.disabled = true;
+                        this.closest('.action-buttons').classList.add('disabled');
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.false-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                if(!this.disabled) {
+                    const row = this.closest('tr');
+                    if(confirm('해당 신고를 허위 신고로 등록하시겠습니까?')) {
+                        // Here you would call an API to mark as false report
+                        alert('허위 신고로 등록되었습니다.');
+                        const statusCell = row.querySelector('.status');
+                        statusCell.className = 'status rejected';
+                        statusCell.textContent = '거부됨';
+                        
+                        this.textContent = '허위신고 등록됨';
+                        this.disabled = true;
+                        this.classList.add('disabled');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
