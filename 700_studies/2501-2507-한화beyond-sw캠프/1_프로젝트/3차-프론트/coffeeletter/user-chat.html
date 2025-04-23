@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1:1 채팅 | Newbit</title>
+    <link rel="stylesheet" href="user-chat.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- 채팅 상대 목록 패널 -->
+      <div class="chat-list-panel">
+        <div class="chat-list-header">
+          <h2>메시지</h2>
+        </div>
+        <div class="chat-search">
+          <div class="search-input-container">
+            <input type="text" placeholder="검색" class="chat-search-input" />
+          </div>
+        </div>
+        <div class="chat-users">
+          <div class="chat-user-item selected">
+            <div class="user-avatar">
+              <img src="https://via.placeholder.com/40" alt="사용자 이미지" />
+              <span class="status-indicator online"></span>
+            </div>
+            <div class="user-info">
+              <div class="user-name-row">
+                <span class="user-name">김철수</span>
+                <span class="message-time">14:22</span>
+              </div>
+              <div class="last-message">
+                안녕하세요! 오늘 새로운 기능이 업데이트 되었나요?
+              </div>
+            </div>
+          </div>
+          <div class="chat-user-item">
+            <div class="user-avatar">
+              <img src="https://via.placeholder.com/40" alt="사용자 이미지" />
+              <span class="status-indicator offline"></span>
+            </div>
+            <div class="user-info">
+              <div class="user-name-row">
+                <span class="user-name">이영희</span>
+                <span class="message-time">어제</span>
+              </div>
+              <div class="last-message">
+                프로젝트 진행 상황 어떻게 되고 있나요?
+              </div>
+            </div>
+          </div>
+          <div class="chat-user-item">
+            <div class="user-avatar">
+              <img src="https://via.placeholder.com/40" alt="사용자 이미지" />
+              <span class="status-indicator online"></span>
+            </div>
+            <div class="user-info">
+              <div class="user-name-row">
+                <span class="user-name">박민수</span>
+                <span class="message-time">월요일</span>
+              </div>
+              <div class="last-message">
+                회의 시간 변경되었습니다. 오후 3시에 진행할게요.
+              </div>
+            </div>
+          </div>
+          <div class="chat-user-item">
+            <div class="user-avatar">
+              <img src="https://via.placeholder.com/40" alt="사용자 이미지" />
+              <span class="status-indicator away"></span>
+            </div>
+            <div class="user-info">
+              <div class="user-name-row">
+                <span class="user-name">정수진</span>
+                <span class="message-time">11월 2일</span>
+              </div>
+              <div class="last-message">
+                첨부파일 잘 받았습니다. 감사합니다!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 채팅 패널 -->
+      <div class="chat-panel">
+        <div class="chat-header">
+          <div class="chat-info">
+            <div class="user-avatar small">
+              <img src="https://via.placeholder.com/32" alt="사용자 이미지" />
+              <span class="status-indicator online"></span>
+            </div>
+            <div class="user-details">
+              <h2 class="chat-title">김철수</h2>
+              <span class="user-status">온라인</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-messages">
+          <!-- 날짜 구분선 -->
+          <div class="date-divider">
+            <span>오늘</span>
+          </div>
+
+          <!-- 상대방 메시지 -->
+          <div class="message other-message">
+            <div class="message-avatar">
+              <img src="https://via.placeholder.com/32" alt="사용자 이미지" />
+            </div>
+            <div class="message-bubble">
+              <div class="message-info">
+                <span class="message-sender">김철수</span>
+                <span class="message-time">14:22</span>
+              </div>
+              <div class="message-content">
+                안녕하세요! 오늘 새로운 기능이 업데이트 되었나요?
+              </div>
+            </div>
+          </div>
+
+          <!-- 나의 메시지 -->
+          <div class="message my-message">
+            <div class="message-bubble">
+              <div class="message-content">
+                네, 오늘 오전에 새로운 기능이 업데이트 되었습니다. 공지사항을
+                확인해보세요!
+              </div>
+              <div class="message-status">
+                <span class="message-time">14:23</span>
+                <span class="read-status">읽음</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 상대방 메시지 -->
+          <div class="message other-message">
+            <div class="message-avatar">
+              <img src="https://via.placeholder.com/32" alt="사용자 이미지" />
+            </div>
+            <div class="message-bubble">
+              <div class="message-content">감사합니다! 확인해볼게요.</div>
+              <div class="message-info">
+                <span class="message-time">14:25</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 상대방 메시지 (여러 줄) -->
+          <div class="message other-message">
+            <div class="message-avatar">
+              <img src="https://via.placeholder.com/32" alt="사용자 이미지" />
+            </div>
+            <div class="message-bubble">
+              <div class="message-content">
+                새로운 기능이 정말 유용해 보이네요! 특히 데이터 시각화 부분이
+                마음에 듭니다. 이전보다 훨씬 보기 좋아졌어요.
+              </div>
+              <div class="message-info">
+                <span class="message-time">14:30</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 나의 메시지 -->
+          <div class="message my-message">
+            <div class="message-bubble">
+              <div class="message-content">
+                맞아요. 사용자 피드백을 반영해서 개선했습니다. 더 필요한 기능이
+                있으시면 언제든지 말씀해주세요.
+              </div>
+              <div class="message-status">
+                <span class="message-time">14:32</span>
+                <span class="read-status">읽음</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 상대방 메시지 (짧은 메시지) -->
+          <div class="message other-message">
+            <div class="message-avatar">
+              <img src="https://via.placeholder.com/32" alt="사용자 이미지" />
+            </div>
+            <div class="message-bubble">
+              <div class="message-content">알겠습니다!</div>
+              <div class="message-info">
+                <span class="message-time">14:33</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <textarea
+            placeholder="메시지를 입력하세요..."
+            class="chat-input"
+          ></textarea>
+          <button class="send-btn" title="전송">
+            <span class="material-icons">send</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 채팅 상대 선택 기능
+      document.querySelectorAll(".chat-user-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          document.querySelectorAll(".chat-user-item").forEach((el) => {
+            el.classList.remove("selected");
+          });
+          this.classList.add("selected");
+
+          // 채팅방 제목과 상태 업데이트
+          const userName = this.querySelector(".user-name").textContent;
+          document.querySelector(".chat-title").textContent = userName;
+
+          // 온라인 상태 확인 및 업데이트
+          const isOnline =
+            this.querySelector(".status-indicator").classList.contains(
+              "online"
+            );
+          document.querySelector(".user-status").textContent = isOnline
+            ? "온라인"
+            : "오프라인";
+          document.querySelector(".chat-info .status-indicator").className =
+            "status-indicator " + (isOnline ? "online" : "offline");
+        });
+      });
+
+      // 메시지 전송 기능
+      document
+        .querySelector(".send-btn")
+        .addEventListener("click", function () {
+          const input = document.querySelector(".chat-input");
+          const message = input.value.trim();
+
+          if (message) {
+            const chatMessages = document.querySelector(".chat-messages");
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, "0");
+            const minutes = now.getMinutes().toString().padStart(2, "0");
+
+            const newMessage = document.createElement("div");
+            newMessage.className = "message my-message";
+            newMessage.innerHTML = `
+                    <div class="message-bubble">
+                        <div class="message-content">
+                            ${message}
+                        </div>
+                        <div class="message-status">
+                            <span class="message-time">${hours}:${minutes}</span>
+                            <span class="read-status">전송됨</span>
+                        </div>
+                    </div>
+                `;
+
+            chatMessages.appendChild(newMessage);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            input.value = "";
+
+            // 채팅 목록의 마지막 메시지 업데이트
+            const selectedUser = document.querySelector(
+              ".chat-user-item.selected"
+            );
+            if (selectedUser) {
+              selectedUser.querySelector(".last-message").textContent = message;
+              selectedUser.querySelector(".message-time").textContent =
+                hours + ":" + minutes;
+            }
+
+            // 2초 후 읽음 표시로 변경 (시연용)
+            setTimeout(() => {
+              newMessage.querySelector(".read-status").textContent = "읽음";
+            }, 2000);
+          }
+        });
+
+      // Enter 키로 메시지 전송
+      document
+        .querySelector(".chat-input")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            document.querySelector(".send-btn").click();
+          }
+        });
+    </script>
+  </body>
+</html>
