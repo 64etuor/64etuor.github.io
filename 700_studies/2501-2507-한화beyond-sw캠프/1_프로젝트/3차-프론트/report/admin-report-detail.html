@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>신고 상세 조회 | Newbit</title>
+    <link rel="stylesheet" href="admin-report-detail.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="header-top">
+          <h1>신고 상세 조회</h1>
+          <div class="header-actions">
+            <button
+              class="back-btn"
+              onclick="location.href='admin-report.html'"
+            >
+              <span class="material-icons">arrow_back</span> 목록으로
+            </button>
+          </div>
+        </div>
+        <div class="report-meta">
+          <div class="report-id">신고 번호: <span>R-2025042201</span></div>
+          <div class="report-date">
+            신고 일시: <span>2025-04-22 14:30:15</span>
+          </div>
+          <div class="report-status">
+            <span class="status pending">미처리</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="detail-container">
+        <div class="detail-section">
+          <h2 class="section-title">신고 정보</h2>
+          <div class="detail-content">
+            <div class="info-group">
+              <div class="info-label">신고자</div>
+              <div class="info-value">hong_gil (홍길동)</div>
+            </div>
+            <div class="info-group">
+              <div class="info-label">신고 유형</div>
+              <div class="info-value">욕설/혐오/차별적 표현</div>
+            </div>
+            <div class="info-group full-width">
+              <div class="info-label">신고 사유</div>
+              <div class="info-value description">
+                해당 게시글에는 다른 사용자를 향한 심각한 모욕적 표현과 차별적
+                내용이 포함되어 있어 신고합니다. 특히 3번째 문단의 내용은 특정
+                집단을 향한 혐오 발언으로 보입니다.
+              </div>
+            </div>
+            <div class="info-group">
+              <div class="info-label">누적 신고 수</div>
+              <div class="info-value">
+                <span class="report-count-high">52</span>회
+              </div>
+            </div>
+            <div class="info-group">
+              <div class="info-label">IP 주소</div>
+              <div class="info-value">123.45.67.89</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h2 class="section-title">게시글 정보</h2>
+          <div class="detail-content">
+            <div class="info-group">
+              <div class="info-label">게시글 ID</div>
+              <div class="info-value">P-10025431</div>
+            </div>
+            <div class="info-group">
+              <div class="info-label">작성자</div>
+              <div class="info-value">
+                user123 (유저123)
+                <span class="user-status">활동중</span>
+              </div>
+            </div>
+            <div class="info-group">
+              <div class="info-label">작성일</div>
+              <div class="info-value">2025-04-20 09:15:30</div>
+            </div>
+            <div class="info-group">
+              <div class="info-label">카테고리</div>
+              <div class="info-value">자유게시판</div>
+            </div>
+            <div class="info-group">
+              <div class="info-label">IP 주소</div>
+              <div class="info-value">111.222.333.444</div>
+            </div>
+            <div class="info-group full-width">
+              <div class="info-label">제목</div>
+              <div class="info-value title">부적절한 내용의 게시글입니다.</div>
+            </div>
+            <div class="info-group full-width">
+              <div class="info-label">내용</div>
+              <div class="info-value content">
+                <div class="post-content">
+                  <p>
+                    안녕하세요. 이 글은 신고된 게시글 내용을 예시로 보여줍니다.
+                  </p>
+                  <p>두 번째 문단입니다. 일반적인 내용이 포함되어 있습니다.</p>
+                  <p class="highlight">
+                    세 번째 문단에는 부적절한 표현이 포함되어 있습니다. 이러한
+                    내용으로 인해 신고가 접수되었을 수 있습니다.
+                  </p>
+                  <p>네 번째 문단입니다. 추가적인 내용이 있습니다.</p>
+                  <img
+                    src="https://via.placeholder.com/500x300"
+                    alt="첨부 이미지"
+                    class="post-image"
+                  />
+                  <p>이미지 아래 추가 설명글입니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h2 class="section-title">처리 이력</h2>
+          <div class="detail-content history-content">
+            <div class="history-item">
+              <div class="history-meta">
+                <span class="history-date">2025-04-22 14:35:22</span>
+                <span class="history-admin">admin_kim</span>
+              </div>
+              <div class="history-action">
+                <span class="action-label">검토 시작</span>
+                <div class="action-note">해당 신고 내용 검토를 시작합니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section action-section">
+          <h2 class="section-title">관리자 조치</h2>
+          <div class="detail-content">
+            <div class="admin-note-container">
+              <label for="admin-note">관리자 메모</label>
+              <textarea
+                id="admin-note"
+                placeholder="처리 관련 메모를 입력하세요..."
+              ></textarea>
+            </div>
+
+            <div class="action-buttons-group">
+              <div class="action-buttons primary-actions">
+                <button class="action-btn delete-btn">
+                  <span class="material-icons">delete</span> 게시글 삭제
+                </button>
+                <button class="action-btn suspend-btn">
+                  <span class="material-icons">block</span> 작성자 정지
+                </button>
+                <button class="action-btn hold-btn">
+                  <span class="material-icons">pause_circle</span> 보류
+                </button>
+                <button class="action-btn false-btn">
+                  <span class="material-icons">report_off</span> 허위신고 처리
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="related-reports">
+        <h2 class="section-title">관련 신고 내역</h2>
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>신고 번호</th>
+              <th>신고자</th>
+              <th>신고 사유</th>
+              <th>신고 일시</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="#" class="report-link">R-2025042101</a></td>
+              <td>kim_min</td>
+              <td>욕설/혐오/차별적 표현</td>
+              <td>2025-04-21 13:25:10</td>
+              <td><span class="status processed">처리완료</span></td>
+            </tr>
+            <tr>
+              <td><a href="#" class="report-link">R-2025042010</a></td>
+              <td>park_ji</td>
+              <td>욕설/혐오/차별적 표현</td>
+              <td>2025-04-20 19:17:45</td>
+              <td><span class="status processed">처리완료</span></td>
+            </tr>
+            <tr class="current">
+              <td><a href="#" class="report-link">R-2025042201</a></td>
+              <td>hong_gil</td>
+              <td>욕설/혐오/차별적 표현</td>
+              <td>2025-04-22 14:30:15</td>
+              <td><span class="status pending">미처리</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // Action buttons functionality
+      document
+        .querySelector(".delete-btn")
+        .addEventListener("click", function () {
+          if (confirm("해당 게시글을 삭제하시겠습니까?")) {
+            alert("게시글이 삭제되었습니다.");
+            // Here you would call an API to delete the content
+            addHistoryEntry(
+              "게시글 삭제",
+              "해당 게시글을 삭제 처리하였습니다."
+            );
+            updateStatus("processed", "처리완료");
+          }
+        });
+
+      document
+        .querySelector(".suspend-btn")
+        .addEventListener("click", function () {
+          if (confirm("작성자 계정을 정지하시겠습니까?")) {
+            alert("작성자 계정이 정지되었습니다.");
+            // Here you would call an API to suspend the user
+            addHistoryEntry(
+              "작성자 정지",
+              "해당 작성자 계정을 정지 처리하였습니다."
+            );
+            updateStatus("suspended", "작성자 정지");
+          }
+        });
+
+      document
+        .querySelector(".hold-btn")
+        .addEventListener("click", function () {
+          if (confirm("해당 신고를 보류 처리하시겠습니까?")) {
+            alert("보류 처리되었습니다.");
+            // Here you would call an API to put the report on hold
+            addHistoryEntry("보류 처리", "해당 신고를 보류 처리하였습니다.");
+            updateStatus("hold", "보류");
+          }
+        });
+
+      document
+        .querySelector(".false-btn")
+        .addEventListener("click", function () {
+          if (confirm("해당 신고를 허위 신고로 처리하시겠습니까?")) {
+            alert("허위 신고로 처리되었습니다.");
+            // Here you would call an API to mark as false report
+            addHistoryEntry(
+              "허위 신고 처리",
+              "해당 신고를 허위 신고로 처리하였습니다."
+            );
+            updateStatus("rejected", "거부됨");
+          }
+        });
+
+      // Helper functions
+      function addHistoryEntry(action, note) {
+        const now = new Date();
+        const dateStr = now.toISOString().replace("T", " ").substring(0, 19);
+
+        const historyContent = document.querySelector(".history-content");
+        const newEntry = document.createElement("div");
+        newEntry.className = "history-item";
+        newEntry.innerHTML = `
+                <div class="history-meta">
+                    <span class="history-date">${dateStr}</span>
+                    <span class="history-admin">current_admin</span>
+                </div>
+                <div class="history-action">
+                    <span class="action-label">${action}</span>
+                    <div class="action-note">${
+                      note ||
+                      document.getElementById("admin-note").value ||
+                      "처리되었습니다."
+                    }</div>
+                </div>
+            `;
+
+        historyContent.prepend(newEntry);
+        document.getElementById("admin-note").value = "";
+      }
+
+      function updateStatus(statusClass, statusText) {
+        const statusEl = document.querySelector(".report-status .status");
+        statusEl.className = `status ${statusClass}`;
+        statusEl.textContent = statusText;
+
+        // Also update in the related reports table
+        const currentRow = document.querySelector(
+          ".report-table tbody tr.current"
+        );
+        const statusCell = currentRow.querySelector(".status");
+        statusCell.className = `status ${statusClass}`;
+        statusCell.textContent = statusText;
+      }
+    </script>
+  </body>
+</html>
