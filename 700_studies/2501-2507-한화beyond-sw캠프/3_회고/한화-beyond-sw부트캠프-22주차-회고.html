@@ -22,9 +22,13 @@
 개인적으로 아주 헛된 경험이란 없는 것이라는 생각을 한다.<br>
 다행히 조금 있으면 동생도 출장지로부터 귀국하니 이래저래 상의를 해봐도 좋고, 마음의 짐이 좀 덜어짐직 하겠다.</p></div><div class="el-h2"><h2 data-heading="2. 학습 영역 회고:" dir="auto" class="heading" id="2._학습_영역_회고_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2. 학습 영역 회고:</h2></div><div class="el-ul"><ul class="has-list-bullet">
 <li data-line="0" dir="auto"><span class="list-bullet"></span><strong>SW 부트캠프</strong>:<br>
-데이터 ETL은 현업에서 가장 많이 사용할 것으로 추측되는 “Airflow DAG + Spark”로 잠정적으로 결정했다. 데이터가 없으니 적당한 MVP 형태로 가면 될 거라고 생각해서 데이터베이스는 어플리케이션 레벨에서 해결하기로 했다. DuckDB에 SQlite을 조합하여 사용하기로 했고 서버는 FastAPI에 Python 3.11, Airflow DAG Spark, 그외 데이터 분석 라이브러리와 Shap Value 산출을 위한 XGBoost 모델 정도로 간단하게 구성하기로 잠정 결론을 지었다.<br>
+데이터 ETL은 현업에서 가장 많이 사용할 것으로 추측되는 “Airflow DAG + Spark”로 잠정적으로 결정했다. 데이터가 없으니 적당한 MVP 형태로 가면 될 거라고 생각해서 데이터베이스는 어플리케이션 레벨에서 해결하기로 했다. DuckDB에 SQlite을 조합하여 사용하기로 했고 서버는 FastAPI에 Python 3.11, 그외 데이터 분석 라이브러리와 Shap Value 산출을 위한 XGBoost 모델 정도로 간단하게 구성하기로 잠정 결론을 지었다.<br>
 사실 이 정도 규모라면 Vertex AI를 쓰는 것이 낭비라 초기 구상 목록에서 아예 삭제했다.<br>
-아직까지 프로젝트 진행에 어려운 일은 아직 없지만, 썩 멋져 보이는 최종 산출물이 여전히 머리에 안 그려져서 계속 수정을 하긴 해야겠다.</li>
+아직까지 프로젝트 진행에 어려운 일은 아직 없지만, 썩 멋져 보이는 최종 산출물이 여전히 머리에 안 그려져서 계속 수정을 하긴 해야겠다.<br>
+이번엔 백엔드에서 새로 시도하는 것 중 하나는 Hateoas를 활용한 API 고도화, 말은 거창하지만 매커니즘에 대한 불완전한 이해 때문에 기초적인 수준의 응용 정도만 기대하고 있다. 사용하다보면 원리와 목적에 대한 이해가 생기기도 하니 음미하듯 한 입 베어 먹어보면 그만.<br>
+이전 프로젝트에선 항상 Jpa와 Mybatis 조합을 사용했는데 이번엔 QueryDSL과 ElasticSearch를 도입했다.<br>
+QueryDSL은 Jpa와 분리된 프레임워크로 독자적인 Q타입 클래스를 사용한다고 한다. 현업 개발자들의 추천을 받아서 사용해 보게 됐는데, 빌더 타입의 메서드 체이닝 방식이다 보니 활용도가 무척 높다는 생각이 들었다.<br>
+ElasticSearch는 아무래도 CRM에서 고객명이나 연락처 같이 자주 조회되는 자료의 경우 실시간 자동완성 검색, 사전 인덱싱을 통한 검색 최적화가 무척 중요하기 때문에 도입했다. 벤치마크한 CRM 툴의 경우, 고객명, 연락처 검색이 느려서 사용성에서 큰 답답함을 느꼈는데, 아마 제대로 구현만 한다면 UX 측면에서 큰 향상이 있으리라는 기대가 된다.</li>
 </ul></div><div class="el-h2"><h2 data-heading="🎯 지난 Action Item 리뷰" dir="auto" class="heading" id="🎯_지난_Action_Item_리뷰_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>🎯 지난 Action Item 리뷰</h2></div><div class="el-p"><p dir="auto"></p></div><div class="el-ul"><ul class="has-list-bullet">
 <li data-line="0" dir="auto"><span class="list-bullet"></span>목표: 할 일 목록 재점검 및 강제력 도입</li>
 <li data-line="1" dir="auto"><span class="list-bullet"></span>결과:  강제력을 어떻게 적용할까 애매한 부분, 이건 다시 구상할 필요가 있다.</li>
