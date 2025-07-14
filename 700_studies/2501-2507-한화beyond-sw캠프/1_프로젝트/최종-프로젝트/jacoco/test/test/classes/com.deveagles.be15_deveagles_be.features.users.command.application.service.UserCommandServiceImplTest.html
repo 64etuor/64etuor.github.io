@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - UserCommandService 단위 테스트</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>UserCommandService 단위 테스트</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.deveagles.be15_deveagles_be.features.users.command.application.service.html">com.deveagles.be15_deveagles_be.features.users.command.application.service</a> &gt; UserCommandServiceImplTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">17</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.321s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a href="#">Tests</a>
+</li>
+</ul>
+<div class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">getAccount: 존재하는 staffId로 계정 정보를 반환한다</td>
+<td class="success">getAccount_성공()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getAccount: 존재하지 않는 staffId면 예외를 반환한다</td>
+<td class="success">getAccount_예외_테스트()</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getProfile: 유저 정보 조회 성공</td>
+<td class="success">getProfile_성공()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">patchAccount: 비밀번호만 수정하는 경우</td>
+<td class="success">patchAccount_비밀번호만_수정()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">patchAccount: 존재하지 않는 staffId면 예외 발생</td>
+<td class="success">patchAccount_예외_테스트()</td>
+<td class="success">0.008s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">patchAccount: 이메일만 수정하는 경우</td>
+<td class="success">patchAccount_이메일만_수정()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">patchAccount: 이메일, 전화번호, 비밀번호를 수정한다</td>
+<td class="success">patchAccount_전체수정_테스트()</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">patchAccount: 전화번호만 수정하는 경우</td>
+<td class="success">patchAccount_전화번호만_수정()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">patchPaassword: 이메일로 유저를 찾아 비밀번호를 변경한다</td>
+<td class="success">patchPassword_성공()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">patchPaassword: 이메일에 해당하는 유저가 없으면 예외 발생</td>
+<td class="success">patchPassword_유저없음_예외()</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">patchProfile: 프로필 이미지와 정보 수정 성공</td>
+<td class="success">patchProfile_성공()</td>
+<td class="success">0.252s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">patchProfile: 존재하지 않는 유저면 예외 발생</td>
+<td class="success">patchProfile_예외()</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">userRegist: 사용자 등록 테스트</td>
+<td class="success">userRegist_요청으로_Staff가_생성된다()</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">validCheckEmail: 이메일 사용 가능하면 true 반환</td>
+<td class="success">사용가능한_이메일이면_TRUE가_반환된다()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">중복된 ID가 없으면 true 반환</td>
+<td class="success">중복된_ID가_없으면_TRUE가_반환된다()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">회원 로그인ID 중복 테스트</td>
+<td class="success">중복된_ID가_있으면_FALSE가_반환된다()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">validCheckEmail: 이메일 중복 시 false 반환</td>
+<td class="success">중복된_이메일이면_FALSE가_반환된다()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="https://www.gradle.org">Gradle 8.14.2</a> at 2025. 7. 14. 오후 5:22:32</p>
+</div>
+</div>
+</body>
+</html>

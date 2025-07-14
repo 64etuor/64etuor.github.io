@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - CouponCommandService 단위 테스트</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>CouponCommandService 단위 테스트</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.deveagles.be15_deveagles_be.features.coupons.application.command.html">com.deveagles.be15_deveagles_be.features.coupons.application.command</a> &gt; CouponCommandServiceImplTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">9</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.155s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a href="#">Tests</a>
+</li>
+<li>
+<a href="#">Standard output</a>
+</li>
+</ul>
+<div class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">쿠폰 생성 성공 - 자동 생성 중복 시 재시도</td>
+<td class="success">createCoupon_자동생성중복재시도_성공()</td>
+<td class="success">0.007s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">쿠폰 생성 성공 - 자동 코드 생성</td>
+<td class="success">createCoupon_자동코드생성_성공()</td>
+<td class="success">0.017s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">쿠폰 삭제 성공</td>
+<td class="success">deleteCoupon_성공()</td>
+<td class="success">0.102s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">쿠폰 삭제 실패 - 이미 삭제된 쿠폰</td>
+<td class="success">deleteCoupon_이미삭제된쿠폰_실패()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">쿠폰 삭제 실패 - 존재하지 않는 쿠폰</td>
+<td class="success">deleteCoupon_존재하지않는쿠폰_실패()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">쿠폰 상태 토글 성공 - 비활성화에서 활성화</td>
+<td class="success">toggleCouponStatus_비활성화에서활성화_성공()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">쿠폰 상태 토글 실패 - 삭제된 쿠폰</td>
+<td class="success">toggleCouponStatus_삭제된쿠폰_실패()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">쿠폰 상태 토글 실패 - 존재하지 않는 쿠폰</td>
+<td class="success">toggleCouponStatus_존재하지않는쿠폰_실패()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">쿠폰 상태 토글 성공 - 활성화에서 비활성화</td>
+<td class="success">toggleCouponStatus_활성화에서비활성화_성공()</td>
+<td class="success">0.008s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2025-07-14 17:22:22.297 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 삭제 시작 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.297 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 삭제 시작 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.303 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 삭제 완료 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.303 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 삭제 완료 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.310 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 삭제 시작 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.310 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 삭제 시작 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.310 ?[31mWARN ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 이미 삭제된 쿠폰 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.310 WARN  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 이미 삭제된 쿠폰 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.315 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 생성 시작 - 쿠폰명: 테스트 쿠폰
+2025-07-14 17:22:22.315 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 생성 시작 - 쿠폰명: 테스트 쿠폰
+2025-07-14 17:22:22.316 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 생성 완료 - ID: 1, 쿠폰코드: CP241201ABCD1234
+2025-07-14 17:22:22.316 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 생성 완료 - ID: 1, 쿠폰코드: CP241201ABCD1234
+2025-07-14 17:22:22.334 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 삭제 시작 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.334 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 삭제 시작 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.334 ?[31mWARN ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰을 찾을 수 없음 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.334 WARN  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰을 찾을 수 없음 - ID: 1, 매장ID: null
+2025-07-14 17:22:22.337 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 상태 토글 시작 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.337 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 상태 토글 시작 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.339 ?[31mWARN ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰을 찾을 수 없음 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.339 WARN  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰을 찾을 수 없음 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.344 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 상태 토글 시작 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.344 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 상태 토글 시작 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.344 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 활성화 완료 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.344 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 활성화 완료 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.351 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 상태 토글 시작 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.351 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 상태 토글 시작 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.352 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 비활성화 완료 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.352 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 비활성화 완료 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.356 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 상태 토글 시작 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.356 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 상태 토글 시작 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.356 ?[31mWARN ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 삭제된 쿠폰 상태 변경 시도 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.356 WARN  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 삭제된 쿠폰 상태 변경 시도 - ID: 1, 매장ID: 1
+2025-07-14 17:22:22.362 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 생성 시작 - 쿠폰명: 테스트 쿠폰
+2025-07-14 17:22:22.362 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 생성 시작 - 쿠폰명: 테스트 쿠폰
+2025-07-14 17:22:22.363 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 코드 생성 - 2번 시도 후 성공: CP241201ABCD2222
+2025-07-14 17:22:22.363 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 코드 생성 - 2번 시도 후 성공: CP241201ABCD2222
+2025-07-14 17:22:22.363 ?[34mINFO ?[0;39m ?[36m[Test worker]?[0;39m ?[33mc.d.b.f.c.a.c.CouponCommandServiceImpl?[0;39m - 쿠폰 생성 완료 - ID: 1, 쿠폰코드: CP241201ABCD1234
+2025-07-14 17:22:22.363 INFO  [Test worker] c.d.b.f.c.a.c.CouponCommandServiceImpl - 쿠폰 생성 완료 - ID: 1, 쿠폰코드: CP241201ABCD1234
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="https://www.gradle.org">Gradle 8.14.2</a> at 2025. 7. 14. 오후 5:22:32</p>
+</div>
+</div>
+</body>
+</html>
