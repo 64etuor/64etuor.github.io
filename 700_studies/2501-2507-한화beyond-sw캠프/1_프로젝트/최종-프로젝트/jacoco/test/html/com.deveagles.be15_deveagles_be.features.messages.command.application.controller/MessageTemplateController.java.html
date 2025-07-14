@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MessageTemplateController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.command.application.controller</a> &gt; <span class="el_source">MessageTemplateController.java</span></div><h1>MessageTemplateController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.request.MessageTemplateCreateRequest;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.request.MessageTemplateUpdateRequest;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.response.MessageTemplateResponse;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.service.MessageTemplateService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/message/templates&quot;)
+public class MessageTemplateController {
+  private final MessageTemplateService messageTemplateService;
+
+  @Operation(summary = &quot;메시지 템플릿 생성&quot;, description = &quot;현재 로그인한 매장에 새로운 메시지 템플릿을 생성합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;템플릿 생성 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 입력값&quot;),
+  })
+  @PostMapping()
+  public ResponseEntity&lt;ApiResponse&lt;MessageTemplateResponse&gt;&gt; create(
+      @AuthenticationPrincipal CustomUser customUser,
+      @RequestBody @Valid MessageTemplateCreateRequest templateCreateRequest) {
+<span class="nc" id="L36">    MessageTemplateResponse response =</span>
+<span class="nc" id="L37">        messageTemplateService.createTemplate(customUser.getShopId(), templateCreateRequest);</span>
+
+<span class="nc" id="L39">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;메시지 템플릿 수정&quot;, description = &quot;템플릿 ID를 기준으로 기존 템플릿을 수정합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;템플릿 수정 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;템플릿을 찾을 수 없음&quot;),
+  })
+  @PutMapping(&quot;/{templateId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updateTemplate(
+      @AuthenticationPrincipal CustomUser customUser,
+      @PathVariable Long templateId,
+      @Valid @RequestBody MessageTemplateUpdateRequest messageTemplateUpdateRequest) {
+<span class="nc" id="L56">    messageTemplateService.changeTemplate(</span>
+<span class="nc" id="L57">        templateId, customUser.getShopId(), messageTemplateUpdateRequest);</span>
+<span class="nc" id="L58">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;메시지 템플릿 삭제&quot;, description = &quot;템플릿 ID를 기준으로 템플릿을 삭제합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;템플릿 삭제 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;템플릿을 찾을 수 없음&quot;),
+  })
+  @DeleteMapping(&quot;/{templateId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; deleteTemplate(
+      @AuthenticationPrincipal CustomUser customUser, @PathVariable Long templateId) {
+<span class="nc" id="L73">    messageTemplateService.removeTemplate(templateId, customUser.getShopId());</span>
+
+<span class="nc" id="L75">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

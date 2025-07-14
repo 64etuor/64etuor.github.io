@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuthServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.auth.command.application.service</a> &gt; <span class="el_source">AuthServiceImpl.java</span></div><h1>AuthServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.auth.command.application.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.common.jwt.JwtTokenProvider;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.dto.request.CheckEmailRequest;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.dto.request.EmailVerifyRequest;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.dto.request.LoginRequest;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.dto.response.TokenResponse;
+import com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate.Staff;
+import com.deveagles.be15_deveagles_be.features.users.command.repository.UserRepository;
+import jakarta.mail.MessagingException;
+import java.time.Duration;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+<span class="fc" id="L24">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class AuthServiceImpl implements AuthService {
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
+  private final JwtTokenProvider jwtTokenProvider;
+  private final RefreshTokenService refreshTokenService;
+  private final RedisTemplate&lt;String, String&gt; redisTemplate;
+  private final MailService mailService;
+
+  @Value(&quot;${spring.mail.properties.auth-code-expiration-millis}&quot;)
+  private long expireMinute;
+
+  @Override
+  public TokenResponse login(LoginRequest request) {
+
+<span class="fc" id="L41">    Staff staff =</span>
+        userRepository
+<span class="fc" id="L43">            .findStaffByLoginId(request.loginId())</span>
+<span class="fc" id="L44">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.USER_NAME_NOT_FOUND));</span>
+
+<span class="fc bfc" id="L46" title="All 2 branches covered.">    if (!passwordEncoder.matches(request.password(), staff.getPassword())) {</span>
+<span class="fc" id="L47">      throw new BusinessException(ErrorCode.USER_INVALID_PASSWORD);</span>
+    }
+
+<span class="fc" id="L50">    String accessToken = jwtTokenProvider.createToken(staff.getLoginId());</span>
+<span class="fc" id="L51">    String refreshToken = jwtTokenProvider.createRefreshToken(staff.getLoginId());</span>
+
+<span class="fc" id="L53">    refreshTokenService.saveRefreshToken(staff.getLoginId(), refreshToken);</span>
+
+<span class="fc" id="L55">    return TokenResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();</span>
+  }
+
+  @Override
+  public TokenResponse refreshToken(String refreshToken) {
+    // 리프레시 토큰 유효성 검사
+<span class="fc" id="L61">    jwtTokenProvider.validateToken(refreshToken);</span>
+<span class="fc" id="L62">    String username = jwtTokenProvider.getUsernameFromJWT(refreshToken);</span>
+
+    // Redis에서 저장된 refresh token 가져오기
+<span class="fc" id="L65">    String redisKey = &quot;RT:&quot; + username;</span>
+<span class="fc" id="L66">    String storedToken = redisTemplate.opsForValue().get(redisKey);</span>
+
+<span class="fc bfc" id="L68" title="All 2 branches covered.">    if (storedToken == null) {</span>
+<span class="fc" id="L69">      throw new BadCredentialsException(&quot;해당 유저로 저장된 리프레시 토큰 없음&quot;);</span>
+    }
+
+<span class="fc bfc" id="L72" title="All 2 branches covered.">    if (!storedToken.equals(refreshToken)) {</span>
+<span class="fc" id="L73">      throw new BadCredentialsException(&quot;리프레시 토큰 일치하지 않음&quot;);</span>
+    }
+
+<span class="fc" id="L76">    Staff staff =</span>
+        userRepository
+<span class="fc" id="L78">            .findStaffByLoginId(username)</span>
+<span class="fc" id="L79">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.USER_NAME_NOT_FOUND));</span>
+
+    // 새로운 토큰 재발급
+<span class="fc" id="L82">    String newAccessToken = jwtTokenProvider.createToken(staff.getLoginId());</span>
+<span class="fc" id="L83">    String newRefreshToken = jwtTokenProvider.createRefreshToken(staff.getLoginId());</span>
+
+<span class="fc" id="L85">    redisTemplate</span>
+<span class="fc" id="L86">        .opsForValue()</span>
+<span class="fc" id="L87">        .set(</span>
+            redisKey,
+            newRefreshToken,
+<span class="fc" id="L90">            jwtTokenProvider.getRefreshExpiration(),</span>
+            TimeUnit.MILLISECONDS);
+
+<span class="fc" id="L93">    return TokenResponse.builder()</span>
+<span class="fc" id="L94">        .accessToken(newAccessToken)</span>
+<span class="fc" id="L95">        .refreshToken(newRefreshToken)</span>
+<span class="fc" id="L96">        .build();</span>
+  }
+
+  @Override
+  public void logout(String refreshToken, String accessToken) {
+
+    // 토큰 검증
+<span class="fc" id="L103">    jwtTokenProvider.validateToken(refreshToken);</span>
+<span class="fc" id="L104">    String username = jwtTokenProvider.getUsernameFromJWT(refreshToken);</span>
+<span class="fc" id="L105">    refreshTokenService.deleteRefreshToken(username);</span>
+
+<span class="fc" id="L107">    long remainTime = jwtTokenProvider.getRemainingExpiration(accessToken);</span>
+<span class="fc" id="L108">    redisTemplate.opsForValue().set(&quot;BL:&quot; + accessToken, &quot;logout&quot;, Duration.ofMillis(remainTime));</span>
+<span class="fc" id="L109">  }</span>
+
+  @Override
+  public void sendPatchPwdEmail(CheckEmailRequest request) {
+
+<span class="fc" id="L114">    userRepository</span>
+<span class="fc" id="L115">        .findStaffForGetPwd(request.staffName(), request.email())</span>
+<span class="fc" id="L116">        .orElseThrow(() -&gt; new BusinessException(ErrorCode.USER_NOT_FOUND));</span>
+
+<span class="fc bfc" id="L118" title="All 2 branches covered.">    if (getAuthCode(request.email()) != null) {</span>
+<span class="fc" id="L119">      throw new BusinessException(ErrorCode.DUPLICATE_SEND_AUTH_EXCEPTION);</span>
+    }
+
+<span class="fc" id="L122">    String authCode = UUID.randomUUID().toString().substring(0, 6);</span>
+<span class="fc" id="L123">    saveAuthCode(request.email(), authCode);</span>
+
+    try {
+<span class="fc" id="L126">      mailService.sendFindPwdEmail(request.email(), authCode);</span>
+<span class="fc" id="L127">    } catch (MessagingException e) {</span>
+<span class="fc" id="L128">      throw new BusinessException(ErrorCode.SEND_EMAIL_FAILURE_EXCEPTION);</span>
+<span class="fc" id="L129">    }</span>
+<span class="fc" id="L130">  }</span>
+
+  @Override
+  public void verifyAuthCode(EmailVerifyRequest request) {
+<span class="fc" id="L134">    String authCode = getAuthCode(request.email());</span>
+
+<span class="pc bpc" id="L136" title="1 of 4 branches missed.">    if (authCode == null || !authCode.equals(request.authCode())) {</span>
+<span class="fc" id="L137">      throw new BusinessException(ErrorCode.INVALID_AUTH_CODE);</span>
+    }
+
+<span class="fc" id="L140">    deleteAuthCode(authCode);</span>
+<span class="fc" id="L141">  }</span>
+
+  private void saveAuthCode(String email, String code) {
+<span class="fc" id="L144">    redisTemplate.opsForValue().set(email, code, Duration.ofMillis(expireMinute));</span>
+<span class="fc" id="L145">  }</span>
+
+  private String getAuthCode(String email) {
+<span class="fc" id="L148">    return redisTemplate.opsForValue().get(email);</span>
+  }
+
+  private void deleteAuthCode(String code) {
+<span class="fc" id="L152">    redisTemplate.delete(code);</span>
+<span class="fc" id="L153">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

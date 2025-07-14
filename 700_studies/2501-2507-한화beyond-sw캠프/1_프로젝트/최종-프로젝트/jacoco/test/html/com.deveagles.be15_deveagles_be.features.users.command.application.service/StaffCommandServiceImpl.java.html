@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StaffCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.users.command.application.service</a> &gt; <span class="el_source">StaffCommandServiceImpl.java</span></div><h1>StaffCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.users.command.application.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.auth.command.domain.aggregate.AccessAuth;
+import com.deveagles.be15_deveagles_be.features.auth.command.domain.aggregate.AccessList;
+import com.deveagles.be15_deveagles_be.features.auth.command.repository.AccessAuthRepository;
+import com.deveagles.be15_deveagles_be.features.auth.command.repository.AccessListRepository;
+import com.deveagles.be15_deveagles_be.features.auth.query.infroStructure.repository.AccessAuthQueryRepository;
+import com.deveagles.be15_deveagles_be.features.users.command.application.dto.request.CreateStaffRequest;
+import com.deveagles.be15_deveagles_be.features.users.command.application.dto.request.PermissionItem;
+import com.deveagles.be15_deveagles_be.features.users.command.application.dto.request.PutStaffRequest;
+import com.deveagles.be15_deveagles_be.features.users.command.application.dto.response.StaffInfoResponse;
+import com.deveagles.be15_deveagles_be.features.users.command.application.dto.response.StaffPermissions;
+import com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate.Staff;
+import com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate.StaffStatus;
+import com.deveagles.be15_deveagles_be.features.users.command.repository.UserRepository;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+<span class="fc" id="L29">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class StaffCommandServiceImpl implements StaffCommandService {
+
+  private final UserRepository userRepository;
+  private final AccessListRepository accessListRepository;
+  private final AccessAuthRepository accessAuthRepository;
+  private final AccessAuthQueryRepository accessAuthQueryRepository;
+  private final PasswordEncoder passwordEncoder;
+  private final UserCommandService userCommandService;
+  private final FileCommandService fileCommandService;
+
+  @Override
+  @Transactional
+  public void staffCreate(Long shopId, CreateStaffRequest request, MultipartFile profile) {
+
+<span class="fc" id="L46">    String profileUrl = null;</span>
+
+<span class="pc bpc" id="L48" title="1 of 4 branches missed.">    if (profile != null &amp;&amp; !profile.isEmpty()) {</span>
+<span class="fc" id="L49">      profileUrl = userCommandService.saveProfile(profile);</span>
+    }
+
+    Staff staff =
+<span class="fc" id="L53">        Staff.builder()</span>
+<span class="fc" id="L54">            .loginId(request.loginId())</span>
+<span class="fc" id="L55">            .password(passwordEncoder.encode(request.password()))</span>
+<span class="fc" id="L56">            .staffName(request.staffName())</span>
+<span class="fc" id="L57">            .grade(request.grade())</span>
+<span class="fc" id="L58">            .email(request.email())</span>
+<span class="fc" id="L59">            .shopId(shopId)</span>
+<span class="fc" id="L60">            .phoneNumber(request.phoneNumber())</span>
+<span class="fc" id="L61">            .colorCode(&quot;#364f6b&quot;)</span>
+<span class="fc" id="L62">            .staffStatus(StaffStatus.STAFF)</span>
+<span class="fc" id="L63">            .profileUrl(profileUrl)</span>
+<span class="fc" id="L64">            .build();</span>
+
+<span class="fc" id="L66">    Staff newStaff = userRepository.save(staff);</span>
+
+<span class="fc" id="L68">    List&lt;AccessList&gt; accessList = accessListRepository.findAll();</span>
+
+<span class="fc bfc" id="L70" title="All 2 branches covered.">    for (AccessList access : accessList) {</span>
+      AccessAuth auth =
+<span class="fc" id="L72">          AccessAuth.builder()</span>
+<span class="fc" id="L73">              .staffId(newStaff.getStaffId())</span>
+<span class="fc" id="L74">              .accessId(access.getAccessId())</span>
+<span class="fc" id="L75">              .canRead(true)</span>
+<span class="fc" id="L76">              .canWrite(false)</span>
+<span class="fc" id="L77">              .canDelete(false)</span>
+<span class="fc" id="L78">              .isActive(true)</span>
+<span class="fc" id="L79">              .build();</span>
+
+<span class="fc" id="L81">      accessAuthRepository.save(auth);</span>
+<span class="fc" id="L82">    }</span>
+<span class="fc" id="L83">  }</span>
+
+  @Override
+  public StaffInfoResponse getStaffDetail(Long staffId) {
+
+<span class="fc" id="L88">    Staff staff =</span>
+        userRepository
+<span class="fc" id="L90">            .findStaffByStaffId(staffId)</span>
+<span class="fc" id="L91">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.STAFF_NOT_FOUND));</span>
+
+<span class="fc" id="L93">    List&lt;StaffPermissions&gt; permissions =</span>
+<span class="fc" id="L94">        accessAuthQueryRepository.getAccessPermissionsByStaffId(staffId);</span>
+
+<span class="fc" id="L96">    return buildStaffInfoResponse(staff, permissions);</span>
+  }
+
+  @Override
+  public void putStaffDetail(Long staffId, PutStaffRequest request, MultipartFile profile) {
+
+<span class="fc" id="L102">    Staff findStaff =</span>
+        userRepository
+<span class="fc" id="L104">            .findStaffByStaffId(staffId)</span>
+<span class="fc" id="L105">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.STAFF_NOT_FOUND));</span>
+
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">    if (profile != null) {</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">      if (!profile.isEmpty()) {</span>
+<span class="fc" id="L109">        String profileUrl = fileCommandService.saveProfile(profile);</span>
+<span class="fc" id="L110">        findStaff.patchProfileUrl(profileUrl);</span>
+<span class="fc" id="L111">      } else {</span>
+<span class="nc" id="L112">        findStaff.patchProfileUrl(null);</span>
+      }
+    }
+
+<span class="pc bpc" id="L116" title="2 of 4 branches missed.">    if (request.staffName() != null &amp;&amp; !request.staffName().equals(findStaff.getStaffName())) {</span>
+<span class="fc" id="L117">      findStaff.patchName(request.staffName());</span>
+    }
+<span class="pc bpc" id="L119" title="2 of 4 branches missed.">    if (request.email() != null &amp;&amp; !request.email().equals(findStaff.getEmail())) {</span>
+<span class="fc" id="L120">      findStaff.patchEmail(request.email());</span>
+    }
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">    if (request.phoneNumber() != null</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">        &amp;&amp; !request.phoneNumber().equals(findStaff.getPhoneNumber())) {</span>
+<span class="fc" id="L124">      findStaff.patchPhoneNumber(request.phoneNumber());</span>
+    }
+<span class="pc bpc" id="L126" title="2 of 4 branches missed.">    if (request.grade() != null &amp;&amp; !request.grade().equals(findStaff.getGrade())) {</span>
+<span class="fc" id="L127">      findStaff.patchGrade(request.grade());</span>
+    }
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">    if (request.description() != null</span>
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">        &amp;&amp; !request.description().equals(findStaff.getStaffDescription())) {</span>
+<span class="fc" id="L131">      findStaff.patchDescription(request.description());</span>
+    }
+<span class="pc bpc" id="L133" title="2 of 4 branches missed.">    if (request.colorCode() != null &amp;&amp; !request.colorCode().equals(findStaff.getColorCode())) {</span>
+<span class="fc" id="L134">      findStaff.patchColorCode(request.colorCode());</span>
+    }
+
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">    if (request.joinedDate() != null) findStaff.patchJoinedDate(request.joinedDate());</span>
+<span class="fc" id="L138">    findStaff.patchLeftDate(request.leftDate());</span>
+
+<span class="fc" id="L140">    userRepository.save(findStaff);</span>
+
+<span class="fc" id="L142">    List&lt;AccessAuth&gt; originalPermissions = accessAuthRepository.findAllByStaffId(staffId);</span>
+    // 수정본
+<span class="fc" id="L144">    Map&lt;Long, PermissionItem&gt; permissions =</span>
+<span class="fc" id="L145">        request.permissions().stream()</span>
+<span class="fc" id="L146">            .collect(Collectors.toMap(PermissionItem::accessId, Function.identity()));</span>
+
+<span class="fc bfc" id="L148" title="All 2 branches covered.">    for (AccessAuth auth : originalPermissions) {</span>
+<span class="fc" id="L149">      PermissionItem perm = permissions.get(auth.getAccessId());</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">      if (perm != null) {</span>
+<span class="fc" id="L151">        auth.updateAccess(perm.active(), perm.canRead(), perm.canWrite(), perm.canDelete());</span>
+      }
+<span class="fc" id="L153">      accessAuthRepository.save(auth);</span>
+<span class="fc" id="L154">    }</span>
+<span class="fc" id="L155">  }</span>
+
+  private StaffInfoResponse buildStaffInfoResponse(
+      Staff staff, List&lt;StaffPermissions&gt; permissions) {
+
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">    boolean isWorking = staff.getLeftDate() == null;</span>
+
+<span class="fc" id="L162">    return StaffInfoResponse.builder()</span>
+<span class="fc" id="L163">        .staffName(staff.getStaffName())</span>
+<span class="fc" id="L164">        .email(staff.getEmail())</span>
+<span class="fc" id="L165">        .grade(staff.getGrade())</span>
+<span class="fc" id="L166">        .colorCode(staff.getColorCode())</span>
+<span class="fc" id="L167">        .isWorking(isWorking)</span>
+<span class="fc" id="L168">        .joinedDate(staff.getJoinedDate())</span>
+<span class="fc" id="L169">        .phoneNumber(staff.getPhoneNumber())</span>
+<span class="fc" id="L170">        .description(staff.getStaffDescription())</span>
+<span class="fc" id="L171">        .profileUrl(staff.getProfileUrl())</span>
+<span class="fc" id="L172">        .permissions(permissions)</span>
+<span class="fc" id="L173">        .build();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

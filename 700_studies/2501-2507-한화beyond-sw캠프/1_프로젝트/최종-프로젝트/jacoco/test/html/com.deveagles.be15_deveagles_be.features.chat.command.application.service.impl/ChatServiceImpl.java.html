@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChatServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.chat.command.application.service.impl</a> &gt; <span class="el_source">ChatServiceImpl.java</span></div><h1>ChatServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.chat.command.application.service.impl;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.dto.request.ChatMessageRequest;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.dto.response.ChatMessageResponse;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.service.ChatService;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.aggregate.ChatMessage;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.aggregate.ChatRoom;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.repository.ChatMessageRepository;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.repository.ChatRoomRepository;
+import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Service;
+
+<span class="nc" id="L18">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class ChatServiceImpl implements ChatService {
+
+  private final ChatRoomRepository chatRoomRepository;
+  private final ChatMessageRepository chatMessageRepository;
+  private final SimpMessagingTemplate messagingTemplate;
+
+  @Override
+  public ChatMessageResponse saveMessage(ChatMessageRequest request, Long userId) {
+    // 채팅방 검증
+<span class="nc" id="L30">    ChatRoom chatRoom =</span>
+        chatRoomRepository
+<span class="nc" id="L32">            .findById(request.getRoomId())</span>
+<span class="nc" id="L33">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CHATROOM_NOT_FOUND));</span>
+
+    // 메시지 저장
+<span class="nc" id="L36">    ChatMessage saved =</span>
+<span class="nc" id="L37">        chatMessageRepository.save(</span>
+<span class="nc" id="L38">            ChatMessage.builder()</span>
+<span class="nc" id="L39">                .chatroomId(chatRoom.getId())</span>
+<span class="nc" id="L40">                .sender(</span>
+<span class="nc" id="L41">                    ChatMessage.Sender.builder().id(userId).name(request.getSenderName()).build())</span>
+<span class="nc" id="L42">                .content(request.getContent())</span>
+<span class="nc" id="L43">                .isCustomer(request.isCustomer())</span>
+<span class="nc" id="L44">                .createdAt(LocalDateTime.now())</span>
+<span class="nc" id="L45">                .build());</span>
+
+    // 응답 DTO 생성
+    ChatMessageResponse response =
+<span class="nc" id="L49">        ChatMessageResponse.builder()</span>
+<span class="nc" id="L50">            .messageId(saved.getId())</span>
+<span class="nc" id="L51">            .chatroomId(saved.getChatroomId())</span>
+<span class="nc" id="L52">            .senderId(saved.getSender().getId())</span>
+<span class="nc" id="L53">            .senderName(saved.getSender().getName())</span>
+<span class="nc" id="L54">            .content(saved.getContent())</span>
+<span class="nc" id="L55">            .isCustomer(saved.isCustomer())</span>
+<span class="nc" id="L56">            .createdAt(saved.getCreatedAt())</span>
+<span class="nc" id="L57">            .build();</span>
+
+    // WebSocket 브로커 전송
+<span class="nc" id="L60">    messagingTemplate.convertAndSend(&quot;/sub/chatroom/&quot; + chatRoom.getId(), response);</span>
+
+<span class="nc" id="L62">    return response;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LogTestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.common.controller</a> &gt; <span class="el_source">LogTestController.java</span></div><h1>LogTestController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.common.controller;
+
+import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(&quot;/api/log-test&quot;)
+<span class="nc" id="L12">@Slf4j</span>
+<span class="nc" id="L13">public class LogTestController {</span>
+
+  @GetMapping(&quot;/debug/{message}&quot;)
+  public Map&lt;String, String&gt; testDebugLog(@PathVariable String message) {
+<span class="nc" id="L17">    log.debug(&quot;DEBUG 레벨 로그 테스트 - 메시지: {}&quot;, message);</span>
+<span class="nc" id="L18">    return Map.of(&quot;level&quot;, &quot;DEBUG&quot;, &quot;message&quot;, message);</span>
+  }
+
+  @GetMapping(&quot;/info/{message}&quot;)
+  public Map&lt;String, String&gt; testInfoLog(@PathVariable String message) {
+<span class="nc" id="L23">    log.info(&quot;INFO 레벨 로그 테스트 - 메시지: {}&quot;, message);</span>
+<span class="nc" id="L24">    return Map.of(&quot;level&quot;, &quot;INFO&quot;, &quot;message&quot;, message);</span>
+  }
+
+  @GetMapping(&quot;/warn/{message}&quot;)
+  public Map&lt;String, String&gt; testWarnLog(@PathVariable String message) {
+<span class="nc" id="L29">    log.warn(&quot;WARN 레벨 로그 테스트 - 메시지: {}&quot;, message);</span>
+<span class="nc" id="L30">    return Map.of(&quot;level&quot;, &quot;WARN&quot;, &quot;message&quot;, message);</span>
+  }
+
+  @GetMapping(&quot;/error/{message}&quot;)
+  public Map&lt;String, String&gt; testErrorLog(@PathVariable String message) {
+<span class="nc" id="L35">    log.error(&quot;ERROR 레벨 로그 테스트 - 메시지: {}&quot;, message);</span>
+<span class="nc" id="L36">    return Map.of(&quot;level&quot;, &quot;ERROR&quot;, &quot;message&quot;, message);</span>
+  }
+
+  @GetMapping(&quot;/exception&quot;)
+  public Map&lt;String, String&gt; testExceptionLog() {
+    try {
+<span class="nc" id="L42">      throw new RuntimeException(&quot;테스트 예외 발생&quot;);</span>
+<span class="nc" id="L43">    } catch (Exception e) {</span>
+<span class="nc" id="L44">      log.error(&quot;예외 로그 테스트 - 예외 메시지: {}&quot;, e.getMessage(), e);</span>
+<span class="nc" id="L45">      return Map.of(&quot;level&quot;, &quot;ERROR&quot;, &quot;exception&quot;, e.getMessage());</span>
+    }
+  }
+
+  @GetMapping(&quot;/performance&quot;)
+  public Map&lt;String, String&gt; testPerformanceLog() {
+<span class="nc" id="L51">    long startTime = System.currentTimeMillis();</span>
+
+<span class="nc" id="L53">    log.info(&quot;성능 측정 시작&quot;);</span>
+
+    // 시뮬레이션을 위한 지연
+    try {
+<span class="nc" id="L57">      Thread.sleep(100);</span>
+<span class="nc" id="L58">    } catch (InterruptedException e) {</span>
+<span class="nc" id="L59">      Thread.currentThread().interrupt();</span>
+<span class="nc" id="L60">    }</span>
+
+<span class="nc" id="L62">    long endTime = System.currentTimeMillis();</span>
+<span class="nc" id="L63">    long duration = endTime - startTime;</span>
+
+<span class="nc" id="L65">    log.info(&quot;성능 측정 완료 - 실행 시간: {}ms&quot;, duration);</span>
+
+<span class="nc" id="L67">    return Map.of(&quot;duration&quot;, duration + &quot;ms&quot;);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

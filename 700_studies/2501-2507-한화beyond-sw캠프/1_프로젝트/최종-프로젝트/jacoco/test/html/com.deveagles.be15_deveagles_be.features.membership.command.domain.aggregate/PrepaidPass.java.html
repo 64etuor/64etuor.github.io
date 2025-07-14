@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PrepaidPass.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.membership.command.domain.aggregate</a> &gt; <span class="el_source">PrepaidPass.java</span></div><h1>PrepaidPass.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.membership.command.domain.aggregate;
+
+import com.deveagles.be15_deveagles_be.features.shops.command.domain.aggregate.Shop;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import lombok.*;
+
+@Entity
+@Table(name = &quot;prepaid_pass&quot;)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class PrepaidPass {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;prepaid_pass_id&quot;)
+  private Long prepaidPassId;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = &quot;shop_id&quot;, nullable = false)
+  private Shop shopId;
+
+  @Column(name = &quot;prepaid_pass_name&quot;, length = 100, nullable = false)
+  private String prepaidPassName;
+
+  @Column(name = &quot;prepaid_pass_price&quot;, nullable = false)
+  private Integer prepaidPassPrice;
+
+  @Column(name = &quot;expiration_period&quot;, nullable = false)
+  private Integer expirationPeriod;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = &quot;expiration_period_type&quot;, nullable = false)
+  private ExpirationPeriodType expirationPeriodType;
+
+  @Column(name = &quot;bonus&quot;)
+  private Integer bonus;
+
+  @Column(name = &quot;discount_rate&quot;)
+  private Integer discountRate;
+
+  @Column(name = &quot;prepaid_pass_memo&quot;, length = 255)
+  private String prepaidPassMemo;
+
+  @Column(name = &quot;created_at&quot;, nullable = false)
+  private LocalDateTime createdAt = LocalDateTime.now();
+
+  @Column(name = &quot;modified_at&quot;, nullable = false)
+  private LocalDateTime modifiedAt = LocalDateTime.now();
+
+  @Column(name = &quot;deleted_at&quot;)
+  private LocalDateTime deletedAt;
+
+  public void updatePrepaidPass(
+      String prepaidPassName,
+      Integer prepaidPassPrice,
+      Integer expirationPeriod,
+      ExpirationPeriodType expirationPeriodType,
+      Integer bonus,
+      Integer discountRate,
+      String prepaidPassMemo) {
+<span class="nc" id="L64">    this.prepaidPassName = prepaidPassName;</span>
+<span class="nc" id="L65">    this.prepaidPassPrice = prepaidPassPrice;</span>
+<span class="nc" id="L66">    this.expirationPeriod = expirationPeriod;</span>
+<span class="nc" id="L67">    this.expirationPeriodType = expirationPeriodType;</span>
+<span class="nc" id="L68">    this.bonus = bonus;</span>
+<span class="nc" id="L69">    this.discountRate = discountRate;</span>
+<span class="nc" id="L70">    this.prepaidPassMemo = prepaidPassMemo;</span>
+<span class="nc" id="L71">    this.modifiedAt = LocalDateTime.now();</span>
+<span class="nc" id="L72">  }</span>
+
+  public void setDeletedAt() {
+<span class="fc" id="L75">    this.deletedAt = LocalDateTime.now();</span>
+<span class="fc" id="L76">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

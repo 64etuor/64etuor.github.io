@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JwtAuthenticationFilter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.common.jwt</a> &gt; <span class="el_source">JwtAuthenticationFilter.java</span></div><h1>JwtAuthenticationFilter.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.common.jwt;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+<span class="nc" id="L17">@Slf4j</span>
+@RequiredArgsConstructor
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+  private final JwtTokenProvider jwtTokenProvider;
+  private final UserDetailsService userDetailsService;
+
+  @Override
+  protected void doFilterInternal(
+      HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+      throws ServletException, IOException {
+
+<span class="nc" id="L29">    String token = getJwtFromRequest(request);</span>
+<span class="nc" id="L30">    log.info(&quot;[AUTH_FILTER] 요청 헤더 토큰: {}&quot;, token);</span>
+    try {
+<span class="nc bnc" id="L32" title="All 4 branches missed.">      if (StringUtils.hasText(token) &amp;&amp; jwtTokenProvider.validateToken(token)) {</span>
+
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (jwtTokenProvider.isRefreshToken(token)) {</span>
+<span class="nc" id="L35">          log.warn(&quot;# refreshToken으로 접근 시도 차단&quot;);</span>
+<span class="nc" id="L36">          response.sendError(</span>
+              HttpServletResponse.SC_UNAUTHORIZED, &quot;refreshToken은 API 인증에 사용할 수 없습니다.&quot;);
+<span class="nc" id="L38">          return;</span>
+        }
+
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (Boolean.TRUE.equals(jwtTokenProvider.isAccessTokenBlacklisted(token))) {</span>
+<span class="nc" id="L42">          log.warn(&quot;# 블랙리스트 토큰 사용 시도&quot;);</span>
+<span class="nc" id="L43">          response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;로그아웃된 토큰입니다.&quot;);</span>
+<span class="nc" id="L44">          return;</span>
+        }
+
+<span class="nc" id="L47">        String username = jwtTokenProvider.getUsernameFromJWT(token);</span>
+<span class="nc" id="L48">        log.info(&quot;## user login -&gt; username: {}&quot;, username);</span>
+
+<span class="nc" id="L50">        UserDetails userDetails = userDetailsService.loadUserByUsername(username);</span>
+<span class="nc" id="L51">        UsernamePasswordAuthenticationToken authentication =</span>
+            new UsernamePasswordAuthenticationToken(
+<span class="nc" id="L53">                userDetails, null, userDetails.getAuthorities());</span>
+<span class="nc" id="L54">        SecurityContextHolder.getContext().setAuthentication(authentication);</span>
+      }
+<span class="nc" id="L56">    } catch (Exception e) {</span>
+<span class="nc" id="L57">      log.error(&quot;# JWT 처리 중 에러 발생&quot;, e);</span>
+<span class="nc" id="L58">      response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;토큰 오류&quot;);</span>
+<span class="nc" id="L59">      return;</span>
+<span class="nc" id="L60">    }</span>
+<span class="nc" id="L61">    filterChain.doFilter(request, response);</span>
+<span class="nc" id="L62">  }</span>
+
+  private String getJwtFromRequest(HttpServletRequest request) {
+<span class="nc" id="L65">    String bearerToken = request.getHeader(&quot;Authorization&quot;);</span>
+<span class="nc bnc" id="L66" title="All 4 branches missed.">    if (StringUtils.hasText(bearerToken) &amp;&amp; bearerToken.startsWith(&quot;Bearer &quot;)) {</span>
+<span class="nc" id="L67">      return bearerToken.substring(7);</span>
+    }
+<span class="nc" id="L69">    return null;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

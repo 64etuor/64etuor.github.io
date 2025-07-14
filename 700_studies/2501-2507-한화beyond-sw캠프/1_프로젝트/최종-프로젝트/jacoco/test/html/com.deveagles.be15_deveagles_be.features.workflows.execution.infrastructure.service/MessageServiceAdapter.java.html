@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MessageServiceAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.execution.infrastructure.service</a> &gt; <span class="el_source">MessageServiceAdapter.java</span></div><h1>MessageServiceAdapter.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.execution.infrastructure.service;
+
+import com.deveagles.be15_deveagles_be.features.customers.query.dto.response.CustomerDetailResponse;
+import com.deveagles.be15_deveagles_be.features.customers.query.service.CustomerQueryService;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.request.SmsRequest;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.service.MessageCommandService;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageKind;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageSendingType;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageType;
+import com.deveagles.be15_deveagles_be.features.messages.query.service.MessageTemplateQueryService;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+<span class="nc" id="L21">@Slf4j</span>
+public class MessageServiceAdapter {
+
+  private final MessageCommandService messageCommandService;
+  private final MessageTemplateQueryService messageTemplateQueryService;
+  private final CustomerQueryService customerQueryService;
+
+  public boolean sendMessage(Long customerId, Long shopId, String templateId, LocalTime sendTime) {
+    try {
+      // 고객 정보 조회
+<span class="nc" id="L31">      Optional&lt;CustomerDetailResponse&gt; customerOpt =</span>
+<span class="nc" id="L32">          customerQueryService.getCustomerDetail(customerId, shopId);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">      if (customerOpt.isEmpty()) {</span>
+<span class="nc" id="L34">        log.warn(&quot;고객을 찾을 수 없습니다. customerId: {}&quot;, customerId);</span>
+<span class="nc" id="L35">        return false;</span>
+      }
+<span class="nc" id="L37">      CustomerDetailResponse customer = customerOpt.get();</span>
+
+      // 템플릿 조회
+<span class="nc" id="L40">      Long tId = Long.parseLong(templateId);</span>
+<span class="nc" id="L41">      var template = messageTemplateQueryService.findOne(shopId, tId);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">      if (template == null) {</span>
+<span class="nc" id="L43">        log.warn(&quot;메시지 템플릿을 찾을 수 없습니다. templateId: {}, shopId: {}&quot;, templateId, shopId);</span>
+<span class="nc" id="L44">        return false;</span>
+      }
+
+      // 발송 시간에 따른 발송 타입 결정
+      MessageSendingType sendingType =
+<span class="nc bnc" id="L49" title="All 2 branches missed.">          sendTime != null ? MessageSendingType.RESERVATION : MessageSendingType.IMMEDIATE;</span>
+
+      // 예약 발송인 경우 오늘 날짜의 지정된 시간으로 설정
+      LocalDateTime scheduledTime =
+<span class="nc bnc" id="L53" title="All 2 branches missed.">          sendTime != null</span>
+<span class="nc" id="L54">              ? LocalDateTime.of(LocalDateTime.now().toLocalDate(), sendTime)</span>
+<span class="nc" id="L55">              : LocalDateTime.now();</span>
+
+<span class="nc" id="L57">      log.info(</span>
+          &quot;메시지 발송 설정 - customerId: {}, sendingType: {}, scheduledTime: {}&quot;,
+          customerId,
+          sendingType,
+          scheduledTime);
+
+      // SMS 요청 생성
+<span class="nc" id="L64">      SmsRequest smsRequest =</span>
+          new SmsRequest(
+<span class="nc" id="L66">              List.of(customerId),</span>
+<span class="nc" id="L67">              template.getTemplateContent(),</span>
+              MessageType.SMS,
+              sendingType,
+              scheduledTime,
+              tId,
+<span class="nc" id="L72">              false,</span>
+              null,
+              null,
+              MessageKind.advertising,
+              null,
+              null);
+
+      // 메시지 발송
+<span class="nc" id="L80">      var results = messageCommandService.sendSms(shopId, smsRequest);</span>
+<span class="nc bnc" id="L81" title="All 4 branches missed.">      return !results.isEmpty() &amp;&amp; results.get(0).success();</span>
+
+<span class="nc" id="L83">    } catch (Exception e) {</span>
+<span class="nc" id="L84">      log.error(</span>
+          &quot;메시지 발송 실패 - customerId: {}, templateId: {}, shopId: {}&quot;,
+          customerId,
+          templateId,
+          shopId,
+          e);
+<span class="nc" id="L90">      return false;</span>
+    }
+  }
+
+  public boolean sendCouponMessage(
+      Long customerId, Long shopId, String templateId, String couponCode, LocalTime sendTime) {
+    try {
+      // 고객 정보 조회
+<span class="nc" id="L98">      Optional&lt;CustomerDetailResponse&gt; customerOpt =</span>
+<span class="nc" id="L99">          customerQueryService.getCustomerDetail(customerId, shopId);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">      if (customerOpt.isEmpty()) {</span>
+<span class="nc" id="L101">        log.warn(&quot;고객을 찾을 수 없습니다. customerId: {}&quot;, customerId);</span>
+<span class="nc" id="L102">        return false;</span>
+      }
+<span class="nc" id="L104">      CustomerDetailResponse customer = customerOpt.get();</span>
+
+      // 템플릿 조회
+<span class="nc" id="L107">      Long tId = Long.parseLong(templateId);</span>
+<span class="nc" id="L108">      var template = messageTemplateQueryService.findOne(shopId, tId);</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">      if (template == null) {</span>
+<span class="nc" id="L110">        log.warn(&quot;메시지 템플릿을 찾을 수 없습니다. templateId: {}, shopId: {}&quot;, templateId, shopId);</span>
+<span class="nc" id="L111">        return false;</span>
+      }
+
+      // 템플릿 내용에 쿠폰 정보 추가
+<span class="nc" id="L115">      String content = template.getTemplateContent();</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">      if (couponCode != null) {</span>
+<span class="nc" id="L117">        content = content.replace(&quot;{{couponCode}}&quot;, couponCode);</span>
+      }
+
+      // 발송 시간에 따른 발송 타입 결정
+      MessageSendingType sendingType =
+<span class="nc bnc" id="L122" title="All 2 branches missed.">          sendTime != null ? MessageSendingType.RESERVATION : MessageSendingType.IMMEDIATE;</span>
+
+      // 예약 발송인 경우 오늘 날짜의 지정된 시간으로 설정
+      LocalDateTime scheduledTime =
+<span class="nc bnc" id="L126" title="All 2 branches missed.">          sendTime != null</span>
+<span class="nc" id="L127">              ? LocalDateTime.of(LocalDateTime.now().toLocalDate(), sendTime)</span>
+<span class="nc" id="L128">              : LocalDateTime.now();</span>
+
+<span class="nc" id="L130">      log.info(</span>
+          &quot;쿠폰 메시지 발송 설정 - customerId: {}, couponCode: {}, sendingType: {}, scheduledTime: {}&quot;,
+          customerId,
+          couponCode,
+          sendingType,
+          scheduledTime);
+
+      // SMS 요청 생성
+<span class="nc" id="L138">      SmsRequest smsRequest =</span>
+          new SmsRequest(
+<span class="nc" id="L140">              List.of(customerId),</span>
+              content,
+              MessageType.SMS,
+              sendingType,
+              scheduledTime,
+              tId,
+<span class="nc" id="L146">              false,</span>
+              null,
+              null,
+              MessageKind.advertising,
+              null,
+              null);
+
+      // 메시지 발송
+<span class="nc" id="L154">      var results = messageCommandService.sendSms(shopId, smsRequest);</span>
+<span class="nc bnc" id="L155" title="All 4 branches missed.">      return !results.isEmpty() &amp;&amp; results.get(0).success();</span>
+
+<span class="nc" id="L157">    } catch (Exception e) {</span>
+<span class="nc" id="L158">      log.error(</span>
+          &quot;쿠폰 메시지 발송 실패 - customerId: {}, templateId: {}, couponCode: {}, shopId: {}&quot;,
+          customerId,
+          templateId,
+          couponCode,
+          shopId,
+          e);
+<span class="nc" id="L165">      return false;</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

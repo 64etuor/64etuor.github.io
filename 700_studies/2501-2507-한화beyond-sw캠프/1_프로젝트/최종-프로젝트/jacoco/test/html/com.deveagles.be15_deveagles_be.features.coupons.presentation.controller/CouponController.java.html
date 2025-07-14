@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CouponController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.coupons.presentation.controller</a> &gt; <span class="el_source">CouponController.java</span></div><h1>CouponController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.coupons.presentation.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.common.dto.PagedResponse;
+import com.deveagles.be15_deveagles_be.common.dto.PagedResult;
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.coupons.application.command.CouponCommandService;
+import com.deveagles.be15_deveagles_be.features.coupons.application.command.CreateCouponRequest;
+import com.deveagles.be15_deveagles_be.features.coupons.application.query.CouponQueryService;
+import com.deveagles.be15_deveagles_be.features.coupons.application.query.CouponSearchQuery;
+import com.deveagles.be15_deveagles_be.features.coupons.common.CouponDto;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.request.DeleteCouponRequest;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.response.CouponResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import java.time.LocalDate;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = &quot;쿠폰 관리&quot;, description = &quot;쿠폰 생성, 삭제, 조회 API&quot;)
+@RestController
+@RequestMapping(&quot;/coupons&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="fc" id="L38">@Slf4j</span>
+public class CouponController {
+
+  private final CouponCommandService couponCommandService;
+  private final CouponQueryService couponQueryService;
+
+  @Operation(summary = &quot;쿠폰 생성&quot;, description = &quot;새로운 쿠폰을 생성합니다. 쿠폰 코드는 자동으로 생성됩니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;201&quot;,
+        description = &quot;쿠폰 생성 성공&quot;,
+        content = @Content(schema = @Schema(implementation = CouponDto.class))),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 요청 데이터&quot;)
+  })
+  @PostMapping
+  public ResponseEntity&lt;ApiResponse&lt;CouponDto&gt;&gt; createCoupon(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;쿠폰 생성 정보&quot;, required = true) @Valid @RequestBody
+          CreateCouponRequest command) {
+<span class="nc" id="L59">    log.info(</span>
+        &quot;쿠폰 생성 요청 - 쿠폰명: {}, 매장ID: {}, 직원ID: {}&quot;,
+<span class="nc" id="L61">        command.getCouponTitle(),</span>
+<span class="nc" id="L62">        user.getShopId(),</span>
+<span class="nc" id="L63">        user.getUserId());</span>
+
+<span class="nc" id="L65">    CouponDto couponDto = couponCommandService.createCoupon(command);</span>
+<span class="nc" id="L66">    return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(couponDto));</span>
+  }
+
+  @Operation(summary = &quot;쿠폰 삭제&quot;, description = &quot;쿠폰을 소프트 삭제합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;쿠폰 삭제 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;쿠폰을 찾을 수 없음&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;이미 삭제된 쿠폰&quot;)
+  })
+  @DeleteMapping(&quot;/{id}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; deleteCoupon(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;쿠폰 ID&quot;, required = true) @PathVariable Long id) {
+<span class="nc" id="L85">    log.info(&quot;쿠폰 삭제 요청 - ID: {}, 매장ID: {}&quot;, id, user.getShopId());</span>
+
+    DeleteCouponRequest command =
+<span class="nc" id="L88">        DeleteCouponRequest.builder().id(id).shopId(user.getShopId()).build();</span>
+<span class="nc" id="L89">    couponCommandService.deleteCoupon(command);</span>
+<span class="nc" id="L90">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;쿠폰 상태 토글&quot;, description = &quot;쿠폰의 활성화/비활성화 상태를 토글합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;쿠폰 상태 변경 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;쿠폰을 찾을 수 없음&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;삭제된 쿠폰은 상태 변경 불가&quot;)
+  })
+  @PatchMapping(&quot;/{id}/toggle&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CouponDto&gt;&gt; toggleCouponStatus(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;쿠폰 ID&quot;, required = true) @PathVariable Long id) {
+<span class="nc" id="L109">    log.info(&quot;쿠폰 상태 토글 요청 - ID: {}, 매장ID: {}&quot;, id, user.getShopId());</span>
+
+<span class="nc" id="L111">    CouponDto couponDto = couponCommandService.toggleCouponStatus(id, user.getShopId());</span>
+<span class="nc" id="L112">    return ResponseEntity.ok(ApiResponse.success(couponDto));</span>
+  }
+
+  @Operation(summary = &quot;쿠폰 ID로 조회&quot;, description = &quot;쿠폰 ID를 사용하여 특정 쿠폰을 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;쿠폰 조회 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;쿠폰을 찾을 수 없음&quot;)
+  })
+  @GetMapping(&quot;/{id}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CouponResponse&gt;&gt; getCouponById(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;쿠폰 ID&quot;, required = true) @PathVariable Long id) {
+<span class="nc" id="L128">    log.info(&quot;쿠폰 ID로 조회 요청 - ID: {}, 매장ID: {}&quot;, id, user.getShopId());</span>
+
+<span class="nc" id="L130">    CouponResponse coupon =</span>
+        couponQueryService
+<span class="nc" id="L132">            .getCouponById(id, user.getShopId())</span>
+<span class="nc" id="L133">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.COUPON_NOT_FOUND));</span>
+
+<span class="nc" id="L135">    return ResponseEntity.ok(ApiResponse.success(coupon));</span>
+  }
+
+  @Operation(summary = &quot;쿠폰 코드로 조회&quot;, description = &quot;쿠폰 코드를 사용하여 특정 쿠폰을 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;쿠폰 조회 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;쿠폰을 찾을 수 없음&quot;)
+  })
+  @GetMapping(&quot;/code/{couponCode}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CouponResponse&gt;&gt; getCouponByCode(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;쿠폰 코드&quot;, required = true, example = &quot;CP241201ABCD1234&quot;) @PathVariable
+          String couponCode) {
+<span class="nc" id="L152">    log.info(&quot;쿠폰 코드로 조회 요청 - 코드: {}, 매장ID: {}&quot;, couponCode, user.getShopId());</span>
+
+<span class="nc" id="L154">    CouponResponse coupon =</span>
+        couponQueryService
+<span class="nc" id="L156">            .getCouponByCode(couponCode, user.getShopId())</span>
+<span class="nc" id="L157">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.COUPON_NOT_FOUND));</span>
+
+<span class="nc" id="L159">    return ResponseEntity.ok(ApiResponse.success(coupon));</span>
+  }
+
+  @Operation(summary = &quot;쿠폰 통합 검색&quot;, description = &quot;다양한 조건으로 쿠폰을 검색하고 페이징 결과를 반환합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;쿠폰 검색 성공&quot;)
+  })
+  @GetMapping
+  public ResponseEntity&lt;ApiResponse&lt;PagedResponse&lt;CouponResponse&gt;&gt;&gt; searchCoupons(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;쿠폰 코드 (부분 검색)&quot;, example = &quot;CP241201&quot;)
+          @RequestParam(required = false)
+          String couponCode,
+      @Parameter(description = &quot;쿠폰명 (부분 검색)&quot;, example = &quot;할인 쿠폰&quot;) @RequestParam(required = false)
+          String couponTitle,
+      @Parameter(description = &quot;직원 ID&quot;, example = &quot;1&quot;) @RequestParam(required = false) Long staffId,
+      @Parameter(description = &quot;상품 ID&quot;, example = &quot;100&quot;) @RequestParam(required = false)
+          Long primaryItemId,
+      @Parameter(description = &quot;활성화 상태 (true: 활성, false: 비활성)&quot;, example = &quot;true&quot;)
+          @RequestParam(required = false)
+          Boolean isActive,
+      @Parameter(description = &quot;만료일 시작 (YYYY-MM-DD)&quot;, example = &quot;2024-01-01&quot;)
+          @RequestParam(required = false)
+          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+          LocalDate expirationDateFrom,
+      @Parameter(description = &quot;만료일 종료 (YYYY-MM-DD)&quot;, example = &quot;2024-12-31&quot;)
+          @RequestParam(required = false)
+          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+          LocalDate expirationDateTo,
+      @Parameter(description = &quot;페이지 번호 (0부터 시작)&quot;, example = &quot;0&quot;) @RequestParam(defaultValue = &quot;0&quot;)
+          Integer page,
+      @Parameter(description = &quot;페이지 크기&quot;, example = &quot;10&quot;) @RequestParam(defaultValue = &quot;10&quot;)
+          Integer size,
+      @Parameter(description = &quot;정렬 기준 필드&quot;, example = &quot;createdAt&quot;)
+          @RequestParam(defaultValue = &quot;createdAt&quot;)
+          String sortBy,
+      @Parameter(description = &quot;정렬 방향&quot;, example = &quot;desc&quot;) @RequestParam(defaultValue = &quot;desc&quot;)
+          String sortDirection) {
+
+<span class="nc" id="L200">    log.info(</span>
+        &quot;쿠폰 통합 검색 요청 - 매장ID: {}, 활성상태: {}, 직원ID: {}, 상품ID: {}&quot;,
+<span class="nc" id="L202">        user.getShopId(),</span>
+        isActive,
+        staffId,
+        primaryItemId);
+
+    try {
+      CouponSearchQuery query =
+<span class="nc" id="L209">          CouponSearchQuery.builder()</span>
+<span class="nc" id="L210">              .couponCode(couponCode)</span>
+<span class="nc" id="L211">              .couponTitle(couponTitle)</span>
+<span class="nc" id="L212">              .shopId(user.getShopId())</span>
+<span class="nc" id="L213">              .staffId(staffId)</span>
+<span class="nc" id="L214">              .primaryItemId(primaryItemId)</span>
+<span class="nc" id="L215">              .isActive(isActive)</span>
+<span class="nc" id="L216">              .expirationDateFrom(expirationDateFrom)</span>
+<span class="nc" id="L217">              .expirationDateTo(expirationDateTo)</span>
+<span class="nc" id="L218">              .page(page)</span>
+<span class="nc" id="L219">              .size(size)</span>
+<span class="nc" id="L220">              .sortBy(sortBy)</span>
+<span class="nc" id="L221">              .sortDirection(sortDirection)</span>
+<span class="nc" id="L222">              .build();</span>
+
+<span class="nc" id="L224">      PagedResult&lt;CouponResponse&gt; pagedResult = couponQueryService.searchCoupons(query);</span>
+<span class="nc" id="L225">      PagedResponse&lt;CouponResponse&gt; response = PagedResponse.from(pagedResult);</span>
+
+<span class="nc bnc" id="L227" title="All 2 branches missed.">      log.info(&quot;쿠폰 검색 결과: {}건&quot;, response.getContent() != null ? response.getContent().size() : 0);</span>
+<span class="nc" id="L228">      return ResponseEntity.ok(ApiResponse.success(response));</span>
+<span class="nc" id="L229">    } catch (Exception e) {</span>
+<span class="nc" id="L230">      log.error(&quot;[쿠폰 통합 검색] 500 에러 발생&quot;, e);</span>
+<span class="nc" id="L231">      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)</span>
+<span class="nc" id="L232">          .body(ApiResponse.failure(&quot;INTERNAL_ERROR&quot;, &quot;서버 내부 오류: &quot; + e.getMessage()));</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

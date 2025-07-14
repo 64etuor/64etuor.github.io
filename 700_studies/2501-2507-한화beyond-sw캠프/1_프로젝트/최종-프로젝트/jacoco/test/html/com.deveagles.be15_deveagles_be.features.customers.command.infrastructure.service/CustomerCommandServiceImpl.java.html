@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.command.infrastructure.service</a> &gt; <span class="el_source">CustomerCommandServiceImpl.java</span></div><h1>CustomerCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.command.infrastructure.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.request.CreateCustomerRequest;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.request.UpdateCustomerRequest;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.response.CustomerCommandResponse;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.service.CustomerCommandService;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.service.CustomerTagService;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.Customer;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.repository.CustomerRepository;
+import com.deveagles.be15_deveagles_be.features.customers.query.service.CustomerQueryService;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.service.AutomaticMessageTriggerService;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.AutomaticEventType;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+<span class="fc" id="L25">@Slf4j</span>
+public class CustomerCommandServiceImpl implements CustomerCommandService {
+
+  private final CustomerRepository customerRepository;
+  private final CustomerQueryService customerQueryService;
+  private final AutomaticMessageTriggerService automaticMessageTriggerService;
+  private final CustomerTagService customerTagService;
+
+  @Override
+  public CustomerCommandResponse createCustomer(CreateCustomerRequest request) {
+<span class="fc" id="L35">    Long currentShopId = getCurrentShopId();</span>
+
+    Customer customer =
+<span class="fc" id="L38">        Customer.builder()</span>
+<span class="fc" id="L39">            .shopId(currentShopId)</span>
+<span class="fc" id="L40">            .customerName(request.customerName())</span>
+<span class="fc" id="L41">            .phoneNumber(request.phoneNumber())</span>
+<span class="fc" id="L42">            .gender(request.gender())</span>
+<span class="fc" id="L43">            .birthdate(request.birthdate())</span>
+<span class="fc" id="L44">            .customerGradeId(request.customerGradeId())</span>
+<span class="fc" id="L45">            .staffId(request.staffId())</span>
+<span class="fc" id="L46">            .channelId(request.channelId())</span>
+<span class="fc" id="L47">            .memo(request.memo())</span>
+<span class="fc" id="L48">            .marketingConsent(request.marketingConsent())</span>
+<span class="fc" id="L49">            .notificationConsent(request.notificationConsent())</span>
+<span class="fc" id="L50">            .build();</span>
+
+<span class="fc" id="L52">    Customer savedCustomer = customerRepository.save(customer);</span>
+<span class="fc" id="L53">    customerQueryService.syncCustomerToElasticsearch(savedCustomer.getId());</span>
+
+<span class="pc bpc" id="L55" title="2 of 4 branches missed.">    if (request.tags() != null &amp;&amp; !request.tags().isEmpty()) {</span>
+<span class="nc" id="L56">      request</span>
+<span class="nc" id="L57">          .tags()</span>
+<span class="nc" id="L58">          .forEach(</span>
+              tagId -&gt;
+<span class="nc" id="L60">                  customerTagService.addTagToCustomer(savedCustomer.getId(), tagId, currentShopId));</span>
+    }
+
+<span class="fc" id="L63">    log.info(</span>
+<span class="fc" id="L64">        &quot;자동 발송 메시지 실행 - 이벤트: {}, 고객ID: {}&quot;, AutomaticEventType.NEW_CUSTOMER, savedCustomer.getId());</span>
+<span class="fc" id="L65">    automaticMessageTriggerService.triggerAutomaticSend(</span>
+        savedCustomer, AutomaticEventType.NEW_CUSTOMER);
+
+<span class="fc" id="L68">    return CustomerCommandResponse.from(savedCustomer);</span>
+  }
+
+  @Override
+  public CustomerCommandResponse updateCustomer(UpdateCustomerRequest request) {
+<span class="fc" id="L73">    Customer customer =</span>
+        customerRepository
+<span class="fc" id="L75">            .findByIdAndShopId(request.customerId(), getCurrentShopId())</span>
+<span class="fc" id="L76">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND));</span>
+
+<span class="fc" id="L78">    customer.updateCustomerInfo(</span>
+<span class="fc" id="L79">        request.customerName(),</span>
+<span class="fc" id="L80">        request.phoneNumber(),</span>
+<span class="fc" id="L81">        request.memo(),</span>
+<span class="fc" id="L82">        request.gender(),</span>
+<span class="fc" id="L83">        request.channelId());</span>
+
+    // 추가 필드 업데이트
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">    if (request.staffId() != null) {</span>
+<span class="fc" id="L87">      customer.updateStaff(request.staffId());</span>
+    }
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">    if (request.customerGradeId() != null) {</span>
+<span class="fc" id="L90">      customer.updateGrade(request.customerGradeId());</span>
+    }
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">    if (request.birthdate() != null) {</span>
+<span class="fc" id="L93">      customer.updateBirthdate(request.birthdate());</span>
+    }
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">    if (request.marketingConsent() != null) {</span>
+<span class="fc" id="L96">      customer.updateMarketingConsent(request.marketingConsent());</span>
+    }
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">    if (request.notificationConsent() != null) {</span>
+<span class="fc" id="L99">      customer.updateNotificationConsent(request.notificationConsent());</span>
+    }
+
+<span class="fc" id="L102">    Customer updatedCustomer = customerRepository.save(customer);</span>
+
+    // Elasticsearch 동기화
+<span class="fc" id="L105">    customerQueryService.syncCustomerToElasticsearch(updatedCustomer.getId());</span>
+
+<span class="fc" id="L107">    log.info(&quot;고객 정보 수정됨: ID={}, 이름={}&quot;, updatedCustomer.getId(), updatedCustomer.getCustomerName());</span>
+
+<span class="fc" id="L109">    return CustomerCommandResponse.from(updatedCustomer);</span>
+  }
+
+  @Override
+  public void deleteCustomer(Long customerId, Long shopId) {
+<span class="fc" id="L114">    Customer customer =</span>
+        customerRepository
+<span class="fc" id="L116">            .findByIdAndShopId(customerId, shopId)</span>
+<span class="fc" id="L117">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND));</span>
+
+<span class="fc" id="L119">    customer.softDelete();</span>
+<span class="fc" id="L120">    customerRepository.save(customer);</span>
+<span class="fc" id="L121">    log.info(&quot;고객 삭제됨: ID={}, 매장ID={}&quot;, customerId, shopId);</span>
+
+    // Elasticsearch 동기화
+<span class="fc" id="L124">    customerQueryService.syncCustomerToElasticsearch(customerId);</span>
+<span class="fc" id="L125">  }</span>
+
+  @Override
+  public CustomerCommandResponse updateMarketingConsent(
+      Long customerId, Long shopId, Boolean consent) {
+<span class="fc" id="L130">    Customer customer =</span>
+        customerRepository
+<span class="fc" id="L132">            .findByIdAndShopId(customerId, shopId)</span>
+<span class="fc" id="L133">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND));</span>
+
+<span class="fc" id="L135">    customer.updateMarketingConsent(consent);</span>
+<span class="fc" id="L136">    Customer updatedCustomer = customerRepository.save(customer);</span>
+
+<span class="fc" id="L138">    return CustomerCommandResponse.from(updatedCustomer);</span>
+  }
+
+  @Override
+  public CustomerCommandResponse updateNotificationConsent(
+      Long customerId, Long shopId, Boolean consent) {
+<span class="fc" id="L144">    Customer customer =</span>
+        customerRepository
+<span class="fc" id="L146">            .findByIdAndShopId(customerId, shopId)</span>
+<span class="fc" id="L147">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND));</span>
+
+<span class="fc" id="L149">    customer.updateNotificationConsent(consent);</span>
+<span class="fc" id="L150">    Customer updatedCustomer = customerRepository.save(customer);</span>
+
+<span class="fc" id="L152">    return CustomerCommandResponse.from(updatedCustomer);</span>
+  }
+
+  @Override
+  public CustomerCommandResponse addVisit(Long customerId, Long shopId, Integer revenue) {
+<span class="fc" id="L157">    Customer customer =</span>
+        customerRepository
+<span class="fc" id="L159">            .findByIdAndShopId(customerId, shopId)</span>
+<span class="fc" id="L160">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND));</span>
+
+<span class="fc" id="L162">    customer.addVisit(revenue);</span>
+<span class="fc" id="L163">    Customer updatedCustomer = customerRepository.save(customer);</span>
+<span class="fc" id="L164">    log.info(&quot;고객 방문 추가됨: ID={}, 매출={}&quot;, customerId, revenue);</span>
+
+<span class="fc" id="L166">    return CustomerCommandResponse.from(updatedCustomer);</span>
+  }
+
+  @Override
+  public CustomerCommandResponse addNoshow(Long customerId, Long shopId) {
+<span class="fc" id="L171">    Customer customer =</span>
+        customerRepository
+<span class="fc" id="L173">            .findByIdAndShopId(customerId, shopId)</span>
+<span class="fc" id="L174">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND));</span>
+
+<span class="fc" id="L176">    customer.addNoshow();</span>
+<span class="fc" id="L177">    Customer updatedCustomer = customerRepository.save(customer);</span>
+<span class="fc" id="L178">    log.info(&quot;고객 노쇼 추가됨: ID={}&quot;, customerId);</span>
+
+<span class="fc" id="L180">    return CustomerCommandResponse.from(updatedCustomer);</span>
+  }
+
+  // SecurityContext에서 현재 사용자의 shopId 가져오기
+  private Long getCurrentShopId() {
+    CustomUser user =
+<span class="fc" id="L186">        (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();</span>
+<span class="fc" id="L187">    return user.getShopId();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

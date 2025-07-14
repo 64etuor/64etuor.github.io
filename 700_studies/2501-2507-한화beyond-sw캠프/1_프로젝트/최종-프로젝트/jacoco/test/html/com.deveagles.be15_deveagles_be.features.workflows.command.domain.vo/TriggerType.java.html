@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TriggerType.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.command.domain.vo</a> &gt; <span class="el_source">TriggerType.java</span></div><h1>TriggerType.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.command.domain.vo;
+
+import lombok.Getter;
+
+<span class="nc" id="L5">@Getter</span>
+public enum TriggerType {
+  // 고객 생애주기 관리
+<span class="nc" id="L8">  NEW_CUSTOMER_FOLLOWUP(&quot;new-customer-followup&quot;, &quot;신규 고객 팔로업&quot;, TriggerCategory.LIFECYCLE),</span>
+<span class="nc" id="L9">  VIP_ATTENTION_NEEDED(&quot;vip-attention-needed&quot;, &quot;VIP 고객 특별 관리&quot;, TriggerCategory.LIFECYCLE),</span>
+
+  // 정기 리텐션
+<span class="nc" id="L12">  VISIT_CYCLE(&quot;visit-cycle&quot;, &quot;방문 주기 기반&quot;, TriggerCategory.PERIODIC),</span>
+<span class="nc" id="L13">  SPECIFIC_TREATMENT(&quot;specific-treatment&quot;, &quot;특정 시술 후&quot;, TriggerCategory.PERIODIC),</span>
+
+  // 특별 이벤트
+<span class="nc" id="L16">  BIRTHDAY(&quot;birthday&quot;, &quot;생일 이벤트&quot;, TriggerCategory.SPECIAL),</span>
+<span class="nc" id="L17">  FIRST_VISIT_ANNIVERSARY(&quot;first-visit-anniversary&quot;, &quot;첫 방문 기념일&quot;, TriggerCategory.SPECIAL),</span>
+<span class="nc" id="L18">  VISIT_MILESTONE(&quot;visit-milestone&quot;, &quot;방문 횟수 기념&quot;, TriggerCategory.SPECIAL),</span>
+<span class="nc" id="L19">  AMOUNT_MILESTONE(&quot;amount-milestone&quot;, &quot;누적 금액 기념&quot;, TriggerCategory.SPECIAL),</span>
+<span class="nc" id="L20">  FIRST_VISIT_DAYS_AFTER(&quot;first-visit-days-after&quot;, &quot;첫 방문 이후 경과&quot;, TriggerCategory.SPECIAL),</span>
+
+  // 이탈 방지
+<span class="nc" id="L23">  NEW_CUSTOMER_AT_RISK(&quot;new-customer-at-risk&quot;, &quot;신규 고객 이탈 위험&quot;, TriggerCategory.PREVENTION),</span>
+<span class="nc" id="L24">  REACTIVATION_NEEDED(&quot;reactivation-needed&quot;, &quot;재활성화 필요&quot;, TriggerCategory.PREVENTION),</span>
+<span class="nc" id="L25">  GROWING_DELAYED(&quot;growing-delayed&quot;, &quot;성장 고객 케어&quot;, TriggerCategory.PREVENTION),</span>
+<span class="nc" id="L26">  LOYAL_DELAYED(&quot;loyal-delayed&quot;, &quot;충성 고객 케어&quot;, TriggerCategory.PREVENTION),</span>
+<span class="nc" id="L27">  CHURN_RISK_HIGH(&quot;churn-risk-high&quot;, &quot;고위험 이탈 예측&quot;, TriggerCategory.PREVENTION);</span>
+
+  private final String code;
+  private final String displayName;
+  private final TriggerCategory category;
+
+<span class="nc" id="L33">  TriggerType(String code, String displayName, TriggerCategory category) {</span>
+<span class="nc" id="L34">    this.code = code;</span>
+<span class="nc" id="L35">    this.displayName = displayName;</span>
+<span class="nc" id="L36">    this.category = category;</span>
+<span class="nc" id="L37">  }</span>
+
+  public static TriggerType fromCode(String code) {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">    for (TriggerType type : values()) {</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">      if (type.code.equals(code)) {</span>
+<span class="nc" id="L42">        return type;</span>
+      }
+    }
+<span class="nc" id="L45">    throw new IllegalArgumentException(&quot;Unknown trigger type code: &quot; + code);</span>
+  }
+
+  public boolean isPeriodicType() {
+<span class="nc bnc" id="L49" title="All 2 branches missed.">    return category == TriggerCategory.PERIODIC;</span>
+  }
+
+  public boolean isEventBasedType() {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">    return category == TriggerCategory.SPECIAL;</span>
+  }
+
+  public boolean isPreventionType() {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">    return category == TriggerCategory.PREVENTION;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

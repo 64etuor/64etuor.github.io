@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ActionExecutorServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.execution.infrastructure.service</a> &gt; <span class="el_source">ActionExecutorServiceImpl.java</span></div><h1>ActionExecutorServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.execution.infrastructure.service;
+
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.aggregate.Workflow;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.aggregate.WorkflowExecution;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.repository.WorkflowExecutionRepository;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.vo.ActionConfig;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.vo.ActionType;
+import com.deveagles.be15_deveagles_be.features.workflows.execution.application.service.ActionExecutorService;
+import com.deveagles.be15_deveagles_be.features.workflows.execution.application.service.WorkflowExecutionService.ActionExecutionResult;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+<span class="nc" id="L19">@Slf4j</span>
+public class ActionExecutorServiceImpl implements ActionExecutorService {
+
+  private final WorkflowExecutionRepository workflowExecutionRepository;
+  private final ObjectMapper objectMapper;
+  private final MessageServiceAdapter messageService;
+  private final CouponServiceAdapter couponService;
+  private final NotificationServiceAdapter notificationService;
+
+  @Override
+  public ActionExecutionResult executeAction(
+      Workflow workflow, List&lt;Long&gt; targetCustomerIds, WorkflowExecution execution) {
+<span class="nc" id="L31">    log.info(</span>
+        &quot;액션 실행 시작: 워크플로우 ID={}, 대상 고객 {}명, 액션 타입={}&quot;,
+<span class="nc" id="L33">        workflow.getId(),</span>
+<span class="nc" id="L34">        targetCustomerIds.size(),</span>
+<span class="nc" id="L35">        workflow.getActionType());</span>
+
+    try {
+<span class="nc" id="L38">      ActionConfig actionConfig = parseActionConfig(workflow.getActionConfig());</span>
+<span class="nc" id="L39">      ActionType actionType = ActionType.fromCode(workflow.getActionType());</span>
+
+<span class="nc bnc" id="L41" title="All 2 branches missed.">      if (!actionConfig.isValid(actionType)) {</span>
+<span class="nc" id="L42">        log.error(</span>
+<span class="nc" id="L43">            &quot;액션 설정이 유효하지 않습니다: 워크플로우 ID={}, 액션 타입={}&quot;, workflow.getId(), workflow.getActionType());</span>
+<span class="nc" id="L44">        return new ActionExecutionResult(0, targetCustomerIds.size());</span>
+      }
+
+<span class="nc bnc" id="L47" title="All 4 branches missed.">      switch (actionType) {</span>
+        case MESSAGE_ONLY:
+<span class="nc" id="L49">          return executeMessageOnlyAction(actionConfig, targetCustomerIds, workflow);</span>
+        case COUPON_MESSAGE:
+<span class="nc" id="L51">          return executeCouponMessageAction(actionConfig, targetCustomerIds, workflow);</span>
+        case SYSTEM_NOTIFICATION:
+<span class="nc" id="L53">          return executeSystemNotificationAction(actionConfig, targetCustomerIds, workflow);</span>
+        default:
+<span class="nc" id="L55">          log.error(&quot;지원하지 않는 액션 타입: {}&quot;, workflow.getActionType());</span>
+<span class="nc" id="L56">          return new ActionExecutionResult(0, targetCustomerIds.size());</span>
+      }
+
+<span class="nc" id="L59">    } catch (Exception e) {</span>
+<span class="nc" id="L60">      log.error(&quot;액션 실행 중 오류 발생: 워크플로우 ID={}, 오류={}&quot;, workflow.getId(), e.getMessage(), e);</span>
+<span class="nc" id="L61">      return new ActionExecutionResult(0, targetCustomerIds.size());</span>
+    }
+  }
+
+  private ActionExecutionResult executeMessageOnlyAction(
+      ActionConfig actionConfig, List&lt;Long&gt; customerIds, Workflow workflow) {
+<span class="nc" id="L67">    log.info(&quot;메시지 전용 액션 실행: 템플릿 ID={}&quot;, actionConfig.getMessageTemplateId());</span>
+
+<span class="nc" id="L69">    int successCount = 0;</span>
+<span class="nc" id="L70">    int failureCount = 0;</span>
+
+<span class="nc bnc" id="L72" title="All 2 branches missed.">    for (Long customerId : customerIds) {</span>
+      try {
+<span class="nc" id="L74">        boolean success = executeSmsAction(customerId, actionConfig, workflow.getShopId());</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (success) {</span>
+<span class="nc" id="L76">          successCount++;</span>
+        } else {
+<span class="nc" id="L78">          failureCount++;</span>
+        }
+<span class="nc" id="L80">      } catch (Exception e) {</span>
+<span class="nc" id="L81">        log.error(&quot;메시지 발송 실패: 고객 ID={}, 오류={}&quot;, customerId, e.getMessage());</span>
+<span class="nc" id="L82">        failureCount++;</span>
+<span class="nc" id="L83">      }</span>
+<span class="nc" id="L84">    }</span>
+
+<span class="nc" id="L86">    log.info(&quot;메시지 전용 액션 완료: 성공={}, 실패={}&quot;, successCount, failureCount);</span>
+<span class="nc" id="L87">    return new ActionExecutionResult(successCount, failureCount);</span>
+  }
+
+  private ActionExecutionResult executeCouponMessageAction(
+      ActionConfig actionConfig, List&lt;Long&gt; customerIds, Workflow workflow) {
+<span class="nc" id="L92">    log.info(</span>
+        &quot;쿠폰+메시지 액션 실행: 쿠폰 ID={}, 템플릿 ID={}&quot;,
+<span class="nc" id="L94">        actionConfig.getCouponId(),</span>
+<span class="nc" id="L95">        actionConfig.getMessageTemplateId());</span>
+
+<span class="nc" id="L97">    int successCount = 0;</span>
+<span class="nc" id="L98">    int failureCount = 0;</span>
+
+<span class="nc bnc" id="L100" title="All 2 branches missed.">    if (!isValidCoupon(actionConfig.getCouponId(), workflow.getShopId())) {</span>
+<span class="nc" id="L101">      log.error(&quot;유효하지 않은 쿠폰: 쿠폰 ID={}, 매장 ID={}&quot;, actionConfig.getCouponId(), workflow.getShopId());</span>
+<span class="nc" id="L102">      return new ActionExecutionResult(0, customerIds.size());</span>
+    }
+
+<span class="nc bnc" id="L105" title="All 2 branches missed.">    for (Long customerId : customerIds) {</span>
+      try {
+<span class="nc" id="L107">        boolean success = executeAlimtalkAction(customerId, actionConfig, workflow.getShopId());</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (success) {</span>
+<span class="nc" id="L109">          successCount++;</span>
+        } else {
+<span class="nc" id="L111">          failureCount++;</span>
+        }
+<span class="nc" id="L113">      } catch (Exception e) {</span>
+<span class="nc" id="L114">        log.error(&quot;쿠폰+메시지 발송 실패: 고객 ID={}, 오류={}&quot;, customerId, e.getMessage());</span>
+<span class="nc" id="L115">        failureCount++;</span>
+<span class="nc" id="L116">      }</span>
+<span class="nc" id="L117">    }</span>
+
+<span class="nc" id="L119">    log.info(&quot;쿠폰+메시지 액션 완료: 성공={}, 실패={}&quot;, successCount, failureCount);</span>
+<span class="nc" id="L120">    return new ActionExecutionResult(successCount, failureCount);</span>
+  }
+
+  private ActionExecutionResult executeSystemNotificationAction(
+      ActionConfig actionConfig, List&lt;Long&gt; customerIds, Workflow workflow) {
+<span class="nc" id="L125">    log.info(&quot;시스템 알림 액션 실행: 제목={}&quot;, actionConfig.getNotificationTitle());</span>
+
+    try {
+<span class="nc" id="L128">      boolean success = executeNotificationAction(actionConfig, workflow.getShopId());</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">      if (success) {</span>
+<span class="nc" id="L130">        log.info(&quot;시스템 알림 발송 완료&quot;);</span>
+<span class="nc" id="L131">        return new ActionExecutionResult(1, 0);</span>
+      } else {
+<span class="nc" id="L133">        log.error(&quot;시스템 알림 발송 실패&quot;);</span>
+<span class="nc" id="L134">        return new ActionExecutionResult(0, 1);</span>
+      }
+<span class="nc" id="L136">    } catch (Exception e) {</span>
+<span class="nc" id="L137">      log.error(&quot;시스템 알림 발송 중 오류: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L138">      return new ActionExecutionResult(0, 1);</span>
+    }
+  }
+
+  private boolean executeSmsAction(Long customerId, ActionConfig action, Long shopId) {
+<span class="nc" id="L143">    String templateId = action.getMessageTemplateId();</span>
+
+<span class="nc bnc" id="L145" title="All 2 branches missed.">    if (templateId == null) {</span>
+<span class="nc" id="L146">      log.warn(&quot;SMS 액션에 templateId가 없습니다. customerId: {}, shopId: {}&quot;, customerId, shopId);</span>
+<span class="nc" id="L147">      return false;</span>
+    }
+
+<span class="nc" id="L150">    return messageService.sendMessage(customerId, shopId, templateId, action.getSendTime());</span>
+  }
+
+  private boolean executeAlimtalkAction(Long customerId, ActionConfig action, Long shopId) {
+<span class="nc" id="L154">    String templateId = action.getMessageTemplateId();</span>
+<span class="nc" id="L155">    String couponId = action.getCouponId();</span>
+
+<span class="nc bnc" id="L157" title="All 2 branches missed.">    if (templateId == null) {</span>
+<span class="nc" id="L158">      log.warn(&quot;알림톡 액션에 templateId가 없습니다. customerId: {}, shopId: {}&quot;, customerId, shopId);</span>
+<span class="nc" id="L159">      return false;</span>
+    }
+
+<span class="nc" id="L162">    return messageService.sendCouponMessage(</span>
+<span class="nc" id="L163">        customerId, shopId, templateId, couponId, action.getSendTime());</span>
+  }
+
+  private boolean executeNotificationAction(ActionConfig action, Long shopId) {
+<span class="nc" id="L167">    String title = action.getNotificationTitle();</span>
+<span class="nc" id="L168">    String content = action.getNotificationContent();</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">    String level = action.getNotificationLevel() != null ? action.getNotificationLevel() : &quot;INFO&quot;;</span>
+
+<span class="nc bnc" id="L171" title="All 4 branches missed.">    if (title == null || content == null) {</span>
+<span class="nc" id="L172">      log.warn(&quot;알림 액션에 필수 정보가 없습니다. title: {}, content: {}, shopId: {}&quot;, title, content, shopId);</span>
+<span class="nc" id="L173">      return false;</span>
+    }
+
+<span class="nc" id="L176">    return notificationService.sendNotification(shopId, 1L, title, content, level, 1);</span>
+  }
+
+  private boolean isValidCoupon(String couponId, Long shopId) {
+<span class="nc" id="L180">    return couponService.isValidCoupon(couponId, shopId);</span>
+  }
+
+  private ActionConfig parseActionConfig(String actionConfigJson) throws JsonProcessingException {
+<span class="nc bnc" id="L184" title="All 4 branches missed.">    if (actionConfigJson == null || actionConfigJson.trim().isEmpty()) {</span>
+<span class="nc" id="L185">      return ActionConfig.builder().build();</span>
+    }
+<span class="nc" id="L187">    return objectMapper.readValue(actionConfigJson, ActionConfig.class);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

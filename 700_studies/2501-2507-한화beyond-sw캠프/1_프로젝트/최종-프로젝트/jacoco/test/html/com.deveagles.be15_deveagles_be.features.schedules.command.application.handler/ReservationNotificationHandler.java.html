@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationNotificationHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.application.handler</a> &gt; <span class="el_source">ReservationNotificationHandler.java</span></div><h1>ReservationNotificationHandler.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.application.handler;
+
+import com.deveagles.be15_deveagles_be.common.events.ReservationCreatedEvent;
+import com.deveagles.be15_deveagles_be.features.notifications.command.application.dto.CreateNotificationRequest;
+import com.deveagles.be15_deveagles_be.features.notifications.command.application.service.NotificationCommandService;
+import com.deveagles.be15_deveagles_be.features.notifications.command.application.service.NotificationSseService;
+import com.deveagles.be15_deveagles_be.features.notifications.command.domain.aggregate.NotificationType;
+import com.deveagles.be15_deveagles_be.features.notifications.query.application.dto.NotificationResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.event.TransactionalEventListener;
+
+<span class="nc" id="L14">@Slf4j</span>
+@Component
+@RequiredArgsConstructor
+public class ReservationNotificationHandler {
+
+  private final NotificationCommandService notificationCommandService;
+  private final NotificationSseService notificationSseService;
+
+  // @EventListener 를 @TransactionalEventListener 로 변경하여
+  // 예약 정보가 DB에 100% 안전하게 저장된 후에만 아래 코드를 실행하도록 보장합니다.
+  @TransactionalEventListener
+  public void handle(ReservationCreatedEvent event) {
+<span class="nc" id="L26">    log.info(&quot;[Event] ReservationCreatedEvent 수신 - shopId: {}&quot;, event.shopId());</span>
+
+    // 1. 알림 생성에 필요한 데이터를 가공합니다.
+<span class="nc" id="L29">    CreateNotificationRequest request =</span>
+        new CreateNotificationRequest(
+<span class="nc" id="L31">            event.shopId(),</span>
+            NotificationType.RESERVATION,
+            &quot;새로운 예약 신청&quot;,
+<span class="nc" id="L34">            String.format(&quot;고객 '%s'님이 예약을 신청했습니다. 확인해주세요.&quot;, event.customerName()));</span>
+
+    // 2. 알림을 DB에 저장하고, 저장된 알림 정보를 반환받습니다.
+<span class="nc" id="L37">    NotificationResponse savedNotification = notificationCommandService.create(request);</span>
+
+    // 3. ✨ [핵심 해결책] 저장된 알림 정보를 클라이언트에게 실시간으로 발송합니다.
+    // 이 코드가 없으면 알림은 DB에만 저장되고 프론트엔드로는 절대 전송되지 않습니다.
+<span class="nc bnc" id="L41" title="All 2 branches missed.">    if (savedNotification != null) {</span>
+<span class="nc" id="L42">      notificationSseService.send(event.shopId(), savedNotification);</span>
+    }
+<span class="nc" id="L44">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

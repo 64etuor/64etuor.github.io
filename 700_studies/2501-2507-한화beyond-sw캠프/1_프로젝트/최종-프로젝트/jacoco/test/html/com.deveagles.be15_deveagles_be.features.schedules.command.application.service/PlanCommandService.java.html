@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlanCommandService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.application.service</a> &gt; <span class="el_source">PlanCommandService.java</span></div><h1>PlanCommandService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.application.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.dto.request.CreatePlanRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.dto.request.CreateRegularPlanRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.dto.request.DeleteScheduleRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.dto.request.UpdatePlanScheduleRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.Plan;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.RegularPlan;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.ScheduleType;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.repository.PlanRepository;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.repository.RegularPlanRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class PlanCommandService {
+
+  private final PlanRepository planRepository;
+  private final RegularPlanRepository regularPlanRepository;
+
+  public Long createPlan(Long shopId, CreatePlanRequest request) {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">    if (request.planStartAt().isAfter(request.planEndAt())) {</span>
+<span class="fc" id="L30">      throw new BusinessException(ErrorCode.INVALID_RESERVATION_TIME_RANGE);</span>
+    }
+
+    Plan plan =
+<span class="fc" id="L34">        Plan.builder()</span>
+<span class="fc" id="L35">            .staffId(request.staffId())</span>
+<span class="fc" id="L36">            .shopId(shopId)</span>
+<span class="fc" id="L37">            .planTitle(request.planTitle())</span>
+<span class="fc" id="L38">            .planMemo(request.planMemo())</span>
+<span class="fc" id="L39">            .planStartAt(request.planStartAt())</span>
+<span class="fc" id="L40">            .planEndAt(request.planEndAt())</span>
+<span class="fc" id="L41">            .build();</span>
+<span class="fc" id="L42">    return planRepository.save(plan).getPlanId();</span>
+  }
+
+  public Long createRegularPlan(Long shopId, CreateRegularPlanRequest request) {
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">    if (request.regularPlanStartAt().isAfter(request.regularPlanEndAt())) {</span>
+<span class="nc" id="L47">      throw new BusinessException(ErrorCode.INVALID_RESERVATION_TIME_RANGE);</span>
+    }
+<span class="fc bfc" id="L49" title="All 2 branches covered.">    boolean hasWeekly = request.weeklyPlan() != null;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">    boolean hasMonthly = request.monthlyPlan() != null;</span>
+
+<span class="fc bfc" id="L52" title="All 2 branches covered.">    if (hasWeekly == hasMonthly) {</span>
+<span class="fc" id="L53">      throw new BusinessException(ErrorCode.INVALID_SCHEDULE_REPEAT_TYPE);</span>
+    }
+    RegularPlan regularPlan =
+<span class="fc" id="L56">        RegularPlan.builder()</span>
+<span class="fc" id="L57">            .staffId(request.staffId())</span>
+<span class="fc" id="L58">            .shopId(shopId)</span>
+<span class="fc" id="L59">            .regularPlanTitle(request.regularPlanTitle())</span>
+<span class="fc" id="L60">            .monthlyPlan(request.monthlyPlan())</span>
+<span class="fc" id="L61">            .weeklyPlan(request.weeklyPlan())</span>
+<span class="fc" id="L62">            .regularPlanMemo(request.regularPlanMemo())</span>
+<span class="fc" id="L63">            .regularPlanStartAt(request.regularPlanStartAt())</span>
+<span class="fc" id="L64">            .regularPlanEndAt(request.regularPlanEndAt())</span>
+<span class="fc" id="L65">            .build();</span>
+<span class="fc" id="L66">    return regularPlanRepository.save(regularPlan).getRegularPlanId();</span>
+  }
+
+  // 일정 (단기, 정기) 다건 삭제
+  @Transactional
+  public void deleteMixedSchedules(Long shopId, List&lt;DeleteScheduleRequest&gt; requests) {
+<span class="pc bpc" id="L72" title="2 of 4 branches missed.">    if (requests == null || requests.isEmpty()) return;</span>
+
+<span class="fc" id="L74">    List&lt;Long&gt; planIds = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L75">    List&lt;Long&gt; regularPlanIds = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">    for (DeleteScheduleRequest req : requests) {</span>
+<span class="fc" id="L78">      String type = req.type().toLowerCase(Locale.ROOT);</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">      if (&quot;plan&quot;.equals(type)) {</span>
+<span class="fc" id="L80">        planIds.add(req.id());</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">      } else if (&quot;regular_plan&quot;.equals(type)) {</span>
+<span class="fc" id="L82">        regularPlanIds.add(req.id());</span>
+      } else {
+<span class="fc" id="L84">        throw new BusinessException(ErrorCode.INVALID_SCHEDULE_TYPE);</span>
+      }
+<span class="fc" id="L86">    }</span>
+
+<span class="fc bfc" id="L88" title="All 2 branches covered.">    if (!planIds.isEmpty()) {</span>
+<span class="fc" id="L89">      List&lt;Plan&gt; plans = planRepository.findAllById(planIds);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">      if (plans.size() != planIds.size()) {</span>
+<span class="fc" id="L91">        throw new BusinessException(ErrorCode.PLAN_NOT_FOUND);</span>
+      }
+<span class="fc" id="L93">      planRepository.deleteAllInBatch(plans);</span>
+    }
+
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">    if (!regularPlanIds.isEmpty()) {</span>
+<span class="fc" id="L97">      List&lt;RegularPlan&gt; regularPlans = regularPlanRepository.findAllById(regularPlanIds);</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">      if (regularPlans.size() != regularPlanIds.size()) {</span>
+<span class="fc" id="L99">        throw new BusinessException(ErrorCode.REGULAR_PLAN_NOT_FOUND);</span>
+      }
+<span class="fc" id="L101">      regularPlanRepository.deleteAllInBatch(regularPlans);</span>
+    }
+<span class="fc" id="L103">  }</span>
+
+  @Transactional
+  public void updatePlan(Long shopId, Long planId, CreatePlanRequest request) {
+<span class="fc" id="L107">    Plan plan =</span>
+        planRepository
+<span class="fc" id="L109">            .findById(planId)</span>
+<span class="pc" id="L110">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.PLAN_NOT_FOUND));</span>
+
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">    if (request.planStartAt().isAfter(request.planEndAt())) {</span>
+<span class="nc" id="L113">      throw new BusinessException(ErrorCode.INVALID_RESERVATION_TIME_RANGE);</span>
+    }
+
+    // 값 수정
+<span class="fc" id="L117">    plan.update(</span>
+<span class="fc" id="L118">        request.planTitle(), request.planMemo(), request.planStartAt(), request.planEndAt());</span>
+<span class="fc" id="L119">  }</span>
+
+  @Transactional
+  public void updateRegularPlan(Long shopId, Long regularPlanId, CreateRegularPlanRequest request) {
+<span class="nc" id="L123">    RegularPlan regularPlan =</span>
+        regularPlanRepository
+<span class="nc" id="L125">            .findById(regularPlanId)</span>
+<span class="nc" id="L126">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.REGULAR_PLAN_NOT_FOUND));</span>
+
+<span class="nc bnc" id="L128" title="All 2 branches missed.">    if (request.regularPlanStartAt().isAfter(request.regularPlanEndAt())) {</span>
+<span class="nc" id="L129">      throw new BusinessException(ErrorCode.INVALID_RESERVATION_TIME_RANGE);</span>
+    }
+
+<span class="nc bnc" id="L132" title="All 2 branches missed.">    boolean hasWeekly = request.weeklyPlan() != null;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">    boolean hasMonthly = request.monthlyPlan() != null;</span>
+
+<span class="nc bnc" id="L135" title="All 2 branches missed.">    if (hasWeekly == hasMonthly) {</span>
+<span class="nc" id="L136">      throw new BusinessException(ErrorCode.INVALID_SCHEDULE_REPEAT_TYPE);</span>
+    }
+
+<span class="nc" id="L139">    regularPlan.update(</span>
+<span class="nc" id="L140">        request.regularPlanTitle(),</span>
+<span class="nc" id="L141">        request.monthlyPlan(),</span>
+<span class="nc" id="L142">        request.weeklyPlan(),</span>
+<span class="nc" id="L143">        request.regularPlanMemo(),</span>
+<span class="nc" id="L144">        request.regularPlanStartAt(),</span>
+<span class="nc" id="L145">        request.regularPlanEndAt());</span>
+<span class="nc" id="L146">  }</span>
+
+  @Transactional
+  public void switchSchedule(Long shopId, UpdatePlanScheduleRequest request) {
+<span class="fc" id="L150">    ScheduleType fromType = request.fromType();</span>
+<span class="fc" id="L151">    ScheduleType toType = request.toType();</span>
+
+    // 타입이 같으면 수정
+<span class="fc bfc" id="L154" title="All 2 branches covered.">    if (fromType == toType) {</span>
+<span class="pc bpc" id="L155" title="2 of 3 branches missed.">      switch (fromType) {</span>
+<span class="fc" id="L156">        case PLAN -&gt; updatePlan(shopId, request.fromId(), request.planRequest());</span>
+        case REGULAR_PLAN -&gt;
+<span class="nc" id="L158">            updateRegularPlan(shopId, request.fromId(), request.regularPlanRequest());</span>
+<span class="nc" id="L159">        default -&gt; throw new BusinessException(ErrorCode.INVALID_SCHEDULE_TYPE);</span>
+      }
+<span class="fc" id="L161">      return;</span>
+    }
+
+    // 타입이 다르면 기존 삭제 + 새로 등록
+<span class="pc bpc" id="L165" title="1 of 3 branches missed.">    switch (fromType) {</span>
+      case PLAN -&gt; {
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">        if (!planRepository.existsById(request.fromId())) {</span>
+<span class="nc" id="L168">          throw new BusinessException(ErrorCode.PLAN_NOT_FOUND);</span>
+        }
+<span class="fc" id="L170">        planRepository.deleteById(request.fromId());</span>
+<span class="fc" id="L171">      }</span>
+      case REGULAR_PLAN -&gt; {
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">        if (!regularPlanRepository.existsById(request.fromId())) {</span>
+<span class="nc" id="L174">          throw new BusinessException(ErrorCode.REGULAR_PLAN_NOT_FOUND);</span>
+        }
+<span class="fc" id="L176">        regularPlanRepository.deleteById(request.fromId());</span>
+<span class="fc" id="L177">      }</span>
+<span class="nc" id="L178">      default -&gt; throw new BusinessException(ErrorCode.INVALID_SCHEDULE_TYPE);</span>
+    }
+
+<span class="pc bpc" id="L181" title="1 of 3 branches missed.">    switch (toType) {</span>
+<span class="fc" id="L182">      case PLAN -&gt; createPlan(shopId, request.planRequest());</span>
+<span class="fc" id="L183">      case REGULAR_PLAN -&gt; createRegularPlan(shopId, request.regularPlanRequest());</span>
+<span class="nc" id="L184">      default -&gt; throw new BusinessException(ErrorCode.INVALID_SCHEDULE_TYPE);</span>
+    }
+<span class="fc" id="L186">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

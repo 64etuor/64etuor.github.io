@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorkflowQueryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.query.controller</a> &gt; <span class="el_source">WorkflowQueryController.java</span></div><h1>WorkflowQueryController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.query.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.common.dto.PagedResponse;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.dto.request.WorkflowSearchRequest;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.dto.response.WorkflowQueryResponse;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.dto.response.WorkflowStatsResponse;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.dto.response.WorkflowSummaryResponse;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.service.WorkflowQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@Tag(name = &quot;워크플로우 조회&quot;, description = &quot;워크플로우 조회 및 검색 API&quot;)
+@RestController
+@RequestMapping(&quot;/workflows&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L32">@Slf4j</span>
+public class WorkflowQueryController {
+
+  private final WorkflowQueryService workflowQueryService;
+
+  @Operation(summary = &quot;워크플로우 상세 조회&quot;, description = &quot;워크플로우 ID로 상세 정보를 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;워크플로우 조회 성공&quot;,
+        content = @Content(schema = @Schema(implementation = WorkflowQueryResponse.class))),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;워크플로우를 찾을 수 없음&quot;)
+  })
+  @GetMapping(&quot;/{workflowId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;WorkflowQueryResponse&gt;&gt; getWorkflow(
+      @Parameter(description = &quot;워크플로우 ID&quot;, required = true) @PathVariable Long workflowId,
+      @Parameter(description = &quot;매장 ID&quot;, required = true) @RequestParam Long shopId) {
+
+<span class="nc" id="L52">    log.info(&quot;워크플로우 상세 조회 요청 - workflowId: {}, shopId: {}&quot;, workflowId, shopId);</span>
+
+<span class="nc" id="L54">    WorkflowQueryResponse response = workflowQueryService.getWorkflowById(workflowId, shopId);</span>
+
+<span class="nc" id="L56">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;워크플로우 목록 검색&quot;, description = &quot;다양한 조건으로 워크플로우를 검색하고 페이징 결과를 반환합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;워크플로우 검색 성공&quot;)
+  })
+  @GetMapping
+  public ResponseEntity&lt;ApiResponse&lt;PagedResponse&lt;WorkflowSummaryResponse&gt;&gt;&gt; searchWorkflows(
+      @Parameter(description = &quot;매장 ID&quot;, required = true) @RequestParam Long shopId,
+      @Parameter(description = &quot;검색어 (제목, 설명)&quot;) @RequestParam(required = false) String searchQuery,
+      @Parameter(description = &quot;상태 필터 (active, inactive, all)&quot;) @RequestParam(required = false)
+          String statusFilter,
+      @Parameter(description = &quot;트리거 카테고리&quot;) @RequestParam(required = false) String triggerCategory,
+      @Parameter(description = &quot;트리거 타입&quot;) @RequestParam(required = false) String triggerType,
+      @Parameter(description = &quot;액션 타입&quot;) @RequestParam(required = false) String actionType,
+      @Parameter(description = &quot;활성화 상태&quot;) @RequestParam(required = false) Boolean isActive,
+      @Parameter(description = &quot;페이지 번호 (0부터 시작)&quot;) @RequestParam(defaultValue = &quot;0&quot;) int page,
+      @Parameter(description = &quot;페이지 크기&quot;) @RequestParam(defaultValue = &quot;20&quot;) int size,
+      @Parameter(description = &quot;정렬 기준&quot;) @RequestParam(defaultValue = &quot;createdAt&quot;) String sortBy,
+      @Parameter(description = &quot;정렬 방향&quot;) @RequestParam(defaultValue = &quot;desc&quot;) String sortDirection) {
+
+<span class="nc" id="L80">    log.info(&quot;워크플로우 목록 검색 요청 - shopId: {}, page: {}, size: {}&quot;, shopId, page, size);</span>
+
+    WorkflowSearchRequest request =
+<span class="nc" id="L83">        WorkflowSearchRequest.builder()</span>
+<span class="nc" id="L84">            .shopId(shopId)</span>
+<span class="nc" id="L85">            .searchQuery(searchQuery)</span>
+<span class="nc" id="L86">            .statusFilter(statusFilter)</span>
+<span class="nc" id="L87">            .triggerCategory(triggerCategory)</span>
+<span class="nc" id="L88">            .triggerType(triggerType)</span>
+<span class="nc" id="L89">            .actionType(actionType)</span>
+<span class="nc" id="L90">            .isActive(isActive)</span>
+<span class="nc" id="L91">            .page(page)</span>
+<span class="nc" id="L92">            .size(size)</span>
+<span class="nc" id="L93">            .sortBy(sortBy)</span>
+<span class="nc" id="L94">            .sortDirection(sortDirection)</span>
+<span class="nc" id="L95">            .build();</span>
+
+<span class="nc" id="L97">    PagedResponse&lt;WorkflowSummaryResponse&gt; response = workflowQueryService.searchWorkflows(request);</span>
+
+<span class="nc" id="L99">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;워크플로우 통계 조회&quot;, description = &quot;매장의 워크플로우 관련 통계 정보를 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;통계 조회 성공&quot;,
+        content = @Content(schema = @Schema(implementation = WorkflowStatsResponse.class)))
+  })
+  @GetMapping(&quot;/stats&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;WorkflowStatsResponse&gt;&gt; getWorkflowStats(
+      @Parameter(description = &quot;매장 ID&quot;, required = true) @RequestParam Long shopId) {
+
+<span class="nc" id="L113">    log.info(&quot;워크플로우 통계 조회 요청 - shopId: {}&quot;, shopId);</span>
+
+<span class="nc" id="L115">    WorkflowStatsResponse response = workflowQueryService.getWorkflowStats(shopId);</span>
+
+<span class="nc" id="L117">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;트리거 카테고리별 워크플로우 조회&quot;, description = &quot;특정 트리거 카테고리에 속하는 워크플로우 목록을 조회합니다.&quot;)
+  @GetMapping(&quot;/trigger-category/{triggerCategory}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;WorkflowSummaryResponse&gt;&gt;&gt; getWorkflowsByTriggerCategory(
+      @Parameter(description = &quot;트리거 카테고리&quot;, required = true) @PathVariable String triggerCategory,
+      @Parameter(description = &quot;매장 ID&quot;, required = true) @RequestParam Long shopId) {
+
+<span class="nc" id="L126">    log.info(&quot;트리거 카테고리별 워크플로우 조회 요청 - triggerCategory: {}, shopId: {}&quot;, triggerCategory, shopId);</span>
+
+<span class="nc" id="L128">    List&lt;WorkflowSummaryResponse&gt; response =</span>
+<span class="nc" id="L129">        workflowQueryService.getWorkflowsByTriggerCategory(triggerCategory, shopId);</span>
+
+<span class="nc" id="L131">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;트리거 타입별 워크플로우 조회&quot;, description = &quot;특정 트리거 타입에 속하는 워크플로우 목록을 조회합니다.&quot;)
+  @GetMapping(&quot;/trigger-type/{triggerType}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;WorkflowSummaryResponse&gt;&gt;&gt; getWorkflowsByTriggerType(
+      @Parameter(description = &quot;트리거 타입&quot;, required = true) @PathVariable String triggerType,
+      @Parameter(description = &quot;매장 ID&quot;, required = true) @RequestParam Long shopId) {
+
+<span class="nc" id="L140">    log.info(&quot;트리거 타입별 워크플로우 조회 요청 - triggerType: {}, shopId: {}&quot;, triggerType, shopId);</span>
+
+<span class="nc" id="L142">    List&lt;WorkflowSummaryResponse&gt; response =</span>
+<span class="nc" id="L143">        workflowQueryService.getWorkflowsByTriggerType(triggerType, shopId);</span>
+
+<span class="nc" id="L145">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;최근 워크플로우 조회&quot;, description = &quot;최근 생성된 워크플로우 목록을 조회합니다.&quot;)
+  @GetMapping(&quot;/recent&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;WorkflowSummaryResponse&gt;&gt;&gt; getRecentWorkflows(
+      @Parameter(description = &quot;매장 ID&quot;, required = true) @RequestParam Long shopId,
+      @Parameter(description = &quot;조회할 개수&quot;) @RequestParam(defaultValue = &quot;10&quot;) int limit) {
+
+<span class="nc" id="L154">    log.info(&quot;최근 워크플로우 조회 요청 - shopId: {}, limit: {}&quot;, shopId, limit);</span>
+
+<span class="nc" id="L156">    List&lt;WorkflowSummaryResponse&gt; response = workflowQueryService.getRecentWorkflows(shopId, limit);</span>
+
+<span class="nc" id="L158">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;활성 워크플로우 조회&quot;, description = &quot;활성화된 워크플로우 목록을 조회합니다.&quot;)
+  @GetMapping(&quot;/active&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;WorkflowSummaryResponse&gt;&gt;&gt; getActiveWorkflows(
+      @Parameter(description = &quot;매장 ID&quot;, required = true) @RequestParam Long shopId) {
+
+<span class="nc" id="L166">    log.info(&quot;활성 워크플로우 조회 요청 - shopId: {}&quot;, shopId);</span>
+
+<span class="nc" id="L168">    List&lt;WorkflowSummaryResponse&gt; response = workflowQueryService.getActiveWorkflows(shopId);</span>
+
+<span class="nc" id="L170">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

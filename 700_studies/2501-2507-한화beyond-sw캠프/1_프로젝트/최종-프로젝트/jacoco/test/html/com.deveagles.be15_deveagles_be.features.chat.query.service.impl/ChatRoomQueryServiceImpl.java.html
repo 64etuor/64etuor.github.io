@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChatRoomQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.chat.query.service.impl</a> &gt; <span class="el_source">ChatRoomQueryServiceImpl.java</span></div><h1>ChatRoomQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.chat.query.service.impl;
+
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.aggregate.ChatMessage;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.aggregate.ChatRoom;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.repository.ChatMessageRepository;
+import com.deveagles.be15_deveagles_be.features.chat.query.dto.response.ChatRoomSummaryResponse;
+import com.deveagles.be15_deveagles_be.features.chat.query.repository.ChatRoomQueryRepository;
+import com.deveagles.be15_deveagles_be.features.chat.query.service.ChatRoomQueryService;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class ChatRoomQueryServiceImpl implements ChatRoomQueryService {
+
+  private final ChatRoomQueryRepository chatRoomQueryRepository;
+  private final ChatMessageRepository chatMessageRepository;
+
+  @Override
+  public List&lt;ChatRoomSummaryResponse&gt; getMyChatRooms(Long userId, boolean isStaff) {
+    List&lt;ChatRoom&gt; rooms =
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        isStaff</span>
+<span class="nc" id="L26">            ? chatRoomQueryRepository.findByAssignedStaffIdAndIsAiActiveFalse(userId)</span>
+<span class="nc" id="L27">            : chatRoomQueryRepository.findByParticipantId(userId);</span>
+
+<span class="nc" id="L29">    return rooms.stream().map(room -&gt; toSummaryResponse(room, isStaff)).toList();</span>
+  }
+
+  private ChatRoomSummaryResponse toSummaryResponse(ChatRoom room, boolean isStaff) {
+<span class="nc" id="L33">    Optional&lt;ChatMessage&gt; latestMessageOpt =</span>
+<span class="nc" id="L34">        chatMessageRepository.findTopByChatroomIdOrderByCreatedAtDesc(room.getId());</span>
+
+<span class="nc" id="L36">    LocalDateTime lastMessageAt = latestMessageOpt.map(ChatMessage::getCreatedAt).orElse(null);</span>
+
+<span class="nc bnc" id="L38" title="All 2 branches missed.">    if (isStaff) {</span>
+<span class="nc" id="L39">      ChatRoom.Participant p = room.getParticipant();</span>
+<span class="nc" id="L40">      return ChatRoomSummaryResponse.builder()</span>
+<span class="nc" id="L41">          .roomId(room.getId())</span>
+<span class="nc" id="L42">          .customerName(p.getName())</span>
+<span class="nc" id="L43">          .customerShopName(p.getShopName())</span>
+<span class="nc" id="L44">          .lastMessageAt(lastMessageAt)</span>
+<span class="nc" id="L45">          .build();</span>
+    } else {
+<span class="nc" id="L47">      return ChatRoomSummaryResponse.builder()</span>
+<span class="nc" id="L48">          .roomId(room.getId())</span>
+<span class="nc" id="L49">          .lastMessageAt(lastMessageAt)</span>
+<span class="nc" id="L50">          .build();</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

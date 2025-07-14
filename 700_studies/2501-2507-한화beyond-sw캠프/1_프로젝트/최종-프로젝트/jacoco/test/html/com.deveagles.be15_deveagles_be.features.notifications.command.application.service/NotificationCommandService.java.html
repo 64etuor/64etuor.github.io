@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NotificationCommandService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.notifications.command.application.service</a> &gt; <span class="el_source">NotificationCommandService.java</span></div><h1>NotificationCommandService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.notifications.command.application.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.notifications.command.application.dto.CreateNotificationRequest;
+import com.deveagles.be15_deveagles_be.features.notifications.command.domain.aggregate.Notification;
+import com.deveagles.be15_deveagles_be.features.notifications.command.domain.repository.NotificationRepository;
+import com.deveagles.be15_deveagles_be.features.notifications.query.application.dto.NotificationResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class NotificationCommandService {
+
+  private final NotificationRepository notificationRepository;
+
+  /**
+   * 알림을 생성하고, 생성된 알림 정보를 DTO로 반환합니다.
+   *
+   * @param request 알림 생성에 필요한 정보
+   * @return 생성된 알림의 상세 정보가 담긴 DTO
+   */
+  public NotificationResponse create(CreateNotificationRequest request) {
+    Notification notification =
+<span class="fc" id="L28">        Notification.builder()</span>
+<span class="fc" id="L29">            .shopId(request.getShopId())</span>
+<span class="fc" id="L30">            .type(request.getType())</span>
+<span class="fc" id="L31">            .title(request.getTitle())</span>
+<span class="fc" id="L32">            .content(request.getContent())</span>
+<span class="fc" id="L33">            .build();</span>
+
+<span class="fc" id="L35">    Notification savedNotification = notificationRepository.save(notification);</span>
+
+<span class="fc" id="L37">    return new NotificationResponse(</span>
+<span class="fc" id="L38">        savedNotification.getNotificationId(),</span>
+<span class="fc" id="L39">        savedNotification.getTitle(),</span>
+<span class="fc" id="L40">        savedNotification.getContent(),</span>
+<span class="fc" id="L41">        savedNotification.getType(),</span>
+<span class="fc" id="L42">        savedNotification.isRead(),</span>
+<span class="fc" id="L43">        savedNotification.getCreatedAt());</span>
+  }
+
+  public void markAsRead(Long shopId, Long notificationId) {
+<span class="nc" id="L47">    Notification notification =</span>
+        notificationRepository
+<span class="nc" id="L49">            .findByNotificationIdAndShopId(notificationId, shopId)</span>
+<span class="nc" id="L50">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.NOTIFICATION_NOT_FOUND));</span>
+
+<span class="nc" id="L52">    notification.markAsRead();</span>
+<span class="nc" id="L53">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorkflowQueryRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.query.infrastructure.repository</a> &gt; <span class="el_source">WorkflowQueryRepositoryImpl.java</span></div><h1>WorkflowQueryRepositoryImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.query.infrastructure.repository;
+
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.aggregate.Workflow;
+import com.deveagles.be15_deveagles_be.features.workflows.command.infrastructure.repository.WorkflowJpaDataRepository;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.dto.request.WorkflowSearchRequest;
+import com.deveagles.be15_deveagles_be.features.workflows.query.domain.repository.WorkflowQueryRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Repository;
+
+<span class="nc" id="L23">@Slf4j</span>
+@Repository
+@RequiredArgsConstructor
+public class WorkflowQueryRepositoryImpl implements WorkflowQueryRepository {
+
+  private final WorkflowJpaDataRepository workflowJpaDataRepository;
+  private final EntityManager entityManager;
+
+  @Override
+  public Optional&lt;Workflow&gt; findByIdAndShopId(Long workflowId, Long shopId) {
+<span class="nc" id="L33">    log.debug(&quot;워크플로우 ID로 조회 - workflowId: {}, shopId: {}&quot;, workflowId, shopId);</span>
+<span class="nc" id="L34">    return workflowJpaDataRepository.findByIdAndShopIdAndDeletedAtIsNull(workflowId, shopId);</span>
+  }
+
+  @Override
+  public Page&lt;Workflow&gt; searchWorkflows(WorkflowSearchRequest request) {
+<span class="nc" id="L39">    log.debug(</span>
+<span class="nc" id="L40">        &quot;워크플로우 검색 - shopId: {}, searchQuery: {}&quot;, request.getShopId(), request.getSearchQuery());</span>
+
+<span class="nc" id="L42">    Specification&lt;Workflow&gt; spec = createWorkflowSpecification(request);</span>
+<span class="nc" id="L43">    Pageable pageable = createPageable(request);</span>
+
+<span class="nc" id="L45">    return workflowJpaDataRepository.findAll(spec, pageable);</span>
+  }
+
+  @Override
+  public long countByShopId(Long shopId) {
+<span class="nc" id="L50">    return workflowJpaDataRepository.countByShopIdAndDeletedAtIsNull(shopId);</span>
+  }
+
+  @Override
+  public long countActiveByShopId(Long shopId) {
+<span class="nc" id="L55">    return workflowJpaDataRepository.countByShopIdAndIsActiveTrueAndDeletedAtIsNull(shopId);</span>
+  }
+
+  @Override
+  public long countInactiveByShopId(Long shopId) {
+<span class="nc" id="L60">    return countByShopId(shopId) - countActiveByShopId(shopId);</span>
+  }
+
+  @Override
+  public long countExecutionsByShopIdAndPeriod(
+      Long shopId, LocalDateTime startDate, LocalDateTime endDate) {
+    // WorkflowExecution 테이블에서 실행 횟수를 조회해야 하지만,
+    // 현재는 Workflow 테이블의 executionCount 합계로 대체
+<span class="nc" id="L68">    String jpql =</span>
+        &quot;&quot;&quot;
+            SELECT COALESCE(SUM(w.executionCount), 0)
+            FROM Workflow w
+            WHERE w.shopId = :shopId
+            AND w.deletedAt IS NULL
+            AND w.lastExecutedAt BETWEEN :startDate AND :endDate
+            &quot;&quot;&quot;;
+
+<span class="nc" id="L77">    TypedQuery&lt;Long&gt; query = entityManager.createQuery(jpql, Long.class);</span>
+<span class="nc" id="L78">    query.setParameter(&quot;shopId&quot;, shopId);</span>
+<span class="nc" id="L79">    query.setParameter(&quot;startDate&quot;, startDate);</span>
+<span class="nc" id="L80">    query.setParameter(&quot;endDate&quot;, endDate);</span>
+
+<span class="nc" id="L82">    return query.getSingleResult();</span>
+  }
+
+  @Override
+  public List&lt;Workflow&gt; findByTriggerCategoryAndShopId(String triggerCategory, Long shopId) {
+<span class="nc" id="L87">    return workflowJpaDataRepository.findByTriggerCategoryAndShopIdAndDeletedAtIsNull(</span>
+        triggerCategory, shopId);
+  }
+
+  @Override
+  public List&lt;Workflow&gt; findByTriggerTypeAndShopId(String triggerType, Long shopId) {
+<span class="nc" id="L93">    return workflowJpaDataRepository.findByTriggerTypeAndShopIdAndDeletedAtIsNull(</span>
+        triggerType, shopId);
+  }
+
+  @Override
+  public List&lt;Workflow&gt; findRecentWorkflowsByShopId(Long shopId, int limit) {
+<span class="nc" id="L99">    Pageable pageable = PageRequest.of(0, limit, Sort.by(Sort.Direction.DESC, &quot;createdAt&quot;));</span>
+<span class="nc" id="L100">    return workflowJpaDataRepository.findByShopIdAndDeletedAtIsNull(shopId, pageable).getContent();</span>
+  }
+
+  @Override
+  public Double calculateAverageSuccessRateByShopId(Long shopId) {
+<span class="nc" id="L105">    String jpql =</span>
+        &quot;&quot;&quot;
+            SELECT AVG(
+                CASE
+                    WHEN w.executionCount &gt; 0 THEN (w.successCount * 100.0 / w.executionCount)
+                    ELSE 0.0
+                END
+            )
+            FROM Workflow w
+            WHERE w.shopId = :shopId
+            AND w.deletedAt IS NULL
+            AND w.executionCount &gt; 0
+            &quot;&quot;&quot;;
+
+<span class="nc" id="L119">    TypedQuery&lt;Double&gt; query = entityManager.createQuery(jpql, Double.class);</span>
+<span class="nc" id="L120">    query.setParameter(&quot;shopId&quot;, shopId);</span>
+
+<span class="nc" id="L122">    return query.getSingleResult();</span>
+  }
+
+  private Specification&lt;Workflow&gt; createWorkflowSpecification(WorkflowSearchRequest request) {
+<span class="nc" id="L126">    return (root, query, criteriaBuilder) -&gt; {</span>
+<span class="nc" id="L127">      List&lt;Predicate&gt; predicates = new ArrayList&lt;&gt;();</span>
+
+      // Shop ID 필수 조건
+<span class="nc" id="L130">      predicates.add(criteriaBuilder.equal(root.get(&quot;shopId&quot;), request.getShopId()));</span>
+
+      // 삭제되지 않은 것만
+<span class="nc" id="L133">      predicates.add(criteriaBuilder.isNull(root.get(&quot;deletedAt&quot;)));</span>
+
+      // 검색어 조건
+<span class="nc bnc" id="L136" title="All 2 branches missed.">      if (request.hasSearchQuery()) {</span>
+<span class="nc" id="L137">        String searchPattern = &quot;%&quot; + request.getSearchQuery().toLowerCase() + &quot;%&quot;;</span>
+<span class="nc" id="L138">        Predicate titlePredicate =</span>
+<span class="nc" id="L139">            criteriaBuilder.like(criteriaBuilder.lower(root.get(&quot;title&quot;)), searchPattern);</span>
+<span class="nc" id="L140">        Predicate descriptionPredicate =</span>
+<span class="nc" id="L141">            criteriaBuilder.like(criteriaBuilder.lower(root.get(&quot;description&quot;)), searchPattern);</span>
+<span class="nc" id="L142">        predicates.add(criteriaBuilder.or(titlePredicate, descriptionPredicate));</span>
+      }
+
+      // 상태 필터
+<span class="nc bnc" id="L146" title="All 2 branches missed.">      if (request.hasStatusFilter()) {</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (&quot;active&quot;.equals(request.getStatusFilter())) {</span>
+<span class="nc" id="L148">          predicates.add(criteriaBuilder.isTrue(root.get(&quot;isActive&quot;)));</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        } else if (&quot;inactive&quot;.equals(request.getStatusFilter())) {</span>
+<span class="nc" id="L150">          predicates.add(criteriaBuilder.isFalse(root.get(&quot;isActive&quot;)));</span>
+        }
+      }
+
+      // 활성화 상태 필터
+<span class="nc bnc" id="L155" title="All 2 branches missed.">      if (request.hasActiveFilter()) {</span>
+<span class="nc" id="L156">        predicates.add(criteriaBuilder.equal(root.get(&quot;isActive&quot;), request.getIsActive()));</span>
+      }
+
+      // 트리거 카테고리 필터
+<span class="nc bnc" id="L160" title="All 2 branches missed.">      if (request.hasTriggerCategoryFilter()) {</span>
+<span class="nc" id="L161">        predicates.add(</span>
+<span class="nc" id="L162">            criteriaBuilder.equal(root.get(&quot;triggerCategory&quot;), request.getTriggerCategory()));</span>
+      }
+
+      // 트리거 타입 필터
+<span class="nc bnc" id="L166" title="All 2 branches missed.">      if (request.hasTriggerTypeFilter()) {</span>
+<span class="nc" id="L167">        predicates.add(criteriaBuilder.equal(root.get(&quot;triggerType&quot;), request.getTriggerType()));</span>
+      }
+
+      // 액션 타입 필터
+<span class="nc bnc" id="L171" title="All 2 branches missed.">      if (request.hasActionTypeFilter()) {</span>
+<span class="nc" id="L172">        predicates.add(criteriaBuilder.equal(root.get(&quot;actionType&quot;), request.getActionType()));</span>
+      }
+
+<span class="nc" id="L175">      return criteriaBuilder.and(predicates.toArray(new Predicate[0]));</span>
+    };
+  }
+
+  private Pageable createPageable(WorkflowSearchRequest request) {
+    Sort.Direction direction =
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        &quot;asc&quot;.equalsIgnoreCase(request.getSortDirection())</span>
+<span class="nc" id="L182">            ? Sort.Direction.ASC</span>
+<span class="nc" id="L183">            : Sort.Direction.DESC;</span>
+
+<span class="nc" id="L185">    Sort sort = Sort.by(direction, request.getSortBy());</span>
+
+<span class="nc" id="L187">    return PageRequest.of(request.getPage(), request.getSize(), sort);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

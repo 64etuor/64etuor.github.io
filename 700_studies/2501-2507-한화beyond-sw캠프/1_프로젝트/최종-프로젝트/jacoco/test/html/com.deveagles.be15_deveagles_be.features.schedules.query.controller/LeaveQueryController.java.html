@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LeaveQueryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.query.controller</a> &gt; <span class="el_source">LeaveQueryController.java</span></div><h1>LeaveQueryController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.query.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.common.dto.PagedResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.request.LeaveListRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.LeaveDetailResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.LeaveListResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.RegularLeaveDetailResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.service.LeaveQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/schedules/leaves&quot;)
+@Tag(name = &quot;휴무 조회&quot;, description = &quot;직원 단기/정기 휴무 조회 API&quot;)
+public class LeaveQueryController {
+
+  private final LeaveQueryService leaveQueryService;
+
+  @Operation(
+      summary = &quot;휴무 목록 조회&quot;,
+      description = &quot;단기/정기 휴무를 통합하여 페이징으로 조회합니다. 필터: 직원 ID, 휴무 타입, 기간.&quot;)
+  @GetMapping
+  public ApiResponse&lt;PagedResponse&lt;LeaveListResponse&gt;&gt; getLeaveList(
+      @AuthenticationPrincipal CustomUser user, LeaveListRequest request) {
+
+<span class="nc" id="L32">    return ApiResponse.success(</span>
+<span class="nc" id="L33">        PagedResponse.from(leaveQueryService.getLeaveList(user.getShopId(), request)));</span>
+  }
+
+  @Operation(summary = &quot;단기 휴무 상세 조회&quot;, description = &quot;단기 휴무 ID를 기준으로 상세 정보를 조회합니다.&quot;)
+  @GetMapping(&quot;/{leaveId}&quot;)
+  public ApiResponse&lt;LeaveDetailResponse&gt; getLeaveDetail(@PathVariable Long leaveId) {
+<span class="nc" id="L39">    LeaveDetailResponse response = leaveQueryService.getLeaveDetail(leaveId);</span>
+<span class="nc" id="L40">    return ApiResponse.success(response);</span>
+  }
+
+  @Operation(summary = &quot;정기 휴무 상세 조회&quot;, description = &quot;정기 휴무 ID를 기준으로 상세 정보를 조회합니다.&quot;)
+  @GetMapping(&quot;/regular/{regularLeaveId}&quot;)
+  public ApiResponse&lt;RegularLeaveDetailResponse&gt; getRegularLeaveDetail(
+      @PathVariable Long regularLeaveId) {
+<span class="nc" id="L47">    RegularLeaveDetailResponse response = leaveQueryService.getRegularLeaveDetail(regularLeaveId);</span>
+<span class="nc" id="L48">    return ApiResponse.success(response);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

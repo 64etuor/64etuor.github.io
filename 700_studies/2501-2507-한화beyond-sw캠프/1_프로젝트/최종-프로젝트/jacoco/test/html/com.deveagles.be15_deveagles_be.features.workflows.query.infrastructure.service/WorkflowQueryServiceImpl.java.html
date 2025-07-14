@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorkflowQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.query.infrastructure.service</a> &gt; <span class="el_source">WorkflowQueryServiceImpl.java</span></div><h1>WorkflowQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.query.infrastructure.service;
+
+import com.deveagles.be15_deveagles_be.common.dto.PagedResponse;
+import com.deveagles.be15_deveagles_be.common.dto.PagedResult;
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.aggregate.Workflow;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.repository.WorkflowExecutionRepository;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.dto.request.WorkflowSearchRequest;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.dto.response.WorkflowQueryResponse;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.dto.response.WorkflowStatsResponse;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.dto.response.WorkflowSummaryResponse;
+import com.deveagles.be15_deveagles_be.features.workflows.query.application.service.WorkflowQueryService;
+import com.deveagles.be15_deveagles_be.features.workflows.query.domain.repository.WorkflowQueryRepository;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+<span class="fc" id="L24">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class WorkflowQueryServiceImpl implements WorkflowQueryService {
+
+  private final WorkflowQueryRepository workflowQueryRepository;
+  private final WorkflowExecutionRepository workflowExecutionRepository;
+
+  @Override
+  public WorkflowQueryResponse getWorkflowById(Long workflowId, Long shopId) {
+<span class="fc" id="L35">    log.debug(&quot;워크플로우 상세 조회 시작 - workflowId: {}, shopId: {}&quot;, workflowId, shopId);</span>
+
+<span class="fc" id="L37">    Workflow workflow =</span>
+        workflowQueryRepository
+<span class="fc" id="L39">            .findByIdAndShopId(workflowId, shopId)</span>
+<span class="fc" id="L40">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.WORKFLOW_NOT_FOUND));</span>
+
+<span class="fc" id="L42">    WorkflowQueryResponse response = WorkflowQueryResponse.from(workflow);</span>
+
+<span class="fc" id="L44">    log.debug(&quot;워크플로우 상세 조회 완료 - workflowId: {}&quot;, workflowId);</span>
+<span class="fc" id="L45">    return response;</span>
+  }
+
+  @Override
+  public PagedResponse&lt;WorkflowSummaryResponse&gt; searchWorkflows(WorkflowSearchRequest request) {
+<span class="fc" id="L50">    log.debug(</span>
+        &quot;워크플로우 목록 검색 시작 - shopId: {}, page: {}, size: {}&quot;,
+<span class="fc" id="L52">        request.getShopId(),</span>
+<span class="fc" id="L53">        request.getPage(),</span>
+<span class="fc" id="L54">        request.getSize());</span>
+
+<span class="fc" id="L56">    Page&lt;Workflow&gt; workflowPage = workflowQueryRepository.searchWorkflows(request);</span>
+
+<span class="fc" id="L58">    List&lt;WorkflowSummaryResponse&gt; responses =</span>
+<span class="fc" id="L59">        WorkflowSummaryResponse.from(workflowPage.getContent());</span>
+
+<span class="fc" id="L61">    PagedResult&lt;WorkflowSummaryResponse&gt; pagedResult =</span>
+<span class="fc" id="L62">        PagedResult.from(workflowPage.map(WorkflowSummaryResponse::from));</span>
+<span class="fc" id="L63">    PagedResponse&lt;WorkflowSummaryResponse&gt; pagedResponse =</span>
+<span class="fc" id="L64">        new PagedResponse&lt;&gt;(responses, pagedResult.getPagination());</span>
+
+<span class="fc" id="L66">    log.debug(</span>
+        &quot;워크플로우 목록 검색 완료 - shopId: {}, totalElements: {}&quot;,
+<span class="fc" id="L68">        request.getShopId(),</span>
+<span class="fc" id="L69">        workflowPage.getTotalElements());</span>
+
+<span class="fc" id="L71">    return pagedResponse;</span>
+  }
+
+  @Override
+  public WorkflowStatsResponse getWorkflowStats(Long shopId) {
+<span class="fc" id="L76">    log.debug(&quot;워크플로우 통계 조회 시작 - shopId: {}&quot;, shopId);</span>
+
+    // 기본 통계
+<span class="fc" id="L79">    long totalWorkflows = workflowQueryRepository.countByShopId(shopId);</span>
+<span class="fc" id="L80">    long activeWorkflows = workflowQueryRepository.countActiveByShopId(shopId);</span>
+<span class="fc" id="L81">    long inactiveWorkflows = workflowQueryRepository.countInactiveByShopId(shopId);</span>
+
+    // 이번 달 실행 통계
+<span class="fc" id="L84">    YearMonth currentMonth = YearMonth.now();</span>
+<span class="fc" id="L85">    LocalDateTime monthStart = currentMonth.atDay(1).atStartOfDay();</span>
+<span class="fc" id="L86">    LocalDateTime monthEnd = currentMonth.atEndOfMonth().atTime(23, 59, 59);</span>
+
+<span class="fc" id="L88">    long monthlyExecutions =</span>
+<span class="fc" id="L89">        workflowQueryRepository.countExecutionsByShopIdAndPeriod(shopId, monthStart, monthEnd);</span>
+
+    // 성공/실패 통계는 WorkflowExecution 테이블에서 조회
+<span class="fc" id="L92">    long monthlySuccessfulExecutions =</span>
+<span class="fc" id="L93">        workflowExecutionRepository.countByShopIdAndCreatedAtBetween(shopId, monthStart, monthEnd);</span>
+
+<span class="fc" id="L95">    long monthlyFailedExecutions = monthlyExecutions - monthlySuccessfulExecutions;</span>
+
+    // 평균 성공률
+<span class="fc" id="L98">    Double averageSuccessRate = workflowQueryRepository.calculateAverageSuccessRateByShopId(shopId);</span>
+
+<span class="fc" id="L100">    WorkflowStatsResponse response =</span>
+<span class="fc" id="L101">        WorkflowStatsResponse.of(</span>
+<span class="fc" id="L102">            totalWorkflows,</span>
+<span class="fc" id="L103">            activeWorkflows,</span>
+<span class="fc" id="L104">            inactiveWorkflows,</span>
+<span class="fc" id="L105">            monthlyExecutions,</span>
+<span class="fc" id="L106">            monthlySuccessfulExecutions,</span>
+<span class="fc" id="L107">            monthlyFailedExecutions,</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">            averageSuccessRate != null ? averageSuccessRate : 0.0);</span>
+
+<span class="fc" id="L110">    log.debug(&quot;워크플로우 통계 조회 완료 - shopId: {}, totalWorkflows: {}&quot;, shopId, totalWorkflows);</span>
+<span class="fc" id="L111">    return response;</span>
+  }
+
+  @Override
+  public List&lt;WorkflowSummaryResponse&gt; getWorkflowsByTriggerCategory(
+      String triggerCategory, Long shopId) {
+<span class="fc" id="L117">    log.debug(&quot;트리거 카테고리별 워크플로우 조회 시작 - triggerCategory: {}, shopId: {}&quot;, triggerCategory, shopId);</span>
+
+<span class="fc" id="L119">    List&lt;Workflow&gt; workflows =</span>
+<span class="fc" id="L120">        workflowQueryRepository.findByTriggerCategoryAndShopId(triggerCategory, shopId);</span>
+
+<span class="fc" id="L122">    List&lt;WorkflowSummaryResponse&gt; responses = WorkflowSummaryResponse.from(workflows);</span>
+
+<span class="fc" id="L124">    log.debug(</span>
+        &quot;트리거 카테고리별 워크플로우 조회 완료 - triggerCategory: {}, count: {}&quot;,
+        triggerCategory,
+<span class="fc" id="L127">        workflows.size());</span>
+
+<span class="fc" id="L129">    return responses;</span>
+  }
+
+  @Override
+  public List&lt;WorkflowSummaryResponse&gt; getWorkflowsByTriggerType(String triggerType, Long shopId) {
+<span class="fc" id="L134">    log.debug(&quot;트리거 타입별 워크플로우 조회 시작 - triggerType: {}, shopId: {}&quot;, triggerType, shopId);</span>
+
+<span class="fc" id="L136">    List&lt;Workflow&gt; workflows =</span>
+<span class="fc" id="L137">        workflowQueryRepository.findByTriggerTypeAndShopId(triggerType, shopId);</span>
+
+<span class="fc" id="L139">    List&lt;WorkflowSummaryResponse&gt; responses = WorkflowSummaryResponse.from(workflows);</span>
+
+<span class="fc" id="L141">    log.debug(&quot;트리거 타입별 워크플로우 조회 완료 - triggerType: {}, count: {}&quot;, triggerType, workflows.size());</span>
+
+<span class="fc" id="L143">    return responses;</span>
+  }
+
+  @Override
+  public List&lt;WorkflowSummaryResponse&gt; getRecentWorkflows(Long shopId, int limit) {
+<span class="fc" id="L148">    log.debug(&quot;최근 워크플로우 조회 시작 - shopId: {}, limit: {}&quot;, shopId, limit);</span>
+
+<span class="fc" id="L150">    List&lt;Workflow&gt; workflows = workflowQueryRepository.findRecentWorkflowsByShopId(shopId, limit);</span>
+
+<span class="fc" id="L152">    List&lt;WorkflowSummaryResponse&gt; responses = WorkflowSummaryResponse.from(workflows);</span>
+
+<span class="fc" id="L154">    log.debug(&quot;최근 워크플로우 조회 완료 - shopId: {}, count: {}&quot;, shopId, workflows.size());</span>
+
+<span class="fc" id="L156">    return responses;</span>
+  }
+
+  @Override
+  public List&lt;WorkflowSummaryResponse&gt; getActiveWorkflows(Long shopId) {
+<span class="fc" id="L161">    log.debug(&quot;활성 워크플로우 조회 시작 - shopId: {}&quot;, shopId);</span>
+
+    WorkflowSearchRequest request =
+<span class="fc" id="L164">        WorkflowSearchRequest.builder()</span>
+<span class="fc" id="L165">            .shopId(shopId)</span>
+<span class="fc" id="L166">            .isActive(true)</span>
+<span class="fc" id="L167">            .page(0)</span>
+<span class="fc" id="L168">            .size(1000) // 충분히 큰 값으로 설정</span>
+<span class="fc" id="L169">            .sortBy(&quot;createdAt&quot;)</span>
+<span class="fc" id="L170">            .sortDirection(&quot;desc&quot;)</span>
+<span class="fc" id="L171">            .build();</span>
+
+<span class="fc" id="L173">    Page&lt;Workflow&gt; workflowPage = workflowQueryRepository.searchWorkflows(request);</span>
+
+<span class="fc" id="L175">    List&lt;WorkflowSummaryResponse&gt; responses =</span>
+<span class="fc" id="L176">        WorkflowSummaryResponse.from(workflowPage.getContent());</span>
+
+<span class="fc" id="L178">    log.debug(&quot;활성 워크플로우 조회 완료 - shopId: {}, count: {}&quot;, shopId, responses.size());</span>
+
+<span class="fc" id="L180">    return responses;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

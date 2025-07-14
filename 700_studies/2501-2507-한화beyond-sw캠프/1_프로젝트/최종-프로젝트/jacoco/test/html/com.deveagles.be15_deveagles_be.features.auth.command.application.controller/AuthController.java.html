@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuthController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.auth.command.application.controller</a> &gt; <span class="el_source">AuthController.java</span></div><h1>AuthController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.auth.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.dto.request.CheckEmailRequest;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.dto.request.EmailVerifyRequest;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.dto.request.LoginRequest;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.dto.response.TokenResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.service.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import java.time.Duration;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+<span class="nc" id="L21">@Slf4j</span>
+@RestController
+@RequestMapping(&quot;/auth&quot;)
+@RequiredArgsConstructor
+@Tag(name = &quot;Auth&quot;, description = &quot;Auth 관련 API&quot;)
+public class AuthController {
+
+  private final AuthService authService;
+
+  @Operation(summary = &quot;로그인&quot;, description = &quot;사용자가 사이트에 로그인합니다.&quot;)
+  @PostMapping(&quot;/login&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;TokenResponse&gt;&gt; login(
+      @RequestBody @Valid LoginRequest request) {
+
+<span class="nc" id="L35">    TokenResponse response = authService.login(request);</span>
+
+<span class="nc" id="L37">    return buildTokenResponse(response);</span>
+  }
+
+  @Operation(summary = &quot;로그아웃&quot;, description = &quot;사용자가 사이트에서 로그아웃합니다.&quot;)
+  @PostMapping(&quot;/logout&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; logout(
+      @CookieValue(name = &quot;refreshToken&quot;, required = false) String refreshToken,
+      @RequestHeader(name = &quot;Authorization&quot;, required = false) String authHeader) { // 토큰 삭제, 만료
+<span class="nc bnc" id="L45" title="All 6 branches missed.">    if (refreshToken != null &amp;&amp; authHeader != null &amp;&amp; authHeader.startsWith(&quot;Bearer &quot;)) {</span>
+<span class="nc" id="L46">      String accessToken = authHeader.substring(7);</span>
+<span class="nc" id="L47">      authService.logout(refreshToken, accessToken);</span>
+    }
+
+<span class="nc" id="L50">    ResponseCookie deleteCookie = createDeleteRefreshTokenCookie();</span>
+
+<span class="nc" id="L52">    return ResponseEntity.ok()</span>
+<span class="nc" id="L53">        .header(HttpHeaders.SET_COOKIE, deleteCookie.toString())</span>
+<span class="nc" id="L54">        .body(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;RefreshToken 재발급&quot;, description = &quot;accessToken 만료 시 자동으로 Token을 재발급합니다.&quot;)
+  @PostMapping(&quot;/refresh&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;TokenResponse&gt;&gt; refreshToken(
+      @CookieValue(name = &quot;refreshToken&quot;, required = false) String refreshToken) {
+<span class="nc bnc" id="L61" title="All 2 branches missed.">    if (refreshToken == null) {</span>
+<span class="nc" id="L62">      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();</span>
+    }
+<span class="nc" id="L64">    TokenResponse tokenResponse = authService.refreshToken(refreshToken);</span>
+<span class="nc" id="L65">    return buildTokenResponse(tokenResponse);</span>
+  }
+
+  @Operation(summary = &quot;비밀번호 변경 이메일 인증&quot;, description = &quot;사용자가 비밀번호 변경을 위한 이메일을 인증합니다.&quot;)
+  @PostMapping(&quot;/check-email&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; findPwd(
+      @RequestBody @Valid CheckEmailRequest checkEmailRequest) {
+
+<span class="nc" id="L73">    authService.sendPatchPwdEmail(checkEmailRequest);</span>
+
+<span class="nc" id="L75">    return ResponseEntity.ok().body(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;비밀번호 변경을 위한 인증 코드 확인&quot;, description = &quot;사용자가 비밀번호 변경을 위한 인증 코드를 확인합니다.&quot;)
+  @PostMapping(&quot;/verify&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; verifyAuthCode(
+      @RequestBody @Valid EmailVerifyRequest verifyRequest) {
+
+<span class="nc" id="L83">    authService.verifyAuthCode(verifyRequest);</span>
+<span class="nc" id="L84">    return ResponseEntity.ok().body(ApiResponse.success(null));</span>
+  }
+
+  private ResponseEntity&lt;ApiResponse&lt;TokenResponse&gt;&gt; buildTokenResponse(TokenResponse response) {
+
+<span class="nc" id="L89">    ResponseCookie cookie = createRefreshTokenCookie(response.getRefreshToken());</span>
+
+<span class="nc" id="L91">    return ResponseEntity.ok()</span>
+<span class="nc" id="L92">        .header(HttpHeaders.SET_COOKIE, cookie.toString())</span>
+<span class="nc" id="L93">        .body(ApiResponse.success(response));</span>
+  }
+
+  private ResponseCookie createRefreshTokenCookie(String refreshToken) {
+
+<span class="nc" id="L98">    return ResponseCookie.from(&quot;refreshToken&quot;, refreshToken)</span>
+<span class="nc" id="L99">        .httpOnly(true)</span>
+<span class="nc" id="L100">        .path(&quot;/&quot;)</span>
+<span class="nc" id="L101">        .maxAge(Duration.ofDays(7))</span>
+<span class="nc" id="L102">        .sameSite(&quot;Strict&quot;)</span>
+<span class="nc" id="L103">        .build();</span>
+  }
+
+  private ResponseCookie createDeleteRefreshTokenCookie() {
+
+<span class="nc" id="L108">    return ResponseCookie.from(&quot;refreshToken&quot;, &quot;&quot;)</span>
+<span class="nc" id="L109">        .httpOnly(true)</span>
+<span class="nc" id="L110">        .path(&quot;/&quot;)</span>
+<span class="nc" id="L111">        .maxAge(0)</span>
+<span class="nc" id="L112">        .sameSite(&quot;Strict&quot;)</span>
+<span class="nc" id="L113">        .build();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

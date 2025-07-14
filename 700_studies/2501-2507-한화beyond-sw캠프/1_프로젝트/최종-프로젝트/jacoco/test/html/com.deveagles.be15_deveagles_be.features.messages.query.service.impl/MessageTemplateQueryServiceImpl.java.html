@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MessageTemplateQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.query.service.impl</a> &gt; <span class="el_source">MessageTemplateQueryServiceImpl.java</span></div><h1>MessageTemplateQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.query.service.impl;
+
+import com.deveagles.be15_deveagles_be.common.dto.PagedResult;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.response.MessageTemplateResponse;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageTemplate;
+import com.deveagles.be15_deveagles_be.features.messages.query.repository.MessageTemplateQueryRepository;
+import com.deveagles.be15_deveagles_be.features.messages.query.service.MessageTemplateQueryService;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.service.ShopCommandService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class MessageTemplateQueryServiceImpl implements MessageTemplateQueryService {
+  private final ShopCommandService shopCommandService;
+  private final MessageTemplateQueryRepository messageTemplateQueryRepository;
+
+  @Override
+  public PagedResult&lt;MessageTemplateResponse&gt; findAll(Long shopId, Pageable pageable) {
+<span class="fc" id="L22">    shopCommandService.validateShopExists(shopId);</span>
+<span class="fc" id="L23">    Page&lt;MessageTemplate&gt; page = messageTemplateQueryRepository.findAllByShopId(shopId, pageable);</span>
+
+<span class="fc" id="L25">    Page&lt;MessageTemplateResponse&gt; mapped = page.map(MessageTemplateResponse::from);</span>
+
+<span class="fc" id="L27">    return PagedResult.from(mapped); // ✅ 변경 포인트</span>
+  }
+
+  @Override
+  public MessageTemplateResponse findOne(Long shopId, Long templateId) {
+<span class="fc" id="L32">    shopCommandService.validateShopExists(shopId);</span>
+<span class="fc" id="L33">    return messageTemplateQueryRepository</span>
+<span class="fc" id="L34">        .findByIdAndNotDeleted(templateId)</span>
+<span class="fc" id="L35">        .map(MessageTemplateResponse::from)</span>
+<span class="fc" id="L36">        .orElseThrow(() -&gt; new RuntimeException(&quot;템플릿이 존재하지 않습니다.&quot;));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

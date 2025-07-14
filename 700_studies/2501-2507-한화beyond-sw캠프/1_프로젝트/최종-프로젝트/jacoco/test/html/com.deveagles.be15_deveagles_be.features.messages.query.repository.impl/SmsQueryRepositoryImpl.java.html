@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SmsQueryRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.query.repository.impl</a> &gt; <span class="el_source">SmsQueryRepositoryImpl.java</span></div><h1>SmsQueryRepositoryImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.query.repository.impl;
+
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.QCustomer;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageDeliveryStatus;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageSendingType;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.QSms;
+import com.deveagles.be15_deveagles_be.features.messages.query.dto.response.SmsDetailResponse;
+import com.deveagles.be15_deveagles_be.features.messages.query.dto.response.SmsListResponse;
+import com.deveagles.be15_deveagles_be.features.messages.query.repository.SmsQueryRepository;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.DateTimeExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@RequiredArgsConstructor
+<span class="nc" id="L27">@Slf4j</span>
+public class SmsQueryRepositoryImpl implements SmsQueryRepository {
+
+  private final JPAQueryFactory queryFactory;
+
+  @Override
+  public Page&lt;SmsListResponse&gt; findSmsListByShopId(Long shopId, Pageable pageable) {
+<span class="nc" id="L34">    QSms sms = QSms.sms;</span>
+<span class="nc" id="L35">    QCustomer customer = QCustomer.customer;</span>
+
+<span class="nc" id="L37">    log.info(</span>
+        &quot;📨 문자 목록 조회 시작 - shopId={}, page={}, size={}&quot;,
+        shopId,
+<span class="nc" id="L40">        pageable.getPageNumber(),</span>
+<span class="nc" id="L41">        pageable.getPageSize());</span>
+
+    // 조건
+<span class="nc" id="L44">    BooleanBuilder builder = new BooleanBuilder().and(sms.shopId.eq(shopId));</span>
+
+    // 날짜 필드: 예약이면 scheduledAt, 아니면 sentAt
+<span class="nc" id="L47">    DateTimeExpression&lt;LocalDateTime&gt; dateField =</span>
+        new CaseBuilder()
+<span class="nc" id="L49">            .when(sms.messageSendingType.eq(MessageSendingType.RESERVATION))</span>
+<span class="nc" id="L50">            .then(sms.scheduledAt)</span>
+<span class="nc" id="L51">            .otherwise(sms.sentAt);</span>
+
+    // 본문 조회
+<span class="nc" id="L54">    List&lt;SmsListResponse&gt; content =</span>
+        queryFactory
+<span class="nc" id="L56">            .select(</span>
+<span class="nc" id="L57">                Projections.constructor(</span>
+                    SmsListResponse.class,
+                    sms.messageId,
+<span class="nc" id="L60">                    sms.messageKind.stringValue(), // → title</span>
+                    sms.messageContent, // → content
+                    customer.customerName, // → receiverName
+<span class="nc" id="L63">                    sms.messageDeliveryStatus.stringValue(), // → statusLabel</span>
+                    dateField, // → 예약 or 발송 일자
+                    new CaseBuilder()
+<span class="nc" id="L66">                        .when(sms.messageSendingType.eq(MessageSendingType.RESERVATION))</span>
+<span class="nc" id="L67">                        .then(true)</span>
+<span class="nc" id="L68">                        .otherwise(false), // → canEdit</span>
+                    new CaseBuilder()
+<span class="nc" id="L70">                        .when(sms.messageSendingType.eq(MessageSendingType.RESERVATION))</span>
+<span class="nc" id="L71">                        .then(true)</span>
+<span class="nc" id="L72">                        .otherwise(false), // → canDelete</span>
+                    new CaseBuilder()
+<span class="nc" id="L74">                        .when(sms.messageDeliveryStatus.eq(MessageDeliveryStatus.FAIL))</span>
+<span class="nc" id="L75">                        .then(&quot;전송 실패&quot;)</span>
+<span class="nc" id="L76">                        .otherwise(&quot;&quot;), // → errorMessage</span>
+<span class="nc" id="L77">                    sms.messageSendingType.stringValue() // ✅ → sendingType (마지막)</span>
+                    ))
+<span class="nc" id="L79">            .from(sms)</span>
+<span class="nc" id="L80">            .leftJoin(customer)</span>
+<span class="nc" id="L81">            .on(customer.id.eq(sms.customerId))</span>
+<span class="nc" id="L82">            .where(builder)</span>
+<span class="nc" id="L83">            .orderBy(sms.createdAt.desc())</span>
+<span class="nc" id="L84">            .offset(pageable.getOffset())</span>
+<span class="nc" id="L85">            .limit(pageable.getPageSize())</span>
+<span class="nc" id="L86">            .fetch();</span>
+
+    // 총 개수 조회
+<span class="nc" id="L89">    Long total = queryFactory.select(sms.count()).from(sms).where(builder).fetchOne();</span>
+
+<span class="nc" id="L91">    log.info(&quot;📨 문자 목록 조회 완료 - 총 {}건&quot;, total);</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">    return new PageImpl&lt;&gt;(content, pageable, total != null ? total : 0);</span>
+  }
+
+  @Override
+  public Optional&lt;SmsDetailResponse&gt; findSmsDetailByIdAndShopId(Long messageId, Long shopId) {
+<span class="nc" id="L97">    QSms sms = QSms.sms;</span>
+
+<span class="nc" id="L99">    SmsDetailResponse result =</span>
+        queryFactory
+<span class="nc" id="L101">            .select(</span>
+<span class="nc" id="L102">                Projections.constructor(</span>
+                    SmsDetailResponse.class,
+                    sms.messageId,
+                    sms.messageContent,
+<span class="nc" id="L106">                    sms.messageDeliveryStatus.stringValue(),</span>
+                    sms.createdAt,
+                    sms.sentAt,
+                    sms.scheduledAt,
+<span class="nc" id="L110">                    sms.messageType.stringValue(),</span>
+<span class="nc" id="L111">                    sms.messageSendingType.stringValue(),</span>
+<span class="nc" id="L112">                    sms.messageKind.stringValue(),</span>
+                    sms.hasLink,
+                    sms.customerId,
+                    sms.templateId,
+                    sms.customerGradeId,
+                    sms.tagId))
+<span class="nc" id="L118">            .from(sms)</span>
+<span class="nc" id="L119">            .where(sms.messageId.eq(messageId), sms.shopId.eq(shopId))</span>
+<span class="nc" id="L120">            .fetchOne();</span>
+
+<span class="nc" id="L122">    return Optional.ofNullable(result);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

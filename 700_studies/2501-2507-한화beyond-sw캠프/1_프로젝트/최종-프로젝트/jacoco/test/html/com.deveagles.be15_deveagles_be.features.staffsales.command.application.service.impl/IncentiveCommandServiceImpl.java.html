@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IncentiveCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.staffsales.command.application.service.impl</a> &gt; <span class="el_source">IncentiveCommandServiceImpl.java</span></div><h1>IncentiveCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.staffsales.command.application.service.impl;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.PaymentsMethod;
+import com.deveagles.be15_deveagles_be.features.shops.command.domain.aggregate.Shop;
+import com.deveagles.be15_deveagles_be.features.shops.command.repository.ShopRepository;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.ProductIncentiveRates;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.StaffIncentiveInfo;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.request.SetIncentiveRequest;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.response.IncentiveListResult;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.response.StaffSimpleInfo;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.service.IncentiveCommandService;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.domain.aggregate.Incentive;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.domain.aggregate.ProductType;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.domain.aggregate.StaffSalesSettingType;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.repository.IncentiveRepository;
+import com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate.Staff;
+import com.deveagles.be15_deveagles_be.features.users.command.repository.UserRepository;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+<span class="fc" id="L28">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class IncentiveCommandServiceImpl implements IncentiveCommandService {
+
+  private final ShopRepository shopRepository;
+  private final UserRepository userRepository;
+  private final IncentiveRepository incentiveRepository;
+
+  @Override
+  @Transactional(readOnly = true)
+  public IncentiveListResult getIncentives(Long shopId) {
+
+    // 1. 매장 인센티브 활성화 여부 조회
+<span class="fc" id="L42">    boolean incentiveEnabled = shopRepository.findIncentiveStatusByShopId(shopId).orElse(false);</span>
+
+    // 2. 직원 목록 조회
+<span class="fc" id="L45">    List&lt;Staff&gt; staffList = userRepository.findByShopIdAndLeftDateIsNull(shopId);</span>
+
+    // 3. 매장 인센티브 조회
+<span class="fc" id="L48">    List&lt;Incentive&gt; incentives = incentiveRepository.findByShopIdAndIsActiveTrue(shopId);</span>
+
+    // 4. 직원 목록 변환
+<span class="fc" id="L51">    List&lt;StaffSimpleInfo&gt; staffSimpleList =</span>
+<span class="fc" id="L52">        staffList.stream()</span>
+<span class="fc" id="L53">            .map(</span>
+                staff -&gt;
+<span class="fc" id="L55">                    StaffSimpleInfo.builder()</span>
+<span class="fc" id="L56">                        .staffId(staff.getStaffId())</span>
+<span class="fc" id="L57">                        .staffName(staff.getStaffName())</span>
+<span class="fc" id="L58">                        .build())</span>
+<span class="fc" id="L59">            .toList();</span>
+
+    // 5. 직원별 인센티브 여부 판단
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">    boolean isStaffBased = incentives.stream().anyMatch(i -&gt; i.getStaffId() != null);</span>
+    StaffSalesSettingType type =
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        isStaffBased ? StaffSalesSettingType.STAFF : StaffSalesSettingType.BULK;</span>
+
+    // 6. 직원별 인센티브
+<span class="fc" id="L67">    List&lt;StaffIncentiveInfo&gt; incentiveInfoList =</span>
+<span class="fc" id="L68">        buildStaffIncentiveInfoList(incentives, staffList, type);</span>
+
+<span class="fc" id="L70">    return IncentiveListResult.builder()</span>
+<span class="fc" id="L71">        .shopId(shopId)</span>
+<span class="fc" id="L72">        .incentiveEnabled(incentiveEnabled)</span>
+<span class="fc" id="L73">        .staffSalesSettingType(type)</span>
+<span class="fc" id="L74">        .staffList(staffSimpleList)</span>
+<span class="fc" id="L75">        .incentiveList(incentiveInfoList)</span>
+<span class="fc" id="L76">        .build();</span>
+  }
+
+  @Override
+  @Transactional
+  public void setIncentive(Long shopId, SetIncentiveRequest request) {
+
+<span class="fc" id="L83">    Shop shop =</span>
+        shopRepository
+<span class="fc" id="L85">            .findByShopId(shopId)</span>
+<span class="pc" id="L86">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.SHOP_NOT_FOUNT));</span>
+
+<span class="fc bfc" id="L88" title="All 2 branches covered.">    if (Boolean.FALSE.equals(request.isActive())) {</span>
+<span class="fc" id="L89">      shop.setIncentive(false);</span>
+<span class="fc" id="L90">      shopRepository.save(shop);</span>
+<span class="fc" id="L91">      return;</span>
+    } else {
+<span class="fc" id="L93">      shop.setIncentive(true);</span>
+<span class="fc" id="L94">      shopRepository.save(shop);</span>
+    }
+
+<span class="fc" id="L97">    Map&lt;PaymentsMethod, ProductIncentiveRates&gt; map = request.incentiveInfo().getIncentives();</span>
+    Long staffId =
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        request.type() == StaffSalesSettingType.STAFF ? request.incentiveInfo().getStaffId() : null;</span>
+
+<span class="fc bfc" id="L101" title="All 2 branches covered.">    for (Map.Entry&lt;PaymentsMethod, ProductIncentiveRates&gt; entry : map.entrySet()) {</span>
+<span class="fc" id="L102">      PaymentsMethod method = entry.getKey();</span>
+<span class="fc" id="L103">      ProductIncentiveRates rates = entry.getValue();</span>
+
+<span class="fc" id="L105">      saveOrUpdateIncentive(shopId, staffId, method, ProductType.SERVICE, rates.getService());</span>
+<span class="fc" id="L106">      saveOrUpdateIncentive(shopId, staffId, method, ProductType.PRODUCT, rates.getProduct());</span>
+<span class="fc" id="L107">      saveOrUpdateIncentive(</span>
+<span class="fc" id="L108">          shopId, staffId, method, ProductType.SESSION_PASS, rates.getSessionPass());</span>
+<span class="fc" id="L109">      saveOrUpdateIncentive(</span>
+<span class="fc" id="L110">          shopId, staffId, method, ProductType.PREPAID_PASS, rates.getPrepaidPass());</span>
+<span class="fc" id="L111">    }</span>
+<span class="fc" id="L112">  }</span>
+
+  private List&lt;StaffIncentiveInfo&gt; buildStaffIncentiveInfoList(
+      List&lt;Incentive&gt; incentives, List&lt;Staff&gt; staffList, StaffSalesSettingType type) {
+
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">    if (type == StaffSalesSettingType.BULK) {</span>
+      // 일괄 인센티브만 필터
+<span class="fc" id="L119">      Map&lt;PaymentsMethod, ProductIncentiveRates&gt; rateMap = mapIncentivesToRate(incentives, null);</span>
+
+<span class="fc" id="L121">      return List.of(</span>
+<span class="fc" id="L122">          StaffIncentiveInfo.builder().staffId(null).staffName(null).incentives(rateMap).build());</span>
+    }
+
+    // 직원별
+<span class="nc" id="L126">    return staffList.stream()</span>
+<span class="nc" id="L127">        .map(</span>
+            staff -&gt; {
+<span class="nc" id="L129">              Map&lt;PaymentsMethod, ProductIncentiveRates&gt; rates =</span>
+<span class="nc" id="L130">                  mapIncentivesToRate(incentives, staff.getStaffId());</span>
+
+              // 해당 직원 인센티브 없으면 일괄 적용
+<span class="nc bnc" id="L133" title="All 2 branches missed.">              if (rates.isEmpty()) {</span>
+<span class="nc" id="L134">                rates = mapIncentivesToRate(incentives, null);</span>
+              }
+
+<span class="nc" id="L137">              return StaffIncentiveInfo.builder()</span>
+<span class="nc" id="L138">                  .staffId(staff.getStaffId())</span>
+<span class="nc" id="L139">                  .staffName(staff.getStaffName())</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">                  .incentives(rates.isEmpty() ? ZERO_RATES : rates)</span>
+<span class="nc" id="L141">                  .build();</span>
+            })
+<span class="nc" id="L143">        .toList();</span>
+  }
+
+  private Map&lt;PaymentsMethod, ProductIncentiveRates&gt; mapIncentivesToRate(
+      List&lt;Incentive&gt; incentives, Long staffId) {
+<span class="fc" id="L148">    return incentives.stream()</span>
+<span class="fc" id="L149">        .filter(i -&gt; Objects.equals(i.getStaffId(), staffId))</span>
+<span class="fc" id="L150">        .collect(</span>
+<span class="fc" id="L151">            Collectors.groupingBy(</span>
+                Incentive::getPaymentsMethod,
+<span class="fc" id="L153">                Collectors.collectingAndThen(</span>
+<span class="fc" id="L154">                    Collectors.toList(),</span>
+                    list -&gt; {
+<span class="fc" id="L156">                      Map&lt;ProductType, Integer&gt; productMap =</span>
+<span class="fc" id="L157">                          list.stream()</span>
+<span class="fc" id="L158">                              .collect(</span>
+<span class="fc" id="L159">                                  Collectors.toMap(Incentive::getType, Incentive::getIncentive));</span>
+
+<span class="fc" id="L161">                      return ProductIncentiveRates.builder()</span>
+<span class="fc" id="L162">                          .service(productMap.getOrDefault(ProductType.SERVICE, 0))</span>
+<span class="fc" id="L163">                          .product(productMap.getOrDefault(ProductType.PRODUCT, 0))</span>
+<span class="fc" id="L164">                          .sessionPass(productMap.getOrDefault(ProductType.SESSION_PASS, 0))</span>
+<span class="fc" id="L165">                          .prepaidPass(productMap.getOrDefault(ProductType.PREPAID_PASS, 0))</span>
+<span class="fc" id="L166">                          .build();</span>
+                    })));
+  }
+
+<span class="fc" id="L170">  private static final Map&lt;PaymentsMethod, ProductIncentiveRates&gt; ZERO_RATES =</span>
+<span class="fc" id="L171">      Arrays.stream(PaymentsMethod.values())</span>
+<span class="fc" id="L172">          .collect(</span>
+<span class="fc" id="L173">              Collectors.toMap(</span>
+<span class="fc" id="L174">                  Function.identity(),</span>
+                  method -&gt;
+<span class="fc" id="L176">                      ProductIncentiveRates.builder()</span>
+<span class="fc" id="L177">                          .service(0)</span>
+<span class="fc" id="L178">                          .product(0)</span>
+<span class="fc" id="L179">                          .sessionPass(0)</span>
+<span class="fc" id="L180">                          .prepaidPass(0)</span>
+<span class="fc" id="L181">                          .build()));</span>
+
+  private void saveOrUpdateIncentive(
+      Long shopId, Long staffId, PaymentsMethod method, ProductType type, int ratio) {
+<span class="fc bfc" id="L185" title="All 2 branches covered.">    if (staffId == null) {</span>
+      // 1. 직원별 설정 isActive false 처리
+<span class="fc" id="L187">      List&lt;Incentive&gt; staffIncentives =</span>
+<span class="fc" id="L188">          incentiveRepository.findStaffSpecificIncentives(shopId, method, type);</span>
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">      for (Incentive i : staffIncentives) {</span>
+<span class="nc" id="L190">        i.setActive(false);</span>
+<span class="nc" id="L191">      }</span>
+<span class="fc" id="L192">      incentiveRepository.saveAll(staffIncentives);</span>
+
+      // 2. 일괄 설정 insert or update
+<span class="fc" id="L195">      Optional&lt;Incentive&gt; existing = incentiveRepository.findCommonIncentives(shopId, method, type);</span>
+
+<span class="fc bfc" id="L197" title="All 2 branches covered.">      if (existing.isPresent()) {</span>
+<span class="fc" id="L198">        existing.get().setIncentiveRatio(ratio);</span>
+<span class="fc" id="L199">        existing.get().setActive(true); // 혹시 비활성화돼 있었을 수도 있으니</span>
+<span class="fc" id="L200">        incentiveRepository.save(existing.get());</span>
+      } else {
+        Incentive newIncentive =
+<span class="fc" id="L203">            Incentive.builder()</span>
+<span class="fc" id="L204">                .shopId(shopId)</span>
+<span class="fc" id="L205">                .staffId(null)</span>
+<span class="fc" id="L206">                .paymentsMethod(method)</span>
+<span class="fc" id="L207">                .type(type)</span>
+<span class="fc" id="L208">                .incentive(ratio)</span>
+<span class="fc" id="L209">                .isActive(true)</span>
+<span class="fc" id="L210">                .build();</span>
+<span class="fc" id="L211">        incentiveRepository.save(newIncentive);</span>
+      }
+<span class="fc" id="L213">    } else {</span>
+      // 직원별 설정
+<span class="fc" id="L215">      Optional&lt;Incentive&gt; existing =</span>
+<span class="fc" id="L216">          incentiveRepository.findByShopIdAndStaffIdAndPaymentsMethodAndType(</span>
+              shopId, staffId, method, type);
+
+<span class="fc bfc" id="L219" title="All 2 branches covered.">      if (existing.isPresent()) {</span>
+<span class="fc" id="L220">        existing.get().setIncentiveRatio(ratio);</span>
+<span class="fc" id="L221">        existing.get().setActive(true);</span>
+<span class="fc" id="L222">        incentiveRepository.save(existing.get());</span>
+      } else {
+        Incentive newIncentive =
+<span class="fc" id="L225">            Incentive.builder()</span>
+<span class="fc" id="L226">                .shopId(shopId)</span>
+<span class="fc" id="L227">                .staffId(staffId)</span>
+<span class="fc" id="L228">                .paymentsMethod(method)</span>
+<span class="fc" id="L229">                .type(type)</span>
+<span class="fc" id="L230">                .incentive(ratio)</span>
+<span class="fc" id="L231">                .isActive(true)</span>
+<span class="fc" id="L232">                .build();</span>
+<span class="fc" id="L233">        incentiveRepository.save(newIncentive);</span>
+      }
+    }
+<span class="fc" id="L236">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

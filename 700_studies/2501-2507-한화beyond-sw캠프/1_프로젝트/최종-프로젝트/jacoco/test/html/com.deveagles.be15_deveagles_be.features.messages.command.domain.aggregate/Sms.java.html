@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Sms.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate</a> &gt; <span class="el_source">Sms.java</span></div><h1>Sms.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+@Entity
+@Table(name = &quot;sms&quot;)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class Sms {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;message_id&quot;)
+  private Long messageId;
+
+  @Column(name = &quot;message_content&quot;, nullable = false, length = 500)
+  private String messageContent;
+
+  @Column(name = &quot;sent_at&quot;, nullable = true)
+  private LocalDateTime sentAt;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = &quot;message_delivery_status&quot;, nullable = false)
+  private MessageDeliveryStatus messageDeliveryStatus;
+
+  @CreationTimestamp
+  @Column(name = &quot;created_at&quot;, nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
+  @Column(name = &quot;scheduled_at&quot;, nullable = false)
+  private LocalDateTime scheduledAt;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = &quot;message_type&quot;, nullable = false)
+  private MessageType messageType;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = &quot;message_sending_type&quot;, nullable = false)
+  private MessageSendingType messageSendingType;
+
+  @Column(name = &quot;template_id&quot;)
+  private Long templateId;
+
+  @Column(name = &quot;shop_id&quot;, nullable = false)
+  private Long shopId;
+
+  @Column(name = &quot;customer_id&quot;, nullable = false)
+  private Long customerId;
+
+  @Builder.Default
+  @Column(name = &quot;has_link&quot;, nullable = false)
+  private Boolean hasLink = false;
+
+  @Column(name = &quot;customer_grade_id&quot;)
+  private Long customerGradeId;
+
+  @Column(name = &quot;tag_id&quot;)
+  private Long tagId;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = &quot;message_kind&quot;, nullable = false)
+  private MessageKind messageKind;
+
+  @Column(name = &quot;coupon_id&quot;, nullable = true)
+  private Long couponId;
+
+  @Column(name = &quot;workflow_id&quot;, nullable = true)
+  private Long workflowId;
+
+  public void markAsSent() {
+<span class="nc" id="L78">    this.sentAt = LocalDateTime.now();</span>
+<span class="nc" id="L79">    this.messageDeliveryStatus = MessageDeliveryStatus.SENT;</span>
+<span class="nc" id="L80">  }</span>
+
+  public void markAsFailed() {
+<span class="nc" id="L83">    this.messageDeliveryStatus = MessageDeliveryStatus.FAIL;</span>
+<span class="nc" id="L84">  }</span>
+
+  public void cancel() {
+<span class="nc" id="L87">    this.messageDeliveryStatus = MessageDeliveryStatus.CANCELLED;</span>
+<span class="nc" id="L88">  }</span>
+
+  public void schedule(LocalDateTime time) {
+<span class="nc bnc" id="L91" title="All 2 branches missed.">    if (this.messageSendingType != MessageSendingType.RESERVATION) {</span>
+<span class="nc" id="L92">      throw new IllegalStateException(&quot;예약 메시지에만 예약 시간을 설정할 수 있습니다.&quot;);</span>
+    }
+<span class="nc" id="L94">    this.scheduledAt = time;</span>
+<span class="nc" id="L95">  }</span>
+
+  public void attachLink(boolean hasLink) {
+<span class="nc" id="L98">    this.hasLink = hasLink;</span>
+<span class="nc" id="L99">  }</span>
+
+  public void updateReservation(
+      String messageContent, MessageKind messageKind, Long customerId, LocalDateTime scheduledAt) {
+<span class="nc bnc" id="L103" title="All 2 branches missed.">    if (this.messageSendingType != MessageSendingType.RESERVATION) {</span>
+<span class="nc" id="L104">      throw new BusinessException(ErrorCode.INVALID_MESSAGET_TYPE);</span>
+    }
+<span class="nc bnc" id="L106" title="All 2 branches missed.">    if (this.messageDeliveryStatus != MessageDeliveryStatus.PENDING) {</span>
+<span class="nc" id="L107">      throw new BusinessException(ErrorCode.ALREADY_SENT_OR_CANCELED);</span>
+    }
+<span class="nc" id="L109">    this.messageContent = messageContent;</span>
+<span class="nc" id="L110">    this.messageKind = messageKind;</span>
+<span class="nc" id="L111">    this.customerId = customerId;</span>
+<span class="nc" id="L112">    this.scheduledAt = scheduledAt;</span>
+<span class="nc" id="L113">  }</span>
+
+  public boolean isReservable() {
+<span class="nc bnc" id="L116" title="All 6 branches missed.">    return this.messageSendingType == MessageSendingType.RESERVATION</span>
+        &amp;&amp; this.messageDeliveryStatus == MessageDeliveryStatus.PENDING
+        &amp;&amp; this.scheduledAt != null
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        &amp;&amp; this.scheduledAt.isAfter(LocalDateTime.now());</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

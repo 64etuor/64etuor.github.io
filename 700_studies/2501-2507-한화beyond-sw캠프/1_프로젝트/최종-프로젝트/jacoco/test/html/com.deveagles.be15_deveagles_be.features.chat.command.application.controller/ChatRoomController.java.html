@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChatRoomController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.chat.command.application.controller</a> &gt; <span class="el_source">ChatRoomController.java</span></div><h1>ChatRoomController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.chat.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.dto.response.ChatRoomCreateResponse;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.dto.response.ChatRoomCreateResult;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.service.ChatRoomService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/chatrooms&quot;)
+public class ChatRoomController {
+
+  private final ChatRoomService chatRoomService;
+
+  @Operation(summary = &quot;채팅방 생성&quot;, description = &quot;현재 로그인한 매장 사용자의 채팅방을 생성합니다. 같은 유저는 중복 생성되지 않습니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;채팅방 생성 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;중복 요청 또는 매장 정보 오류&quot;)
+  })
+  @PostMapping
+  public ResponseEntity&lt;ApiResponse&lt;ChatRoomCreateResponse&gt;&gt; createRoom(
+      @AuthenticationPrincipal CustomUser customUser) {
+
+<span class="nc" id="L35">    Long shopId = customUser.getShopId();</span>
+<span class="nc" id="L36">    Long staffId = customUser.getUserId();</span>
+<span class="nc" id="L37">    String staffName = customUser.getStaffName();</span>
+
+<span class="nc" id="L39">    ChatRoomCreateResult result = chatRoomService.createChatRoom(shopId, staffId, staffName);</span>
+
+<span class="nc" id="L41">    return ResponseEntity.ok(ApiResponse.success(new ChatRoomCreateResponse(result.roomId())));</span>
+  }
+
+  @Operation(
+      summary = &quot;초기 인사 메시지 전송&quot;,
+      description = &quot;WebSocket 구독 이후, AI 챗봇의 인사 메시지를 해당 채팅방에 전송합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;인사 메시지 전송 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;채팅방을 찾을 수 없음&quot;)
+  })
+  @PostMapping(&quot;/{roomId}/send-greeting&quot;)
+  public ResponseEntity&lt;Void&gt; sendGreeting(@PathVariable String roomId) {
+<span class="nc" id="L57">    chatRoomService.sendGreeting(roomId); // 👈 Impl 호출</span>
+<span class="nc" id="L58">    return ResponseEntity.ok().build();</span>
+  }
+
+  @Operation(summary = &quot;상담사 전환 처리&quot;, description = &quot;AI 챗봇 응답을 중단하고, 상담사 응답 모드로 전환합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;상담사 전환 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;채팅방을 찾을 수 없음&quot;)
+  })
+  @PostMapping(&quot;/{roomId}/switch-to-staff&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; switchToStaff(@PathVariable String roomId) {
+<span class="nc" id="L72">    chatRoomService.switchToStaff(roomId); // ✅ 호출</span>
+<span class="nc" id="L73">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

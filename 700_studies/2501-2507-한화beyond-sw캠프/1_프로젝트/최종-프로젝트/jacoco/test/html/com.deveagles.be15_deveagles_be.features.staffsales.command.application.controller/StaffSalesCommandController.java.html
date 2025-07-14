@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StaffSalesCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.staffsales.command.application.controller</a> &gt; <span class="el_source">StaffSalesCommandController.java</span></div><h1>StaffSalesCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.staffsales.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.request.SetIncentiveRequest;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.request.SetSalesTargetRequest;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.response.IncentiveListResult;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.service.IncentiveCommandService;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.service.SalesTargetCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+<span class="nc" id="L19">@Slf4j</span>
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/staff-sales&quot;)
+@Tag(name = &quot;직원 결산 관리&quot;, description = &quot;직원 결산 관리 관련 API&quot;)
+public class StaffSalesCommandController {
+
+  private final IncentiveCommandService incentiveCommandService;
+  private final SalesTargetCommandService salesTargetCommandService;
+
+  @GetMapping(&quot;/incentive&quot;)
+  @Operation(summary = &quot;직원 인센티브 조회&quot;, description = &quot;매장 별 직원에게 적용하는 인센티브 내역을 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;IncentiveListResult&gt;&gt; getIncentives(
+      @AuthenticationPrincipal CustomUser customUser) {
+
+<span class="nc" id="L34">    IncentiveListResult response = incentiveCommandService.getIncentives(customUser.getShopId());</span>
+
+<span class="nc" id="L36">    return ResponseEntity.ok().body(ApiResponse.success(response));</span>
+  }
+
+  @PostMapping(&quot;/incentive&quot;)
+  @Operation(summary = &quot;직원 인센티브 설정&quot;, description = &quot;매장 별 직원에게 적용하는 인센티브 내역을 설정합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; setIncentives(
+      @AuthenticationPrincipal CustomUser customUser,
+      @RequestBody @Valid SetIncentiveRequest request) {
+
+<span class="nc" id="L45">    incentiveCommandService.setIncentive(customUser.getShopId(), request);</span>
+
+<span class="nc" id="L47">    return ResponseEntity.ok().body(ApiResponse.success(null));</span>
+  }
+
+  @PostMapping(&quot;/sales-target&quot;)
+  @Operation(summary = &quot;직원 목표 매출 설정&quot;, description = &quot;매장 별 직원에게 적용하는 목표 매출 내역을 설정합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; setSalesTarget(
+      @AuthenticationPrincipal CustomUser customUser,
+      @RequestBody @Valid SetSalesTargetRequest request) {
+
+<span class="nc" id="L56">    salesTargetCommandService.setSalesTarget(customUser.getShopId(), request);</span>
+
+<span class="nc" id="L58">    return ResponseEntity.ok().body(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

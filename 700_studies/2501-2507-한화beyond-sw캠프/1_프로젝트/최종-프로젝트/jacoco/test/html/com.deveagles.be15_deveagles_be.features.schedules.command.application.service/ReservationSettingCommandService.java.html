@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationSettingCommandService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.application.service</a> &gt; <span class="el_source">ReservationSettingCommandService.java</span></div><h1>ReservationSettingCommandService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.application.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.dto.request.UpdateReservationSettingRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.ReservationSetting;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.ReservationSettingId;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.repository.ReservationSettingRepository;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.service.ShopCommandService;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class ReservationSettingCommandService {
+  private final ReservationSettingRepository reservationSettingRepository;
+  private final ShopCommandService shopCommandService;
+
+  @Transactional
+  public void updateReservationSettings(
+      Long shopId, List&lt;UpdateReservationSettingRequest&gt; requestList) {
+<span class="fc" id="L28">    Set&lt;Integer&gt; incomingDays =</span>
+<span class="fc" id="L29">        requestList.stream()</span>
+<span class="fc" id="L30">            .map(UpdateReservationSettingRequest::availableDay)</span>
+<span class="fc" id="L31">            .collect(Collectors.toSet());</span>
+
+<span class="fc" id="L33">    List&lt;ReservationSetting&gt; allSettings =</span>
+<span class="fc" id="L34">        reservationSettingRepository.findAllSettingsIncludingDeleted(shopId);</span>
+
+<span class="fc bfc" id="L36" title="All 2 branches covered.">    for (ReservationSetting setting : allSettings) {</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">      if (!incomingDays.contains(setting.getAvailableDay())) {</span>
+<span class="fc" id="L38">        setting.markDeleted();</span>
+      }
+<span class="fc" id="L40">    }</span>
+
+<span class="fc bfc" id="L42" title="All 2 branches covered.">    for (UpdateReservationSettingRequest req : requestList) {</span>
+<span class="fc" id="L43">      ReservationSettingId id = new ReservationSettingId(shopId, req.availableDay());</span>
+<span class="fc" id="L44">      Optional&lt;ReservationSetting&gt; optional = reservationSettingRepository.findById(id);</span>
+
+<span class="fc bfc" id="L46" title="All 2 branches covered.">      if (optional.isPresent()) {</span>
+<span class="fc" id="L47">        ReservationSetting setting = optional.get();</span>
+<span class="fc" id="L48">        setting.update(</span>
+<span class="fc" id="L49">            req.availableStartTime(),</span>
+<span class="fc" id="L50">            req.availableEndTime(),</span>
+<span class="fc" id="L51">            req.lunchStartTime(),</span>
+<span class="fc" id="L52">            req.lunchEndTime());</span>
+<span class="fc" id="L53">        setting.restore();</span>
+<span class="fc" id="L54">      } else {</span>
+        ReservationSetting setting =
+<span class="fc" id="L56">            ReservationSetting.builder()</span>
+<span class="fc" id="L57">                .id(id)</span>
+<span class="fc" id="L58">                .availableStartTime(req.availableStartTime())</span>
+<span class="fc" id="L59">                .availableEndTime(req.availableEndTime())</span>
+<span class="fc" id="L60">                .lunchStartTime(req.lunchStartTime())</span>
+<span class="fc" id="L61">                .lunchEndTime(req.lunchEndTime())</span>
+<span class="fc" id="L62">                .build();</span>
+
+<span class="fc" id="L64">        reservationSettingRepository.save(setting);</span>
+      }
+<span class="fc" id="L66">    }</span>
+<span class="fc" id="L67">    requestList.stream()</span>
+<span class="fc" id="L68">        .map(UpdateReservationSettingRequest::reservationTerm)</span>
+<span class="fc" id="L69">        .filter(Objects::nonNull)</span>
+<span class="fc" id="L70">        .findFirst()</span>
+<span class="fc" id="L71">        .ifPresent(</span>
+            term -&gt; {
+<span class="pc bpc" id="L73" title="1 of 4 branches missed.">              if (term != 10 &amp;&amp; term != 30) {</span>
+<span class="fc" id="L74">                throw new BusinessException(ErrorCode.INVALID_RESERVATION_TERM);</span>
+              }
+
+<span class="fc" id="L77">              shopCommandService.updateReservationTerm(shopId, term);</span>
+<span class="fc" id="L78">            });</span>
+<span class="fc" id="L79">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

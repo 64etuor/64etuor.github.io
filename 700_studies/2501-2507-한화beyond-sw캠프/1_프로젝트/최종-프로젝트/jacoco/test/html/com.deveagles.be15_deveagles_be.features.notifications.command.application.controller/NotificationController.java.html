@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NotificationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.notifications.command.application.controller</a> &gt; <span class="el_source">NotificationController.java</span></div><h1>NotificationController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.notifications.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.notifications.command.application.service.NotificationSseService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+@Tag(name = &quot;알림 실시간 API&quot;, description = &quot;SSE를 이용한 실시간 알림 구독 API&quot;)
+@RestController
+@RequestMapping(&quot;/notifications&quot;) // 기존 조회 컨트롤러와 경로가 겹치지 않도록 주의
+@RequiredArgsConstructor
+public class NotificationController {
+
+  private final NotificationSseService notificationSseService;
+
+  @Operation(summary = &quot;알림 구독&quot;, description = &quot;로그인한 사용자가 실시간 알림을 구독합니다. (SSE)&quot;)
+  @GetMapping(value = &quot;/subscribe&quot;, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+  public ResponseEntity&lt;SseEmitter&gt; subscribe(@AuthenticationPrincipal CustomUser customUser) {
+
+    // 로그인한 사용자의 shopId를 사용하여 구독을 시작합니다.
+<span class="nc" id="L29">    SseEmitter emitter = notificationSseService.subscribe(customUser.getShopId());</span>
+<span class="nc" id="L30">    return ResponseEntity.ok(emitter);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CouponQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.coupons.application.query</a> &gt; <span class="el_source">CouponQueryServiceImpl.java</span></div><h1>CouponQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.coupons.application.query;
+
+import com.deveagles.be15_deveagles_be.common.dto.PagedResult;
+import com.deveagles.be15_deveagles_be.features.coupons.common.CouponDto;
+import com.deveagles.be15_deveagles_be.features.coupons.domain.repository.CouponQueryRepository;
+import com.deveagles.be15_deveagles_be.features.coupons.infrastructure.repository.CouponJpaRepository;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.response.CouponResponse;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
+<span class="fc" id="L20">@Slf4j</span>
+public class CouponQueryServiceImpl implements CouponQueryService {
+
+  private final CouponJpaRepository couponJpaRepository;
+  private final CouponQueryRepository couponQueryRepository;
+
+  @Override
+  public Optional&lt;CouponResponse&gt; getCouponById(Long id, Long shopId) {
+<span class="fc" id="L28">    log.info(&quot;쿠폰 ID로 조회 - ID: {}, 매장ID: {}&quot;, id, shopId);</span>
+
+<span class="fc" id="L30">    return couponJpaRepository</span>
+<span class="fc" id="L31">        .findByIdAndShopIdAndDeletedAtIsNull(id, shopId)</span>
+<span class="fc" id="L32">        .map(CouponResponse::from);</span>
+  }
+
+  @Override
+  public Optional&lt;CouponResponse&gt; getCouponByCode(String couponCode, Long shopId) {
+<span class="fc" id="L37">    log.info(&quot;쿠폰 코드로 조회 - 코드: {}, 매장ID: {}&quot;, couponCode, shopId);</span>
+
+<span class="fc" id="L39">    return couponJpaRepository</span>
+<span class="fc" id="L40">        .findByCouponCodeAndShopIdAndDeletedAtIsNull(couponCode, shopId)</span>
+<span class="fc" id="L41">        .map(CouponResponse::from);</span>
+  }
+
+  @Override
+  public PagedResult&lt;CouponResponse&gt; searchCoupons(CouponSearchQuery query) {
+<span class="fc" id="L46">    log.info(</span>
+        &quot;쿠폰 검색 시작 - 조건: 매장ID={}, 활성상태={}, 직원ID={}, 상품ID={}&quot;,
+<span class="fc" id="L48">        query.getShopId(),</span>
+<span class="fc" id="L49">        query.getIsActive(),</span>
+<span class="fc" id="L50">        query.getStaffId(),</span>
+<span class="fc" id="L51">        query.getPrimaryItemId());</span>
+
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">    int page = query.getPage() != null ? query.getPage() : 0;</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">    int size = query.getSize() != null ? query.getSize() : 10;</span>
+
+<span class="fc" id="L56">    Pageable pageable = PageRequest.of(page, size);</span>
+<span class="fc" id="L57">    Page&lt;CouponDto&gt; coupons = couponQueryRepository.searchCoupons(query, pageable);</span>
+
+<span class="fc" id="L59">    Page&lt;CouponResponse&gt; pageResult = coupons.map(CouponResponse::from);</span>
+
+<span class="fc" id="L61">    log.info(&quot;쿠폰 검색 완료 - 총 {}개, 현재 페이지: {}&quot;, coupons.getTotalElements(), page);</span>
+
+<span class="fc" id="L63">    return PagedResult.from(pageResult);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

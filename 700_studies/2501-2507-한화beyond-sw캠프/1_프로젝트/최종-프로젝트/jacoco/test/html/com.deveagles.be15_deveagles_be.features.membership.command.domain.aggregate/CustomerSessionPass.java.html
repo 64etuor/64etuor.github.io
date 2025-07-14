@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerSessionPass.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.membership.command.domain.aggregate</a> &gt; <span class="el_source">CustomerSessionPass.java</span></div><h1>CustomerSessionPass.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.membership.command.domain.aggregate;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
+import lombok.*;
+
+@Entity
+@Table(name = &quot;customer_session_pass&quot;)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class CustomerSessionPass {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;customer_session_pass_id&quot;)
+  private Long customerSessionPassId;
+
+  @Column(name = &quot;customer_id&quot;, nullable = false)
+  private Long customerId;
+
+  @Column(name = &quot;session_pass_id&quot;, nullable = false)
+  private Long sessionPassId;
+
+  @Setter
+  @Column(name = &quot;remaining_count&quot;)
+  private Integer remainingCount;
+
+  @Setter
+  @Column(name = &quot;expiration_date&quot;)
+  private Date expirationDate;
+
+  @Column(name = &quot;created_at&quot;, nullable = false)
+  private LocalDateTime createdAt = LocalDateTime.now();
+
+  @Setter
+  @Column(name = &quot;modified_at&quot;, nullable = false)
+  private LocalDateTime modifiedAt = LocalDateTime.now();
+
+  @Column(name = &quot;deleted_at&quot;)
+  private LocalDateTime deletedAt;
+
+  public void useCount(int count) {
+<span class="nc" id="L46">    this.remainingCount -= count;</span>
+<span class="nc" id="L47">    this.modifiedAt = LocalDateTime.now();</span>
+<span class="nc" id="L48">  }</span>
+
+  public void restoreCount(int amount) {
+<span class="nc" id="L51">    this.remainingCount += amount;</span>
+<span class="nc" id="L52">    this.modifiedAt = LocalDateTime.now();</span>
+<span class="nc" id="L53">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

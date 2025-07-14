@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SessionPassSalesCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.sales.command.application.controller</a> &gt; <span class="el_source">SessionPassSalesCommandController.java</span></div><h1>SessionPassSalesCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.sales.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.dto.request.SessionPassSalesRequest;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.service.SessionPassSalesCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = &quot;횟수권 매출&quot;, description = &quot;횟수권 매출 API&quot;)
+@RestController
+@RequestMapping(&quot;session-pass-sales&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L19">@Slf4j</span>
+public class SessionPassSalesCommandController {
+
+  private final SessionPassSalesCommandService sessionPassSalesCommandService;
+
+  @Operation(summary = &quot;횟수권 매출 등록&quot;, description = &quot;횟수권을 매출을 등록합니다.&quot;)
+  @PostMapping
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; registerSessionPassSales(
+      @Validated @RequestBody SessionPassSalesRequest request) {
+<span class="nc" id="L28">    sessionPassSalesCommandService.registSessionPassSales(request);</span>
+<span class="nc" id="L29">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;횟수권 매출 수정&quot;, description = &quot;횟수권 매출을 수정합니다.&quot;)
+  @PutMapping(&quot;/{salesId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updateSessionPassSales(
+      @PathVariable Long salesId, @Validated @RequestBody SessionPassSalesRequest request) {
+
+<span class="nc" id="L37">    sessionPassSalesCommandService.updateSessionPassSales(salesId, request);</span>
+<span class="nc" id="L38">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

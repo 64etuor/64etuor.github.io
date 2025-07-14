@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChatRoomServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.chat.command.application.service.impl</a> &gt; <span class="el_source">ChatRoomServiceImpl.java</span></div><h1>ChatRoomServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.chat.command.application.service.impl;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.dto.response.ChatMessageResponse;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.dto.response.ChatRoomCreateResult;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.service.ChatRoomService;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.aggregate.ChatMessage;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.aggregate.ChatRoom;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.repository.ChatMessageRepository;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.repository.ChatRoomRepository;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.service.ShopCommandService;
+import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+<span class="fc" id="L21">@Slf4j</span>
+public class ChatRoomServiceImpl implements ChatRoomService {
+
+  private final ChatRoomRepository chatRoomRepository;
+  private final ChatMessageRepository chatMessageRepository;
+  private final ShopCommandService shopCommandService;
+  private final SimpMessagingTemplate messagingTemplate;
+
+  @Override
+  public ChatRoomCreateResult createChatRoom(Long shopId, Long staffId, String staffName) {
+<span class="fc" id="L31">    shopCommandService.validateShopExists(shopId);</span>
+<span class="fc" id="L32">    String shopName = shopCommandService.getShop(shopId).getShopName();</span>
+
+    ChatRoom.Participant participant =
+<span class="fc" id="L35">        ChatRoom.Participant.builder()</span>
+<span class="fc" id="L36">            .id(staffId)</span>
+<span class="fc" id="L37">            .name(staffName)</span>
+<span class="fc" id="L38">            .shopId(shopId)</span>
+<span class="fc" id="L39">            .shopName(shopName)</span>
+<span class="fc" id="L40">            .build();</span>
+
+    ChatRoom chatRoom =
+<span class="fc" id="L43">        ChatRoom.builder()</span>
+<span class="fc" id="L44">            .participant(participant)</span>
+<span class="fc" id="L45">            .isAiActive(true)</span>
+<span class="fc" id="L46">            .createdAt(LocalDateTime.now())</span>
+<span class="fc" id="L47">            .build();</span>
+
+<span class="fc" id="L49">    ChatRoom saved = chatRoomRepository.save(chatRoom);</span>
+
+    // ❌ 메시지 저장 제거!
+<span class="fc" id="L52">    return new ChatRoomCreateResult(saved.getId());</span>
+  }
+
+  @Override
+  public void sendGreeting(String roomId) {
+<span class="fc" id="L57">    ChatRoom chatRoom =</span>
+        chatRoomRepository
+<span class="fc" id="L59">            .findById(roomId)</span>
+<span class="pc" id="L60">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CHATROOM_NOT_FOUND));</span>
+
+<span class="fc" id="L62">    ChatMessage message =</span>
+<span class="fc" id="L63">        chatMessageRepository.save(</span>
+<span class="fc" id="L64">            ChatMessage.builder()</span>
+<span class="fc" id="L65">                .chatroomId(roomId)</span>
+<span class="fc" id="L66">                .sender(ChatMessage.Sender.builder().id(null).name(&quot;Beautifly AI&quot;).build())</span>
+<span class="fc" id="L67">                .content(&quot;어떤 도움이 필요하신가요?&quot;)</span>
+<span class="fc" id="L68">                .isCustomer(false)</span>
+<span class="fc" id="L69">                .createdAt(LocalDateTime.now())</span>
+<span class="fc" id="L70">                .build());</span>
+
+    ChatMessageResponse response =
+<span class="fc" id="L73">        ChatMessageResponse.builder()</span>
+<span class="fc" id="L74">            .messageId(message.getId())</span>
+<span class="fc" id="L75">            .chatroomId(roomId)</span>
+<span class="fc" id="L76">            .senderId(null)</span>
+<span class="fc" id="L77">            .senderName(&quot;Beautifly AI&quot;)</span>
+<span class="fc" id="L78">            .content(message.getContent())</span>
+<span class="fc" id="L79">            .isCustomer(false)</span>
+<span class="fc" id="L80">            .createdAt(message.getCreatedAt())</span>
+<span class="fc" id="L81">            .build();</span>
+
+<span class="fc" id="L83">    messagingTemplate.convertAndSend(&quot;/sub/chatroom/&quot; + roomId, response);</span>
+<span class="fc" id="L84">  }</span>
+
+  @Override
+  public void switchToStaff(String roomId) {
+<span class="fc" id="L88">    ChatRoom chatRoom =</span>
+        chatRoomRepository
+<span class="fc" id="L90">            .findById(roomId)</span>
+<span class="pc" id="L91">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CHATROOM_NOT_FOUND));</span>
+
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">    if (!chatRoom.isAiActive()) {</span>
+<span class="nc" id="L94">      log.info(&quot;[SWITCH] 이미 상담사로 전환된 채팅방: {}&quot;, roomId);</span>
+<span class="nc" id="L95">      return;</span>
+    }
+
+<span class="fc" id="L98">    Long staffId = 17L; // ✅ 지금은 하드코딩 (임시 상담사 ID)</span>
+
+<span class="fc" id="L100">    chatRoom.updateToStaff(staffId); // isAiActive = false, assignedStaffId = 17L</span>
+<span class="fc" id="L101">    chatRoomRepository.save(chatRoom);</span>
+
+    ChatMessage message =
+<span class="fc" id="L104">        ChatMessage.builder()</span>
+<span class="fc" id="L105">            .chatroomId(roomId)</span>
+<span class="fc" id="L106">            .sender(ChatMessage.Sender.builder().id(staffId).name(&quot;상담사&quot;).build())</span>
+<span class="fc" id="L107">            .content(&quot;상담사가 연결되었습니다. 무엇을 도와드릴까요?&quot;)</span>
+<span class="fc" id="L108">            .isCustomer(false)</span>
+<span class="fc" id="L109">            .createdAt(LocalDateTime.now())</span>
+<span class="fc" id="L110">            .build();</span>
+
+<span class="fc" id="L112">    chatMessageRepository.save(message);</span>
+
+<span class="fc" id="L114">    messagingTemplate.convertAndSend(&quot;/sub/chatroom/&quot; + roomId, message);</span>
+<span class="fc" id="L115">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationSettingInitializer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.application.service</a> &gt; <span class="el_source">ReservationSettingInitializer.java</span></div><h1>ReservationSettingInitializer.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.application.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.ReservationSetting;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.ReservationSettingId;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.repository.ReservationSettingRepository;
+import java.time.LocalTime;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+public class ReservationSettingInitializer {
+
+  private final ReservationSettingRepository reservationSettingRepository;
+
+  public void initDefault(Long shopId) {
+<span class="nc" id="L20">    List&lt;ReservationSetting&gt; existing = reservationSettingRepository.findAllByShopId(shopId);</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">    if (!existing.isEmpty()) {</span>
+<span class="nc" id="L22">      throw new BusinessException(ErrorCode.RESERVATION_SETTING_ALREADY_EXISTS);</span>
+    }
+
+<span class="nc bnc" id="L25" title="All 2 branches missed.">    for (int day = 1; day &lt;= 7; day++) {</span>
+      ReservationSetting setting =
+<span class="nc" id="L27">          ReservationSetting.builder()</span>
+<span class="nc" id="L28">              .id(new ReservationSettingId(shopId, day))</span>
+<span class="nc" id="L29">              .availableStartTime(LocalTime.of(9, 0))</span>
+<span class="nc" id="L30">              .availableEndTime(LocalTime.of(18, 0))</span>
+<span class="nc" id="L31">              .lunchStartTime(null)</span>
+<span class="nc" id="L32">              .lunchEndTime(null)</span>
+<span class="nc" id="L33">              .build();</span>
+
+<span class="nc" id="L35">      reservationSettingRepository.save(setting);</span>
+    }
+<span class="nc" id="L37">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

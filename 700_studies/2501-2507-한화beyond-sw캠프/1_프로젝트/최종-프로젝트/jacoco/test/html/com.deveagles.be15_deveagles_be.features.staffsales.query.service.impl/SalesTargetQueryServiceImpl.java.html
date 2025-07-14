@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SalesTargetQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.staffsales.query.service.impl</a> &gt; <span class="el_source">SalesTargetQueryServiceImpl.java</span></div><h1>SalesTargetQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.staffsales.query.service.impl;
+
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.StaffSalesTargetInfo;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.request.GetSalesTargetRequest;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.response.SalesTargetListResult;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.application.dto.response.StaffSimpleInfo;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.domain.aggregate.SalesTarget;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.domain.aggregate.StaffSalesSettingType;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.repository.SalesTargetQueryRepository;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.service.SalesTargetQueryService;
+import com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate.Staff;
+import com.deveagles.be15_deveagles_be.features.users.command.repository.UserRepository;
+import java.time.Month;
+import java.time.Year;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+<span class="fc" id="L22">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class SalesTargetQueryServiceImpl implements SalesTargetQueryService {
+
+  private final UserRepository userRepository;
+  private final SalesTargetQueryRepository salesTargetQueryRepository;
+
+  @Override
+  public SalesTargetListResult getSalesTarget(Long shopId, GetSalesTargetRequest request) {
+
+<span class="fc" id="L33">    Year year = Year.of(request.targetDate().getYear());</span>
+<span class="fc" id="L34">    Month month = request.targetDate().getMonth();</span>
+
+    // 1. 직원 목록
+<span class="fc" id="L37">    List&lt;Staff&gt; staffList = userRepository.findByShopIdAndLeftDateIsNull(shopId);</span>
+
+<span class="fc" id="L39">    List&lt;StaffSimpleInfo&gt; staffInfos =</span>
+<span class="fc" id="L40">        staffList.stream()</span>
+<span class="fc" id="L41">            .map(</span>
+                staff -&gt;
+<span class="fc" id="L43">                    StaffSimpleInfo.builder()</span>
+<span class="fc" id="L44">                        .staffId(staff.getStaffId())</span>
+<span class="fc" id="L45">                        .staffName(staff.getStaffName())</span>
+<span class="fc" id="L46">                        .build())</span>
+<span class="fc" id="L47">            .toList();</span>
+
+    // 2. 해당 년월의 목표 매출 조회
+<span class="fc" id="L50">    List&lt;SalesTarget&gt; targetList =</span>
+<span class="fc" id="L51">        salesTargetQueryRepository.findAppliedTargets(shopId, year, month);</span>
+
+    // 3. 일괄 설정 확인
+<span class="fc bfc" id="L54" title="All 2 branches covered.">    boolean hasOnlyBulk = targetList.stream().allMatch(t -&gt; t.getStaffId() == null);</span>
+    StaffSalesSettingType settingType =
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        hasOnlyBulk ? StaffSalesSettingType.BULK : StaffSalesSettingType.STAFF;</span>
+
+    // 4. 일괄 설정 Target 추출
+<span class="fc" id="L59">    Map&lt;String, Integer&gt; defaultTargets = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L60">    targetList.stream()</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        .filter(t -&gt; t.getStaffId() == null)</span>
+<span class="fc" id="L62">        .forEach(</span>
+            t -&gt; {
+<span class="fc bfc" id="L64" title="All 2 branches covered.">              if (Boolean.TRUE.equals(t.isItems())) defaultTargets.put(&quot;items&quot;, t.getSales());</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">              if (Boolean.TRUE.equals(t.isMembership()))</span>
+<span class="fc" id="L66">                defaultTargets.put(&quot;membership&quot;, t.getSales());</span>
+<span class="fc" id="L67">            });</span>
+
+    // 5. 개별 설정 Target 추출
+<span class="fc" id="L70">    Map&lt;Long, Map&lt;String, Integer&gt;&gt; personalTargets = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L71">    targetList.stream()</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        .filter(t -&gt; t.getStaffId() != null)</span>
+<span class="fc" id="L73">        .forEach(</span>
+            t -&gt; {
+<span class="fc" id="L75">              Long staffId = t.getStaffId();</span>
+<span class="fc" id="L76">              personalTargets.putIfAbsent(staffId, new HashMap&lt;&gt;());</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">              if (Boolean.TRUE.equals(t.isItems()))</span>
+<span class="fc" id="L78">                personalTargets.get(staffId).put(&quot;items&quot;, t.getSales());</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">              if (Boolean.TRUE.equals(t.isMembership()))</span>
+<span class="fc" id="L80">                personalTargets.get(staffId).put(&quot;membership&quot;, t.getSales());</span>
+<span class="fc" id="L81">            });</span>
+
+    // 6. 직원별 targetAmount
+<span class="fc" id="L84">    List&lt;StaffSalesTargetInfo&gt; salesTargetInfos =</span>
+<span class="fc" id="L85">        staffList.stream()</span>
+<span class="fc" id="L86">            .map(</span>
+                staff -&gt; {
+<span class="fc" id="L88">                  Map&lt;String, Integer&gt; targetAmounts = new HashMap&lt;&gt;();</span>
+
+                  // 우선순위 적용
+<span class="fc bfc" id="L91" title="All 2 branches covered.">                  if (personalTargets.containsKey(staff.getStaffId())) {</span>
+<span class="fc" id="L92">                    targetAmounts = personalTargets.get(staff.getStaffId());</span>
+                  } else {
+<span class="fc" id="L94">                    targetAmounts.put(&quot;items&quot;, defaultTargets.getOrDefault(&quot;items&quot;, 0));</span>
+<span class="fc" id="L95">                    targetAmounts.put(&quot;membership&quot;, defaultTargets.getOrDefault(&quot;membership&quot;, 0));</span>
+                  }
+
+<span class="fc" id="L98">                  return StaffSalesTargetInfo.builder()</span>
+<span class="fc" id="L99">                      .staffId(staff.getStaffId())</span>
+<span class="fc" id="L100">                      .targetAmounts(targetAmounts)</span>
+<span class="fc" id="L101">                      .build();</span>
+                })
+<span class="fc" id="L103">            .toList();</span>
+
+<span class="fc" id="L105">    return SalesTargetListResult.builder()</span>
+<span class="fc" id="L106">        .targetYear(year)</span>
+<span class="fc" id="L107">        .targetMonth(month)</span>
+<span class="fc" id="L108">        .type(settingType)</span>
+<span class="fc" id="L109">        .staffList(staffInfos)</span>
+<span class="fc" id="L110">        .salesTargetInfos(salesTargetInfos)</span>
+<span class="fc" id="L111">        .build();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

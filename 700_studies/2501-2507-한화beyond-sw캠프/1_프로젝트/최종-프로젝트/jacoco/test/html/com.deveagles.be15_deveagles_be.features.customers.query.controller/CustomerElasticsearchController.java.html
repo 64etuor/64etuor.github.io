@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerElasticsearchController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.query.controller</a> &gt; <span class="el_source">CustomerElasticsearchController.java</span></div><h1>CustomerElasticsearchController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.query.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.customers.query.dto.response.CustomerSearchResult;
+import com.deveagles.be15_deveagles_be.features.customers.query.service.CustomerQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@Tag(name = &quot;고객 검색 관리&quot;, description = &quot;엘라스틱서치 인덱스 관리 및 동기화 API&quot;)
+@RestController
+@RequestMapping(&quot;/customers/elasticsearch&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L29">@Slf4j</span>
+public class CustomerElasticsearchController {
+
+  private final CustomerQueryService customerQueryService;
+
+  @Operation(summary = &quot;개별 고객 엘라스틱서치 동기화&quot;, description = &quot;특정 고객의 데이터를 엘라스틱서치에 동기화합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;동기화 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;고객을 찾을 수 없음&quot;)
+  })
+  @PostMapping(&quot;/sync/{customerId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;String&gt;&gt; syncCustomer(
+      @Parameter(description = &quot;고객 ID&quot;, required = true, example = &quot;1&quot;) @PathVariable
+          Long customerId) {
+<span class="nc" id="L47">    log.info(&quot;고객 엘라스틱서치 동기화 요청 - 고객ID: {}&quot;, customerId);</span>
+
+    try {
+<span class="nc" id="L50">      customerQueryService.syncCustomerToElasticsearch(customerId);</span>
+<span class="nc" id="L51">      return ResponseEntity.ok(ApiResponse.success(&quot;고객 데이터가 성공적으로 동기화되었습니다.&quot;));</span>
+<span class="nc" id="L52">    } catch (Exception e) {</span>
+<span class="nc" id="L53">      log.error(&quot;고객 동기화 실패 - 고객ID: {}, 오류: {}&quot;, customerId, e.getMessage());</span>
+<span class="nc" id="L54">      return ResponseEntity.ok(ApiResponse.success(&quot;고객 동기화 중 오류가 발생했습니다: &quot; + e.getMessage()));</span>
+    }
+  }
+
+  @Operation(summary = &quot;매장별 전체 고객 재인덱싱&quot;, description = &quot;특정 매장의 모든 고객 데이터를 엘라스틱서치에 재인덱싱합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;재인덱싱 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 매장 ID&quot;)
+  })
+  @PostMapping(&quot;/reindex&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;String&gt;&gt; reindexCustomers(
+      @AuthenticationPrincipal CustomUser user) {
+<span class="nc" id="L70">    log.info(&quot;매장별 고객 재인덱싱 요청 - 매장ID: {}&quot;, user.getShopId());</span>
+
+    try {
+<span class="nc" id="L73">      customerQueryService.reindexAllCustomers(user.getShopId());</span>
+<span class="nc" id="L74">      return ResponseEntity.ok(ApiResponse.success(&quot;매장의 모든 고객 데이터가 성공적으로 재인덱싱되었습니다.&quot;));</span>
+<span class="nc" id="L75">    } catch (Exception e) {</span>
+<span class="nc" id="L76">      log.error(&quot;매장 재인덱싱 실패 - 매장ID: {}, 오류: {}&quot;, user.getShopId(), e.getMessage());</span>
+<span class="nc" id="L77">      return ResponseEntity.ok(ApiResponse.success(&quot;재인덱싱 중 오류가 발생했습니다: &quot; + e.getMessage()));</span>
+    }
+  }
+
+  @Operation(summary = &quot;자동완성 검색&quot;, description = &quot;고객명/전화번호 자동완성을 위한 검색 결과를 반환합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;자동완성 검색 성공&quot;)
+  })
+  @GetMapping(&quot;/autocomplete&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;String&gt;&gt;&gt; autocomplete(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;검색 키워드&quot;, required = true, example = &quot;홍&quot;) @RequestParam
+          String prefix) {
+<span class="nc" id="L92">    log.info(&quot;자동완성 검색 요청 - 키워드: {}, 매장ID: {}&quot;, prefix, user.getShopId());</span>
+
+    try {
+<span class="nc" id="L95">      List&lt;String&gt; suggestions = customerQueryService.autocomplete(prefix, user.getShopId());</span>
+<span class="nc" id="L96">      return ResponseEntity.ok(ApiResponse.success(suggestions));</span>
+<span class="nc" id="L97">    } catch (Exception e) {</span>
+<span class="nc" id="L98">      log.error(&quot;자동완성 검색 실패 - 키워드: {}, 매장ID: {}, 오류: {}&quot;, prefix, user.getShopId(), e.getMessage());</span>
+<span class="nc" id="L99">      return ResponseEntity.ok(ApiResponse.success(List.of()));</span>
+    }
+  }
+
+  @Operation(summary = &quot;검색 결과 개수&quot;, description = &quot;키워드로 검색되는 고객 수를 반환합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;검색 개수 조회 성공&quot;)
+  })
+  @GetMapping(&quot;/count&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Long&gt;&gt; countByKeyword(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;검색 키워드&quot;, required = true, example = &quot;홍길동&quot;) @RequestParam
+          String keyword) {
+<span class="nc" id="L114">    log.info(&quot;키워드별 고객 수 조회 요청 - 키워드: {}, 매장ID: {}&quot;, keyword, user.getShopId());</span>
+
+    try {
+<span class="nc" id="L117">      long count = customerQueryService.countByKeyword(keyword, user.getShopId());</span>
+<span class="nc" id="L118">      return ResponseEntity.ok(ApiResponse.success(count));</span>
+<span class="nc" id="L119">    } catch (Exception e) {</span>
+<span class="nc" id="L120">      log.error(</span>
+<span class="nc" id="L121">          &quot;키워드별 고객 수 조회 실패 - 키워드: {}, 매장ID: {}, 오류: {}&quot;, keyword, user.getShopId(), e.getMessage());</span>
+<span class="nc" id="L122">      return ResponseEntity.ok(ApiResponse.success(0L));</span>
+    }
+  }
+
+  @Operation(summary = &quot;키워드 검색&quot;, description = &quot;간단한 키워드로 고객을 검색합니다 (페이징 없음).&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;키워드 검색 성공&quot;)
+  })
+  @GetMapping(&quot;/search&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;CustomerSearchResult&gt;&gt;&gt; searchByKeyword(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;검색 키워드&quot;, required = true, example = &quot;홍길동&quot;) @RequestParam
+          String keyword) {
+<span class="nc" id="L137">    log.info(&quot;키워드 검색 요청 - 키워드: {}, 매장ID: {}&quot;, keyword, user.getShopId());</span>
+
+    try {
+<span class="nc" id="L140">      List&lt;CustomerSearchResult&gt; results =</span>
+<span class="nc" id="L141">          customerQueryService.searchByKeyword(keyword, user.getShopId());</span>
+<span class="nc" id="L142">      return ResponseEntity.ok(ApiResponse.success(results));</span>
+<span class="nc" id="L143">    } catch (Exception e) {</span>
+<span class="nc" id="L144">      log.error(&quot;키워드 검색 실패 - 키워드: {}, 매장ID: {}, 오류: {}&quot;, keyword, user.getShopId(), e.getMessage());</span>
+<span class="nc" id="L145">      return ResponseEntity.ok(ApiResponse.success(List.of()));</span>
+    }
+  }
+
+  @Operation(summary = &quot;엘라스틱서치 헬스체크&quot;, description = &quot;엘라스틱서치 연결 상태를 확인합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;헬스체크 완료&quot;)
+  })
+  @GetMapping(&quot;/health&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;String&gt;&gt; healthCheck() {
+<span class="nc" id="L157">    log.info(&quot;엘라스틱서치 헬스체크 요청&quot;);</span>
+
+    try {
+<span class="nc" id="L160">      customerQueryService.autocomplete(&quot;test&quot;, 1L);</span>
+<span class="nc" id="L161">      return ResponseEntity.ok(ApiResponse.success(&quot;엘라스틱서치가 정상적으로 작동 중입니다.&quot;));</span>
+<span class="nc" id="L162">    } catch (Exception e) {</span>
+<span class="nc" id="L163">      log.error(&quot;엘라스틱서치 헬스체크 실패: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L164">      return ResponseEntity.ok(ApiResponse.success(&quot;엘라스틱서치 연결에 문제가 있습니다: &quot; + e.getMessage()));</span>
+    }
+  }
+
+  @Operation(
+      summary = &quot;매장별 안전한 재인덱싱 (리셋)&quot;,
+      description = &quot;매장의 기존 인덱스를 삭제하고 새로 생성합니다. DB 데이터를 전부 갈은 경우 사용.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;안전한 재인덱싱 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 매장 ID&quot;)
+  })
+  @PostMapping(&quot;/reindex/reset&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;String&gt;&gt; reindexCustomersWithReset(
+      @AuthenticationPrincipal CustomUser user) {
+<span class="nc" id="L182">    log.info(&quot;매장별 안전한 고객 재인덱싱 요청 - 매장ID: {}&quot;, user.getShopId());</span>
+
+    try {
+<span class="nc" id="L185">      customerQueryService.reindexAllCustomersWithReset(user.getShopId());</span>
+<span class="nc" id="L186">      return ResponseEntity.ok(ApiResponse.success(&quot;매장의 고객 데이터가 안전하게 재인덱싱되었습니다.&quot;));</span>
+<span class="nc" id="L187">    } catch (Exception e) {</span>
+<span class="nc" id="L188">      log.error(&quot;매장 안전한 재인덱싱 실패 - 매장ID: {}, 오류: {}&quot;, user.getShopId(), e.getMessage());</span>
+<span class="nc" id="L189">      return ResponseEntity.ok(ApiResponse.success(&quot;안전한 재인덱싱 중 오류가 발생했습니다: &quot; + e.getMessage()));</span>
+    }
+  }
+
+  @Operation(summary = &quot;전체 매장 재인덱싱&quot;, description = &quot;모든 매장의 고객 데이터를 재인덱싱합니다. 시스템 관리자만 사용.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;전체 재인덱싱 성공&quot;)
+  })
+  @PostMapping(&quot;/reindex/all&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;String&gt;&gt; reindexAllShopsCustomers() {
+<span class="nc" id="L201">    log.info(&quot;전체 매장 고객 재인덱싱 요청&quot;);</span>
+
+    try {
+<span class="nc" id="L204">      customerQueryService.reindexAllShopsCustomers();</span>
+<span class="nc" id="L205">      return ResponseEntity.ok(ApiResponse.success(&quot;모든 매장의 고객 데이터가 성공적으로 재인덱싱되었습니다.&quot;));</span>
+<span class="nc" id="L206">    } catch (Exception e) {</span>
+<span class="nc" id="L207">      log.error(&quot;전체 매장 재인덱싱 실패 - 오류: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L208">      return ResponseEntity.ok(ApiResponse.success(&quot;전체 재인덱싱 중 오류가 발생했습니다: &quot; + e.getMessage()));</span>
+    }
+  }
+
+  @Operation(
+      summary = &quot;전체 매장 안전한 재인덱싱 (리셋)&quot;,
+      description = &quot;모든 인덱스를 삭제하고 전체 재생성합니다. DB 전체 데이터를 갈은 경우 사용.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;전체 안전한 재인덱싱 성공&quot;)
+  })
+  @PostMapping(&quot;/reindex/all/reset&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;String&gt;&gt; reindexAllShopsCustomersWithReset() {
+<span class="nc" id="L222">    log.info(&quot;전체 매장 안전한 고객 재인덱싱 요청&quot;);</span>
+
+    try {
+<span class="nc" id="L225">      customerQueryService.reindexAllShopsCustomersWithReset();</span>
+<span class="nc" id="L226">      return ResponseEntity.ok(ApiResponse.success(&quot;모든 매장의 고객 데이터가 안전하게 재인덱싱되었습니다.&quot;));</span>
+<span class="nc" id="L227">    } catch (Exception e) {</span>
+<span class="nc" id="L228">      log.error(&quot;전체 매장 안전한 재인덱싱 실패 - 오류: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L229">      return ResponseEntity.ok(ApiResponse.success(&quot;전체 안전한 재인덱싱 중 오류가 발생했습니다: &quot; + e.getMessage()));</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

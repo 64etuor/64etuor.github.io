@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExecutionStatus.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.command.domain.vo</a> &gt; <span class="el_source">ExecutionStatus.java</span></div><h1>ExecutionStatus.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.command.domain.vo;
+
+import lombok.Getter;
+
+<span class="nc" id="L5">@Getter</span>
+public enum ExecutionStatus {
+<span class="nc" id="L7">  SCHEDULED(&quot;SCHEDULED&quot;, &quot;예약됨&quot;, &quot;실행 예약된 상태&quot;),</span>
+<span class="nc" id="L8">  RUNNING(&quot;RUNNING&quot;, &quot;실행 중&quot;, &quot;현재 실행 중인 상태&quot;),</span>
+<span class="nc" id="L9">  SUCCESS(&quot;SUCCESS&quot;, &quot;성공&quot;, &quot;성공적으로 완료된 상태&quot;),</span>
+<span class="nc" id="L10">  FAILED(&quot;FAILED&quot;, &quot;실패&quot;, &quot;실행 중 오류가 발생한 상태&quot;),</span>
+<span class="nc" id="L11">  CANCELLED(&quot;CANCELLED&quot;, &quot;취소됨&quot;, &quot;실행이 취소된 상태&quot;);</span>
+
+  private final String code;
+  private final String displayName;
+  private final String description;
+
+<span class="nc" id="L17">  ExecutionStatus(String code, String displayName, String description) {</span>
+<span class="nc" id="L18">    this.code = code;</span>
+<span class="nc" id="L19">    this.displayName = displayName;</span>
+<span class="nc" id="L20">    this.description = description;</span>
+<span class="nc" id="L21">  }</span>
+
+  public static ExecutionStatus fromCode(String code) {
+<span class="nc bnc" id="L24" title="All 2 branches missed.">    for (ExecutionStatus status : values()) {</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">      if (status.code.equals(code)) {</span>
+<span class="nc" id="L26">        return status;</span>
+      }
+    }
+<span class="nc" id="L29">    throw new IllegalArgumentException(&quot;Unknown execution status code: &quot; + code);</span>
+  }
+
+  public boolean isCompleted() {
+<span class="nc bnc" id="L33" title="All 6 branches missed.">    return this == SUCCESS || this == FAILED || this == CANCELLED;</span>
+  }
+
+  public boolean isInProgress() {
+<span class="nc bnc" id="L37" title="All 4 branches missed.">    return this == SCHEDULED || this == RUNNING;</span>
+  }
+
+  public boolean isSuccessful() {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">    return this == SUCCESS;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

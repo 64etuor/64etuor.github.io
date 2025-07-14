@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RegularPlan.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate</a> &gt; <span class="el_source">RegularPlan.java</span></div><h1>RegularPlan.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate;
+
+import jakarta.persistence.*;
+import java.time.LocalTime;
+import lombok.*;
+
+@Entity
+@Table(name = &quot;regular_plan&quot;)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class RegularPlan {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;regular_plan_id&quot;)
+  private Long regularPlanId;
+
+  @Column(name = &quot;staff_id&quot;, nullable = false)
+  private Long staffId;
+
+  @Column(name = &quot;shop_id&quot;, nullable = false)
+  private Long shopId;
+
+  @Column(name = &quot;regular_plan_title&quot;, nullable = false, length = 50)
+  private String regularPlanTitle;
+
+  @Column(name = &quot;monthly_plan&quot;)
+  private Integer monthlyPlan;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = &quot;weekly_plan&quot;)
+  private DayOfWeekEnum weeklyPlan;
+
+  @Column(name = &quot;regular_plan_memo&quot;)
+  private String regularPlanMemo;
+
+  @Column(name = &quot;regular_plan_start_at&quot;, nullable = false)
+  private LocalTime regularPlanStartAt;
+
+  @Column(name = &quot;regular_plan_end_at&quot;, nullable = false)
+  private LocalTime regularPlanEndAt;
+
+  public void update(
+      String title,
+      Integer monthlyPlan,
+      DayOfWeekEnum weeklyPlan,
+      String memo,
+      LocalTime start,
+      LocalTime end) {
+<span class="nc" id="L52">    this.regularPlanTitle = title;</span>
+<span class="nc" id="L53">    this.monthlyPlan = monthlyPlan;</span>
+<span class="nc" id="L54">    this.weeklyPlan = weeklyPlan;</span>
+<span class="nc" id="L55">    this.regularPlanMemo = memo;</span>
+<span class="nc" id="L56">    this.regularPlanStartAt = start;</span>
+<span class="nc" id="L57">    this.regularPlanEndAt = end;</span>
+<span class="nc" id="L58">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

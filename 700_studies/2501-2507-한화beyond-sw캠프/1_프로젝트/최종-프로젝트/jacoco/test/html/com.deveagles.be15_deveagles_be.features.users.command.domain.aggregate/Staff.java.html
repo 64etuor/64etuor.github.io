@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Staff.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate</a> &gt; <span class="el_source">Staff.java</span></div><h1>Staff.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate;
+
+import jakarta.persistence.*;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import lombok.*;
+
+@Getter
+@Entity
+@Builder
+@Table(name = &quot;staff&quot;)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+public class Staff {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;staff_id&quot;, nullable = false)
+  private Long staffId;
+
+  @Column(name = &quot;shop_id&quot;, nullable = false)
+  private Long shopId;
+
+  @Column(name = &quot;login_id&quot;, nullable = false)
+  private String loginId;
+
+  @Column(name = &quot;password&quot;, nullable = false)
+  private String password;
+
+  @Column(name = &quot;staff_name&quot;, nullable = false)
+  private String staffName;
+
+  @Column(name = &quot;grade&quot;, nullable = false)
+  private String grade;
+
+  @Column(name = &quot;phone_number&quot;, nullable = false)
+  private String phoneNumber;
+
+  @Column(name = &quot;email&quot;)
+  private String email;
+
+  @Column(name = &quot;joined_date&quot;)
+  private Date joinedDate;
+
+  @Column(name = &quot;left_date&quot;)
+  private Date leftDate;
+
+  @Column(name = &quot;staff_description&quot;)
+  private String staffDescription;
+
+  @Column(name = &quot;color_code&quot;, nullable = false)
+  private String colorCode;
+
+  @Column(name = &quot;profile_url&quot;)
+  private String profileUrl;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = &quot;staff_status&quot;, nullable = false)
+  private StaffStatus staffStatus;
+
+  @Column(name = &quot;created_at&quot;, nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
+  @Column(name = &quot;modified_at&quot;, nullable = false)
+  private LocalDateTime modifiedAt;
+
+  @Builder
+  public Staff(
+      Long shopId,
+      String loginId,
+      String password,
+      String staffName,
+      String grade,
+      String phoneNumber,
+<span class="nc" id="L75">      String email) {</span>
+<span class="nc" id="L76">    this.shopId = shopId;</span>
+<span class="nc" id="L77">    this.loginId = loginId;</span>
+<span class="nc" id="L78">    this.password = password;</span>
+<span class="nc" id="L79">    this.staffName = staffName;</span>
+<span class="nc" id="L80">    this.grade = grade;</span>
+<span class="nc" id="L81">    this.phoneNumber = phoneNumber;</span>
+<span class="nc" id="L82">    this.email = email;</span>
+<span class="nc" id="L83">    this.colorCode = &quot;#364f6b&quot;;</span>
+<span class="nc" id="L84">    this.staffStatus = StaffStatus.STAFF;</span>
+<span class="nc" id="L85">    this.createdAt = LocalDateTime.now();</span>
+<span class="nc" id="L86">    this.modifiedAt = LocalDateTime.now();</span>
+<span class="nc" id="L87">  }</span>
+
+  public void setEncodedPassword(String encodedPassword) {
+<span class="fc" id="L90">    this.password = encodedPassword;</span>
+<span class="fc" id="L91">  }</span>
+
+  public void setOwner() {
+<span class="nc" id="L94">    this.staffStatus = StaffStatus.OWNER;</span>
+<span class="nc" id="L95">  }</span>
+
+  public void setStaff(
+      String profileUrl,
+      String staffName,
+      String phoneNumber,
+      String grade,
+      Date joinedDate,
+      Date leftDate,
+      String staffDescription,
+      String colorCode) {
+<span class="nc" id="L106">    this.profileUrl = profileUrl;</span>
+<span class="nc" id="L107">    this.staffName = staffName;</span>
+<span class="nc" id="L108">    this.phoneNumber = phoneNumber;</span>
+<span class="nc" id="L109">    this.grade = grade;</span>
+<span class="nc" id="L110">    this.joinedDate = joinedDate;</span>
+<span class="nc" id="L111">    this.leftDate = leftDate;</span>
+<span class="nc" id="L112">    this.staffDescription = staffDescription;</span>
+<span class="nc" id="L113">    this.colorCode = colorCode;</span>
+<span class="nc" id="L114">  }</span>
+
+  public void patchEmail(String email) {
+<span class="fc" id="L117">    this.email = email;</span>
+<span class="fc" id="L118">  }</span>
+
+  public void patchPhoneNumber(String phoneNumber) {
+<span class="fc" id="L121">    this.phoneNumber = phoneNumber;</span>
+<span class="fc" id="L122">  }</span>
+
+  public void patchName(String staffName) {
+<span class="fc" id="L125">    this.staffName = staffName;</span>
+<span class="fc" id="L126">  }</span>
+
+  public void patchGrade(String grade) {
+<span class="fc" id="L129">    this.grade = grade;</span>
+<span class="fc" id="L130">  }</span>
+
+  public void patchProfileUrl(String profileUrl) {
+<span class="fc" id="L133">    this.profileUrl = profileUrl;</span>
+<span class="fc" id="L134">  }</span>
+
+  public void patchColorCode(String colorCode) {
+<span class="fc" id="L137">    this.colorCode = colorCode;</span>
+<span class="fc" id="L138">  }</span>
+
+  public void patchDescription(String staffDescription) {
+<span class="fc" id="L141">    this.staffDescription = staffDescription;</span>
+<span class="fc" id="L142">  }</span>
+
+  public void patchJoinedDate(Date joinedDate) {
+<span class="nc" id="L145">    this.joinedDate = joinedDate;</span>
+<span class="nc" id="L146">  }</span>
+
+  public void patchLeftDate(Date leftDate) {
+<span class="fc" id="L149">    this.leftDate = leftDate;</span>
+<span class="fc" id="L150">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

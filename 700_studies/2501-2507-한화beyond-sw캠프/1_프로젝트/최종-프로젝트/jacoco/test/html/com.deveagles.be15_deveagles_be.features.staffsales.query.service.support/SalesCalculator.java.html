@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SalesCalculator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.staffsales.query.service.support</a> &gt; <span class="el_source">SalesCalculator.java</span></div><h1>SalesCalculator.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.staffsales.query.service.support;
+
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.PaymentsMethod;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.SearchMode;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.domain.aggregate.Incentive;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.domain.aggregate.ProductType;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.repository.IncentiveRepository;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.dto.response.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+public class SalesCalculator {
+
+  private final IncentiveRepository incentiveRepository;
+
+  public StaffSalesSummaryResponse calculateSummary(
+      Long shopId, List&lt;StaffSalesListResponse&gt; staffSalesList) {
+
+<span class="nc" id="L27">    int totalGrossSales = 0;</span>
+<span class="nc" id="L28">    int totalNetSales = 0;</span>
+<span class="nc" id="L29">    int totalDeduction = 0;</span>
+<span class="nc" id="L30">    int totalDiscount = 0;</span>
+<span class="nc" id="L31">    int totalCoupon = 0;</span>
+<span class="nc" id="L32">    int totalPrepaid = 0;</span>
+<span class="nc" id="L33">    int totalIncentiveAmount = 0;</span>
+
+<span class="nc bnc" id="L35" title="All 2 branches missed.">    for (StaffSalesListResponse staff : staffSalesList) {</span>
+<span class="nc" id="L36">      Long staffId = staff.getStaffId();</span>
+
+<span class="nc bnc" id="L38" title="All 2 branches missed.">      for (StaffPaymentsSalesResponse payment : staff.getPaymentsSalesList()) {</span>
+<span class="nc" id="L39">        ProductType type = ProductType.valueOf(payment.getCategory());</span>
+
+        // 총영업액 / 실매출 / 공제 합산
+<span class="nc" id="L42">        totalGrossSales += payment.getGrossSalesTotal();</span>
+<span class="nc" id="L43">        totalNetSales += payment.getNetSalesTotal();</span>
+<span class="nc" id="L44">        totalDeduction += payment.getDeductionTotal();</span>
+
+        // 공제 항목별 세부 합산
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        for (StaffSalesDeductionsResponse deduction : payment.getDeductionList()) {</span>
+<span class="nc bnc" id="L48" title="All 4 branches missed.">          switch (deduction.getDeduction()) {</span>
+<span class="nc" id="L49">            case &quot;DISCOUNT&quot; -&gt; totalDiscount += deduction.getAmount();</span>
+<span class="nc" id="L50">            case &quot;COUPON&quot; -&gt; totalCoupon += deduction.getAmount();</span>
+<span class="nc" id="L51">            case &quot;PREPAID&quot; -&gt; totalPrepaid += deduction.getAmount();</span>
+          }
+<span class="nc" id="L53">        }</span>
+
+        // 인센티브 합산
+<span class="nc" id="L56">        int incentive = calculateTotalIncentive(shopId, staffId, type, payment.getNetSalesList());</span>
+<span class="nc" id="L57">        totalIncentiveAmount += incentive;</span>
+<span class="nc" id="L58">      }</span>
+<span class="nc" id="L59">    }</span>
+
+<span class="nc" id="L61">    return StaffSalesSummaryResponse.builder()</span>
+<span class="nc" id="L62">        .totalGrossSales(totalGrossSales)</span>
+<span class="nc" id="L63">        .totalNetSales(totalNetSales)</span>
+<span class="nc" id="L64">        .totalDeduction(totalDeduction)</span>
+<span class="nc" id="L65">        .totalDiscount(totalDiscount)</span>
+<span class="nc" id="L66">        .totalCoupon(totalCoupon)</span>
+<span class="nc" id="L67">        .totalPrepaid(totalPrepaid)</span>
+<span class="nc" id="L68">        .totalIncentiveAmount(totalIncentiveAmount)</span>
+<span class="nc" id="L69">        .build();</span>
+  }
+
+  public StaffSalesSummaryResponse calculateFromSummaryList(
+      Long shopId, List&lt;StaffDetailSalesListResponse&gt; staffDetailList) {
+<span class="nc" id="L74">    int[] netSales = {0};</span>
+<span class="nc" id="L75">    int[] discount = {0};</span>
+<span class="nc" id="L76">    int[] coupon = {0};</span>
+<span class="nc" id="L77">    int[] prepaid = {0};</span>
+<span class="nc" id="L78">    int[] incentiveTotal = {0};</span>
+
+<span class="nc" id="L80">    staffDetailList.forEach(</span>
+        staff -&gt; {
+<span class="nc" id="L82">          StaffSalesSummaryResponse summary = staff.getSummary();</span>
+
+<span class="nc" id="L84">          netSales[0] += Optional.ofNullable(summary.getTotalNetSales()).orElse(0);</span>
+<span class="nc" id="L85">          discount[0] += Optional.ofNullable(summary.getTotalDiscount()).orElse(0);</span>
+<span class="nc" id="L86">          coupon[0] += Optional.ofNullable(summary.getTotalCoupon()).orElse(0);</span>
+<span class="nc" id="L87">          prepaid[0] += Optional.ofNullable(summary.getTotalPrepaid()).orElse(0);</span>
+<span class="nc" id="L88">          incentiveTotal[0] += Optional.ofNullable(summary.getTotalIncentiveAmount()).orElse(0);</span>
+<span class="nc" id="L89">        });</span>
+
+<span class="nc" id="L91">    return StaffSalesSummaryResponse.builder()</span>
+<span class="nc" id="L92">        .totalNetSales(netSales[0])</span>
+<span class="nc" id="L93">        .totalDiscount(discount[0])</span>
+<span class="nc" id="L94">        .totalCoupon(coupon[0])</span>
+<span class="nc" id="L95">        .totalPrepaid(prepaid[0])</span>
+<span class="nc" id="L96">        .totalIncentiveAmount(incentiveTotal[0])</span>
+<span class="nc" id="L97">        .build();</span>
+  }
+
+  // 인센티브 계산
+  public int calculateTotalIncentive(
+      Long shopId, Long staffId, ProductType type, List&lt;StaffNetSalesResponse&gt; netSalesList) {
+
+<span class="nc" id="L104">    Map&lt;PaymentsMethod, Integer&gt; rateMap = getEffectiveIncentiveRates(shopId, staffId, type);</span>
+
+<span class="nc" id="L106">    return netSalesList.stream()</span>
+<span class="nc" id="L107">        .mapToInt(</span>
+            net -&gt; {
+<span class="nc" id="L109">              PaymentsMethod method = net.getPaymentsMethod();</span>
+<span class="nc" id="L110">              int amount = Optional.ofNullable(net.getAmount()).orElse(0);</span>
+<span class="nc" id="L111">              int rate = rateMap.getOrDefault(method, 0);</span>
+<span class="nc" id="L112">              return calculateIncentive(amount, rate);</span>
+            })
+<span class="nc" id="L114">        .sum();</span>
+  }
+
+  public int calculateIncentive(int amount, int rate) {
+<span class="nc" id="L118">    return BigDecimal.valueOf(amount)</span>
+<span class="nc" id="L119">        .multiply(BigDecimal.valueOf(rate))</span>
+<span class="nc" id="L120">        .divide(BigDecimal.valueOf(100), 0, RoundingMode.DOWN)</span>
+<span class="nc" id="L121">        .intValue();</span>
+  }
+
+  public Map&lt;PaymentsMethod, Integer&gt; getEffectiveIncentiveRates(
+      Long shopId, Long staffId, ProductType type) {
+
+<span class="nc" id="L127">    List&lt;Incentive&gt; incentives =</span>
+<span class="nc" id="L128">        incentiveRepository.findActiveIncentivesByShopIdAndType(shopId, type, staffId);</span>
+
+<span class="nc" id="L130">    Map&lt;PaymentsMethod, Integer&gt; rateMap = new EnumMap&lt;&gt;(PaymentsMethod.class);</span>
+
+<span class="nc" id="L132">    incentives.stream()</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        .filter(incentive -&gt; incentive.getStaffId() == null)</span>
+<span class="nc" id="L134">        .forEach(incentive -&gt; rateMap.put(incentive.getPaymentsMethod(), incentive.getIncentive()));</span>
+
+<span class="nc bnc" id="L136" title="All 2 branches missed.">    if (staffId != null) {</span>
+<span class="nc" id="L137">      incentives.stream()</span>
+<span class="nc" id="L138">          .filter(incentive -&gt; staffId.equals(incentive.getStaffId()))</span>
+<span class="nc" id="L139">          .forEach(</span>
+<span class="nc" id="L140">              incentive -&gt; rateMap.put(incentive.getPaymentsMethod(), incentive.getIncentive()));</span>
+    }
+<span class="nc" id="L142">    return rateMap;</span>
+  }
+
+  public int calculateAdjustedTarget(
+      SearchMode mode, int monthlyTarget, int monthDays, int periodDays) {
+<span class="nc bnc" id="L147" title="All 2 branches missed.">    if (mode == SearchMode.MONTH) {</span>
+<span class="nc" id="L148">      return monthlyTarget;</span>
+    }
+
+    // 기간 기준 목표: (월목표 / 월일수) * 조회일수, 절삭
+<span class="nc" id="L152">    return BigDecimal.valueOf(monthlyTarget)</span>
+<span class="nc" id="L153">        .divide(BigDecimal.valueOf(monthDays), 0, RoundingMode.DOWN)</span>
+<span class="nc" id="L154">        .multiply(BigDecimal.valueOf(periodDays))</span>
+<span class="nc" id="L155">        .intValue();</span>
+  }
+
+  public double calculateAchievementRate(int actual, int target) {
+<span class="nc bnc" id="L159" title="All 2 branches missed.">    if (target == 0) return 0.0;</span>
+<span class="nc" id="L160">    return BigDecimal.valueOf(actual)</span>
+<span class="nc" id="L161">        .divide(BigDecimal.valueOf(target), 4, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L162">        .multiply(BigDecimal.valueOf(100))</span>
+<span class="nc" id="L163">        .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L164">        .doubleValue();</span>
+  }
+
+  public StaffSalesSummaryResponse calculateFromDetailAndSalesList(
+      List&lt;StaffPaymentsDetailSalesResponse&gt; detailSales, List&lt;StaffPaymentsSalesResponse&gt; sales) {
+
+<span class="nc" id="L170">    int totalNetSales = 0;</span>
+<span class="nc" id="L171">    int totalDiscount = 0;</span>
+<span class="nc" id="L172">    int totalCoupon = 0;</span>
+<span class="nc" id="L173">    int totalPrepaid = 0;</span>
+<span class="nc" id="L174">    int totalIncentiveAmount = 0;</span>
+
+    // 상세 매출: SERVICE, PRODUCT
+<span class="nc bnc" id="L177" title="All 2 branches missed.">    for (StaffPaymentsDetailSalesResponse category : detailSales) {</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">      for (StaffPrimarySalesResponse primary : category.getPrimaryList()) {</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">        for (StaffSecondarySalesResponse secondary : primary.getSecondaryList()) {</span>
+          // 실매출 및 인센티브
+<span class="nc bnc" id="L181" title="All 2 branches missed.">          for (StaffNetSalesResponse net : secondary.getNetSalesList()) {</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">            if (net.getPaymentsMethod() != PaymentsMethod.PREPAID_PASS) {</span>
+<span class="nc" id="L183">              totalNetSales += Optional.ofNullable(net.getAmount()).orElse(0);</span>
+<span class="nc" id="L184">              totalIncentiveAmount += Optional.ofNullable(net.getIncentiveAmount()).orElse(0);</span>
+            }
+<span class="nc" id="L186">          }</span>
+
+          // 공제 항목
+<span class="nc bnc" id="L189" title="All 2 branches missed.">          for (StaffSalesDeductionsResponse deduction : secondary.getDeductionList()) {</span>
+<span class="nc bnc" id="L190" title="All 4 branches missed.">            switch (deduction.getDeduction()) {</span>
+              case &quot;DISCOUNT&quot; -&gt;
+<span class="nc" id="L192">                  totalDiscount += Optional.ofNullable(deduction.getAmount()).orElse(0);</span>
+<span class="nc" id="L193">              case &quot;COUPON&quot; -&gt; totalCoupon += Optional.ofNullable(deduction.getAmount()).orElse(0);</span>
+              case &quot;PREPAID&quot; -&gt;
+<span class="nc" id="L195">                  totalPrepaid += Optional.ofNullable(deduction.getAmount()).orElse(0);</span>
+            }
+<span class="nc" id="L197">          }</span>
+<span class="nc" id="L198">        }</span>
+<span class="nc" id="L199">      }</span>
+<span class="nc" id="L200">    }</span>
+
+    // 일반 매출: SESSION_PASS, PREPAID_PASS
+<span class="nc bnc" id="L203" title="All 2 branches missed.">    for (StaffPaymentsSalesResponse payment : sales) {</span>
+<span class="nc" id="L204">      totalNetSales += payment.getNetSalesTotal();</span>
+<span class="nc" id="L205">      totalDiscount += sumDeduction(payment.getDeductionList(), &quot;DISCOUNT&quot;);</span>
+<span class="nc" id="L206">      totalCoupon += sumDeduction(payment.getDeductionList(), &quot;COUPON&quot;);</span>
+<span class="nc" id="L207">      totalPrepaid += sumDeduction(payment.getDeductionList(), &quot;PREPAID&quot;);</span>
+<span class="nc" id="L208">      totalIncentiveAmount += payment.getIncentiveTotal();</span>
+<span class="nc" id="L209">    }</span>
+
+<span class="nc" id="L211">    int totalDeduction = totalDiscount + totalCoupon + totalPrepaid;</span>
+<span class="nc" id="L212">    int totalGrossSales = totalNetSales + totalDeduction;</span>
+
+<span class="nc" id="L214">    return StaffSalesSummaryResponse.builder()</span>
+<span class="nc" id="L215">        .totalNetSales(totalNetSales)</span>
+<span class="nc" id="L216">        .totalDiscount(totalDiscount)</span>
+<span class="nc" id="L217">        .totalCoupon(totalCoupon)</span>
+<span class="nc" id="L218">        .totalPrepaid(totalPrepaid)</span>
+<span class="nc" id="L219">        .totalDeduction(totalDeduction)</span>
+<span class="nc" id="L220">        .totalGrossSales(totalGrossSales)</span>
+<span class="nc" id="L221">        .totalIncentiveAmount(totalIncentiveAmount)</span>
+<span class="nc" id="L222">        .build();</span>
+  }
+
+  private int sumDeduction(List&lt;StaffSalesDeductionsResponse&gt; list, String type) {
+<span class="nc bnc" id="L226" title="All 2 branches missed.">    return list == null</span>
+<span class="nc" id="L227">        ? 0</span>
+<span class="nc" id="L228">        : list.stream()</span>
+<span class="nc" id="L229">            .filter(d -&gt; type.equals(d.getDeduction()))</span>
+<span class="nc" id="L230">            .mapToInt(d -&gt; Optional.ofNullable(d.getAmount()).orElse(0))</span>
+<span class="nc" id="L231">            .sum();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

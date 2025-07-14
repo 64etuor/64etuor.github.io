@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CouponQueryRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.coupons.infrastructure.repository</a> &gt; <span class="el_source">CouponQueryRepositoryImpl.java</span></div><h1>CouponQueryRepositoryImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.coupons.infrastructure.repository;
+
+import static com.deveagles.be15_deveagles_be.features.coupons.domain.entity.QCoupon.coupon;
+import static com.deveagles.be15_deveagles_be.features.items.command.domain.aggregate.QPrimaryItem.primaryItem;
+import static com.deveagles.be15_deveagles_be.features.items.command.domain.aggregate.QSecondaryItem.secondaryItem;
+import static com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate.QStaff.staff;
+
+import com.deveagles.be15_deveagles_be.features.coupons.application.query.CouponSearchQuery;
+import com.deveagles.be15_deveagles_be.features.coupons.common.CouponDto;
+import com.deveagles.be15_deveagles_be.features.coupons.domain.repository.CouponQueryRepository;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@RequiredArgsConstructor
+<span class="nc" id="L25">@Slf4j</span>
+public class CouponQueryRepositoryImpl implements CouponQueryRepository {
+
+  private final JPAQueryFactory queryFactory;
+
+  @Override
+  public Page&lt;CouponDto&gt; searchCoupons(CouponSearchQuery query, Pageable pageable) {
+<span class="nc" id="L32">    log.info(</span>
+        &quot;쿠폰 검색 시작 - 조건: 매장ID={}, 활성상태={}, 직원ID={}, 상품ID={}&quot;,
+<span class="nc" id="L34">        query.getShopId(),</span>
+<span class="nc" id="L35">        query.getIsActive(),</span>
+<span class="nc" id="L36">        query.getStaffId(),</span>
+<span class="nc" id="L37">        query.getPrimaryItemId());</span>
+
+<span class="nc" id="L39">    BooleanBuilder builder = new BooleanBuilder();</span>
+<span class="nc" id="L40">    builder.and(coupon.deletedAt.isNull());</span>
+
+    // Add search conditions
+<span class="nc bnc" id="L43" title="All 4 branches missed.">    if (query.getCouponCode() != null &amp;&amp; !query.getCouponCode().trim().isEmpty()) {</span>
+<span class="nc" id="L44">      builder.and(coupon.couponCode.containsIgnoreCase(query.getCouponCode()));</span>
+    }
+<span class="nc bnc" id="L46" title="All 4 branches missed.">    if (query.getCouponTitle() != null &amp;&amp; !query.getCouponTitle().trim().isEmpty()) {</span>
+<span class="nc" id="L47">      builder.and(coupon.couponTitle.containsIgnoreCase(query.getCouponTitle()));</span>
+    }
+<span class="nc bnc" id="L49" title="All 2 branches missed.">    if (query.getShopId() != null) {</span>
+<span class="nc" id="L50">      builder.and(coupon.shopId.eq(query.getShopId()));</span>
+    }
+<span class="nc bnc" id="L52" title="All 2 branches missed.">    if (query.getStaffId() != null) {</span>
+<span class="nc" id="L53">      builder.and(coupon.staffId.eq(query.getStaffId()));</span>
+    }
+<span class="nc bnc" id="L55" title="All 2 branches missed.">    if (query.getPrimaryItemId() != null) {</span>
+<span class="nc" id="L56">      builder.and(coupon.primaryItemId.eq(query.getPrimaryItemId()));</span>
+    }
+<span class="nc bnc" id="L58" title="All 2 branches missed.">    if (query.getIsActive() != null) {</span>
+<span class="nc" id="L59">      builder.and(coupon.isActive.eq(query.getIsActive()));</span>
+    }
+<span class="nc bnc" id="L61" title="All 2 branches missed.">    if (query.getExpirationDateFrom() != null) {</span>
+<span class="nc" id="L62">      builder.and(coupon.expirationDate.goe(query.getExpirationDateFrom()));</span>
+    }
+<span class="nc bnc" id="L64" title="All 2 branches missed.">    if (query.getExpirationDateTo() != null) {</span>
+<span class="nc" id="L65">      builder.and(coupon.expirationDate.loe(query.getExpirationDateTo()));</span>
+    }
+
+<span class="nc" id="L68">    Long totalCount = queryFactory.select(coupon.count()).from(coupon).where(builder).fetchOne();</span>
+
+<span class="nc" id="L70">    log.info(&quot;쿠폰 총 개수: {}&quot;, totalCount);</span>
+
+<span class="nc" id="L72">    OrderSpecifier&lt;?&gt; orderSpecifier = getOrderSpecifier(query);</span>
+
+<span class="nc" id="L74">    List&lt;CouponDto&gt; coupons =</span>
+        queryFactory
+<span class="nc" id="L76">            .select(</span>
+<span class="nc" id="L77">                Projections.constructor(</span>
+                    CouponDto.class,
+                    coupon.id,
+                    coupon.couponCode,
+                    coupon.couponTitle,
+                    coupon.shopId,
+                    coupon.discountRate,
+                    coupon.expirationDate,
+                    coupon.isActive,
+                    coupon.createdAt,
+                    staff.staffId,
+                    staff.staffName,
+                    primaryItem.primaryItemId,
+                    primaryItem.primaryItemName,
+<span class="nc" id="L91">                    primaryItem.category.stringValue(),</span>
+<span class="nc" id="L92">                    secondaryItem.secondaryItemId.longValue(),</span>
+<span class="nc" id="L93">                    secondaryItem.secondaryItemName.stringValue()))</span>
+<span class="nc" id="L94">            .from(coupon)</span>
+<span class="nc" id="L95">            .leftJoin(staff)</span>
+<span class="nc" id="L96">            .on(coupon.staffId.eq(staff.staffId))</span>
+<span class="nc" id="L97">            .leftJoin(primaryItem)</span>
+<span class="nc" id="L98">            .on(coupon.primaryItemId.eq(primaryItem.primaryItemId))</span>
+<span class="nc" id="L99">            .leftJoin(secondaryItem)</span>
+<span class="nc" id="L100">            .on(coupon.secondaryItemId.eq(secondaryItem.secondaryItemId))</span>
+<span class="nc" id="L101">            .where(builder)</span>
+<span class="nc" id="L102">            .orderBy(orderSpecifier)</span>
+<span class="nc" id="L103">            .offset(pageable.getOffset())</span>
+<span class="nc" id="L104">            .limit(pageable.getPageSize())</span>
+<span class="nc" id="L105">            .fetch();</span>
+
+<span class="nc" id="L107">    log.info(</span>
+        &quot;쿠폰 검색 완료 - 조회된 건수: {}, 총 개수: {}, 현재 페이지: {}&quot;,
+<span class="nc" id="L109">        coupons.size(),</span>
+        totalCount,
+<span class="nc" id="L111">        pageable.getPageNumber());</span>
+
+<span class="nc bnc" id="L113" title="All 2 branches missed.">    return new PageImpl&lt;&gt;(coupons, pageable, totalCount != null ? totalCount : 0);</span>
+  }
+
+  private OrderSpecifier&lt;?&gt; getOrderSpecifier(CouponSearchQuery query) {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">    String sortBy = query.getSortBy() != null ? query.getSortBy() : &quot;createdAt&quot;;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">    String sortDirection = query.getSortDirection() != null ? query.getSortDirection() : &quot;desc&quot;;</span>
+
+    OrderSpecifier&lt;?&gt; orderSpecifier;
+
+<span class="nc bnc" id="L122" title="All 5 branches missed.">    switch (sortBy.toLowerCase()) {</span>
+      case &quot;createdat&quot;:
+      case &quot;created_at&quot;:
+        orderSpecifier =
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            &quot;asc&quot;.equalsIgnoreCase(sortDirection)</span>
+<span class="nc" id="L127">                ? coupon.createdAt.asc()</span>
+<span class="nc" id="L128">                : coupon.createdAt.desc();</span>
+<span class="nc" id="L129">        break;</span>
+      case &quot;couponcode&quot;:
+      case &quot;coupon_code&quot;:
+        orderSpecifier =
+<span class="nc bnc" id="L133" title="All 2 branches missed.">            &quot;asc&quot;.equalsIgnoreCase(sortDirection)</span>
+<span class="nc" id="L134">                ? coupon.couponCode.asc()</span>
+<span class="nc" id="L135">                : coupon.couponCode.desc();</span>
+<span class="nc" id="L136">        break;</span>
+      case &quot;coupontitle&quot;:
+      case &quot;coupon_title&quot;:
+        orderSpecifier =
+<span class="nc bnc" id="L140" title="All 2 branches missed.">            &quot;asc&quot;.equalsIgnoreCase(sortDirection)</span>
+<span class="nc" id="L141">                ? coupon.couponTitle.asc()</span>
+<span class="nc" id="L142">                : coupon.couponTitle.desc();</span>
+<span class="nc" id="L143">        break;</span>
+      case &quot;expirationdate&quot;:
+      case &quot;expiration_date&quot;:
+        orderSpecifier =
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            &quot;asc&quot;.equalsIgnoreCase(sortDirection)</span>
+<span class="nc" id="L148">                ? coupon.expirationDate.asc()</span>
+<span class="nc" id="L149">                : coupon.expirationDate.desc();</span>
+<span class="nc" id="L150">        break;</span>
+      default:
+<span class="nc" id="L152">        orderSpecifier = coupon.createdAt.desc();</span>
+        break;
+    }
+
+<span class="nc" id="L156">    return orderSpecifier;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

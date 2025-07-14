@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StaffSalesQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.staffsales.query.service.impl</a> &gt; <span class="el_source">StaffSalesQueryServiceImpl.java</span></div><h1>StaffSalesQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.staffsales.query.service.impl;
+
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.PaymentsMethod;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.SearchMode;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.domain.aggregate.ProductType;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.dto.request.GetStaffSalesListRequest;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.dto.response.*;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.repository.SalesTargetQueryRepository;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.repository.StaffSalesQueryRepository;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.service.StaffSalesQueryService;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.service.support.SalesCalculator;
+import com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate.Staff;
+import com.deveagles.be15_deveagles_be.features.users.command.repository.UserRepository;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+<span class="fc" id="L23">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class StaffSalesQueryServiceImpl implements StaffSalesQueryService {
+
+  private final UserRepository userRepository;
+  private final SalesTargetQueryRepository salesTargetQueryRepository;
+  private final StaffSalesQueryRepository staffSalesQueryRepository;
+  private final SalesCalculator salesCalculator;
+
+  @Override
+  public StaffSalesListResult getStaffSales(Long shopId, GetStaffSalesListRequest request) {
+
+    // 1. 조회 기간 계산
+<span class="fc" id="L37">    LocalDateTime startDate = getStartDate(request);</span>
+<span class="fc" id="L38">    LocalDateTime endDate = getEndDate(request);</span>
+
+    // 2. 재직 중인 직원 리스트 조회
+<span class="fc" id="L41">    List&lt;Staff&gt; staffList = userRepository.findByShopIdAndLeftDateIsNull(shopId);</span>
+
+    // 3. 직원별 매출 데이터 생성
+<span class="fc" id="L44">    List&lt;StaffSalesListResponse&gt; result =</span>
+<span class="fc" id="L45">        staffList.stream()</span>
+<span class="fc" id="L46">            .map(</span>
+                staff -&gt; {
+<span class="fc" id="L48">                  List&lt;StaffPaymentsSalesResponse&gt; paymentsSalesList =</span>
+                      staffSalesQueryRepository
+<span class="fc" id="L50">                          .getSalesByStaff(false, shopId, staff.getStaffId(), startDate, endDate)</span>
+<span class="fc" id="L51">                          .stream()</span>
+<span class="fc" id="L52">                          .map(</span>
+                              response -&gt; {
+
+                                // 인센티브율 맵 조회
+<span class="fc" id="L56">                                ProductType type = ProductType.valueOf(response.getCategory());</span>
+<span class="fc" id="L57">                                Map&lt;PaymentsMethod, Integer&gt; incentiveRateMap =</span>
+<span class="fc" id="L58">                                    salesCalculator.getEffectiveIncentiveRates(</span>
+<span class="fc" id="L59">                                        shopId, staff.getStaffId(), type);</span>
+
+                                // 실매출 리스트 계산 (PREPAID 제외)
+<span class="fc" id="L62">                                List&lt;StaffNetSalesResponse&gt; netSalesList =</span>
+<span class="fc" id="L63">                                    response.getNetSalesList().stream()</span>
+<span class="fc" id="L64">                                        .filter(</span>
+                                            net -&gt;
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">                                                net.getPaymentsMethod()</span>
+                                                    != PaymentsMethod.PREPAID_PASS)
+<span class="fc" id="L68">                                        .map(</span>
+                                            net -&gt; {
+<span class="fc" id="L70">                                              int amount =</span>
+<span class="fc" id="L71">                                                  Optional.ofNullable(net.getAmount()).orElse(0);</span>
+<span class="fc" id="L72">                                              int rate =</span>
+<span class="fc" id="L73">                                                  incentiveRateMap.getOrDefault(</span>
+<span class="fc" id="L74">                                                      net.getPaymentsMethod(), 0);</span>
+<span class="fc" id="L75">                                              int incentiveAmount =</span>
+<span class="fc" id="L76">                                                  (int) Math.floor(amount * (rate / 100.0));</span>
+<span class="fc" id="L77">                                              return StaffNetSalesResponse.builder()</span>
+<span class="fc" id="L78">                                                  .paymentsMethod(net.getPaymentsMethod())</span>
+<span class="fc" id="L79">                                                  .amount(amount)</span>
+<span class="fc" id="L80">                                                  .incentiveAmount(incentiveAmount)</span>
+<span class="fc" id="L81">                                                  .build();</span>
+                                            })
+<span class="fc" id="L83">                                        .toList();</span>
+
+                                // 총 인센티브 합계
+<span class="fc" id="L86">                                int incentiveTotal =</span>
+<span class="fc" id="L87">                                    netSalesList.stream()</span>
+<span class="fc" id="L88">                                        .mapToInt(</span>
+                                            net -&gt;
+<span class="fc" id="L90">                                                Optional.ofNullable(net.getIncentiveAmount())</span>
+<span class="fc" id="L91">                                                    .orElse(0))</span>
+<span class="fc" id="L92">                                        .sum();</span>
+
+                                // 총영업액 = 결제 금액 총합
+<span class="fc" id="L95">                                int grossSalesTotal =</span>
+<span class="fc" id="L96">                                    netSalesList.stream()</span>
+<span class="fc" id="L97">                                        .mapToInt(</span>
+<span class="fc" id="L98">                                            net -&gt; Optional.ofNullable(net.getAmount()).orElse(0))</span>
+<span class="fc" id="L99">                                        .sum();</span>
+
+                                // 공제액 계산
+<span class="fc" id="L102">                                int deductionTotal =</span>
+<span class="fc" id="L103">                                    response.getDeductionList().stream()</span>
+<span class="fc" id="L104">                                        .mapToInt(d -&gt; Optional.ofNullable(d.getAmount()).orElse(0))</span>
+<span class="fc" id="L105">                                        .sum();</span>
+
+                                // 실매출 = 총영업액 - 공제액
+<span class="fc" id="L108">                                int netSalesTotal = grossSalesTotal - deductionTotal;</span>
+
+<span class="fc" id="L110">                                return StaffPaymentsSalesResponse.builder()</span>
+<span class="fc" id="L111">                                    .category(response.getCategory())</span>
+<span class="fc" id="L112">                                    .netSalesList(netSalesList)</span>
+<span class="fc" id="L113">                                    .deductionList(response.getDeductionList())</span>
+<span class="fc" id="L114">                                    .incentiveTotal(incentiveTotal)</span>
+<span class="fc" id="L115">                                    .grossSalesTotal(grossSalesTotal)</span>
+<span class="fc" id="L116">                                    .deductionTotal(deductionTotal)</span>
+<span class="fc" id="L117">                                    .netSalesTotal(netSalesTotal)</span>
+<span class="fc" id="L118">                                    .build();</span>
+                              })
+<span class="fc" id="L120">                          .toList();</span>
+
+<span class="fc" id="L122">                  return StaffSalesListResponse.builder()</span>
+<span class="fc" id="L123">                      .staffId(staff.getStaffId())</span>
+<span class="fc" id="L124">                      .staffName(staff.getStaffName())</span>
+<span class="fc" id="L125">                      .paymentsSalesList(paymentsSalesList)</span>
+<span class="fc" id="L126">                      .build();</span>
+                })
+<span class="fc" id="L128">            .toList();</span>
+
+    // 4. 전체 요약 계산
+<span class="fc" id="L131">    StaffSalesSummaryResponse summary = salesCalculator.calculateSummary(shopId, result);</span>
+
+<span class="fc" id="L133">    return StaffSalesListResult.builder().staffSalesList(result).totalSummary(summary).build();</span>
+  }
+
+  @Override
+  public StaffSalesDetailListResult getStaffDetailSales(
+      Long shopId, GetStaffSalesListRequest request) {
+
+    // 1. 기간 계산
+<span class="fc" id="L141">    LocalDateTime startDate = getStartDate(request);</span>
+<span class="fc" id="L142">    LocalDateTime endDate = getEndDate(request);</span>
+
+    // 2. 직원 리스트 조회
+<span class="fc" id="L145">    List&lt;Staff&gt; staffList = userRepository.findByShopIdAndLeftDateIsNull(shopId);</span>
+
+    // 3. 직원별 매출 데이터 조회
+<span class="fc" id="L148">    List&lt;StaffDetailSalesListResponse&gt; result =</span>
+<span class="fc" id="L149">        staffList.stream()</span>
+<span class="fc" id="L150">            .map(</span>
+                staff -&gt; {
+<span class="fc" id="L152">                  List&lt;StaffPaymentsDetailSalesResponse&gt; detailSales =</span>
+<span class="fc" id="L153">                      staffSalesQueryRepository.getDetailSalesByStaff(</span>
+<span class="fc" id="L154">                          staff.getStaffId(), shopId, startDate, endDate);</span>
+
+<span class="fc" id="L156">                  List&lt;StaffPaymentsSalesResponse&gt; sales =</span>
+<span class="fc" id="L157">                      staffSalesQueryRepository.getSalesByStaff(</span>
+<span class="fc" id="L158">                          true, shopId, staff.getStaffId(), startDate, endDate);</span>
+
+                  // 직원 요약 정보
+<span class="fc" id="L161">                  StaffSalesSummaryResponse summary =</span>
+<span class="fc" id="L162">                      salesCalculator.calculateFromDetailAndSalesList(detailSales, sales);</span>
+
+<span class="fc" id="L164">                  return StaffDetailSalesListResponse.builder()</span>
+<span class="fc" id="L165">                      .staffId(staff.getStaffId())</span>
+<span class="fc" id="L166">                      .staffName(staff.getStaffName())</span>
+<span class="fc" id="L167">                      .paymentsSalesList(sales)</span>
+<span class="fc" id="L168">                      .paymentsDetailSalesList(detailSales)</span>
+<span class="fc" id="L169">                      .summary(summary)</span>
+<span class="fc" id="L170">                      .build();</span>
+                })
+<span class="fc" id="L172">            .toList();</span>
+
+<span class="fc" id="L174">    StaffSalesSummaryResponse totalSummary =</span>
+<span class="fc" id="L175">        salesCalculator.calculateFromSummaryList(shopId, result);</span>
+
+<span class="fc" id="L177">    return StaffSalesDetailListResult.builder()</span>
+<span class="fc" id="L178">        .staffSalesList(result)</span>
+<span class="fc" id="L179">        .totalSummary(totalSummary)</span>
+<span class="fc" id="L180">        .build();</span>
+  }
+
+  @Override
+  public StaffSalesTargetListResult getStaffSalesTarget(
+      Long shopId, GetStaffSalesListRequest request) {
+
+    LocalDate startDate =
+<span class="fc bfc" id="L188" title="All 2 branches covered.">        request.searchMode() == SearchMode.MONTH</span>
+<span class="fc" id="L189">            ? request.startDate().withDayOfMonth(1)</span>
+<span class="fc" id="L190">            : request.startDate();</span>
+
+    LocalDate endDate =
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        request.searchMode() == SearchMode.PERIOD</span>
+<span class="fc" id="L194">            ? request.endDate()</span>
+<span class="fc" id="L195">            : YearMonth.from(request.startDate()).atEndOfMonth();</span>
+
+<span class="fc bfc" id="L197" title="All 2 branches covered.">    if (!hasAnyTargetForShop(shopId, startDate, endDate)) {</span>
+<span class="fc" id="L198">      return null;</span>
+    }
+
+<span class="fc" id="L201">    List&lt;Staff&gt; staffList = userRepository.findAllByShopId(shopId);</span>
+
+<span class="fc" id="L203">    List&lt;StaffSalesTargetResponse&gt; staffResponse =</span>
+<span class="fc" id="L204">        staffList.stream()</span>
+<span class="fc" id="L205">            .map(</span>
+                staff -&gt; {
+<span class="fc" id="L207">                  Long staffId = staff.getStaffId();</span>
+
+<span class="fc" id="L209">                  List&lt;StaffProductTargetSalesResponse&gt; targetList =</span>
+<span class="fc" id="L210">                      List.of(</span>
+<span class="fc" id="L211">                          buildCombinedTargetResponse(</span>
+                              shopId, staffId, true, &quot;상품&quot;, startDate, endDate, request),
+<span class="fc" id="L213">                          buildCombinedTargetResponse(</span>
+                              shopId, staffId, false, &quot;회원권&quot;, startDate, endDate, request));
+
+<span class="fc" id="L216">                  int totalTarget =</span>
+<span class="fc" id="L217">                      targetList.stream()</span>
+<span class="fc" id="L218">                          .mapToInt(StaffProductTargetSalesResponse::getTargetAmount)</span>
+<span class="fc" id="L219">                          .sum();</span>
+<span class="fc" id="L220">                  int totalActual =</span>
+<span class="fc" id="L221">                      targetList.stream()</span>
+<span class="fc" id="L222">                          .mapToInt(StaffProductTargetSalesResponse::getTotalAmount)</span>
+<span class="fc" id="L223">                          .sum();</span>
+<span class="fc" id="L224">                  double totalRate =</span>
+<span class="fc" id="L225">                      salesCalculator.calculateAchievementRate(totalActual, totalTarget);</span>
+
+<span class="fc" id="L227">                  return StaffSalesTargetResponse.builder()</span>
+<span class="fc" id="L228">                      .staffId(staffId)</span>
+<span class="fc" id="L229">                      .staffName(staff.getStaffName())</span>
+<span class="fc" id="L230">                      .targetSalesList(targetList)</span>
+<span class="fc" id="L231">                      .totalTargetAmount(totalTarget)</span>
+<span class="fc" id="L232">                      .totalActualAmount(totalActual)</span>
+<span class="fc" id="L233">                      .totalAchievementRate(totalRate)</span>
+<span class="fc" id="L234">                      .build();</span>
+                })
+<span class="fc" id="L236">            .toList();</span>
+
+<span class="fc" id="L238">    return StaffSalesTargetListResult.builder().staffSalesList(staffResponse).build();</span>
+  }
+
+  private StaffProductTargetSalesResponse buildCombinedTargetResponse(
+      Long shopId,
+      Long staffId,
+      boolean isItems,
+      String label,
+      LocalDate startDate,
+      LocalDate endDate,
+      GetStaffSalesListRequest request) {
+
+<span class="fc" id="L250">    List&lt;YearMonth&gt; months = getYearMonthsBetween(startDate, endDate);</span>
+<span class="fc" id="L251">    int totalAdjustedTarget = 0;</span>
+
+<span class="fc bfc" id="L253" title="All 2 branches covered.">    for (YearMonth ym : months) {</span>
+<span class="fc" id="L254">      LocalDate monthStart = ym.atDay(1);</span>
+<span class="fc" id="L255">      LocalDate monthEnd = ym.atEndOfMonth();</span>
+
+<span class="pc bpc" id="L257" title="1 of 2 branches missed.">      LocalDate overlapStart = startDate.isAfter(monthStart) ? startDate : monthStart;</span>
+<span class="pc bpc" id="L258" title="1 of 2 branches missed.">      LocalDate overlapEnd = endDate.isBefore(monthEnd) ? endDate : monthEnd;</span>
+<span class="fc" id="L259">      int includedDays = (int) ChronoUnit.DAYS.between(overlapStart, overlapEnd) + 1;</span>
+
+<span class="fc" id="L261">      int monthlyTarget =</span>
+<span class="fc" id="L262">          salesTargetQueryRepository.findTargetAmountByItemsOrMembership(</span>
+              shopId, staffId, isItems, ym);
+
+<span class="fc" id="L265">      int adjustedTarget =</span>
+<span class="fc" id="L266">          salesCalculator.calculateAdjustedTarget(</span>
+<span class="fc" id="L267">              request.searchMode(), monthlyTarget, ym.lengthOfMonth(), includedDays);</span>
+
+<span class="fc" id="L269">      totalAdjustedTarget += adjustedTarget;</span>
+<span class="fc" id="L270">    }</span>
+
+<span class="fc bfc" id="L272" title="All 2 branches covered.">    ProductType type1 = isItems ? ProductType.SERVICE : ProductType.SESSION_PASS;</span>
+<span class="fc bfc" id="L273" title="All 2 branches covered.">    ProductType type2 = isItems ? ProductType.PRODUCT : ProductType.PREPAID_PASS;</span>
+
+<span class="fc" id="L275">    int actualSales1 =</span>
+<span class="fc" id="L276">        staffSalesQueryRepository.getTargetTotalSales(shopId, staffId, type1, startDate, endDate);</span>
+<span class="fc" id="L277">    int actualSales2 =</span>
+<span class="fc" id="L278">        staffSalesQueryRepository.getTargetTotalSales(shopId, staffId, type2, startDate, endDate);</span>
+<span class="fc" id="L279">    int totalActualSales = actualSales1 + actualSales2;</span>
+
+<span class="fc" id="L281">    double achievement =</span>
+<span class="fc" id="L282">        salesCalculator.calculateAchievementRate(totalActualSales, totalAdjustedTarget);</span>
+
+<span class="fc" id="L284">    return StaffProductTargetSalesResponse.builder()</span>
+<span class="fc" id="L285">        .label(label)</span>
+<span class="fc" id="L286">        .targetAmount(totalAdjustedTarget)</span>
+<span class="fc" id="L287">        .totalAmount(totalActualSales)</span>
+<span class="fc" id="L288">        .achievementRate(achievement)</span>
+<span class="fc" id="L289">        .build();</span>
+  }
+
+  private List&lt;YearMonth&gt; getYearMonthsBetween(LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L293">    List&lt;YearMonth&gt; months = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L294">    YearMonth current = YearMonth.from(startDate);</span>
+<span class="fc" id="L295">    YearMonth last = YearMonth.from(endDate);</span>
+
+<span class="fc bfc" id="L297" title="All 2 branches covered.">    while (!current.isAfter(last)) {</span>
+<span class="fc" id="L298">      months.add(current);</span>
+<span class="fc" id="L299">      current = current.plusMonths(1);</span>
+    }
+
+<span class="fc" id="L302">    return months;</span>
+  }
+
+  private LocalDateTime getStartDate(GetStaffSalesListRequest request) {
+<span class="fc bfc" id="L306" title="All 2 branches covered.">    if (request.searchMode() == SearchMode.MONTH) {</span>
+<span class="fc" id="L307">      return request.startDate().withDayOfMonth(1).atStartOfDay();</span>
+    }
+<span class="fc" id="L309">    return request.startDate().atStartOfDay();</span>
+  }
+
+  private LocalDateTime getEndDate(GetStaffSalesListRequest request) {
+<span class="fc" id="L313">    LocalDate endDate =</span>
+<span class="fc" id="L314">        getEffectiveEndDate(request.startDate(), request.endDate(), request.searchMode());</span>
+<span class="fc" id="L315">    return endDate.atTime(23, 59, 59);</span>
+  }
+
+  private LocalDate getEffectiveEndDate(LocalDate startDate, LocalDate endDate, SearchMode mode) {
+<span class="fc bfc" id="L319" title="All 2 branches covered.">    if (mode == SearchMode.MONTH) {</span>
+<span class="fc" id="L320">      return startDate.withDayOfMonth(startDate.lengthOfMonth());</span>
+    }
+<span class="fc" id="L322">    return Optional.ofNullable(endDate).orElse(startDate);</span>
+  }
+
+  private int getPeriodDays(LocalDate start, LocalDate end) {
+<span class="nc" id="L326">    return (int) ChronoUnit.DAYS.between(start, end) + 1;</span>
+  }
+
+  private boolean hasAnyTargetForShop(Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L330">    List&lt;YearMonth&gt; yearMonthList = getYearMonthsInRange(startDate, endDate);</span>
+<span class="fc" id="L331">    return salesTargetQueryRepository.existsTargetForShopInMonths(shopId, yearMonthList);</span>
+  }
+
+  private List&lt;YearMonth&gt; getYearMonthsInRange(LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L335">    List&lt;YearMonth&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L336">    YearMonth start = YearMonth.from(startDate);</span>
+<span class="fc" id="L337">    YearMonth end = YearMonth.from(endDate);</span>
+
+<span class="fc bfc" id="L339" title="All 2 branches covered.">    while (!start.isAfter(end)) {</span>
+<span class="fc" id="L340">      result.add(start);</span>
+<span class="fc" id="L341">      start = start.plusMonths(1);</span>
+    }
+
+<span class="fc" id="L344">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

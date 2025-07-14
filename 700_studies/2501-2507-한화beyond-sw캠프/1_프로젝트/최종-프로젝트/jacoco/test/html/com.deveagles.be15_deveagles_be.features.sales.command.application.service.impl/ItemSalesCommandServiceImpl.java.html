@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemSalesCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.sales.command.application.service.impl</a> &gt; <span class="el_source">ItemSalesCommandServiceImpl.java</span></div><h1>ItemSalesCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.sales.command.application.service.impl;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.Customer;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.repository.CustomerRepository;
+import com.deveagles.be15_deveagles_be.features.membership.command.domain.repository.CustomerPrepaidPassRepository;
+import com.deveagles.be15_deveagles_be.features.membership.command.domain.repository.CustomerSessionPassRepository;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.dto.request.ItemSalesRequest;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.dto.request.PaymentsInfo;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.service.ItemSalesCommandService;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.CustomerMembershipHistory;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.ItemSales;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.Payments;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.Sales;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.repository.CustomerMembershipHistoryRepository;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.repository.ItemSalesRepository;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.repository.PaymentsRepository;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.repository.SalesRepository;
+import jakarta.transaction.Transactional;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class ItemSalesCommandServiceImpl implements ItemSalesCommandService {
+
+  private final CustomerPrepaidPassRepository customerPrepaidPassRepository;
+  private final CustomerSessionPassRepository customerSessionPassRepository;
+  private final SalesRepository salesRepository;
+  private final PaymentsRepository paymentsRepository;
+  private final CustomerRepository customerRepository;
+  private final ItemSalesRepository itemSalesRepository;
+  private final CustomerMembershipHistoryRepository customerMembershipHistoryRepository;
+
+  @Transactional
+  @Override
+  public void registItemSales(ItemSalesRequest request) {
+
+    // 유효성 검사
+<span class="fc bfc" id="L42" title="All 2 branches covered.">    if (request.getRetailPrice() &lt; 0) {</span>
+<span class="fc" id="L43">      throw new BusinessException(ErrorCode.SALES_RETAILPRICE_REQUIRED);</span>
+    }
+<span class="fc bfc" id="L45" title="All 2 branches covered.">    if (request.getTotalAmount() &lt; 0) {</span>
+<span class="fc" id="L46">      throw new BusinessException(ErrorCode.SALES_TOTALAMOUNT_REQUIRED);</span>
+    }
+<span class="fc bfc" id="L48" title="All 2 branches covered.">    for (PaymentsInfo payment : request.getPayments()) {</span>
+<span class="pc bpc" id="L49" title="2 of 4 branches missed.">      if (payment.getAmount() == null || payment.getAmount() &lt;= 0) {</span>
+<span class="nc" id="L50">        throw new BusinessException(ErrorCode.SALES_PAYMENTSAMOUNT_REQUIRED);</span>
+      }
+<span class="fc bfc" id="L52" title="All 2 branches covered.">      if (payment.getPaymentsMethod() == null) {</span>
+<span class="fc" id="L53">        throw new BusinessException(ErrorCode.SALES_PAYMENTMETHOD_REQUIRED);</span>
+      }
+<span class="fc" id="L55">    }</span>
+
+    // 1. Sales 저장
+    Sales sales =
+<span class="fc" id="L59">        Sales.builder()</span>
+<span class="fc" id="L60">            .shopId(request.getShopId())</span>
+<span class="fc" id="L61">            .customerId(request.getCustomerId())</span>
+<span class="fc" id="L62">            .staffId(request.getStaffId())</span>
+<span class="fc" id="L63">            .reservationId(request.getReservationId())</span>
+<span class="fc" id="L64">            .retailPrice(request.getRetailPrice())</span>
+<span class="fc" id="L65">            .discountRate(request.getDiscountRate())</span>
+<span class="fc" id="L66">            .discountAmount(request.getDiscountAmount())</span>
+<span class="fc" id="L67">            .totalAmount(request.getTotalAmount())</span>
+<span class="fc" id="L68">            .salesMemo(request.getSalesMemo())</span>
+<span class="fc" id="L69">            .salesDate(request.getSalesDate())</span>
+<span class="fc" id="L70">            .isRefunded(false)</span>
+<span class="fc" id="L71">            .build();</span>
+<span class="fc" id="L72">    salesRepository.save(sales);</span>
+
+    // 2. Payments 저장 및 패스 차감
+<span class="fc bfc" id="L75" title="All 2 branches covered.">    for (PaymentsInfo p : request.getPayments()) {</span>
+      Payments payment =
+<span class="fc" id="L77">          Payments.builder()</span>
+<span class="fc" id="L78">              .salesId(sales.getSalesId())</span>
+<span class="fc" id="L79">              .paymentsMethod(p.getPaymentsMethod())</span>
+<span class="fc" id="L80">              .amount(p.getAmount())</span>
+<span class="fc" id="L81">              .build();</span>
+<span class="fc" id="L82">      paymentsRepository.save(payment);</span>
+
+<span class="fc" id="L84">      Long savedPaymentsId = payment.getPaymentsId(); // 저장된 결제 ID</span>
+
+<span class="pc bpc" id="L86" title="2 of 3 branches missed.">      switch (p.getPaymentsMethod()) {</span>
+        case PREPAID_PASS -&gt; {
+<span class="nc" id="L88">          var pass =</span>
+              customerPrepaidPassRepository
+<span class="nc" id="L90">                  .findById(p.getCustomerPrepaidPassId())</span>
+<span class="nc" id="L91">                  .orElseThrow(</span>
+<span class="nc" id="L92">                      () -&gt; new BusinessException(ErrorCode.CUSTOMERPREPAIDPASS_NOT_FOUND));</span>
+
+<span class="nc" id="L94">          pass.useAmount(p.getAmount());</span>
+
+<span class="nc" id="L96">          customerMembershipHistoryRepository.save(</span>
+<span class="nc" id="L97">              CustomerMembershipHistory.builder()</span>
+<span class="nc" id="L98">                  .salesId(sales.getSalesId())</span>
+<span class="nc" id="L99">                  .paymentsId(savedPaymentsId)</span>
+<span class="nc" id="L100">                  .customerPrepaidPassId(pass.getCustomerPrepaidPassId())</span>
+<span class="nc" id="L101">                  .build());</span>
+<span class="nc" id="L102">        }</span>
+
+        case SESSION_PASS -&gt; {
+<span class="nc" id="L105">          var pass =</span>
+              customerSessionPassRepository
+<span class="nc" id="L107">                  .findById(p.getCustomerSessionPassId())</span>
+<span class="nc" id="L108">                  .orElseThrow(</span>
+<span class="nc" id="L109">                      () -&gt; new BusinessException(ErrorCode.CUSTOMERSESSIONPASS_NOT_FOUND));</span>
+
+<span class="nc bnc" id="L111" title="All 2 branches missed.">          int useCount = p.getUsedCount() != null ? p.getUsedCount() : 1;</span>
+<span class="nc" id="L112">          pass.useCount(useCount);</span>
+
+<span class="nc" id="L114">          customerMembershipHistoryRepository.save(</span>
+<span class="nc" id="L115">              CustomerMembershipHistory.builder()</span>
+<span class="nc" id="L116">                  .salesId(sales.getSalesId())</span>
+<span class="nc" id="L117">                  .paymentsId(savedPaymentsId)</span>
+<span class="nc" id="L118">                  .customerSessionPassId(pass.getCustomerSessionPassId())</span>
+<span class="nc" id="L119">                  .usedCount(useCount)</span>
+<span class="nc" id="L120">                  .build());</span>
+        }
+      }
+<span class="fc" id="L123">    }</span>
+    // 3. item_sales 저장
+<span class="fc" id="L125">    itemSalesRepository.save(</span>
+<span class="fc" id="L126">        ItemSales.builder()</span>
+<span class="fc" id="L127">            .salesId(sales.getSalesId())</span>
+<span class="fc" id="L128">            .secondaryItemId(request.getSecondaryItemId())</span>
+<span class="fc" id="L129">            .quantity(request.getQuantity())</span>
+<span class="fc" id="L130">            .discountRate(request.getDiscountRate())</span>
+<span class="fc" id="L131">            .couponId(request.getCouponId())</span>
+<span class="fc" id="L132">            .build());</span>
+
+    // 4. 고객 정보 갱신
+<span class="fc" id="L135">    Customer customer =</span>
+        customerRepository
+<span class="fc" id="L137">            .findById(request.getCustomerId())</span>
+<span class="pc" id="L138">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND));</span>
+<span class="fc" id="L139">    customer.incrementVisitCount();</span>
+<span class="fc" id="L140">    customer.addRevenue(request.getTotalAmount());</span>
+<span class="fc" id="L141">    customer.updateRecentVisitDate(request.getSalesDate().toLocalDate());</span>
+<span class="fc" id="L142">  }</span>
+
+  @Transactional
+  @Override
+  public void updateItemSales(Long salesId, ItemSalesRequest request) {
+    // 1. 기존 Sales 조회
+<span class="fc" id="L148">    Sales sales =</span>
+        salesRepository
+<span class="fc" id="L150">            .findById(salesId)</span>
+<span class="pc" id="L151">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.SALES_NOT_FOUND));</span>
+
+    // 1-1. 수정 전 총금액을 로컬 변수에 저장
+<span class="fc" id="L154">    int oldTotalAmount = sales.getTotalAmount();</span>
+
+    // 2. 기존 Payments 조회 및 soft delete + 패스 복원
+<span class="fc" id="L157">    List&lt;Payments&gt; oldPayments = paymentsRepository.findAllBySalesId(salesId);</span>
+
+<span class="fc bfc" id="L159" title="All 2 branches covered.">    for (Payments old : oldPayments) {</span>
+<span class="fc" id="L160">      old.softDelete();</span>
+
+      // customer_membership_history 기반으로 어떤 패스를 썼는지 확인
+<span class="fc" id="L163">      customerMembershipHistoryRepository</span>
+<span class="fc" id="L164">          .findBySalesIdAndPaymentsId(salesId, old.getPaymentsId())</span>
+<span class="fc" id="L165">          .ifPresent(</span>
+              history -&gt; {
+<span class="nc bnc" id="L167" title="All 2 branches missed.">                if (history.getCustomerPrepaidPassId() != null) {</span>
+<span class="nc" id="L168">                  var pass =</span>
+                      customerPrepaidPassRepository
+<span class="nc" id="L170">                          .findById(history.getCustomerPrepaidPassId())</span>
+<span class="nc" id="L171">                          .orElseThrow(</span>
+<span class="nc" id="L172">                              () -&gt; new BusinessException(ErrorCode.CUSTOMERPREPAIDPASS_NOT_FOUND));</span>
+<span class="nc" id="L173">                  pass.restoreAmount(old.getAmount());</span>
+                }
+
+<span class="nc bnc" id="L176" title="All 2 branches missed.">                if (history.getCustomerSessionPassId() != null) {</span>
+<span class="nc" id="L177">                  var pass =</span>
+                      customerSessionPassRepository
+<span class="nc" id="L179">                          .findById(history.getCustomerSessionPassId())</span>
+<span class="nc" id="L180">                          .orElseThrow(</span>
+<span class="nc" id="L181">                              () -&gt; new BusinessException(ErrorCode.CUSTOMERSESSIONPASS_NOT_FOUND));</span>
+<span class="nc" id="L182">                  pass.restoreCount(history.getUsedCount());</span>
+                }
+
+                // history도 soft delete
+<span class="nc" id="L186">                history.softDelete();</span>
+<span class="nc" id="L187">              });</span>
+<span class="fc" id="L188">    }</span>
+
+    // 3. Sales 필드 수정
+<span class="fc" id="L191">    sales.updateSales(</span>
+<span class="fc" id="L192">        request.getCustomerId(),</span>
+<span class="fc" id="L193">        request.getStaffId(),</span>
+<span class="fc" id="L194">        request.getReservationId(),</span>
+<span class="fc" id="L195">        request.getRetailPrice(),</span>
+<span class="fc" id="L196">        request.getDiscountRate(),</span>
+<span class="fc" id="L197">        request.getDiscountAmount(),</span>
+<span class="fc" id="L198">        request.getTotalAmount(),</span>
+<span class="fc" id="L199">        request.getSalesMemo(),</span>
+<span class="fc" id="L200">        request.getSalesDate());</span>
+
+    // 4. 새로운 Payments 추가 + 패스 차감 + history 저장
+<span class="fc bfc" id="L203" title="All 2 branches covered.">    for (PaymentsInfo p : request.getPayments()) {</span>
+      Payments payment =
+<span class="fc" id="L205">          Payments.builder()</span>
+<span class="fc" id="L206">              .salesId(salesId)</span>
+<span class="fc" id="L207">              .paymentsMethod(p.getPaymentsMethod())</span>
+<span class="fc" id="L208">              .amount(p.getAmount())</span>
+<span class="fc" id="L209">              .build();</span>
+<span class="fc" id="L210">      paymentsRepository.save(payment);</span>
+
+      // customer_membership_history 저장용 변수
+<span class="fc" id="L213">      Long customerPrepaidPassId = null;</span>
+<span class="fc" id="L214">      Long customerSessionPassId = null;</span>
+
+<span class="fc" id="L216">      int usedCount = 0;</span>
+<span class="pc bpc" id="L217" title="2 of 3 branches missed.">      switch (p.getPaymentsMethod()) {</span>
+        case PREPAID_PASS -&gt; {
+<span class="nc" id="L219">          var pass =</span>
+              customerPrepaidPassRepository
+<span class="nc" id="L221">                  .findById(p.getCustomerPrepaidPassId())</span>
+<span class="nc" id="L222">                  .orElseThrow(</span>
+<span class="nc" id="L223">                      () -&gt; new BusinessException(ErrorCode.CUSTOMERPREPAIDPASS_NOT_FOUND));</span>
+<span class="nc" id="L224">          pass.useAmount(p.getAmount());</span>
+<span class="nc" id="L225">          customerPrepaidPassId = pass.getCustomerPrepaidPassId();</span>
+<span class="nc" id="L226">        }</span>
+
+        case SESSION_PASS -&gt; {
+<span class="nc" id="L229">          var pass =</span>
+              customerSessionPassRepository
+<span class="nc" id="L231">                  .findById(p.getCustomerSessionPassId())</span>
+<span class="nc" id="L232">                  .orElseThrow(</span>
+<span class="nc" id="L233">                      () -&gt; new BusinessException(ErrorCode.CUSTOMERSESSIONPASS_NOT_FOUND));</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">          usedCount = p.getUsedCount() != null ? p.getUsedCount() : 1;</span>
+<span class="nc" id="L235">          pass.useCount(usedCount);</span>
+<span class="nc" id="L236">          customerSessionPassId = pass.getCustomerSessionPassId();</span>
+        }
+      }
+
+<span class="fc" id="L240">      customerMembershipHistoryRepository.save(</span>
+<span class="fc" id="L241">          CustomerMembershipHistory.builder()</span>
+<span class="fc" id="L242">              .salesId(salesId)</span>
+<span class="fc" id="L243">              .paymentsId(payment.getPaymentsId())</span>
+<span class="fc" id="L244">              .customerPrepaidPassId(customerPrepaidPassId)</span>
+<span class="fc" id="L245">              .customerSessionPassId(customerSessionPassId)</span>
+<span class="fc" id="L246">              .usedCount(usedCount)</span>
+<span class="fc" id="L247">              .build());</span>
+<span class="fc" id="L248">    }</span>
+
+    // 5. ItemSales 수정
+<span class="fc" id="L251">    ItemSales itemSales =</span>
+        itemSalesRepository
+<span class="fc" id="L253">            .findBySalesId(salesId)</span>
+<span class="pc" id="L254">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.ITEMSALES_NOT_FOUND));</span>
+<span class="fc" id="L255">    itemSales.updateItemSales(</span>
+<span class="fc" id="L256">        request.getSecondaryItemId(),</span>
+<span class="fc" id="L257">        request.getQuantity(),</span>
+<span class="fc" id="L258">        request.getDiscountRate(),</span>
+<span class="fc" id="L259">        request.getCouponId());</span>
+
+    // 6. 고객 정보 갱신 (금액 차이 반영)
+<span class="fc" id="L262">    Customer customer =</span>
+        customerRepository
+<span class="fc" id="L264">            .findById(request.getCustomerId())</span>
+<span class="pc" id="L265">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND));</span>
+
+<span class="fc" id="L267">    int amountDifference = request.getTotalAmount() - oldTotalAmount;</span>
+<span class="fc" id="L268">    customer.addRevenue(amountDifference);</span>
+<span class="fc" id="L269">    customer.updateRecentVisitDate(request.getSalesDate().toLocalDate());</span>
+<span class="fc" id="L270">  }</span>
+
+  @Transactional
+  @Override
+  public void refundItemSales(Long salesId) {
+    // 1. 기존 Sales 조회 및 환불 여부 확인
+<span class="fc" id="L276">    Sales sales =</span>
+        salesRepository
+<span class="fc" id="L278">            .findById(salesId)</span>
+<span class="pc" id="L279">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.SALES_NOT_FOUND));</span>
+
+<span class="pc bpc" id="L281" title="1 of 2 branches missed.">    if (sales.getIsRefunded()) {</span>
+<span class="nc" id="L282">      throw new BusinessException(ErrorCode.SALES_ALREADY_REFUNDED);</span>
+    }
+
+<span class="fc" id="L285">    int oldTotalAmount = sales.getTotalAmount();</span>
+
+    // 2. 기존 Payments 조회 및 soft delete + 패스 복원
+<span class="fc" id="L288">    List&lt;Payments&gt; oldPayments = paymentsRepository.findAllBySalesId(salesId);</span>
+
+<span class="fc bfc" id="L290" title="All 2 branches covered.">    for (Payments old : oldPayments) {</span>
+<span class="fc" id="L291">      old.softDelete();</span>
+
+<span class="fc" id="L293">      customerMembershipHistoryRepository</span>
+<span class="fc" id="L294">          .findBySalesIdAndPaymentsId(salesId, old.getPaymentsId())</span>
+<span class="fc" id="L295">          .ifPresent(</span>
+              history -&gt; {
+<span class="nc bnc" id="L297" title="All 2 branches missed.">                if (history.getCustomerPrepaidPassId() != null) {</span>
+<span class="nc" id="L298">                  var pass =</span>
+                      customerPrepaidPassRepository
+<span class="nc" id="L300">                          .findById(history.getCustomerPrepaidPassId())</span>
+<span class="nc" id="L301">                          .orElseThrow(</span>
+<span class="nc" id="L302">                              () -&gt; new BusinessException(ErrorCode.CUSTOMERPREPAIDPASS_NOT_FOUND));</span>
+<span class="nc" id="L303">                  pass.restoreAmount(old.getAmount());</span>
+                }
+
+<span class="nc bnc" id="L306" title="All 2 branches missed.">                if (history.getCustomerSessionPassId() != null) {</span>
+<span class="nc" id="L307">                  var pass =</span>
+                      customerSessionPassRepository
+<span class="nc" id="L309">                          .findById(history.getCustomerSessionPassId())</span>
+<span class="nc" id="L310">                          .orElseThrow(</span>
+<span class="nc" id="L311">                              () -&gt; new BusinessException(ErrorCode.CUSTOMERSESSIONPASS_NOT_FOUND));</span>
+<span class="nc" id="L312">                  Integer usedCount = history.getUsedCount();</span>
+<span class="nc bnc" id="L313" title="All 2 branches missed.">                  if (usedCount == null) {</span>
+<span class="nc" id="L314">                    throw new BusinessException(ErrorCode.INVALID_MEMBERSHIP_HISTORY);</span>
+                  }
+<span class="nc" id="L316">                  pass.restoreCount(usedCount);</span>
+                }
+
+<span class="nc" id="L319">                history.softDelete();</span>
+<span class="nc" id="L320">              });</span>
+<span class="fc" id="L321">    }</span>
+
+    // 3. Sales 환불 처리
+<span class="fc" id="L324">    sales.setRefunded(true);</span>
+
+    // 4. 고객 정보 롤백
+<span class="fc" id="L327">    Customer customer =</span>
+        customerRepository
+<span class="fc" id="L329">            .findById(sales.getCustomerId())</span>
+<span class="pc" id="L330">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND));</span>
+<span class="fc" id="L331">    customer.subtractRevenue(oldTotalAmount);</span>
+<span class="fc" id="L332">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

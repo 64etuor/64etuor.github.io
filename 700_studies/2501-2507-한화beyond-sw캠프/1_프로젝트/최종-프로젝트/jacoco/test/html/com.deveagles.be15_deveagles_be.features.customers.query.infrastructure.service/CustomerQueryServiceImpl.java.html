@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.query.infrastructure.service</a> &gt; <span class="el_source">CustomerQueryServiceImpl.java</span></div><h1>CustomerQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.query.infrastructure.service;
+
+import static com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.QCustomer.customer;
+import static com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.QCustomerGrade.customerGrade;
+import static com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.QTag.tag;
+import static com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.QTagByCustomer.tagByCustomer;
+
+import com.deveagles.be15_deveagles_be.common.dto.PagedResult;
+import com.deveagles.be15_deveagles_be.common.dto.Pagination;
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.response.TagResponse;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.Customer;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.repository.CustomerRepository;
+import com.deveagles.be15_deveagles_be.features.customers.command.infrastructure.repository.CustomerElasticsearchRepository;
+import com.deveagles.be15_deveagles_be.features.customers.command.infrastructure.repository.CustomerJpaRepository;
+import com.deveagles.be15_deveagles_be.features.customers.query.dto.request.CustomerSearchQuery;
+import com.deveagles.be15_deveagles_be.features.customers.query.dto.response.*;
+import com.deveagles.be15_deveagles_be.features.customers.query.repository.CustomerDetailQueryRepository;
+import com.deveagles.be15_deveagles_be.features.customers.query.repository.CustomerListQueryRepository;
+import com.deveagles.be15_deveagles_be.features.customers.query.service.CustomerQueryService;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+<span class="fc" id="L44">@Slf4j</span>
+public class CustomerQueryServiceImpl implements CustomerQueryService {
+
+  private final CustomerJpaRepository customerJpaRepository;
+  private final CustomerRepository customerRepository;
+  private final CustomerElasticsearchRepository elasticsearchRepository;
+  private final CustomerDetailQueryRepository customerDetailQueryRepository;
+  private final CustomerListQueryRepository customerListQueryRepository;
+  private final JPAQueryFactory queryFactory;
+
+  // 기본 조회
+  @Override
+  public Optional&lt;CustomerResponse&gt; getCustomerByPhoneNumber(String phoneNumber, Long shopId) {
+<span class="fc" id="L57">    return customerJpaRepository</span>
+<span class="fc" id="L58">        .findByPhoneNumberAndShopIdAndDeletedAtIsNull(phoneNumber, shopId)</span>
+<span class="fc" id="L59">        .map(CustomerResponse::from);</span>
+  }
+
+  @Override
+  public List&lt;CustomerResponse&gt; getCustomersByShopId(Long shopId) {
+<span class="nc" id="L64">    return customerJpaRepository.findByShopIdAndDeletedAtIsNull(shopId).stream()</span>
+<span class="nc" id="L65">        .map(CustomerResponse::from)</span>
+<span class="nc" id="L66">        .toList();</span>
+  }
+
+  @Override
+  public long getCustomerCountByShopId(Long shopId) {
+<span class="fc" id="L71">    return customerJpaRepository.countByShopIdAndDeletedAtIsNull(shopId);</span>
+  }
+
+  @Override
+  public boolean existsByPhoneNumber(String phoneNumber, Long shopId) {
+<span class="fc" id="L76">    return customerJpaRepository.existsByPhoneNumberAndShopIdAndDeletedAtIsNull(</span>
+        phoneNumber, shopId);
+  }
+
+  // 상세 조회 (조인)
+  @Override
+  public Optional&lt;CustomerDetailResponse&gt; getCustomerDetail(Long customerId, Long shopId) {
+<span class="fc" id="L83">    return customerDetailQueryRepository.findCustomerDetailById(customerId, shopId);</span>
+  }
+
+  // 목록 조회 (조인 + 페이징)
+  @Override
+  public List&lt;CustomerListResponse&gt; getCustomerList(Long shopId) {
+<span class="fc" id="L89">    return customerListQueryRepository.findCustomerListByShopId(shopId);</span>
+  }
+
+  @Override
+  public Page&lt;CustomerListResponse&gt; getCustomerListPaged(Long shopId, Pageable pageable) {
+<span class="fc" id="L94">    return customerListQueryRepository.findCustomerListByShopId(shopId, pageable);</span>
+  }
+
+  // 검색 (Elasticsearch + JPA 폴백)
+  @Override
+  public List&lt;CustomerSearchResult&gt; searchByKeyword(String keyword, Long shopId) {
+    try {
+<span class="fc" id="L101">      List&lt;CustomerDocument&gt; documents =</span>
+<span class="fc" id="L102">          elasticsearchRepository.searchByNameOrPhoneNumber(shopId, keyword);</span>
+<span class="fc" id="L103">      return documents.stream().map(CustomerSearchResult::from).collect(Collectors.toList());</span>
+<span class="nc" id="L104">    } catch (Exception e) {</span>
+<span class="nc" id="L105">      log.warn(&quot;Elasticsearch 검색 실패, JPA로 폴백: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L106">      return fallbackToJpaSearch(keyword, shopId);</span>
+    }
+  }
+
+  @Override
+  public PagedResult&lt;CustomerSearchResult&gt; advancedSearch(CustomerSearchQuery query) {
+    try {
+      Sort sort =
+<span class="nc" id="L114">          Sort.by(</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">              &quot;DESC&quot;.equalsIgnoreCase(query.sortDirection())</span>
+<span class="nc" id="L116">                  ? Sort.Direction.DESC</span>
+<span class="nc" id="L117">                  : Sort.Direction.ASC,</span>
+<span class="nc" id="L118">              mapSortField(query.sortBy()));</span>
+
+<span class="nc" id="L120">      Pageable pageable = PageRequest.of(query.page(), query.size(), sort);</span>
+
+      // 기본 쿼리 생성
+<span class="nc" id="L123">      JPAQuery&lt;Customer&gt; jpaQuery =</span>
+          queryFactory
+<span class="nc" id="L125">              .selectFrom(customer)</span>
+<span class="nc" id="L126">              .leftJoin(customerGrade)</span>
+<span class="nc" id="L127">              .on(customer.customerGradeId.eq(customerGrade.id))</span>
+<span class="nc" id="L128">              .where(customer.shopId.eq(query.shopId()).and(customer.deletedAt.isNull()));</span>
+
+      // 키워드 검색
+<span class="nc bnc" id="L131" title="All 4 branches missed.">      if (query.keyword() != null &amp;&amp; !query.keyword().trim().isEmpty()) {</span>
+<span class="nc" id="L132">        jpaQuery.where(</span>
+            customer
+                .customerName
+<span class="nc" id="L135">                .containsIgnoreCase(query.keyword())</span>
+<span class="nc" id="L136">                .or(customer.phoneNumber.containsIgnoreCase(query.keyword())));</span>
+      }
+
+      // 고객 등급 필터링
+<span class="nc bnc" id="L140" title="All 4 branches missed.">      if (query.customerGradeIds() != null &amp;&amp; !query.customerGradeIds().isEmpty()) {</span>
+<span class="nc" id="L141">        jpaQuery.where(customer.customerGradeId.in(query.customerGradeIds()));</span>
+      }
+
+      // 태그 필터링
+<span class="nc bnc" id="L145" title="All 4 branches missed.">      if (query.tagIds() != null &amp;&amp; !query.tagIds().isEmpty()) {</span>
+<span class="nc" id="L146">        jpaQuery</span>
+<span class="nc" id="L147">            .innerJoin(tagByCustomer)</span>
+<span class="nc" id="L148">            .on(customer.id.eq(tagByCustomer.customerId))</span>
+<span class="nc" id="L149">            .where(tagByCustomer.tagId.in(query.tagIds().stream().map(Long::valueOf).toList()));</span>
+      }
+
+      // 성별 필터링
+<span class="nc bnc" id="L153" title="All 2 branches missed.">      if (query.gender() != null) {</span>
+<span class="nc" id="L154">        jpaQuery.where(customer.gender.eq(Customer.Gender.valueOf(query.gender())));</span>
+      }
+
+      // 마케팅 동의 필터링
+<span class="nc bnc" id="L158" title="All 2 branches missed.">      if (query.marketingConsent() != null) {</span>
+<span class="nc" id="L159">        jpaQuery.where(customer.marketingConsent.eq(query.marketingConsent()));</span>
+      }
+
+      // 알림 동의 필터링
+<span class="nc bnc" id="L163" title="All 2 branches missed.">      if (query.notificationConsent() != null) {</span>
+<span class="nc" id="L164">        jpaQuery.where(customer.notificationConsent.eq(query.notificationConsent()));</span>
+      }
+
+      // 휴면 고객 제외
+<span class="nc bnc" id="L168" title="All 4 branches missed.">      if (query.excludeDormant() != null &amp;&amp; query.excludeDormant()) {</span>
+        LocalDateTime dormantDate =
+<span class="nc" id="L170">            LocalDateTime.now()</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">                .minusMonths(query.dormantMonths() != null ? query.dormantMonths() : 6);</span>
+<span class="nc" id="L172">        jpaQuery.where(customer.recentVisitDate.after(dormantDate.toLocalDate()));</span>
+      }
+
+      // 최근 메시지 수신자 제외
+<span class="nc bnc" id="L176" title="All 4 branches missed.">      if (query.excludeRecentMessage() != null &amp;&amp; query.excludeRecentMessage()) {</span>
+        LocalDateTime recentMessageDate =
+<span class="nc" id="L178">            LocalDateTime.now()</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">                .minusDays(query.recentMessageDays() != null ? query.recentMessageDays() : 30);</span>
+<span class="nc" id="L180">        jpaQuery.where(</span>
+            customer
+                .lastMessageSentAt
+<span class="nc" id="L183">                .before(recentMessageDate)</span>
+<span class="nc" id="L184">                .or(customer.lastMessageSentAt.isNull()));</span>
+      }
+
+      // 페이징 적용
+<span class="nc" id="L188">      List&lt;Customer&gt; countResult = jpaQuery.fetch();</span>
+<span class="nc" id="L189">      long total = countResult.size();</span>
+<span class="nc" id="L190">      List&lt;Customer&gt; customers =</span>
+<span class="nc" id="L191">          jpaQuery.offset(pageable.getOffset()).limit(pageable.getPageSize()).fetch();</span>
+
+      // 결과 변환
+<span class="nc" id="L194">      List&lt;CustomerSearchResult&gt; responses =</span>
+<span class="nc" id="L195">          customers.stream()</span>
+<span class="nc" id="L196">              .map(</span>
+                  c -&gt;
+<span class="nc" id="L198">                      CustomerSearchResult.of(</span>
+<span class="nc" id="L199">                          c.getId(),</span>
+<span class="nc" id="L200">                          c.getCustomerName(),</span>
+<span class="nc" id="L201">                          c.getPhoneNumber(),</span>
+<span class="nc" id="L202">                          c.getCustomerGradeId(),</span>
+                          null, // customerGradeName은 나중에 조인으로 가져오도록 수정
+<span class="nc" id="L204">                          c.getGender()))</span>
+<span class="nc" id="L205">              .toList();</span>
+
+      Pagination pagination =
+<span class="nc" id="L208">          Pagination.builder()</span>
+<span class="nc" id="L209">              .currentPage(query.page())</span>
+<span class="nc" id="L210">              .totalPages((int) Math.ceil((double) total / query.size()))</span>
+<span class="nc" id="L211">              .totalItems(total)</span>
+<span class="nc" id="L212">              .build();</span>
+
+<span class="nc" id="L214">      return new PagedResult&lt;&gt;(responses, pagination);</span>
+
+<span class="nc" id="L216">    } catch (Exception e) {</span>
+<span class="nc" id="L217">      log.error(&quot;JPA 고급 검색 실패: {}&quot;, e.getMessage(), e);</span>
+<span class="nc" id="L218">      throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR);</span>
+    }
+  }
+
+  @Override
+  public List&lt;String&gt; autocomplete(String prefix, Long shopId) {
+    try {
+<span class="fc" id="L225">      List&lt;CustomerDocument&gt; documents = elasticsearchRepository.autocomplete(shopId, prefix);</span>
+<span class="fc" id="L226">      return documents.stream()</span>
+<span class="fc" id="L227">          .map(doc -&gt; doc.getCustomerName() + &quot; (&quot; + doc.getPhoneNumber() + &quot;)&quot;)</span>
+<span class="fc" id="L228">          .distinct()</span>
+<span class="fc" id="L229">          .limit(10)</span>
+<span class="fc" id="L230">          .collect(Collectors.toList());</span>
+<span class="fc" id="L231">    } catch (Exception e) {</span>
+<span class="fc" id="L232">      log.warn(&quot;Elasticsearch 자동완성 실패: {}&quot;, e.getMessage());</span>
+<span class="fc" id="L233">      return List.of();</span>
+    }
+  }
+
+  @Override
+  public long countByKeyword(String keyword, Long shopId) {
+    try {
+<span class="nc" id="L240">      return elasticsearchRepository.searchByNameOrPhoneNumber(shopId, keyword).size();</span>
+<span class="nc" id="L241">    } catch (Exception e) {</span>
+<span class="nc" id="L242">      log.warn(&quot;Elasticsearch 개수 조회 실패: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L243">      return 0;</span>
+    }
+  }
+
+  // 태그 조회
+  @Override
+  public List&lt;TagResponse&gt; getCustomerTags(Long customerId, Long shopId) {
+<span class="nc" id="L250">    validateCustomerExists(customerId, shopId);</span>
+
+<span class="nc" id="L252">    return queryFactory</span>
+<span class="nc" id="L253">        .select(tag.id, tag.shopId, tag.tagName, tag.colorCode)</span>
+<span class="nc" id="L254">        .from(tagByCustomer)</span>
+<span class="nc" id="L255">        .innerJoin(tag)</span>
+<span class="nc" id="L256">        .on(tagByCustomer.tagId.eq(tag.id))</span>
+<span class="nc" id="L257">        .where(tagByCustomer.customerId.eq(customerId))</span>
+<span class="nc" id="L258">        .fetch()</span>
+<span class="nc" id="L259">        .stream()</span>
+<span class="nc" id="L260">        .map(</span>
+            tuple -&gt;
+<span class="nc" id="L262">                TagResponse.builder()</span>
+<span class="nc" id="L263">                    .tagId(tuple.get(tag.id))</span>
+<span class="nc" id="L264">                    .shopId(tuple.get(tag.shopId))</span>
+<span class="nc" id="L265">                    .tagName(tuple.get(tag.tagName))</span>
+<span class="nc" id="L266">                    .colorCode(tuple.get(tag.colorCode))</span>
+<span class="nc" id="L267">                    .build())</span>
+<span class="nc" id="L268">        .toList();</span>
+  }
+
+  // Elasticsearch 동기화
+  @Override
+  @Transactional
+  public void syncCustomerToElasticsearch(Long customerId) {
+    try {
+<span class="nc" id="L276">      customerJpaRepository</span>
+<span class="nc" id="L277">          .findById(customerId)</span>
+<span class="nc" id="L278">          .ifPresent(</span>
+              cust -&gt; {
+<span class="nc" id="L280">                CustomerDocument document = createCustomerDocumentWithGradeName(cust);</span>
+<span class="nc" id="L281">                elasticsearchRepository.save(document);</span>
+<span class="nc" id="L282">                log.info(&quot;고객 Elasticsearch 동기화 완료: ID={}&quot;, customerId);</span>
+<span class="nc" id="L283">              });</span>
+<span class="nc" id="L284">    } catch (Exception e) {</span>
+<span class="nc" id="L285">      log.error(&quot;고객 Elasticsearch 동기화 실패: ID={}, error={}&quot;, customerId, e.getMessage());</span>
+<span class="nc" id="L286">    }</span>
+<span class="nc" id="L287">  }</span>
+
+  @Override
+  @Transactional
+  public void reindexAllCustomers(Long shopId) {
+    try {
+<span class="nc" id="L293">      List&lt;Customer&gt; customers = customerJpaRepository.findByShopIdAndDeletedAtIsNull(shopId);</span>
+<span class="nc" id="L294">      List&lt;CustomerDocument&gt; documents =</span>
+<span class="nc" id="L295">          customers.stream()</span>
+<span class="nc" id="L296">              .map(this::createCustomerDocumentWithGradeName)</span>
+<span class="nc" id="L297">              .collect(Collectors.toList());</span>
+
+<span class="nc" id="L299">      elasticsearchRepository.saveAll(documents);</span>
+<span class="nc" id="L300">      log.info(&quot;매장 {} 고객 데이터 재인덱싱 완료: {}건&quot;, shopId, documents.size());</span>
+<span class="nc" id="L301">    } catch (Exception e) {</span>
+<span class="nc" id="L302">      log.error(&quot;고객 데이터 재인덱싱 실패: shopId={}, error={}&quot;, shopId, e.getMessage());</span>
+<span class="nc" id="L303">    }</span>
+<span class="nc" id="L304">  }</span>
+
+  @Override
+  @Transactional
+  public void reindexAllCustomersWithReset(Long shopId) {
+    try {
+<span class="nc" id="L310">      log.info(&quot;매장 {} 고객 데이터 리셋 후 재인덱싱 시작&quot;, shopId);</span>
+
+      // 1. 해당 매장의 기존 문서 삭제
+<span class="nc" id="L313">      deleteCustomerDocumentsByShopId(shopId);</span>
+
+      // 2. 배치 처리로 재인덱싱
+<span class="nc" id="L316">      reindexCustomersByBatch(shopId);</span>
+
+<span class="nc" id="L318">      log.info(&quot;매장 {} 고객 데이터 리셋 후 재인덱싱 완료&quot;, shopId);</span>
+<span class="nc" id="L319">    } catch (Exception e) {</span>
+<span class="nc" id="L320">      log.error(&quot;매장 {} 고객 데이터 리셋 후 재인덱싱 실패: {}&quot;, shopId, e.getMessage());</span>
+<span class="nc" id="L321">      throw new RuntimeException(&quot;재인덱싱 실패&quot;, e);</span>
+<span class="nc" id="L322">    }</span>
+<span class="nc" id="L323">  }</span>
+
+  @Override
+  @Transactional
+  public void reindexAllShopsCustomers() {
+    try {
+<span class="nc" id="L329">      log.info(&quot;전체 매장 고객 데이터 재인덱싱 시작&quot;);</span>
+
+<span class="nc" id="L331">      List&lt;Long&gt; shopIds = customerJpaRepository.findDistinctShopIds();</span>
+
+<span class="nc bnc" id="L333" title="All 2 branches missed.">      for (Long shopId : shopIds) {</span>
+        try {
+<span class="nc" id="L335">          reindexCustomersByBatch(shopId);</span>
+<span class="nc" id="L336">          log.info(&quot;매장 {} 재인덱싱 완료&quot;, shopId);</span>
+<span class="nc" id="L337">        } catch (Exception e) {</span>
+<span class="nc" id="L338">          log.error(&quot;매장 {} 재인덱싱 실패: {}&quot;, shopId, e.getMessage());</span>
+          // 다른 매장은 계속 처리
+<span class="nc" id="L340">        }</span>
+<span class="nc" id="L341">      }</span>
+
+<span class="nc" id="L343">      log.info(&quot;전체 매장 고객 데이터 재인덱싱 완료&quot;);</span>
+<span class="nc" id="L344">    } catch (Exception e) {</span>
+<span class="nc" id="L345">      log.error(&quot;전체 매장 고객 데이터 재인덱싱 실패: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L346">      throw new RuntimeException(&quot;전체 재인덱싱 실패&quot;, e);</span>
+<span class="nc" id="L347">    }</span>
+<span class="nc" id="L348">  }</span>
+
+  @Override
+  @Transactional
+  public void reindexAllShopsCustomersWithReset() {
+    try {
+<span class="nc" id="L354">      log.info(&quot;전체 매장 고객 데이터 리셋 후 재인덱싱 시작&quot;);</span>
+
+      // 1. 모든 고객 문서 삭제
+<span class="nc" id="L357">      elasticsearchRepository.deleteAll();</span>
+<span class="nc" id="L358">      log.info(&quot;기존 고객 문서 전체 삭제 완료&quot;);</span>
+
+      // 2. 전체 매장 재인덱싱
+<span class="nc" id="L361">      reindexAllShopsCustomers();</span>
+
+<span class="nc" id="L363">      log.info(&quot;전체 매장 고객 데이터 리셋 후 재인덱싱 완료&quot;);</span>
+<span class="nc" id="L364">    } catch (Exception e) {</span>
+<span class="nc" id="L365">      log.error(&quot;전체 매장 고객 데이터 리셋 후 재인덱싱 실패: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L366">      throw new RuntimeException(&quot;전체 리셋 후 재인덱싱 실패&quot;, e);</span>
+<span class="nc" id="L367">    }</span>
+<span class="nc" id="L368">  }</span>
+
+  @Override
+  public ReindexStatus getReindexStatus(String taskId) {
+<span class="nc" id="L372">    return ReindexStatus.createCompleted(taskId, 0L, 0L, LocalDateTime.now(), null);</span>
+  }
+
+  // 배치 처리를 위한 private 메서드들
+  private void deleteCustomerDocumentsByShopId(Long shopId) {
+    try {
+<span class="nc" id="L378">      List&lt;CustomerDocument&gt; existingDocs =</span>
+          elasticsearchRepository
+<span class="nc" id="L380">              .findByShopIdAndDeletedAtIsNull(shopId, PageRequest.of(0, Integer.MAX_VALUE))</span>
+<span class="nc" id="L381">              .getContent();</span>
+
+<span class="nc bnc" id="L383" title="All 2 branches missed.">      if (!existingDocs.isEmpty()) {</span>
+<span class="nc" id="L384">        elasticsearchRepository.deleteAll(existingDocs);</span>
+<span class="nc" id="L385">        log.info(&quot;매장 {} 기존 고객 문서 {}건 삭제 완료&quot;, shopId, existingDocs.size());</span>
+      }
+<span class="nc" id="L387">    } catch (Exception e) {</span>
+<span class="nc" id="L388">      log.error(&quot;매장 {} 기존 고객 문서 삭제 실패: {}&quot;, shopId, e.getMessage());</span>
+<span class="nc" id="L389">    }</span>
+<span class="nc" id="L390">  }</span>
+
+  private void reindexCustomersByBatch(Long shopId) {
+<span class="nc" id="L393">    final int BATCH_SIZE = 1000;</span>
+<span class="nc" id="L394">    int page = 0;</span>
+
+    while (true) {
+<span class="nc" id="L397">      Pageable pageable = PageRequest.of(page, BATCH_SIZE);</span>
+<span class="nc" id="L398">      List&lt;Customer&gt; customers =</span>
+<span class="nc" id="L399">          customerJpaRepository.findByShopIdAndDeletedAtIsNull(shopId, pageable);</span>
+
+<span class="nc bnc" id="L401" title="All 2 branches missed.">      if (customers.isEmpty()) {</span>
+<span class="nc" id="L402">        break;</span>
+      }
+
+<span class="nc" id="L405">      Set&lt;Long&gt; gradeIds =</span>
+<span class="nc" id="L406">          customers.stream()</span>
+<span class="nc" id="L407">              .map(Customer::getCustomerGradeId)</span>
+<span class="nc" id="L408">              .filter(Objects::nonNull)</span>
+<span class="nc" id="L409">              .collect(Collectors.toSet());</span>
+
+<span class="nc" id="L411">      Map&lt;Long, String&gt; gradeNameMap = loadGradeNames(gradeIds);</span>
+
+<span class="nc" id="L413">      List&lt;CustomerDocument&gt; documents =</span>
+<span class="nc" id="L414">          customers.stream()</span>
+<span class="nc" id="L415">              .map(cust -&gt; createCustomerDocumentWithGradeMap(cust, gradeNameMap))</span>
+<span class="nc" id="L416">              .collect(Collectors.toList());</span>
+
+<span class="nc" id="L418">      elasticsearchRepository.saveAll(documents);</span>
+<span class="nc" id="L419">      log.info(&quot;매장 {} 배치 {} 처리 완료: {}건&quot;, shopId, page + 1, documents.size());</span>
+
+<span class="nc" id="L421">      page++;</span>
+
+<span class="nc bnc" id="L423" title="All 2 branches missed.">      if (customers.size() &lt; BATCH_SIZE) {</span>
+<span class="nc" id="L424">        break;</span>
+      }
+<span class="nc" id="L426">    }</span>
+<span class="nc" id="L427">  }</span>
+
+  // Grade 정보를 배치로 로드하는 최적화된 메서드
+  private Map&lt;Long, String&gt; loadGradeNames(Set&lt;Long&gt; gradeIds) {
+<span class="nc bnc" id="L431" title="All 2 branches missed.">    if (gradeIds.isEmpty()) {</span>
+<span class="nc" id="L432">      return Collections.emptyMap();</span>
+    }
+
+<span class="nc" id="L435">    return queryFactory</span>
+<span class="nc" id="L436">        .select(customerGrade.id, customerGrade.customerGradeName)</span>
+<span class="nc" id="L437">        .from(customerGrade)</span>
+<span class="nc" id="L438">        .where(customerGrade.id.in(gradeIds))</span>
+<span class="nc" id="L439">        .fetch()</span>
+<span class="nc" id="L440">        .stream()</span>
+<span class="nc" id="L441">        .collect(</span>
+<span class="nc" id="L442">            Collectors.toMap(</span>
+<span class="nc" id="L443">                tuple -&gt; tuple.get(customerGrade.id),</span>
+<span class="nc" id="L444">                tuple -&gt; tuple.get(customerGrade.customerGradeName)));</span>
+  }
+
+  // 최적화된 CustomerDocument 생성 메서드
+  private CustomerDocument createCustomerDocumentWithGradeMap(
+      Customer cust, Map&lt;Long, String&gt; gradeNameMap) {
+<span class="nc" id="L450">    String gradeName = gradeNameMap.get(cust.getCustomerGradeId());</span>
+
+<span class="nc" id="L452">    return CustomerDocument.builder()</span>
+<span class="nc" id="L453">        .id(cust.getShopId() + &quot;_&quot; + cust.getId())</span>
+<span class="nc" id="L454">        .customerId(cust.getId())</span>
+<span class="nc" id="L455">        .shopId(cust.getShopId())</span>
+<span class="nc" id="L456">        .customerName(cust.getCustomerName())</span>
+<span class="nc" id="L457">        .phoneNumber(cust.getPhoneNumber())</span>
+<span class="nc" id="L458">        .customerGradeId(cust.getCustomerGradeId())</span>
+<span class="nc" id="L459">        .customerGradeName(gradeName)</span>
+<span class="nc bnc" id="L460" title="All 2 branches missed.">        .gender(cust.getGender() != null ? cust.getGender().name() : null)</span>
+<span class="nc" id="L461">        .deletedAt(cust.getDeletedAt())</span>
+<span class="nc" id="L462">        .build();</span>
+  }
+
+  @Override
+  public Optional&lt;CustomerIdResponse&gt; findCustomerIdByPhoneNumber(String phoneNumber, Long shopId) {
+<span class="fc" id="L467">    return customerJpaRepository</span>
+<span class="fc" id="L468">        .findByPhoneNumberAndShopIdAndDeletedAtIsNull(phoneNumber, shopId)</span>
+<span class="fc" id="L469">        .map(cust -&gt; new CustomerIdResponse(cust.getId()));</span>
+  }
+
+  // 기존 메서드는 개별 동기화에서만 사용
+  private CustomerDocument createCustomerDocumentWithGradeName(Customer cust) {
+<span class="nc" id="L474">    String gradeName =</span>
+        queryFactory
+<span class="nc" id="L476">            .select(customerGrade.customerGradeName)</span>
+<span class="nc" id="L477">            .from(customerGrade)</span>
+<span class="nc" id="L478">            .where(customerGrade.id.eq(cust.getCustomerGradeId()))</span>
+<span class="nc" id="L479">            .fetchOne();</span>
+
+<span class="nc" id="L481">    return CustomerDocument.builder()</span>
+<span class="nc" id="L482">        .id(cust.getShopId() + &quot;_&quot; + cust.getId())</span>
+<span class="nc" id="L483">        .customerId(cust.getId())</span>
+<span class="nc" id="L484">        .shopId(cust.getShopId())</span>
+<span class="nc" id="L485">        .customerName(cust.getCustomerName())</span>
+<span class="nc" id="L486">        .phoneNumber(cust.getPhoneNumber())</span>
+<span class="nc" id="L487">        .customerGradeId(cust.getCustomerGradeId())</span>
+<span class="nc" id="L488">        .customerGradeName(gradeName)</span>
+<span class="nc bnc" id="L489" title="All 2 branches missed.">        .gender(cust.getGender() != null ? cust.getGender().name() : null)</span>
+<span class="nc" id="L490">        .deletedAt(cust.getDeletedAt())</span>
+<span class="nc" id="L491">        .build();</span>
+  }
+
+  // Private helper methods
+  private void validateCustomerExists(Long customerId, Long shopId) {
+<span class="pc bpc" id="L496" title="1 of 2 branches missed.">    if (customerRepository.findByIdAndShopId(customerId, shopId).isEmpty()) {</span>
+<span class="fc" id="L497">      throw new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND, &quot;고객을 찾을 수 없습니다.&quot;);</span>
+    }
+<span class="nc" id="L499">  }</span>
+
+  private List&lt;CustomerSearchResult&gt; fallbackToJpaSearch(String keyword, Long shopId) {
+<span class="nc" id="L502">    return queryFactory</span>
+<span class="nc" id="L503">        .select(</span>
+            customer.id,
+            customer.customerName,
+            customer.phoneNumber,
+            customer.customerGradeId,
+            customerGrade.customerGradeName,
+            customer.gender)
+<span class="nc" id="L510">        .from(customer)</span>
+<span class="nc" id="L511">        .leftJoin(customerGrade)</span>
+<span class="nc" id="L512">        .on(customer.customerGradeId.eq(customerGrade.id))</span>
+<span class="nc" id="L513">        .where(</span>
+            customer
+                .shopId
+<span class="nc" id="L516">                .eq(shopId)</span>
+<span class="nc" id="L517">                .and(customer.deletedAt.isNull())</span>
+<span class="nc" id="L518">                .and(</span>
+                    customer
+                        .customerName
+<span class="nc" id="L521">                        .contains(keyword)</span>
+<span class="nc" id="L522">                        .or(customer.phoneNumber.contains(keyword))))</span>
+<span class="nc" id="L523">        .fetch()</span>
+<span class="nc" id="L524">        .stream()</span>
+<span class="nc" id="L525">        .map(</span>
+            tuple -&gt;
+<span class="nc" id="L527">                CustomerSearchResult.of(</span>
+<span class="nc" id="L528">                    tuple.get(customer.id),</span>
+<span class="nc" id="L529">                    tuple.get(customer.customerName),</span>
+<span class="nc" id="L530">                    tuple.get(customer.phoneNumber),</span>
+<span class="nc" id="L531">                    tuple.get(customer.customerGradeId),</span>
+<span class="nc" id="L532">                    tuple.get(customerGrade.customerGradeName),</span>
+<span class="nc" id="L533">                    tuple.get(customer.gender)))</span>
+<span class="nc" id="L534">        .collect(Collectors.toList());</span>
+  }
+
+  private String mapSortField(String sortBy) {
+<span class="nc bnc" id="L538" title="All 3 branches missed.">    return switch (sortBy) {</span>
+<span class="nc" id="L539">      case &quot;customerName&quot; -&gt; &quot;customerName.keyword&quot;;</span>
+<span class="nc" id="L540">      case &quot;phoneNumber&quot; -&gt; &quot;phoneNumber&quot;;</span>
+<span class="nc" id="L541">      default -&gt; &quot;customerName.keyword&quot;;</span>
+    };
+  }
+
+  @Override
+  public List&lt;String&gt; getCustomerPhoneNumbers(List&lt;Long&gt; customerIds) {
+<span class="fc" id="L547">    List&lt;Customer&gt; customers = customerJpaRepository.findAllById(customerIds);</span>
+
+<span class="fc bfc" id="L549" title="All 2 branches covered.">    if (customers.size() != customerIds.size()) {</span>
+<span class="fc" id="L550">      throw new BusinessException(ErrorCode.CUSTOMER_NOT_FOUND);</span>
+    }
+
+<span class="fc" id="L553">    return customers.stream().map(Customer::getPhoneNumber).toList();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

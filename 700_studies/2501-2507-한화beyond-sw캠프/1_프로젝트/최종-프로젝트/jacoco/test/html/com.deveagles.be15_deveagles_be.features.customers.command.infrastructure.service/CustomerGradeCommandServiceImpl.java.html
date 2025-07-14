@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerGradeCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.command.infrastructure.service</a> &gt; <span class="el_source">CustomerGradeCommandServiceImpl.java</span></div><h1>CustomerGradeCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.command.infrastructure.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.request.CreateCustomerGradeRequest;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.request.UpdateCustomerGradeRequest;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.service.CustomerGradeCommandService;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.CustomerGrade;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.repository.CustomerGradeRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+<span class="fc" id="L18">@Slf4j</span>
+public class CustomerGradeCommandServiceImpl implements CustomerGradeCommandService {
+
+  private final CustomerGradeRepository customerGradeRepository;
+
+  @Override
+  public Long createCustomerGrade(CreateCustomerGradeRequest request) {
+<span class="fc" id="L25">    log.info(</span>
+        &quot;고객등급 생성 요청 - 매장ID: {}, 등급명: {}, 할인율: {}%&quot;,
+<span class="fc" id="L27">        request.getShopId(), request.getCustomerGradeName(), request.getDiscountRate());</span>
+
+<span class="fc" id="L29">    validateGradeNameNotExists(request.getCustomerGradeName(), request.getShopId());</span>
+
+    CustomerGrade customerGrade =
+<span class="fc" id="L32">        CustomerGrade.builder()</span>
+<span class="fc" id="L33">            .shopId(request.getShopId())</span>
+<span class="fc" id="L34">            .customerGradeName(request.getCustomerGradeName())</span>
+<span class="fc" id="L35">            .discountRate(request.getDiscountRate())</span>
+<span class="fc" id="L36">            .build();</span>
+
+<span class="fc" id="L38">    CustomerGrade savedGrade = customerGradeRepository.save(customerGrade);</span>
+
+<span class="fc" id="L40">    log.info(</span>
+        &quot;고객등급 생성 완료 - ID: {}, 매장ID: {}, 등급명: {}, 할인율: {}%&quot;,
+<span class="fc" id="L42">        savedGrade.getId(),</span>
+<span class="fc" id="L43">        savedGrade.getShopId(),</span>
+<span class="fc" id="L44">        savedGrade.getCustomerGradeName(),</span>
+<span class="fc" id="L45">        savedGrade.getDiscountRate());</span>
+<span class="fc" id="L46">    return savedGrade.getId();</span>
+  }
+
+  @Override
+  public void updateCustomerGrade(Long gradeId, UpdateCustomerGradeRequest request) {
+<span class="fc" id="L51">    log.info(</span>
+        &quot;고객등급 수정 요청 - ID: {}, 매장ID: {}, 새 등급명: {}, 새 할인율: {}%&quot;,
+<span class="fc" id="L53">        gradeId, request.getShopId(), request.getCustomerGradeName(), request.getDiscountRate());</span>
+
+<span class="fc" id="L55">    CustomerGrade customerGrade = findCustomerGradeByIdAndShopId(gradeId, request.getShopId());</span>
+
+<span class="fc bfc" id="L57" title="All 2 branches covered.">    if (!customerGrade.getCustomerGradeName().equals(request.getCustomerGradeName())) {</span>
+<span class="fc" id="L58">      validateGradeNameNotExists(request.getCustomerGradeName(), request.getShopId());</span>
+    }
+
+<span class="fc" id="L61">    String oldGradeName = customerGrade.getCustomerGradeName();</span>
+<span class="fc" id="L62">    Integer oldDiscountRate = customerGrade.getDiscountRate();</span>
+
+<span class="fc" id="L64">    customerGrade.updateGradeName(request.getCustomerGradeName());</span>
+<span class="fc" id="L65">    customerGrade.updateDiscountRate(request.getDiscountRate());</span>
+
+<span class="fc" id="L67">    log.info(</span>
+        &quot;고객등급 수정 완료 - ID: {}, 매장ID: {}, 등급명: {} -&gt; {}, 할인율: {}% -&gt; {}%&quot;,
+        gradeId,
+<span class="fc" id="L70">        request.getShopId(),</span>
+        oldGradeName,
+<span class="fc" id="L72">        request.getCustomerGradeName(),</span>
+        oldDiscountRate,
+<span class="fc" id="L74">        request.getDiscountRate());</span>
+<span class="fc" id="L75">  }</span>
+
+  @Override
+  public void deleteCustomerGrade(Long gradeId) {
+<span class="fc" id="L79">    log.info(&quot;고객등급 삭제 요청 - ID: {}&quot;, gradeId);</span>
+
+<span class="fc" id="L81">    CustomerGrade customerGrade = findCustomerGradeById(gradeId);</span>
+<span class="fc" id="L82">    customerGradeRepository.delete(customerGrade);</span>
+
+<span class="fc" id="L84">    log.info(&quot;고객등급 삭제 완료 - ID: {}, 등급명: {}&quot;, gradeId, customerGrade.getCustomerGradeName());</span>
+<span class="fc" id="L85">  }</span>
+
+  private CustomerGrade findCustomerGradeById(Long gradeId) {
+<span class="fc" id="L88">    return customerGradeRepository</span>
+<span class="fc" id="L89">        .findById(gradeId)</span>
+<span class="fc" id="L90">        .orElseThrow(</span>
+            () -&gt; {
+<span class="fc" id="L92">              log.error(&quot;고객등급을 찾을 수 없음 - ID: {}&quot;, gradeId);</span>
+<span class="fc" id="L93">              return new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, &quot;고객등급을 찾을 수 없습니다.&quot;);</span>
+            });
+  }
+
+  private CustomerGrade findCustomerGradeByIdAndShopId(Long gradeId, Long shopId) {
+<span class="fc" id="L98">    return customerGradeRepository</span>
+<span class="fc" id="L99">        .findByIdAndShopId(gradeId, shopId)</span>
+<span class="fc" id="L100">        .orElseThrow(</span>
+            () -&gt; {
+<span class="fc" id="L102">              log.error(&quot;고객등급을 찾을 수 없음 - ID: {}, 매장ID: {}&quot;, gradeId, shopId);</span>
+<span class="fc" id="L103">              return new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, &quot;고객등급을 찾을 수 없습니다.&quot;);</span>
+            });
+  }
+
+  private void validateGradeNameNotExists(String customerGradeName, Long shopId) {
+<span class="fc bfc" id="L108" title="All 2 branches covered.">    if (customerGradeRepository.existsByCustomerGradeNameAndShopId(customerGradeName, shopId)) {</span>
+<span class="fc" id="L109">      log.error(&quot;중복된 고객등급명 - 등급명: {}, 매장ID: {}&quot;, customerGradeName, shopId);</span>
+<span class="fc" id="L110">      throw new BusinessException(ErrorCode.DUPLICATE_RESOURCE, &quot;이미 존재하는 고객등급명입니다.&quot;);</span>
+    }
+<span class="fc" id="L112">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

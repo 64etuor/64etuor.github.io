@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PrepaidPassSalesCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.sales.command.application.service.impl</a> &gt; <span class="el_source">PrepaidPassSalesCommandServiceImpl.java</span></div><h1>PrepaidPassSalesCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.sales.command.application.service.impl;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.membership.command.application.dto.request.CustomerPrepaidPassRegistRequest;
+import com.deveagles.be15_deveagles_be.features.membership.command.application.service.CustomerPrepaidPassCommandService;
+import com.deveagles.be15_deveagles_be.features.membership.command.domain.aggregate.ExpirationPeriodType;
+import com.deveagles.be15_deveagles_be.features.membership.command.domain.aggregate.PrepaidPass;
+import com.deveagles.be15_deveagles_be.features.membership.command.domain.repository.PrepaidPassRepository;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.dto.request.PaymentsInfo;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.dto.request.PrepaidPassSalesRequest;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.service.PrepaidPassSalesCommandService;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.Payments;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.PrepaidPassSales;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.Sales;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.repository.PaymentsRepository;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.repository.PrepaidPassSalesRepository;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.repository.SalesRepository;
+import jakarta.transaction.Transactional;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class PrepaidPassSalesCommandServiceImpl implements PrepaidPassSalesCommandService {
+
+  private final PrepaidPassSalesRepository prepaidPassSalesRepository;
+  private final PrepaidPassRepository prepaidPassRepository;
+  private final SalesRepository salesRepository;
+  private final PaymentsRepository paymentsRepository;
+  private final CustomerPrepaidPassCommandService customerPrepaidPassCommandService;
+
+  @Transactional
+  @Override
+  public void registPrepaidPassSales(PrepaidPassSalesRequest request) {
+
+    // 유효성 검사
+<span class="fc bfc" id="L41" title="All 2 branches covered.">    if (request.getRetailPrice() &lt; 0) {</span>
+<span class="fc" id="L42">      throw new BusinessException(ErrorCode.SALES_RETAILPRICE_REQUIRED);</span>
+    }
+<span class="fc bfc" id="L44" title="All 2 branches covered.">    if (request.getTotalAmount() &lt; 0) {</span>
+<span class="fc" id="L45">      throw new BusinessException(ErrorCode.SALES_TOTALAMOUNT_REQUIRED);</span>
+    }
+<span class="fc bfc" id="L47" title="All 2 branches covered.">    for (PaymentsInfo payment : request.getPayments()) {</span>
+<span class="pc bpc" id="L48" title="2 of 4 branches missed.">      if (payment.getAmount() == null || payment.getAmount() &lt;= 0) {</span>
+<span class="nc" id="L49">        throw new BusinessException(ErrorCode.SALES_PAYMENTSAMOUNT_REQUIRED);</span>
+      }
+<span class="fc bfc" id="L51" title="All 2 branches covered.">      if (payment.getPaymentsMethod() == null) {</span>
+<span class="fc" id="L52">        throw new BusinessException(ErrorCode.SALES_PAYMENTMETHOD_REQUIRED);</span>
+      }
+<span class="fc" id="L54">    }</span>
+
+    // Sales 저장
+    Sales sales =
+<span class="fc" id="L58">        Sales.builder()</span>
+<span class="fc" id="L59">            .shopId(request.getShopId())</span>
+<span class="fc" id="L60">            .customerId(request.getCustomerId())</span>
+<span class="fc" id="L61">            .staffId(request.getStaffId())</span>
+<span class="fc" id="L62">            .reservationId(request.getReservationId())</span>
+<span class="fc" id="L63">            .retailPrice(request.getRetailPrice())</span>
+<span class="fc" id="L64">            .discountRate(request.getDiscountRate())</span>
+<span class="fc" id="L65">            .discountAmount(request.getDiscountAmount())</span>
+<span class="fc" id="L66">            .totalAmount(request.getTotalAmount())</span>
+<span class="fc" id="L67">            .salesMemo(request.getSalesMemo())</span>
+<span class="fc" id="L68">            .salesDate(request.getSalesDate())</span>
+<span class="fc" id="L69">            .isRefunded(false)</span>
+<span class="fc" id="L70">            .build();</span>
+<span class="fc" id="L71">    salesRepository.save(sales);</span>
+
+    // PrepaidPassSales 저장
+    PrepaidPassSales prepaidPassSales =
+<span class="fc" id="L75">        PrepaidPassSales.builder()</span>
+<span class="fc" id="L76">            .salesId(sales.getSalesId())</span>
+<span class="fc" id="L77">            .prepaidPassId(request.getPrepaidPassId())</span>
+<span class="fc" id="L78">            .build();</span>
+<span class="fc" id="L79">    prepaidPassSalesRepository.save(prepaidPassSales);</span>
+
+    // Payments 저장
+<span class="fc" id="L82">    List&lt;Payments&gt; payments =</span>
+<span class="fc" id="L83">        request.getPayments().stream()</span>
+<span class="fc" id="L84">            .map(</span>
+                p -&gt;
+<span class="fc" id="L86">                    Payments.builder()</span>
+<span class="fc" id="L87">                        .salesId(sales.getSalesId())</span>
+<span class="fc" id="L88">                        .paymentsMethod(p.getPaymentsMethod())</span>
+<span class="fc" id="L89">                        .amount(p.getAmount())</span>
+<span class="fc" id="L90">                        .build())</span>
+<span class="fc" id="L91">            .toList();</span>
+<span class="fc" id="L92">    payments.forEach(paymentsRepository::save);</span>
+
+    // 고객 선불권 등록
+<span class="fc" id="L95">    PrepaidPass prepaidPass =</span>
+        prepaidPassRepository
+<span class="fc" id="L97">            .findById(request.getPrepaidPassId())</span>
+<span class="pc" id="L98">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.PREPAIDPASS_NOT_FOUND));</span>
+
+<span class="fc" id="L100">    Date expirationDate =</span>
+<span class="fc" id="L101">        calculateExpirationDate(</span>
+<span class="fc" id="L102">            prepaidPass.getExpirationPeriod(), prepaidPass.getExpirationPeriodType());</span>
+
+<span class="fc" id="L104">    int baseAmount = request.getRetailPrice();</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">    int bonusAmount = prepaidPass.getBonus() != null ? prepaidPass.getBonus() : 0;</span>
+
+<span class="fc" id="L107">    CustomerPrepaidPassRegistRequest passRequest = new CustomerPrepaidPassRegistRequest();</span>
+<span class="fc" id="L108">    passRequest.setCustomerId(request.getCustomerId());</span>
+<span class="fc" id="L109">    passRequest.setPrepaidPassId(prepaidPass.getPrepaidPassId());</span>
+<span class="fc" id="L110">    passRequest.setRemainingAmount(baseAmount + bonusAmount);</span>
+<span class="fc" id="L111">    passRequest.setExpirationDate(expirationDate);</span>
+
+<span class="fc" id="L113">    customerPrepaidPassCommandService.registCustomerPrepaidPass(passRequest);</span>
+<span class="fc" id="L114">  }</span>
+
+  private Date calculateExpirationDate(int period, ExpirationPeriodType type) {
+<span class="fc" id="L117">    Calendar calendar = Calendar.getInstance();</span>
+<span class="pc bpc" id="L118" title="4 of 5 branches missed.">    switch (type) {</span>
+<span class="fc" id="L119">      case DAY -&gt; calendar.add(Calendar.DAY_OF_YEAR, period);</span>
+<span class="nc" id="L120">      case WEEK -&gt; calendar.add(Calendar.WEEK_OF_YEAR, period);</span>
+<span class="nc" id="L121">      case MONTH -&gt; calendar.add(Calendar.MONTH, period);</span>
+<span class="nc" id="L122">      case YEAR -&gt; calendar.add(Calendar.YEAR, period);</span>
+    }
+<span class="fc" id="L124">    return calendar.getTime();</span>
+  }
+
+  @Transactional
+  @Override
+  public void updatePrepaidPassSales(Long salesId, PrepaidPassSalesRequest request) {
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">    if (request.getRetailPrice() &lt; 0) {</span>
+<span class="nc" id="L131">      throw new BusinessException(ErrorCode.SALES_RETAILPRICE_REQUIRED);</span>
+    }
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">    if (request.getTotalAmount() &lt; 0) {</span>
+<span class="nc" id="L134">      throw new BusinessException(ErrorCode.SALES_TOTALAMOUNT_REQUIRED);</span>
+    }
+<span class="fc bfc" id="L136" title="All 2 branches covered.">    for (PaymentsInfo payment : request.getPayments()) {</span>
+<span class="pc bpc" id="L137" title="2 of 4 branches missed.">      if (payment.getAmount() == null || payment.getAmount() &lt;= 0) {</span>
+<span class="nc" id="L138">        throw new BusinessException(ErrorCode.SALES_PAYMENTSAMOUNT_REQUIRED);</span>
+      }
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">      if (payment.getPaymentsMethod() == null) {</span>
+<span class="nc" id="L141">        throw new BusinessException(ErrorCode.SALES_PAYMENTMETHOD_REQUIRED);</span>
+      }
+<span class="fc" id="L143">    }</span>
+
+<span class="fc" id="L145">    Sales sales =</span>
+        salesRepository
+<span class="fc" id="L147">            .findById(salesId)</span>
+<span class="fc" id="L148">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.SALES_NOT_FOUND));</span>
+
+<span class="fc" id="L150">    sales.update(</span>
+<span class="fc" id="L151">        request.getShopId(),</span>
+<span class="fc" id="L152">        request.getCustomerId(),</span>
+<span class="fc" id="L153">        request.getStaffId(),</span>
+<span class="fc" id="L154">        request.getReservationId(),</span>
+<span class="fc" id="L155">        request.getRetailPrice(),</span>
+<span class="fc" id="L156">        request.getDiscountRate(),</span>
+<span class="fc" id="L157">        request.getDiscountAmount(),</span>
+<span class="fc" id="L158">        request.getTotalAmount(),</span>
+<span class="fc" id="L159">        request.getSalesMemo(),</span>
+<span class="fc" id="L160">        request.getSalesDate());</span>
+
+<span class="fc" id="L162">    prepaidPassSalesRepository.deleteBySalesId(salesId);</span>
+    PrepaidPassSales prepaidPassSales =
+<span class="fc" id="L164">        PrepaidPassSales.builder()</span>
+<span class="fc" id="L165">            .salesId(salesId)</span>
+<span class="fc" id="L166">            .prepaidPassId(request.getPrepaidPassId())</span>
+<span class="fc" id="L167">            .build();</span>
+<span class="fc" id="L168">    prepaidPassSalesRepository.save(prepaidPassSales);</span>
+
+<span class="fc" id="L170">    paymentsRepository.deleteBySalesId(salesId);</span>
+<span class="fc" id="L171">    List&lt;Payments&gt; payments =</span>
+<span class="fc" id="L172">        request.getPayments().stream()</span>
+<span class="fc" id="L173">            .map(</span>
+                p -&gt;
+<span class="fc" id="L175">                    Payments.builder()</span>
+<span class="fc" id="L176">                        .salesId(salesId)</span>
+<span class="fc" id="L177">                        .paymentsMethod(p.getPaymentsMethod())</span>
+<span class="fc" id="L178">                        .amount(p.getAmount())</span>
+<span class="fc" id="L179">                        .build())</span>
+<span class="fc" id="L180">            .toList();</span>
+<span class="fc" id="L181">    payments.forEach(paymentsRepository::save);</span>
+<span class="fc" id="L182">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

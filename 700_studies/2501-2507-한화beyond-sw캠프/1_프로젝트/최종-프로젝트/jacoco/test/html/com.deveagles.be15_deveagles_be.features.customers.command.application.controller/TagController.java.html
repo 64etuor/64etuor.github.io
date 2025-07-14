@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TagController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.command.application.controller</a> &gt; <span class="el_source">TagController.java</span></div><h1>TagController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.request.CreateTagRequest;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.request.UpdateTagRequest;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.response.TagResponse;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.service.TagCommandService;
+import com.deveagles.be15_deveagles_be.features.customers.query.service.TagQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = &quot;태그 관리&quot;, description = &quot;태그 생성, 수정, 삭제, 조회 API&quot;)
+@RestController
+@RequestMapping(&quot;/customers/tags&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L31">@Slf4j</span>
+public class TagController {
+
+  private final TagCommandService tagCommandService;
+  private final TagQueryService tagQueryService;
+
+  @Operation(summary = &quot;태그 생성&quot;, description = &quot;새로운 태그를 생성합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;201&quot;,
+        description = &quot;태그 생성 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 요청 데이터&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;409&quot;,
+        description = &quot;중복된 태그명&quot;)
+  })
+  @PostMapping
+  public ResponseEntity&lt;ApiResponse&lt;Long&gt;&gt; createTag(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;태그 생성 정보&quot;, required = true) @Valid @RequestBody
+          CreateTagRequest request) {
+<span class="nc" id="L54">    log.info(</span>
+        &quot;태그 생성 요청 - 매장ID: {}, 태그명: {}, 색상코드: {}&quot;,
+<span class="nc" id="L56">        user.getShopId(),</span>
+<span class="nc" id="L57">        request.getTagName(),</span>
+<span class="nc" id="L58">        request.getColorCode());</span>
+
+<span class="nc" id="L60">    CreateTagRequest requestWithShopId =</span>
+<span class="nc" id="L61">        new CreateTagRequest(user.getShopId(), request.getTagName(), request.getColorCode());</span>
+
+<span class="nc" id="L63">    Long tagId = tagCommandService.createTag(requestWithShopId);</span>
+<span class="nc" id="L64">    return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(tagId));</span>
+  }
+
+  @Operation(summary = &quot;태그 단건 조회&quot;, description = &quot;태그 ID로 특정 태그를 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;태그 조회 성공&quot;,
+        content = @Content(schema = @Schema(implementation = TagResponse.class))),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;태그를 찾을 수 없음&quot;)
+  })
+  @GetMapping(&quot;/{tagId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;TagResponse&gt;&gt; getTag(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;태그 ID&quot;, required = true, example = &quot;1&quot;) @PathVariable Long tagId) {
+<span class="nc" id="L81">    log.info(&quot;태그 단건 조회 요청 - ID: {}, 매장ID: {}&quot;, tagId, user.getShopId());</span>
+
+<span class="nc" id="L83">    TagResponse response = tagQueryService.getTag(tagId, user.getShopId());</span>
+<span class="nc" id="L84">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;매장별 전체 태그 조회&quot;, description = &quot;특정 매장의 모든 태그를 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;전체 태그 조회 성공&quot;)
+  })
+  @GetMapping
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;TagResponse&gt;&gt;&gt; getAllTags(
+      @AuthenticationPrincipal CustomUser user) {
+<span class="nc" id="L96">    log.info(&quot;매장별 전체 태그 조회 요청 - 매장ID: {}&quot;, user.getShopId());</span>
+
+<span class="nc" id="L98">    List&lt;TagResponse&gt; response = tagQueryService.getAllTagsByShopId(user.getShopId());</span>
+<span class="nc" id="L99">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;태그 수정&quot;, description = &quot;기존 태그의 정보를 수정합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;태그 수정 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;태그를 찾을 수 없음&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 요청 데이터&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;409&quot;,
+        description = &quot;중복된 태그명&quot;)
+  })
+  @PutMapping(&quot;/{tagId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updateTag(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;태그 ID&quot;, required = true, example = &quot;1&quot;) @PathVariable Long tagId,
+      @Parameter(description = &quot;태그 수정 정보&quot;, required = true) @Valid @RequestBody
+          UpdateTagRequest request) {
+<span class="nc" id="L123">    log.info(</span>
+        &quot;태그 수정 요청 - ID: {}, 매장ID: {}, 새 태그명: {}, 새 색상코드: {}&quot;,
+        tagId,
+<span class="nc" id="L126">        user.getShopId(),</span>
+<span class="nc" id="L127">        request.getTagName(),</span>
+<span class="nc" id="L128">        request.getColorCode());</span>
+
+    // shopId를 user에서 가져와서 새로운 request 생성
+<span class="nc" id="L131">    UpdateTagRequest requestWithShopId =</span>
+<span class="nc" id="L132">        new UpdateTagRequest(user.getShopId(), request.getTagName(), request.getColorCode());</span>
+
+<span class="nc" id="L134">    tagCommandService.updateTag(tagId, requestWithShopId);</span>
+<span class="nc" id="L135">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;태그 삭제&quot;, description = &quot;기존 태그를 삭제합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;태그 삭제 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;태그를 찾을 수 없음&quot;)
+  })
+  @DeleteMapping(&quot;/{tagId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; deleteTag(
+      @Parameter(description = &quot;태그 ID&quot;, required = true, example = &quot;1&quot;) @PathVariable Long tagId) {
+<span class="nc" id="L150">    log.info(&quot;태그 삭제 요청 - ID: {}&quot;, tagId);</span>
+
+<span class="nc" id="L152">    tagCommandService.deleteTag(tagId);</span>
+<span class="nc" id="L153">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

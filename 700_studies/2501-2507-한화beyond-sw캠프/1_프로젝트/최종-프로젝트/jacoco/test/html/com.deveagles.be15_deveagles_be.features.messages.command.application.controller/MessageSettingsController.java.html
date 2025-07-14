@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MessageSettingsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.command.application.controller</a> &gt; <span class="el_source">MessageSettingsController.java</span></div><h1>MessageSettingsController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.request.MessageSettingRequest;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.response.MessageSettingResponse;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.service.MessageSettingsCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(&quot;/message/settings&quot;)
+@RequiredArgsConstructor
+public class MessageSettingsController {
+  private final MessageSettingsCommandService messageSettingsCommandService;
+
+  @Operation(summary = &quot;문자 설정 기본값 생성&quot;, description = &quot;해당 매장(shopId)의 문자 설정을 기본값으로 생성합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;201&quot;,
+        description = &quot;설정 생성 완료&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;유효하지 않은 shopId&quot;)
+  })
+  @PostMapping()
+  public ResponseEntity&lt;ApiResponse&lt;Long&gt;&gt; create(@AuthenticationPrincipal CustomUser customUser) {
+<span class="nc" id="L34">    Long shopId = customUser.getShopId();</span>
+<span class="nc" id="L35">    Long id = messageSettingsCommandService.createDefault(shopId);</span>
+<span class="nc" id="L36">    return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(shopId));</span>
+  }
+
+  @Operation(summary = &quot;문자 설정 조회&quot;, description = &quot;현재 로그인한 매장의 문자 설정 정보를 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;설정 조회 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;설정 정보 없음&quot;)
+  })
+  @GetMapping()
+  public ResponseEntity&lt;ApiResponse&lt;MessageSettingResponse&gt;&gt; getSettings(
+      @AuthenticationPrincipal CustomUser customUser) {
+<span class="nc" id="L51">    Long shopId = customUser.getShopId();</span>
+<span class="nc" id="L52">    return ResponseEntity.ok(</span>
+<span class="nc" id="L53">        ApiResponse.success(messageSettingsCommandService.loadSettings(shopId)));</span>
+  }
+
+  @Operation(summary = &quot;문자 설정 수정&quot;, description = &quot;현재 로그인한 매장의 문자 설정을 수정합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;설정 수정 완료&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;요청 데이터 오류&quot;)
+  })
+  @PutMapping()
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; update(
+      @AuthenticationPrincipal CustomUser customUser,
+      @Valid @RequestBody MessageSettingRequest request) {
+<span class="nc" id="L69">    Long shopId = customUser.getShopId();</span>
+<span class="nc" id="L70">    messageSettingsCommandService.updateSettings(shopId, request);</span>
+<span class="nc" id="L71">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

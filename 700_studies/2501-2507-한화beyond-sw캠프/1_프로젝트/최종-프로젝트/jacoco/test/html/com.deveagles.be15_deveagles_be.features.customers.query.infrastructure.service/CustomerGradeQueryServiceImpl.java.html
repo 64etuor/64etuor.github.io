@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerGradeQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.query.infrastructure.service</a> &gt; <span class="el_source">CustomerGradeQueryServiceImpl.java</span></div><h1>CustomerGradeQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.query.infrastructure.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.response.CustomerGradeResponse;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.CustomerGrade;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.repository.CustomerGradeRepository;
+import com.deveagles.be15_deveagles_be.features.customers.query.service.CustomerGradeQueryService;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+<span class="fc" id="L20">@Slf4j</span>
+public class CustomerGradeQueryServiceImpl implements CustomerGradeQueryService {
+
+  private final CustomerGradeRepository customerGradeRepository;
+
+  @Override
+  public CustomerGradeResponse getCustomerGrade(Long customerGradeId, Long shopId) {
+<span class="fc" id="L27">    log.info(&quot;고객등급 조회 요청 - 고객등급ID: {}, 매장ID: {}&quot;, customerGradeId, shopId);</span>
+
+<span class="fc" id="L29">    CustomerGrade customerGrade =</span>
+        customerGradeRepository
+<span class="fc" id="L31">            .findByIdAndShopId(customerGradeId, shopId)</span>
+<span class="fc" id="L32">            .orElseThrow(</span>
+                () -&gt; {
+<span class="fc" id="L34">                  log.error(&quot;고객등급을 찾을 수 없음 - 고객등급ID: {}, 매장ID: {}&quot;, customerGradeId, shopId);</span>
+<span class="fc" id="L35">                  return new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, &quot;고객등급을 찾을 수 없습니다.&quot;);</span>
+                });
+
+    CustomerGradeResponse response =
+<span class="fc" id="L39">        CustomerGradeResponse.builder()</span>
+<span class="fc" id="L40">            .id(customerGrade.getId())</span>
+<span class="fc" id="L41">            .shopId(customerGrade.getShopId())</span>
+<span class="fc" id="L42">            .customerGradeName(customerGrade.getCustomerGradeName())</span>
+<span class="fc" id="L43">            .discountRate(customerGrade.getDiscountRate())</span>
+<span class="fc" id="L44">            .build();</span>
+
+<span class="fc" id="L46">    log.info(&quot;고객등급 조회 완료 - 고객등급ID: {}&quot;, customerGradeId);</span>
+<span class="fc" id="L47">    return response;</span>
+  }
+
+  @Override
+  public List&lt;CustomerGradeResponse&gt; getAllCustomerGrades() {
+<span class="fc" id="L52">    log.info(&quot;전체 고객등급 목록 조회 요청&quot;);</span>
+
+<span class="fc" id="L54">    List&lt;CustomerGrade&gt; customerGrades = customerGradeRepository.findAll();</span>
+<span class="fc" id="L55">    List&lt;CustomerGradeResponse&gt; responses =</span>
+<span class="fc" id="L56">        customerGrades.stream().map(this::mapToResponse).toList();</span>
+
+<span class="fc" id="L58">    log.info(&quot;전체 고객등급 목록 조회 완료 - 총 {}개&quot;, responses.size());</span>
+<span class="fc" id="L59">    return responses;</span>
+  }
+
+  @Override
+  public List&lt;CustomerGradeResponse&gt; getAllCustomerGradesByShopId(Long shopId) {
+<span class="nc" id="L64">    log.info(&quot;매장별 고객등급 목록 조회 요청 - 매장ID: {}&quot;, shopId);</span>
+
+<span class="nc" id="L66">    List&lt;CustomerGrade&gt; customerGrades = customerGradeRepository.findByShopId(shopId);</span>
+<span class="nc" id="L67">    List&lt;CustomerGradeResponse&gt; responses =</span>
+<span class="nc" id="L68">        customerGrades.stream().map(this::mapToResponse).toList();</span>
+
+<span class="nc" id="L70">    log.info(&quot;매장별 고객등급 목록 조회 완료 - 매장ID: {}, 총 {}개&quot;, shopId, responses.size());</span>
+<span class="nc" id="L71">    return responses;</span>
+  }
+
+  @Override
+  public Page&lt;CustomerGradeResponse&gt; getCustomerGrades(Pageable pageable) {
+<span class="fc" id="L76">    log.info(&quot;고객등급 페이징 조회 요청 - 페이지: {}, 크기: {}&quot;, pageable.getPageNumber(), pageable.getPageSize());</span>
+
+<span class="fc" id="L78">    Page&lt;CustomerGrade&gt; customerGrades = customerGradeRepository.findAll(pageable);</span>
+<span class="fc" id="L79">    Page&lt;CustomerGradeResponse&gt; responses = customerGrades.map(this::mapToResponse);</span>
+
+<span class="fc" id="L81">    log.info(</span>
+        &quot;고객등급 페이징 조회 완료 - 현재페이지: {}, 전체페이지: {}, 전체개수: {}&quot;,
+<span class="fc" id="L83">        responses.getNumber(),</span>
+<span class="fc" id="L84">        responses.getTotalPages(),</span>
+<span class="fc" id="L85">        responses.getTotalElements());</span>
+
+<span class="fc" id="L87">    return responses;</span>
+  }
+
+  private CustomerGradeResponse mapToResponse(CustomerGrade customerGrade) {
+<span class="fc" id="L91">    return CustomerGradeResponse.builder()</span>
+<span class="fc" id="L92">        .id(customerGrade.getId())</span>
+<span class="fc" id="L93">        .shopId(customerGrade.getShopId())</span>
+<span class="fc" id="L94">        .customerGradeName(customerGrade.getCustomerGradeName())</span>
+<span class="fc" id="L95">        .discountRate(customerGrade.getDiscountRate())</span>
+<span class="fc" id="L96">        .build();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

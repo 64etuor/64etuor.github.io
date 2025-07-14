@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerTagController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.command.application.controller</a> &gt; <span class="el_source">CustomerTagController.java</span></div><h1>CustomerTagController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.service.CustomerTagService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@Tag(name = &quot;고객 태그 관리&quot;, description = &quot;고객에게 태그 추가, 제거 API&quot;)
+@RestController
+@RequestMapping(&quot;/customers/{customerId}/tags&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L26">@Slf4j</span>
+public class CustomerTagController {
+
+  private final CustomerTagService customerTagService;
+
+  @Operation(summary = &quot;고객에게 태그 추가&quot;, description = &quot;특정 고객에게 태그를 추가합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;태그 추가 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;고객 또는 태그를 찾을 수 없음&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;409&quot;,
+        description = &quot;이미 할당된 태그&quot;)
+  })
+  @PostMapping(&quot;/{tagId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; addTagToCustomer(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;고객 ID&quot;, required = true, example = &quot;1&quot;) @PathVariable
+          Long customerId,
+      @Parameter(description = &quot;태그 ID&quot;, required = true, example = &quot;1&quot;) @PathVariable Long tagId) {
+<span class="nc" id="L49">    log.info(&quot;고객 태그 추가 요청 - 고객ID: {}, 태그ID: {}, 매장ID: {}&quot;, customerId, tagId, user.getShopId());</span>
+
+<span class="nc" id="L51">    customerTagService.addTagToCustomer(customerId, tagId, user.getShopId());</span>
+<span class="nc" id="L52">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;고객에서 태그 제거&quot;, description = &quot;특정 고객에서 태그를 제거합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;태그 제거 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;고객을 찾을 수 없거나 할당되지 않은 태그&quot;)
+  })
+  @DeleteMapping(&quot;/{tagId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; removeTagFromCustomer(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;고객 ID&quot;, required = true, example = &quot;1&quot;) @PathVariable
+          Long customerId,
+      @Parameter(description = &quot;태그 ID&quot;, required = true, example = &quot;1&quot;) @PathVariable Long tagId) {
+<span class="nc" id="L70">    log.info(&quot;고객 태그 제거 요청 - 고객ID: {}, 태그ID: {}, 매장ID: {}&quot;, customerId, tagId, user.getShopId());</span>
+
+<span class="nc" id="L72">    customerTagService.removeTagFromCustomer(customerId, tagId, user.getShopId());</span>
+<span class="nc" id="L73">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

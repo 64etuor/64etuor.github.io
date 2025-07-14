@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalendarScheduleQueryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.query.controller</a> &gt; <span class="el_source">CalendarScheduleQueryController.java</span></div><h1>CalendarScheduleQueryController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.query.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.request.CalendarRegularRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.request.CalendarScheduleRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.CalendarRenderedResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.CalendarScheduleResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.service.CalendarScheduleQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/schedules&quot;)
+@Tag(name = &quot;일정 캘린더&quot;, description = &quot;예약/일정/휴무 조회 API&quot;)
+public class CalendarScheduleQueryController {
+
+  private final CalendarScheduleQueryService calendarScheduleQueryService;
+
+  @GetMapping(&quot;/calendar&quot;)
+  @Operation(summary = &quot;예약/일정/휴무 전체 조회&quot;, description = &quot;지정된 기간과 조건에 따라 예약, 단기 일정, 단기 휴무를 조회합니다.&quot;)
+  public ApiResponse&lt;List&lt;CalendarScheduleResponse&gt;&gt; getSchedules(
+      @AuthenticationPrincipal CustomUser user, CalendarScheduleRequest request) {
+<span class="nc" id="L29">    Long shopId = user.getShopId();</span>
+<span class="nc" id="L30">    List&lt;CalendarScheduleResponse&gt; schedules =</span>
+<span class="nc" id="L31">        calendarScheduleQueryService.findSchedules(shopId, request);</span>
+<span class="nc" id="L32">    return ApiResponse.success(schedules);</span>
+  }
+
+  @GetMapping(&quot;/calendar/regular&quot;)
+  @Operation(summary = &quot;정기 일정/휴무 조회&quot;, description = &quot;정기 일정 및 정기 휴무를 주어진 기간에 맞춰 확장하여 조회합니다.&quot;)
+  public ApiResponse&lt;List&lt;CalendarRenderedResponse&gt;&gt; expandRegularSchedules(
+      @AuthenticationPrincipal CustomUser user, @ModelAttribute CalendarRegularRequest request) {
+<span class="nc" id="L39">    Long shopId = user.getShopId();</span>
+
+<span class="nc" id="L41">    List&lt;CalendarRenderedResponse&gt; schedules =</span>
+<span class="nc" id="L42">        calendarScheduleQueryService.getExpandedRegularSchedules(shopId, request);</span>
+
+<span class="nc" id="L44">    return ApiResponse.success(schedules);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

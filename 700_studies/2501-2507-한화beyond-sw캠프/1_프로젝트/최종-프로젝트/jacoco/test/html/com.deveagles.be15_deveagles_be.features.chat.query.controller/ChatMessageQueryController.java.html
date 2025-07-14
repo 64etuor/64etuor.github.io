@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChatMessageQueryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.chat.query.controller</a> &gt; <span class="el_source">ChatMessageQueryController.java</span></div><h1>ChatMessageQueryController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.chat.query.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.chat.command.application.dto.response.ChatMessageResponse;
+import com.deveagles.be15_deveagles_be.features.chat.query.service.ChatMessageQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/chatrooms&quot;)
+public class ChatMessageQueryController {
+
+  private final ChatMessageQueryService chatMessageQueryService;
+
+  @Operation(summary = &quot;채팅 메시지 조회&quot;, description = &quot;특정 채팅방의 모든 메시지를 시간순으로 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;조회 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;채팅방을 찾을 수 없음&quot;)
+  })
+  @GetMapping(&quot;/{roomId}/messages&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;ChatMessageResponse&gt;&gt;&gt; getMessages(
+      @PathVariable String roomId) {
+<span class="nc" id="L35">    List&lt;ChatMessageResponse&gt; messages = chatMessageQueryService.getMessagesByRoomId(roomId);</span>
+<span class="nc" id="L36">    return ResponseEntity.ok(ApiResponse.success(messages));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationSettingQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.query.service</a> &gt; <span class="el_source">ReservationSettingQueryService.java</span></div><h1>ReservationSettingQueryService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.query.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.CustomerReservationSettingResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.ReservationSettingResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.mapper.ReservationSettingMapper;
+import java.time.LocalDate;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class ReservationSettingQueryService {
+  private final ReservationSettingMapper reservationSettingMapper;
+
+  public List&lt;ReservationSettingResponse&gt; getReservationSettings(Long shopId) {
+<span class="fc" id="L19">    List&lt;ReservationSettingResponse&gt; settings =</span>
+<span class="fc" id="L20">        reservationSettingMapper.findSettingsWithUnitByShopId(shopId);</span>
+
+<span class="pc bpc" id="L22" title="1 of 4 branches missed.">    if (settings == null || settings.isEmpty()) {</span>
+<span class="fc" id="L23">      throw new BusinessException(ErrorCode.RESERVATION_SETTING_NOT_FOUND);</span>
+    }
+
+<span class="fc" id="L26">    return settings;</span>
+  }
+
+  public CustomerReservationSettingResponse getReservationSetting(Long shopId, LocalDate date) {
+<span class="fc" id="L30">    int dayOfWeek = date.getDayOfWeek().getValue(); // 월=1 ~ 일=7</span>
+<span class="fc" id="L31">    return reservationSettingMapper.findCustomerReservationSetting(shopId, dayOfWeek);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

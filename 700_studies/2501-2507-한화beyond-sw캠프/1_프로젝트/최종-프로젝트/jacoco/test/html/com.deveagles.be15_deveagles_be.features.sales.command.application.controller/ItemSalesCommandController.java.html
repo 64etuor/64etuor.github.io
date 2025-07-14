@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemSalesCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.sales.command.application.controller</a> &gt; <span class="el_source">ItemSalesCommandController.java</span></div><h1>ItemSalesCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.sales.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.dto.request.ItemSalesRequest;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.service.ItemSalesCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = &quot;상품 매출&quot;, description = &quot;상품 매출 API&quot;)
+@RestController
+@RequestMapping(&quot;item-sales&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L21">@Slf4j</span>
+public class ItemSalesCommandController {
+
+  private final ItemSalesCommandService itemSalesCommandService;
+
+  @Operation(summary = &quot;상품 매출 등록&quot;, description = &quot;상품 매출을 등록합니다.&quot;)
+  @PostMapping
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; registerItemSales(
+      @AuthenticationPrincipal CustomUser user, @Validated @RequestBody ItemSalesRequest request) {
+<span class="nc" id="L30">    request.setShopId(user.getShopId());</span>
+<span class="nc" id="L31">    itemSalesCommandService.registItemSales(request);</span>
+<span class="nc" id="L32">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;상품 매출 수정&quot;, description = &quot;기존 상품 매출을 수정합니다.&quot;)
+  @PutMapping(&quot;/{salesId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updateItemSales(
+      @AuthenticationPrincipal CustomUser user,
+      @PathVariable Long salesId,
+      @Validated @RequestBody ItemSalesRequest request) {
+
+<span class="nc" id="L42">    request.setShopId(user.getShopId());</span>
+<span class="nc" id="L43">    itemSalesCommandService.updateItemSales(salesId, request);</span>
+<span class="nc" id="L44">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;상품 매출 환불&quot;, description = &quot;기존 상품 매출을 환불 처리합니다.&quot;)
+  @PutMapping(&quot;/refund/{salesId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; refundItemSales(
+      @AuthenticationPrincipal CustomUser user, @PathVariable Long salesId) {
+
+<span class="nc" id="L52">    itemSalesCommandService.refundItemSales(salesId);</span>
+<span class="nc" id="L53">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

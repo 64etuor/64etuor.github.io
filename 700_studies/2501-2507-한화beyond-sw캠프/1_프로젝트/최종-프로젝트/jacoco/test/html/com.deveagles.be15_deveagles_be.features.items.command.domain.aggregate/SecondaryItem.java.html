@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SecondaryItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.items.command.domain.aggregate</a> &gt; <span class="el_source">SecondaryItem.java</span></div><h1>SecondaryItem.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.items.command.domain.aggregate;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import lombok.*;
+
+@Entity
+@Table(name = &quot;secondary_item&quot;)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class SecondaryItem {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;secondary_item_id&quot;)
+  private Long secondaryItemId;
+
+  @Column(name = &quot;primary_item_id&quot;, nullable = false)
+  private Long primaryItemId;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = &quot;primary_item_id&quot;, insertable = false, updatable = false)
+  private PrimaryItem primaryItem;
+
+  @Column(name = &quot;secondary_item_name&quot;)
+  private String secondaryItemName;
+
+  @Column(name = &quot;secondary_item_price&quot;)
+  private Integer secondaryItemPrice;
+
+  @Column(name = &quot;is_active&quot;, nullable = false)
+  private Boolean isActive;
+
+  @Column(name = &quot;time_taken&quot;)
+  private Integer timeTaken;
+
+  @Column(name = &quot;created_at&quot;, nullable = false)
+  private LocalDateTime createdAt;
+
+  @Column(name = &quot;modified_at&quot;, nullable = false)
+  private LocalDateTime modifiedAt;
+
+  @Column(name = &quot;deleted_at&quot;)
+  private LocalDateTime deletedAt;
+
+  @PrePersist
+  public void prePersist() {
+<span class="nc" id="L50">    this.createdAt = LocalDateTime.now();</span>
+<span class="nc" id="L51">    this.modifiedAt = LocalDateTime.now();</span>
+<span class="nc" id="L52">  }</span>
+
+  public void updateSecondaryItem(
+      String secondaryItemName, Integer secondaryItemPrice, Integer timeTaken, boolean isActive) {
+<span class="nc" id="L56">    this.secondaryItemName = secondaryItemName;</span>
+<span class="nc" id="L57">    this.secondaryItemPrice = secondaryItemPrice;</span>
+<span class="nc" id="L58">    this.timeTaken = timeTaken;</span>
+<span class="nc" id="L59">    this.isActive = isActive;</span>
+<span class="nc" id="L60">  }</span>
+
+  public void setModifiedAt() {
+<span class="nc" id="L63">    this.modifiedAt = LocalDateTime.now();</span>
+<span class="nc" id="L64">  }</span>
+
+  public void setDeletedAt() {
+<span class="fc" id="L67">    this.deletedAt = LocalDateTime.now();</span>
+<span class="fc" id="L68">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

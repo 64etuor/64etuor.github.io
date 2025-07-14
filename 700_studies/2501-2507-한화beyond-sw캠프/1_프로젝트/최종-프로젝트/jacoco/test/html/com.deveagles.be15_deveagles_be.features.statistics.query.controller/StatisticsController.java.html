@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StatisticsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.statistics.query.controller</a> &gt; <span class="el_source">StatisticsController.java</span></div><h1>StatisticsController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.statistics.query.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.AdvancedSalesStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.DailyVisitorStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.HourlyVisitorStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.ReservationRequest;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.ReservationStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.ReservationSummaryResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.SalesStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.SalesSummaryResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.StatisticsRequest;
+import com.deveagles.be15_deveagles_be.features.statistics.query.service.StatisticsQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.time.LocalDate;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@Tag(name = &quot;Statistics&quot;, description = &quot;통계 관련 API&quot;)
+@RestController
+@RequestMapping(&quot;/statistics&quot;)
+@RequiredArgsConstructor
+public class StatisticsController {
+
+  private final StatisticsQueryService statisticsQueryService;
+
+  @GetMapping(&quot;/sales&quot;)
+  @Operation(summary = &quot;매출 통계 조회&quot;, description = &quot;기간별 매출 통계를 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;SalesStatisticsResponse&gt;&gt;&gt; getSalesStatistics(
+      @AuthenticationPrincipal CustomUser customUser,
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+<span class="nc" id="L45">    List&lt;SalesStatisticsResponse&gt; statistics =</span>
+<span class="nc" id="L46">        statisticsQueryService.getSalesStatistics(customUser.getShopId(), startDate, endDate);</span>
+<span class="nc" id="L47">    return ResponseEntity.ok(ApiResponse.success(statistics));</span>
+  }
+
+  @PostMapping(&quot;/sales/advanced&quot;)
+  @Operation(summary = &quot;고급 매출 통계 조회&quot;, description = &quot;다양한 조건으로 그룹화하고 필터링된 매출 통계를 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;AdvancedSalesStatisticsResponse&gt;&gt;&gt;
+      getAdvancedSalesStatistics(
+          @AuthenticationPrincipal CustomUser customUser, @RequestBody StatisticsRequest request) {
+<span class="nc" id="L55">    List&lt;AdvancedSalesStatisticsResponse&gt; statistics =</span>
+<span class="nc" id="L56">        statisticsQueryService.getAdvancedSalesStatistics(customUser.getShopId(), request);</span>
+<span class="nc" id="L57">    return ResponseEntity.ok(ApiResponse.success(statistics));</span>
+  }
+
+  @GetMapping(&quot;/sales/summary&quot;)
+  @Operation(summary = &quot;매출 요약 통계 조회&quot;, description = &quot;총 매출, 일일 평균, 거래 건수 등의 요약 통계를 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;SalesSummaryResponse&gt;&gt; getSalesSummary(
+      @AuthenticationPrincipal CustomUser customUser,
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+<span class="nc" id="L66">    SalesSummaryResponse summary =</span>
+<span class="nc" id="L67">        statisticsQueryService.getSalesSummary(customUser.getShopId(), startDate, endDate);</span>
+<span class="nc" id="L68">    return ResponseEntity.ok(ApiResponse.success(summary));</span>
+  }
+
+  @GetMapping(&quot;/sales/primary-item-daily-trend&quot;)
+  @Operation(summary = &quot;1차 상품별 일별 매출추이 조회&quot;, description = &quot;1차 상품별 일별 매출 추이를 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;AdvancedSalesStatisticsResponse&gt;&gt;&gt;
+      getPrimaryItemDailyTrend(
+          @AuthenticationPrincipal CustomUser customUser,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+<span class="nc" id="L78">    List&lt;AdvancedSalesStatisticsResponse&gt; statistics =</span>
+<span class="nc" id="L79">        statisticsQueryService.getPrimaryItemDailyTrend(customUser.getShopId(), startDate, endDate);</span>
+<span class="nc" id="L80">    return ResponseEntity.ok(ApiResponse.success(statistics));</span>
+  }
+
+  @GetMapping(&quot;/reservations&quot;)
+  @Operation(summary = &quot;예약률 통계 조회&quot;, description = &quot;기간별 예약률 통계를 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;ReservationStatisticsResponse&gt;&gt;&gt; getReservationStatistics(
+      @AuthenticationPrincipal CustomUser customUser,
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+<span class="nc" id="L89">    List&lt;ReservationStatisticsResponse&gt; statistics =</span>
+<span class="nc" id="L90">        statisticsQueryService.getReservationStatistics(customUser.getShopId(), startDate, endDate);</span>
+<span class="nc" id="L91">    return ResponseEntity.ok(ApiResponse.success(statistics));</span>
+  }
+
+  @PostMapping(&quot;/reservations/advanced&quot;)
+  @Operation(summary = &quot;고급 예약률 통계 조회&quot;, description = &quot;다양한 조건으로 그룹화하고 필터링된 예약률 통계를 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;ReservationStatisticsResponse&gt;&gt;&gt;
+      getAdvancedReservationStatistics(
+          @AuthenticationPrincipal CustomUser customUser, @RequestBody ReservationRequest request) {
+<span class="nc" id="L99">    List&lt;ReservationStatisticsResponse&gt; statistics =</span>
+<span class="nc" id="L100">        statisticsQueryService.getAdvancedReservationStatistics(customUser.getShopId(), request);</span>
+<span class="nc" id="L101">    return ResponseEntity.ok(ApiResponse.success(statistics));</span>
+  }
+
+  @GetMapping(&quot;/reservations/summary&quot;)
+  @Operation(summary = &quot;예약률 요약 통계 조회&quot;, description = &quot;총 예약률, 일일 평균, 피크 시간대 등의 요약 통계를 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;ReservationSummaryResponse&gt;&gt; getReservationSummary(
+      @AuthenticationPrincipal CustomUser customUser,
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+<span class="nc" id="L110">    ReservationSummaryResponse summary =</span>
+<span class="nc" id="L111">        statisticsQueryService.getReservationSummary(customUser.getShopId(), startDate, endDate);</span>
+<span class="nc" id="L112">    return ResponseEntity.ok(ApiResponse.success(summary));</span>
+  }
+
+  @GetMapping(&quot;/reservations/staff/{staffId}&quot;)
+  @Operation(summary = &quot;특정 직원 예약률 통계 조회&quot;, description = &quot;특정 직원의 예약률 통계를 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;ReservationStatisticsResponse&gt;&gt;&gt;
+      getStaffReservationStatistics(
+          @AuthenticationPrincipal CustomUser customUser,
+          @PathVariable Long staffId,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+<span class="nc" id="L123">    List&lt;ReservationStatisticsResponse&gt; statistics =</span>
+<span class="nc" id="L124">        statisticsQueryService.getStaffReservationStatistics(</span>
+<span class="nc" id="L125">            customUser.getShopId(), staffId, startDate, endDate);</span>
+<span class="nc" id="L126">    return ResponseEntity.ok(ApiResponse.success(statistics));</span>
+  }
+
+  @GetMapping(&quot;/reservations/staff&quot;)
+  @Operation(summary = &quot;모든 직원 예약률 통계 조회&quot;, description = &quot;모든 직원의 예약률 통계를 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;ReservationStatisticsResponse&gt;&gt;&gt;
+      getAllStaffReservationStatistics(
+          @AuthenticationPrincipal CustomUser customUser,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+<span class="nc" id="L136">    List&lt;ReservationStatisticsResponse&gt; statistics =</span>
+<span class="nc" id="L137">        statisticsQueryService.getAllStaffReservationStatistics(</span>
+<span class="nc" id="L138">            customUser.getShopId(), startDate, endDate);</span>
+<span class="nc" id="L139">    return ResponseEntity.ok(ApiResponse.success(statistics));</span>
+  }
+
+  @GetMapping(&quot;/visitors/hourly&quot;)
+  @Operation(summary = &quot;시간대별 방문객 성별 통계 조회&quot;, description = &quot;시간대별 방문객 수를 성별로 구분하여 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;HourlyVisitorStatisticsResponse&gt;&gt;&gt;
+      getHourlyVisitorStatistics(
+          @AuthenticationPrincipal CustomUser customUser,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+<span class="nc" id="L149">    List&lt;HourlyVisitorStatisticsResponse&gt; statistics =</span>
+<span class="nc" id="L150">        statisticsQueryService.getHourlyVisitorStatistics(</span>
+<span class="nc" id="L151">            customUser.getShopId(), startDate, endDate);</span>
+<span class="nc" id="L152">    return ResponseEntity.ok(ApiResponse.success(statistics));</span>
+  }
+
+  @GetMapping(&quot;/visitors/daily&quot;)
+  @Operation(summary = &quot;일별 방문객 성별 통계 조회&quot;, description = &quot;일별 방문객 수를 성별로 구분하여 조회합니다.&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;DailyVisitorStatisticsResponse&gt;&gt;&gt;
+      getDailyVisitorStatistics(
+          @AuthenticationPrincipal CustomUser customUser,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+<span class="nc" id="L162">    List&lt;DailyVisitorStatisticsResponse&gt; statistics =</span>
+<span class="nc" id="L163">        statisticsQueryService.getDailyVisitorStatistics(</span>
+<span class="nc" id="L164">            customUser.getShopId(), startDate, endDate);</span>
+<span class="nc" id="L165">    return ResponseEntity.ok(ApiResponse.success(statistics));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

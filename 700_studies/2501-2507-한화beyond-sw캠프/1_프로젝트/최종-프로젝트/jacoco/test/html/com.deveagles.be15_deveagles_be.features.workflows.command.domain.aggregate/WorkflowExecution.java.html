@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorkflowExecution.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.command.domain.aggregate</a> &gt; <span class="el_source">WorkflowExecution.java</span></div><h1>WorkflowExecution.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.command.domain.aggregate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.time.LocalDateTime;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+@Entity
+@Table(name = &quot;workflow_execution&quot;)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class WorkflowExecution {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;execution_id&quot;)
+  private Long id;
+
+  @Column(name = &quot;workflow_id&quot;, nullable = false)
+  private Long workflowId;
+
+  @Column(name = &quot;shop_id&quot;, nullable = false)
+  private Long shopId;
+
+  @Column(name = &quot;execution_status&quot;, nullable = false, length = 20)
+  private String executionStatus; // SCHEDULED, RUNNING, SUCCESS, FAILED, CANCELLED
+
+  @Column(name = &quot;trigger_type&quot;, nullable = false, length = 50)
+  private String triggerType;
+
+  @Column(name = &quot;action_type&quot;, nullable = false, length = 50)
+  private String actionType;
+
+  @Column(name = &quot;target_count&quot;)
+  private Integer targetCount; // 대상 고객 수
+
+  @Column(name = &quot;success_count&quot;)
+  @Builder.Default
+  private Integer successCount = 0;
+
+  @Column(name = &quot;failure_count&quot;)
+  @Builder.Default
+  private Integer failureCount = 0;
+
+  @Column(name = &quot;error_message&quot;, length = 1000)
+  private String errorMessage;
+
+  @JdbcTypeCode(SqlTypes.JSON)
+  @Column(name = &quot;execution_details&quot;, columnDefinition = &quot;json&quot;)
+  private String executionDetails; // 실행 세부 정보 JSON
+
+  @Column(name = &quot;started_at&quot;)
+  private LocalDateTime startedAt;
+
+  @Column(name = &quot;completed_at&quot;)
+  private LocalDateTime completedAt;
+
+  @CreationTimestamp
+  @Column(name = &quot;created_at&quot;, nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
+  // Business methods
+  public void start() {
+<span class="nc" id="L77">    this.executionStatus = &quot;RUNNING&quot;;</span>
+<span class="nc" id="L78">    this.startedAt = LocalDateTime.now();</span>
+<span class="nc" id="L79">  }</span>
+
+  public void complete() {
+<span class="nc" id="L82">    this.executionStatus = &quot;SUCCESS&quot;;</span>
+<span class="nc" id="L83">    this.completedAt = LocalDateTime.now();</span>
+<span class="nc" id="L84">  }</span>
+
+  public void fail(String errorMessage) {
+<span class="nc" id="L87">    this.executionStatus = &quot;FAILED&quot;;</span>
+<span class="nc" id="L88">    this.errorMessage = errorMessage;</span>
+<span class="nc" id="L89">    this.completedAt = LocalDateTime.now();</span>
+<span class="nc" id="L90">  }</span>
+
+  public void cancel() {
+<span class="nc" id="L93">    this.executionStatus = &quot;CANCELLED&quot;;</span>
+<span class="nc" id="L94">    this.completedAt = LocalDateTime.now();</span>
+<span class="nc" id="L95">  }</span>
+
+  public void updateCounts(Integer successCount, Integer failureCount) {
+<span class="nc" id="L98">    this.successCount = successCount;</span>
+<span class="nc" id="L99">    this.failureCount = failureCount;</span>
+<span class="nc" id="L100">  }</span>
+
+  public void setTargetCount(Integer targetCount) {
+<span class="nc" id="L103">    this.targetCount = targetCount;</span>
+<span class="nc" id="L104">  }</span>
+
+  public boolean isCompleted() {
+<span class="nc bnc" id="L107" title="All 2 branches missed.">    return &quot;SUCCESS&quot;.equals(executionStatus)</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        || &quot;FAILED&quot;.equals(executionStatus)</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        || &quot;CANCELLED&quot;.equals(executionStatus);</span>
+  }
+
+  public boolean isSuccessful() {
+<span class="nc" id="L113">    return &quot;SUCCESS&quot;.equals(executionStatus);</span>
+  }
+
+  public double getSuccessRate() {
+    int total =
+<span class="nc bnc" id="L118" title="All 4 branches missed.">        (successCount != null ? successCount : 0) + (failureCount != null ? failureCount : 0);</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">    if (total == 0) {</span>
+<span class="nc" id="L120">      return 0.0;</span>
+    }
+<span class="nc bnc" id="L122" title="All 2 branches missed.">    return (double) (successCount != null ? successCount : 0) / total * 100;</span>
+  }
+
+  public long getDurationInSeconds() {
+<span class="nc bnc" id="L126" title="All 4 branches missed.">    if (startedAt == null || completedAt == null) {</span>
+<span class="nc" id="L127">      return 0;</span>
+    }
+<span class="nc" id="L129">    return java.time.Duration.between(startedAt, completedAt).getSeconds();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

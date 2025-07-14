@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StatisticsQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.statistics.query.service</a> &gt; <span class="el_source">StatisticsQueryServiceImpl.java</span></div><h1>StatisticsQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.statistics.query.service;
+
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.AdvancedSalesStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.DailyVisitorStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.HourlyVisitorStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.ReservationRequest;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.ReservationStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.ReservationSummaryResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.SalesStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.SalesSummaryResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.StatisticsRequest;
+import com.deveagles.be15_deveagles_be.features.statistics.query.repository.StatisticsQueryRepository;
+import java.time.LocalDate;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class StatisticsQueryServiceImpl implements StatisticsQueryService {
+
+  private final StatisticsQueryRepository statisticsQueryRepository;
+
+  @Override
+  public List&lt;SalesStatisticsResponse&gt; getSalesStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L29">    return statisticsQueryRepository.findSalesStatisticsByPeriod(shopId, startDate, endDate);</span>
+  }
+
+  @Override
+  public List&lt;AdvancedSalesStatisticsResponse&gt; getAdvancedSalesStatistics(
+      Long shopId, StatisticsRequest request) {
+<span class="fc" id="L35">    return statisticsQueryRepository.findAdvancedSalesStatistics(shopId, request);</span>
+  }
+
+  @Override
+  public SalesSummaryResponse getSalesSummary(Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L40">    return statisticsQueryRepository.findSalesSummary(shopId, startDate, endDate);</span>
+  }
+
+  @Override
+  public List&lt;ReservationStatisticsResponse&gt; getReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L46">    return statisticsQueryRepository.findReservationStatisticsByPeriod(shopId, startDate, endDate);</span>
+  }
+
+  @Override
+  public List&lt;ReservationStatisticsResponse&gt; getAdvancedReservationStatistics(
+      Long shopId, ReservationRequest request) {
+<span class="fc" id="L52">    return statisticsQueryRepository.findAdvancedReservationStatistics(shopId, request);</span>
+  }
+
+  @Override
+  public ReservationSummaryResponse getReservationSummary(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L58">    return statisticsQueryRepository.findReservationSummary(shopId, startDate, endDate);</span>
+  }
+
+  @Override
+  public List&lt;ReservationStatisticsResponse&gt; getStaffReservationStatistics(
+      Long shopId, Long staffId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L64">    return statisticsQueryRepository.findStaffReservationStatistics(</span>
+        shopId, staffId, startDate, endDate);
+  }
+
+  @Override
+  public List&lt;ReservationStatisticsResponse&gt; getAllStaffReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L71">    return statisticsQueryRepository.findAllStaffReservationStatistics(shopId, startDate, endDate);</span>
+  }
+
+  @Override
+  public List&lt;HourlyVisitorStatisticsResponse&gt; getHourlyVisitorStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L77">    return statisticsQueryRepository.findHourlyVisitorStatistics(shopId, startDate, endDate);</span>
+  }
+
+  @Override
+  public List&lt;DailyVisitorStatisticsResponse&gt; getDailyVisitorStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L83">    return statisticsQueryRepository.findDailyVisitorStatistics(shopId, startDate, endDate);</span>
+  }
+
+  @Override
+  public List&lt;AdvancedSalesStatisticsResponse&gt; getPrimaryItemDailyTrend(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="fc" id="L89">    return statisticsQueryRepository.findPrimaryItemDailyTrend(shopId, startDate, endDate);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

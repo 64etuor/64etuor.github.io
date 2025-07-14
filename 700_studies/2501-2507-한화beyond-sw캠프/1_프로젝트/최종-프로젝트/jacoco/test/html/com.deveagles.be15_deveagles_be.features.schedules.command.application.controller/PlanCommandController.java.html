@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlanCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.application.controller</a> &gt; <span class="el_source">PlanCommandController.java</span></div><h1>PlanCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.dto.request.*;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.service.PlanCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(&quot;/schedules&quot;)
+@RequiredArgsConstructor
+@Tag(name = &quot;일정 관리&quot;, description = &quot;단기 및 정기 일정 생성, 수정, 삭제 API&quot;)
+public class PlanCommandController {
+
+  private final PlanCommandService planCommandService;
+
+  @Operation(summary = &quot;단기 일정 생성&quot;, description = &quot;단기 일정을 새로 등록합니다.&quot;)
+  @PostMapping(&quot;/plans&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Long&gt;&gt; createPlan(
+      @AuthenticationPrincipal CustomUser user, @RequestBody CreatePlanRequest request) {
+<span class="nc" id="L27">    Long id = planCommandService.createPlan(user.getShopId(), request);</span>
+<span class="nc" id="L28">    return ResponseEntity.ok(ApiResponse.success(id));</span>
+  }
+
+  @Operation(summary = &quot;정기 일정 생성&quot;, description = &quot;정기 일정을 새로 등록합니다.&quot;)
+  @PostMapping(&quot;/regular-plans&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Long&gt;&gt; createRegularPlan(
+      @AuthenticationPrincipal CustomUser user, @RequestBody CreateRegularPlanRequest request) {
+<span class="nc" id="L35">    Long id = planCommandService.createRegularPlan(user.getShopId(), request);</span>
+<span class="nc" id="L36">    return ResponseEntity.ok(ApiResponse.success(id));</span>
+  }
+
+  @Operation(summary = &quot;단기 일정 수정&quot;, description = &quot;기존 단기 일정을 수정합니다.&quot;)
+  @PutMapping(&quot;/plans/{planId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updatePlan(
+      @AuthenticationPrincipal CustomUser user,
+      @PathVariable Long planId,
+      @RequestBody CreatePlanRequest request) {
+<span class="nc" id="L45">    planCommandService.updatePlan(user.getShopId(), planId, request);</span>
+<span class="nc" id="L46">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;정기 일정 수정&quot;, description = &quot;기존 정기 일정을 수정합니다.&quot;)
+  @PutMapping(&quot;/regular-plans/{regularPlanId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updateRegularPlan(
+      @AuthenticationPrincipal CustomUser user,
+      @PathVariable Long regularPlanId,
+      @RequestBody CreateRegularPlanRequest request) {
+<span class="nc" id="L55">    planCommandService.updateRegularPlan(user.getShopId(), regularPlanId, request);</span>
+<span class="nc" id="L56">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;일정 타입 전환&quot;, description = &quot;단기 ↔ 정기 일정으로 전환합니다.&quot;)
+  @PostMapping(&quot;/plans/switch&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; switchSchedule(
+      @AuthenticationPrincipal CustomUser user, @RequestBody UpdatePlanScheduleRequest request) {
+<span class="nc" id="L63">    planCommandService.switchSchedule(user.getShopId(), request);</span>
+<span class="nc" id="L64">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;일정 삭제 (다건)&quot;, description = &quot;단기 및 정기 일정을 함께 삭제합니다.&quot;)
+  @DeleteMapping(&quot;/plans&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; deleteSchedules(
+      @AuthenticationPrincipal CustomUser user, @RequestBody List&lt;DeleteScheduleRequest&gt; requests) {
+<span class="nc" id="L71">    planCommandService.deleteMixedSchedules(user.getShopId(), requests);</span>
+<span class="nc" id="L72">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

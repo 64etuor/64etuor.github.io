@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.users.command.application.service</a> &gt; <span class="el_source">FileCommandServiceImpl.java</span></div><h1>FileCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.users.command.application.service;
+
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import java.io.IOException;
+import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+<span class="nc" id="L15">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class FileCommandServiceImpl implements FileCommandService {
+
+  private final AmazonS3 amazonS3;
+
+  @Value(&quot;${cloud.aws.s3.bucket}&quot;)
+  private String bucket;
+
+  @Override
+  public String saveProfile(MultipartFile profile) {
+<span class="nc" id="L27">    String fileName = &quot;user/thumbnail_&quot; + UUID.randomUUID() + &quot;_&quot; + profile.getOriginalFilename();</span>
+
+<span class="nc" id="L29">    ObjectMetadata metadata = new ObjectMetadata();</span>
+<span class="nc" id="L30">    metadata.setContentLength(profile.getSize());</span>
+<span class="nc" id="L31">    metadata.setContentType(profile.getContentType());</span>
+
+    try {
+<span class="nc" id="L34">      amazonS3.putObject(bucket, fileName, profile.getInputStream(), metadata);</span>
+<span class="nc" id="L35">    } catch (IOException e) {</span>
+<span class="nc" id="L36">      throw new BusinessException(ErrorCode.FILE_SAVE_ERROR);</span>
+<span class="nc" id="L37">    }</span>
+
+<span class="nc" id="L39">    return amazonS3.getUrl(bucket, fileName).toString();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LeaveCommandService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.application.service</a> &gt; <span class="el_source">LeaveCommandService.java</span></div><h1>LeaveCommandService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.application.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.dto.request.*;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.Leave;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.RegularLeave;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.ScheduleType;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.repository.LeaveRepository;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.repository.RegularLeaveRepository;
+import java.util.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class LeaveCommandService {
+
+  private final LeaveRepository leaveRepository;
+  private final RegularLeaveRepository regularLeaveRepository;
+
+  @Transactional
+  public Long createLeave(Long shopId, CreateLeaveRequest request) {
+    Leave leave =
+<span class="fc" id="L26">        Leave.builder()</span>
+<span class="fc" id="L27">            .staffId(request.staffId())</span>
+<span class="fc" id="L28">            .shopId(shopId)</span>
+<span class="fc" id="L29">            .leaveTitle(request.leaveTitle())</span>
+<span class="fc" id="L30">            .leaveAt(request.leaveAt())</span>
+<span class="fc" id="L31">            .leaveMemo(request.leaveMemo())</span>
+<span class="fc" id="L32">            .build();</span>
+<span class="fc" id="L33">    return leaveRepository.save(leave).getLeaveId();</span>
+  }
+
+  @Transactional
+  public void updateLeave(Long shopId, Long leaveId, UpdateLeaveRequest request) {
+<span class="fc" id="L38">    Leave leave =</span>
+        leaveRepository
+<span class="fc" id="L40">            .findById(leaveId)</span>
+<span class="fc" id="L41">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.LEAVE_NOT_FOUND));</span>
+
+<span class="fc" id="L43">    leave.update(request.leaveTitle(), request.leaveAt(), request.leaveMemo());</span>
+<span class="fc" id="L44">  }</span>
+
+  @Transactional
+  public Long createRegularLeave(Long shopId, CreateRegularLeaveRequest request) {
+<span class="fc bfc" id="L48" title="All 2 branches covered.">    boolean hasMonthly = request.monthlyLeave() != null;</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">    boolean hasWeekly = request.weeklyLeave() != null;</span>
+
+<span class="fc bfc" id="L51" title="All 2 branches covered.">    if (hasMonthly == hasWeekly) {</span>
+<span class="fc" id="L52">      throw new BusinessException(ErrorCode.INVALID_SCHEDULE_REPEAT_TYPE);</span>
+    }
+
+    RegularLeave regularLeave =
+<span class="fc" id="L56">        RegularLeave.builder()</span>
+<span class="fc" id="L57">            .staffId(request.staffId())</span>
+<span class="fc" id="L58">            .shopId(shopId)</span>
+<span class="fc" id="L59">            .regularLeaveTitle(request.regularLeaveTitle())</span>
+<span class="fc" id="L60">            .monthlyLeave(request.monthlyLeave())</span>
+<span class="fc" id="L61">            .weeklyLeave(request.weeklyLeave())</span>
+<span class="fc" id="L62">            .regularLeaveMemo(request.regularLeaveMemo())</span>
+<span class="fc" id="L63">            .build();</span>
+
+<span class="fc" id="L65">    return regularLeaveRepository.save(regularLeave).getRegularLeaveId();</span>
+  }
+
+  @Transactional
+  public void updateRegularLeave(
+      Long shopId, Long regularLeaveId, UpdateRegularLeaveRequest request) {
+<span class="fc" id="L71">    RegularLeave regularLeave =</span>
+        regularLeaveRepository
+<span class="fc" id="L73">            .findById(regularLeaveId)</span>
+<span class="pc" id="L74">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.REGULAR_LEAVE_NOT_FOUND));</span>
+
+<span class="nc" id="L76">    regularLeave.update(</span>
+<span class="nc" id="L77">        request.regularLeaveTitle(),</span>
+<span class="nc" id="L78">        request.monthlyLeave(),</span>
+<span class="nc" id="L79">        request.weeklyLeave(),</span>
+<span class="nc" id="L80">        request.regularLeaveMemo());</span>
+<span class="nc" id="L81">  }</span>
+
+  @Transactional
+  public void deleteMixedLeaves(Long shopId, List&lt;DeleteScheduleRequest&gt; requests) {
+<span class="pc bpc" id="L85" title="2 of 4 branches missed.">    if (requests == null || requests.isEmpty()) return;</span>
+
+<span class="fc" id="L87">    List&lt;Long&gt; leaveIds = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L88">    List&lt;Long&gt; regularLeaveIds = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L90" title="All 2 branches covered.">    for (DeleteScheduleRequest req : requests) {</span>
+<span class="fc" id="L91">      String type = req.type().toLowerCase(Locale.ROOT);</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">      if (&quot;leave&quot;.equals(type)) {</span>
+<span class="fc" id="L93">        leaveIds.add(req.id());</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">      } else if (&quot;regular_leave&quot;.equals(type)) {</span>
+<span class="fc" id="L95">        regularLeaveIds.add(req.id());</span>
+      } else {
+<span class="fc" id="L97">        throw new BusinessException(ErrorCode.INVALID_SCHEDULE_TYPE);</span>
+      }
+<span class="fc" id="L99">    }</span>
+
+<span class="fc bfc" id="L101" title="All 2 branches covered.">    if (!leaveIds.isEmpty()) {</span>
+<span class="fc" id="L102">      List&lt;Leave&gt; leaves = leaveRepository.findAllById(leaveIds);</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">      if (leaves.size() != leaveIds.size()) {</span>
+<span class="fc" id="L104">        throw new BusinessException(ErrorCode.LEAVE_NOT_FOUND);</span>
+      }
+<span class="fc" id="L106">      leaveRepository.deleteAllInBatch(leaves);</span>
+    }
+
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">    if (!regularLeaveIds.isEmpty()) {</span>
+<span class="fc" id="L110">      List&lt;RegularLeave&gt; regularLeaves = regularLeaveRepository.findAllById(regularLeaveIds);</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">      if (regularLeaves.size() != regularLeaveIds.size()) {</span>
+<span class="fc" id="L112">        throw new BusinessException(ErrorCode.REGULAR_LEAVE_NOT_FOUND);</span>
+      }
+<span class="fc" id="L114">      regularLeaveRepository.deleteAllInBatch(regularLeaves);</span>
+    }
+<span class="fc" id="L116">  }</span>
+
+  @Transactional
+  public void switchSchedule(Long shopId, UpdateLeaveScheduleRequest request) {
+<span class="nc" id="L120">    ScheduleType fromType = request.fromType();</span>
+<span class="nc" id="L121">    ScheduleType toType = request.toType();</span>
+
+<span class="nc bnc" id="L123" title="All 2 branches missed.">    if (fromType == toType) {</span>
+<span class="nc bnc" id="L124" title="All 3 branches missed.">      switch (fromType) {</span>
+        case LEAVE -&gt;
+<span class="nc" id="L126">            updateLeave(shopId, request.fromId(), request.leaveRequest().toUpdateRequest());</span>
+        case REGULAR_LEAVE -&gt;
+<span class="nc" id="L128">            updateRegularLeave(</span>
+<span class="nc" id="L129">                shopId, request.fromId(), request.regularLeaveRequest().toUpdateRequest());</span>
+<span class="nc" id="L130">        default -&gt; throw new BusinessException(ErrorCode.INVALID_SCHEDULE_TYPE);</span>
+      }
+<span class="nc" id="L132">      return;</span>
+    }
+
+<span class="nc bnc" id="L135" title="All 3 branches missed.">    switch (fromType) {</span>
+      case LEAVE -&gt; {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        if (!leaveRepository.existsById(request.fromId())) {</span>
+<span class="nc" id="L138">          throw new BusinessException(ErrorCode.LEAVE_NOT_FOUND);</span>
+        }
+<span class="nc" id="L140">        leaveRepository.deleteById(request.fromId());</span>
+<span class="nc" id="L141">      }</span>
+      case REGULAR_LEAVE -&gt; {
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (!regularLeaveRepository.existsById(request.fromId())) {</span>
+<span class="nc" id="L144">          throw new BusinessException(ErrorCode.REGULAR_LEAVE_NOT_FOUND);</span>
+        }
+<span class="nc" id="L146">        regularLeaveRepository.deleteById(request.fromId());</span>
+<span class="nc" id="L147">      }</span>
+<span class="nc" id="L148">      default -&gt; throw new BusinessException(ErrorCode.INVALID_SCHEDULE_TYPE);</span>
+    }
+
+<span class="nc bnc" id="L151" title="All 3 branches missed.">    switch (toType) {</span>
+<span class="nc" id="L152">      case LEAVE -&gt; createLeave(shopId, request.leaveRequest());</span>
+<span class="nc" id="L153">      case REGULAR_LEAVE -&gt; createRegularLeave(shopId, request.regularLeaveRequest());</span>
+<span class="nc" id="L154">      default -&gt; throw new BusinessException(ErrorCode.INVALID_SCHEDULE_TYPE);</span>
+    }
+<span class="nc" id="L156">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

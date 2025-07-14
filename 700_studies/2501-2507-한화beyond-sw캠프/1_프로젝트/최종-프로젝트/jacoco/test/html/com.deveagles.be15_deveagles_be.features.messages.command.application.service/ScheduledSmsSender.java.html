@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScheduledSmsSender.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.command.application.service</a> &gt; <span class="el_source">ScheduledSmsSender.java</span></div><h1>ScheduledSmsSender.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.command.application.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.customers.query.service.CustomerQueryService;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.SmsSendUnit;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.response.MessageSendResult;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageDeliveryStatus;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageSendingType;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageSettings;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.Sms;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.repository.MessageSettingRepository;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.repository.SmsRepository;
+import com.deveagles.be15_deveagles_be.features.messages.command.infrastructure.CoolSmsClient;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+<span class="nc" id="L28">@Slf4j</span>
+public class ScheduledSmsSender {
+
+  private final SmsRepository smsRepository;
+  private final CustomerQueryService customerQueryService;
+  private final MessageSettingRepository messageSettingRepository;
+  private final CoolSmsClient coolSmsClient;
+  private final MessageCommandService messageCommandService;
+
+  @Scheduled(fixedDelay = 60000) // 이전 작업이 끝난 후 60초 뒤에 실행
+  public void sendScheduledMessages() {
+<span class="nc" id="L39">    log.info(&quot;✅ 예약 메시지 스케줄러 실행됨 - {}&quot;, LocalDateTime.now());</span>
+
+<span class="nc" id="L41">    LocalDateTime now = LocalDateTime.now().withSecond(0).withNano(0);</span>
+
+    // 1. 현재 시간에 예약된 메시지 조회
+<span class="nc" id="L44">    List&lt;Sms&gt; scheduledMessages =</span>
+        smsRepository
+<span class="nc" id="L46">            .findAllByMessageSendingTypeAndScheduledAtLessThanEqualAndMessageDeliveryStatus(</span>
+                MessageSendingType.RESERVATION, now, MessageDeliveryStatus.PENDING);
+
+<span class="nc bnc" id="L49" title="All 2 branches missed.">    if (scheduledMessages.isEmpty()) return;</span>
+
+    // 2. 고객 전화번호 매핑
+<span class="nc" id="L52">    List&lt;Long&gt; customerIds = scheduledMessages.stream().map(Sms::getCustomerId).distinct().toList();</span>
+<span class="nc" id="L53">    List&lt;String&gt; phoneNumbers = customerQueryService.getCustomerPhoneNumbers(customerIds);</span>
+
+<span class="nc" id="L55">    Map&lt;Long, String&gt; phoneNumberMap = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">    for (int i = 0; i &lt; customerIds.size(); i++) {</span>
+<span class="nc" id="L57">      phoneNumberMap.put(customerIds.get(i), phoneNumbers.get(i));</span>
+    }
+
+    // ✅ 3. shopId → senderNumber 캐싱 처리
+<span class="nc" id="L61">    Map&lt;Long, String&gt; senderNumberMap = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">    for (Sms sms : scheduledMessages) {</span>
+<span class="nc" id="L63">      senderNumberMap.computeIfAbsent(</span>
+<span class="nc" id="L64">          sms.getShopId(),</span>
+          shopId -&gt;
+              messageSettingRepository
+<span class="nc" id="L67">                  .findByShopId(shopId)</span>
+<span class="nc" id="L68">                  .map(MessageSettings::getSenderNumber)</span>
+<span class="nc" id="L69">                  .orElseThrow(() -&gt; new BusinessException(ErrorCode.MESSAGE_SETTINGS_NOT_FOUND)));</span>
+<span class="nc" id="L70">    }</span>
+
+    // ✅ 4. senderNumber + messageContent 로 그룹핑
+<span class="nc" id="L73">    Map&lt;String, List&lt;Sms&gt;&gt; grouped =</span>
+<span class="nc" id="L74">        scheduledMessages.stream()</span>
+<span class="nc" id="L75">            .filter(sms -&gt; phoneNumberMap.containsKey(sms.getCustomerId()))</span>
+<span class="nc" id="L76">            .collect(</span>
+<span class="nc" id="L77">                Collectors.groupingBy(</span>
+<span class="nc" id="L78">                    sms -&gt; senderNumberMap.get(sms.getShopId()) + &quot;|&quot; + sms.getMessageContent()));</span>
+
+<span class="nc" id="L80">    List&lt;MessageSendResult&gt; allResults = new ArrayList&lt;&gt;();</span>
+
+    // 5. 그룹별 전송
+<span class="nc bnc" id="L83" title="All 2 branches missed.">    for (Map.Entry&lt;String, List&lt;Sms&gt;&gt; entry : grouped.entrySet()) {</span>
+<span class="nc" id="L84">      String[] keyParts = entry.getKey().split(&quot;\\|&quot;, 2);</span>
+<span class="nc" id="L85">      String senderNumber = keyParts[0];</span>
+<span class="nc" id="L86">      String messageContent = keyParts[1];</span>
+<span class="nc" id="L87">      List&lt;Sms&gt; smsGroup = entry.getValue();</span>
+
+<span class="nc" id="L89">      List&lt;SmsSendUnit&gt; units =</span>
+<span class="nc" id="L90">          smsGroup.stream()</span>
+<span class="nc" id="L91">              .map(</span>
+                  sms -&gt;
+<span class="nc" id="L93">                      new SmsSendUnit(sms.getMessageId(), phoneNumberMap.get(sms.getCustomerId())))</span>
+<span class="nc" id="L94">              .toList();</span>
+
+<span class="nc" id="L96">      List&lt;MessageSendResult&gt; results = coolSmsClient.sendMany(senderNumber, messageContent, units);</span>
+<span class="nc" id="L97">      allResults.addAll(results);</span>
+<span class="nc" id="L98">    }</span>
+
+    // 6. 성공/실패 반영
+<span class="nc" id="L101">    List&lt;Long&gt; successIds =</span>
+<span class="nc" id="L102">        allResults.stream()</span>
+<span class="nc" id="L103">            .filter(MessageSendResult::success)</span>
+<span class="nc" id="L104">            .map(MessageSendResult::messageId)</span>
+<span class="nc" id="L105">            .toList();</span>
+
+<span class="nc" id="L107">    List&lt;Long&gt; failedIds =</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        allResults.stream().filter(r -&gt; !r.success()).map(MessageSendResult::messageId).toList();</span>
+
+<span class="nc bnc" id="L110" title="All 2 branches missed.">    if (!successIds.isEmpty()) {</span>
+<span class="nc" id="L111">      messageCommandService.markSmsAsSent(successIds);</span>
+    }
+
+<span class="nc bnc" id="L114" title="All 2 branches missed.">    if (!failedIds.isEmpty()) {</span>
+<span class="nc" id="L115">      messageCommandService.markSmsAsFailed(failedIds);</span>
+    }
+<span class="nc" id="L117">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.command.application.controller</a> &gt; <span class="el_source">CustomerCommandController.java</span></div><h1>CustomerCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.request.CreateCustomerRequest;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.request.UpdateCustomerRequest;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.dto.response.CustomerCommandResponse;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.service.CustomerCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@Tag(name = &quot;고객 관리&quot;, description = &quot;고객 생성, 수정, 삭제 API&quot;)
+@RestController
+@RequestMapping(&quot;/customers&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L37">@Slf4j</span>
+public class CustomerCommandController {
+
+  private final CustomerCommandService customerCommandService;
+
+  @Operation(summary = &quot;고객 생성&quot;, description = &quot;새로운 고객을 등록합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;201&quot;,
+        description = &quot;고객 생성 성공&quot;,
+        content = @Content(schema = @Schema(implementation = CustomerCommandResponse.class))),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 요청 데이터&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;409&quot;,
+        description = &quot;중복된 전화번호&quot;)
+  })
+  @PostMapping
+  public ResponseEntity&lt;ApiResponse&lt;CustomerCommandResponse&gt;&gt; createCustomer(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;고객 생성 정보&quot;, required = true) @Valid @RequestBody
+          CreateCustomerRequest request) {
+<span class="nc" id="L60">    log.info(</span>
+        &quot;고객 생성 요청 - 이름: {}, 전화번호: {}, 매장ID: {}&quot;,
+<span class="nc" id="L62">        request.customerName(),</span>
+<span class="nc" id="L63">        request.phoneNumber(),</span>
+<span class="nc" id="L64">        user.getShopId());</span>
+
+<span class="nc" id="L66">    CustomerCommandResponse response = customerCommandService.createCustomer(request);</span>
+<span class="nc" id="L67">    return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;고객 정보 수정&quot;, description = &quot;기존 고객의 정보를 수정합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;고객 정보 수정 성공&quot;,
+        content = @Content(schema = @Schema(implementation = CustomerCommandResponse.class))),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;고객을 찾을 수 없음&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 요청 데이터&quot;)
+  })
+  @PutMapping(&quot;/{customerId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CustomerCommandResponse&gt;&gt; updateCustomer(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;고객 ID&quot;, required = true) @PathVariable Long customerId,
+      @Parameter(description = &quot;고객 수정 정보&quot;, required = true) @Valid @RequestBody
+          UpdateCustomerRequest request) {
+<span class="nc" id="L89">    log.info(&quot;고객 정보 수정 요청 - 고객ID: {}, 이름: {}&quot;, customerId, request.customerName());</span>
+
+    // customerId를 request에 설정
+<span class="nc" id="L92">    UpdateCustomerRequest updatedRequest =</span>
+        new UpdateCustomerRequest(
+            customerId,
+<span class="nc" id="L95">            request.customerName(),</span>
+<span class="nc" id="L96">            request.phoneNumber(),</span>
+<span class="nc" id="L97">            request.memo(),</span>
+<span class="nc" id="L98">            request.gender(),</span>
+<span class="nc" id="L99">            request.channelId(),</span>
+<span class="nc" id="L100">            request.staffId(),</span>
+<span class="nc" id="L101">            request.customerGradeId(),</span>
+<span class="nc" id="L102">            request.birthdate(),</span>
+<span class="nc" id="L103">            request.marketingConsent(),</span>
+<span class="nc" id="L104">            request.notificationConsent());</span>
+
+<span class="nc" id="L106">    CustomerCommandResponse response = customerCommandService.updateCustomer(updatedRequest);</span>
+<span class="nc" id="L107">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;고객 삭제&quot;, description = &quot;고객을 소프트 삭제합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;고객 삭제 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;고객을 찾을 수 없음&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;이미 삭제된 고객&quot;)
+  })
+  @DeleteMapping(&quot;/{customerId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;String&gt;&gt; deleteCustomer(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;고객 ID&quot;, required = true) @PathVariable Long customerId) {
+<span class="nc" id="L126">    log.info(&quot;고객 삭제 요청 - 고객ID: {}, 매장ID: {}&quot;, customerId, user.getShopId());</span>
+
+<span class="nc" id="L128">    customerCommandService.deleteCustomer(customerId, user.getShopId());</span>
+<span class="nc" id="L129">    return ResponseEntity.ok(ApiResponse.success(&quot;고객이 성공적으로 삭제되었습니다.&quot;));</span>
+  }
+
+  @Operation(summary = &quot;마케팅 동의 변경&quot;, description = &quot;고객의 마케팅 수신 동의 상태를 변경합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;마케팅 동의 상태 변경 성공&quot;,
+        content = @Content(schema = @Schema(implementation = CustomerCommandResponse.class))),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;고객을 찾을 수 없음&quot;)
+  })
+  @PatchMapping(&quot;/{customerId}/marketing-consent&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CustomerCommandResponse&gt;&gt; updateMarketingConsent(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;고객 ID&quot;, required = true) @PathVariable Long customerId,
+      @Parameter(description = &quot;마케팅 동의 여부&quot;, required = true) @RequestParam Boolean consent) {
+<span class="nc" id="L147">    log.info(&quot;마케팅 동의 변경 요청 - 고객ID: {}, 매장ID: {}, 동의: {}&quot;, customerId, user.getShopId(), consent);</span>
+
+<span class="nc" id="L149">    CustomerCommandResponse response =</span>
+<span class="nc" id="L150">        customerCommandService.updateMarketingConsent(customerId, user.getShopId(), consent);</span>
+<span class="nc" id="L151">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;알림 동의 변경&quot;, description = &quot;고객의 알림 수신 동의 상태를 변경합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;알림 동의 상태 변경 성공&quot;,
+        content = @Content(schema = @Schema(implementation = CustomerCommandResponse.class))),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;고객을 찾을 수 없음&quot;)
+  })
+  @PatchMapping(&quot;/{customerId}/notification-consent&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CustomerCommandResponse&gt;&gt; updateNotificationConsent(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;고객 ID&quot;, required = true) @PathVariable Long customerId,
+      @Parameter(description = &quot;알림 동의 여부&quot;, required = true) @RequestParam Boolean consent) {
+<span class="nc" id="L169">    log.info(&quot;알림 동의 변경 요청 - 고객ID: {}, 매장ID: {}, 동의: {}&quot;, customerId, user.getShopId(), consent);</span>
+
+<span class="nc" id="L171">    CustomerCommandResponse response =</span>
+<span class="nc" id="L172">        customerCommandService.updateNotificationConsent(customerId, user.getShopId(), consent);</span>
+<span class="nc" id="L173">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;방문 추가&quot;, description = &quot;고객의 방문 정보를 추가합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;방문 추가 성공&quot;,
+        content = @Content(schema = @Schema(implementation = CustomerCommandResponse.class))),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;고객을 찾을 수 없음&quot;)
+  })
+  @PatchMapping(&quot;/{customerId}/visit&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CustomerCommandResponse&gt;&gt; addVisit(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;고객 ID&quot;, required = true) @PathVariable Long customerId,
+      @Parameter(description = &quot;매출액&quot;, required = true) @RequestParam Integer revenue) {
+<span class="nc" id="L191">    log.info(&quot;방문 추가 요청 - 고객ID: {}, 매장ID: {}, 매출: {}&quot;, customerId, user.getShopId(), revenue);</span>
+
+<span class="nc" id="L193">    CustomerCommandResponse response =</span>
+<span class="nc" id="L194">        customerCommandService.addVisit(customerId, user.getShopId(), revenue);</span>
+<span class="nc" id="L195">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+
+  @Operation(summary = &quot;노쇼 추가&quot;, description = &quot;고객의 노쇼 정보를 추가합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;노쇼 추가 성공&quot;,
+        content = @Content(schema = @Schema(implementation = CustomerCommandResponse.class))),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;고객을 찾을 수 없음&quot;)
+  })
+  @PatchMapping(&quot;/{customerId}/noshow&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CustomerCommandResponse&gt;&gt; addNoshow(
+      @AuthenticationPrincipal CustomUser user,
+      @Parameter(description = &quot;고객 ID&quot;, required = true) @PathVariable Long customerId) {
+<span class="nc" id="L212">    log.info(&quot;노쇼 추가 요청 - 고객ID: {}, 매장ID: {}&quot;, customerId, user.getShopId());</span>
+
+<span class="nc" id="L214">    CustomerCommandResponse response =</span>
+<span class="nc" id="L215">        customerCommandService.addNoshow(customerId, user.getShopId());</span>
+<span class="nc" id="L216">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

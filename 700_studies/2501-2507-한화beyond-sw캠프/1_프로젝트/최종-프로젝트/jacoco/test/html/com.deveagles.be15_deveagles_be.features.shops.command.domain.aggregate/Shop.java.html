@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Shop.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.shops.command.domain.aggregate</a> &gt; <span class="el_source">Shop.java</span></div><h1>Shop.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.shops.command.domain.aggregate;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import lombok.*;
+
+@Builder
+@Getter
+@Entity
+@Table(name = &quot;shop&quot;)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+public class Shop {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;shop_id&quot;, nullable = false)
+  private Long shopId;
+
+  @Column(name = &quot;shop_name&quot;, nullable = false)
+  private String shopName;
+
+  @Column(name = &quot;owner_id&quot;)
+  private Long ownerId;
+
+  @Column(name = &quot;address&quot;, nullable = false)
+  private String address;
+
+  @Column(name = &quot;detail_address&quot;, nullable = false)
+  private String detailAddress;
+
+  @Column(name = &quot;phone_number&quot;)
+  private String phoneNumber;
+
+  @Column(name = &quot;business_number&quot;)
+  private String businessNumber;
+
+  @Column(name = &quot;industry_id&quot;, nullable = false)
+  private Long industryId;
+
+<span class="nc" id="L43">  @Column(name = &quot;incentive_status&quot;, nullable = false)</span>
+  private boolean incentiveStatus = false;
+
+<span class="nc" id="L46">  @Column(name = &quot;reservation_term&quot;, nullable = false)</span>
+  private int reservationTerm = 30;
+
+  @Column(name = &quot;shop_description&quot;)
+  private String shopDescription;
+
+  @Column(name = &quot;created_at&quot;, nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
+  @Column(name = &quot;modified_at&quot;, nullable = false)
+  private LocalDateTime modifiedAt;
+
+  @Builder
+  public Shop(
+      String shopName,
+      String address,
+      String detailAddress,
+      Long industryId,
+      String phoneNumber,
+      String businessNumber,
+<span class="nc" id="L66">      String shopDescription) {</span>
+<span class="nc" id="L67">    this.shopName = shopName;</span>
+<span class="nc" id="L68">    this.address = address;</span>
+<span class="nc" id="L69">    this.detailAddress = detailAddress;</span>
+<span class="nc" id="L70">    this.industryId = industryId;</span>
+<span class="nc" id="L71">    this.phoneNumber = phoneNumber;</span>
+<span class="nc" id="L72">    this.businessNumber = businessNumber;</span>
+<span class="nc" id="L73">    this.shopDescription = shopDescription;</span>
+<span class="nc" id="L74">  }</span>
+
+  public void setIncentive(boolean status) {
+<span class="fc" id="L77">    this.incentiveStatus = status;</span>
+<span class="fc" id="L78">  }</span>
+
+  public void setReservation(int term) {
+<span class="nc" id="L81">    this.reservationTerm = term;</span>
+<span class="nc" id="L82">  }</span>
+
+  public void setOwner(Long ownerId) {
+<span class="fc" id="L85">    this.ownerId = ownerId;</span>
+<span class="fc" id="L86">  }</span>
+
+  public void setName(String shopName) {
+<span class="fc" id="L89">    this.shopName = shopName;</span>
+<span class="fc" id="L90">  }</span>
+
+  public void setShopAddress(String address) {
+<span class="fc" id="L93">    this.address = address;</span>
+<span class="fc" id="L94">  }</span>
+
+  public void setShopDetailAddress(String detailAddress) {
+<span class="fc" id="L97">    this.detailAddress = detailAddress;</span>
+<span class="fc" id="L98">  }</span>
+
+  public void setIndustry(Long industryId) {
+<span class="fc" id="L101">    this.industryId = industryId;</span>
+<span class="fc" id="L102">  }</span>
+
+  public void setPhone(String phoneNumber) {
+<span class="fc" id="L105">    this.phoneNumber = phoneNumber;</span>
+<span class="fc" id="L106">  }</span>
+
+  public void setBizNumber(String businessNumber) {
+<span class="fc" id="L109">    this.businessNumber = businessNumber;</span>
+<span class="fc" id="L110">  }</span>
+
+  public void setDescription(String description) {
+<span class="fc" id="L113">    this.shopDescription = description;</span>
+<span class="fc" id="L114">  }</span>
+
+  public void updateReservationTerm(int term) {
+<span class="pc bpc" id="L117" title="3 of 4 branches missed.">    if (term != 10 &amp;&amp; term != 30) {</span>
+<span class="nc" id="L118">      throw new BusinessException(ErrorCode.INVALID_RESERVATION_TERM);</span>
+    }
+<span class="fc" id="L120">    this.reservationTerm = term;</span>
+<span class="fc" id="L121">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

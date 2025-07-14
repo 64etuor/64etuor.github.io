@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StaffQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.users.query.application.service</a> &gt; <span class="el_source">StaffQueryServiceImpl.java</span></div><h1>StaffQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.users.query.application.service;
+
+import com.deveagles.be15_deveagles_be.common.dto.Pagination;
+import com.deveagles.be15_deveagles_be.features.users.query.application.dto.response.StaffListInfo;
+import com.deveagles.be15_deveagles_be.features.users.query.application.dto.response.StaffsListResponse;
+import com.deveagles.be15_deveagles_be.features.users.query.infraStrucure.repository.StaffQueryRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+<span class="fc" id="L15">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class StaffQueryServiceImpl implements StaffQueryService {
+
+  private final StaffQueryRepository staffQueryRepository;
+
+  @Override
+  public StaffsListResponse getStaff(
+      Long shopId, int size, int page, String keyword, Boolean isActive) {
+
+<span class="fc" id="L26">    Pageable pageable = PageRequest.of(page - 1, size, Sort.by(&quot;staffId&quot;).descending());</span>
+<span class="fc" id="L27">    Page&lt;StaffListInfo&gt; staffPage =</span>
+<span class="fc" id="L28">        staffQueryRepository.searchStaffs(shopId, keyword, isActive, pageable);</span>
+
+<span class="fc" id="L30">    return StaffsListResponse.builder()</span>
+<span class="fc" id="L31">        .staffList(staffPage.getContent())</span>
+<span class="fc" id="L32">        .pagination(</span>
+<span class="fc" id="L33">            Pagination.builder()</span>
+<span class="fc" id="L34">                .currentPage(page)</span>
+<span class="fc" id="L35">                .totalItems(staffPage.getTotalElements())</span>
+<span class="fc" id="L36">                .totalPages(staffPage.getTotalPages())</span>
+<span class="fc" id="L37">                .build())</span>
+<span class="fc" id="L38">        .build();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

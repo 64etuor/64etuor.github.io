@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationHistoryQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.query.service</a> &gt; <span class="el_source">ReservationHistoryQueryService.java</span></div><h1>ReservationHistoryQueryService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.query.service;
+
+import com.deveagles.be15_deveagles_be.common.dto.PagedResponse;
+import com.deveagles.be15_deveagles_be.common.dto.PagedResult;
+import com.deveagles.be15_deveagles_be.common.dto.Pagination;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.ReservationHistoryResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.mapper.ReservationHistoryMapper;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class ReservationHistoryQueryService {
+
+  private final ReservationHistoryMapper reservationHistoryMapper;
+
+  public PagedResponse&lt;ReservationHistoryResponse&gt; getReservationHistories(
+      Long shopId, int page, int size) {
+<span class="fc" id="L20">    int offset = page * size;</span>
+
+<span class="fc" id="L22">    List&lt;ReservationHistoryResponse&gt; content =</span>
+<span class="fc" id="L23">        reservationHistoryMapper.getReservationHistoryList(shopId, size, offset);</span>
+
+<span class="fc" id="L25">    long total = reservationHistoryMapper.countReservationHistories(shopId);</span>
+
+    Pagination pagination =
+<span class="fc" id="L28">        Pagination.builder()</span>
+<span class="fc" id="L29">            .currentPage(page)</span>
+<span class="fc" id="L30">            .totalPages((int) Math.ceil((double) total / size))</span>
+<span class="fc" id="L31">            .totalItems(total)</span>
+<span class="fc" id="L32">            .build();</span>
+
+<span class="fc" id="L34">    return PagedResponse.from(new PagedResult&lt;&gt;(content, pagination));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.users.command.application.service</a> &gt; <span class="el_source">UserCommandServiceImpl.java</span></div><h1>UserCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.users.command.application.service;
+
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.users.command.application.dto.request.*;
+import com.deveagles.be15_deveagles_be.features.users.command.application.dto.response.AccountResponse;
+import com.deveagles.be15_deveagles_be.features.users.command.application.dto.response.ProfileResponse;
+import com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate.Staff;
+import com.deveagles.be15_deveagles_be.features.users.command.domain.aggregate.StaffStatus;
+import com.deveagles.be15_deveagles_be.features.users.command.repository.UserRepository;
+import java.io.IOException;
+import java.util.Optional;
+import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+<span class="fc" id="L25">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class UserCommandServiceImpl implements UserCommandService {
+
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
+  private final AmazonS3 amazonS3;
+
+  @Value(&quot;${cloud.aws.s3.bucket}&quot;)
+  private String bucket;
+
+  @Override
+  @Transactional
+  public Staff userRegist(UserCreateRequest request, Long shopId) {
+
+    Staff staff =
+<span class="fc" id="L42">        Staff.builder()</span>
+<span class="fc" id="L43">            .loginId(request.loginId())</span>
+<span class="fc" id="L44">            .password(passwordEncoder.encode(request.password()))</span>
+<span class="fc" id="L45">            .staffName(request.staffName())</span>
+<span class="fc" id="L46">            .grade(&quot;점장&quot;)</span>
+<span class="fc" id="L47">            .email(request.email())</span>
+<span class="fc" id="L48">            .shopId(shopId)</span>
+<span class="fc" id="L49">            .phoneNumber(request.phoneNumber())</span>
+<span class="fc" id="L50">            .colorCode(&quot;#364f6b&quot;)</span>
+<span class="fc" id="L51">            .staffStatus(StaffStatus.OWNER)</span>
+<span class="fc" id="L52">            .build();</span>
+
+<span class="fc" id="L54">    return userRepository.save(staff);</span>
+  }
+
+  @Override
+  @Transactional
+  public Boolean validCheckId(ValidCheckRequest validRequest) {
+
+<span class="fc" id="L61">    Optional&lt;Staff&gt; findStaff = userRepository.findStaffByLoginId(validRequest.checkItem());</span>
+
+<span class="fc bfc" id="L63" title="All 2 branches covered.">    if (findStaff.isEmpty()) return Boolean.TRUE;</span>
+<span class="fc" id="L64">    else return Boolean.FALSE;</span>
+  }
+
+  @Override
+  @Transactional
+  public Boolean validCheckEmail(ValidCheckRequest validRequest) {
+<span class="fc" id="L70">    Optional&lt;Staff&gt; findStaff = userRepository.findStaffByEmail(validRequest.checkItem());</span>
+
+<span class="fc bfc" id="L72" title="All 2 branches covered.">    if (findStaff.isEmpty()) return Boolean.TRUE;</span>
+<span class="fc" id="L73">    else return Boolean.FALSE;</span>
+  }
+
+  @Override
+  @Transactional
+  public AccountResponse getAccount(GetAccountRequest request) {
+
+<span class="fc" id="L80">    Staff findStaff = findStaffByStaffId(request.staffId());</span>
+
+<span class="fc" id="L82">    return buildAccountResponse(findStaff);</span>
+  }
+
+  @Override
+  @Transactional
+  public AccountResponse patchAccount(PatchAccountRequest request) {
+
+<span class="fc" id="L89">    Staff findStaff = findStaffByStaffId(request.staffId());</span>
+
+<span class="fc bfc" id="L91" title="All 2 branches covered.">    if (!request.email().isEmpty()) findStaff.patchEmail(request.email());</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">    if (!request.phoneNumber().isEmpty()) findStaff.patchPhoneNumber(request.phoneNumber());</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">    if (!request.password().isEmpty())</span>
+<span class="fc" id="L94">      findStaff.setEncodedPassword(passwordEncoder.encode(request.password()));</span>
+
+<span class="fc" id="L96">    Staff staff = userRepository.save(findStaff);</span>
+
+<span class="fc" id="L98">    return buildAccountResponse(staff);</span>
+  }
+
+  @Override
+  @Transactional
+  public ProfileResponse getProfile(CustomUser customUser) {
+
+<span class="fc" id="L105">    Staff findStaff = findStaffByStaffId(customUser.getUserId());</span>
+
+<span class="fc" id="L107">    return buildProfileResponse(findStaff);</span>
+  }
+
+  @Override
+  @Transactional
+  public ProfileResponse patchProfile(
+      Long staffId, PatchProfileRequest request, MultipartFile profile) {
+
+<span class="fc" id="L115">    Staff findStaff = findStaffByStaffId(staffId);</span>
+
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">    if (profile != null) {</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">      if (!profile.isEmpty()) {</span>
+<span class="fc" id="L119">        String profileUrl = saveProfile(profile);</span>
+<span class="fc" id="L120">        findStaff.patchProfileUrl(profileUrl);</span>
+<span class="fc" id="L121">      } else {</span>
+<span class="nc" id="L122">        findStaff.patchProfileUrl(null);</span>
+      }
+    }
+
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">    if (!request.colorCode().isEmpty()) findStaff.patchColorCode(request.colorCode());</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">    if (!request.description().isEmpty()) findStaff.patchDescription(request.description());</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">    if (!request.staffName().isEmpty()) findStaff.patchName(request.staffName());</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">    if (!request.grade().isEmpty()) findStaff.patchGrade(request.grade());</span>
+
+<span class="fc" id="L131">    return buildProfileResponse(userRepository.save(findStaff));</span>
+  }
+
+  @Override
+  @Transactional
+  public void patchPaassword(PatchPasswordRequest request) {
+
+<span class="fc" id="L138">    Staff staff =</span>
+        userRepository
+<span class="fc" id="L140">            .findStaffByEmail(request.email())</span>
+<span class="fc" id="L141">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.USER_NOT_FOUND));</span>
+
+<span class="fc" id="L143">    staff.setEncodedPassword(passwordEncoder.encode(request.password()));</span>
+
+<span class="fc" id="L145">    userRepository.save(staff);</span>
+<span class="fc" id="L146">  }</span>
+
+  @Override
+  public String saveProfile(MultipartFile profile) {
+
+<span class="fc" id="L151">    String fileName = &quot;user/thumbnail_&quot; + UUID.randomUUID() + &quot;_&quot; + profile.getOriginalFilename();</span>
+
+<span class="fc" id="L153">    ObjectMetadata metadata = new ObjectMetadata();</span>
+<span class="fc" id="L154">    metadata.setContentLength(profile.getSize());</span>
+<span class="fc" id="L155">    metadata.setContentType(profile.getContentType());</span>
+
+    try {
+<span class="fc" id="L158">      amazonS3.putObject(bucket, fileName, profile.getInputStream(), metadata);</span>
+<span class="nc" id="L159">    } catch (IOException e) {</span>
+<span class="nc" id="L160">      throw new BusinessException(ErrorCode.FILE_SAVE_ERROR);</span>
+<span class="fc" id="L161">    }</span>
+
+<span class="fc" id="L163">    return amazonS3.getUrl(bucket, fileName).toString();</span>
+  }
+
+  private Staff findStaffByStaffId(Long staffId) {
+
+<span class="fc" id="L168">    return userRepository</span>
+<span class="fc" id="L169">        .findStaffByStaffId(staffId)</span>
+<span class="fc" id="L170">        .orElseThrow(() -&gt; new BusinessException(ErrorCode.USER_NOT_FOUND));</span>
+  }
+
+  private AccountResponse buildAccountResponse(Staff staff) {
+
+<span class="fc" id="L175">    return AccountResponse.builder()</span>
+<span class="fc" id="L176">        .phoneNumber(staff.getPhoneNumber())</span>
+<span class="fc" id="L177">        .email(staff.getEmail())</span>
+<span class="fc" id="L178">        .build();</span>
+  }
+
+  private ProfileResponse buildProfileResponse(Staff staff) {
+
+<span class="fc" id="L183">    return ProfileResponse.builder()</span>
+<span class="fc" id="L184">        .profileUrl(staff.getProfileUrl())</span>
+<span class="fc" id="L185">        .description(staff.getStaffDescription())</span>
+<span class="fc" id="L186">        .colorCode(staff.getColorCode())</span>
+<span class="fc" id="L187">        .build();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

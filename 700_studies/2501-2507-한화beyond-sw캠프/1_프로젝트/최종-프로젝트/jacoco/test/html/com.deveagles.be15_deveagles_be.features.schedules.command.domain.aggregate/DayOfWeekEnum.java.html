@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DayOfWeekEnum.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate</a> &gt; <span class="el_source">DayOfWeekEnum.java</span></div><h1>DayOfWeekEnum.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import lombok.Getter;
+
+<span class="fc" id="L7">@Getter</span>
+public enum DayOfWeekEnum {
+<span class="fc" id="L9">  MON,</span>
+<span class="fc" id="L10">  TUE,</span>
+<span class="fc" id="L11">  WED,</span>
+<span class="fc" id="L12">  THU,</span>
+<span class="fc" id="L13">  FRI,</span>
+<span class="fc" id="L14">  SAT,</span>
+<span class="fc" id="L15">  SUN;</span>
+
+  public static DayOfWeekEnum fromKorean(String korean) {
+<span class="nc bnc" id="L18" title="All 8 branches missed.">    return switch (korean) {</span>
+<span class="nc" id="L19">      case &quot;월&quot; -&gt; MON;</span>
+<span class="nc" id="L20">      case &quot;화&quot; -&gt; TUE;</span>
+<span class="nc" id="L21">      case &quot;수&quot; -&gt; WED;</span>
+<span class="nc" id="L22">      case &quot;목&quot; -&gt; THU;</span>
+<span class="nc" id="L23">      case &quot;금&quot; -&gt; FRI;</span>
+<span class="nc" id="L24">      case &quot;토&quot; -&gt; SAT;</span>
+<span class="nc" id="L25">      case &quot;일&quot; -&gt; SUN;</span>
+<span class="nc" id="L26">      default -&gt; throw new BusinessException(ErrorCode.INVALID_DAY_OF_WEEK);</span>
+    };
+  }
+
+  public String toKorean() {
+<span class="nc bnc" id="L31" title="All 8 branches missed.">    return switch (this) {</span>
+<span class="nc" id="L32">      case MON -&gt; &quot;월&quot;;</span>
+<span class="nc" id="L33">      case TUE -&gt; &quot;화&quot;;</span>
+<span class="nc" id="L34">      case WED -&gt; &quot;수&quot;;</span>
+<span class="nc" id="L35">      case THU -&gt; &quot;목&quot;;</span>
+<span class="nc" id="L36">      case FRI -&gt; &quot;금&quot;;</span>
+<span class="nc" id="L37">      case SAT -&gt; &quot;토&quot;;</span>
+<span class="nc" id="L38">      case SUN -&gt; &quot;일&quot;;</span>
+    };
+  }
+
+  public int toFullCalendarIndex() {
+<span class="nc bnc" id="L43" title="All 8 branches missed.">    return switch (this) {</span>
+<span class="nc" id="L44">      case SUN -&gt; 0;</span>
+<span class="nc" id="L45">      case MON -&gt; 1;</span>
+<span class="nc" id="L46">      case TUE -&gt; 2;</span>
+<span class="nc" id="L47">      case WED -&gt; 3;</span>
+<span class="nc" id="L48">      case THU -&gt; 4;</span>
+<span class="nc" id="L49">      case FRI -&gt; 5;</span>
+<span class="nc" id="L50">      case SAT -&gt; 6;</span>
+    };
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

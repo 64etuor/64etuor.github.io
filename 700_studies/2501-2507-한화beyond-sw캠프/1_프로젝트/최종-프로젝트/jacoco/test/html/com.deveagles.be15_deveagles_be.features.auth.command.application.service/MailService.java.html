@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.auth.command.application.service</a> &gt; <span class="el_source">MailService.java</span></div><h1>MailService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.auth.command.application.service;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class MailService {
+
+  private final JavaMailSender mailSender;
+
+  @Value(&quot;${spring.mail.pwd-url}&quot;)
+  private String pwdUrl;
+
+  public void sendFindPwdEmail(String email, String authCode) throws MessagingException {
+
+<span class="nc" id="L22">    MimeMessage message = mailSender.createMimeMessage();</span>
+<span class="nc" id="L23">    MimeMessageHelper helper = new MimeMessageHelper(message, true, &quot;UTF-8&quot;);</span>
+
+<span class="nc" id="L25">    String subject = &quot;Beautifly 비밀번호 변경 이메일 인증 요청&quot;;</span>
+<span class="nc" id="L26">    String verifyLink = pwdUrl + &quot;?email=&quot; + email + &quot;&amp;code=&quot; + authCode;</span>
+
+<span class="nc" id="L28">    String htmlContent =</span>
+        &quot;&lt;h3&gt;Beautifly 비밀번호 변경 인증 안내입니다. &lt;/h3&gt;&quot;
+            + &quot;&lt;p&gt;아래 버튼을 클릭하여 이메일 인증을 완료해주세요 : &lt;/p&gt;&quot;
+            + &quot;&lt;a href='&quot;
+            + verifyLink
+            + &quot;' style =style='padding:10px 20px; background-color:#4CAF50; color:white; text-decoration:none;'&quot;
+            + &quot;&gt;이메일 인증하기&lt;/a&gt;&quot;;
+
+<span class="nc" id="L36">    helper.setTo(email);</span>
+<span class="nc" id="L37">    helper.setSubject(subject);</span>
+<span class="nc" id="L38">    helper.setText(htmlContent, true);</span>
+
+<span class="nc" id="L40">    mailSender.send(message);</span>
+<span class="nc" id="L41">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

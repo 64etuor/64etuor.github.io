@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AutomaticMessageTriggerController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.command.application.controller</a> &gt; <span class="el_source">AutomaticMessageTriggerController.java</span></div><h1>AutomaticMessageTriggerController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.request.AutomaticCreateRequest;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.service.AutomaticMessageTriggerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = &quot;자동 발송 관리&quot;, description = &quot;자동 발송 관련 설정, 수정, 조회 API&quot;)
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/message/auto-message/{shopId}&quot;)
+public class AutomaticMessageTriggerController {
+  private final AutomaticMessageTriggerService automaticMessageTriggerService;
+
+  @Operation(summary = &quot;자동발송 메시지 등록&quot;, description = &quot;특정 매장의 자동발송 메시지를 등록합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;등록 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 요청&quot;)
+  })
+  @PostMapping
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; registerAutoMessage(
+      @AuthenticationPrincipal CustomUser customUser,
+      @RequestBody @Valid AutomaticCreateRequest automaticCreateRequest) {
+<span class="nc" id="L36">    automaticMessageTriggerService.registerAutomaticMessage(</span>
+<span class="nc" id="L37">        customUser.getShopId(), automaticCreateRequest);</span>
+
+<span class="nc" id="L39">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,1570 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StatisticsQueryRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.statistics.query.repository</a> &gt; <span class="el_source">StatisticsQueryRepositoryImpl.java</span></div><h1>StatisticsQueryRepositoryImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.statistics.query.repository;
+
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.QCustomer;
+import com.deveagles.be15_deveagles_be.features.items.command.domain.aggregate.QPrimaryItem;
+import com.deveagles.be15_deveagles_be.features.items.command.domain.aggregate.QSecondaryItem;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.QItemSales;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.QSales;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.QReservation;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.QReservationSetting;
+import com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate.ReservationStatusName;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.AdvancedSalesStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.DailyVisitorStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.HourlyVisitorStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.ReservationRequest;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.ReservationStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.ReservationSummaryResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.SalesStatisticsResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.SalesSummaryResponse;
+import com.deveagles.be15_deveagles_be.features.statistics.query.dto.StatisticsRequest;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.StringExpression;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@RequiredArgsConstructor
+<span class="nc" id="L40">@Slf4j</span>
+public class StatisticsQueryRepositoryImpl implements StatisticsQueryRepository {
+
+  private final JPAQueryFactory queryFactory;
+  private final QSales sales = QSales.sales;
+  private final QItemSales itemSales = QItemSales.itemSales;
+  private final QPrimaryItem primaryItem = QPrimaryItem.primaryItem;
+  private final QSecondaryItem secondaryItem = QSecondaryItem.secondaryItem;
+  private final QCustomer customer = QCustomer.customer;
+  private final QReservation reservation = QReservation.reservation;
+  private final QReservationSetting reservationSetting = QReservationSetting.reservationSetting;
+
+  @Override
+  public List&lt;SalesStatisticsResponse&gt; findSalesStatisticsByPeriod(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="nc" id="L55">    return queryFactory</span>
+<span class="nc" id="L56">        .select(</span>
+<span class="nc" id="L57">            sales.salesDate.year(),</span>
+<span class="nc" id="L58">            sales.salesDate.month(),</span>
+<span class="nc" id="L59">            sales.salesDate.dayOfMonth(),</span>
+<span class="nc" id="L60">            sales.totalAmount.sum().coalesce(0),</span>
+<span class="nc" id="L61">            sales.count())</span>
+<span class="nc" id="L62">        .from(sales)</span>
+<span class="nc" id="L63">        .where(</span>
+            sales
+                .shopId
+<span class="nc" id="L66">                .eq(shopId)</span>
+<span class="nc" id="L67">                .and(</span>
+<span class="nc" id="L68">                    sales.salesDate.between(</span>
+<span class="nc" id="L69">                        startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L70">                .and(sales.isRefunded.isFalse()))</span>
+<span class="nc" id="L71">        .groupBy(sales.salesDate.year(), sales.salesDate.month(), sales.salesDate.dayOfMonth())</span>
+<span class="nc" id="L72">        .orderBy(</span>
+<span class="nc" id="L73">            sales.salesDate.year().asc(),</span>
+<span class="nc" id="L74">            sales.salesDate.month().asc(),</span>
+<span class="nc" id="L75">            sales.salesDate.dayOfMonth().asc())</span>
+<span class="nc" id="L76">        .fetch()</span>
+<span class="nc" id="L77">        .stream()</span>
+<span class="nc" id="L78">        .map(</span>
+            tuple -&gt;
+<span class="nc" id="L80">                SalesStatisticsResponse.builder()</span>
+<span class="nc" id="L81">                    .date(</span>
+<span class="nc" id="L82">                        LocalDate.of(</span>
+<span class="nc" id="L83">                            tuple.get(0, Integer.class),</span>
+<span class="nc" id="L84">                            tuple.get(1, Integer.class),</span>
+<span class="nc" id="L85">                            tuple.get(2, Integer.class)))</span>
+<span class="nc" id="L86">                    .totalSalesAmount(tuple.get(3, Integer.class).longValue())</span>
+<span class="nc" id="L87">                    .totalTransactions(tuple.get(4, Long.class))</span>
+<span class="nc" id="L88">                    .build())</span>
+<span class="nc" id="L89">        .collect(Collectors.toList());</span>
+  }
+
+  @Override
+  public List&lt;AdvancedSalesStatisticsResponse&gt; findAdvancedSalesStatistics(
+      Long shopId, StatisticsRequest request) {
+    // 시간 기반 집계와 상품/카테고리 기반 집계를 완전히 분리
+    StatisticsRequest.GroupBy groupBy =
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        request.getGroupBy() != null ? request.getGroupBy() : StatisticsRequest.GroupBy.DAY;</span>
+
+    // 시간 기반 집계는 sales 테이블만 사용 (JOIN 없음)
+<span class="nc bnc" id="L100" title="All 6 branches missed.">    if (groupBy == StatisticsRequest.GroupBy.DAY</span>
+        || groupBy == StatisticsRequest.GroupBy.WEEK
+        || groupBy == StatisticsRequest.GroupBy.MONTH) {
+
+<span class="nc" id="L104">      return getTimeBasedStatistics(shopId, request, groupBy);</span>
+    }
+    // 상품/카테고리 기반 집계만 JOIN 사용
+    else {
+<span class="nc" id="L108">      return getItemBasedStatistics(shopId, request, groupBy);</span>
+    }
+  }
+
+  /** 시간 기반 통계 - sales 테이블만 사용하여 정확한 집계 */
+  private List&lt;AdvancedSalesStatisticsResponse&gt; getTimeBasedStatistics(
+      Long shopId, StatisticsRequest request, StatisticsRequest.GroupBy groupBy) {
+    // WHERE 조건 구성
+<span class="nc" id="L116">    List&lt;BooleanExpression&gt; whereClauses = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L117">    whereClauses.add(sales.shopId.eq(shopId));</span>
+<span class="nc" id="L118">    whereClauses.add(sales.isRefunded.isFalse());</span>
+<span class="nc" id="L119">    handleTimeRange(request, whereClauses);</span>
+
+    // 그룹화 키 설정
+    StringExpression groupKey;
+<span class="nc bnc" id="L123" title="All 4 branches missed.">    switch (groupBy) {</span>
+      case DAY:
+<span class="nc" id="L125">        groupKey = sales.salesDate.dayOfMonth().stringValue();</span>
+<span class="nc" id="L126">        break;</span>
+      case WEEK:
+        // 연도-주차 형태로 반환 (YYYY-WW)
+<span class="nc" id="L129">        groupKey =</span>
+<span class="nc" id="L130">            Expressions.stringTemplate(</span>
+                &quot;CONCAT({0}, '-', LPAD({1}, 2, '0'))&quot;,
+<span class="nc" id="L132">                sales.salesDate.year().stringValue(), sales.salesDate.week().stringValue());</span>
+<span class="nc" id="L133">        break;</span>
+      case MONTH:
+        // 연도-월 형태로 반환 (YYYY-MM)
+<span class="nc" id="L136">        groupKey =</span>
+<span class="nc" id="L137">            Expressions.stringTemplate(</span>
+                &quot;CONCAT({0}, '-', LPAD({1}, 2, '0'))&quot;,
+<span class="nc" id="L139">                sales.salesDate.year().stringValue(), sales.salesDate.month().stringValue());</span>
+<span class="nc" id="L140">        break;</span>
+      default:
+<span class="nc" id="L142">        throw new IllegalArgumentException(&quot;Invalid time groupBy: &quot; + groupBy);</span>
+    }
+
+<span class="nc" id="L145">    return queryFactory</span>
+<span class="nc" id="L146">        .select(</span>
+            groupKey,
+<span class="nc" id="L148">            sales.totalAmount.sum().coalesce(0),</span>
+<span class="nc" id="L149">            sales.count().coalesce(0L),</span>
+<span class="nc" id="L150">            sales.discountAmount.sum().coalesce(0),</span>
+<span class="nc" id="L151">            Expressions.constant(0))</span>
+<span class="nc" id="L152">        .from(sales)</span>
+<span class="nc" id="L153">        .where(whereClauses.toArray(new BooleanExpression[0]))</span>
+<span class="nc" id="L154">        .groupBy(groupKey)</span>
+<span class="nc" id="L155">        .orderBy(groupKey.asc())</span>
+<span class="nc" id="L156">        .fetch()</span>
+<span class="nc" id="L157">        .stream()</span>
+<span class="nc" id="L158">        .map(</span>
+            tuple -&gt;
+<span class="nc" id="L160">                AdvancedSalesStatisticsResponse.builder()</span>
+<span class="nc" id="L161">                    .date(tuple.get(0, String.class))</span>
+<span class="nc" id="L162">                    .gender(null)</span>
+<span class="nc" id="L163">                    .category(null)</span>
+<span class="nc" id="L164">                    .primaryItemName(null)</span>
+<span class="nc" id="L165">                    .secondaryItemName(null)</span>
+<span class="nc" id="L166">                    .totalSalesAmount(tuple.get(1, Integer.class).longValue())</span>
+<span class="nc" id="L167">                    .totalTransactions(tuple.get(2, Long.class))</span>
+<span class="nc" id="L168">                    .totalDiscountAmount(tuple.get(3, Integer.class).longValue())</span>
+<span class="nc" id="L169">                    .totalCouponDiscountAmount(tuple.get(4, Integer.class).longValue())</span>
+<span class="nc" id="L170">                    .build())</span>
+<span class="nc" id="L171">        .collect(Collectors.toList());</span>
+  }
+
+  /** 상품/카테고리 기반 통계 - JOIN 사용하여 상품별 실제 금액 계산 */
+  private List&lt;AdvancedSalesStatisticsResponse&gt; getItemBasedStatistics(
+      Long shopId, StatisticsRequest request, StatisticsRequest.GroupBy groupBy) {
+<span class="nc" id="L177">    JPAQuery&lt;?&gt; query = queryFactory.from(sales);</span>
+
+<span class="nc" id="L179">    query.leftJoin(itemSales).on(sales.salesId.eq(itemSales.salesId));</span>
+<span class="nc" id="L180">    query.leftJoin(secondaryItem).on(itemSales.secondaryItemId.eq(secondaryItem.secondaryItemId));</span>
+<span class="nc" id="L181">    query.leftJoin(primaryItem).on(secondaryItem.primaryItemId.eq(primaryItem.primaryItemId));</span>
+
+<span class="nc bnc" id="L183" title="All 2 branches missed.">    if (groupBy == StatisticsRequest.GroupBy.GENDER) {</span>
+<span class="nc" id="L184">      query.leftJoin(customer).on(sales.customerId.eq(customer.id));</span>
+    }
+
+<span class="nc" id="L187">    List&lt;BooleanExpression&gt; whereClauses = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L188">    whereClauses.add(sales.shopId.eq(shopId));</span>
+<span class="nc" id="L189">    whereClauses.add(sales.isRefunded.isFalse());</span>
+
+<span class="nc" id="L191">    whereClauses.add(itemSales.salesId.isNotNull());</span>
+<span class="nc" id="L192">    whereClauses.add(secondaryItem.secondaryItemId.isNotNull());</span>
+<span class="nc" id="L193">    whereClauses.add(primaryItem.primaryItemId.isNotNull());</span>
+
+<span class="nc" id="L195">    handleTimeRange(request, whereClauses);</span>
+
+<span class="nc bnc" id="L197" title="All 4 branches missed.">    if (request.getGender() != null &amp;&amp; groupBy == StatisticsRequest.GroupBy.GENDER) {</span>
+<span class="nc" id="L198">      whereClauses.add(</span>
+<span class="nc" id="L199">          customer.gender.isNotNull().and(customer.gender.stringValue().eq(request.getGender())));</span>
+    }
+<span class="nc bnc" id="L201" title="All 2 branches missed.">    if (request.getCategoryId() != null) {</span>
+<span class="nc" id="L202">      whereClauses.add(primaryItem.category.stringValue().eq(request.getCategoryId().toString()));</span>
+    }
+<span class="nc bnc" id="L204" title="All 2 branches missed.">    if (request.getPrimaryItemId() != null) {</span>
+<span class="nc" id="L205">      whereClauses.add(primaryItem.primaryItemId.eq(request.getPrimaryItemId()));</span>
+    }
+<span class="nc bnc" id="L207" title="All 2 branches missed.">    if (request.getSecondaryItemId() != null) {</span>
+<span class="nc" id="L208">      whereClauses.add(secondaryItem.secondaryItemId.eq(request.getSecondaryItemId()));</span>
+    }
+
+<span class="nc" id="L211">    query.where(whereClauses.toArray(new BooleanExpression[0]));</span>
+
+    // 그룹화 키 설정
+    StringExpression groupKey;
+<span class="nc bnc" id="L215" title="All 5 branches missed.">    switch (groupBy) {</span>
+      case GENDER:
+<span class="nc" id="L217">        groupKey =</span>
+            new CaseBuilder()
+<span class="nc" id="L219">                .when(customer.gender.isNotNull())</span>
+<span class="nc" id="L220">                .then(customer.gender.stringValue())</span>
+<span class="nc" id="L221">                .otherwise(&quot;UNKNOWN&quot;);</span>
+<span class="nc" id="L222">        break;</span>
+      case CATEGORY:
+<span class="nc" id="L224">        groupKey = primaryItem.category.stringValue().coalesce(&quot;UNKNOWN&quot;);</span>
+<span class="nc" id="L225">        break;</span>
+      case PRIMARY_ITEM:
+<span class="nc" id="L227">        groupKey = primaryItem.primaryItemName.coalesce(&quot;UNKNOWN&quot;);</span>
+<span class="nc" id="L228">        break;</span>
+      case SECONDARY_ITEM:
+<span class="nc" id="L230">        groupKey = secondaryItem.secondaryItemName.coalesce(&quot;UNKNOWN&quot;);</span>
+<span class="nc" id="L231">        break;</span>
+      default:
+<span class="nc" id="L233">        throw new IllegalArgumentException(&quot;Unsupported groupBy: &quot; + groupBy);</span>
+    }
+
+<span class="nc" id="L236">    return query</span>
+<span class="nc" id="L237">        .groupBy(groupKey)</span>
+<span class="nc" id="L238">        .select(</span>
+            groupKey,
+<span class="nc" id="L240">            itemSales.quantity.multiply(secondaryItem.secondaryItemPrice).sum().coalesce(0),</span>
+<span class="nc" id="L241">            sales.salesId.countDistinct().coalesce(0L),</span>
+<span class="nc" id="L242">            Expressions.numberTemplate(</span>
+                Integer.class,
+                &quot;COALESCE(SUM(CASE WHEN {0} &gt; 0 THEN &quot;
+                    + &quot;CAST(({1} * {2} * {3}) / {0} AS INTEGER) ELSE 0 END), 0)&quot;,
+                sales.totalAmount,
+                itemSales.quantity,
+                secondaryItem.secondaryItemPrice,
+                sales.discountAmount),
+<span class="nc" id="L250">            Expressions.numberTemplate(</span>
+                Integer.class,
+                &quot;COALESCE(SUM(CASE WHEN {0} &gt; 0 AND {4} IS NOT NULL THEN &quot;
+                    + &quot;CAST(({1} * {2} * {3}) / {0} AS INTEGER) ELSE 0 END), 0)&quot;,
+                sales.totalAmount,
+                itemSales.quantity,
+                secondaryItem.secondaryItemPrice,
+                sales.discountAmount,
+                itemSales.couponId))
+<span class="nc" id="L259">        .fetch()</span>
+<span class="nc" id="L260">        .stream()</span>
+<span class="nc" id="L261">        .map(</span>
+            tuple -&gt;
+<span class="nc" id="L263">                AdvancedSalesStatisticsResponse.builder()</span>
+<span class="nc" id="L264">                    .date(null)</span>
+<span class="nc" id="L265">                    .gender(</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">                        groupBy == StatisticsRequest.GroupBy.GENDER</span>
+<span class="nc" id="L267">                            ? tuple.get(0, String.class)</span>
+<span class="nc" id="L268">                            : null)</span>
+<span class="nc" id="L269">                    .category(</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">                        groupBy == StatisticsRequest.GroupBy.CATEGORY</span>
+<span class="nc" id="L271">                            ? tuple.get(0, String.class)</span>
+<span class="nc" id="L272">                            : null)</span>
+<span class="nc" id="L273">                    .primaryItemName(</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">                        groupBy == StatisticsRequest.GroupBy.PRIMARY_ITEM</span>
+<span class="nc" id="L275">                            ? tuple.get(0, String.class)</span>
+<span class="nc" id="L276">                            : null)</span>
+<span class="nc" id="L277">                    .secondaryItemName(</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">                        groupBy == StatisticsRequest.GroupBy.SECONDARY_ITEM</span>
+<span class="nc" id="L279">                            ? tuple.get(0, String.class)</span>
+<span class="nc" id="L280">                            : null)</span>
+<span class="nc" id="L281">                    .totalSalesAmount(tuple.get(1, Integer.class).longValue())</span>
+<span class="nc" id="L282">                    .totalTransactions(tuple.get(2, Long.class))</span>
+<span class="nc" id="L283">                    .totalDiscountAmount(tuple.get(3, Integer.class).longValue())</span>
+<span class="nc" id="L284">                    .totalCouponDiscountAmount(tuple.get(4, Integer.class).longValue())</span>
+<span class="nc" id="L285">                    .build())</span>
+<span class="nc" id="L286">        .collect(Collectors.toList());</span>
+  }
+
+  private void handleTimeRange(StatisticsRequest request, List&lt;BooleanExpression&gt; whereClauses) {
+<span class="nc" id="L290">    LocalDate now = LocalDate.now();</span>
+<span class="nc bnc" id="L291" title="All 2 branches missed.">    if (request.getTimeRange() != null) {</span>
+<span class="nc bnc" id="L292" title="All 6 branches missed.">      switch (request.getTimeRange()) {</span>
+        case LAST_WEEK:
+<span class="nc" id="L294">          whereClauses.add(</span>
+<span class="nc" id="L295">              sales.salesDate.between(now.minusWeeks(1).atStartOfDay(), now.atTime(LocalTime.MAX)));</span>
+<span class="nc" id="L296">          break;</span>
+        case LAST_MONTH:
+<span class="nc" id="L298">          whereClauses.add(</span>
+<span class="nc" id="L299">              sales.salesDate.between(</span>
+<span class="nc" id="L300">                  now.minusMonths(1).atStartOfDay(), now.atTime(LocalTime.MAX)));</span>
+<span class="nc" id="L301">          break;</span>
+        case LAST_6_MONTHS:
+<span class="nc" id="L303">          whereClauses.add(</span>
+<span class="nc" id="L304">              sales.salesDate.between(</span>
+<span class="nc" id="L305">                  now.minusMonths(6).atStartOfDay(), now.atTime(LocalTime.MAX)));</span>
+<span class="nc" id="L306">          break;</span>
+        case LAST_YEAR:
+<span class="nc" id="L308">          whereClauses.add(</span>
+<span class="nc" id="L309">              sales.salesDate.between(now.minusYears(1).atStartOfDay(), now.atTime(LocalTime.MAX)));</span>
+<span class="nc" id="L310">          break;</span>
+        case CUSTOM:
+<span class="nc bnc" id="L312" title="All 4 branches missed.">          if (request.getStartDate() != null &amp;&amp; request.getEndDate() != null) {</span>
+<span class="nc" id="L313">            whereClauses.add(</span>
+<span class="nc" id="L314">                sales.salesDate.between(</span>
+<span class="nc" id="L315">                    request.getStartDate().atStartOfDay(),</span>
+<span class="nc" id="L316">                    request.getEndDate().atTime(LocalTime.MAX)));</span>
+          }
+          break;
+      }
+    }
+<span class="nc" id="L321">  }</span>
+
+  @Override
+  public SalesSummaryResponse findSalesSummary(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+    // Get total sales and transaction count for the period
+<span class="nc" id="L327">    var basicStats =</span>
+        queryFactory
+<span class="nc" id="L329">            .select(sales.totalAmount.sum().coalesce(0), sales.count())</span>
+<span class="nc" id="L330">            .from(sales)</span>
+<span class="nc" id="L331">            .where(</span>
+                sales
+                    .shopId
+<span class="nc" id="L334">                    .eq(shopId)</span>
+<span class="nc" id="L335">                    .and(</span>
+<span class="nc" id="L336">                        sales.salesDate.between(</span>
+<span class="nc" id="L337">                            startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L338">                    .and(sales.isRefunded.isFalse()))</span>
+<span class="nc" id="L339">            .fetchOne();</span>
+
+<span class="nc" id="L341">    Long totalSales = basicStats.get(0, Integer.class).longValue();</span>
+<span class="nc" id="L342">    Long totalTransactions = basicStats.get(1, Long.class);</span>
+
+    // Calculate daily average
+<span class="nc" id="L345">    long daysBetween = startDate.until(endDate).getDays() + 1;</span>
+<span class="nc bnc" id="L346" title="All 2 branches missed.">    double dailyAverage = daysBetween &gt; 0 ? (double) totalSales / daysBetween : 0.0;</span>
+
+    // Calculate average order value
+    double averageOrderValue =
+<span class="nc bnc" id="L350" title="All 2 branches missed.">        totalTransactions &gt; 0 ? (double) totalSales / totalTransactions : 0.0;</span>
+
+<span class="nc" id="L352">    return SalesSummaryResponse.builder()</span>
+<span class="nc" id="L353">        .totalSales(totalSales)</span>
+<span class="nc" id="L354">        .dailyAverage(dailyAverage)</span>
+<span class="nc" id="L355">        .totalTransactions(totalTransactions)</span>
+<span class="nc" id="L356">        .averageOrderValue(averageOrderValue)</span>
+<span class="nc" id="L357">        .startDate(startDate)</span>
+<span class="nc" id="L358">        .endDate(endDate)</span>
+<span class="nc" id="L359">        .build();</span>
+  }
+
+  @Override
+  public List&lt;ReservationStatisticsResponse&gt; findReservationStatisticsByPeriod(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L366">    return getDailyReservationStatistics(shopId, startDate, endDate);</span>
+  }
+
+  @Override
+  public List&lt;ReservationStatisticsResponse&gt; findAdvancedReservationStatistics(
+      Long shopId, ReservationRequest request) {
+
+<span class="nc" id="L373">    LocalDate startDate = request.getStartDate();</span>
+<span class="nc" id="L374">    LocalDate endDate = request.getEndDate();</span>
+    ReservationRequest.GroupBy groupBy =
+<span class="nc bnc" id="L376" title="All 2 branches missed.">        request.getGroupBy() != null ? request.getGroupBy() : ReservationRequest.GroupBy.DAY;</span>
+
+<span class="nc bnc" id="L378" title="All 8 branches missed.">    switch (groupBy) {</span>
+      case DAY:
+<span class="nc" id="L380">        return getDailyReservationStatistics(shopId, startDate, endDate);</span>
+      case WEEK:
+<span class="nc" id="L382">        return getWeeklyReservationStatistics(shopId, startDate, endDate);</span>
+      case MONTH:
+<span class="nc" id="L384">        return getMonthlyReservationStatistics(shopId, startDate, endDate);</span>
+      case TIME_SLOT:
+<span class="nc" id="L386">        return getTimeSlotReservationStatistics(shopId, startDate, endDate);</span>
+      case HOUR:
+<span class="nc" id="L388">        return getHourlyReservationStatistics(shopId, startDate, endDate);</span>
+      case STAFF:
+<span class="nc" id="L390">        return getStaffBasedReservationStatistics(shopId, startDate, endDate, request.getStaffId());</span>
+      case DAY_TIME_SLOT:
+<span class="nc" id="L392">        return getDayTimeSlotReservationStatistics(shopId, startDate, endDate);</span>
+      default:
+<span class="nc" id="L394">        throw new IllegalArgumentException(&quot;Invalid groupBy: &quot; + groupBy);</span>
+    }
+  }
+
+  @Override
+  public ReservationSummaryResponse findReservationSummary(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+    // 기간 내 총 가능한 슬롯 수 계산
+<span class="nc" id="L403">    int totalSlots = calculateTotalSlotsForPeriod(shopId, startDate, endDate);</span>
+
+    // 실제 예약된 슬롯 수 계산
+<span class="nc" id="L406">    Long reservedCount =</span>
+        queryFactory
+<span class="nc" id="L408">            .select(reservation.count())</span>
+<span class="nc" id="L409">            .from(reservation)</span>
+<span class="nc" id="L410">            .where(</span>
+                reservation
+                    .shopId
+<span class="nc" id="L413">                    .eq(shopId)</span>
+<span class="nc" id="L414">                    .and(</span>
+<span class="nc" id="L415">                        reservation.reservationStartAt.between(</span>
+<span class="nc" id="L416">                            startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L417">                    .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L418">                    .and(</span>
+<span class="nc" id="L419">                        reservation.reservationStatusName.notIn(</span>
+                            ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L421">            .fetchOne();</span>
+
+<span class="nc bnc" id="L423" title="All 2 branches missed.">    int reservedSlots = reservedCount != null ? reservedCount.intValue() : 0;</span>
+<span class="nc" id="L424">    int availableSlots = totalSlots - reservedSlots;</span>
+    BigDecimal averageReservationRate =
+<span class="nc bnc" id="L426" title="All 2 branches missed.">        totalSlots &gt; 0</span>
+<span class="nc" id="L427">            ? BigDecimal.valueOf(reservedSlots * 100.0 / totalSlots)</span>
+<span class="nc" id="L428">                .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L429">            : BigDecimal.ZERO;</span>
+
+<span class="nc" id="L431">    long daysBetween = ChronoUnit.DAYS.between(startDate, endDate) + 1;</span>
+
+    // 피크 시간대 예약 통계 (예: 오전 10시-오후 6시)
+<span class="nc" id="L434">    Long peakHourReservations =</span>
+        queryFactory
+<span class="nc" id="L436">            .select(reservation.count())</span>
+<span class="nc" id="L437">            .from(reservation)</span>
+<span class="nc" id="L438">            .where(</span>
+                reservation
+                    .shopId
+<span class="nc" id="L441">                    .eq(shopId)</span>
+<span class="nc" id="L442">                    .and(</span>
+<span class="nc" id="L443">                        reservation.reservationStartAt.between(</span>
+<span class="nc" id="L444">                            startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L445">                    .and(reservation.reservationStartAt.hour().between(10, 17))</span>
+<span class="nc" id="L446">                    .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L447">                    .and(</span>
+<span class="nc" id="L448">                        reservation.reservationStatusName.notIn(</span>
+                            ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L450">            .fetchOne();</span>
+
+<span class="nc bnc" id="L452" title="All 2 branches missed.">    int peakHourSlots = peakHourReservations != null ? peakHourReservations.intValue() : 0;</span>
+<span class="nc" id="L453">    int offPeakHourSlots = reservedSlots - peakHourSlots;</span>
+
+    // 피크 시간대 총 가능 슬롯 수 (8시간 * 2슬롯 * 일수)
+<span class="nc" id="L456">    int totalPeakSlots = (int) (8 * 2 * daysBetween);</span>
+<span class="nc" id="L457">    int totalOffPeakSlots = totalSlots - totalPeakSlots;</span>
+
+    BigDecimal peakHourReservationRate =
+<span class="nc bnc" id="L460" title="All 2 branches missed.">        totalPeakSlots &gt; 0</span>
+<span class="nc" id="L461">            ? BigDecimal.valueOf(peakHourSlots * 100.0 / totalPeakSlots)</span>
+<span class="nc" id="L462">                .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L463">            : BigDecimal.ZERO;</span>
+
+    BigDecimal offPeakHourReservationRate =
+<span class="nc bnc" id="L466" title="All 2 branches missed.">        totalOffPeakSlots &gt; 0</span>
+<span class="nc" id="L467">            ? BigDecimal.valueOf(offPeakHourSlots * 100.0 / totalOffPeakSlots)</span>
+<span class="nc" id="L468">                .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L469">            : BigDecimal.ZERO;</span>
+
+<span class="nc" id="L471">    return new ReservationSummaryResponse(</span>
+<span class="nc" id="L472">        totalSlots,</span>
+<span class="nc" id="L473">        reservedSlots,</span>
+<span class="nc" id="L474">        availableSlots,</span>
+        averageReservationRate,
+<span class="nc" id="L476">        (int) daysBetween,</span>
+<span class="nc" id="L477">        BigDecimal.valueOf(reservedSlots * 1.0 / daysBetween).setScale(2, RoundingMode.HALF_UP),</span>
+<span class="nc" id="L478">        peakHourSlots,</span>
+<span class="nc" id="L479">        offPeakHourSlots,</span>
+        peakHourReservationRate,
+        offPeakHourReservationRate);
+  }
+
+  private List&lt;ReservationStatisticsResponse&gt; getDailyReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L487">    List&lt;ReservationStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L488">    LocalDate currentDate = startDate;</span>
+
+<span class="nc bnc" id="L490" title="All 2 branches missed.">    while (!currentDate.isAfter(endDate)) {</span>
+      // 해당 날짜의 예약 설정 조회
+<span class="nc" id="L492">      List&lt;Integer&gt; availableDays =</span>
+          queryFactory
+<span class="nc" id="L494">              .select(reservationSetting.id.availableDay)</span>
+<span class="nc" id="L495">              .from(reservationSetting)</span>
+<span class="nc" id="L496">              .where(</span>
+                  reservationSetting
+                      .id
+                      .shopId
+<span class="nc" id="L500">                      .eq(shopId)</span>
+<span class="nc" id="L501">                      .and(reservationSetting.deletedAt.isNull()))</span>
+<span class="nc" id="L502">              .fetch();</span>
+
+<span class="nc" id="L504">      int dayOfWeek = currentDate.getDayOfWeek().getValue(); // 1=Monday, 7=Sunday</span>
+
+<span class="nc bnc" id="L506" title="All 2 branches missed.">      if (availableDays.contains(dayOfWeek)) {</span>
+        // 해당 날짜의 운영 시간 조회
+<span class="nc" id="L508">        var setting =</span>
+            queryFactory
+<span class="nc" id="L510">                .select(</span>
+                    reservationSetting.availableStartTime,
+                    reservationSetting.availableEndTime,
+                    reservationSetting.lunchStartTime,
+                    reservationSetting.lunchEndTime)
+<span class="nc" id="L515">                .from(reservationSetting)</span>
+<span class="nc" id="L516">                .where(</span>
+                    reservationSetting
+                        .id
+                        .shopId
+<span class="nc" id="L520">                        .eq(shopId)</span>
+<span class="nc" id="L521">                        .and(reservationSetting.id.availableDay.eq(dayOfWeek))</span>
+<span class="nc" id="L522">                        .and(reservationSetting.deletedAt.isNull()))</span>
+<span class="nc" id="L523">                .fetchOne();</span>
+
+<span class="nc bnc" id="L525" title="All 2 branches missed.">        if (setting != null) {</span>
+<span class="nc" id="L526">          LocalTime startTime = setting.get(0, LocalTime.class);</span>
+<span class="nc" id="L527">          LocalTime endTime = setting.get(1, LocalTime.class);</span>
+<span class="nc" id="L528">          LocalTime lunchStart = setting.get(2, LocalTime.class);</span>
+<span class="nc" id="L529">          LocalTime lunchEnd = setting.get(3, LocalTime.class);</span>
+
+          // 총 가능한 슬롯 수 계산 (30분 단위)
+<span class="nc" id="L532">          int totalSlots = calculateTotalSlots(startTime, endTime, lunchStart, lunchEnd);</span>
+
+          // 해당 날짜의 실제 예약 수 조회
+<span class="nc" id="L535">          Long reservedCount =</span>
+              queryFactory
+<span class="nc" id="L537">                  .select(reservation.count())</span>
+<span class="nc" id="L538">                  .from(reservation)</span>
+<span class="nc" id="L539">                  .where(</span>
+                      reservation
+                          .shopId
+<span class="nc" id="L542">                          .eq(shopId)</span>
+<span class="nc" id="L543">                          .and(</span>
+<span class="nc" id="L544">                              reservation.reservationStartAt.between(</span>
+<span class="nc" id="L545">                                  currentDate.atStartOfDay(), currentDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L546">                          .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L547">                          .and(</span>
+<span class="nc" id="L548">                              reservation.reservationStatusName.notIn(</span>
+                                  ReservationStatusName.CBC,
+                                  ReservationStatusName.CBS))) // 고객취소, 매장취소 제외
+<span class="nc" id="L551">                  .fetchOne();</span>
+
+<span class="nc bnc" id="L553" title="All 2 branches missed.">          int reservedSlots = reservedCount != null ? reservedCount.intValue() : 0;</span>
+<span class="nc" id="L554">          int availableSlots = totalSlots - reservedSlots;</span>
+          BigDecimal reservationRate =
+<span class="nc bnc" id="L556" title="All 2 branches missed.">              totalSlots &gt; 0</span>
+<span class="nc" id="L557">                  ? BigDecimal.valueOf(reservedSlots * 100.0 / totalSlots)</span>
+<span class="nc" id="L558">                      .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L559">                  : BigDecimal.ZERO;</span>
+
+<span class="nc" id="L561">          result.add(</span>
+              new ReservationStatisticsResponse(
+                  currentDate,
+<span class="nc" id="L564">                  LocalTime.of(0, 0),</span>
+<span class="nc" id="L565">                  totalSlots,</span>
+<span class="nc" id="L566">                  reservedSlots,</span>
+<span class="nc" id="L567">                  availableSlots,</span>
+                  reservationRate,
+                  &quot;DAY&quot;,
+<span class="nc" id="L570">                  currentDate.toString(),</span>
+                  null,
+                  null));
+        }
+<span class="nc" id="L574">      } else {</span>
+        // 운영하지 않는 날
+<span class="nc" id="L576">        result.add(</span>
+            new ReservationStatisticsResponse(
+                currentDate,
+<span class="nc" id="L579">                LocalTime.of(0, 0),</span>
+<span class="nc" id="L580">                0,</span>
+<span class="nc" id="L581">                0,</span>
+<span class="nc" id="L582">                0,</span>
+                BigDecimal.ZERO,
+                &quot;DAY&quot;,
+<span class="nc" id="L585">                currentDate.toString(),</span>
+                null,
+                null));
+      }
+
+<span class="nc" id="L590">      currentDate = currentDate.plusDays(1);</span>
+<span class="nc" id="L591">    }</span>
+
+<span class="nc" id="L593">    return result;</span>
+  }
+
+  private List&lt;ReservationStatisticsResponse&gt; getWeeklyReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L599">    List&lt;ReservationStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L600">    LocalDate weekStart = startDate.with(java.time.DayOfWeek.MONDAY);</span>
+
+<span class="nc bnc" id="L602" title="All 2 branches missed.">    while (!weekStart.isAfter(endDate)) {</span>
+<span class="nc" id="L603">      LocalDate weekEnd = weekStart.plusDays(6);</span>
+<span class="nc bnc" id="L604" title="All 2 branches missed.">      if (weekEnd.isAfter(endDate)) weekEnd = endDate;</span>
+
+      // 해당 주의 총 가능한 슬롯 수 계산
+<span class="nc" id="L607">      int totalSlots = calculateTotalSlotsForPeriod(shopId, weekStart, weekEnd);</span>
+
+      // 해당 주의 실제 예약 수 조회
+<span class="nc" id="L610">      Long reservedCount =</span>
+          queryFactory
+<span class="nc" id="L612">              .select(reservation.count())</span>
+<span class="nc" id="L613">              .from(reservation)</span>
+<span class="nc" id="L614">              .where(</span>
+                  reservation
+                      .shopId
+<span class="nc" id="L617">                      .eq(shopId)</span>
+<span class="nc" id="L618">                      .and(</span>
+<span class="nc" id="L619">                          reservation.reservationStartAt.between(</span>
+<span class="nc" id="L620">                              weekStart.atStartOfDay(), weekEnd.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L621">                      .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L622">                      .and(</span>
+<span class="nc" id="L623">                          reservation.reservationStatusName.notIn(</span>
+                              ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L625">              .fetchOne();</span>
+
+<span class="nc bnc" id="L627" title="All 2 branches missed.">      int reservedSlots = reservedCount != null ? reservedCount.intValue() : 0;</span>
+<span class="nc" id="L628">      int availableSlots = totalSlots - reservedSlots;</span>
+      BigDecimal reservationRate =
+<span class="nc bnc" id="L630" title="All 2 branches missed.">          totalSlots &gt; 0</span>
+<span class="nc" id="L631">              ? BigDecimal.valueOf(reservedSlots * 100.0 / totalSlots)</span>
+<span class="nc" id="L632">                  .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L633">              : BigDecimal.ZERO;</span>
+
+      // 연도-주차 형태로 키 생성 (YYYY-WW) - ISO 8601 주차 기준
+<span class="nc" id="L636">      int year = weekStart.getYear();</span>
+<span class="nc" id="L637">      int weekOfYear = weekStart.get(java.time.temporal.WeekFields.ISO.weekOfYear());</span>
+<span class="nc" id="L638">      String weekKey = String.format(&quot;%d-%02d&quot;, year, weekOfYear);</span>
+
+<span class="nc" id="L640">      result.add(</span>
+          new ReservationStatisticsResponse(
+              weekStart,
+<span class="nc" id="L643">              LocalTime.of(0, 0),</span>
+<span class="nc" id="L644">              totalSlots,</span>
+<span class="nc" id="L645">              reservedSlots,</span>
+<span class="nc" id="L646">              availableSlots,</span>
+              reservationRate,
+              &quot;WEEK&quot;,
+              weekKey,
+              null,
+              null));
+
+<span class="nc" id="L653">      weekStart = weekStart.plusWeeks(1);</span>
+<span class="nc" id="L654">    }</span>
+
+<span class="nc" id="L656">    return result;</span>
+  }
+
+  private List&lt;ReservationStatisticsResponse&gt; getMonthlyReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L662">    List&lt;ReservationStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L663">    LocalDate monthStart = startDate.withDayOfMonth(1);</span>
+
+<span class="nc bnc" id="L665" title="All 2 branches missed.">    while (!monthStart.isAfter(endDate)) {</span>
+<span class="nc" id="L666">      LocalDate monthEnd = monthStart.plusMonths(1).minusDays(1);</span>
+<span class="nc bnc" id="L667" title="All 2 branches missed.">      if (monthEnd.isAfter(endDate)) monthEnd = endDate;</span>
+
+      // 해당 월의 총 가능한 슬롯 수 계산
+<span class="nc" id="L670">      int totalSlots = calculateTotalSlotsForPeriod(shopId, monthStart, monthEnd);</span>
+
+      // 해당 월의 실제 예약 수 조회
+<span class="nc" id="L673">      Long reservedCount =</span>
+          queryFactory
+<span class="nc" id="L675">              .select(reservation.count())</span>
+<span class="nc" id="L676">              .from(reservation)</span>
+<span class="nc" id="L677">              .where(</span>
+                  reservation
+                      .shopId
+<span class="nc" id="L680">                      .eq(shopId)</span>
+<span class="nc" id="L681">                      .and(</span>
+<span class="nc" id="L682">                          reservation.reservationStartAt.between(</span>
+<span class="nc" id="L683">                              monthStart.atStartOfDay(), monthEnd.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L684">                      .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L685">                      .and(</span>
+<span class="nc" id="L686">                          reservation.reservationStatusName.notIn(</span>
+                              ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L688">              .fetchOne();</span>
+
+<span class="nc bnc" id="L690" title="All 2 branches missed.">      int reservedSlots = reservedCount != null ? reservedCount.intValue() : 0;</span>
+<span class="nc" id="L691">      int availableSlots = totalSlots - reservedSlots;</span>
+      BigDecimal reservationRate =
+<span class="nc bnc" id="L693" title="All 2 branches missed.">          totalSlots &gt; 0</span>
+<span class="nc" id="L694">              ? BigDecimal.valueOf(reservedSlots * 100.0 / totalSlots)</span>
+<span class="nc" id="L695">                  .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L696">              : BigDecimal.ZERO;</span>
+
+      // 연도-월 형태로 키 생성 (YYYY-MM)
+<span class="nc" id="L699">      int year = monthStart.getYear();</span>
+<span class="nc" id="L700">      int month = monthStart.getMonthValue();</span>
+<span class="nc" id="L701">      String monthKey = String.format(&quot;%d-%02d&quot;, year, month);</span>
+
+<span class="nc" id="L703">      result.add(</span>
+          new ReservationStatisticsResponse(
+              monthStart,
+<span class="nc" id="L706">              LocalTime.of(0, 0),</span>
+<span class="nc" id="L707">              totalSlots,</span>
+<span class="nc" id="L708">              reservedSlots,</span>
+<span class="nc" id="L709">              availableSlots,</span>
+              reservationRate,
+              &quot;MONTH&quot;,
+              monthKey,
+              null,
+              null));
+
+<span class="nc" id="L716">      monthStart = monthStart.plusMonths(1);</span>
+<span class="nc" id="L717">    }</span>
+
+<span class="nc" id="L719">    return result;</span>
+  }
+
+  private List&lt;ReservationStatisticsResponse&gt; getTimeSlotReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L725">    List&lt;ReservationStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L726">    long daysBetween = ChronoUnit.DAYS.between(startDate, endDate) + 1;</span>
+
+    // 30분 단위로 하루 48개 슬롯 생성
+<span class="nc bnc" id="L729" title="All 2 branches missed.">    for (int slot = 0; slot &lt; 48; slot++) {</span>
+<span class="nc" id="L730">      LocalTime timeSlot = LocalTime.of(slot / 2, (slot % 2) * 30);</span>
+<span class="nc" id="L731">      LocalTime timeSlotEnd = timeSlot.plusMinutes(30);</span>
+
+      // 해당 시간대의 예약 수 조회
+<span class="nc" id="L734">      Long reservedCount =</span>
+          queryFactory
+<span class="nc" id="L736">              .select(reservation.count())</span>
+<span class="nc" id="L737">              .from(reservation)</span>
+<span class="nc" id="L738">              .where(</span>
+                  reservation
+                      .shopId
+<span class="nc" id="L741">                      .eq(shopId)</span>
+<span class="nc" id="L742">                      .and(</span>
+<span class="nc" id="L743">                          reservation.reservationStartAt.between(</span>
+<span class="nc" id="L744">                              startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L745">                      .and(reservation.reservationStartAt.hour().eq(timeSlot.getHour()))</span>
+<span class="nc" id="L746">                      .and(</span>
+                          reservation
+                              .reservationStartAt
+<span class="nc" id="L749">                              .minute()</span>
+<span class="nc" id="L750">                              .between(timeSlot.getMinute(), timeSlotEnd.getMinute() - 1))</span>
+<span class="nc" id="L751">                      .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L752">                      .and(</span>
+<span class="nc" id="L753">                          reservation.reservationStatusName.notIn(</span>
+                              ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L755">              .fetchOne();</span>
+
+<span class="nc bnc" id="L757" title="All 2 branches missed.">      int reservedSlots = reservedCount != null ? reservedCount.intValue() : 0;</span>
+<span class="nc" id="L758">      int totalSlots = (int) daysBetween; // 해당 시간대의 총 가능한 슬롯 수</span>
+<span class="nc" id="L759">      int availableSlots = totalSlots - reservedSlots;</span>
+      BigDecimal reservationRate =
+<span class="nc bnc" id="L761" title="All 2 branches missed.">          totalSlots &gt; 0</span>
+<span class="nc" id="L762">              ? BigDecimal.valueOf(reservedSlots * 100.0 / totalSlots)</span>
+<span class="nc" id="L763">                  .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L764">              : BigDecimal.ZERO;</span>
+
+<span class="nc" id="L766">      result.add(</span>
+          new ReservationStatisticsResponse(
+              startDate,
+              timeSlot,
+<span class="nc" id="L770">              totalSlots,</span>
+<span class="nc" id="L771">              reservedSlots,</span>
+<span class="nc" id="L772">              availableSlots,</span>
+              reservationRate,
+              &quot;TIME_SLOT&quot;,
+<span class="nc" id="L775">              timeSlot.toString(),</span>
+              null,
+              null));
+    }
+
+<span class="nc" id="L780">    return result;</span>
+  }
+
+  private List&lt;ReservationStatisticsResponse&gt; getHourlyReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L786">    List&lt;ReservationStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L787">    long daysBetween = ChronoUnit.DAYS.between(startDate, endDate) + 1;</span>
+
+    // 24시간 단위로 집계
+<span class="nc bnc" id="L790" title="All 2 branches missed.">    for (int hour = 0; hour &lt; 24; hour++) {</span>
+<span class="nc" id="L791">      LocalTime hourSlot = LocalTime.of(hour, 0);</span>
+
+      // 해당 시간대의 예약 수 조회
+<span class="nc" id="L794">      Long reservedCount =</span>
+          queryFactory
+<span class="nc" id="L796">              .select(reservation.count())</span>
+<span class="nc" id="L797">              .from(reservation)</span>
+<span class="nc" id="L798">              .where(</span>
+                  reservation
+                      .shopId
+<span class="nc" id="L801">                      .eq(shopId)</span>
+<span class="nc" id="L802">                      .and(</span>
+<span class="nc" id="L803">                          reservation.reservationStartAt.between(</span>
+<span class="nc" id="L804">                              startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L805">                      .and(reservation.reservationStartAt.hour().eq(hour))</span>
+<span class="nc" id="L806">                      .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L807">                      .and(</span>
+<span class="nc" id="L808">                          reservation.reservationStatusName.notIn(</span>
+                              ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L810">              .fetchOne();</span>
+
+<span class="nc bnc" id="L812" title="All 2 branches missed.">      int reservedSlots = reservedCount != null ? reservedCount.intValue() : 0;</span>
+<span class="nc" id="L813">      int totalSlots = (int) daysBetween * 2; // 시간당 2개 슬롯 (30분 단위)</span>
+<span class="nc" id="L814">      int availableSlots = totalSlots - reservedSlots;</span>
+      BigDecimal reservationRate =
+<span class="nc bnc" id="L816" title="All 2 branches missed.">          totalSlots &gt; 0</span>
+<span class="nc" id="L817">              ? BigDecimal.valueOf(reservedSlots * 100.0 / totalSlots)</span>
+<span class="nc" id="L818">                  .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L819">              : BigDecimal.ZERO;</span>
+
+<span class="nc" id="L821">      result.add(</span>
+          new ReservationStatisticsResponse(
+              startDate,
+              hourSlot,
+<span class="nc" id="L825">              totalSlots,</span>
+<span class="nc" id="L826">              reservedSlots,</span>
+<span class="nc" id="L827">              availableSlots,</span>
+              reservationRate,
+              &quot;HOUR&quot;,
+<span class="nc" id="L830">              hourSlot.toString(),</span>
+              null,
+              null));
+    }
+
+<span class="nc" id="L835">    return result;</span>
+  }
+
+  @Override
+  public List&lt;ReservationStatisticsResponse&gt; findStaffReservationStatistics(
+      Long shopId, Long staffId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L842">    List&lt;ReservationStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L843">    LocalDate currentDate = startDate;</span>
+
+<span class="nc bnc" id="L845" title="All 2 branches missed.">    while (!currentDate.isAfter(endDate)) {</span>
+      // 해당 날짜의 예약 설정 조회
+<span class="nc" id="L847">      List&lt;Integer&gt; availableDays =</span>
+          queryFactory
+<span class="nc" id="L849">              .select(reservationSetting.id.availableDay)</span>
+<span class="nc" id="L850">              .from(reservationSetting)</span>
+<span class="nc" id="L851">              .where(</span>
+                  reservationSetting
+                      .id
+                      .shopId
+<span class="nc" id="L855">                      .eq(shopId)</span>
+<span class="nc" id="L856">                      .and(reservationSetting.deletedAt.isNull()))</span>
+<span class="nc" id="L857">              .fetch();</span>
+
+<span class="nc" id="L859">      int dayOfWeek = currentDate.getDayOfWeek().getValue();</span>
+
+<span class="nc bnc" id="L861" title="All 2 branches missed.">      if (availableDays.contains(dayOfWeek)) {</span>
+        // 해당 날짜의 운영 시간 조회
+<span class="nc" id="L863">        var setting =</span>
+            queryFactory
+<span class="nc" id="L865">                .select(</span>
+                    reservationSetting.availableStartTime,
+                    reservationSetting.availableEndTime,
+                    reservationSetting.lunchStartTime,
+                    reservationSetting.lunchEndTime)
+<span class="nc" id="L870">                .from(reservationSetting)</span>
+<span class="nc" id="L871">                .where(</span>
+                    reservationSetting
+                        .id
+                        .shopId
+<span class="nc" id="L875">                        .eq(shopId)</span>
+<span class="nc" id="L876">                        .and(reservationSetting.id.availableDay.eq(dayOfWeek))</span>
+<span class="nc" id="L877">                        .and(reservationSetting.deletedAt.isNull()))</span>
+<span class="nc" id="L878">                .fetchOne();</span>
+
+<span class="nc bnc" id="L880" title="All 2 branches missed.">        if (setting != null) {</span>
+<span class="nc" id="L881">          LocalTime startTime = setting.get(0, LocalTime.class);</span>
+<span class="nc" id="L882">          LocalTime endTime = setting.get(1, LocalTime.class);</span>
+<span class="nc" id="L883">          LocalTime lunchStart = setting.get(2, LocalTime.class);</span>
+<span class="nc" id="L884">          LocalTime lunchEnd = setting.get(3, LocalTime.class);</span>
+
+          // 총 가능한 슬롯 수 계산 (30분 단위)
+<span class="nc" id="L887">          int totalSlots = calculateTotalSlots(startTime, endTime, lunchStart, lunchEnd);</span>
+
+          // 해당 날짜의 특정 직원 예약 수 조회
+<span class="nc" id="L890">          Long reservedCount =</span>
+              queryFactory
+<span class="nc" id="L892">                  .select(reservation.count())</span>
+<span class="nc" id="L893">                  .from(reservation)</span>
+<span class="nc" id="L894">                  .where(</span>
+                      reservation
+                          .shopId
+<span class="nc" id="L897">                          .eq(shopId)</span>
+<span class="nc" id="L898">                          .and(reservation.staffId.eq(staffId))</span>
+<span class="nc" id="L899">                          .and(</span>
+<span class="nc" id="L900">                              reservation.reservationStartAt.between(</span>
+<span class="nc" id="L901">                                  currentDate.atStartOfDay(), currentDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L902">                          .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L903">                          .and(</span>
+<span class="nc" id="L904">                              reservation.reservationStatusName.notIn(</span>
+                                  ReservationStatusName.CBC,
+                                  ReservationStatusName.CBS))) // 고객취소, 매장취소 제외
+<span class="nc" id="L907">                  .fetchOne();</span>
+
+<span class="nc bnc" id="L909" title="All 2 branches missed.">          int reservedSlots = reservedCount != null ? reservedCount.intValue() : 0;</span>
+<span class="nc" id="L910">          int availableSlots = totalSlots - reservedSlots;</span>
+          BigDecimal reservationRate =
+<span class="nc bnc" id="L912" title="All 2 branches missed.">              totalSlots &gt; 0</span>
+<span class="nc" id="L913">                  ? BigDecimal.valueOf(reservedSlots * 100.0 / totalSlots)</span>
+<span class="nc" id="L914">                      .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L915">                  : BigDecimal.ZERO;</span>
+
+<span class="nc" id="L917">          result.add(</span>
+              new ReservationStatisticsResponse(
+                  currentDate,
+<span class="nc" id="L920">                  LocalTime.of(0, 0),</span>
+<span class="nc" id="L921">                  totalSlots,</span>
+<span class="nc" id="L922">                  reservedSlots,</span>
+<span class="nc" id="L923">                  availableSlots,</span>
+                  reservationRate,
+                  &quot;STAFF&quot;,
+<span class="nc" id="L926">                  currentDate.toString(),</span>
+                  staffId,
+                  &quot;직원&quot; + staffId // 실제로는 직원 이름을 조회해야 함
+                  ));
+        }
+<span class="nc" id="L931">      } else {</span>
+        // 운영하지 않는 날
+<span class="nc" id="L933">        result.add(</span>
+            new ReservationStatisticsResponse(
+                currentDate,
+<span class="nc" id="L936">                LocalTime.of(0, 0),</span>
+<span class="nc" id="L937">                0,</span>
+<span class="nc" id="L938">                0,</span>
+<span class="nc" id="L939">                0,</span>
+                BigDecimal.ZERO,
+                &quot;STAFF&quot;,
+<span class="nc" id="L942">                currentDate.toString(),</span>
+                staffId,
+                &quot;직원&quot; + staffId));
+      }
+
+<span class="nc" id="L947">      currentDate = currentDate.plusDays(1);</span>
+<span class="nc" id="L948">    }</span>
+
+<span class="nc" id="L950">    return result;</span>
+  }
+
+  @Override
+  public List&lt;ReservationStatisticsResponse&gt; findAllStaffReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L957">    List&lt;ReservationStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+
+    // 해당 샵의 모든 직원 조회 (예약이 있는 직원만)
+<span class="nc" id="L960">    List&lt;Long&gt; staffIds =</span>
+        queryFactory
+<span class="nc" id="L962">            .select(reservation.staffId)</span>
+<span class="nc" id="L963">            .from(reservation)</span>
+<span class="nc" id="L964">            .where(</span>
+                reservation
+                    .shopId
+<span class="nc" id="L967">                    .eq(shopId)</span>
+<span class="nc" id="L968">                    .and(</span>
+<span class="nc" id="L969">                        reservation.reservationStartAt.between(</span>
+<span class="nc" id="L970">                            startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L971">                    .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L972">                    .and(</span>
+<span class="nc" id="L973">                        reservation.reservationStatusName.notIn(</span>
+                            ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L975">            .distinct()</span>
+<span class="nc" id="L976">            .fetch();</span>
+
+<span class="nc bnc" id="L978" title="All 2 branches missed.">    for (Long staffId : staffIds) {</span>
+      // 기간 내 총 가능한 슬롯 수 계산
+<span class="nc" id="L980">      int totalSlots = calculateTotalSlotsForPeriod(shopId, startDate, endDate);</span>
+
+      // 해당 직원의 예약 수 조회
+<span class="nc" id="L983">      Long reservedCount =</span>
+          queryFactory
+<span class="nc" id="L985">              .select(reservation.count())</span>
+<span class="nc" id="L986">              .from(reservation)</span>
+<span class="nc" id="L987">              .where(</span>
+                  reservation
+                      .shopId
+<span class="nc" id="L990">                      .eq(shopId)</span>
+<span class="nc" id="L991">                      .and(reservation.staffId.eq(staffId))</span>
+<span class="nc" id="L992">                      .and(</span>
+<span class="nc" id="L993">                          reservation.reservationStartAt.between(</span>
+<span class="nc" id="L994">                              startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L995">                      .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L996">                      .and(</span>
+<span class="nc" id="L997">                          reservation.reservationStatusName.notIn(</span>
+                              ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L999">              .fetchOne();</span>
+
+<span class="nc bnc" id="L1001" title="All 2 branches missed.">      int reservedSlots = reservedCount != null ? reservedCount.intValue() : 0;</span>
+<span class="nc" id="L1002">      int availableSlots = totalSlots - reservedSlots;</span>
+      BigDecimal reservationRate =
+<span class="nc bnc" id="L1004" title="All 2 branches missed.">          totalSlots &gt; 0</span>
+<span class="nc" id="L1005">              ? BigDecimal.valueOf(reservedSlots * 100.0 / totalSlots)</span>
+<span class="nc" id="L1006">                  .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L1007">              : BigDecimal.ZERO;</span>
+
+<span class="nc" id="L1009">      result.add(</span>
+          new ReservationStatisticsResponse(
+              startDate,
+<span class="nc" id="L1012">              LocalTime.of(0, 0),</span>
+<span class="nc" id="L1013">              totalSlots,</span>
+<span class="nc" id="L1014">              reservedSlots,</span>
+<span class="nc" id="L1015">              availableSlots,</span>
+              reservationRate,
+              &quot;STAFF&quot;,
+              &quot;직원&quot; + staffId,
+              staffId,
+              &quot;직원&quot; + staffId));
+<span class="nc" id="L1021">    }</span>
+
+<span class="nc" id="L1023">    return result;</span>
+  }
+
+  private List&lt;ReservationStatisticsResponse&gt; getStaffBasedReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate, Long staffId) {
+
+<span class="nc bnc" id="L1029" title="All 2 branches missed.">    if (staffId != null) {</span>
+<span class="nc" id="L1030">      return findStaffReservationStatistics(shopId, staffId, startDate, endDate);</span>
+    } else {
+<span class="nc" id="L1032">      return findAllStaffReservationStatistics(shopId, startDate, endDate);</span>
+    }
+  }
+
+  /**
+   * 요일별/시간대별 히트맵용 예약율 통계 조회
+   *
+   * @param shopId 매장 ID
+   * @param startDate 시작일
+   * @param endDate 종료일
+   * @return 요일별/시간대별 예약율 데이터
+   */
+  private List&lt;ReservationStatisticsResponse&gt; getDayTimeSlotReservationStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L1047">    log.info(</span>
+        &quot;요일별 시간대 예약 통계 조회 시작 - shopId: {}, startDate: {}, endDate: {}&quot;, shopId, startDate, endDate);
+
+    // 전체 예약 데이터 개수 확인
+<span class="nc" id="L1051">    Long totalReservationCount =</span>
+        queryFactory
+<span class="nc" id="L1053">            .select(reservation.count())</span>
+<span class="nc" id="L1054">            .from(reservation)</span>
+<span class="nc" id="L1055">            .where(</span>
+                reservation
+                    .shopId
+<span class="nc" id="L1058">                    .eq(shopId)</span>
+<span class="nc" id="L1059">                    .and(</span>
+<span class="nc" id="L1060">                        reservation.reservationStartAt.between(</span>
+<span class="nc" id="L1061">                            startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L1062">                    .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L1063">                    .and(</span>
+<span class="nc" id="L1064">                        reservation.reservationStatusName.notIn(</span>
+                            ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L1066">            .fetchOne();</span>
+
+<span class="nc bnc" id="L1068" title="All 2 branches missed.">    log.debug(&quot;기간 내 총 예약 건수: {}&quot;, totalReservationCount != null ? totalReservationCount : 0);</span>
+
+    // 예약 설정 확인
+<span class="nc" id="L1071">    Long settingCount =</span>
+        queryFactory
+<span class="nc" id="L1073">            .select(reservationSetting.count())</span>
+<span class="nc" id="L1074">            .from(reservationSetting)</span>
+<span class="nc" id="L1075">            .where(</span>
+<span class="nc" id="L1076">                reservationSetting.id.shopId.eq(shopId).and(reservationSetting.deletedAt.isNull()))</span>
+<span class="nc" id="L1077">            .fetchOne();</span>
+
+<span class="nc bnc" id="L1079" title="All 2 branches missed.">    log.debug(&quot;예약 설정 개수: {}&quot;, settingCount != null ? settingCount : 0);</span>
+
+<span class="nc" id="L1081">    List&lt;ReservationStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+
+    // 각 요일별로 시간대별 예약율 계산
+<span class="nc bnc" id="L1084" title="All 2 branches missed.">    for (int dayOfWeek = 1; dayOfWeek &lt;= 7; dayOfWeek++) { // 1=Monday, 7=Sunday</span>
+
+      // 해당 요일의 운영 시간 조회
+<span class="nc" id="L1087">      log.debug(&quot;요일 {} 운영시간 조회 중...&quot;, dayOfWeek);</span>
+<span class="nc" id="L1088">      var setting =</span>
+          queryFactory
+<span class="nc" id="L1090">              .select(</span>
+                  reservationSetting.availableStartTime,
+                  reservationSetting.availableEndTime,
+                  reservationSetting.lunchStartTime,
+                  reservationSetting.lunchEndTime)
+<span class="nc" id="L1095">              .from(reservationSetting)</span>
+<span class="nc" id="L1096">              .where(</span>
+                  reservationSetting
+                      .id
+                      .shopId
+<span class="nc" id="L1100">                      .eq(shopId)</span>
+<span class="nc" id="L1101">                      .and(reservationSetting.id.availableDay.eq(dayOfWeek))</span>
+<span class="nc" id="L1102">                      .and(reservationSetting.deletedAt.isNull()))</span>
+<span class="nc" id="L1103">              .fetchOne();</span>
+
+<span class="nc bnc" id="L1105" title="All 2 branches missed.">      if (setting != null) {</span>
+<span class="nc" id="L1106">        log.debug(</span>
+            &quot;요일 {} 운영시간 찾음: {} ~ {}&quot;,
+<span class="nc" id="L1108">            dayOfWeek,</span>
+<span class="nc" id="L1109">            setting.get(0, LocalTime.class),</span>
+<span class="nc" id="L1110">            setting.get(1, LocalTime.class));</span>
+<span class="nc" id="L1111">        LocalTime startTime = setting.get(0, LocalTime.class);</span>
+<span class="nc" id="L1112">        LocalTime endTime = setting.get(1, LocalTime.class);</span>
+<span class="nc" id="L1113">        LocalTime lunchStart = setting.get(2, LocalTime.class);</span>
+<span class="nc" id="L1114">        LocalTime lunchEnd = setting.get(3, LocalTime.class);</span>
+
+        // 9시부터 20시까지 각 시간대별 예약율 계산
+<span class="nc bnc" id="L1117" title="All 2 branches missed.">        for (int hour = 9; hour &lt;= 20; hour++) {</span>
+
+          // 해당 요일과 시간대의 총 예약 가능 일수 계산
+<span class="nc" id="L1120">          int totalDays = 0;</span>
+<span class="nc" id="L1121">          LocalDate currentDate = startDate;</span>
+<span class="nc bnc" id="L1122" title="All 2 branches missed.">          while (!currentDate.isAfter(endDate)) {</span>
+<span class="nc bnc" id="L1123" title="All 2 branches missed.">            if (currentDate.getDayOfWeek().getValue() == dayOfWeek) {</span>
+<span class="nc" id="L1124">              totalDays++;</span>
+            }
+<span class="nc" id="L1126">            currentDate = currentDate.plusDays(1);</span>
+          }
+
+          // 해당 요일과 시간대의 실제 예약 수 조회 (요일 조건 추가)
+<span class="nc" id="L1130">          Long reservedCount =</span>
+              queryFactory
+<span class="nc" id="L1132">                  .select(reservation.count())</span>
+<span class="nc" id="L1133">                  .from(reservation)</span>
+<span class="nc" id="L1134">                  .where(</span>
+                      reservation
+                          .shopId
+<span class="nc" id="L1137">                          .eq(shopId)</span>
+<span class="nc" id="L1138">                          .and(</span>
+<span class="nc" id="L1139">                              reservation.reservationStartAt.between(</span>
+<span class="nc" id="L1140">                                  startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L1141">                          .and(reservation.reservationStartAt.hour().eq(hour))</span>
+<span class="nc" id="L1142">                          .and(reservation.reservationStartAt.dayOfWeek().eq(dayOfWeek)) // 요일 조건 추가</span>
+<span class="nc" id="L1143">                          .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L1144">                          .and(</span>
+<span class="nc" id="L1145">                              reservation.reservationStatusName.notIn(</span>
+                                  ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L1147">                  .fetchOne();</span>
+
+<span class="nc bnc" id="L1149" title="All 4 branches missed.">          if (hour == 10 &amp;&amp; dayOfWeek == 1) {</span>
+<span class="nc" id="L1150">            Long allHourReservations =</span>
+                queryFactory
+<span class="nc" id="L1152">                    .select(reservation.count())</span>
+<span class="nc" id="L1153">                    .from(reservation)</span>
+<span class="nc" id="L1154">                    .where(</span>
+                        reservation
+                            .shopId
+<span class="nc" id="L1157">                            .eq(shopId)</span>
+<span class="nc" id="L1158">                            .and(</span>
+<span class="nc" id="L1159">                                reservation.reservationStartAt.between(</span>
+<span class="nc" id="L1160">                                    startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L1161">                            .and(reservation.reservationStartAt.hour().eq(hour))</span>
+<span class="nc" id="L1162">                            .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L1163">                            .and(</span>
+<span class="nc" id="L1164">                                reservation.reservationStatusName.notIn(</span>
+                                    ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L1166">                    .fetchOne();</span>
+<span class="nc" id="L1167">            log.debug(</span>
+                &quot;{}시 전체 예약 수 (요일 조건 없음): {}&quot;,
+<span class="nc" id="L1169">                hour,</span>
+<span class="nc bnc" id="L1170" title="All 2 branches missed.">                allHourReservations != null ? allHourReservations : 0);</span>
+<span class="nc" id="L1171">            log.debug(</span>
+<span class="nc bnc" id="L1172" title="All 2 branches missed.">                &quot;{}시 월요일 예약 수 (요일 조건 있음): {}&quot;, hour, reservedCount != null ? reservedCount : 0);</span>
+          }
+
+<span class="nc bnc" id="L1175" title="All 2 branches missed.">          int reservedSlots = reservedCount != null ? reservedCount.intValue() : 0;</span>
+
+          // 해당 시간대가 운영시간 내인지 확인
+<span class="nc" id="L1178">          boolean isOperatingHour =</span>
+<span class="nc bnc" id="L1179" title="All 8 branches missed.">              (hour &gt;= startTime.getHour() &amp;&amp; hour &lt;= endTime.getHour())</span>
+                  &amp;&amp; !(lunchStart != null
+                      &amp;&amp; lunchEnd != null
+<span class="nc bnc" id="L1182" title="All 2 branches missed.">                      &amp;&amp; hour &gt;= lunchStart.getHour()</span>
+<span class="nc bnc" id="L1183" title="All 2 branches missed.">                      &amp;&amp; hour &lt; lunchEnd.getHour());</span>
+
+<span class="nc bnc" id="L1185" title="All 2 branches missed.">          int totalSlots = isOperatingHour ? totalDays * 2 : 0; // 시간당 2개 슬롯 (30분 단위)</span>
+
+<span class="nc bnc" id="L1187" title="All 4 branches missed.">          if (hour == 10 &amp;&amp; dayOfWeek == 1) { // 월요일 10시만 샘플 로깅</span>
+<span class="nc" id="L1188">            log.debug(</span>
+                &quot;샘플 조회 (월요일 10시): totalDays={}, reservedSlots={}, totalSlots={}, isOperatingHour={}&quot;,
+<span class="nc" id="L1190">                totalDays,</span>
+<span class="nc" id="L1191">                reservedSlots,</span>
+<span class="nc" id="L1192">                totalSlots,</span>
+<span class="nc" id="L1193">                isOperatingHour);</span>
+          }
+<span class="nc" id="L1195">          int availableSlots = totalSlots - reservedSlots;</span>
+
+          BigDecimal reservationRate =
+<span class="nc bnc" id="L1198" title="All 2 branches missed.">              totalSlots &gt; 0</span>
+<span class="nc" id="L1199">                  ? BigDecimal.valueOf(reservedSlots * 100.0 / totalSlots)</span>
+<span class="nc" id="L1200">                      .setScale(2, RoundingMode.HALF_UP)</span>
+<span class="nc" id="L1201">                  : BigDecimal.ZERO;</span>
+
+          // 요일 문자열 생성
+<span class="nc" id="L1204">          String dayOfWeekStr = getDayOfWeekString(dayOfWeek);</span>
+
+<span class="nc" id="L1206">          result.add(</span>
+              new ReservationStatisticsResponse(
+                  null, // 날짜는 null로 설정 (요일별 합산 데이터이므로)
+<span class="nc" id="L1209">                  LocalTime.of(hour, 0), // 시간대</span>
+<span class="nc" id="L1210">                  totalSlots,</span>
+<span class="nc" id="L1211">                  reservedSlots,</span>
+<span class="nc" id="L1212">                  availableSlots,</span>
+                  reservationRate,
+                  &quot;DAY_TIME_SLOT&quot;,
+                  dayOfWeekStr + &quot;_&quot; + hour + &quot;시&quot;, // displayKey: &quot;MON_10시&quot;
+                  null, // staffId
+                  null, // staffName
+                  dayOfWeekStr // dayOfWeek
+                  ));
+        }
+<span class="nc" id="L1221">      } else {</span>
+<span class="nc" id="L1222">        log.debug(&quot;요일 {} 운영시간 설정 없음&quot;, dayOfWeek);</span>
+      }
+    }
+
+<span class="nc" id="L1226">    log.info(&quot;요일별 시간대 예약 통계 조회 완료 - 결과: {}개 항목&quot;, result.size());</span>
+<span class="nc bnc" id="L1227" title="All 2 branches missed.">    if (!result.isEmpty()) {</span>
+<span class="nc" id="L1228">      log.debug(</span>
+<span class="nc" id="L1229">          &quot;첫 번째 항목: {} = {}%&quot;, result.get(0).getDisplayKey(), result.get(0).getReservationRate());</span>
+    }
+
+<span class="nc" id="L1232">    return result;</span>
+  }
+
+  /** 요일 숫자를 문자열로 변환 (1=MON, 2=TUE, ..., 7=SUN) */
+  private String getDayOfWeekString(int dayOfWeek) {
+<span class="nc bnc" id="L1237" title="All 8 branches missed.">    switch (dayOfWeek) {</span>
+      case 1:
+<span class="nc" id="L1239">        return &quot;MON&quot;;</span>
+      case 2:
+<span class="nc" id="L1241">        return &quot;TUE&quot;;</span>
+      case 3:
+<span class="nc" id="L1243">        return &quot;WED&quot;;</span>
+      case 4:
+<span class="nc" id="L1245">        return &quot;THU&quot;;</span>
+      case 5:
+<span class="nc" id="L1247">        return &quot;FRI&quot;;</span>
+      case 6:
+<span class="nc" id="L1249">        return &quot;SAT&quot;;</span>
+      case 7:
+<span class="nc" id="L1251">        return &quot;SUN&quot;;</span>
+      default:
+<span class="nc" id="L1253">        return &quot;UNKNOWN&quot;;</span>
+    }
+  }
+
+  /** 30분 단위 슬롯 수 계산 */
+  private int calculateTotalSlots(
+      LocalTime startTime, LocalTime endTime, LocalTime lunchStart, LocalTime lunchEnd) {
+<span class="nc bnc" id="L1260" title="All 4 branches missed.">    if (startTime == null || endTime == null) {</span>
+<span class="nc" id="L1261">      return 0;</span>
+    }
+
+    // 총 운영 시간 계산 (분 단위)
+<span class="nc" id="L1265">    int totalMinutes = (int) ChronoUnit.MINUTES.between(startTime, endTime);</span>
+
+    // 점심시간 제외
+<span class="nc bnc" id="L1268" title="All 4 branches missed.">    if (lunchStart != null &amp;&amp; lunchEnd != null) {</span>
+<span class="nc" id="L1269">      int lunchMinutes = (int) ChronoUnit.MINUTES.between(lunchStart, lunchEnd);</span>
+<span class="nc" id="L1270">      totalMinutes -= lunchMinutes;</span>
+    }
+
+    // 30분 단위 슬롯 수 계산
+<span class="nc" id="L1274">    return totalMinutes / 30;</span>
+  }
+
+  /** 기간 내 총 슬롯 수 계산 */
+  private int calculateTotalSlotsForPeriod(Long shopId, LocalDate startDate, LocalDate endDate) {
+<span class="nc" id="L1279">    int totalSlots = 0;</span>
+<span class="nc" id="L1280">    LocalDate currentDate = startDate;</span>
+
+<span class="nc bnc" id="L1282" title="All 2 branches missed.">    while (!currentDate.isAfter(endDate)) {</span>
+<span class="nc" id="L1283">      List&lt;Integer&gt; availableDays =</span>
+          queryFactory
+<span class="nc" id="L1285">              .select(reservationSetting.id.availableDay)</span>
+<span class="nc" id="L1286">              .from(reservationSetting)</span>
+<span class="nc" id="L1287">              .where(</span>
+                  reservationSetting
+                      .id
+                      .shopId
+<span class="nc" id="L1291">                      .eq(shopId)</span>
+<span class="nc" id="L1292">                      .and(reservationSetting.deletedAt.isNull()))</span>
+<span class="nc" id="L1293">              .fetch();</span>
+
+<span class="nc" id="L1295">      int dayOfWeek = currentDate.getDayOfWeek().getValue();</span>
+
+<span class="nc bnc" id="L1297" title="All 2 branches missed.">      if (availableDays.contains(dayOfWeek)) {</span>
+<span class="nc" id="L1298">        var setting =</span>
+            queryFactory
+<span class="nc" id="L1300">                .select(</span>
+                    reservationSetting.availableStartTime,
+                    reservationSetting.availableEndTime,
+                    reservationSetting.lunchStartTime,
+                    reservationSetting.lunchEndTime)
+<span class="nc" id="L1305">                .from(reservationSetting)</span>
+<span class="nc" id="L1306">                .where(</span>
+                    reservationSetting
+                        .id
+                        .shopId
+<span class="nc" id="L1310">                        .eq(shopId)</span>
+<span class="nc" id="L1311">                        .and(reservationSetting.id.availableDay.eq(dayOfWeek))</span>
+<span class="nc" id="L1312">                        .and(reservationSetting.deletedAt.isNull()))</span>
+<span class="nc" id="L1313">                .fetchOne();</span>
+
+<span class="nc bnc" id="L1315" title="All 2 branches missed.">        if (setting != null) {</span>
+<span class="nc" id="L1316">          LocalTime startTime = setting.get(0, LocalTime.class);</span>
+<span class="nc" id="L1317">          LocalTime endTime = setting.get(1, LocalTime.class);</span>
+<span class="nc" id="L1318">          LocalTime lunchStart = setting.get(2, LocalTime.class);</span>
+<span class="nc" id="L1319">          LocalTime lunchEnd = setting.get(3, LocalTime.class);</span>
+
+<span class="nc" id="L1321">          totalSlots += calculateTotalSlots(startTime, endTime, lunchStart, lunchEnd);</span>
+        }
+      }
+
+<span class="nc" id="L1325">      currentDate = currentDate.plusDays(1);</span>
+<span class="nc" id="L1326">    }</span>
+
+<span class="nc" id="L1328">    return totalSlots;</span>
+  }
+
+  @Override
+  public List&lt;HourlyVisitorStatisticsResponse&gt; findHourlyVisitorStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L1335">    List&lt;HourlyVisitorStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+
+    // 시간대별 방문객 수를 성별로 구분하여 조회
+<span class="nc bnc" id="L1338" title="All 2 branches missed.">    for (int hour = 9; hour &lt;= 20; hour++) {</span>
+      // 남성 방문객 수 조회
+<span class="nc" id="L1340">      Long maleCount =</span>
+          queryFactory
+<span class="nc" id="L1342">              .select(reservation.count())</span>
+<span class="nc" id="L1343">              .from(reservation)</span>
+<span class="nc" id="L1344">              .leftJoin(customer)</span>
+<span class="nc" id="L1345">              .on(reservation.customerId.eq(customer.id))</span>
+<span class="nc" id="L1346">              .where(</span>
+                  reservation
+                      .shopId
+<span class="nc" id="L1349">                      .eq(shopId)</span>
+<span class="nc" id="L1350">                      .and(</span>
+<span class="nc" id="L1351">                          reservation.reservationStartAt.between(</span>
+<span class="nc" id="L1352">                              startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L1353">                      .and(reservation.reservationStartAt.hour().eq(hour))</span>
+<span class="nc" id="L1354">                      .and(customer.gender.stringValue().eq(&quot;M&quot;))</span>
+<span class="nc" id="L1355">                      .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L1356">                      .and(</span>
+<span class="nc" id="L1357">                          reservation.reservationStatusName.notIn(</span>
+                              ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L1359">              .fetchOne();</span>
+
+      // 여성 방문객 수 조회
+<span class="nc" id="L1362">      Long femaleCount =</span>
+          queryFactory
+<span class="nc" id="L1364">              .select(reservation.count())</span>
+<span class="nc" id="L1365">              .from(reservation)</span>
+<span class="nc" id="L1366">              .leftJoin(customer)</span>
+<span class="nc" id="L1367">              .on(reservation.customerId.eq(customer.id))</span>
+<span class="nc" id="L1368">              .where(</span>
+                  reservation
+                      .shopId
+<span class="nc" id="L1371">                      .eq(shopId)</span>
+<span class="nc" id="L1372">                      .and(</span>
+<span class="nc" id="L1373">                          reservation.reservationStartAt.between(</span>
+<span class="nc" id="L1374">                              startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L1375">                      .and(reservation.reservationStartAt.hour().eq(hour))</span>
+<span class="nc" id="L1376">                      .and(customer.gender.stringValue().eq(&quot;F&quot;))</span>
+<span class="nc" id="L1377">                      .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L1378">                      .and(</span>
+<span class="nc" id="L1379">                          reservation.reservationStatusName.notIn(</span>
+                              ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L1381">              .fetchOne();</span>
+
+<span class="nc bnc" id="L1383" title="All 2 branches missed.">      long maleVisitors = maleCount != null ? maleCount : 0;</span>
+<span class="nc bnc" id="L1384" title="All 2 branches missed.">      long femaleVisitors = femaleCount != null ? femaleCount : 0;</span>
+<span class="nc" id="L1385">      long totalVisitors = maleVisitors + femaleVisitors;</span>
+
+<span class="nc" id="L1387">      String timeSlot = String.format(&quot;%02d:00&quot;, hour);</span>
+<span class="nc" id="L1388">      String displayTime = hour + &quot;시&quot;;</span>
+
+<span class="nc" id="L1390">      result.add(</span>
+          new HourlyVisitorStatisticsResponse(
+<span class="nc" id="L1392">              hour, timeSlot, maleVisitors, femaleVisitors, totalVisitors, displayTime));</span>
+    }
+
+<span class="nc" id="L1395">    return result;</span>
+  }
+
+  @Override
+  public List&lt;DailyVisitorStatisticsResponse&gt; findDailyVisitorStatistics(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+<span class="nc" id="L1402">    List&lt;DailyVisitorStatisticsResponse&gt; result = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L1404">    LocalDate currentDate = startDate;</span>
+<span class="nc bnc" id="L1405" title="All 2 branches missed.">    while (!currentDate.isAfter(endDate)) {</span>
+      // 남성 방문객 수 조회
+<span class="nc" id="L1407">      Long maleCount =</span>
+          queryFactory
+<span class="nc" id="L1409">              .select(reservation.count())</span>
+<span class="nc" id="L1410">              .from(reservation)</span>
+<span class="nc" id="L1411">              .leftJoin(customer)</span>
+<span class="nc" id="L1412">              .on(reservation.customerId.eq(customer.id))</span>
+<span class="nc" id="L1413">              .where(</span>
+                  reservation
+                      .shopId
+<span class="nc" id="L1416">                      .eq(shopId)</span>
+<span class="nc" id="L1417">                      .and(</span>
+<span class="nc" id="L1418">                          reservation.reservationStartAt.between(</span>
+<span class="nc" id="L1419">                              currentDate.atStartOfDay(), currentDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L1420">                      .and(customer.gender.stringValue().eq(&quot;M&quot;))</span>
+<span class="nc" id="L1421">                      .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L1422">                      .and(</span>
+<span class="nc" id="L1423">                          reservation.reservationStatusName.notIn(</span>
+                              ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L1425">              .fetchOne();</span>
+
+      // 여성 방문객 수 조회
+<span class="nc" id="L1428">      Long femaleCount =</span>
+          queryFactory
+<span class="nc" id="L1430">              .select(reservation.count())</span>
+<span class="nc" id="L1431">              .from(reservation)</span>
+<span class="nc" id="L1432">              .leftJoin(customer)</span>
+<span class="nc" id="L1433">              .on(reservation.customerId.eq(customer.id))</span>
+<span class="nc" id="L1434">              .where(</span>
+                  reservation
+                      .shopId
+<span class="nc" id="L1437">                      .eq(shopId)</span>
+<span class="nc" id="L1438">                      .and(</span>
+<span class="nc" id="L1439">                          reservation.reservationStartAt.between(</span>
+<span class="nc" id="L1440">                              currentDate.atStartOfDay(), currentDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L1441">                      .and(customer.gender.stringValue().eq(&quot;F&quot;))</span>
+<span class="nc" id="L1442">                      .and(reservation.deletedAt.isNull())</span>
+<span class="nc" id="L1443">                      .and(</span>
+<span class="nc" id="L1444">                          reservation.reservationStatusName.notIn(</span>
+                              ReservationStatusName.CBC, ReservationStatusName.CBS)))
+<span class="nc" id="L1446">              .fetchOne();</span>
+
+<span class="nc bnc" id="L1448" title="All 2 branches missed.">      long maleVisitors = maleCount != null ? maleCount : 0;</span>
+<span class="nc bnc" id="L1449" title="All 2 branches missed.">      long femaleVisitors = femaleCount != null ? femaleCount : 0;</span>
+<span class="nc" id="L1450">      long totalVisitors = maleVisitors + femaleVisitors;</span>
+
+<span class="nc" id="L1452">      String dayOfWeek = getDayOfWeekKorean(currentDate);</span>
+<span class="nc" id="L1453">      String displayDate =</span>
+<span class="nc" id="L1454">          String.format(&quot;%02d/%02d&quot;, currentDate.getMonthValue(), currentDate.getDayOfMonth());</span>
+
+<span class="nc" id="L1456">      result.add(</span>
+          new DailyVisitorStatisticsResponse(
+<span class="nc" id="L1458">              currentDate, dayOfWeek, maleVisitors, femaleVisitors, totalVisitors, displayDate));</span>
+
+<span class="nc" id="L1460">      currentDate = currentDate.plusDays(1);</span>
+<span class="nc" id="L1461">    }</span>
+
+<span class="nc" id="L1463">    return result;</span>
+  }
+
+  private String getDayOfWeekKorean(LocalDate date) {
+<span class="nc bnc" id="L1467" title="All 8 branches missed.">    switch (date.getDayOfWeek()) {</span>
+      case MONDAY:
+<span class="nc" id="L1469">        return &quot;월&quot;;</span>
+      case TUESDAY:
+<span class="nc" id="L1471">        return &quot;화&quot;;</span>
+      case WEDNESDAY:
+<span class="nc" id="L1473">        return &quot;수&quot;;</span>
+      case THURSDAY:
+<span class="nc" id="L1475">        return &quot;목&quot;;</span>
+      case FRIDAY:
+<span class="nc" id="L1477">        return &quot;금&quot;;</span>
+      case SATURDAY:
+<span class="nc" id="L1479">        return &quot;토&quot;;</span>
+      case SUNDAY:
+<span class="nc" id="L1481">        return &quot;일&quot;;</span>
+      default:
+<span class="nc" id="L1483">        return &quot;&quot;;</span>
+    }
+  }
+
+  @Override
+  public List&lt;AdvancedSalesStatisticsResponse&gt; findPrimaryItemDailyTrend(
+      Long shopId, LocalDate startDate, LocalDate endDate) {
+
+    // 1차 상품별 일별 매출추이를 조회
+<span class="nc" id="L1492">    List&lt;AdvancedSalesStatisticsResponse&gt; results =</span>
+        queryFactory
+<span class="nc" id="L1494">            .select(</span>
+<span class="nc" id="L1495">                sales.salesDate.stringValue(),</span>
+                primaryItem.primaryItemName,
+<span class="nc" id="L1497">                itemSales.quantity.multiply(secondaryItem.secondaryItemPrice).sum().coalesce(0),</span>
+<span class="nc" id="L1498">                sales.salesId.countDistinct().coalesce(0L),</span>
+<span class="nc" id="L1499">                Expressions.numberTemplate(</span>
+                    Integer.class,
+                    &quot;COALESCE(SUM(CASE WHEN {0} &gt; 0 THEN &quot;
+                        + &quot;CAST(({1} * {2} * {3}) / {0} AS INTEGER) ELSE 0 END), 0)&quot;,
+                    sales.totalAmount,
+                    itemSales.quantity,
+                    secondaryItem.secondaryItemPrice,
+                    sales.discountAmount),
+<span class="nc" id="L1507">                Expressions.numberTemplate(</span>
+                    Integer.class,
+                    &quot;COALESCE(SUM(CASE WHEN {0} &gt; 0 AND {4} IS NOT NULL THEN &quot;
+                        + &quot;CAST(({1} * {2} * {3}) / {0} AS INTEGER) ELSE 0 END), 0)&quot;,
+                    sales.totalAmount,
+                    itemSales.quantity,
+                    secondaryItem.secondaryItemPrice,
+                    sales.discountAmount,
+                    itemSales.couponId))
+<span class="nc" id="L1516">            .from(sales)</span>
+<span class="nc" id="L1517">            .leftJoin(itemSales)</span>
+<span class="nc" id="L1518">            .on(sales.salesId.eq(itemSales.salesId))</span>
+<span class="nc" id="L1519">            .leftJoin(secondaryItem)</span>
+<span class="nc" id="L1520">            .on(itemSales.secondaryItemId.eq(secondaryItem.secondaryItemId))</span>
+<span class="nc" id="L1521">            .leftJoin(primaryItem)</span>
+<span class="nc" id="L1522">            .on(secondaryItem.primaryItemId.eq(primaryItem.primaryItemId))</span>
+<span class="nc" id="L1523">            .where(</span>
+                sales
+                    .shopId
+<span class="nc" id="L1526">                    .eq(shopId)</span>
+<span class="nc" id="L1527">                    .and(</span>
+<span class="nc" id="L1528">                        sales.salesDate.between(</span>
+<span class="nc" id="L1529">                            startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)))</span>
+<span class="nc" id="L1530">                    .and(sales.isRefunded.isFalse())</span>
+<span class="nc" id="L1531">                    .and(itemSales.salesId.isNotNull())</span>
+<span class="nc" id="L1532">                    .and(secondaryItem.secondaryItemId.isNotNull())</span>
+<span class="nc" id="L1533">                    .and(primaryItem.primaryItemId.isNotNull())</span>
+<span class="nc" id="L1534">                    .and(sales.deletedAt.isNull())</span>
+<span class="nc" id="L1535">                    .and(itemSales.deletedAt.isNull())</span>
+<span class="nc" id="L1536">                    .and(secondaryItem.deletedAt.isNull())</span>
+<span class="nc" id="L1537">                    .and(primaryItem.deletedAt.isNull()))</span>
+<span class="nc" id="L1538">            .groupBy(sales.salesDate, primaryItem.primaryItemName)</span>
+<span class="nc" id="L1539">            .orderBy(sales.salesDate.asc(), primaryItem.primaryItemName.asc())</span>
+<span class="nc" id="L1540">            .fetch()</span>
+<span class="nc" id="L1541">            .stream()</span>
+<span class="nc" id="L1542">            .map(</span>
+                tuple -&gt; {
+<span class="nc" id="L1544">                  String date = tuple.get(0, String.class);</span>
+<span class="nc" id="L1545">                  String primaryItemName = tuple.get(1, String.class);</span>
+
+                  // 날짜 형식 변환 (필요시)
+<span class="nc" id="L1548">                  String formattedDate = date;</span>
+<span class="nc bnc" id="L1549" title="All 4 branches missed.">                  if (date != null &amp;&amp; date.contains(&quot;T&quot;)) {</span>
+<span class="nc" id="L1550">                    formattedDate = date.split(&quot;T&quot;)[0];</span>
+                  }
+
+<span class="nc" id="L1553">                  return AdvancedSalesStatisticsResponse.builder()</span>
+<span class="nc" id="L1554">                      .date(formattedDate)</span>
+<span class="nc" id="L1555">                      .gender(null)</span>
+<span class="nc" id="L1556">                      .category(null)</span>
+<span class="nc" id="L1557">                      .primaryItemName(primaryItemName)</span>
+<span class="nc" id="L1558">                      .secondaryItemName(null)</span>
+<span class="nc" id="L1559">                      .totalSalesAmount(tuple.get(2, Integer.class).longValue())</span>
+<span class="nc" id="L1560">                      .totalTransactions(tuple.get(3, Long.class))</span>
+<span class="nc" id="L1561">                      .totalDiscountAmount(tuple.get(4, Integer.class).longValue())</span>
+<span class="nc" id="L1562">                      .totalCouponDiscountAmount(tuple.get(5, Integer.class).longValue())</span>
+<span class="nc" id="L1563">                      .build();</span>
+                })
+<span class="nc" id="L1565">            .collect(Collectors.toList());</span>
+
+<span class="nc" id="L1567">    return results;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MessageCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.command.application.service.impl</a> &gt; <span class="el_source">MessageCommandServiceImpl.java</span></div><h1>MessageCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.command.application.service.impl;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.customers.query.service.CustomerQueryService;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.SmsSendUnit;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.request.SmsRequest;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.request.UpdateReservationRequest;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.response.MessageSendResult;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.service.MessageCommandService;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.service.MessageVariableProcessor;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageDeliveryStatus;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageSendingType;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.MessageSettings;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.aggregate.Sms;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.repository.MessageSettingRepository;
+import com.deveagles.be15_deveagles_be.features.messages.command.domain.repository.SmsRepository;
+import com.deveagles.be15_deveagles_be.features.messages.command.infrastructure.CoolSmsClient;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.service.ShopCommandService;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class MessageCommandServiceImpl implements MessageCommandService {
+  private final ShopCommandService shopCommandService;
+  private final CustomerQueryService customerQueryService;
+  private final MessageSettingRepository messageSettingRepository;
+  private final CoolSmsClient coolSmsClient;
+  private final SmsRepository smsRepository;
+  private final MessageVariableProcessor messageVariableProcessor;
+
+  @Override
+  @Transactional
+  public List&lt;MessageSendResult&gt; sendSms(Long shopId, SmsRequest smsRequest) {
+<span class="fc" id="L43">    shopCommandService.validateShopExists(shopId);</span>
+<span class="fc" id="L44">    LocalDateTime now = LocalDateTime.now();</span>
+<span class="fc" id="L45">    LocalDateTime scheduledAt = resolveScheduledAt(smsRequest, now);</span>
+<span class="fc" id="L46">    boolean isReservation = MessageSendingType.RESERVATION.equals(smsRequest.messageSendingType());</span>
+
+    // 1. 고객 ID 원본 리스트
+<span class="fc" id="L49">    List&lt;Long&gt; customerIds = smsRequest.customerIds();</span>
+
+    // 2. 중복 제거된 ID로 전화번호 조회 (성공/실패 여부 판단용)
+<span class="fc" id="L52">    List&lt;Long&gt; distinctCustomerIds = customerIds.stream().distinct().toList();</span>
+<span class="fc" id="L53">    List&lt;String&gt; phoneNumbers = customerQueryService.getCustomerPhoneNumbers(distinctCustomerIds);</span>
+
+    // 3. 메시지 설정 조회 (발신번호 등)
+<span class="fc" id="L56">    MessageSettings settings =</span>
+        messageSettingRepository
+<span class="fc" id="L58">            .findByShopId(shopId)</span>
+<span class="fc" id="L59">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.MESSAGE_SETTINGS_NOT_FOUND));</span>
+<span class="fc" id="L60">    String senderNumber = settings.getSenderNumber();</span>
+
+    // 4. Sms 리스트 생성 (치환 포함)
+<span class="fc" id="L63">    List&lt;Sms&gt; smsList =</span>
+<span class="fc" id="L64">        IntStream.range(0, distinctCustomerIds.size())</span>
+<span class="fc" id="L65">            .mapToObj(</span>
+                i -&gt; {
+<span class="fc" id="L67">                  Long customerId = distinctCustomerIds.get(i);</span>
+
+                  // ✅ 메시지 치환: payload 생성 + 적용
+<span class="fc" id="L70">                  Map&lt;String, String&gt; payload =</span>
+<span class="fc" id="L71">                      messageVariableProcessor.buildPayload(customerId, shopId);</span>
+<span class="fc" id="L72">                  String resolvedContent =</span>
+<span class="fc" id="L73">                      messageVariableProcessor.resolveVariables(</span>
+<span class="fc" id="L74">                          smsRequest.messageContent(), payload);</span>
+
+                  Sms.SmsBuilder builder =
+<span class="fc" id="L77">                      Sms.builder()</span>
+<span class="fc" id="L78">                          .shopId(shopId)</span>
+<span class="fc" id="L79">                          .customerId(customerId)</span>
+<span class="fc" id="L80">                          .messageContent(resolvedContent)</span>
+<span class="fc" id="L81">                          .messageKind(smsRequest.messageKind())</span>
+<span class="fc" id="L82">                          .messageType(smsRequest.messageType())</span>
+<span class="fc" id="L83">                          .messageSendingType(smsRequest.messageSendingType())</span>
+<span class="fc" id="L84">                          .messageDeliveryStatus(</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">                              isReservation</span>
+<span class="fc" id="L86">                                  ? MessageDeliveryStatus.PENDING</span>
+<span class="fc" id="L87">                                  : MessageDeliveryStatus.SENT)</span>
+<span class="fc" id="L88">                          .scheduledAt(scheduledAt)</span>
+<span class="fc" id="L89">                          .templateId(smsRequest.templateId())</span>
+<span class="fc" id="L90">                          .hasLink(Boolean.TRUE.equals(smsRequest.hasLink()))</span>
+<span class="fc" id="L91">                          .customerGradeId(smsRequest.customerGradeId())</span>
+<span class="fc" id="L92">                          .tagId(smsRequest.tagId())</span>
+<span class="fc" id="L93">                          .couponId(smsRequest.couponId())</span>
+<span class="fc" id="L94">                          .workflowId(smsRequest.workflowId());</span>
+
+<span class="fc bfc" id="L96" title="All 2 branches covered.">                  if (!isReservation) {</span>
+<span class="fc" id="L97">                    builder.sentAt(now);</span>
+                  }
+
+<span class="fc" id="L100">                  return builder.build();</span>
+                })
+<span class="fc" id="L102">            .toList();</span>
+
+    // 5. 저장
+<span class="fc" id="L105">    List&lt;Sms&gt; saved = smsRepository.saveAll(smsList);</span>
+<span class="fc" id="L106">    smsRepository.flush();</span>
+    // 6. 즉시 발송이면 CoolSMS 호출
+<span class="fc bfc" id="L108" title="All 2 branches covered.">    if (!isReservation) {</span>
+<span class="fc" id="L109">      List&lt;SmsSendUnit&gt; units =</span>
+<span class="fc" id="L110">          IntStream.range(0, saved.size())</span>
+<span class="fc" id="L111">              .mapToObj(i -&gt; new SmsSendUnit(saved.get(i).getMessageId(), phoneNumbers.get(i)))</span>
+<span class="fc" id="L112">              .toList();</span>
+
+<span class="fc" id="L114">      List&lt;MessageSendResult&gt; results =</span>
+<span class="fc" id="L115">          coolSmsClient.sendMany(senderNumber, saved.get(0).getMessageContent(), units);</span>
+
+<span class="fc" id="L117">      List&lt;Long&gt; failedIds =</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">          results.stream().filter(r -&gt; !r.success()).map(MessageSendResult::messageId).toList();</span>
+
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">      if (!failedIds.isEmpty()) {</span>
+<span class="nc" id="L121">        markSmsAsFailed(failedIds);</span>
+      }
+
+<span class="fc" id="L124">      return results;</span>
+    }
+
+    // 7. 예약 발송이면 등록 완료 응답
+<span class="fc" id="L128">    return saved.stream()</span>
+<span class="fc" id="L129">        .map(s -&gt; new MessageSendResult(true, &quot;예약 등록 완료&quot;, s.getMessageId()))</span>
+<span class="fc" id="L130">        .toList();</span>
+  }
+
+  @Override
+  @Transactional
+  public void updateReservationMessage(
+      UpdateReservationRequest updateReservationRequest, Long shopId, Long messageId) {
+<span class="fc" id="L137">    shopCommandService.validateShopExists(shopId);</span>
+<span class="fc" id="L138">    Sms sms =</span>
+        smsRepository
+<span class="fc" id="L140">            .findById(messageId)</span>
+<span class="pc" id="L141">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.SMS_NOT_FOUND));</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">    if (!sms.getShopId().equals(shopId)) {</span>
+<span class="nc" id="L143">      throw new BusinessException(ErrorCode.SMS_SHOP_MISMATCH);</span>
+    }
+<span class="pc bpc" id="L145" title="1 of 2 branches missed.">    if (sms.getScheduledAt().isBefore(LocalDateTime.now())) {</span>
+<span class="nc" id="L146">      throw new BusinessException(ErrorCode.ALREADY_SENT_OR_CANCELED);</span>
+    }
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">    if (updateReservationRequest.scheduledAt().isBefore(LocalDateTime.now())) {</span>
+<span class="nc" id="L149">      throw new BusinessException(ErrorCode.INVALID_SCHEDULED_TIME);</span>
+    }
+<span class="fc" id="L151">    sms.updateReservation(</span>
+<span class="fc" id="L152">        updateReservationRequest.messageContent(),</span>
+<span class="fc" id="L153">        updateReservationRequest.messageKind(),</span>
+<span class="fc" id="L154">        updateReservationRequest.customerId(),</span>
+<span class="fc" id="L155">        updateReservationRequest.scheduledAt());</span>
+<span class="fc" id="L156">  }</span>
+
+  @Override
+  @Transactional
+  public void cancelScheduledMessage(Long messageId, Long shopId) {
+<span class="fc" id="L161">    shopCommandService.validateShopExists(shopId);</span>
+<span class="fc" id="L162">    Sms sms =</span>
+        smsRepository
+<span class="fc" id="L164">            .findById(messageId)</span>
+<span class="pc" id="L165">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.SMS_NOT_FOUND));</span>
+
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">    if (!sms.getShopId().equals(shopId)) {</span>
+<span class="nc" id="L168">      throw new BusinessException(ErrorCode.SMS_SHOP_MISMATCH);</span>
+    }
+
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">    if (!sms.isReservable()) {</span>
+<span class="nc" id="L172">      throw new BusinessException(ErrorCode.INVALID_MESSAGE_CANCEL_CONDITION);</span>
+    }
+
+<span class="fc" id="L175">    sms.cancel();</span>
+<span class="fc" id="L176">  }</span>
+
+  @Override
+  @Transactional(propagation = Propagation.REQUIRES_NEW)
+  public void markSmsAsFailed(Collection&lt;Long&gt; smsIds) {
+<span class="fc" id="L181">    List&lt;Sms&gt; failedMessages = smsRepository.findAllById(smsIds);</span>
+<span class="fc" id="L182">    failedMessages.forEach(Sms::markAsFailed);</span>
+<span class="fc" id="L183">    smsRepository.saveAll(failedMessages);</span>
+<span class="fc" id="L184">  }</span>
+
+  @Override
+  @Transactional(propagation = Propagation.REQUIRES_NEW)
+  public void markSmsAsSent(Collection&lt;Long&gt; smsIds) {
+<span class="fc" id="L189">    List&lt;Sms&gt; sentMessages = smsRepository.findAllById(smsIds);</span>
+<span class="fc" id="L190">    sentMessages.forEach(Sms::markAsSent);</span>
+<span class="fc" id="L191">    smsRepository.saveAll(sentMessages);</span>
+<span class="fc" id="L192">  }</span>
+
+  private LocalDateTime resolveScheduledAt(SmsRequest request, LocalDateTime now) {
+<span class="fc bfc" id="L195" title="All 2 branches covered.">    if (request.messageSendingType() == MessageSendingType.RESERVATION</span>
+<span class="pc bpc" id="L196" title="1 of 2 branches missed.">        &amp;&amp; request.scheduledAt() == null) {</span>
+<span class="nc" id="L197">      throw new BusinessException(ErrorCode.SCHEDULE_TIME_REQUIRED_FOR_RESERVATION);</span>
+    }
+
+<span class="fc bfc" id="L200" title="All 2 branches covered.">    if (request.messageSendingType() == MessageSendingType.IMMEDIATE</span>
+<span class="pc bpc" id="L201" title="1 of 2 branches missed.">        &amp;&amp; request.scheduledAt() != null) {</span>
+<span class="nc" id="L202">      throw new BusinessException(ErrorCode.SCHEDULE_TIME_NOT_ALLOWED_FOR_IMMEDIATE);</span>
+    }
+
+<span class="fc bfc" id="L205" title="All 2 branches covered.">    return request.messageSendingType() == MessageSendingType.IMMEDIATE</span>
+<span class="fc" id="L206">        ? now</span>
+<span class="fc" id="L207">        : request.scheduledAt();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TriggerCategory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.command.domain.vo</a> &gt; <span class="el_source">TriggerCategory.java</span></div><h1>TriggerCategory.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.command.domain.vo;
+
+import lombok.Getter;
+
+<span class="nc" id="L5">@Getter</span>
+public enum TriggerCategory {
+<span class="nc" id="L7">  LIFECYCLE(&quot;lifecycle&quot;, &quot;고객 생애주기 관리&quot;, &quot;신규부터 VIP까지 고객 단계별 맞춤 관리&quot;),</span>
+<span class="nc" id="L8">  PERIODIC(&quot;periodic&quot;, &quot;정기 리텐션&quot;, &quot;방문 주기와 시술 기반 정기적 재방문 유도&quot;),</span>
+<span class="nc" id="L9">  SPECIAL(&quot;special&quot;, &quot;특별 이벤트&quot;, &quot;생일, 기념일 등 특별한 날 기반 마케팅&quot;),</span>
+<span class="nc" id="L10">  PREVENTION(&quot;prevention&quot;, &quot;이탈 방지&quot;, &quot;AI 분석 기반 이탈 위험 고객 재활성화&quot;);</span>
+
+  private final String code;
+  private final String displayName;
+  private final String description;
+
+<span class="nc" id="L16">  TriggerCategory(String code, String displayName, String description) {</span>
+<span class="nc" id="L17">    this.code = code;</span>
+<span class="nc" id="L18">    this.displayName = displayName;</span>
+<span class="nc" id="L19">    this.description = description;</span>
+<span class="nc" id="L20">  }</span>
+
+  public static TriggerCategory fromCode(String code) {
+<span class="nc bnc" id="L23" title="All 2 branches missed.">    for (TriggerCategory category : values()) {</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">      if (category.code.equals(code)) {</span>
+<span class="nc" id="L25">        return category;</span>
+      }
+    }
+<span class="nc" id="L28">    throw new IllegalArgumentException(&quot;Unknown trigger category code: &quot; + code);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SessionPassQueryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.membership.query.controller</a> &gt; <span class="el_source">SessionPassQueryController.java</span></div><h1>SessionPassQueryController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.membership.query.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.membership.query.dto.response.SessionPassResponse;
+import com.deveagles.be15_deveagles_be.features.membership.query.service.SessionPassQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@Tag(name = &quot;횟수권 조회&quot;, description = &quot;횟수권 조회 API&quot;)
+@RestController
+@RequestMapping(&quot;/session-pass&quot;)
+@RequiredArgsConstructor
+public class SessionPassQueryController {
+
+  private final SessionPassQueryService sessionPassQueryService;
+
+  @Operation(summary = &quot;횟수권 전체 조회&quot;, description = &quot;등록된 모든 횟수권을 조회합니다.&quot;)
+  @GetMapping
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;SessionPassResponse&gt;&gt;&gt; getSessionPasses(
+      @AuthenticationPrincipal CustomUser user) {
+<span class="nc" id="L29">    List&lt;SessionPassResponse&gt; result = sessionPassQueryService.getAllSessionPass(user.getShopId());</span>
+<span class="nc" id="L30">    return ResponseEntity.ok(ApiResponse.success(result));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

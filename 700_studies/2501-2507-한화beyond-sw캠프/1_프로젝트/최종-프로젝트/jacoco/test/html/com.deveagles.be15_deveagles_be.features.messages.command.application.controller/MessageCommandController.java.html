@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MessageCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.command.application.controller</a> &gt; <span class="el_source">MessageCommandController.java</span></div><h1>MessageCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.request.SmsRequest;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.request.UpdateReservationRequest;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.dto.response.MessageSendResult;
+import com.deveagles.be15_deveagles_be.features.messages.command.application.service.MessageCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/message&quot;)
+public class MessageCommandController {
+
+  private final MessageCommandService messageCommandService;
+
+  @Operation(summary = &quot;문자 메시지 발송&quot;, description = &quot;매장의 선택된 고객에게 문자 메시지를 발송합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;발송 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 요청&quot;)
+  })
+  @PostMapping(&quot;/send&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;List&lt;MessageSendResult&gt;&gt;&gt; sendSms(
+      @AuthenticationPrincipal CustomUser customUser, @RequestBody @Valid SmsRequest request) {
+
+<span class="nc" id="L38">    List&lt;MessageSendResult&gt; resultList =</span>
+<span class="nc" id="L39">        messageCommandService.sendSms(customUser.getShopId(), request);</span>
+<span class="nc" id="L40">    return ResponseEntity.ok(ApiResponse.success(resultList));</span>
+  }
+
+  @Operation(summary = &quot;예약 문자 수정&quot;, description = &quot;이미 등록된 예약 문자의 전송 내용을 수정합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;수정 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;해당 메시지를 찾을 수 없음&quot;)
+  })
+  @PutMapping(&quot;/{messageId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updateReservation(
+      @AuthenticationPrincipal CustomUser customUser,
+      @RequestBody @Valid UpdateReservationRequest updateReservationRequest,
+      @PathVariable Long messageId) {
+<span class="nc" id="L57">    messageCommandService.updateReservationMessage(</span>
+<span class="nc" id="L58">        updateReservationRequest, customUser.getShopId(), messageId);</span>
+<span class="nc" id="L59">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;예약 문자 취소&quot;, description = &quot;등록된 예약 문자 전송을 취소합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;취소 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;해당 메시지를 찾을 수 없음&quot;)
+  })
+  @DeleteMapping(&quot;/{messageId}/cancel&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; cancelReservation(
+      @AuthenticationPrincipal CustomUser customUser, @PathVariable Long messageId) {
+<span class="nc" id="L74">    messageCommandService.cancelScheduledMessage(messageId, customUser.getShopId());</span>
+
+<span class="nc" id="L76">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

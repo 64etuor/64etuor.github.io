@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NotificationQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.notifications.query.application.service</a> &gt; <span class="el_source">NotificationQueryService.java</span></div><h1>NotificationQueryService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.notifications.query.application.service;
+
+import com.deveagles.be15_deveagles_be.features.notifications.query.application.dto.NotificationResponse;
+import com.deveagles.be15_deveagles_be.features.notifications.query.application.dto.UnreadNotificationCountResponse;
+import com.deveagles.be15_deveagles_be.features.notifications.query.repository.NotificationQueryRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true) // 조회 전용이므로 readOnly=true로 성능 최적화
+public class NotificationQueryService {
+
+  private final NotificationQueryRepository notificationQueryRepository;
+
+  /**
+   * 특정 매장의 알림 목록을 조회합니다.
+   *
+   * @param shopId 조회할 매장의 ID
+   * @param pageable 페이징 및 정렬 정보
+   * @return 페이징된 알림 응답 DTO 목록
+   */
+  public Page&lt;NotificationResponse&gt; getNotificationsByShop(Long shopId, Pageable pageable) {
+<span class="nc" id="L27">    return notificationQueryRepository.findByShopId(shopId, pageable);</span>
+  }
+
+  /**
+   * 특정 매장의 읽지 않은 알림 개수를 조회합니다.
+   *
+   * @param shopId 조회할 매장의 ID
+   * @return 읽지 않은 알림 개수 응답 DTO
+   */
+  public UnreadNotificationCountResponse getUnreadNotificationCount(Long shopId) {
+<span class="nc" id="L37">    long count = notificationQueryRepository.countByShopIdAndIsReadFalse(shopId);</span>
+<span class="nc" id="L38">    return new UnreadNotificationCountResponse(count);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

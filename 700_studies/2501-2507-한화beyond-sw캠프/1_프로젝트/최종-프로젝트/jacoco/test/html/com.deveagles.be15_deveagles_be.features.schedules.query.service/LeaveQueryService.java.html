@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LeaveQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.query.service</a> &gt; <span class="el_source">LeaveQueryService.java</span></div><h1>LeaveQueryService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.query.service;
+
+import com.deveagles.be15_deveagles_be.common.dto.PagedResult;
+import com.deveagles.be15_deveagles_be.common.dto.Pagination;
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.request.LeaveListRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.LeaveDetailResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.LeaveListResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.RegularLeaveDetailResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.mapper.LeaveQueryMapper;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class LeaveQueryService {
+
+  private final LeaveQueryMapper leaveQueryMapper;
+
+  public PagedResult&lt;LeaveListResponse&gt; getLeaveList(Long shopId, LeaveListRequest request) {
+<span class="fc" id="L23">    int offset = request.page() * request.size();</span>
+
+<span class="fc" id="L25">    List&lt;LeaveListResponse&gt; leaves =</span>
+<span class="fc" id="L26">        leaveQueryMapper.findLeaves(</span>
+            shopId,
+<span class="fc" id="L28">            request.from(),</span>
+<span class="fc" id="L29">            request.to(),</span>
+<span class="fc" id="L30">            request.leaveType(),</span>
+<span class="fc" id="L31">            request.staffId(),</span>
+<span class="fc" id="L32">            request.size(),</span>
+            offset);
+
+<span class="fc" id="L35">    int total =</span>
+<span class="fc" id="L36">        leaveQueryMapper.countLeaves(</span>
+<span class="fc" id="L37">            shopId, request.from(), request.to(), request.leaveType(), request.staffId());</span>
+
+<span class="fc" id="L39">    return new PagedResult&lt;&gt;(</span>
+        leaves,
+<span class="fc" id="L41">        new Pagination(request.page(), (int) Math.ceil((double) total / request.size()), total));</span>
+  }
+
+  public LeaveDetailResponse getLeaveDetail(Long leaveId) {
+<span class="fc" id="L45">    LeaveDetailResponse result = leaveQueryMapper.findLeaveDetailById(leaveId);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">    if (result == null) {</span>
+<span class="fc" id="L47">      throw new BusinessException(ErrorCode.LEAVE_NOT_FOUND);</span>
+    }
+<span class="fc" id="L49">    return result;</span>
+  }
+
+  public RegularLeaveDetailResponse getRegularLeaveDetail(Long regularLeaveId) {
+<span class="fc" id="L53">    RegularLeaveDetailResponse result = leaveQueryMapper.findRegularLeaveDetailById(regularLeaveId);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">    if (result == null) {</span>
+<span class="fc" id="L55">      throw new BusinessException(ErrorCode.REGULAR_LEAVE_NOT_FOUND);</span>
+    }
+<span class="fc" id="L57">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlanQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.query.service</a> &gt; <span class="el_source">PlanQueryService.java</span></div><h1>PlanQueryService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.query.service;
+
+import com.deveagles.be15_deveagles_be.common.dto.PagedResponse;
+import com.deveagles.be15_deveagles_be.common.dto.Pagination;
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.PlanDetailResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.PlanListResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.RegularPlanDetailResponse;
+import com.deveagles.be15_deveagles_be.features.schedules.query.mapper.PlanQueryMapper;
+import com.deveagles.be15_deveagles_be.features.schedules.query.mapper.RegularPlanQueryMapper;
+import java.time.LocalDateTime;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@RequiredArgsConstructor
+@Service
+public class PlanQueryService {
+
+  private final PlanQueryMapper planQueryMapper;
+  private final RegularPlanQueryMapper regularPlanQueryMapper;
+
+  public PlanDetailResponse getPlanDetail(Long planId) {
+<span class="fc" id="L25">    PlanDetailResponse result = planQueryMapper.findPlanDetailById(planId);</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">    if (result == null) throw new BusinessException(ErrorCode.PLAN_NOT_FOUND);</span>
+<span class="fc" id="L27">    return result;</span>
+  }
+
+  public RegularPlanDetailResponse getRegularPlanDetail(Long regularPlanId) {
+<span class="fc" id="L31">    RegularPlanDetailResponse result =</span>
+<span class="fc" id="L32">        regularPlanQueryMapper.findRegularPlanDetailById(regularPlanId);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">    if (result == null) throw new BusinessException(ErrorCode.REGULAR_PLAN_NOT_FOUND);</span>
+<span class="fc" id="L34">    return result;</span>
+  }
+
+  public PagedResponse&lt;PlanListResponse&gt; getPlanList(
+      Long staffId,
+      Long shopId,
+      String planType,
+      LocalDateTime from,
+      LocalDateTime to,
+      int page,
+      int size) {
+<span class="fc" id="L45">    int offset = page * size;</span>
+
+    // 정기 일정이면 from/to 제거
+<span class="pc bpc" id="L48" title="2 of 4 branches missed.">    LocalDateTime filteredFrom = &quot;plan&quot;.equals(planType) || &quot;all&quot;.equals(planType) ? from : null;</span>
+<span class="pc bpc" id="L49" title="2 of 4 branches missed.">    LocalDateTime filteredTo = &quot;plan&quot;.equals(planType) || &quot;all&quot;.equals(planType) ? to : null;</span>
+
+<span class="fc" id="L51">    List&lt;PlanListResponse&gt; content =</span>
+<span class="fc" id="L52">        planQueryMapper.findPlans(</span>
+            staffId, shopId, planType, filteredFrom, filteredTo, offset, size);
+<span class="fc" id="L54">    int total = planQueryMapper.countPlans(staffId, shopId, planType, filteredFrom, filteredTo);</span>
+
+    Pagination pagination =
+<span class="fc" id="L57">        Pagination.builder()</span>
+<span class="fc" id="L58">            .currentPage(page)</span>
+<span class="fc" id="L59">            .totalPages((int) Math.ceil((double) total / size))</span>
+<span class="fc" id="L60">            .totalItems(total)</span>
+<span class="fc" id="L61">            .build();</span>
+
+<span class="fc" id="L63">    return new PagedResponse&lt;&gt;(content, pagination);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CouponServiceAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.execution.infrastructure.service</a> &gt; <span class="el_source">CouponServiceAdapter.java</span></div><h1>CouponServiceAdapter.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.execution.infrastructure.service;
+
+import com.deveagles.be15_deveagles_be.features.coupons.application.query.CouponQueryService;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.response.CouponResponse;
+import java.time.LocalDate;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+<span class="nc" id="L13">@Slf4j</span>
+public class CouponServiceAdapter {
+
+  private final CouponQueryService couponQueryService;
+
+  public boolean isValidCoupon(String couponCode, Long shopId) {
+    try {
+<span class="nc bnc" id="L20" title="All 4 branches missed.">      if (couponCode == null || couponCode.trim().isEmpty()) {</span>
+<span class="nc" id="L21">        log.warn(&quot;쿠폰 코드가 비어 있습니다&quot;);</span>
+<span class="nc" id="L22">        return false;</span>
+      }
+
+<span class="nc" id="L25">      Optional&lt;CouponResponse&gt; optCoupon = couponQueryService.getCouponByCode(couponCode, shopId);</span>
+
+<span class="nc bnc" id="L27" title="All 2 branches missed.">      if (optCoupon.isEmpty()) {</span>
+<span class="nc" id="L28">        log.warn(&quot;쿠폰을 찾을 수 없습니다. couponCode: {}&quot;, couponCode);</span>
+<span class="nc" id="L29">        return false;</span>
+      }
+
+<span class="nc" id="L32">      CouponResponse coupon = optCoupon.get();</span>
+
+      // 매장 사용 가능 여부
+<span class="nc bnc" id="L35" title="All 2 branches missed.">      if (!shopId.equals(coupon.getShopId())) {</span>
+<span class="nc" id="L36">        log.warn(</span>
+            &quot;해당 매장에서 사용할 수 없는 쿠폰입니다. couponCode: {}, shopId: {}, coupon.shopId: {}&quot;,
+            couponCode,
+            shopId,
+<span class="nc" id="L40">            coupon.getShopId());</span>
+<span class="nc" id="L41">        return false;</span>
+      }
+
+      // 활성화 여부
+<span class="nc bnc" id="L45" title="All 2 branches missed.">      if (Boolean.FALSE.equals(coupon.getIsActive())) {</span>
+<span class="nc" id="L46">        log.warn(&quot;비활성화된 쿠폰입니다. couponCode: {}&quot;, couponCode);</span>
+<span class="nc" id="L47">        return false;</span>
+      }
+
+<span class="nc bnc" id="L50" title="All 2 branches missed.">      if (coupon.getExpirationDate() != null</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">          &amp;&amp; coupon.getExpirationDate().isBefore(LocalDate.now())) {</span>
+<span class="nc" id="L52">        log.warn(&quot;만료일이 지난 쿠폰입니다. couponCode: {}&quot;, couponCode);</span>
+<span class="nc" id="L53">        return false;</span>
+      }
+
+<span class="nc" id="L56">      log.info(&quot;쿠폰이 유효합니다. couponCode: {}, shopId: {}&quot;, couponCode, shopId);</span>
+<span class="nc" id="L57">      return true;</span>
+
+<span class="nc" id="L59">    } catch (Exception e) {</span>
+<span class="nc" id="L60">      log.error(&quot;쿠폰 검증 중 예외 발생. couponCode: {}, shopId: {}&quot;, couponCode, shopId, e);</span>
+<span class="nc" id="L61">      return false;</span>
+    }
+  }
+
+  /** 쿠폰 ID로 실제 쿠폰 코드를 조회합니다. 워크플로우에서 쿠폰 ID를 저장하지만, 메시지 발송 시에는 실제 쿠폰 코드가 필요하기 때문입니다. */
+  public String getCouponCodeById(String couponId, Long shopId) {
+    try {
+<span class="nc bnc" id="L68" title="All 4 branches missed.">      if (couponId == null || couponId.trim().isEmpty()) {</span>
+<span class="nc" id="L69">        log.warn(&quot;쿠폰 ID가 비어 있습니다&quot;);</span>
+<span class="nc" id="L70">        return null;</span>
+      }
+
+      // TODO: CouponQueryService에 ID로 조회하는 메서드가 필요할 수 있습니다.
+      // 현재는 임시로 couponId를 그대로 반환합니다.
+      // 실제 구현에서는 쿠폰 ID로 쿠폰을 조회한 후 쿠폰 코드를 반환해야 합니다.
+
+<span class="nc" id="L77">      log.info(&quot;쿠폰 ID로 코드 조회: couponId={}, shopId={}&quot;, couponId, shopId);</span>
+
+      // 임시 처리: ID가 숫자인 경우 &quot;COUPON&quot; + ID 형태로 변환
+      // 실제로는 데이터베이스에서 조회해야 함
+      try {
+<span class="nc" id="L82">        Long.parseLong(couponId);</span>
+<span class="nc" id="L83">        return &quot;COUPON&quot; + couponId;</span>
+<span class="nc" id="L84">      } catch (NumberFormatException e) {</span>
+        // 이미 쿠폰 코드 형태인 경우 그대로 반환
+<span class="nc" id="L86">        return couponId;</span>
+      }
+
+<span class="nc" id="L89">    } catch (Exception e) {</span>
+<span class="nc" id="L90">      log.error(&quot;쿠폰 코드 조회 중 예외 발생. couponId: {}, shopId: {}&quot;, couponId, shopId, e);</span>
+<span class="nc" id="L91">      return null;</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

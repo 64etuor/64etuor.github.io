@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationSettingCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.application.controller</a> &gt; <span class="el_source">ReservationSettingCommandController.java</span></div><h1>ReservationSettingCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.dto.request.UpdateReservationSettingRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.service.ReservationSettingCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/schedules/reservation/settings&quot;)
+@Tag(name = &quot;예약 설정 수정&quot;, description = &quot;매장의 요일별 예약 가능 설정 수정 API&quot;)
+public class ReservationSettingCommandController {
+
+  private final ReservationSettingCommandService reservationSettingCommandService;
+
+  @Operation(summary = &quot;예약 설정 수정&quot;, description = &quot;매장의 요일별 예약 가능 설정을 수정합니다. 기존 값을 덮어씁니다.&quot;)
+  @PutMapping
+  public ApiResponse&lt;Void&gt; updateReservationSettings(
+      @AuthenticationPrincipal CustomUser user,
+      @RequestBody List&lt;UpdateReservationSettingRequest&gt; requestList) {
+<span class="nc" id="L27">    reservationSettingCommandService.updateReservationSettings(user.getShopId(), requestList);</span>
+<span class="nc" id="L28">    return ApiResponse.success(null);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

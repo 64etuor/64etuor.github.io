@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShopCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.shops.command.application.service</a> &gt; <span class="el_source">ShopCommandServiceImpl.java</span></div><h1>ShopCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.shops.command.application.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.service.ReservationSettingInitializer;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.dto.request.PutShopRequest;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.dto.request.ShopCreateRequest;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.dto.request.SnsRequest;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.dto.request.ValidBizNumberRequest;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.dto.response.GetIndustryResponse;
+import com.deveagles.be15_deveagles_be.features.shops.command.application.dto.response.GetShopResponse;
+import com.deveagles.be15_deveagles_be.features.shops.command.domain.aggregate.Industry;
+import com.deveagles.be15_deveagles_be.features.shops.command.domain.aggregate.SNS;
+import com.deveagles.be15_deveagles_be.features.shops.command.domain.aggregate.SNSType;
+import com.deveagles.be15_deveagles_be.features.shops.command.domain.aggregate.Shop;
+import com.deveagles.be15_deveagles_be.features.shops.command.repository.IndustryRepository;
+import com.deveagles.be15_deveagles_be.features.shops.command.repository.ShopRepository;
+import com.deveagles.be15_deveagles_be.features.shops.command.repository.SnsRepository;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+<span class="fc" id="L27">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class ShopCommandServiceImpl implements ShopCommandService {
+
+  private final ShopRepository shopRepository;
+  private final IndustryRepository industryRepository;
+  private final SnsRepository snsRepository;
+  private final ReservationSettingInitializer reservationSettingInitializer;
+
+  @Override
+  public Shop shopRegist(ShopCreateRequest request) {
+    Shop shop =
+<span class="fc" id="L40">        Shop.builder()</span>
+<span class="fc" id="L41">            .shopName(request.shopName())</span>
+<span class="fc" id="L42">            .address(request.address())</span>
+<span class="fc" id="L43">            .detailAddress(request.detailAddress())</span>
+<span class="fc" id="L44">            .industryId(request.industryId())</span>
+<span class="fc" id="L45">            .businessNumber(request.businessNumber())</span>
+<span class="fc" id="L46">            .phoneNumber(request.phoneNumber())</span>
+<span class="fc" id="L47">            .shopDescription(request.description())</span>
+<span class="fc" id="L48">            .build();</span>
+
+<span class="fc" id="L50">    Shop savedShop = shopRepository.save(shop);</span>
+
+<span class="fc" id="L52">    reservationSettingInitializer.initDefault(savedShop.getShopId());</span>
+
+<span class="fc" id="L54">    return savedShop;</span>
+  }
+
+  @Override
+  public Boolean validCheckBizNumber(ValidBizNumberRequest request) {
+
+<span class="fc" id="L60">    Optional&lt;Shop&gt; shop = shopRepository.findByBusinessNumber(request.bizNumber());</span>
+
+<span class="fc" id="L62">    return shop.isEmpty();</span>
+  }
+
+  @Override
+  public void patchOwnerId(Shop shop, Long ownerId) {
+
+<span class="fc" id="L68">    shop.setOwner(ownerId);</span>
+
+<span class="fc" id="L70">    shopRepository.save(shop);</span>
+<span class="fc" id="L71">  }</span>
+
+  @Override
+  public GetIndustryResponse getIndustry() {
+
+<span class="nc" id="L76">    return GetIndustryResponse.builder().industryList(industryRepository.findAll()).build();</span>
+  }
+
+  @Override
+  public void validateShopExists(Long shopId) {
+<span class="fc bfc" id="L81" title="All 2 branches covered.">    if (!shopRepository.existsById(shopId)) {</span>
+<span class="fc" id="L82">      throw new BusinessException(ErrorCode.SHOP_NOT_FOUNT);</span>
+    }
+<span class="fc" id="L84">  }</span>
+
+  @Override
+  public GetShopResponse getShop(Long shopId) {
+
+<span class="fc" id="L89">    Shop shop =</span>
+        shopRepository
+<span class="fc" id="L91">            .findByShopId(shopId)</span>
+<span class="pc" id="L92">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.SHOP_NOT_FOUNT));</span>
+
+<span class="fc" id="L94">    List&lt;Industry&gt; industryList = industryRepository.findAll();</span>
+
+<span class="fc" id="L96">    List&lt;SNS&gt; snsList = snsRepository.findByShopId(shopId);</span>
+
+<span class="fc" id="L98">    return GetShopResponse.builder()</span>
+<span class="fc" id="L99">        .shopName(shop.getShopName())</span>
+<span class="fc" id="L100">        .address(shop.getAddress())</span>
+<span class="fc" id="L101">        .detailAddress(shop.getDetailAddress())</span>
+<span class="fc" id="L102">        .phoneNumber(shop.getPhoneNumber())</span>
+<span class="fc" id="L103">        .bizNumber(shop.getBusinessNumber())</span>
+<span class="fc" id="L104">        .description(shop.getShopDescription())</span>
+<span class="fc" id="L105">        .industryId(shop.getIndustryId())</span>
+<span class="fc" id="L106">        .industryList(industryList)</span>
+<span class="fc" id="L107">        .snsList(snsList)</span>
+<span class="fc" id="L108">        .build();</span>
+  }
+
+  @Transactional
+  @Override
+  public void putShop(Long shopId, PutShopRequest request) {
+
+<span class="fc" id="L115">    Shop findShop =</span>
+        shopRepository
+<span class="fc" id="L117">            .findByShopId(shopId)</span>
+<span class="fc" id="L118">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.SHOP_NOT_FOUNT));</span>
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">    if (!findShop.getShopName().equals(request.shopName())) {</span>
+<span class="fc" id="L121">      findShop.setName(request.shopName());</span>
+    }
+
+<span class="fc bfc" id="L124" title="All 2 branches covered.">    if (!findShop.getAddress().equals(request.address())) {</span>
+<span class="fc" id="L125">      findShop.setShopAddress(request.address());</span>
+    }
+
+<span class="fc bfc" id="L128" title="All 2 branches covered.">    if (!findShop.getDetailAddress().equals(request.detailAddress())) {</span>
+<span class="fc" id="L129">      findShop.setShopDetailAddress(request.detailAddress());</span>
+    }
+
+<span class="fc bfc" id="L132" title="All 2 branches covered.">    if (!Objects.equals(findShop.getIndustryId(), request.industryId())) {</span>
+<span class="fc" id="L133">      findShop.setIndustry(request.industryId());</span>
+    }
+
+<span class="fc bfc" id="L136" title="All 2 branches covered.">    if (!findShop.getPhoneNumber().equals(request.phoneNumber())) {</span>
+<span class="fc" id="L137">      findShop.setPhone(request.phoneNumber());</span>
+    }
+
+<span class="fc bfc" id="L140" title="All 2 branches covered.">    if (!findShop.getBusinessNumber().equals(request.bizNumber())) {</span>
+<span class="fc" id="L141">      findShop.setBizNumber(request.bizNumber());</span>
+    }
+
+<span class="fc bfc" id="L144" title="All 2 branches covered.">    if (!findShop.getShopDescription().equals(request.description())) {</span>
+<span class="fc" id="L145">      findShop.setDescription(request.description());</span>
+    }
+
+<span class="fc" id="L148">    shopRepository.save(findShop);</span>
+
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">    if (!request.deletedSnsIds().isEmpty()) {</span>
+<span class="fc" id="L151">      snsRepository.deleteBySnsIdIn(request.deletedSnsIds());</span>
+    }
+
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">    if (!request.snsList().isEmpty()) {</span>
+<span class="fc" id="L155">      List&lt;Long&gt; existingSnsIds =</span>
+<span class="fc" id="L156">          request.snsList().stream().map(SnsRequest::snsId).filter(Objects::nonNull).toList();</span>
+
+      Map&lt;Long, SNS&gt; existingSnsMap =
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">          existingSnsIds.isEmpty()</span>
+<span class="nc" id="L160">              ? Collections.emptyMap()</span>
+<span class="fc" id="L161">              : snsRepository.findBySnsIdIn(existingSnsIds).stream()</span>
+<span class="fc" id="L162">                  .collect(Collectors.toMap(SNS::getSnsId, Function.identity()));</span>
+
+<span class="fc bfc" id="L164" title="All 2 branches covered.">      for (SnsRequest s : request.snsList()) {</span>
+        SNS sns =
+<span class="pc bpc" id="L166" title="1 of 4 branches missed.">            (s.snsId() != null &amp;&amp; existingSnsMap.containsKey(s.snsId()))</span>
+<span class="fc" id="L167">                ? existingSnsMap.get(s.snsId())</span>
+<span class="fc" id="L168">                : SNS.builder().shopId(shopId).build();</span>
+
+<span class="fc" id="L170">        sns.setSns(SNSType.valueOf(s.type()), s.snsAddress());</span>
+<span class="fc" id="L171">        snsRepository.save(sns);</span>
+<span class="fc" id="L172">      }</span>
+    }
+<span class="fc" id="L174">  }</span>
+
+  @Transactional
+  @Override
+  public void updateReservationTerm(Long shopId, Integer term) {
+<span class="fc" id="L179">    Shop shop =</span>
+        shopRepository
+<span class="fc" id="L181">            .findByShopId(shopId)</span>
+<span class="pc" id="L182">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.SHOP_NOT_FOUNT));</span>
+<span class="fc" id="L183">    shop.updateReservationTerm(term);</span>
+<span class="fc" id="L184">    shopRepository.save(shop);</span>
+<span class="fc" id="L185">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

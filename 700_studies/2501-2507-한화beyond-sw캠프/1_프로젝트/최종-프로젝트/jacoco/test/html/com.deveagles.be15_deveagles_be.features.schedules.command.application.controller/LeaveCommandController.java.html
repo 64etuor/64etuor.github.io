@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LeaveCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.application.controller</a> &gt; <span class="el_source">LeaveCommandController.java</span></div><h1>LeaveCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.dto.request.*;
+import com.deveagles.be15_deveagles_be.features.schedules.command.application.service.LeaveCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(&quot;/schedules&quot;)
+@RequiredArgsConstructor
+@Tag(name = &quot;휴무 관리&quot;, description = &quot;직원 단기 및 정기 휴무 등록, 수정, 삭제 API&quot;)
+public class LeaveCommandController {
+
+  private final LeaveCommandService leaveCommandService;
+
+  @Operation(summary = &quot;단기 휴무 등록&quot;, description = &quot;직원의 단기 휴무 일정을 등록합니다.&quot;)
+  @PostMapping(&quot;/leaves&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Long&gt;&gt; createLeave(
+      @AuthenticationPrincipal CustomUser user, @RequestBody CreateLeaveRequest request) {
+<span class="nc" id="L27">    Long id = leaveCommandService.createLeave(user.getShopId(), request);</span>
+<span class="nc" id="L28">    return ResponseEntity.ok(ApiResponse.success(id));</span>
+  }
+
+  @Operation(summary = &quot;단기 휴무 수정&quot;, description = &quot;기존 단기 휴무 일정을 수정합니다.&quot;)
+  @PutMapping(&quot;/leaves/{leaveId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updateLeave(
+      @AuthenticationPrincipal CustomUser user,
+      @PathVariable Long leaveId,
+      @RequestBody UpdateLeaveRequest request) {
+<span class="nc" id="L37">    leaveCommandService.updateLeave(user.getShopId(), leaveId, request);</span>
+<span class="nc" id="L38">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;정기 휴무 등록&quot;, description = &quot;직원의 정기 휴무 일정을 등록합니다.&quot;)
+  @PostMapping(&quot;/regular-leaves&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Long&gt;&gt; createRegularLeave(
+      @AuthenticationPrincipal CustomUser user, @RequestBody CreateRegularLeaveRequest request) {
+<span class="nc" id="L45">    Long id = leaveCommandService.createRegularLeave(user.getShopId(), request);</span>
+<span class="nc" id="L46">    return ResponseEntity.ok(ApiResponse.success(id));</span>
+  }
+
+  @Operation(summary = &quot;정기 휴무 수정&quot;, description = &quot;기존 정기 휴무 일정을 수정합니다.&quot;)
+  @PutMapping(&quot;/regular-leaves/{regularLeaveId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updateRegularLeave(
+      @AuthenticationPrincipal CustomUser user,
+      @PathVariable Long regularLeaveId,
+      @RequestBody UpdateRegularLeaveRequest request) {
+<span class="nc" id="L55">    leaveCommandService.updateRegularLeave(user.getShopId(), regularLeaveId, request);</span>
+<span class="nc" id="L56">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;휴무 삭제 (다건)&quot;, description = &quot;단기 및 정기 휴무를 함께 삭제합니다.&quot;)
+  @DeleteMapping(&quot;/leaves&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; deleteSchedules(
+      @AuthenticationPrincipal CustomUser user, @RequestBody List&lt;DeleteScheduleRequest&gt; requests) {
+<span class="nc" id="L63">    leaveCommandService.deleteMixedLeaves(user.getShopId(), requests);</span>
+<span class="nc" id="L64">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;휴무 일정 타입 전환&quot;, description = &quot;정기 ↔ 단기 휴무로 일정 타입을 전환합니다.&quot;)
+  @PostMapping(&quot;/leaves/switch&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; switchSchedule(
+      @AuthenticationPrincipal CustomUser user, @RequestBody UpdateLeaveScheduleRequest request) {
+<span class="nc" id="L71">    leaveCommandService.switchSchedule(user.getShopId(), request);</span>
+<span class="nc" id="L72">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

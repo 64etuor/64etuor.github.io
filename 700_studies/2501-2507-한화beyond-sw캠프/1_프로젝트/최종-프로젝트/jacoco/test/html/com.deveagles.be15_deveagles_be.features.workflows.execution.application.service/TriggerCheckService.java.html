@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TriggerCheckService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.execution.application.service</a> &gt; <span class="el_source">TriggerCheckService.java</span></div><h1>TriggerCheckService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.execution.application.service;
+
+public interface TriggerCheckService {
+
+  void onCustomerVisit(CustomerVisitEvent event);
+
+  void onCustomerRegistration(CustomerRegistrationEvent event);
+
+  void onPaymentCompleted(PaymentCompletedEvent event);
+
+  class CustomerVisitEvent {
+    private final Long customerId;
+    private final Long shopId;
+    private final String treatmentId;
+    private final java.time.LocalDateTime visitTime;
+
+    public CustomerVisitEvent(
+<span class="nc" id="L18">        Long customerId, Long shopId, String treatmentId, java.time.LocalDateTime visitTime) {</span>
+<span class="nc" id="L19">      this.customerId = customerId;</span>
+<span class="nc" id="L20">      this.shopId = shopId;</span>
+<span class="nc" id="L21">      this.treatmentId = treatmentId;</span>
+<span class="nc" id="L22">      this.visitTime = visitTime;</span>
+<span class="nc" id="L23">    }</span>
+
+    public Long getCustomerId() {
+<span class="nc" id="L26">      return customerId;</span>
+    }
+
+    public Long getShopId() {
+<span class="nc" id="L30">      return shopId;</span>
+    }
+
+    public String getTreatmentId() {
+<span class="nc" id="L34">      return treatmentId;</span>
+    }
+
+    public java.time.LocalDateTime getVisitTime() {
+<span class="nc" id="L38">      return visitTime;</span>
+    }
+  }
+
+  class CustomerRegistrationEvent {
+    private final Long customerId;
+    private final Long shopId;
+    private final java.time.LocalDateTime registrationTime;
+
+    public CustomerRegistrationEvent(
+<span class="nc" id="L48">        Long customerId, Long shopId, java.time.LocalDateTime registrationTime) {</span>
+<span class="nc" id="L49">      this.customerId = customerId;</span>
+<span class="nc" id="L50">      this.shopId = shopId;</span>
+<span class="nc" id="L51">      this.registrationTime = registrationTime;</span>
+<span class="nc" id="L52">    }</span>
+
+    public Long getCustomerId() {
+<span class="nc" id="L55">      return customerId;</span>
+    }
+
+    public Long getShopId() {
+<span class="nc" id="L59">      return shopId;</span>
+    }
+
+    public java.time.LocalDateTime getRegistrationTime() {
+<span class="nc" id="L63">      return registrationTime;</span>
+    }
+  }
+
+  class PaymentCompletedEvent {
+    private final Long customerId;
+    private final Long shopId;
+    private final Long amount;
+    private final java.time.LocalDateTime paymentTime;
+
+    public PaymentCompletedEvent(
+<span class="nc" id="L74">        Long customerId, Long shopId, Long amount, java.time.LocalDateTime paymentTime) {</span>
+<span class="nc" id="L75">      this.customerId = customerId;</span>
+<span class="nc" id="L76">      this.shopId = shopId;</span>
+<span class="nc" id="L77">      this.amount = amount;</span>
+<span class="nc" id="L78">      this.paymentTime = paymentTime;</span>
+<span class="nc" id="L79">    }</span>
+
+    public Long getCustomerId() {
+<span class="nc" id="L82">      return customerId;</span>
+    }
+
+    public Long getShopId() {
+<span class="nc" id="L86">      return shopId;</span>
+    }
+
+    public Long getAmount() {
+<span class="nc" id="L90">      return amount;</span>
+    }
+
+    public java.time.LocalDateTime getPaymentTime() {
+<span class="nc" id="L94">      return paymentTime;</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

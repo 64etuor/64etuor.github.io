@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Customer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate</a> &gt; <span class="el_source">Customer.java</span></div><h1>Customer.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+@Entity
+@Table(name = &quot;customer&quot;)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class Customer {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;customer_id&quot;)
+  private Long id;
+
+  @Column(name = &quot;customer_grade_id&quot;, nullable = false)
+  private Long customerGradeId;
+
+  @Column(name = &quot;shop_id&quot;, nullable = false)
+  private Long shopId;
+
+  @Column(name = &quot;staff_id&quot;, nullable = false)
+  private Long staffId;
+
+  @Column(name = &quot;customer_name&quot;, nullable = false, length = 100)
+  private String customerName;
+
+  @Column(name = &quot;phone_number&quot;, nullable = false, length = 11)
+  private String phoneNumber;
+
+  @Column(name = &quot;memo&quot;, length = 255)
+  private String memo;
+
+  @Builder.Default
+  @ColumnDefault(&quot;0&quot;)
+  @Column(name = &quot;visit_count&quot;, nullable = false)
+  private Integer visitCount = 0;
+
+  @Builder.Default
+  @ColumnDefault(&quot;0&quot;)
+  @Column(name = &quot;total_revenue&quot;, nullable = false)
+  private Integer totalRevenue = 0;
+
+  @Builder.Default
+  @ColumnDefault(&quot;CURRENT_TIMESTAMP&quot;)
+  @Column(name = &quot;recent_visit_date&quot;, nullable = false)
+  private LocalDate recentVisitDate = LocalDate.now();
+
+  @Column(name = &quot;birthdate&quot;, nullable = false)
+  private LocalDate birthdate;
+
+  @Builder.Default
+  @ColumnDefault(&quot;0&quot;)
+  @Column(name = &quot;noshow_count&quot;, nullable = false)
+  private Integer noshowCount = 0;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = &quot;gender&quot;, length = 1)
+  private Gender gender;
+
+  @Builder.Default
+  @Column(name = &quot;marketing_consent&quot;, nullable = false)
+  private Boolean marketingConsent = false;
+
+  @Column(name = &quot;marketing_consented_at&quot;)
+  private LocalDateTime marketingConsentedAt;
+
+  @Builder.Default
+  @Column(name = &quot;notification_consent&quot;, nullable = false)
+  private Boolean notificationConsent = false;
+
+  @Column(name = &quot;last_message_sent_at&quot;)
+  private LocalDateTime lastMessageSentAt;
+
+  @Column(name = &quot;channel_id&quot;)
+  private Long channelId;
+
+  @Column(name = &quot;created_at&quot;, nullable = false, updatable = false)
+  @CreationTimestamp
+  private LocalDateTime createdAt;
+
+  @Column(name = &quot;modified_at&quot;, nullable = false)
+  @UpdateTimestamp
+  private LocalDateTime modifiedAt;
+
+  @Column(name = &quot;deleted_at&quot;)
+  private LocalDateTime deletedAt;
+
+  // Business methods
+  public void updateCustomerInfo(
+      String customerName, String phoneNumber, String memo, Gender gender, Long channelId) {
+<span class="fc" id="L111">    this.customerName = customerName;</span>
+<span class="fc" id="L112">    this.phoneNumber = phoneNumber;</span>
+<span class="fc" id="L113">    this.memo = memo;</span>
+<span class="fc" id="L114">    this.gender = gender;</span>
+<span class="fc" id="L115">    this.channelId = channelId;</span>
+<span class="fc" id="L116">  }</span>
+
+  public void updateStaff(Long staffId) {
+<span class="fc" id="L119">    this.staffId = staffId;</span>
+<span class="fc" id="L120">  }</span>
+
+  public void updateGrade(Long customerGradeId) {
+<span class="fc" id="L123">    this.customerGradeId = customerGradeId;</span>
+<span class="fc" id="L124">  }</span>
+
+  public void updateBirthdate(LocalDate birthdate) {
+<span class="fc" id="L127">    this.birthdate = birthdate;</span>
+<span class="fc" id="L128">  }</span>
+
+  public void updateMarketingConsent(Boolean consent) {
+<span class="fc" id="L131">    this.marketingConsent = consent;</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">    if (consent) {</span>
+<span class="fc" id="L133">      this.marketingConsentedAt = LocalDateTime.now();</span>
+    }
+<span class="fc" id="L135">  }</span>
+
+  public void updateNotificationConsent(Boolean consent) {
+<span class="fc" id="L138">    this.notificationConsent = consent;</span>
+<span class="fc" id="L139">  }</span>
+
+  public void addVisit(Integer revenue) {
+<span class="fc" id="L142">    this.visitCount++;</span>
+<span class="fc" id="L143">    this.totalRevenue += revenue;</span>
+<span class="fc" id="L144">    this.recentVisitDate = LocalDate.now();</span>
+<span class="fc" id="L145">  }</span>
+
+  public void addNoshow() {
+<span class="fc" id="L148">    this.noshowCount++;</span>
+<span class="fc" id="L149">  }</span>
+
+  public void updateLastMessageSentAt() {
+<span class="nc" id="L152">    this.lastMessageSentAt = LocalDateTime.now();</span>
+<span class="nc" id="L153">  }</span>
+
+  public void softDelete() {
+<span class="fc" id="L156">    this.deletedAt = LocalDateTime.now();</span>
+<span class="fc" id="L157">  }</span>
+
+  public boolean isDeleted() {
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">    return this.deletedAt != null;</span>
+  }
+
+<span class="fc" id="L163">  public enum Gender {</span>
+<span class="fc" id="L164">    M,</span>
+<span class="fc" id="L165">    F</span>
+  }
+
+  public void incrementVisitCount() {
+<span class="nc" id="L169">    this.visitCount += 1;</span>
+<span class="nc" id="L170">  }</span>
+
+  public void addRevenue(int amount) {
+<span class="nc" id="L173">    this.totalRevenue += amount;</span>
+<span class="nc" id="L174">  }</span>
+
+  public void updateRecentVisitDate(LocalDate visitDate) {
+<span class="nc" id="L177">    this.recentVisitDate = visitDate;</span>
+<span class="nc" id="L178">    this.modifiedAt = LocalDateTime.now();</span>
+<span class="nc" id="L179">  }</span>
+
+  public void subtractRevenue(int amount) {
+<span class="nc" id="L182">    this.totalRevenue -= amount;</span>
+<span class="nc" id="L183">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

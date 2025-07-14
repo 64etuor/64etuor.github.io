@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerPrepaidPassCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.membership.command.application.service.impl</a> &gt; <span class="el_source">CustomerPrepaidPassCommandServiceImpl.java</span></div><h1>CustomerPrepaidPassCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.membership.command.application.service.impl;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.membership.command.application.dto.request.CustomerPrepaidPassRegistRequest;
+import com.deveagles.be15_deveagles_be.features.membership.command.application.dto.request.CustomerPrepaidPassUpdateRequest;
+import com.deveagles.be15_deveagles_be.features.membership.command.application.service.CustomerPrepaidPassCommandService;
+import com.deveagles.be15_deveagles_be.features.membership.command.domain.aggregate.CustomerPrepaidPass;
+import com.deveagles.be15_deveagles_be.features.membership.command.domain.repository.CustomerPrepaidPassRepository;
+import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class CustomerPrepaidPassCommandServiceImpl implements CustomerPrepaidPassCommandService {
+
+  private final CustomerPrepaidPassRepository customerPrepaidPassRepository;
+
+  @Override
+  public void registCustomerPrepaidPass(CustomerPrepaidPassRegistRequest request) {
+
+    CustomerPrepaidPass customerPrepaidPass =
+<span class="fc" id="L24">        CustomerPrepaidPass.builder()</span>
+<span class="fc" id="L25">            .customerId(request.getCustomerId())</span>
+<span class="fc" id="L26">            .prepaidPassId(request.getPrepaidPassId())</span>
+<span class="fc" id="L27">            .remainingAmount(request.getRemainingAmount())</span>
+<span class="fc" id="L28">            .expirationDate(request.getExpirationDate())</span>
+<span class="fc" id="L29">            .build();</span>
+
+<span class="fc" id="L31">    customerPrepaidPassRepository.save(customerPrepaidPass);</span>
+<span class="fc" id="L32">  }</span>
+
+  @Override
+  public void updateCustomerPrepaidPass(CustomerPrepaidPassUpdateRequest request) {
+<span class="fc" id="L36">    CustomerPrepaidPass pass =</span>
+        customerPrepaidPassRepository
+<span class="fc" id="L38">            .findById(request.getCustomerPrepaidPassId())</span>
+<span class="fc" id="L39">            .orElseThrow(() -&gt; new BusinessException(ErrorCode.CUSTOMERPREPAIDPASS_NOT_FOUND));</span>
+
+    // 3. 값 유효성 체크 및 필드 수정
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">    if (request.getRemainingAmount() != null) {</span>
+<span class="fc" id="L43">      pass.setRemainingAmount(request.getRemainingAmount());</span>
+    }
+
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">    if (request.getExpirationDate() != null) {</span>
+<span class="fc" id="L47">      pass.setExpirationDate(request.getExpirationDate());</span>
+    }
+
+    // 4. 수정 시간 갱신
+<span class="fc" id="L51">    pass.setModifiedAt(LocalDateTime.now());</span>
+
+    // 5. 저장
+<span class="fc" id="L54">    customerPrepaidPassRepository.save(pass);</span>
+<span class="fc" id="L55">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

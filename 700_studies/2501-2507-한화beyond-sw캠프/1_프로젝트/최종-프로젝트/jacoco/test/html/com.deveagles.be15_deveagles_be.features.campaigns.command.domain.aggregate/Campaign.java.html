@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Campaign.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.campaigns.command.domain.aggregate</a> &gt; <span class="el_source">Campaign.java</span></div><h1>Campaign.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.campaigns.command.domain.aggregate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+@Entity
+@Table(name = &quot;campaign&quot;)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+public class Campaign {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = &quot;campaign_id&quot;)
+  private Long id;
+
+  @Column(name = &quot;campaign_title&quot;, nullable = false, length = 50)
+  private String campaignTitle;
+
+  @Column(name = &quot;description&quot;, nullable = false, length = 255)
+  private String description;
+
+  @Column(name = &quot;start_date&quot;, nullable = false)
+  private LocalDate startDate;
+
+  @Column(name = &quot;end_date&quot;, nullable = false)
+  private LocalDate endDate;
+
+  @Column(name = &quot;message_send_at&quot;, nullable = false)
+  private LocalDateTime messageSendAt;
+
+  @CreationTimestamp
+  @Column(name = &quot;created_at&quot;, nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
+  @Column(name = &quot;deleted_at&quot;)
+  private LocalDateTime deletedAt;
+
+  @Column(name = &quot;staff_id&quot;, nullable = false)
+  private Long staffId;
+
+  @Column(name = &quot;template_id&quot;, nullable = false)
+  private Long templateId;
+
+  @Column(name = &quot;coupon_id&quot;, nullable = false)
+  private Long couponId;
+
+  @Column(name = &quot;customer_grade_id&quot;, nullable = false)
+  private Long customerGradeId;
+
+  @Column(name = &quot;tag_id&quot;, nullable = false)
+  private Long tagId;
+
+  @Column(name = &quot;shop_id&quot;, nullable = false)
+  private Long shopId;
+
+  // Business methods
+  public void softDelete() {
+<span class="fc" id="L73">    this.deletedAt = LocalDateTime.now();</span>
+<span class="fc" id="L74">  }</span>
+
+  public boolean isDeleted() {
+<span class="fc bfc" id="L77" title="All 2 branches covered.">    return this.deletedAt != null;</span>
+  }
+
+  public boolean isActive() {
+<span class="fc" id="L81">    LocalDate now = LocalDate.now();</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">    return !isDeleted()</span>
+<span class="pc bpc" id="L83" title="3 of 4 branches missed.">        &amp;&amp; (startDate.isBefore(now) || startDate.isEqual(now))</span>
+<span class="pc bpc" id="L84" title="3 of 4 branches missed.">        &amp;&amp; (endDate.isAfter(now) || endDate.isEqual(now));</span>
+  }
+
+  public boolean canBeSent() {
+<span class="nc bnc" id="L88" title="All 6 branches missed.">    return isActive() &amp;&amp; messageSendAt != null &amp;&amp; messageSendAt.isBefore(LocalDateTime.now());</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

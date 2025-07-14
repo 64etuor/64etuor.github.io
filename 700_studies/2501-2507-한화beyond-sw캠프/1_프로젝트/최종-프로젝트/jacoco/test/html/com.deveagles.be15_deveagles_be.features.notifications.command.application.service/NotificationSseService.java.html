@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NotificationSseService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.notifications.command.application.service</a> &gt; <span class="el_source">NotificationSseService.java</span></div><h1>NotificationSseService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.notifications.command.application.service;
+
+import com.deveagles.be15_deveagles_be.features.notifications.query.application.dto.NotificationResponse;
+import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+<span class="fc" id="L11">@Slf4j</span>
+@Service
+<span class="fc" id="L13">public class NotificationSseService {</span>
+
+  // SSE 타임아웃 시간 (1시간)
+<span class="fc" id="L16">  private static final Long SSE_TIMEOUT = 1000L * 60 * 60;</span>
+  // 동시성 문제를 해결하기 위해 ConcurrentHashMap 사용
+<span class="fc" id="L18">  private final Map&lt;Long, SseEmitter&gt; emitters = new ConcurrentHashMap&lt;&gt;();</span>
+
+  /**
+   * 사용자가 구독을 시작하면, SseEmitter를 생성하고 저장합니다.
+   *
+   * @param shopId 구독하는 사용자의 매장 ID
+   * @return 생성된 SseEmitter 객체
+   */
+  public SseEmitter subscribe(Long shopId) {
+<span class="fc" id="L27">    SseEmitter emitter = new SseEmitter(SSE_TIMEOUT);</span>
+<span class="fc" id="L28">    emitters.put(shopId, emitter);</span>
+
+    // 연결이 종료되거나 타임아웃되면 emitters 맵에서 제거
+<span class="pc" id="L31">    emitter.onCompletion(() -&gt; emitters.remove(shopId));</span>
+<span class="pc" id="L32">    emitter.onTimeout(() -&gt; emitters.remove(shopId));</span>
+<span class="fc" id="L33">    emitter.onError(</span>
+        e -&gt; {
+<span class="nc" id="L35">          log.error(&quot;SSE Emitter error for shopId: {}&quot;, shopId, e);</span>
+<span class="nc" id="L36">          emitters.remove(shopId);</span>
+<span class="nc" id="L37">        });</span>
+
+    // 연결 직후, 더미 데이터를 보내 연결이 수립되었음을 클라이언트에게 알림
+<span class="fc" id="L40">    sendToClient(emitter, &quot;connect&quot;, &quot;SSE 연결이 성공적으로 완료되었습니다. (shopId: &quot; + shopId + &quot;)&quot;);</span>
+
+<span class="fc" id="L42">    return emitter;</span>
+  }
+
+  /**
+   * 특정 매장(사용자)에게 알림을 보냅니다.
+   *
+   * @param shopId 알림을 받을 매장의 ID
+   * @param notification 저장된 알림 객체
+   */
+  public void send(Long shopId, NotificationResponse notification) {
+<span class="fc bfc" id="L52" title="All 2 branches covered.">    if (emitters.containsKey(shopId)) {</span>
+<span class="fc" id="L53">      SseEmitter emitter = emitters.get(shopId);</span>
+<span class="fc" id="L54">      sendToClient(emitter, &quot;notification&quot;, notification);</span>
+    }
+<span class="fc" id="L56">  }</span>
+
+  /** 클라이언트에게 실제 데이터를 전송하는 헬퍼 메서드 */
+  private void sendToClient(SseEmitter emitter, String eventName, Object data) {
+    try {
+<span class="fc" id="L61">      emitter.send(</span>
+<span class="fc" id="L62">          SseEmitter.event()</span>
+<span class="fc" id="L63">              .id(String.valueOf(System.currentTimeMillis())) // 이벤트 ID</span>
+<span class="fc" id="L64">              .name(eventName) // 클라이언트가 수신할 이벤트 이름</span>
+<span class="fc" id="L65">              .data(data)); // 실제 전송할 데이터 (JSON으로 변환됨)</span>
+<span class="nc" id="L66">    } catch (IOException e) {</span>
+<span class="nc" id="L67">      log.error(&quot;SSE 데이터 전송 중 오류 발생: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L68">      emitter.complete(); // 오류 발생 시 연결 종료</span>
+<span class="fc" id="L69">    }</span>
+<span class="fc" id="L70">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

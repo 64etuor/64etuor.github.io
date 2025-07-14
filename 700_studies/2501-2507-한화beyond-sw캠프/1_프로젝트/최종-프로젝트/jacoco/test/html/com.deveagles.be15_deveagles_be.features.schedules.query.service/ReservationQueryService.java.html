@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.query.service</a> &gt; <span class="el_source">ReservationQueryService.java</span></div><h1>ReservationQueryService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.query.service;
+
+import com.deveagles.be15_deveagles_be.common.dto.PagedResult;
+import com.deveagles.be15_deveagles_be.common.dto.Pagination;
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.request.BookedTimeRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.request.ReservationSearchRequest;
+import com.deveagles.be15_deveagles_be.features.schedules.query.dto.response.*;
+import com.deveagles.be15_deveagles_be.features.schedules.query.mapper.ReservationQueryMapper;
+import com.deveagles.be15_deveagles_be.features.schedules.query.mapper.ReservationSearchMapper;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class ReservationQueryService {
+
+  private final ReservationQueryMapper reservationQueryMapper;
+  private final ReservationSearchMapper reservationSearchMapper;
+
+  public BookedTimeResponse getBookedTimes(BookedTimeRequest req) {
+<span class="fc" id="L24">    List&lt;BookedTimeDto&gt; results = reservationQueryMapper.findBookedTimes(req);</span>
+<span class="fc" id="L25">    return new BookedTimeResponse(results);</span>
+  }
+
+  public PagedResult&lt;ReservationListResponse&gt; findReservationRequests(
+      Long shopId, int page, int size) {
+<span class="nc" id="L30">    int offset = page * size;</span>
+<span class="nc" id="L31">    List&lt;ReservationListResponse&gt; content =</span>
+<span class="nc" id="L32">        reservationQueryMapper.findReservationRequests(shopId, size, offset);</span>
+<span class="nc" id="L33">    long totalCount = reservationQueryMapper.countReservationRequests(shopId);</span>
+
+    Pagination pagination =
+<span class="nc" id="L36">        Pagination.builder()</span>
+<span class="nc" id="L37">            .currentPage(page)</span>
+<span class="nc" id="L38">            .totalPages((int) Math.ceil((double) totalCount / size))</span>
+<span class="nc" id="L39">            .totalItems(totalCount)</span>
+<span class="nc" id="L40">            .build();</span>
+
+<span class="nc" id="L42">    return new PagedResult&lt;&gt;(content, pagination);</span>
+  }
+
+  public PagedResult&lt;ReservationSearchResponse&gt; searchReservations(
+      Long shopId, ReservationSearchRequest request, int page, int size) {
+
+<span class="fc" id="L48">    int offset = page * size;</span>
+
+    ReservationSearchRequest newRequest =
+<span class="fc" id="L51">        ReservationSearchRequest.builder()</span>
+<span class="fc" id="L52">            .shopId(shopId)</span>
+<span class="fc" id="L53">            .staffId(request.staffId())</span>
+<span class="fc" id="L54">            .reservationStatusName(request.reservationStatusName())</span>
+<span class="fc" id="L55">            .customerKeyword(request.customerKeyword())</span>
+<span class="fc" id="L56">            .from(request.from())</span>
+<span class="fc" id="L57">            .to(request.to())</span>
+<span class="fc" id="L58">            .build();</span>
+
+<span class="fc" id="L60">    List&lt;ReservationSearchResponse&gt; content =</span>
+<span class="fc" id="L61">        reservationSearchMapper.findReservations(newRequest, offset, size);</span>
+
+<span class="fc" id="L63">    int totalCount = reservationSearchMapper.countReservations(newRequest);</span>
+
+<span class="fc" id="L65">    return new PagedResult&lt;&gt;(</span>
+<span class="fc" id="L66">        content, new Pagination(page, (int) Math.ceil((double) totalCount / size), totalCount));</span>
+  }
+
+  public ReservationDetailResponse getReservationDetail(Long reservationId, Long shopId) {
+<span class="fc" id="L70">    ReservationDetailResponse response =</span>
+<span class="fc" id="L71">        reservationQueryMapper.findReservationDetailById(reservationId, shopId);</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">    if (response == null) {</span>
+<span class="fc" id="L73">      throw new BusinessException(ErrorCode.RESERVATION_NOT_FOUND);</span>
+    }
+<span class="fc" id="L75">    return response;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

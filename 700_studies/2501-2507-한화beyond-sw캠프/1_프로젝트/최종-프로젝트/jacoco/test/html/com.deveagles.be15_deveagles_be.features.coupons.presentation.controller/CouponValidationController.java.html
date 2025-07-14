@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CouponValidationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.coupons.presentation.controller</a> &gt; <span class="el_source">CouponValidationController.java</span></div><h1>CouponValidationController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.coupons.presentation.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.coupons.application.validation.CouponApplicationService;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.request.CouponApplicationRequest;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.response.CouponApplicationResponse;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.response.CouponValidationResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = &quot;쿠폰 검증/적용&quot;, description = &quot;쿠폰 유효성 검증 및 할인 적용 API&quot;)
+@RestController
+@RequestMapping(&quot;/coupons/validation&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L24">@Slf4j</span>
+public class CouponValidationController {
+
+  private final CouponApplicationService couponApplicationService;
+
+  @Operation(summary = &quot;쿠폰 유효성 검증&quot;, description = &quot;매출 등록 전 쿠폰의 유효성을 검증합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;쿠폰 검증 완료 (성공/실패 여부는 응답 데이터 확인)&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 요청 데이터&quot;)
+  })
+  @PostMapping(&quot;/validate&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CouponValidationResponse&gt;&gt; validateCoupon(
+      @Parameter(description = &quot;쿠폰 검증 요청 정보&quot;, required = true) @Valid @RequestBody
+          CouponApplicationRequest request) {
+<span class="nc" id="L42">    log.info(&quot;쿠폰 검증 요청 - 코드: {}, 매장ID: {}&quot;, request.getCouponCode(), request.getShopId());</span>
+
+<span class="nc" id="L44">    CouponValidationResponse result = couponApplicationService.validateCoupon(request);</span>
+<span class="nc" id="L45">    return ResponseEntity.ok(ApiResponse.success(result));</span>
+  }
+
+  @Operation(summary = &quot;쿠폰 적용 시뮬레이션&quot;, description = &quot;실제 적용하지 않고 쿠폰 적용 시 할인 금액을 계산합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;쿠폰 적용 시뮬레이션 완료&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;400&quot;,
+        description = &quot;잘못된 요청 데이터&quot;)
+  })
+  @PostMapping(&quot;/apply-simulation&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;CouponApplicationResponse&gt;&gt; applyCouponSimulation(
+      @Parameter(description = &quot;쿠폰 적용 요청 정보&quot;, required = true) @Valid @RequestBody
+          CouponApplicationRequest request) {
+<span class="nc" id="L61">    log.info(</span>
+<span class="nc" id="L62">        &quot;쿠폰 적용 시뮬레이션 요청 - 코드: {}, 원금액: {}&quot;, request.getCouponCode(), request.getOriginalAmount());</span>
+
+<span class="nc" id="L64">    CouponApplicationResponse result = couponApplicationService.applyCoupon(request);</span>
+<span class="nc" id="L65">    return ResponseEntity.ok(ApiResponse.success(result));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

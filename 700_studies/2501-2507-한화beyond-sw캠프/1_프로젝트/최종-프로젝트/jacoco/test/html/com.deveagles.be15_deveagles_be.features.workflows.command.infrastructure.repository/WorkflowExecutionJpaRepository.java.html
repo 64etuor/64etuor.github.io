@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorkflowExecutionJpaRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.command.infrastructure.repository</a> &gt; <span class="el_source">WorkflowExecutionJpaRepository.java</span></div><h1>WorkflowExecutionJpaRepository.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.command.infrastructure.repository;
+
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.aggregate.WorkflowExecution;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.repository.WorkflowExecutionRepository;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@RequiredArgsConstructor
+public class WorkflowExecutionJpaRepository implements WorkflowExecutionRepository {
+
+  private final WorkflowExecutionJpaDataRepository dataRepository;
+
+  @Override
+  public WorkflowExecution save(WorkflowExecution execution) {
+<span class="nc" id="L19">    return dataRepository.save(execution);</span>
+  }
+
+  @Override
+  public Optional&lt;WorkflowExecution&gt; findById(Long id) {
+<span class="nc" id="L24">    return dataRepository.findById(id);</span>
+  }
+
+  @Override
+  public List&lt;WorkflowExecution&gt; findByWorkflowId(Long workflowId) {
+<span class="nc" id="L29">    return dataRepository.findByWorkflowId(workflowId);</span>
+  }
+
+  @Override
+  public List&lt;WorkflowExecution&gt; findByWorkflowIdAndShopId(Long workflowId, Long shopId) {
+<span class="nc" id="L34">    return dataRepository.findByWorkflowIdAndShopId(workflowId, shopId);</span>
+  }
+
+  @Override
+  public List&lt;WorkflowExecution&gt; findByShopId(Long shopId) {
+<span class="nc" id="L39">    return dataRepository.findByShopId(shopId);</span>
+  }
+
+  @Override
+  public List&lt;WorkflowExecution&gt; findByExecutionStatus(String status) {
+<span class="nc" id="L44">    return dataRepository.findByExecutionStatus(status);</span>
+  }
+
+  @Override
+  public List&lt;WorkflowExecution&gt; findRunningExecutions() {
+<span class="nc" id="L49">    return dataRepository.findByExecutionStatus(&quot;RUNNING&quot;);</span>
+  }
+
+  @Override
+  public List&lt;WorkflowExecution&gt; findExecutionsBetween(
+      LocalDateTime startTime, LocalDateTime endTime) {
+<span class="nc" id="L55">    return dataRepository.findByCreatedAtBetween(startTime, endTime);</span>
+  }
+
+  @Override
+  public List&lt;WorkflowExecution&gt; findRecentExecutionsByWorkflowId(Long workflowId, int limit) {
+<span class="nc" id="L60">    return dataRepository.findTop10ByWorkflowIdOrderByCreatedAtDesc(workflowId);</span>
+  }
+
+  @Override
+  public Optional&lt;WorkflowExecution&gt; findLatestByWorkflowId(Long workflowId) {
+<span class="nc" id="L65">    return dataRepository.findFirstByWorkflowIdOrderByCreatedAtDesc(workflowId);</span>
+  }
+
+  @Override
+  public long countByWorkflowId(Long workflowId) {
+<span class="nc" id="L70">    return dataRepository.countByWorkflowId(workflowId);</span>
+  }
+
+  @Override
+  public long countSuccessfulByWorkflowId(Long workflowId) {
+<span class="nc" id="L75">    return dataRepository.countByWorkflowIdAndExecutionStatus(workflowId, &quot;SUCCESS&quot;);</span>
+  }
+
+  @Override
+  public long countFailedByWorkflowId(Long workflowId) {
+<span class="nc" id="L80">    return dataRepository.countByWorkflowIdAndExecutionStatus(workflowId, &quot;FAILED&quot;);</span>
+  }
+
+  @Override
+  public long countByShopIdAndCreatedAtBetween(
+      Long shopId, LocalDateTime start, LocalDateTime end) {
+<span class="nc" id="L86">    return dataRepository.countByShopIdAndCreatedAtBetween(shopId, start, end);</span>
+  }
+
+  @Override
+  public void delete(WorkflowExecution execution) {
+<span class="nc" id="L91">    dataRepository.delete(execution);</span>
+<span class="nc" id="L92">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

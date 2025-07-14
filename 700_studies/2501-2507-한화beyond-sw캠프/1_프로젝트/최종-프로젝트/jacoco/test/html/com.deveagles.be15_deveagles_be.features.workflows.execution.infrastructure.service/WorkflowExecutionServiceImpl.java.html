@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorkflowExecutionServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.workflows.execution.infrastructure.service</a> &gt; <span class="el_source">WorkflowExecutionServiceImpl.java</span></div><h1>WorkflowExecutionServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.workflows.execution.infrastructure.service;
+
+import com.deveagles.be15_deveagles_be.features.customers.query.dto.request.CustomerSearchQuery;
+import com.deveagles.be15_deveagles_be.features.customers.query.service.CustomerQueryService;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.aggregate.Workflow;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.aggregate.WorkflowExecution;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.repository.WorkflowExecutionRepository;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.repository.WorkflowRepository;
+import com.deveagles.be15_deveagles_be.features.workflows.command.domain.vo.ExecutionStatus;
+import com.deveagles.be15_deveagles_be.features.workflows.execution.application.service.ActionExecutorService;
+import com.deveagles.be15_deveagles_be.features.workflows.execution.application.service.WorkflowExecutionService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+<span class="nc" id="L26">@Slf4j</span>
+@Transactional
+public class WorkflowExecutionServiceImpl implements WorkflowExecutionService {
+
+  private final WorkflowRepository workflowRepository;
+  private final WorkflowExecutionRepository workflowExecutionRepository;
+  private final CustomerQueryService customerQueryService;
+  private final ActionExecutorService actionExecutorService;
+  private final ObjectMapper objectMapper;
+
+  @Override
+  public void executeWorkflow(Workflow workflow) {
+<span class="nc" id="L38">    log.info(&quot;워크플로우 실행 시작: ID={}, 제목={}&quot;, workflow.getId(), workflow.getTitle());</span>
+
+<span class="nc bnc" id="L40" title="All 2 branches missed.">    if (!workflow.canExecute()) {</span>
+<span class="nc" id="L41">      log.warn(</span>
+          &quot;워크플로우 실행 불가능: ID={}, 활성상태={}, 삭제상태={}&quot;,
+<span class="nc" id="L43">          workflow.getId(),</span>
+<span class="nc" id="L44">          workflow.getIsActive(),</span>
+<span class="nc" id="L45">          workflow.isDeleted());</span>
+<span class="nc" id="L46">      return;</span>
+    }
+
+<span class="nc" id="L49">    WorkflowExecution execution = createExecution(workflow);</span>
+
+    try {
+<span class="nc" id="L52">      execution.start();</span>
+<span class="nc" id="L53">      workflowExecutionRepository.save(execution);</span>
+
+<span class="nc" id="L55">      List&lt;Long&gt; targetCustomerIds = filterTargetCustomerIds(workflow);</span>
+
+<span class="nc bnc" id="L57" title="All 2 branches missed.">      if (targetCustomerIds.isEmpty()) {</span>
+<span class="nc" id="L58">        log.info(&quot;대상 고객이 없어 워크플로우 실행을 건너뜁니다: ID={}&quot;, workflow.getId());</span>
+<span class="nc" id="L59">        execution.complete();</span>
+<span class="nc" id="L60">        execution.updateCounts(0, 0);</span>
+<span class="nc" id="L61">        workflowExecutionRepository.save(execution);</span>
+<span class="nc" id="L62">        return;</span>
+      }
+
+<span class="nc" id="L65">      log.info(&quot;대상 고객 {}명에 대해 워크플로우 실행: ID={}&quot;, targetCustomerIds.size(), workflow.getId());</span>
+<span class="nc" id="L66">      execution.setTargetCount(targetCustomerIds.size());</span>
+
+<span class="nc" id="L68">      ActionExecutionResult result =</span>
+<span class="nc" id="L69">          actionExecutorService.executeAction(workflow, targetCustomerIds, execution);</span>
+
+<span class="nc" id="L71">      execution.updateCounts(result.getSuccessCount(), result.getFailureCount());</span>
+<span class="nc" id="L72">      execution.complete();</span>
+
+<span class="nc bnc" id="L74" title="All 2 branches missed.">      workflow.recordExecution(result.getSuccessCount() &gt; 0);</span>
+
+<span class="nc" id="L76">      scheduleNextExecution(workflow);</span>
+
+<span class="nc" id="L78">      workflowRepository.save(workflow);</span>
+<span class="nc" id="L79">      workflowExecutionRepository.save(execution);</span>
+
+<span class="nc" id="L81">      log.info(</span>
+          &quot;워크플로우 실행 완료: ID={}, 성공={}, 실패={}&quot;,
+<span class="nc" id="L83">          workflow.getId(),</span>
+<span class="nc" id="L84">          result.getSuccessCount(),</span>
+<span class="nc" id="L85">          result.getFailureCount());</span>
+
+<span class="nc" id="L87">    } catch (Exception e) {</span>
+<span class="nc" id="L88">      log.error(&quot;워크플로우 실행 중 오류 발생: ID={}, 오류={}&quot;, workflow.getId(), e.getMessage(), e);</span>
+<span class="nc" id="L89">      execution.fail(e.getMessage());</span>
+<span class="nc" id="L90">      workflow.recordExecution(false);</span>
+
+<span class="nc" id="L92">      workflowRepository.save(workflow);</span>
+<span class="nc" id="L93">      workflowExecutionRepository.save(execution);</span>
+<span class="nc" id="L94">    }</span>
+<span class="nc" id="L95">  }</span>
+
+  @Override
+  public void executeTriggeredWorkflow(Workflow workflow, Long customerId) {
+<span class="nc" id="L99">    log.info(&quot;트리거된 워크플로우 실행: ID={}, 고객ID={}&quot;, workflow.getId(), customerId);</span>
+
+<span class="nc bnc" id="L101" title="All 2 branches missed.">    if (!workflow.canExecute()) {</span>
+<span class="nc" id="L102">      log.warn(&quot;워크플로우 실행 불가능: ID={}&quot;, workflow.getId());</span>
+<span class="nc" id="L103">      return;</span>
+    }
+
+<span class="nc" id="L106">    WorkflowExecution execution = createExecution(workflow);</span>
+
+    try {
+<span class="nc" id="L109">      execution.start();</span>
+<span class="nc" id="L110">      workflowExecutionRepository.save(execution);</span>
+
+<span class="nc" id="L112">      ActionExecutionResult result =</span>
+<span class="nc" id="L113">          actionExecutorService.executeAction(workflow, List.of(customerId), execution);</span>
+
+<span class="nc" id="L115">      execution.updateCounts(result.getSuccessCount(), result.getFailureCount());</span>
+<span class="nc" id="L116">      execution.complete();</span>
+<span class="nc" id="L117">      execution.setTargetCount(1);</span>
+
+<span class="nc bnc" id="L119" title="All 2 branches missed.">      workflow.recordExecution(result.getSuccessCount() &gt; 0);</span>
+
+<span class="nc" id="L121">      workflowRepository.save(workflow);</span>
+<span class="nc" id="L122">      workflowExecutionRepository.save(execution);</span>
+
+<span class="nc" id="L124">      log.info(&quot;트리거된 워크플로우 실행 완료: ID={}, 성공={}&quot;, workflow.getId(), result.getSuccessCount());</span>
+
+<span class="nc" id="L126">    } catch (Exception e) {</span>
+<span class="nc" id="L127">      log.error(&quot;트리거된 워크플로우 실행 중 오류: ID={}, 오류={}&quot;, workflow.getId(), e.getMessage(), e);</span>
+<span class="nc" id="L128">      execution.fail(e.getMessage());</span>
+<span class="nc" id="L129">      workflow.recordExecution(false);</span>
+
+<span class="nc" id="L131">      workflowRepository.save(workflow);</span>
+<span class="nc" id="L132">      workflowExecutionRepository.save(execution);</span>
+<span class="nc" id="L133">    }</span>
+<span class="nc" id="L134">  }</span>
+
+  private WorkflowExecution createExecution(Workflow workflow) {
+<span class="nc" id="L137">    return WorkflowExecution.builder()</span>
+<span class="nc" id="L138">        .workflowId(workflow.getId())</span>
+<span class="nc" id="L139">        .shopId(workflow.getShopId())</span>
+<span class="nc" id="L140">        .executionStatus(ExecutionStatus.SCHEDULED.getCode())</span>
+<span class="nc" id="L141">        .triggerType(workflow.getTriggerType())</span>
+<span class="nc" id="L142">        .actionType(workflow.getActionType())</span>
+<span class="nc" id="L143">        .build();</span>
+  }
+
+  private void scheduleNextExecution(Workflow workflow) {
+<span class="nc bnc" id="L147" title="All 4 branches missed.">    switch (workflow.getTriggerType()) {</span>
+      case &quot;visit-cycle&quot;:
+<span class="nc" id="L149">        workflow.updateSchedule(LocalDateTime.now().plusDays(1));</span>
+<span class="nc" id="L150">        break;</span>
+      case &quot;birthday&quot;:
+<span class="nc" id="L152">        workflow.updateSchedule(LocalDateTime.now().plusDays(1));</span>
+<span class="nc" id="L153">        break;</span>
+      case &quot;churn-risk-high&quot;:
+<span class="nc" id="L155">        workflow.updateSchedule(LocalDateTime.now().plusWeeks(1));</span>
+<span class="nc" id="L156">        break;</span>
+      default:
+<span class="nc" id="L158">        workflow.updateSchedule(LocalDateTime.now().plusDays(1));</span>
+        break;
+    }
+<span class="nc" id="L161">  }</span>
+
+  private List&lt;Long&gt; filterTargetCustomerIds(Workflow workflow) {
+<span class="nc" id="L164">    CustomerSearchQuery query = buildSearchQuery(workflow);</span>
+<span class="nc" id="L165">    return customerQueryService.advancedSearch(query).getContent().stream()</span>
+<span class="nc" id="L166">        .map(result -&gt; result.customerId())</span>
+<span class="nc" id="L167">        .collect(Collectors.toList());</span>
+  }
+
+  private CustomerSearchQuery buildSearchQuery(Workflow workflow) {
+<span class="nc" id="L171">    List&lt;Long&gt; customerGradeIds = parseCustomerGrades(workflow.getTargetCustomerGrades());</span>
+<span class="nc" id="L172">    List&lt;String&gt; tagIds = parseTags(workflow.getTargetTags());</span>
+
+<span class="nc" id="L174">    return new CustomerSearchQuery(</span>
+<span class="nc" id="L175">        workflow.getShopId(),</span>
+        null, // 키워드 검색 없음
+        customerGradeIds,
+        tagIds,
+        null, // 성별 필터링 없음
+        null, // 마케팅 동의 필터링 없음
+        null, // 알림 동의 필터링 없음
+<span class="nc" id="L182">        workflow.getExcludeDormantCustomers(),</span>
+<span class="nc" id="L183">        workflow.getDormantPeriodMonths(),</span>
+<span class="nc" id="L184">        workflow.getExcludeRecentMessageReceivers(),</span>
+<span class="nc" id="L185">        workflow.getRecentMessagePeriodDays(),</span>
+<span class="nc" id="L186">        false, // 삭제된 고객 제외</span>
+        0, // 페이지
+        1000, // 최대 1000명
+        &quot;createdAt&quot;,
+        &quot;DESC&quot;);
+  }
+
+  private List&lt;Long&gt; parseCustomerGrades(String json) {
+    try {
+<span class="nc bnc" id="L195" title="All 4 branches missed.">      if (json == null || json.isBlank()) {</span>
+<span class="nc" id="L196">        return Collections.emptyList();</span>
+      }
+<span class="nc" id="L198">      return objectMapper.readValue(json, new TypeReference&lt;List&lt;Long&gt;&gt;() {});</span>
+<span class="nc" id="L199">    } catch (JsonProcessingException e) {</span>
+<span class="nc" id="L200">      log.error(&quot;고객 등급 JSON 파싱 실패&quot;, e);</span>
+<span class="nc" id="L201">      return Collections.emptyList();</span>
+    }
+  }
+
+  private List&lt;String&gt; parseTags(String json) {
+    try {
+<span class="nc bnc" id="L207" title="All 4 branches missed.">      if (json == null || json.isBlank()) {</span>
+<span class="nc" id="L208">        return Collections.emptyList();</span>
+      }
+<span class="nc" id="L210">      return objectMapper.readValue(json, new TypeReference&lt;List&lt;String&gt;&gt;() {});</span>
+<span class="nc" id="L211">    } catch (JsonProcessingException e) {</span>
+<span class="nc" id="L212">      log.error(&quot;태그 JSON 파싱 실패&quot;, e);</span>
+<span class="nc" id="L213">      return Collections.emptyList();</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

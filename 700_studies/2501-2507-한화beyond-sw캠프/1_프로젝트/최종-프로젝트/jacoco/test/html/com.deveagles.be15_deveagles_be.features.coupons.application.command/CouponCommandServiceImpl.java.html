@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CouponCommandServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.coupons.application.command</a> &gt; <span class="el_source">CouponCommandServiceImpl.java</span></div><h1>CouponCommandServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.coupons.application.command;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.coupons.common.CouponDto;
+import com.deveagles.be15_deveagles_be.features.coupons.domain.entity.Coupon;
+import com.deveagles.be15_deveagles_be.features.coupons.domain.service.CouponCodeGenerator;
+import com.deveagles.be15_deveagles_be.features.coupons.infrastructure.repository.CouponJpaRepository;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.request.DeleteCouponRequest;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+<span class="fc" id="L18">@Slf4j</span>
+public class CouponCommandServiceImpl implements CouponCommandService {
+
+  private final CouponJpaRepository couponJpaRepository;
+  private final CouponCodeGenerator couponCodeGenerator;
+
+  @Override
+  public CouponDto createCoupon(CreateCouponRequest command) {
+<span class="fc" id="L26">    log.info(&quot;쿠폰 생성 시작 - 쿠폰명: {}&quot;, command.getCouponTitle());</span>
+
+<span class="fc" id="L28">    String couponCode = generateUniqueCouponCode();</span>
+
+    Coupon coupon =
+<span class="fc" id="L31">        Coupon.builder()</span>
+<span class="fc" id="L32">            .couponCode(couponCode)</span>
+<span class="fc" id="L33">            .couponTitle(command.getCouponTitle())</span>
+<span class="fc" id="L34">            .shopId(command.getShopId())</span>
+<span class="fc" id="L35">            .staffId(command.getStaffId())</span>
+<span class="fc" id="L36">            .primaryItemId(command.getPrimaryItemId())</span>
+<span class="fc" id="L37">            .secondaryItemId(command.getSecondaryItemId())</span>
+<span class="fc" id="L38">            .discountRate(command.getDiscountRate())</span>
+<span class="fc" id="L39">            .expirationDate(command.getExpirationDate())</span>
+<span class="fc" id="L40">            .isActive(command.getIsActive())</span>
+<span class="fc" id="L41">            .build();</span>
+
+<span class="fc" id="L43">    Coupon savedCoupon = couponJpaRepository.save(coupon);</span>
+<span class="fc" id="L44">    log.info(&quot;쿠폰 생성 완료 - ID: {}, 쿠폰코드: {}&quot;, savedCoupon.getId(), savedCoupon.getCouponCode());</span>
+
+<span class="fc" id="L46">    return CouponDto.from(savedCoupon);</span>
+  }
+
+  private String generateUniqueCouponCode() {
+    String couponCode;
+<span class="fc" id="L51">    int attempts = 0;</span>
+<span class="fc" id="L52">    final int maxAttempts = 10;</span>
+
+    do {
+<span class="fc" id="L55">      couponCode = couponCodeGenerator.generateCouponCode();</span>
+<span class="fc" id="L56">      attempts++;</span>
+
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">      if (attempts &gt; maxAttempts) {</span>
+<span class="nc" id="L59">        log.error(&quot;쿠폰 코드 생성 실패 - 최대 시도 횟수 초과&quot;);</span>
+<span class="nc" id="L60">        throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR, &quot;쿠폰 코드 생성에 실패했습니다&quot;);</span>
+      }
+<span class="fc bfc" id="L62" title="All 2 branches covered.">    } while (couponJpaRepository.existsByCouponCodeAndNotDeleted(couponCode));</span>
+
+<span class="fc bfc" id="L64" title="All 2 branches covered.">    if (attempts &gt; 1) {</span>
+<span class="fc" id="L65">      log.info(&quot;쿠폰 코드 생성 - {}번 시도 후 성공: {}&quot;, attempts, couponCode);</span>
+    }
+
+<span class="fc" id="L68">    return couponCode;</span>
+  }
+
+  @Override
+  public void deleteCoupon(DeleteCouponRequest command) {
+<span class="fc" id="L73">    log.info(&quot;쿠폰 삭제 시작 - ID: {}, 매장ID: {}&quot;, command.getId(), command.getShopId());</span>
+
+<span class="fc" id="L75">    Coupon coupon =</span>
+        couponJpaRepository
+<span class="fc" id="L77">            .findByIdAndShopIdAndDeletedAtIsNull(command.getId(), command.getShopId())</span>
+<span class="fc" id="L78">            .orElseThrow(</span>
+                () -&gt; {
+<span class="fc" id="L80">                  log.warn(&quot;쿠폰을 찾을 수 없음 - ID: {}, 매장ID: {}&quot;, command.getId(), command.getShopId());</span>
+<span class="fc" id="L81">                  return new BusinessException(ErrorCode.COUPON_NOT_FOUND);</span>
+                });
+
+<span class="fc bfc" id="L84" title="All 2 branches covered.">    if (coupon.isDeleted()) {</span>
+<span class="fc" id="L85">      log.warn(&quot;이미 삭제된 쿠폰 - ID: {}, 매장ID: {}&quot;, command.getId(), command.getShopId());</span>
+<span class="fc" id="L86">      throw new BusinessException(ErrorCode.COUPON_ALREADY_DELETED);</span>
+    }
+
+<span class="fc" id="L89">    coupon.softDelete();</span>
+<span class="fc" id="L90">    couponJpaRepository.save(coupon);</span>
+<span class="fc" id="L91">    log.info(&quot;쿠폰 삭제 완료 - ID: {}, 매장ID: {}&quot;, command.getId(), command.getShopId());</span>
+<span class="fc" id="L92">  }</span>
+
+  @Override
+  public CouponDto toggleCouponStatus(Long couponId, Long shopId) {
+<span class="fc" id="L96">    log.info(&quot;쿠폰 상태 토글 시작 - ID: {}, 매장ID: {}&quot;, couponId, shopId);</span>
+
+<span class="fc" id="L98">    Coupon coupon =</span>
+        couponJpaRepository
+<span class="fc" id="L100">            .findByIdAndShopIdAndDeletedAtIsNull(couponId, shopId)</span>
+<span class="fc" id="L101">            .orElseThrow(</span>
+                () -&gt; {
+<span class="fc" id="L103">                  log.warn(&quot;쿠폰을 찾을 수 없음 - ID: {}, 매장ID: {}&quot;, couponId, shopId);</span>
+<span class="fc" id="L104">                  return new BusinessException(ErrorCode.COUPON_NOT_FOUND);</span>
+                });
+
+<span class="fc bfc" id="L107" title="All 2 branches covered.">    if (coupon.isDeleted()) {</span>
+<span class="fc" id="L108">      log.warn(&quot;삭제된 쿠폰 상태 변경 시도 - ID: {}, 매장ID: {}&quot;, couponId, shopId);</span>
+<span class="fc" id="L109">      throw new BusinessException(ErrorCode.DELETED_COUPON_OPERATION_NOT_ALLOWED);</span>
+    }
+
+<span class="fc bfc" id="L112" title="All 2 branches covered.">    if (coupon.getIsActive()) {</span>
+<span class="fc" id="L113">      coupon.deactivate();</span>
+<span class="fc" id="L114">      log.info(&quot;쿠폰 비활성화 완료 - ID: {}, 매장ID: {}&quot;, couponId, shopId);</span>
+    } else {
+<span class="fc" id="L116">      coupon.activate();</span>
+<span class="fc" id="L117">      log.info(&quot;쿠폰 활성화 완료 - ID: {}, 매장ID: {}&quot;, couponId, shopId);</span>
+    }
+
+<span class="fc" id="L120">    Coupon savedCoupon = couponJpaRepository.save(coupon);</span>
+<span class="fc" id="L121">    return CouponDto.from(savedCoupon);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

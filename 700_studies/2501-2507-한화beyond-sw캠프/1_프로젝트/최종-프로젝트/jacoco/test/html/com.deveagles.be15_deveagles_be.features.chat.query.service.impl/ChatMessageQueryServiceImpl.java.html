@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChatMessageQueryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.chat.query.service.impl</a> &gt; <span class="el_source">ChatMessageQueryServiceImpl.java</span></div><h1>ChatMessageQueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.chat.query.service.impl;
+
+import com.deveagles.be15_deveagles_be.features.chat.command.application.dto.response.ChatMessageResponse;
+import com.deveagles.be15_deveagles_be.features.chat.command.domain.aggregate.ChatMessage;
+import com.deveagles.be15_deveagles_be.features.chat.query.repository.ChatMessageQueryRepository;
+import com.deveagles.be15_deveagles_be.features.chat.query.service.ChatMessageQueryService;
+import java.util.List;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ChatMessageQueryServiceImpl implements ChatMessageQueryService {
+
+  private final ChatMessageQueryRepository chatMessageQueryRepository;
+
+<span class="nc" id="L15">  public ChatMessageQueryServiceImpl(ChatMessageQueryRepository chatMessageQueryRepository) {</span>
+<span class="nc" id="L16">    this.chatMessageQueryRepository = chatMessageQueryRepository;</span>
+<span class="nc" id="L17">  }</span>
+
+  @Override
+  public List&lt;ChatMessageResponse&gt; getMessagesByRoomId(String roomId) {
+<span class="nc" id="L21">    List&lt;ChatMessage&gt; messages =</span>
+<span class="nc" id="L22">        chatMessageQueryRepository.findByChatroomIdOrderByCreatedAtAsc(roomId);</span>
+
+<span class="nc" id="L24">    return messages.stream().map(ChatMessageResponse::from).toList();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

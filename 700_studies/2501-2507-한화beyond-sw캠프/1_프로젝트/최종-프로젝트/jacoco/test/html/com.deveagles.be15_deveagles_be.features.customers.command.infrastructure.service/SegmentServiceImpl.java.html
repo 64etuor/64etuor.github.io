@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SegmentServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.customers.command.infrastructure.service</a> &gt; <span class="el_source">SegmentServiceImpl.java</span></div><h1>SegmentServiceImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.customers.command.infrastructure.service;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import com.deveagles.be15_deveagles_be.features.customers.command.application.service.SegmentService;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.Segment;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.aggregate.SegmentByCustomer;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.repository.SegmentByCustomerRepository;
+import com.deveagles.be15_deveagles_be.features.customers.command.domain.repository.SegmentRepository;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+<span class="nc" id="L21">@Slf4j</span>
+public class SegmentServiceImpl implements SegmentService {
+
+  private final SegmentRepository segmentRepository;
+  private final SegmentByCustomerRepository segmentByCustomerRepository;
+
+  @Override
+  public void assignSegmentToCustomer(Long customerId, String segmentTag) {
+<span class="nc" id="L29">    log.info(&quot;고객 세그먼트 할당: customerId={}, segmentTag={}&quot;, customerId, segmentTag);</span>
+
+<span class="nc" id="L31">    Optional&lt;Segment&gt; segmentOpt = segmentRepository.findBySegmentTag(segmentTag);</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">    if (segmentOpt.isEmpty()) {</span>
+<span class="nc" id="L33">      throw new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, &quot;세그먼트를 찾을 수 없습니다: &quot; + segmentTag);</span>
+    }
+
+<span class="nc" id="L36">    Segment segment = segmentOpt.get();</span>
+
+    // 중복 체크
+<span class="nc bnc" id="L39" title="All 2 branches missed.">    if (segmentByCustomerRepository.existsByCustomerIdAndSegmentId(customerId, segment.getId())) {</span>
+<span class="nc" id="L40">      log.debug(&quot;이미 할당된 세그먼트: customerId={}, segmentTag={}&quot;, customerId, segmentTag);</span>
+<span class="nc" id="L41">      return;</span>
+    }
+
+    // 세그먼트 할당
+    SegmentByCustomer segmentByCustomer =
+<span class="nc" id="L46">        SegmentByCustomer.builder().customerId(customerId).segmentId(segment.getId()).build();</span>
+
+<span class="nc" id="L48">    segmentByCustomerRepository.save(segmentByCustomer);</span>
+<span class="nc" id="L49">    log.info(&quot;고객 세그먼트 할당 완료: customerId={}, segmentTag={}&quot;, customerId, segmentTag);</span>
+<span class="nc" id="L50">  }</span>
+
+  @Override
+  public void assignSegmentsToCustomer(Long customerId, List&lt;String&gt; segmentTags) {
+<span class="nc" id="L54">    log.info(&quot;고객 다중 세그먼트 할당: customerId={}, segmentTags={}&quot;, customerId, segmentTags);</span>
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">    for (String segmentTag : segmentTags) {</span>
+      try {
+<span class="nc" id="L58">        assignSegmentToCustomer(customerId, segmentTag);</span>
+<span class="nc" id="L59">      } catch (Exception e) {</span>
+<span class="nc" id="L60">        log.error(</span>
+            &quot;세그먼트 할당 실패: customerId={}, segmentTag={}, error={}&quot;,
+            customerId,
+            segmentTag,
+<span class="nc" id="L64">            e.getMessage());</span>
+<span class="nc" id="L65">      }</span>
+<span class="nc" id="L66">    }</span>
+<span class="nc" id="L67">  }</span>
+
+  @Override
+  public void removeSegmentFromCustomer(Long customerId, String segmentTag) {
+<span class="nc" id="L71">    log.info(&quot;고객 세그먼트 제거: customerId={}, segmentTag={}&quot;, customerId, segmentTag);</span>
+
+<span class="nc" id="L73">    Optional&lt;Segment&gt; segmentOpt = segmentRepository.findBySegmentTag(segmentTag);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">    if (segmentOpt.isEmpty()) {</span>
+<span class="nc" id="L75">      log.warn(&quot;세그먼트를 찾을 수 없음: segmentTag={}&quot;, segmentTag);</span>
+<span class="nc" id="L76">      return;</span>
+    }
+
+<span class="nc" id="L79">    Segment segment = segmentOpt.get();</span>
+
+<span class="nc bnc" id="L81" title="All 2 branches missed.">    if (!segmentByCustomerRepository.existsByCustomerIdAndSegmentId(customerId, segment.getId())) {</span>
+<span class="nc" id="L82">      log.debug(&quot;할당되지 않은 세그먼트: customerId={}, segmentTag={}&quot;, customerId, segmentTag);</span>
+<span class="nc" id="L83">      return;</span>
+    }
+
+<span class="nc" id="L86">    segmentByCustomerRepository.deleteByCustomerIdAndSegmentId(customerId, segment.getId());</span>
+<span class="nc" id="L87">    log.info(&quot;고객 세그먼트 제거 완료: customerId={}, segmentTag={}&quot;, customerId, segmentTag);</span>
+<span class="nc" id="L88">  }</span>
+
+  @Override
+  public void removeAllSegmentsFromCustomer(Long customerId) {
+<span class="nc" id="L92">    log.info(&quot;고객 전체 세그먼트 제거: customerId={}&quot;, customerId);</span>
+
+<span class="nc" id="L94">    int deletedCount = segmentByCustomerRepository.findByCustomerId(customerId).size();</span>
+<span class="nc" id="L95">    segmentByCustomerRepository.deleteByCustomerId(customerId);</span>
+
+<span class="nc" id="L97">    log.info(&quot;고객 전체 세그먼트 제거 완료: customerId={}, count={}&quot;, customerId, deletedCount);</span>
+<span class="nc" id="L98">  }</span>
+
+  @Override
+  public void removeRiskSegmentsFromCustomer(Long customerId) {
+<span class="nc" id="L102">    log.info(&quot;고객 위험 세그먼트 제거: customerId={}&quot;, customerId);</span>
+
+<span class="nc" id="L104">    List&lt;SegmentByCustomer&gt; riskSegments =</span>
+<span class="nc" id="L105">        segmentByCustomerRepository.findRiskSegmentsByCustomerId(customerId, &quot;risk&quot;);</span>
+
+<span class="nc bnc" id="L107" title="All 2 branches missed.">    for (SegmentByCustomer segmentByCustomer : riskSegments) {</span>
+<span class="nc" id="L108">      segmentByCustomerRepository.deleteByCustomerIdAndSegmentId(</span>
+<span class="nc" id="L109">          customerId, segmentByCustomer.getSegmentId());</span>
+<span class="nc" id="L110">    }</span>
+
+<span class="nc" id="L112">    log.info(&quot;고객 위험 세그먼트 제거 완료: customerId={}, count={}&quot;, customerId, riskSegments.size());</span>
+<span class="nc" id="L113">  }</span>
+
+  @Override
+  @Transactional(readOnly = true)
+  public List&lt;Segment&gt; getCustomerSegments(Long customerId) {
+<span class="nc" id="L118">    log.debug(&quot;고객 세그먼트 조회: customerId={}&quot;, customerId);</span>
+
+<span class="nc" id="L120">    List&lt;SegmentByCustomer&gt; segmentByCustomers =</span>
+<span class="nc" id="L121">        segmentByCustomerRepository.findByCustomerId(customerId);</span>
+
+<span class="nc" id="L123">    return segmentByCustomers.stream()</span>
+<span class="nc" id="L124">        .map(sbc -&gt; segmentRepository.findById(sbc.getSegmentId()))</span>
+<span class="nc" id="L125">        .filter(Optional::isPresent)</span>
+<span class="nc" id="L126">        .map(Optional::get)</span>
+<span class="nc" id="L127">        .collect(Collectors.toList());</span>
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List&lt;Long&gt; getCustomerIdsBySegmentTag(String segmentTag) {
+<span class="nc" id="L133">    log.debug(&quot;세그먼트별 고객 ID 조회: segmentTag={}&quot;, segmentTag);</span>
+
+<span class="nc" id="L135">    return segmentByCustomerRepository.findCustomerIdsBySegmentTag(segmentTag);</span>
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List&lt;Long&gt; getCustomerIdsBySegmentTags(List&lt;String&gt; segmentTags) {
+<span class="nc" id="L141">    log.debug(&quot;다중 세그먼트별 고객 ID 조회: segmentTags={}&quot;, segmentTags);</span>
+
+<span class="nc" id="L143">    return segmentByCustomerRepository.findCustomerIdsBySegmentTags(segmentTags);</span>
+  }
+
+  @Override
+  public Segment createSegmentIfNotExists(
+      String segmentTag, String segmentTitle, String colorCode) {
+<span class="nc" id="L149">    log.info(&quot;세그먼트 생성 (존재하지 않는 경우): segmentTag={}, segmentTitle={}&quot;, segmentTag, segmentTitle);</span>
+
+<span class="nc" id="L151">    Optional&lt;Segment&gt; existingSegment = segmentRepository.findBySegmentTag(segmentTag);</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">    if (existingSegment.isPresent()) {</span>
+<span class="nc" id="L153">      log.debug(&quot;이미 존재하는 세그먼트: segmentTag={}&quot;, segmentTag);</span>
+<span class="nc" id="L154">      return existingSegment.get();</span>
+    }
+
+    Segment newSegment =
+<span class="nc" id="L158">        Segment.builder()</span>
+<span class="nc" id="L159">            .segmentTag(segmentTag)</span>
+<span class="nc" id="L160">            .segmentTitle(segmentTitle)</span>
+<span class="nc" id="L161">            .colorCode(colorCode)</span>
+<span class="nc" id="L162">            .build();</span>
+
+<span class="nc" id="L164">    Segment savedSegment = segmentRepository.save(newSegment);</span>
+<span class="nc" id="L165">    log.info(&quot;새 세그먼트 생성 완료: segmentTag={}, id={}&quot;, segmentTag, savedSegment.getId());</span>
+
+<span class="nc" id="L167">    return savedSegment;</span>
+  }
+
+  @Override
+  public void initializeDefaultSegments() {
+<span class="nc" id="L172">    log.info(&quot;기본 세그먼트 초기화 시작&quot;);</span>
+
+    // 고객 생애주기 세그먼트
+<span class="nc" id="L175">    createSegmentIfNotExists(&quot;new&quot;, &quot;신규 고객&quot;, &quot;#00BFFF&quot;);</span>
+<span class="nc" id="L176">    createSegmentIfNotExists(&quot;growing&quot;, &quot;성장 고객&quot;, &quot;#32CD32&quot;);</span>
+<span class="nc" id="L177">    createSegmentIfNotExists(&quot;loyal&quot;, &quot;충성 고객&quot;, &quot;#FFD700&quot;);</span>
+<span class="nc" id="L178">    createSegmentIfNotExists(&quot;vip&quot;, &quot;VIP 고객&quot;, &quot;#FF69B4&quot;);</span>
+<span class="nc" id="L179">    createSegmentIfNotExists(&quot;inactive&quot;, &quot;비활성 고객&quot;, &quot;#808080&quot;);</span>
+
+    // 위험 세그먼트
+<span class="nc" id="L182">    createSegmentIfNotExists(&quot;churn_risk_high&quot;, &quot;고위험 이탈&quot;, &quot;#FF4444&quot;);</span>
+<span class="nc" id="L183">    createSegmentIfNotExists(&quot;churn_risk_medium&quot;, &quot;중위험 이탈&quot;, &quot;#FF8800&quot;);</span>
+<span class="nc" id="L184">    createSegmentIfNotExists(&quot;churn_risk_low&quot;, &quot;저위험 이탈&quot;, &quot;#FFAA00&quot;);</span>
+
+    // 특별 케어 세그먼트
+<span class="nc" id="L187">    createSegmentIfNotExists(&quot;vip_attention_needed&quot;, &quot;VIP 관심 필요&quot;, &quot;#8844FF&quot;);</span>
+<span class="nc" id="L188">    createSegmentIfNotExists(&quot;pattern_break_detected&quot;, &quot;패턴 이상 감지&quot;, &quot;#FF6600&quot;);</span>
+<span class="nc" id="L189">    createSegmentIfNotExists(&quot;reactivation_needed&quot;, &quot;재활성화 필요&quot;, &quot;#FF0000&quot;);</span>
+<span class="nc" id="L190">    createSegmentIfNotExists(&quot;first_visit_follow_up&quot;, &quot;첫 방문 팔로업&quot;, &quot;#0088FF&quot;);</span>
+
+<span class="nc" id="L192">    log.info(&quot;기본 세그먼트 초기화 완료&quot;);</span>
+<span class="nc" id="L193">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

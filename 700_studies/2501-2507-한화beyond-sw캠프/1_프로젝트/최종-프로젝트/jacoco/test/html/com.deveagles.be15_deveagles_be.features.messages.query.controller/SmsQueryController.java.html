@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SmsQueryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.messages.query.controller</a> &gt; <span class="el_source">SmsQueryController.java</span></div><h1>SmsQueryController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.messages.query.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.common.dto.PagedResult;
+import com.deveagles.be15_deveagles_be.features.auth.command.application.model.CustomUser;
+import com.deveagles.be15_deveagles_be.features.messages.query.dto.response.SmsDetailResponse;
+import com.deveagles.be15_deveagles_be.features.messages.query.dto.response.SmsListResponse;
+import com.deveagles.be15_deveagles_be.features.messages.query.service.SmsQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/message&quot;)
+public class SmsQueryController {
+
+  private final SmsQueryService smsQueryService;
+
+  @Operation(summary = &quot;문자 발송 내역 목록 조회&quot;, description = &quot;현재 로그인한 매장의 문자 발송 내역을 페이지네이션 형태로 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;조회 성공&quot;)
+  })
+  @GetMapping
+  public ResponseEntity&lt;ApiResponse&lt;PagedResult&lt;SmsListResponse&gt;&gt;&gt; getSmsList(
+      @AuthenticationPrincipal CustomUser customUser,
+      @PageableDefault(size = 20, sort = &quot;createdAt&quot;, direction = Sort.Direction.DESC)
+          Pageable pageable) {
+
+<span class="nc" id="L41">    System.out.println(customUser.getShopId());</span>
+<span class="nc" id="L42">    PagedResult&lt;SmsListResponse&gt; result =</span>
+<span class="nc" id="L43">        smsQueryService.getSmsList(customUser.getShopId(), pageable);</span>
+<span class="nc" id="L44">    System.out.println(&quot;📦 [백엔드 응답 디버깅]&quot;);</span>
+<span class="nc" id="L45">    System.out.println(&quot;→ totalItems = &quot; + result.getPagination().getTotalItems());</span>
+<span class="nc" id="L46">    System.out.println(&quot;→ totalPages = &quot; + result.getPagination().getTotalPages());</span>
+<span class="nc" id="L47">    System.out.println(&quot;→ currentPage = &quot; + result.getPagination().getCurrentPage());</span>
+<span class="nc" id="L48">    System.out.println(&quot;→ content.size() = &quot; + result.getContent().size());</span>
+<span class="nc" id="L49">    return ResponseEntity.ok(ApiResponse.success(result));</span>
+  }
+
+  @Operation(summary = &quot;문자 발송 상세 조회&quot;, description = &quot;특정 메시지 ID를 기준으로 문자 발송 상세 내용을 조회합니다.&quot;)
+  @ApiResponses({
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;200&quot;,
+        description = &quot;조회 성공&quot;),
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+        responseCode = &quot;404&quot;,
+        description = &quot;메시지를 찾을 수 없음&quot;)
+  })
+  @GetMapping(&quot;/{messageId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;SmsDetailResponse&gt;&gt; getSmsDetail(
+      @AuthenticationPrincipal CustomUser customUser, @PathVariable Long messageId) {
+<span class="nc" id="L64">    SmsDetailResponse response = smsQueryService.getSmsDetail(customUser.getShopId(), messageId);</span>
+<span class="nc" id="L65">    return ResponseEntity.ok(ApiResponse.success(response));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

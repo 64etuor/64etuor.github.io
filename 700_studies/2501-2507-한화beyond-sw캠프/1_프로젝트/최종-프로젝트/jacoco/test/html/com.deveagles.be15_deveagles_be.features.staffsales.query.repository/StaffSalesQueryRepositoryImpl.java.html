@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StaffSalesQueryRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.staffsales.query.repository</a> &gt; <span class="el_source">StaffSalesQueryRepositoryImpl.java</span></div><h1>StaffSalesQueryRepositoryImpl.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.staffsales.query.repository;
+
+import com.deveagles.be15_deveagles_be.features.items.command.domain.aggregate.Category;
+import com.deveagles.be15_deveagles_be.features.items.command.domain.aggregate.QPrimaryItem;
+import com.deveagles.be15_deveagles_be.features.items.command.domain.aggregate.QSecondaryItem;
+import com.deveagles.be15_deveagles_be.features.sales.command.domain.aggregate.*;
+import com.deveagles.be15_deveagles_be.features.staffsales.command.domain.aggregate.ProductType;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.dto.response.*;
+import com.deveagles.be15_deveagles_be.features.staffsales.query.service.support.SalesCalculator;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@RequiredArgsConstructor
+public class StaffSalesQueryRepositoryImpl implements StaffSalesQueryRepository {
+
+  private final JPAQueryFactory queryFactory;
+  private final SalesCalculator salesCalculator;
+
+  @Override
+  public List&lt;StaffPaymentsSalesResponse&gt; getSalesByStaff(
+      boolean isDetail, Long shopId, Long staffId, LocalDateTime startDate, LocalDateTime endDate) {
+
+<span class="nc" id="L30">    List&lt;StaffPaymentsSalesResponse&gt; result = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L32" title="All 2 branches missed.">    if (!isDetail) {</span>
+<span class="nc" id="L33">      result.add(</span>
+<span class="nc" id="L34">          buildSalesResponse(</span>
+              &quot;SERVICE&quot;,
+<span class="nc" id="L36">              getSalesIdsByCategory(shopId, staffId, startDate, endDate, Category.SERVICE),</span>
+              true,
+              shopId,
+              staffId,
+              ProductType.SERVICE));
+
+<span class="nc" id="L42">      result.add(</span>
+<span class="nc" id="L43">          buildSalesResponse(</span>
+              &quot;PRODUCT&quot;,
+<span class="nc" id="L45">              getSalesIdsByCategory(shopId, staffId, startDate, endDate, Category.PRODUCT),</span>
+              true,
+              shopId,
+              staffId,
+              ProductType.PRODUCT));
+    }
+
+    // SESSION_PASS
+<span class="nc" id="L53">    result.add(</span>
+<span class="nc" id="L54">        buildSalesResponse(</span>
+            &quot;SESSION_PASS&quot;,
+<span class="nc" id="L56">            getSessionPassSalesIds(staffId, startDate, endDate),</span>
+            false,
+            shopId,
+            staffId,
+            ProductType.SESSION_PASS));
+
+    // PREPAID_PASS
+<span class="nc" id="L63">    result.add(</span>
+<span class="nc" id="L64">        buildSalesResponse(</span>
+            &quot;PREPAID_PASS&quot;,
+<span class="nc" id="L66">            getPrepaidPassSalesIds(staffId, startDate, endDate),</span>
+            false,
+            shopId,
+            staffId,
+            ProductType.PREPAID_PASS));
+
+<span class="nc" id="L72">    return result;</span>
+  }
+
+  private StaffPaymentsSalesResponse buildSalesResponse(
+      String category,
+      List&lt;Long&gt; salesIds,
+      boolean couponApplicable,
+      Long shopId,
+      Long staffId,
+      ProductType productType) {
+
+<span class="nc" id="L83">    QSales sales = QSales.sales;</span>
+<span class="nc" id="L84">    QItemSales itemSales = QItemSales.itemSales;</span>
+<span class="nc" id="L85">    QPayments payments = QPayments.payments;</span>
+
+    // 결제 수단별 실매출 조회
+<span class="nc" id="L88">    List&lt;StaffNetSalesProjection&gt; projectionList =</span>
+        queryFactory
+<span class="nc" id="L90">            .select(</span>
+<span class="nc" id="L91">                Projections.constructor(</span>
+                    StaffNetSalesProjection.class,
+<span class="nc" id="L93">                    payments.paymentsMethod.stringValue(),</span>
+<span class="nc" id="L94">                    payments.amount.sum()))</span>
+<span class="nc" id="L95">            .from(payments)</span>
+<span class="nc" id="L96">            .where(</span>
+<span class="nc" id="L97">                payments.salesId.in(salesIds),</span>
+<span class="nc" id="L98">                payments.paymentsMethod.notIn(</span>
+                    PaymentsMethod.PREPAID_PASS, PaymentsMethod.SESSION_PASS),
+<span class="nc" id="L100">                payments.deletedAt.isNull())</span>
+<span class="nc" id="L101">            .groupBy(payments.paymentsMethod)</span>
+<span class="nc" id="L102">            .fetch();</span>
+
+<span class="nc" id="L104">    Map&lt;PaymentsMethod, Integer&gt; rateMap =</span>
+<span class="nc" id="L105">        salesCalculator.getEffectiveIncentiveRates(shopId, staffId, productType);</span>
+
+<span class="nc" id="L107">    List&lt;StaffNetSalesResponse&gt; netSalesList =</span>
+<span class="nc" id="L108">        projectionList.stream()</span>
+<span class="nc" id="L109">            .map(</span>
+                p -&gt; {
+<span class="nc" id="L111">                  PaymentsMethod method = PaymentsMethod.valueOf(p.getPayments());</span>
+<span class="nc" id="L112">                  int amount = p.getAmount();</span>
+<span class="nc" id="L113">                  int rate = rateMap.getOrDefault(method, 0);</span>
+<span class="nc" id="L114">                  int incentiveAmount = (int) Math.floor(amount * rate / 100.0);</span>
+
+<span class="nc" id="L116">                  return StaffNetSalesResponse.builder()</span>
+<span class="nc" id="L117">                      .paymentsMethod(method)</span>
+<span class="nc" id="L118">                      .amount(amount)</span>
+<span class="nc" id="L119">                      .incentiveAmount(incentiveAmount)</span>
+<span class="nc" id="L120">                      .build();</span>
+                })
+<span class="nc" id="L122">            .toList();</span>
+
+    // 할인 공제
+<span class="nc" id="L125">    Integer discountSum =</span>
+        queryFactory
+<span class="nc" id="L127">            .select(sales.discountAmount.sum())</span>
+<span class="nc" id="L128">            .from(sales)</span>
+<span class="nc" id="L129">            .where(sales.salesId.in(salesIds), sales.discountAmount.isNotNull())</span>
+<span class="nc" id="L130">            .fetchOne();</span>
+
+    // 쿠폰 공제
+<span class="nc" id="L133">    Integer couponSum = 0;</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">    if (couponApplicable) {</span>
+<span class="nc" id="L135">      couponSum =</span>
+<span class="nc" id="L136">          Optional.ofNullable(</span>
+                  queryFactory
+<span class="nc" id="L138">                      .select(itemSales.count())</span>
+<span class="nc" id="L139">                      .from(itemSales)</span>
+<span class="nc" id="L140">                      .where(itemSales.salesId.in(salesIds), itemSales.couponId.isNotNull())</span>
+<span class="nc" id="L141">                      .fetchOne())</span>
+<span class="nc" id="L142">              .map(Long::intValue)</span>
+<span class="nc" id="L143">              .orElse(0);</span>
+    }
+
+    // 선불권 공제
+<span class="nc" id="L147">    Integer prepaidSum =</span>
+        queryFactory
+<span class="nc" id="L149">            .select(payments.amount.sum())</span>
+<span class="nc" id="L150">            .from(payments)</span>
+<span class="nc" id="L151">            .where(</span>
+<span class="nc" id="L152">                payments.salesId.in(salesIds),</span>
+<span class="nc" id="L153">                payments.paymentsMethod.eq(PaymentsMethod.PREPAID_PASS))</span>
+<span class="nc" id="L154">            .fetchOne();</span>
+
+    // 공제 항목 리스트
+    List&lt;StaffSalesDeductionsResponse&gt; deductionList =
+<span class="nc" id="L158">        List.of(</span>
+<span class="nc" id="L159">            StaffSalesDeductionsResponse.builder()</span>
+<span class="nc" id="L160">                .deduction(&quot;DISCOUNT&quot;)</span>
+<span class="nc" id="L161">                .amount(Optional.ofNullable(discountSum).orElse(0))</span>
+<span class="nc" id="L162">                .build(),</span>
+<span class="nc" id="L163">            StaffSalesDeductionsResponse.builder().deduction(&quot;COUPON&quot;).amount(couponSum).build(),</span>
+<span class="nc" id="L164">            StaffSalesDeductionsResponse.builder()</span>
+<span class="nc" id="L165">                .deduction(&quot;PREPAID&quot;)</span>
+<span class="nc" id="L166">                .amount(Optional.ofNullable(prepaidSum).orElse(0))</span>
+<span class="nc" id="L167">                .build());</span>
+
+    // 총계 계산
+<span class="nc" id="L170">    int grossSalesTotal =</span>
+<span class="nc" id="L171">        netSalesList.stream().mapToInt(n -&gt; Optional.ofNullable(n.getAmount()).orElse(0)).sum();</span>
+
+<span class="nc" id="L173">    int deductionTotal =</span>
+<span class="nc" id="L174">        deductionList.stream().mapToInt(d -&gt; Optional.ofNullable(d.getAmount()).orElse(0)).sum();</span>
+
+<span class="nc" id="L176">    int netSalesTotal = grossSalesTotal - deductionTotal;</span>
+
+<span class="nc" id="L178">    int incentiveTotal =</span>
+<span class="nc" id="L179">        netSalesList.stream()</span>
+<span class="nc" id="L180">            .mapToInt(n -&gt; Optional.ofNullable(n.getIncentiveAmount()).orElse(0))</span>
+<span class="nc" id="L181">            .sum();</span>
+
+<span class="nc" id="L183">    return StaffPaymentsSalesResponse.builder()</span>
+<span class="nc" id="L184">        .category(category)</span>
+<span class="nc" id="L185">        .netSalesList(netSalesList)</span>
+<span class="nc" id="L186">        .deductionList(deductionList)</span>
+<span class="nc" id="L187">        .grossSalesTotal(grossSalesTotal)</span>
+<span class="nc" id="L188">        .deductionTotal(deductionTotal)</span>
+<span class="nc" id="L189">        .netSalesTotal(netSalesTotal)</span>
+<span class="nc" id="L190">        .incentiveTotal(incentiveTotal)</span>
+<span class="nc" id="L191">        .build();</span>
+  }
+
+  private List&lt;Long&gt; getSalesIdsByCategory(
+      Long shopId, Long staffId, LocalDateTime start, LocalDateTime end, Category category) {
+<span class="nc" id="L196">    QSales sales = QSales.sales;</span>
+<span class="nc" id="L197">    QItemSales itemSales = QItemSales.itemSales;</span>
+<span class="nc" id="L198">    QSecondaryItem secondaryItem = QSecondaryItem.secondaryItem;</span>
+<span class="nc" id="L199">    QPrimaryItem primaryItem = QPrimaryItem.primaryItem;</span>
+
+<span class="nc" id="L201">    return queryFactory</span>
+<span class="nc" id="L202">        .select(sales.salesId)</span>
+<span class="nc" id="L203">        .from(sales)</span>
+<span class="nc" id="L204">        .join(itemSales)</span>
+<span class="nc" id="L205">        .on(itemSales.salesId.eq(sales.salesId))</span>
+<span class="nc" id="L206">        .join(secondaryItem)</span>
+<span class="nc" id="L207">        .on(itemSales.secondaryItemId.eq(secondaryItem.secondaryItemId))</span>
+<span class="nc" id="L208">        .join(primaryItem)</span>
+<span class="nc" id="L209">        .on(secondaryItem.primaryItemId.eq(primaryItem.primaryItemId))</span>
+<span class="nc" id="L210">        .where(</span>
+<span class="nc" id="L211">            sales.staffId.eq(staffId),</span>
+<span class="nc" id="L212">            sales.shopId.eq(shopId),</span>
+<span class="nc" id="L213">            sales.salesDate.between(start, end),</span>
+<span class="nc" id="L214">            primaryItem.category.eq(category),</span>
+<span class="nc" id="L215">            sales.deletedAt.isNull(),</span>
+<span class="nc" id="L216">            sales.isRefunded.eq(Boolean.FALSE))</span>
+<span class="nc" id="L217">        .distinct()</span>
+<span class="nc" id="L218">        .fetch();</span>
+  }
+
+  private List&lt;Long&gt; getSessionPassSalesIds(Long staffId, LocalDateTime start, LocalDateTime end) {
+<span class="nc" id="L222">    QSales sales = QSales.sales;</span>
+<span class="nc" id="L223">    QSessionPassSales sessionPassSales = QSessionPassSales.sessionPassSales;</span>
+
+<span class="nc" id="L225">    return queryFactory</span>
+<span class="nc" id="L226">        .select(sales.salesId)</span>
+<span class="nc" id="L227">        .from(sales)</span>
+<span class="nc" id="L228">        .join(sessionPassSales)</span>
+<span class="nc" id="L229">        .on(sessionPassSales.salesId.eq(sales.salesId))</span>
+<span class="nc" id="L230">        .where(</span>
+<span class="nc" id="L231">            sales.staffId.eq(staffId),</span>
+<span class="nc" id="L232">            sales.salesDate.between(start, end),</span>
+<span class="nc" id="L233">            sales.deletedAt.isNull(),</span>
+<span class="nc" id="L234">            sales.isRefunded.eq(Boolean.FALSE))</span>
+<span class="nc" id="L235">        .distinct()</span>
+<span class="nc" id="L236">        .fetch();</span>
+  }
+
+  private List&lt;Long&gt; getPrepaidPassSalesIds(Long staffId, LocalDateTime start, LocalDateTime end) {
+<span class="nc" id="L240">    QSales sales = QSales.sales;</span>
+<span class="nc" id="L241">    QPrepaidPassSales prepaidPassSales = QPrepaidPassSales.prepaidPassSales;</span>
+
+<span class="nc" id="L243">    return queryFactory</span>
+<span class="nc" id="L244">        .select(sales.salesId)</span>
+<span class="nc" id="L245">        .from(sales)</span>
+<span class="nc" id="L246">        .join(prepaidPassSales)</span>
+<span class="nc" id="L247">        .on(prepaidPassSales.salesId.eq(sales.salesId))</span>
+<span class="nc" id="L248">        .where(</span>
+<span class="nc" id="L249">            sales.staffId.eq(staffId),</span>
+<span class="nc" id="L250">            sales.salesDate.between(start, end),</span>
+<span class="nc" id="L251">            sales.deletedAt.isNull(),</span>
+<span class="nc" id="L252">            sales.isRefunded.eq(Boolean.FALSE))</span>
+<span class="nc" id="L253">        .distinct()</span>
+<span class="nc" id="L254">        .fetch();</span>
+  }
+
+  @Override
+  public List&lt;StaffPaymentsDetailSalesResponse&gt; getDetailSalesByStaff(
+      Long staffId, Long shopId, LocalDateTime startDate, LocalDateTime endDate) {
+
+<span class="nc" id="L261">    List&lt;StaffPaymentsDetailSalesResponse&gt; result = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L263">    result.addAll(getSalesDetailByCategory(staffId, shopId, startDate, endDate, Category.SERVICE));</span>
+<span class="nc" id="L264">    result.addAll(getSalesDetailByCategory(staffId, shopId, startDate, endDate, Category.PRODUCT));</span>
+
+<span class="nc" id="L266">    return result;</span>
+  }
+
+  @Override
+  public int getTargetTotalSales(
+      Long shopId, Long staffId, ProductType type, LocalDate startDate, LocalDate endDate) {
+<span class="nc" id="L272">    LocalDateTime start = startDate.atStartOfDay();</span>
+<span class="nc" id="L273">    LocalDateTime end = endDate.atTime(23, 59, 59);</span>
+
+    // salesId 조회
+    List&lt;Long&gt; salesIds;
+    boolean couponApplicable;
+<span class="nc bnc" id="L278" title="All 5 branches missed.">    switch (type) {</span>
+      case SERVICE -&gt; {
+<span class="nc" id="L280">        salesIds = getSalesIdsByCategory(shopId, staffId, start, end, Category.SERVICE);</span>
+<span class="nc" id="L281">        couponApplicable = true;</span>
+<span class="nc" id="L282">      }</span>
+      case PRODUCT -&gt; {
+<span class="nc" id="L284">        salesIds = getSalesIdsByCategory(shopId, staffId, start, end, Category.PRODUCT);</span>
+<span class="nc" id="L285">        couponApplicable = true;</span>
+<span class="nc" id="L286">      }</span>
+      case SESSION_PASS -&gt; {
+<span class="nc" id="L288">        salesIds = getSessionPassSalesIds(staffId, start, end);</span>
+<span class="nc" id="L289">        couponApplicable = false;</span>
+<span class="nc" id="L290">      }</span>
+      case PREPAID_PASS -&gt; {
+<span class="nc" id="L292">        salesIds = getPrepaidPassSalesIds(staffId, start, end);</span>
+<span class="nc" id="L293">        couponApplicable = false;</span>
+<span class="nc" id="L294">      }</span>
+      default -&gt; {
+<span class="nc" id="L296">        return 0;</span>
+      }
+    }
+
+<span class="nc bnc" id="L300" title="All 2 branches missed.">    if (salesIds.isEmpty()) {</span>
+<span class="nc" id="L301">      return 0;</span>
+    }
+
+<span class="nc" id="L304">    StaffPaymentsSalesResponse salesData =</span>
+<span class="nc" id="L305">        buildSalesResponse(type.name(), salesIds, couponApplicable, shopId, staffId, type);</span>
+
+<span class="nc" id="L307">    return salesData.getGrossSalesTotal();</span>
+  }
+
+  private List&lt;StaffPaymentsDetailSalesResponse&gt; getSalesDetailByCategory(
+      Long staffId,
+      Long shopId,
+      LocalDateTime startDate,
+      LocalDateTime endDate,
+      Category category) {
+
+<span class="nc" id="L317">    QSales sales = QSales.sales;</span>
+<span class="nc" id="L318">    QItemSales itemSales = QItemSales.itemSales;</span>
+<span class="nc" id="L319">    QPrimaryItem primary = QPrimaryItem.primaryItem;</span>
+<span class="nc" id="L320">    QSecondaryItem secondary = QSecondaryItem.secondaryItem;</span>
+
+<span class="nc" id="L322">    List&lt;Tuple&gt; salesGroup =</span>
+        queryFactory
+<span class="nc" id="L324">            .select(</span>
+                primary.primaryItemId,
+                primary.primaryItemName,
+                secondary.secondaryItemId,
+                secondary.secondaryItemName,
+                itemSales.salesId)
+<span class="nc" id="L330">            .from(itemSales)</span>
+<span class="nc" id="L331">            .join(secondary)</span>
+<span class="nc" id="L332">            .on(itemSales.secondaryItemId.eq(secondary.secondaryItemId))</span>
+<span class="nc" id="L333">            .join(secondary.primaryItem, primary)</span>
+<span class="nc" id="L334">            .join(sales)</span>
+<span class="nc" id="L335">            .on(itemSales.salesId.eq(sales.salesId))</span>
+<span class="nc" id="L336">            .where(</span>
+<span class="nc" id="L337">                itemSales.deletedAt.isNull(),</span>
+<span class="nc" id="L338">                secondary.deletedAt.isNull(),</span>
+<span class="nc" id="L339">                primary.deletedAt.isNull(),</span>
+<span class="nc" id="L340">                sales.staffId.eq(staffId),</span>
+<span class="nc" id="L341">                sales.shopId.eq(shopId),</span>
+<span class="nc" id="L342">                sales.salesDate.between(startDate, endDate),</span>
+<span class="nc" id="L343">                sales.isRefunded.eq(Boolean.FALSE),</span>
+<span class="nc" id="L344">                sales.deletedAt.isNull(),</span>
+<span class="nc" id="L345">                primary.category.eq(category))</span>
+<span class="nc" id="L346">            .fetch();</span>
+
+<span class="nc" id="L348">    Map&lt;Long, Map&lt;String, List&lt;Long&gt;&gt;&gt; grouped = new LinkedHashMap&lt;&gt;();</span>
+
+<span class="nc" id="L350">    Map&lt;Long, String&gt; primaryNameMap = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L351" title="All 2 branches missed.">    for (Tuple tuple : salesGroup) {</span>
+<span class="nc" id="L352">      Long primaryId = tuple.get(primary.primaryItemId);</span>
+<span class="nc" id="L353">      String primaryName = tuple.get(primary.primaryItemName);</span>
+<span class="nc" id="L354">      String secondaryName = tuple.get(secondary.secondaryItemName);</span>
+<span class="nc" id="L355">      Long salesId = tuple.get(itemSales.salesId);</span>
+
+<span class="nc" id="L357">      primaryNameMap.putIfAbsent(primaryId, primaryName);</span>
+
+<span class="nc" id="L359">      grouped</span>
+<span class="nc" id="L360">          .computeIfAbsent(primaryId, k -&gt; new LinkedHashMap&lt;&gt;())</span>
+<span class="nc" id="L361">          .computeIfAbsent(secondaryName, k -&gt; new ArrayList&lt;&gt;())</span>
+<span class="nc" id="L362">          .add(salesId);</span>
+<span class="nc" id="L363">    }</span>
+
+<span class="nc" id="L365">    List&lt;StaffPaymentsDetailSalesResponse&gt; result = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L367">    List&lt;StaffPrimarySalesResponse&gt; primaryList =</span>
+<span class="nc" id="L368">        grouped.entrySet().stream()</span>
+<span class="nc" id="L369">            .map(</span>
+                primaryEntry -&gt; {
+<span class="nc" id="L371">                  Long primaryId = primaryEntry.getKey();</span>
+<span class="nc" id="L372">                  String primaryName = primaryNameMap.get(primaryId);</span>
+<span class="nc" id="L373">                  List&lt;StaffSecondarySalesResponse&gt; secondaryList =</span>
+<span class="nc" id="L374">                      primaryEntry.getValue().entrySet().stream()</span>
+<span class="nc" id="L375">                          .map(</span>
+                              secondaryEntry -&gt; {
+<span class="nc" id="L377">                                List&lt;Long&gt; salesIds = secondaryEntry.getValue();</span>
+
+<span class="nc" id="L379">                                StaffPaymentsSalesResponse saleData =</span>
+<span class="nc" id="L380">                                    buildSalesResponse(</span>
+<span class="nc" id="L381">                                        category.name(),</span>
+                                        salesIds,
+                                        true,
+                                        shopId,
+                                        staffId,
+<span class="nc" id="L386">                                        ProductType.valueOf(category.name()));</span>
+
+<span class="nc" id="L388">                                return StaffSecondarySalesResponse.builder()</span>
+<span class="nc" id="L389">                                    .secondaryItemName(secondaryEntry.getKey())</span>
+<span class="nc" id="L390">                                    .netSalesList(saleData.getNetSalesList())</span>
+<span class="nc" id="L391">                                    .deductionList(saleData.getDeductionList())</span>
+<span class="nc" id="L392">                                    .incentiveTotal(</span>
+<span class="nc" id="L393">                                        saleData.getNetSalesList().stream()</span>
+<span class="nc" id="L394">                                            .mapToInt(StaffNetSalesResponse::getIncentiveAmount)</span>
+<span class="nc" id="L395">                                            .sum())</span>
+<span class="nc" id="L396">                                    .netSalesTotal(saleData.getNetSalesTotal())</span>
+<span class="nc" id="L397">                                    .deductionTotal(saleData.getDeductionTotal())</span>
+<span class="nc" id="L398">                                    .grossSalesTotal(saleData.getGrossSalesTotal())</span>
+<span class="nc" id="L399">                                    .build();</span>
+                              })
+<span class="nc" id="L401">                          .toList();</span>
+
+<span class="nc" id="L403">                  return StaffPrimarySalesResponse.builder()</span>
+<span class="nc" id="L404">                      .primaryItemId(primaryEntry.getKey())</span>
+<span class="nc" id="L405">                      .primaryItemName(primaryName)</span>
+<span class="nc" id="L406">                      .secondaryList(secondaryList)</span>
+<span class="nc" id="L407">                      .build();</span>
+                })
+<span class="nc" id="L409">            .toList();</span>
+
+<span class="nc" id="L411">    result.add(</span>
+<span class="nc" id="L412">        StaffPaymentsDetailSalesResponse.builder()</span>
+<span class="nc" id="L413">            .category(category.name())</span>
+<span class="nc" id="L414">            .primaryList(primaryList)</span>
+<span class="nc" id="L415">            .build());</span>
+
+<span class="nc" id="L417">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

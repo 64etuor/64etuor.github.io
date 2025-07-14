@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PrimaryItemCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.items.command.application.controller</a> &gt; <span class="el_source">PrimaryItemCommandController.java</span></div><h1>PrimaryItemCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.items.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.items.command.application.dto.request.PrimaryItemRequest;
+import com.deveagles.be15_deveagles_be.features.items.command.application.service.PrimaryItemCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = &quot;1차 상품&quot;, description = &quot;1차 상품 API&quot;)
+@RestController
+@RequestMapping(&quot;/primary-items&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L19">@Slf4j</span>
+public class PrimaryItemCommandController {
+
+  private final PrimaryItemCommandService primaryItemServiceCommand;
+
+  @Operation(summary = &quot;1차 상품 등록&quot;, description = &quot;1차 상품을 등록합니다.&quot;)
+  @PostMapping
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; registerPrimaryItem(
+      @RequestBody PrimaryItemRequest request) {
+<span class="nc" id="L28">    primaryItemServiceCommand.registerPrimaryItem(request);</span>
+<span class="nc" id="L29">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;1차 상품 수정&quot;, description = &quot;1차 상품을 수정합니다.&quot;)
+  @PutMapping(&quot;/{primaryItemId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; updatePrimaryItem(
+      @PathVariable Long primaryItemId, @RequestBody PrimaryItemRequest request) {
+<span class="nc" id="L36">    primaryItemServiceCommand.updatePrimaryItem(primaryItemId, request);</span>
+<span class="nc" id="L37">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;1차 상품 삭제&quot;, description = &quot;1차 상품을 soft delete 합니다.&quot;)
+  @DeleteMapping(&quot;/{primaryItemId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; deletePrimaryItem(@PathVariable Long primaryItemId) {
+<span class="nc" id="L43">    primaryItemServiceCommand.deletePrimaryItem(primaryItemId);</span>
+<span class="nc" id="L44">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

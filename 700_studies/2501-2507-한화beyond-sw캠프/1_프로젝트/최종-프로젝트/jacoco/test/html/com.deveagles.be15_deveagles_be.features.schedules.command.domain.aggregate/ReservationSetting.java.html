@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationSetting.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate</a> &gt; <span class="el_source">ReservationSetting.java</span></div><h1>ReservationSetting.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.schedules.command.domain.aggregate;
+
+import com.deveagles.be15_deveagles_be.common.exception.BusinessException;
+import com.deveagles.be15_deveagles_be.common.exception.ErrorCode;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import lombok.*;
+
+@Entity
+@Table(name = &quot;reservation_setting&quot;)
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ReservationSetting {
+
+  @EmbeddedId private ReservationSettingId id;
+
+  @Column(name = &quot;available_start_time&quot;, nullable = false)
+  private LocalTime availableStartTime;
+
+  @Column(name = &quot;available_end_time&quot;, nullable = false)
+  private LocalTime availableEndTime;
+
+  @Column(name = &quot;lunch_start_time&quot;)
+  private LocalTime lunchStartTime;
+
+  @Column(name = &quot;lunch_end_time&quot;)
+  private LocalTime lunchEndTime;
+
+  @Column(name = &quot;deleted_at&quot;)
+  private LocalDateTime deletedAt;
+
+  public void markDeleted() {
+<span class="fc" id="L36">    this.deletedAt = LocalDateTime.now();</span>
+<span class="fc" id="L37">  }</span>
+
+  public boolean isActive() {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">    return this.deletedAt == null;</span>
+  }
+
+  public void update(LocalTime start, LocalTime end, LocalTime lunchStart, LocalTime lunchEnd) {
+<span class="fc bfc" id="L44" title="All 2 branches covered.">    if (start.isAfter(end)) {</span>
+<span class="fc" id="L45">      throw new BusinessException(ErrorCode.INVALID_RESERVATION_TIME_RANGE);</span>
+    }
+<span class="pc bpc" id="L47" title="1 of 4 branches missed.">    if (lunchStart != null &amp;&amp; lunchEnd != null) {</span>
+<span class="pc bpc" id="L48" title="1 of 4 branches missed.">      if (lunchStart.isBefore(start) || lunchEnd.isAfter(end)) {</span>
+<span class="fc" id="L49">        throw new BusinessException(ErrorCode.INVALID_LUNCH_TIME_RANGE);</span>
+      }
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">      if (!lunchStart.isBefore(lunchEnd)) {</span>
+<span class="fc" id="L52">        throw new BusinessException(ErrorCode.INVALID_LUNCH_TIME_ORDER);</span>
+      }
+    }
+
+<span class="fc" id="L56">    this.availableStartTime = start;</span>
+<span class="fc" id="L57">    this.availableEndTime = end;</span>
+<span class="fc" id="L58">    this.lunchStartTime = lunchStart;</span>
+<span class="fc" id="L59">    this.lunchEndTime = lunchEnd;</span>
+<span class="fc" id="L60">  }</span>
+
+  public Long getShopId() {
+<span class="nc" id="L63">    return id.getShopId();</span>
+  }
+
+  public Integer getAvailableDay() {
+<span class="fc" id="L67">    return id.getAvailableDay();</span>
+  }
+
+  public void restore() {
+<span class="fc" id="L71">    this.deletedAt = null;</span>
+<span class="fc" id="L72">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

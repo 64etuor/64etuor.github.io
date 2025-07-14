@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SalesCommandController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.sales.command.application.controller</a> &gt; <span class="el_source">SalesCommandController.java</span></div><h1>SalesCommandController.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.sales.command.application.controller;
+
+import com.deveagles.be15_deveagles_be.common.dto.ApiResponse;
+import com.deveagles.be15_deveagles_be.features.sales.command.application.service.SalesCommandService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = &quot;매출&quot;, description = &quot;매출 API&quot;)
+@RestController
+@RequestMapping(&quot;sales&quot;)
+@RequiredArgsConstructor
+@Validated
+<span class="nc" id="L18">@Slf4j</span>
+public class SalesCommandController {
+
+  private final SalesCommandService salesCommandService;
+
+  @Operation(summary = &quot;회원권 매출 환불&quot;, description = &quot;해당 회원권 salesId의 매출을 환불 처리합니다.&quot;)
+  @PostMapping(&quot;/refund/{salesId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; refundSales(@PathVariable Long salesId) {
+<span class="nc" id="L26">    salesCommandService.refundSales(salesId);</span>
+<span class="nc" id="L27">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+
+  @Operation(summary = &quot;매출 삭제&quot;, description = &quot;해당 salesId의 매출을 soft delete 처리합니다.&quot;)
+  @DeleteMapping(&quot;/delete/{salesId}&quot;)
+  public ResponseEntity&lt;ApiResponse&lt;Void&gt;&gt; deleteSales(@PathVariable Long salesId) {
+<span class="nc" id="L33">    salesCommandService.deleteSales(salesId);</span>
+<span class="nc" id="L34">    return ResponseEntity.ok(ApiResponse.success(null));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

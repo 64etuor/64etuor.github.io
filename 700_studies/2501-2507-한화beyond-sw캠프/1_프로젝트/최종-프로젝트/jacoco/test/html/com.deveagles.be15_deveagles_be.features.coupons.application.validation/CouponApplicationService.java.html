@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CouponApplicationService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be15_DevEagles_BE</a> &gt; <a href="index.source.html" class="el_package">com.deveagles.be15_deveagles_be.features.coupons.application.validation</a> &gt; <span class="el_source">CouponApplicationService.java</span></div><h1>CouponApplicationService.java</h1><pre class="source lang-java linenums">package com.deveagles.be15_deveagles_be.features.coupons.application.validation;
+
+import com.deveagles.be15_deveagles_be.features.coupons.common.CouponResponseFactory;
+import com.deveagles.be15_deveagles_be.features.coupons.domain.service.CouponDiscountCalculator;
+import com.deveagles.be15_deveagles_be.features.coupons.domain.vo.DiscountResult;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.request.CouponApplicationRequest;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.response.CouponApplicationResponse;
+import com.deveagles.be15_deveagles_be.features.coupons.presentation.dto.response.CouponValidationResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+<span class="fc" id="L17">@Slf4j</span>
+public class CouponApplicationService {
+
+  private final CouponValidationService couponValidationService;
+  private final CouponResponseFactory couponResponseFactory;
+
+  private final CouponDiscountCalculator couponDiscountCalculator = new CouponDiscountCalculator();
+
+  public CouponValidationResponse validateCoupon(CouponApplicationRequest request) {
+<span class="fc" id="L26">    log.info(&quot;쿠폰 검증 요청 - 코드: {}&quot;, request.getCouponCode());</span>
+<span class="fc" id="L27">    return couponValidationService.validateForSale(request);</span>
+  }
+
+  public CouponApplicationResponse applyCoupon(CouponApplicationRequest request) {
+<span class="fc" id="L31">    log.info(&quot;쿠폰 적용 요청 - 코드: {}, 원금액: {}&quot;, request.getCouponCode(), request.getOriginalAmount());</span>
+
+<span class="fc" id="L33">    CouponValidationResponse validationResult = couponValidationService.validateForSale(request);</span>
+
+<span class="fc bfc" id="L35" title="All 2 branches covered.">    if (!validationResult.isValid()) {</span>
+<span class="fc" id="L36">      return couponResponseFactory.createFailedResponse(validationResult.getErrorMessage());</span>
+    }
+
+<span class="fc" id="L39">    DiscountResult discountResult =</span>
+<span class="fc" id="L40">        couponDiscountCalculator.calculateDiscount(</span>
+<span class="fc" id="L41">            validationResult.getCoupon(), request.getOriginalAmount());</span>
+
+<span class="fc" id="L43">    log.info(</span>
+        &quot;할인 계산 완료 - 쿠폰ID: {}, 원금액: {}, 할인율: {}%, 할인금액: {}, 최종금액: {}&quot;,
+<span class="fc" id="L45">        validationResult.getCoupon().getId(),</span>
+<span class="fc" id="L46">        discountResult.getOriginalAmount(),</span>
+<span class="fc" id="L47">        discountResult.getDiscountRate(),</span>
+<span class="fc" id="L48">        discountResult.getDiscountAmount(),</span>
+<span class="fc" id="L49">        discountResult.getFinalAmount());</span>
+
+<span class="fc" id="L51">    return couponResponseFactory.createSuccessResponse(</span>
+<span class="fc" id="L52">        validationResult.getCoupon(), discountResult);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
