@@ -1,4 +1,56 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sat, 12 Jul 2025 14:19:17 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 12 Jul 2025 14:19:01 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[2025-07-12 완벽한 나, 나를 화나게 하는 것]]></title><description><![CDATA[
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 15 Jul 2025 17:04:38 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 15 Jul 2025 17:03:57 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[한화 BEYOND SW부트캠프 25주차 회고]]></title><description><![CDATA[ 프로젝트에 시간을 너무 쏟지 않으려고 했는데 생각보다 너무 많이 할애했다.
+덕분에 독서랑 개인 일과가 너무 밀려서 당장 프로젝트가 끝나는 순간부터 해야 할 일이 산더미처럼 쌓였다.
+프로젝트에 영향을 안 받으려고 했는데 뭐 인간사에서 이게 어쩔 수 있나 싶긴 함.
+아무튼 중간 중간 뒤처진 것들은 순도 100% 백수로 전환되면서 채우면 되긴 한다.
+SW 부트캠프:
+데이터베이스 모델링의 중요성을 뼈저리게 실감한다.
+DB 변경 사항 때문에 만들었던 모든 코드를 고치면서 모든 시간을 낭비했다.
+파이썬 서버는 수정하다가 도저히 답이 없어서 코드 전체를 삭제하고 다시 만들기 시작했다.
+분석 쪽 모델을 먼저 만든다는 게 사실상 어불성설이었는데 프로젝트 기간이 짧다 보니 미리 만든 게 화근이었다.
+덕분에 만들어야 하는 기능은 마무리 못하고 수정에만 모든 시간을 할애해서 보람도 없고, 지치기는 지칠 데로 지치고…(깃 코드 이력을 보니 +9만 lines - 3만 lines…)
+설계를 보다 철저히 해야 하는데 설계도 결국 경험이 선행되야 잘 할 수 있는 거라 경험이 쌓였다는 느낌.
+아 근데 진짜 너무 질리기는 한다. ㅋㅋㅋㅋ
+본래 구현하려고 했던 기능 대다수는 포기해야 프로젝트 기간을 맞출 듯.
+본격적인 칼질 타임 시작. 목표: 아이캔대학 follow-up
+결과: 당연히 못했다. ㅋㅋㅋ 프로젝트 마무리 후 다시 재개 미친 듯이 코드만 쳐다 보고 있었기는 하다. 모든 게 Minus. 마이크로 매니징의 유행이 지났지만, 마이크로 매니징이 필요한 부분도 분명 있는 거 같다. 매니지먼트란 무엇인가? 목표: 프로젝트 기능 마무리 및 배포.
+]]></description><link>https://64etuor.github.io/700_studies/2501-2507-한화beyond-sw캠프/3_회고/한화-beyond-sw부트캠프-25주차-회고.html</link><guid isPermaLink="false">700_Studies/2501-2507 한화BEYOND SW캠프/3_회고/한화 BEYOND SW부트캠프 25주차 회고.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 15 Jul 2025 17:03:47 GMT</pubDate></item><item><title><![CDATA[2025-07-15 나의 아킬레스건, 나와 똑같은 사람이 존재한다면]]></title><description><![CDATA[
+"나의 아킬래스건은 무엇인가? What is your Achilles' heel?" 학력이라고 생각한다.
+결국 중요한 건 능력이라고 생각해서 학력을 크게 신경 쓰지 않았고,
+대학도 호기롭게 죄 그만 뒀다.
+그 학력이 없어서 할 수 있는 일이 너무 제한된 바람에 고생을 많이 했다.
+원하던 가시밭길을 걸었으니 행복하면서도 불행한 이중적인 삶을 살았다.
+남에게든 자식에게든 절대 추천할 만한 길은 아닌 거 같다.
+다만 아킬레스건으로 칭할 정도로 스스로 상처 입거나 열등감이 있는 건 아니라서,
+여전히 본심은 학력이 뭐 대수인가라는 생각을 하긴 한다.
+그러나 그건 내 짧은 생각일 뿐이고 현실에서는 엄청난 대수임은 확실하다.
+데이터는 작은 확률을 무시하니까. (그게 이득이긴 해!) 너와 똑같은 사람이 존재한다면 어떨까? 나는 학습력이 좋고 반면교사를 모토로 삼은 사람이다.
+나랑 똑같은 사람을 만난다면 나의 못난 점을 보면서 ‘나는 저렇게 살 지 말아야지.’ 다짐할 것이다.
+그리고나서 나는 그 내가 관찰하던 나와 또다른 형태의 못난 사람이 되어 있을 것이다.
+아마 평생 못날 팔자로 태어난 것 마냥.
+오늘의 '생각을 자극'하는 글귀
+"타인의 기대가 아닌자신 이상을 따라야 한다.
+정체성에 관한 가장 중요한 질문은 ""남들이 나를 어떻게 생각하는가?""가 아니라 ""내가 어떤 사람이 되고 싶은가?다. 70개의 연구 결과, 정신 건강은 타인의 기대가 아니라 삶에서 자신의 이상을 얼마나 따르느냐에 달려 있다. 행복은 태도와 가치관의 간격이 좁혀질 때 찾아온다."
+]]></description><link>https://64etuor.github.io/700_studies/2501-2502-한달-노트-챌린지/2025-07/2025-07-15-나의-아킬레스건,-나와-똑같은-사람이-존재한다면.html</link><guid isPermaLink="false">700_Studies/2501-2502 한달 노트 챌린지/2025-07/2025-07-15 나의 아킬레스건, 나와 똑같은 사람이 존재한다면.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Tue, 15 Jul 2025 16:50:32 GMT</pubDate></item><item><title><![CDATA[2025-07-14 비밀이 있는지, 아무도 시키지 않아도 즐겁게 하는 일]]></title><description><![CDATA[
+"비밀이 있는가? 하나 이상인가? Do you have a secret? More than one?" 당연히 있다. 하나 이상일 것이다.
+그러나 남을 속이거나 해하려는 의도의 비밀은 아니다.
+비밀을 부끄럽게 생각해서 감추는 것도 아니다.
+말할 필요가 생긴다면 언제든 밝힐 비밀들이기는 하다.
+갑자기 명탐정 코난에서 베르무트가 했던 대사가 떠오르는 건 왜인가.
+A secret makes a woman woman. 아무도 시키지 않았는데 즐겁게 하는 건 뭐야? 웹툰 보기, 게임하기, 책 보기, 노래하기 등등.
+아무도 시키지 않았는데 즐거운 일은 너무나 많은데 굳이 나열할 필요가 있을까!
+즐겁다는 건 남의 인정을 바라지 않는다는 뜻이 될 수도 있는데!
+오늘의 '생각을 자극'하는 글귀
+"행복의 열쇠는 가진 것에 감사하는 마음에 있다.
+불만은 더 좋을 수도 있었다고 말하는 것이다. 지혜는 더 나쁠 수 있었다고 말하는 것이다. ""만약 ~ 했더라면.""이라는 생각은 잘못된 일에 대한 후회지만, ""적어도 ~했어.""는 일이 잘못되지 않은 것에 대한 감사의 표현이다. 행복의 열쇠는 없는 것을 한탄하지 않고 가진 것에 감사하는 마음에 있다."
+]]></description><link>https://64etuor.github.io/700_studies/2501-2502-한달-노트-챌린지/2025-07/2025-07-14-비밀이-있는지,-아무도-시키지-않아도-즐겁게-하는-일.html</link><guid isPermaLink="false">700_Studies/2501-2502 한달 노트 챌린지/2025-07/2025-07-14 비밀이 있는지, 아무도 시키지 않아도 즐겁게 하는 일.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Mon, 14 Jul 2025 16:38:42 GMT</pubDate></item><item><title><![CDATA[2025-07-13 나를 감성에 젖게 만드는 것, 인생을 크게 뒤흔든 선택]]></title><description><![CDATA[
+"나를 감성에 젖게 만드는 것은? What are you sentimental about?" 노래와 문학이 아닐까..?
+예전엔 노래를 듣거나 어떤 이야기를 읽고 눈물을 흘릴 때가 가끔 있었는데,
+그다지 부끄럽게 생각하지 않는다. 오히려 눈물이 안 나는 지금의 내가 별로 맘에 안 든다.
+그 외에는 상황이랄까.
+여유가 없는 상황에서는 쉽게 감성에 젖고 더 감정에 솔직하게 되는 거 같다.
+세월과 함께 얼굴에 주름은 더 깊어져만 가는데,
+내 감성의 지문은 반대로 옅어져만 가는 것 같아 아쉬운 생각이 종종 든다. 인생을 크게 뒤흔들었던 선택을 해 본 적이 있어? 해 본 적이 있다. 그것도 제법 많이.
+]]></description><link>https://64etuor.github.io/700_studies/2501-2502-한달-노트-챌린지/2025-07/2025-07-13-나를-감성에-젖게-만드는-것,-인생을-크게-뒤흔든-선택.html</link><guid isPermaLink="false">700_Studies/2501-2502 한달 노트 챌린지/2025-07/2025-07-13 나를 감성에 젖게 만드는 것, 인생을 크게 뒤흔든 선택.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 13 Jul 2025 20:02:45 GMT</pubDate></item><item><title><![CDATA[(공고문) 2024년도 중앙부처 및 지자체 창업지원사업 통합공고문]]></title><link>https://64etuor.github.io/500_resources/정부지원창업/(공고문)-2024년도-중앙부처-및-지자체-창업지원사업-통합공고문.html</link><guid isPermaLink="false">500_Resources/정부지원창업/(공고문) 2024년도 중앙부처 및 지자체 창업지원사업 통합공고문.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 12 Jan 2025 07:40:32 GMT</pubDate></item><item><title><![CDATA[멍때리기의 과학ㆍ궤도]]></title><link>https://64etuor.github.io/500_resources/00_achieves/멍때리기/멍때리기의-과학ㆍ궤도.html</link><guid isPermaLink="false">500_Resources/00_Achieves/멍때리기/멍때리기의 과학ㆍ궤도.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 29 Dec 2024 10:43:45 GMT</pubDate></item><item><title><![CDATA[착각]]></title><link>https://64etuor.github.io/900_writings/00_achieves/2401-2403-대전-글쓰기-모임/착각.html</link><guid isPermaLink="false">900_Writings/00_Achieves/2401-2403 대전 글쓰기 모임/착각.txt</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 14 Jan 2024 07:26:20 GMT</pubDate></item><item><title><![CDATA[2025-07-12 완벽한 나, 나를 화나게 하는 것]]></title><description><![CDATA[
 "_ 은(는) 완벽하다. __ is perfect." 나는 완벽하다. 내가 나이기에 필요한 모든 조건을 완벽하게 충족하는 사람은 이 세상에 나밖에 없다. 내가 나이기에 필요한 조건은 시시각각 다채롭게 변화하는데 조금의 지체 없이 그 무질서한 변화를 따라갈 수 있는 사람도 나밖에 없다. 그러므로 이 세상에 완벽한 나는 단 하나 뿐이다. 항상 너를 화나게 만드는 건 뭐야? 부당함에 대항할 수 없는 나에게 분개할 때가 있다.
 또 어떠한 잘못된 상황이 있을 때 그걸 개선하거나 반전 시킬 수 없는 스스로의 무능력함에 화가 날 때가 있다.
 매일 루틴을 실패하는 내 게으름에도 화가 난다!!!
@@ -52,7 +104,7 @@
 오늘의 '생각을 자극'하는 글귀
 "충성은 사람이 아닌 원칙에 해야 한다.
 리더를 따를 때는 어떤 상황에서 더 이상 따르지 않을지를 생각해 보아야 한다. 이 질문에 대한 답이 ""그런 상황은 없다.""라면, 당신의 기준은 위험에 빠져 있는 것이다. 당신이 충성해야 하는 것은 사람이 아니라 원칙이어야 한다. 무조건적인 사랑을 받을 자격이 있는 리더는 없다. 헌신은 인격으로 얻는 것이다. "
-]]></description><link>https://64etuor.github.io/700_studies/2501-2502-한달-노트-챌린지/2025-07/2025-07-09-오늘이-유쾌했던-이유,-최근에-찍은-사진.html</link><guid isPermaLink="false">700_Studies/2501-2502 한달 노트 챌린지/2025-07/2025-07-09 오늘이 유쾌했던 이유, 최근에 찍은 사진.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 09 Jul 2025 10:08:46 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20250709190815.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20250709190815.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[(공고문) 2024년도 중앙부처 및 지자체 창업지원사업 통합공고문]]></title><link>https://64etuor.github.io/500_resources/정부지원창업/(공고문)-2024년도-중앙부처-및-지자체-창업지원사업-통합공고문.html</link><guid isPermaLink="false">500_Resources/정부지원창업/(공고문) 2024년도 중앙부처 및 지자체 창업지원사업 통합공고문.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 12 Jan 2025 07:40:32 GMT</pubDate></item><item><title><![CDATA[멍때리기의 과학ㆍ궤도]]></title><link>https://64etuor.github.io/500_resources/00_achieves/멍때리기/멍때리기의-과학ㆍ궤도.html</link><guid isPermaLink="false">500_Resources/00_Achieves/멍때리기/멍때리기의 과학ㆍ궤도.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 29 Dec 2024 10:43:45 GMT</pubDate></item><item><title><![CDATA[착각]]></title><link>https://64etuor.github.io/900_writings/00_achieves/2401-2403-대전-글쓰기-모임/착각.html</link><guid isPermaLink="false">900_Writings/00_Achieves/2401-2403 대전 글쓰기 모임/착각.txt</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 14 Jan 2024 07:26:20 GMT</pubDate></item><item><title><![CDATA[2025-07-08 장마를 좋아하는지, 오랫동안 좋아한 가수와 노래]]></title><description><![CDATA[
+]]></description><link>https://64etuor.github.io/700_studies/2501-2502-한달-노트-챌린지/2025-07/2025-07-09-오늘이-유쾌했던-이유,-최근에-찍은-사진.html</link><guid isPermaLink="false">700_Studies/2501-2502 한달 노트 챌린지/2025-07/2025-07-09 오늘이 유쾌했던 이유, 최근에 찍은 사진.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 09 Jul 2025 10:08:46 GMT</pubDate><enclosure url="https://64etuor.github.io/settings/attachments/pasted-image-20250709190815.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://64etuor.github.io/settings/attachments/pasted-image-20250709190815.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[2025-07-08 장마를 좋아하는지, 오랫동안 좋아한 가수와 노래]]></title><description><![CDATA[
 "장마를 좋아하는가? Do you like the monsoon?" " 좋아하지도 싫어하지도 않는다. 물론 재난 수준의 장마가 좋을 리는 없지만.
 비가 많이 온다면 그 핑계로 파전에 막걸리를 먹어도 좋고,
 바깥 출입을 자제하고 책을 많이 읽거나, 게임을 많이 해도 좋겠다.
