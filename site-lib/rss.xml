@@ -1,4 +1,32 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 15 Jul 2025 17:04:38 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 15 Jul 2025 17:03:57 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[한화 BEYOND SW부트캠프 25주차 회고]]></title><description><![CDATA[ 프로젝트에 시간을 너무 쏟지 않으려고 했는데 생각보다 너무 많이 할애했다.
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Documents]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://64etuor.github.io</link><image><url>https://64etuor.github.io/site-lib/media/favicon.png</url><title>Documents</title><link>https://64etuor.github.io</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Thu, 17 Jul 2025 15:21:49 GMT</lastBuildDate><atom:link href="https://64etuor.github.io/site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 17 Jul 2025 15:21:37 GMT</pubDate><copyright><![CDATA[Yangha Park]]></copyright><ttl>60</ttl><dc:creator>Yangha Park</dc:creator><item><title><![CDATA[2025-07-16]]></title><description><![CDATA[
+"지금 양말을 신고 있는가? Are you wearing socks?" 잘 때가 됐으니 그렇지 않다.
+비가 추적이니 양말을 신고 싶은 기분도 아니다.
+장화가 없으니 이 비에 밖을 나서기 어렵다.
+그러나 장화가 없어도 맨발이라면 밖에 나섬직 하다. 영원히 간직하고 싶은 기억이 있다면 뭐야? 어머니와 함께 글을 쓰던 기억.
+글은 애상이요, 끊이지 않는 단말마 같은 것이라
+이 앞에 메아리 치는 계곡을 홀로 나서는 건 영 두려운 일이고, 또 영영 두려운 일이라서 차마 용기가 없다.
+눈 앞에 번개가 막 부딪혀 오는 마당에 글자 따위를 쓸 사람이 대체 어딨는가? 그나마 그것도 홀로 된 참이라면.
+그러므로 다시는 돌아오지 않을 과거만을 추억하면서 길을 나서지 않는 사람은,
+으레 그렇듯 우물 안에서 세상을 논할 것이다마는.
+세상이 그런 개구리를 위하여 함께 울어 줄 희망 따윈 진즉에 가뭄이다.
+또 비가 온 들 채워지지 않는 우물도 있기 마련이다.
+오늘의 '생각을 자극'하는 글귀
+첫 만남에서 성공적인 대화를 나누려면 ""뭘 좋아하세요?""라고 물어보라.
+처음 만난 사람에게 ""무슨 일 하세요?""라고 묻지 마라. 이 질을 받은 상대방은 일과 회사에 관한 이야기 이외에 다른 이야기를 할 의지가 꺾인다. 대신 이렇게 물어보자. ""뭘 좋아하세요?"" 상대방의 호기심을 자극하고 관심사를 표현할 수 있는 질문을 던져야 한다."
+]]></description><link>https://64etuor.github.io/700_studies/2501-2502-한달-노트-챌린지/2025-07/2025-07-16.html</link><guid isPermaLink="false">700_Studies/2501-2502 한달 노트 챌린지/2025-07/2025-07-16.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 17 Jul 2025 15:21:29 GMT</pubDate></item><item><title><![CDATA[2025-07-17 나의 가장 큰 장점, 최근에 가장 당환했던 순간]]></title><description><![CDATA[
+"나의 가장 큰 장점은? What is your biggest strength?" " 감정적으로 안정되었다는 게 큰 장점인 거 같다. 그리고 동시에 단점이기도 하다.
+글을 쓰고 싶은 순간은 대게 감정적인 순간이기 때문이다.
+나는 어린 날의 내가 쓰던 글을 보는 것을 좋아한다.
+거기에는 감정이 크게 묻어 있어서 꽤나 짙은 향이 나는데,
+요새 쓰는 시나 글은 영 밍밍한 맛 뿐이다.
+감정의 스펙트럼이 작아지다 보니 타인과 공감대를 형성하는 데도 조금 어려움이 있는 거 같다.
+크게 기쁠 일도 없고, 크게 슬플 일도 없는 요새가 다행인 지 불행인 지 아리송할 따름이다. 최근에 가장 당황했던 순간은 언제야? 커서, 클로드 코드, Gemini CLI 를 동시에 쓰면서 프로젝트 작업을 하고 있다.
+다른 레포지토리에서 작업을 하면 문제가 없는데 바로 어제 모노 레포에서 브랜치를 옮기면서 작업하다가 내 실수인지 ide끼리 쓰기 경합 사태가 일어난 것인지 오류가 뜨더니 Git에서 추적하지 않던 (다른 코딩 툴이 작업한 코드인데 브랜치에 해당하는 코드가 아니라 커밋을 안 하고 있었다.) 코드를 다 날려 먹었다. 급할 수록 돌아가라던데… 한동안 멍하니 컴퓨터만 쳐다 보고 있었는데, 허망하고 황망하기 짝이 없었다.
+옛날에 사무 작업을 할 때도 곧잘 저장을 안 하다가 파일을 날리고 시간을 날린 적이 많은데 참 고쳐지지 않는 습관이다!
+오늘의 '생각을 자극'하는 글귀
+지식을 가장한 신념을 조심하라. 확신은 우리를 착각에 빠뜨린다.
+내 생각을 남에게 강요한다고 사실이 되지는 않는다. 설득당하는 사람은 자기 자신뿐이다. 지식을 가장한 신념을 조심하라. 세상에 확실한 것은 없으며 확신은 우리를 쉽게 착각에 빠뜨린다. 죽을힘을 다해 올라간 언덕이 처음부터 올라가지 말았어야 할 언덕일 수도 있다."
+]]></description><link>https://64etuor.github.io/700_studies/2501-2502-한달-노트-챌린지/2025-07/2025-07-17-나의-가장-큰-장점,-최근에-가장-당환했던-순간.html</link><guid isPermaLink="false">700_Studies/2501-2502 한달 노트 챌린지/2025-07/2025-07-17 나의 가장 큰 장점, 최근에 가장 당환했던 순간.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Thu, 17 Jul 2025 15:16:47 GMT</pubDate></item><item><title><![CDATA[멍때리기의-과학ㆍ궤도]]></title><link>https://64etuor.github.io/500_resources/00_achieves/멍때리기/멍때리기의-과학ㆍ궤도.html</link><guid isPermaLink="false">500_Resources/00_Achieves/멍때리기/멍때리기의-과학ㆍ궤도.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 22 Jan 2025 10:18:24 GMT</pubDate></item><item><title><![CDATA[(공고문)-2024년도-중앙부처-및-지자체-창업지원사업-통합공고문]]></title><link>https://64etuor.github.io/500_resources/정부지원창업/(공고문)-2024년도-중앙부처-및-지자체-창업지원사업-통합공고문.html</link><guid isPermaLink="false">500_Resources/정부지원창업/(공고문)-2024년도-중앙부처-및-지자체-창업지원사업-통합공고문.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 22 Jan 2025 10:18:24 GMT</pubDate></item><item><title><![CDATA[착각]]></title><link>https://64etuor.github.io/900_writings/00_achieves/2401-2403-대전-글쓰기-모임/착각.html</link><guid isPermaLink="false">900_Writings/00_Achieves/2401-2403 대전 글쓰기 모임/착각.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 14 Jan 2024 09:00:16 GMT</pubDate></item><item><title><![CDATA[한화 BEYOND SW부트캠프 25주차 회고]]></title><description><![CDATA[ 프로젝트에 시간을 너무 쏟지 않으려고 했는데 생각보다 너무 많이 할애했다.
 덕분에 독서랑 개인 일과가 너무 밀려서 당장 프로젝트가 끝나는 순간부터 해야 할 일이 산더미처럼 쌓였다.
 프로젝트에 영향을 안 받으려고 했는데 뭐 인간사에서 이게 어쩔 수 있나 싶긴 함.
 아무튼 중간 중간 뒤처진 것들은 순도 100% 백수로 전환되면서 채우면 되긴 한다.
@@ -75,7 +103,7 @@ A secret makes a woman woman. 아무도 시키지 않았는데 즐겁게 하는 
 오늘의 '생각을 자극'하는 글귀
 "한 사람의 감정에 결정에 좌우되어서는 안 된다.
 인간관계가 삐걱거릴 때마다 한쪽 바퀴에만 기름칠하는 것은 건강하지 못한 패턴이다. 먼저 화내거나 불안한 모습을 보이는 사람을 곧바로 달래주면 힘의 불균형이 생긴다. 한 사람의 감정에 결정이 좌우되어서는 안 된다. 결정은 양쪽 모두의 가치가 포함되어야 한다."
-]]></description><link>https://64etuor.github.io/700_studies/2501-2502-한달-노트-챌린지/2025-07/2025-07-11-닮고-싶은-문학작품-속-주인공,-꾸준히-모으는-것.html</link><guid isPermaLink="false">700_Studies/2501-2502 한달 노트 챌린지/2025-07/2025-07-11 닮고 싶은 문학작품 속 주인공, 꾸준히 모으는 것.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 11 Jul 2025 18:37:11 GMT</pubDate></item><item><title><![CDATA[멍때리기의-과학ㆍ궤도]]></title><link>https://64etuor.github.io/500_resources/00_achieves/멍때리기/멍때리기의-과학ㆍ궤도.html</link><guid isPermaLink="false">500_Resources/00_Achieves/멍때리기/멍때리기의-과학ㆍ궤도.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 22 Jan 2025 10:18:24 GMT</pubDate></item><item><title><![CDATA[(공고문)-2024년도-중앙부처-및-지자체-창업지원사업-통합공고문]]></title><link>https://64etuor.github.io/500_resources/정부지원창업/(공고문)-2024년도-중앙부처-및-지자체-창업지원사업-통합공고문.html</link><guid isPermaLink="false">500_Resources/정부지원창업/(공고문)-2024년도-중앙부처-및-지자체-창업지원사업-통합공고문.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Wed, 22 Jan 2025 10:18:24 GMT</pubDate></item><item><title><![CDATA[착각]]></title><link>https://64etuor.github.io/900_writings/00_achieves/2401-2403-대전-글쓰기-모임/착각.html</link><guid isPermaLink="false">900_Writings/00_Achieves/2401-2403 대전 글쓰기 모임/착각.pdf</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Sun, 14 Jan 2024 09:00:16 GMT</pubDate></item><item><title><![CDATA[2025-07-10 부모님과의 최근 대화, 오감 중 가장 예민한 감각]]></title><description><![CDATA[
+]]></description><link>https://64etuor.github.io/700_studies/2501-2502-한달-노트-챌린지/2025-07/2025-07-11-닮고-싶은-문학작품-속-주인공,-꾸준히-모으는-것.html</link><guid isPermaLink="false">700_Studies/2501-2502 한달 노트 챌린지/2025-07/2025-07-11 닮고 싶은 문학작품 속 주인공, 꾸준히 모으는 것.md</guid><dc:creator><![CDATA[Yangha Park]]></dc:creator><pubDate>Fri, 11 Jul 2025 18:37:11 GMT</pubDate></item><item><title><![CDATA[2025-07-10 부모님과의 최근 대화, 오감 중 가장 예민한 감각]]></title><description><![CDATA[
 "부모님과 마지막으로 대화를 나눈 적은 언제인가? When was the last time you spoke to your parents?" 2주 전쯤 배편을 예약해 드린다고 통화한 게 마지막이다.
 아무래도 아버지와 엄청나게 살가운 사이는 아니라서 일상을 시시콜콜 공유하지는 않는다.
 대게의 대화는 결혼 못하는 아들에 대한 핀잔으로 마무리되지만,
