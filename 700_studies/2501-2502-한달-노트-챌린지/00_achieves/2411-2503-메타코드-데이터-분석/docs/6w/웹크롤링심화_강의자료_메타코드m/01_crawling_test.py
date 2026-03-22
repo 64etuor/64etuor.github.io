@@ -1,4 +1,0 @@
-from config import ENCODING_KEY, DECODING_KEY
-
-print(ENCODING_KEY)
-print(DECODING_KEY)
