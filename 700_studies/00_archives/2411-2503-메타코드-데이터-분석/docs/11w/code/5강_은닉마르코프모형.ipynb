@@ -1,0 +1,369 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 1. 데이터 불러오기\n",
+    "> - 데이터는 Pandas 라이브러리의 pd.read_csv 함수를 활용하여 불러온다."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 상황 정의\n",
+    "# \n",
+    "# 은닉된 상태 -> 할인수준 -> 할인율\n",
+    "# 보이는 관측치 -> 판매수량 -> 컬럼 O\n",
+    "\n",
+    "# 2,3개 판매/주문한 경우에 할인수준 / 낮기, 높기\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#필요 라이브러리 \n",
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "\n",
+    "#한글 폰트 지정\n",
+    "import matplotlib\n",
+    "import matplotlib.font_manager as fm\n",
+    "\n",
+    "fm.get_fontconfig_fonts()\n",
+    "font_location = 'C:/Windows/Fonts/malgun.ttf' # For Windows\n",
+    "font_name = fm.FontProperties(fname=font_location).get_name()\n",
+    "matplotlib.rc('font', family=font_name)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#데이터 경로 지정\n",
+    "order_data_file_path = \"./data/order_detail.csv\"\n",
+    "customer_data_file_path = \"./data/customer_data.csv\"\n",
+    "\n",
+    "#데이터 불러오기\n",
+    "order_data = pd.read_csv(order_data_file_path)\n",
+    "customer_data = pd.read_csv(customer_data_file_path)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#주문일자 컬럼을 생성한다.\n",
+    "order_data[\"주문일자\"] = order_data[\"주문일시\"].str.slice(start=0, stop=10)\n",
+    "order_data[\"주문일자\"] = pd.to_datetime(order_data[\"주문일자\"], format=\"%Y-%m-%d\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 2. 마르코프 모형을 지정하기 위한 라벨링"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "order_data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "order_data[\"주문수량\"] = order_data[\"주문수량\"].astype(str)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 1만원 / 8천원 -> 1 - (8000/10000) = 0.2 -> 20%\n",
+    "order_data[\"할인율\"] = 1 - (order_data[\"판매가\"]/order_data[\"정상가\"])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "order_data.loc[(order_data[\"할인율\"]>=0)&(order_data[\"할인율\"]<0.3),\"할인구분\"] = \"NORMAL\"\n",
+    "order_data.loc[(order_data[\"할인율\"]>=0.3)&(order_data[\"할인율\"]<0.4),\"할인구분\"] = \"SEASON OFF\"\n",
+    "order_data.loc[(order_data[\"할인율\"]>=0.4),\"할인구분\"] = \"OUTLET\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "order_data = order_data.dropna()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "order_data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 3. 은닉 마르코프 모형 시퀀스 만들기"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#고객별로 주문한 히스토리 리스트 \n",
+    "#홍길동 -> NORMAL, NORMAL, OUTLET (히든 시퀀스)\n",
+    "#       -> 1, 1, 3 (관측 시퀀스)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "order_data.groupby('고객번호')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "customer_data_sequence = []\n",
+    "for customerID, group in order_data.groupby('고객번호'):\n",
+    "    sales_level_sequence = group['할인구분'].tolist()\n",
+    "    purchase_amount_sequence = group['주문수량'].tolist()\n",
+    "    customer_data_sequence.append((customerID, sales_level_sequence, purchase_amount_sequence))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "customer_data_sequence"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "len(customer_data_sequence)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 4. 은닉 마르코프 모형 실행하기"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "\n",
+    "\n",
+    "# Hidden states\n",
+    "hidden_states = [\"NORMAL\",\"SEASON OFF\",\"OUTLET\"]\n",
+    "\n",
+    "# Observed states\n",
+    "observed_states = [\"1\", \"2\", \"3\"]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 상태 전이 행렬 Transition probability 함수 만들기\n",
+    "def calculate_transition_matrix(customer_data, hidden_states):\n",
+    "    transition_counts = {state: {next_state: 0 for next_state in hidden_states} \\\n",
+    "                         for state in hidden_states}\n",
+    "    # transition_counts : 상태 간 전이 횟수를 저장하는 딕셔너리\n",
+    "    # transition_counts[state][next_state]는 state에서 next_state로 전이한 횟수\n",
+    "    # ex. transition_counts[맑음][흐림] -> 맑음에서 흐림으로 진행된 횟수\n",
+    "    \n",
+    "    for _, hidden_states_list, _ in customer_data: \n",
+    "        # (고객번호, 날씨 시퀀스, 기분 시퀀스)\n",
+    "        for i in range(len(hidden_states_list) - 1): \n",
+    "            current_state = hidden_states_list[i] \n",
+    "            next_state = hidden_states_list[i + 1]\n",
+    "            transition_counts[current_state][next_state] += 1 \n",
+    "            # 상태 전이 딕셔너리의 카운트 값에서 전이 카운트를 1씩 증가\n",
+    "    # 맑음 - 맑음 -> 20번 40%\n",
+    "    # 맑음 - 흐림 -> 30번 60%\n",
+    "    # 흐림 - 맑음 -> 10번 20%\n",
+    "    # 흐림 - 흐림 -> 40번 80%\n",
+    "    # 100번\n",
+    "    transition_matrix = {state: {next_state: count \\\n",
+    "                                 / sum(transitions.values()) \\\n",
+    "                                 for next_state, count in transitions.items()} \\\n",
+    "                         for state, transitions in transition_counts.items()}\n",
+    "    # 위에서 계산한 상태 간 전이 횟수를 저장한 딕셔너리 \n",
+    "    # transition_counts를 기반으로 Transition matrix 계산\n",
+    "    # 각 상태(state)에서 다른 상태(next_state)로 전이될 확률은 \n",
+    "    # 그 전이 횟수(count)를 해당 상태에서 일어난 \n",
+    "    # 총 전이 횟수(sum(transitions.values()))로 나눈 값입니다.\n",
+    "    # 최종적으로 transition_matrix는 상태 간 전이 확률을 저장하는 딕셔너리로, \n",
+    "    # transition_matrix[state][next_state]는 state에서 \n",
+    "    # next_state로 전이될 확률을 나타냅니다.\n",
+    "    return transition_matrix"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 출력 행렬 emission(output) probability 함수 만들기\n",
+    "def calculate_emission_matrix(customer_data, hidden_states, observed_states):\n",
+    "    emission_counts = {state: {obs_state: 0 for obs_state in observed_states} \\\n",
+    "                       for state in hidden_states}\n",
+    "    # emission_counts는 각 감추어진 상태에서 \n",
+    "    # 각 관측된 상태로의 발생 빈도를 저장하는 딕셔너리\n",
+    "    # 각 감추어진 상태(state)에 대해 관측된 \n",
+    "    # 상태(obs_state)가 발생한 횟수를 0으로 초기화합니다.\n",
+    "    # 예: emission_counts[hidden_state][observed_state]는 \n",
+    "    # 감추어진 상태(날씨)에서 특정 관측 상태(기분)가 발생한 횟수를 나타냅니다.\n",
+    "    \n",
+    "    for _, hidden_states_list, observed_states_list in customer_data:  \n",
+    "        # (고객번호, 날씨 시퀀스, 기분 시퀀스)\n",
+    "        # customer_data에서 고객별로 상태 목록을 순회합니다. \n",
+    "        # 여기서 튜플의 첫 번째 값은 무시, \n",
+    "        # observed_states_list(관측된 상태 목록)와 \n",
+    "        # hidden_states_list(감추어진 상태 목록)를 가져옵니다.\n",
+    "        for obs_state, hidden_state in zip(observed_states_list, \\\n",
+    "                                           hidden_states_list):\n",
+    "            #관측된 상태 목록과 감추어진 상태 목록을 동시에 순회합니다. \n",
+    "            #이때, zip을 사용해 각 고객의 \n",
+    "            # 관측된 상태(obs_state)와 감추어진 상태(hidden_state)를 대응시킵니다.\n",
+    "            emission_counts[hidden_state][obs_state] += 1\n",
+    "            # 감추어진 상태(hidden_state)에서 \n",
+    "            # 관측된 상태(obs_state)가 발생한 횟수를 1씩 증가시킵니다. \n",
+    "            # 즉, emission_counts[hidden_state][obs_state]는 \n",
+    "            # 해당 감추어진 상태에서 해당 관측된 상태가 나타난 빈도를 기록합니다.\n",
+    "\n",
+    "    emission_matrix = {state: {obs_state: count / sum(emissions.values()) \\\n",
+    "                               for obs_state, count in emissions.items()} \\\n",
+    "                       for state, emissions in emission_counts.items()}\n",
+    "    # emission_counts에서 발생 횟수를 기반으로 확률을 계산하여 \n",
+    "    # Emission Matrix를 만듭니다.\n",
+    "    # 각 감추어진 상태(state)에서 특정 관측 상태(obs_state)가 발생할 확률은 \n",
+    "    # 그 발생 횟수(count)를 해당 감추어진 상태에서 \n",
+    "    # 발생한 모든 관측 상태의 총합(sum(emissions.values()))으로 나눈 값입니다.\n",
+    "    return emission_matrix\n",
+    "\n",
+    "    # 최종적으로 emission_matrix는 감추어진 상태에서 \n",
+    "    # 각 관측 상태로의 확률을 저장하는 딕셔너리입니다. \n",
+    "    # 예를 들어, emission_matrix[hidden_state][observed_state]는 \n",
+    "    # 감추어진 상태에서 관측 상태가 발생할 확률을 나타냅니다."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# transition 계산하기\n",
+    "transition_matrix = calculate_transition_matrix(customer_data_sequence, \\\n",
+    "                                                hidden_states)\n",
+    "print(\"Transition 결과:\")\n",
+    "for state, transitions in transition_matrix.items():\n",
+    "    print(state + \": \", transitions)\n",
+    "\n",
+    "# emission 계산하기\n",
+    "emission_matrix = calculate_emission_matrix(customer_data_sequence, \\\n",
+    "                                            hidden_states, observed_states)\n",
+    "print(\"\\nEmission(output) 결과:\")\n",
+    "for state, emissions in emission_matrix.items():\n",
+    "    print(state + \": \", emissions)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

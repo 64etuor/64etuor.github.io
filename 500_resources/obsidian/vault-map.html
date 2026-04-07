@@ -1,0 +1,221 @@
+<!DOCTYPE html> <html lang="en"><head>
+<title>Vault Map</title>
+<base href="../..">
+<meta name="pathname" content="500_resources/obsidian/vault-map.html">
+<meta name="description" content="Defines folder structure, placement decision tree, and inbox processing rules for routing notes to the correct location">
+<meta property="og:title" content="Vault Map">
+<meta property="og:description" content="Defines folder structure, placement decision tree, and inbox processing rules for routing notes to the correct location">
+<meta property="og:type" content="website">
+<meta property="og:url" content="./https://64etuor.github.io/500_resources/obsidian/vault-map.html">
+<meta property="og:image" content="undefined">
+<meta name="author" content="Yangha Park"></head><body class="publish css-settings-manager styled-scrollbars show-inline-title show-ribbon"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="parsed-feature-container" style="display: contents;"><link itemprop="include" href="site-lib/html/custom-head-content-content.html"></div><meta charset="UTF-8"><meta property="og:site_name" content="Obsidian"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="./https://64etuor.github.io/site-lib/rss.xml"><script async="" id="webpage-script" src="site-lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-wasm-script" src="site-lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="site-lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="site-lib/media/favicon.png"><link rel="preload" href="site-lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/snippets.css"></noscript><link rel="stylesheet" href="site-lib/styles/obsidian.css"><link rel="stylesheet" href="site-lib/styles/theme.css"><link rel="preload" href="site-lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="site-lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/supported-plugins.css"></noscript><link rel="preload" href="site-lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/main-styles.css"></noscript><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-vertical-spacing:1.3em;--sidebar-margin:12px}:root{background-color:#202124}.sidebar{height:100%;font-size:14px;z-index:10;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));position:relative;overflow:hidden;overflow:clip;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}#left-sidebar{left:0}#right-sidebar{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}.sidebar.floating{position:absolute}.sidebar .leaf-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .leaf-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}#left-sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}#right-sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar #left-sidebar-content,.sidebar #right-sidebar-content{contain:none!important;container-type:normal!important;animation:none!important}.sidebar:has(.leaf-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:calc(2.3em + 2 * var(--sidebar-margin));width:var(--sidebar-width);padding:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}#left-sidebar .sidebar-topbar{left:0;flex-direction:row;border-top-right-radius:var(--radius-l)}#right-sidebar .sidebar-topbar{right:0;flex-direction:row-reverse;border-top-left-radius:var(--radius-l)}#left-sidebar .topbar-content{margin-right:calc(2.3em + var(--sidebar-margin));flex-direction:row}#right-sidebar .topbar-content{margin-left:calc(2.3em + var(--sidebar-margin));flex-direction:row-reverse}.topbar-content{overflow:hidden visible;overflow:clip visible;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:2px!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}#left-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}#right-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.feature-title{margin-left:1px;text-transform:uppercase;letter-spacing:.06em;margin-top:.75em;margin-bottom:.75em}.feature-header{display:flex;align-items:center;padding-top:0;font-size:1em;padding-left:0}body.floating-sidebars .sidebar{position:absolute}body{transition:background-color var(--color-fade-speed) ease-in-out}#navbar:not(:empty){display:flex;align-items:center;justify-content:space-between;padding:.5em 1em;width:100%}#main{display:flex;flex-direction:column;height:100%;width:100%;align-items:stretch;justify-content:center}#main-horizontal{display:flex;flex-direction:row;flex-grow:1;width:100%;align-items:stretch;justify-content:center}#center-content{flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0!important;transition:opacity .2s ease-in-out;pointer-events:none}#center-content>.obsidian-document{padding-left:2em;padding-right:1em;margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}body #center-content>.obsidian-document>.markdown-preview-sizer{padding-bottom:80vh;width:100%;max-width:var(--line-width);flex-basis:var(--line-width);transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document>div{width:100%!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document:not([data-type=markdown]).embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}#center-content>.obsidian-document:not([data-type=markdown]).embed>*{max-width:100%;max-height:100%;object-fit:contain}:not(h1,h2,h3,h4,h5,h6,li):has(> :is(.math,table)){overflow-x:auto!important}#center-content>.obsidian-document:not([data-type=markdown]){overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.obsidian-document[data-type=attachment]{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%}.obsidian-document[data-type=attachment]>*{outline:0;border:none;box-shadow:none}.obsidian-document[data-type=attachment] :is(img){max-width:90%;max-height:90%;object-fit:contain}.obsidian-document[data-type=attachment]>:is(audio){width:100%;max-width:min(90%,var(--line-width))}.obsidian-document[data-type=attachment]>:is(embed,iframe,video){width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}.canvas-wrapper>:is(.header,.footer){z-index:100;position:absolute;display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){let e=document.querySelectorAll("link[itemprop='include']");for(const t of e){let e=t.getAttribute("href");try{let o="";if(e.startsWith("https:")||e.startsWith("http:")||"file:"!=window.location.protocol){const n=await fetch(e);if(!n.ok){console.log("Could not include file: "+e),t?.remove();continue}o=await n.text()}else{const t=document.getElementById(btoa(encodeURI(e)));if(t){const e=JSON.parse(decodeURI(atob(t.getAttribute("value")??"")));o=e?.data??""}}let n=document.createRange().createContextualFragment(o);t.before(n),t.remove(),console.log("Included text: "+o),console.log("Included file: "+e)}catch(o){t?.remove(),console.log("Could not include file: "+e,o);continue}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script")));!function e(n){let l=o[n],c=n+1;l?(l&&"true"!=l.getAttribute("loaded")||n<o.length&&e(c),n<o.length&&l.addEventListener("load",(()=>e(c)))):n<o.length?e(c):t()}(0)}</script><div id="main"><div id="navbar"></div><div id="main-horizontal"><div id="left-content" class="leaf" style="--sidebar-width: var(--sidebar-width-left);"><div id="left-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><div id="search-container"><div id="search-wrapper"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div aria-label="Clear search" id="search-clear-button"></div></div></div></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="left-sidebar-content" class="leaf-content"><link itemprop="include" href="site-lib/html/file-tree-content.html"></div></div><script defer="">let ls = document.querySelector("#left-sidebar"); ls.classList.toggle("is-collapsed", window.innerWidth < 768); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div></div><div id="center-content" class="leaf"><div class="obsidian-document markdown-preview-view markdown-rendered node-insert-event allow-fold-headings allow-fold-lists show-indentation-guide show-properties is-readable-line-width" data-type="markdown"><style id="MJX-CHTML-styles"></style><pre class="frontmatter language-yaml" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Vault Map"</span>
+<span class="token key atrule">description</span><span class="token punctuation">:</span> <span class="token string">"Defines folder structure, placement decision tree, and inbox processing rules for routing notes to the correct location"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-04</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-07</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> reference
+<span class="token key atrule">status</span><span class="token punctuation">:</span> active
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Yangha Park
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> infra/obsidian
+<span class="token key atrule">aliases</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> vault<span class="token punctuation">-</span>map
+<span class="token key atrule">use_when</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token string">"Deciding which folder to place a new or moved note in"</span>
+  <span class="token punctuation">-</span> <span class="token string">"Processing inbox or clipping items"</span>
+  <span class="token punctuation">-</span> <span class="token string">"Checking folder-to-type mapping"</span></code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre><div class="markdown-preview-sizer markdown-preview-section"><div class="header"><h1 class="page-title heading inline-title" id="Vault_Map_0">Vault Map</h1><div class="data-bar"></div></div><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="el-h1"><h1 data-heading="Vault Map" dir="auto" class="heading" id="Vault_Map_1"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Vault Map</h1></div><div class="el-h2"><h2 data-heading="Folder Structure" dir="auto" class="heading" id="Folder_Structure_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Folder Structure</h2></div><div class="el-p"><p dir="auto">This vault uses a modified PARA structure. Each folder has a single role.</p></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Folder</th>
+<th dir="ltr">Role</th>
+<th dir="ltr">type value</th>
+<th dir="ltr">Placement criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>100_Inbox/</code></td>
+<td dir="ltr">Inbox</td>
+<td dir="ltr"><code>fleeting</code></td>
+<td dir="ltr">Anything not yet classified</td>
+</tr>
+<tr>
+<td dir="ltr"><code>200_Books/</code></td>
+<td dir="ltr">Book notes</td>
+<td dir="ltr"><code>literature</code></td>
+<td dir="ltr">Notes based on books</td>
+</tr>
+<tr>
+<td dir="ltr"><code>300_Projects/</code></td>
+<td dir="ltr">Project docs</td>
+<td dir="ltr"><code>project</code></td>
+<td dir="ltr">Work with deadlines and deliverables</td>
+</tr>
+<tr>
+<td dir="ltr"><code>400_Areas/</code></td>
+<td dir="ltr">Ongoing areas</td>
+<td dir="ltr"><code>permanent</code></td>
+<td dir="ltr">Areas maintained without deadlines</td>
+</tr>
+<tr>
+<td dir="ltr"><code>500_Resources/</code></td>
+<td dir="ltr">References</td>
+<td dir="ltr"><code>reference</code></td>
+<td dir="ltr">External materials, system docs, tool configs</td>
+</tr>
+<tr>
+<td dir="ltr"><code>600_Tech Stack/</code></td>
+<td dir="ltr">Tech knowledge</td>
+<td dir="ltr"><code>permanent</code></td>
+<td dir="ltr">Learning and reference notes by tech stack</td>
+</tr>
+<tr>
+<td dir="ltr"><code>700_Studies/</code></td>
+<td dir="ltr">Study notes</td>
+<td dir="ltr"><code>literature</code></td>
+<td dir="ltr">Lectures, courses, bootcamp notes</td>
+</tr>
+<tr>
+<td dir="ltr"><code>900_Writings/</code></td>
+<td dir="ltr">Creative works &amp; journals</td>
+<td dir="ltr"><code>output</code>, <code>log</code></td>
+<td dir="ltr">Essays, fiction, poetry, diaries, retrospectives</td>
+</tr>
+<tr>
+<td dir="ltr"><code>Clippings/</code></td>
+<td dir="ltr">Web scraps</td>
+<td dir="ltr"><code>reference</code></td>
+<td dir="ltr">Browser clippings (unprocessed)</td>
+</tr>
+<tr>
+<td dir="ltr"><code>Templates/</code></td>
+<td dir="ltr">Templates</td>
+<td dir="auto">-</td>
+<td dir="ltr">Templater only</td>
+</tr>
+<tr>
+<td dir="ltr"><code>Settings/</code></td>
+<td dir="ltr">Settings</td>
+<td dir="auto">-</td>
+<td dir="ltr">Obsidian app settings</td>
+</tr>
+</tbody>
+</table></div><div class="el-h2"><h2 data-heading="Placement Decision Tree" dir="auto" class="heading" id="Placement_Decision_Tree_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Placement Decision Tree</h2></div><div class="el-pre"><pre><code data-line="0">New note -&gt; "Has deadline and deliverables?"
+            |-- Yes -&gt; 300_Projects/
+            +-- No -&gt; "Summarizing an external source?"
+                       |-- Yes -&gt; "From a book?"
+                       |           |-- Yes -&gt; 200_Books/
+                       |           +-- No -&gt; "From a lecture/course?"
+                       |                      |-- Yes -&gt; 700_Studies/
+                       |                      +-- No -&gt; 500_Resources/ or Clippings/
+                       +-- No -&gt; "Self-authored tech notes?"
+                                  |-- Yes -&gt; 600_Tech Stack/
+                                  +-- No -&gt; "Creative writing?"
+                                             |-- Yes -&gt; 900_Writings/
+                                             +-- No -&gt; "Journal or log?"
+                                                        |-- Yes -&gt; 900_Writings/
+                                                        +-- No -&gt; 400_Areas/ or 100_Inbox/
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h2"><h2 data-heading="Inbox Processing (`100_Inbox/`, `Clippings/`)" dir="auto" class="heading" id="Inbox_Processing_(`100_Inbox/`,_`Clippings/`)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Inbox Processing (<code>100_Inbox/</code>, <code>Clippings/</code>)</h2></div><div class="el-p"><p dir="auto">Both <code>100_Inbox/</code> and <code>Clippings/</code> are inboxes. Self-written memos go to <code>100_Inbox/</code>, browser clippings go to <code>Clippings/</code>. Processing logic is the same.</p></div><div class="el-pre"><pre><code data-line="0">Inbox item -&gt; "Worth processing?"
+  |-- No -&gt; Keep as-is (or delete)
+  +-- Yes -&gt; "What level of processing?"
+              |-- Preserve original (highlight only) -&gt; 500_Resources/{topic}/
+              |-- Rewrite in own words             -&gt; 600_Tech Stack/{topic}/ or 400_Areas/{topic}/
+              +-- Develop into article/creative    -&gt; Run the appropriate Program
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Processing level</th>
+<th dir="ltr">type</th>
+<th dir="ltr">Placement</th>
+<th dir="ltr">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">Unprocessed</td>
+<td dir="ltr"><code>fleeting</code> / <code>reference</code></td>
+<td dir="ltr">Keep in <code>100_Inbox/</code> or <code>Clippings/</code></td>
+<td dir="ltr">Quick memo, link for later</td>
+</tr>
+<tr>
+<td dir="ltr">Original preserved + notes</td>
+<td dir="ltr"><code>reference</code></td>
+<td dir="ltr"><code>500_Resources/{topic}/</code></td>
+<td dir="ltr">API docs, official guides</td>
+</tr>
+<tr>
+<td dir="ltr">Tech topic rewritten</td>
+<td dir="ltr"><code>permanent</code></td>
+<td dir="ltr"><code>600_Tech Stack/{topic}/</code></td>
+<td dir="ltr">Tech blog -&gt; own summary</td>
+</tr>
+<tr>
+<td dir="ltr">Non-tech topic rewritten</td>
+<td dir="ltr"><code>literature</code></td>
+<td dir="ltr"><code>400_Areas/{topic}/</code></td>
+<td dir="ltr">Self-help, finance articles</td>
+</tr>
+<tr>
+<td dir="ltr">Book-based</td>
+<td dir="ltr"><code>literature</code></td>
+<td dir="ltr"><code>200_Books/</code></td>
+<td dir="ltr">Book summary, review</td>
+</tr>
+<tr>
+<td dir="ltr">Developed into creative work</td>
+<td dir="ltr"><code>output</code></td>
+<td dir="ltr"><code>900_Writings/{genre}/</code></td>
+<td dir="ltr">Essay, poetry</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p>Stale items in <code>100_Inbox/</code> and <code>Clippings/</code> are reviewed periodically via the vault-maintenance program.</p>
+</blockquote></div><div class="el-h2"><h2 data-heading="File Naming" dir="auto" class="heading" id="File_Naming_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>File Naming</h2></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Type</th>
+<th dir="ltr">Pattern</th>
+<th dir="ltr">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">General note</td>
+<td dir="ltr">Descriptive title</td>
+<td dir="ltr"><code>SQL JOIN Complete Guide.md</code></td>
+</tr>
+<tr>
+<td dir="ltr">Date-based</td>
+<td dir="ltr"><code>YYMMDD - Title</code></td>
+<td dir="ltr"><code>260331 - On Kindness.md</code></td>
+</tr>
+<tr>
+<td dir="ltr">Tech article</td>
+<td dir="ltr">Descriptive English+Korean</td>
+<td dir="ltr"><code>Decision Tree Architect - Claude Code Harness.md</code></td>
+</tr>
+</tbody>
+</table></div><div class="el-h2"><h2 data-heading="500_Resources/ Subfolder Guide" dir="auto" class="heading" id="500_Resources/_Subfolder_Guide_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>500_Resources/ Subfolder Guide</h2></div><div class="el-pre"><pre><code data-line="0">500_Resources/
+|-- 00_Archives/            &lt;- 비활성 참고 자료 (Personal Color, UI, Windows, 오픈소스 등)
+|-- Marketing/              &lt;- 마케팅 전략, CRM
+|-- Obsidian/               &lt;- 볼트 시스템 문서 (아래 상세)
+|-- Project Management/     &lt;- PMBOK, Gantt, 리좀형 문서 관리
+|-- 경영전략/               &lt;- 비즈니스 전략, 혁신론, 스타트업
+|-- 문제분석/               &lt;- Root Cause Analysis, 의사결정 프레임워크
+|-- 사고와 성장/            &lt;- 자기계발, 질문론, 동기부여
+|-- 인문학/                 &lt;- 철학, 신화, 역사 참고 자료
++-- 정부지원창업/           &lt;- 창업지원사업 공고, 개요
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h2"><h2 data-heading="500_Resources/Obsidian/ Structure" dir="auto" class="heading" id="500_Resources/Obsidian/_Structure_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>500_Resources/Obsidian/ Structure</h2></div><div class="el-pre"><pre><code data-line="0">500_Resources/Obsidian/
+|-- tag-system.md               &lt;- [MAP] Tag system reference
+|-- vault-map.md                &lt;- [MAP] This file
+|-- template-catalog.md         &lt;- [MAP] Template catalog
++-- programs/                   &lt;- [PROGRAM] Vault operation workflows
+    |-- process-book-note.md    &lt;- Book note creation
+    |-- process-clipping.md     &lt;- Web clipping processing
+    +-- vault-maintenance.md    &lt;- Vault audit and cleanup
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="footer"><div class="data-bar"></div></div></div></div></div><div id="right-content" class="leaf" style="--sidebar-width: var(--sidebar-width-right);"><div id="right-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme-toggle-input" id=""><input class="theme-toggle-input" type="checkbox" id="theme-toggle-input"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="right-sidebar-content" class="leaf-content"><div class="graph-view-wrapper"><div class="feature-header"><div class="feature-title">Interactive Graph</div></div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<div class="graph-icon graph-global" role="button" aria-label="Global Graph" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-git-fork"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div id="outline" class=" tree-container"><div class="feature-header"><div class="feature-title">Table Of Contents</div><button class="clickable-icon nav-action-button tree-collapse-all" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-item" data-depth="1"><a class="tree-item-self is-clickable" href="500_resources/obsidian/vault-map.html#Vault_Map_0" data-path="#Vault_Map_0"><div class="tree-item-inner heading-link" heading-name="Vault Map">Vault Map</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/vault-map.html#Vault_Map_1" data-path="#Vault_Map_1"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Vault Map">Vault Map</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="500_resources/obsidian/vault-map.html#Folder_Structure_0" data-path="#Folder_Structure_0"><div class="tree-item-inner heading-link" heading-name="Folder Structure">Folder Structure</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="500_resources/obsidian/vault-map.html#Placement_Decision_Tree_0" data-path="#Placement_Decision_Tree_0"><div class="tree-item-inner heading-link" heading-name="Placement Decision Tree">Placement Decision Tree</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="500_resources/obsidian/vault-map.html#Inbox_Processing_(`100_Inbox/`,_`Clippings/`)_0" data-path="#Inbox_Processing_(`100_Inbox/`,_`Clippings/`)_0"><div class="tree-item-inner heading-link" heading-name="Inbox Processing (`100_Inbox/`, `Clippings/`)">Inbox Processing (<code>100_Inbox/</code>, <code>Clippings/</code>)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="500_resources/obsidian/vault-map.html#File_Naming_0" data-path="#File_Naming_0"><div class="tree-item-inner heading-link" heading-name="File Naming">File Naming</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="500_resources/obsidian/vault-map.html#500_Resources/_Subfolder_Guide_0" data-path="#500_Resources/_Subfolder_Guide_0"><div class="tree-item-inner heading-link" heading-name="500_Resources/ Subfolder Guide">500_Resources/ Subfolder Guide</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="500_resources/obsidian/vault-map.html#500_Resources/Obsidian/_Structure_0" data-path="#500_Resources/Obsidian/_Structure_0"><div class="tree-item-inner heading-link" heading-name="500_Resources/Obsidian/ Structure">500_Resources/Obsidian/ Structure</div></a><div class="tree-item-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector("#right-sidebar"); rs.classList.toggle("is-collapsed", window.innerWidth < 768); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></div></div></body></html>

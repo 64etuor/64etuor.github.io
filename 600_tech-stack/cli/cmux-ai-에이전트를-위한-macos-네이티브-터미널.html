@@ -1,0 +1,410 @@
+<!DOCTYPE html> <html lang="en"><head>
+<title>cmux - AI 에이전트를 위한 macOS 네이티브 터미널</title>
+<base href="../..">
+<meta name="pathname" content="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html">
+<meta name="description" content="Obsidian - cmux - AI 에이전트를 위한 macOS 네이티브 터미널">
+<meta property="og:title" content="cmux - AI 에이전트를 위한 macOS 네이티브 터미널">
+<meta property="og:description" content="Obsidian - cmux - AI 에이전트를 위한 macOS 네이티브 터미널">
+<meta property="og:type" content="website">
+<meta property="og:url" content="./https://64etuor.github.io/600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html">
+<meta property="og:image" content="undefined">
+<meta name="author" content="Yangha Park"></head><body class="publish css-settings-manager styled-scrollbars show-inline-title show-ribbon"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="parsed-feature-container" style="display: contents;"><link itemprop="include" href="site-lib/html/custom-head-content-content.html"></div><meta charset="UTF-8"><meta property="og:site_name" content="Obsidian"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="./https://64etuor.github.io/site-lib/rss.xml"><script async="" id="webpage-script" src="site-lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-wasm-script" src="site-lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="site-lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="site-lib/media/favicon.png"><link rel="preload" href="site-lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/snippets.css"></noscript><link rel="stylesheet" href="site-lib/styles/obsidian.css"><link rel="stylesheet" href="site-lib/styles/theme.css"><link rel="preload" href="site-lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="site-lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/supported-plugins.css"></noscript><link rel="preload" href="site-lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/main-styles.css"></noscript><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-vertical-spacing:1.3em;--sidebar-margin:12px}:root{background-color:#202124}.sidebar{height:100%;font-size:14px;z-index:10;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));position:relative;overflow:hidden;overflow:clip;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}#left-sidebar{left:0}#right-sidebar{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}.sidebar.floating{position:absolute}.sidebar .leaf-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .leaf-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}#left-sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}#right-sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar #left-sidebar-content,.sidebar #right-sidebar-content{contain:none!important;container-type:normal!important;animation:none!important}.sidebar:has(.leaf-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:calc(2.3em + 2 * var(--sidebar-margin));width:var(--sidebar-width);padding:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}#left-sidebar .sidebar-topbar{left:0;flex-direction:row;border-top-right-radius:var(--radius-l)}#right-sidebar .sidebar-topbar{right:0;flex-direction:row-reverse;border-top-left-radius:var(--radius-l)}#left-sidebar .topbar-content{margin-right:calc(2.3em + var(--sidebar-margin));flex-direction:row}#right-sidebar .topbar-content{margin-left:calc(2.3em + var(--sidebar-margin));flex-direction:row-reverse}.topbar-content{overflow:hidden visible;overflow:clip visible;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:2px!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}#left-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}#right-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.feature-title{margin-left:1px;text-transform:uppercase;letter-spacing:.06em;margin-top:.75em;margin-bottom:.75em}.feature-header{display:flex;align-items:center;padding-top:0;font-size:1em;padding-left:0}body.floating-sidebars .sidebar{position:absolute}body{transition:background-color var(--color-fade-speed) ease-in-out}#navbar:not(:empty){display:flex;align-items:center;justify-content:space-between;padding:.5em 1em;width:100%}#main{display:flex;flex-direction:column;height:100%;width:100%;align-items:stretch;justify-content:center}#main-horizontal{display:flex;flex-direction:row;flex-grow:1;width:100%;align-items:stretch;justify-content:center}#center-content{flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0!important;transition:opacity .2s ease-in-out;pointer-events:none}#center-content>.obsidian-document{padding-left:2em;padding-right:1em;margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}body #center-content>.obsidian-document>.markdown-preview-sizer{padding-bottom:80vh;width:100%;max-width:var(--line-width);flex-basis:var(--line-width);transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document>div{width:100%!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document:not([data-type=markdown]).embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}#center-content>.obsidian-document:not([data-type=markdown]).embed>*{max-width:100%;max-height:100%;object-fit:contain}:not(h1,h2,h3,h4,h5,h6,li):has(> :is(.math,table)){overflow-x:auto!important}#center-content>.obsidian-document:not([data-type=markdown]){overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.obsidian-document[data-type=attachment]{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%}.obsidian-document[data-type=attachment]>*{outline:0;border:none;box-shadow:none}.obsidian-document[data-type=attachment] :is(img){max-width:90%;max-height:90%;object-fit:contain}.obsidian-document[data-type=attachment]>:is(audio){width:100%;max-width:min(90%,var(--line-width))}.obsidian-document[data-type=attachment]>:is(embed,iframe,video){width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}.canvas-wrapper>:is(.header,.footer){z-index:100;position:absolute;display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){let e=document.querySelectorAll("link[itemprop='include']");for(const t of e){let e=t.getAttribute("href");try{let o="";if(e.startsWith("https:")||e.startsWith("http:")||"file:"!=window.location.protocol){const n=await fetch(e);if(!n.ok){console.log("Could not include file: "+e),t?.remove();continue}o=await n.text()}else{const t=document.getElementById(btoa(encodeURI(e)));if(t){const e=JSON.parse(decodeURI(atob(t.getAttribute("value")??"")));o=e?.data??""}}let n=document.createRange().createContextualFragment(o);t.before(n),t.remove(),console.log("Included text: "+o),console.log("Included file: "+e)}catch(o){t?.remove(),console.log("Could not include file: "+e,o);continue}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script")));!function e(n){let l=o[n],c=n+1;l?(l&&"true"!=l.getAttribute("loaded")||n<o.length&&e(c),n<o.length&&l.addEventListener("load",(()=>e(c)))):n<o.length?e(c):t()}(0)}</script><div id="main"><div id="navbar"></div><div id="main-horizontal"><div id="left-content" class="leaf" style="--sidebar-width: var(--sidebar-width-left);"><div id="left-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><div id="search-container"><div id="search-wrapper"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div aria-label="Clear search" id="search-clear-button"></div></div></div></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="left-sidebar-content" class="leaf-content"><link itemprop="include" href="site-lib/html/file-tree-content.html"></div></div><script defer="">let ls = document.querySelector("#left-sidebar"); ls.classList.toggle("is-collapsed", window.innerWidth < 768); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div></div><div id="center-content" class="leaf"><div class="obsidian-document markdown-preview-view markdown-rendered node-insert-event allow-fold-headings allow-fold-lists show-indentation-guide show-properties is-readable-line-width" data-type="markdown"><style id="MJX-CHTML-styles"></style><pre class="frontmatter language-yaml" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"cmux - AI 에이전트를 위한 macOS 네이티브 터미널"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-05</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-05</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> permanent
+<span class="token key atrule">status</span><span class="token punctuation">:</span> active
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Yangha Park
+<span class="token key atrule">source</span><span class="token punctuation">:</span> <span class="token string">"https://github.com/manaflow-ai/cmux"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> ai/agent
+  <span class="token punctuation">-</span> infra/linux
+  <span class="token punctuation">-</span> dev/web
+  <span class="token punctuation">-</span> src/doc</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre><div class="markdown-preview-sizer markdown-preview-section"><div class="header"><h1 class="page-title heading inline-title" id="cmux_-_AI_에이전트를_위한_macOS_네이티브_터미널_0">cmux - AI 에이전트를 위한 macOS 네이티브 터미널</h1><div class="data-bar"></div></div><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="el-h2"><h2 data-heading="한 줄 요약" dir="auto" class="heading" id="한_줄_요약_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>한 줄 요약</h2></div><div class="el-p"><p dir="auto">cmux는 AI 코딩 에이전트를 병렬 실행·모니터링·제어하기 위해 설계된 macOS 네이티브 터미널로, 내장 브라우저·사이드바 알림·Unix Socket API를 제공한다.</p></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="도입: 무엇을, 왜" dir="auto" class="heading" id="도입_무엇을,_왜_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>도입: 무엇을, 왜</h2></div><div class="el-p"><p dir="auto">Claude Code, Codex, Gemini CLI 등 AI 에이전트를 터미널에서 병렬로 돌리면 tmux만으로는 한계에 부딪힌다. 브라우저를 따로 띄워야 하고, 에이전트 간 상태 공유가 안 되고, 사이드바에 진행률을 표시할 방법이 없다.</p></div><div class="el-p"><p dir="auto">cmux는 <a data-tooltip-position="top" aria-label="https://github.com/manaflow-ai/cmux" rel="noopener nofollow" class="external-link is-unresolved" href="https://github.com/manaflow-ai/cmux" target="_self">manaflow-ai</a>가 개발한 AI 에이전트 전용 macOS 네이티브 터미널이다. Ghostty의 렌더링 엔진(libghostty)을 사용하며 Swift + AppKit으로 구축되었다. 2026년 1월 최초 공개 후 2월 정식 출시, <strong>v0.63.1</strong>(2026-03-28 기준), GitHub <strong>12.6k+ Stars</strong>.</p></div><div class="el-p"><p dir="auto">핵심 철학은 <strong>"a primitive, not a solution"</strong> — 완성된 솔루션이 아니라 <code>read-screen</code>, <code>send</code>, <code>notify</code> 같은 원자적 빌딩 블록을 제공하고 조합은 사용자와 에이전트에 맡긴다.</p></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="핵심 구조" dir="auto" class="heading" id="핵심_구조_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>핵심 구조</h2></div><div class="el-h3"><h3 data-heading="4단계 계층" dir="auto" class="heading" id="4단계_계층_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4단계 계층</h3></div><div class="el-pre"><pre><code data-line="0">Window                          (앱 윈도우)
+  └── Workspace                 (사이드바 탭 — git 브랜치, PR 상태 표시)
+        └── Pane                (분할 영역)
+              └── Surface       (터미널 탭 또는 브라우저 패널)
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">계층</th>
+<th dir="ltr">참조 형식</th>
+<th dir="ltr">비유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">Window</td>
+<td dir="ltr"><code>window:1</code></td>
+<td dir="ltr">건물</td>
+</tr>
+<tr>
+<td dir="ltr">Workspace</td>
+<td dir="ltr"><code>workspace:1</code></td>
+<td dir="ltr">층(Floor)</td>
+</tr>
+<tr>
+<td dir="ltr">Pane</td>
+<td dir="ltr"><code>pane:1</code></td>
+<td dir="ltr">방(Room)</td>
+</tr>
+<tr>
+<td dir="ltr">Surface</td>
+<td dir="ltr"><code>surface:1</code> / UUID</td>
+<td dir="ltr">책상(Desk)</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="자동 환경변수" dir="auto" class="heading" id="자동_환경변수_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>자동 환경변수</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">변수</th>
+<th dir="ltr">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>CMUX_WORKSPACE_ID</code></td>
+<td dir="ltr">현재 워크스페이스 ID → <code>--workspace</code> 생략 가능</td>
+</tr>
+<tr>
+<td dir="ltr"><code>CMUX_SURFACE_ID</code></td>
+<td dir="ltr">현재 서피스 ID → <code>--surface</code> 생략 가능</td>
+</tr>
+<tr>
+<td dir="ltr"><code>CMUX_SOCKET_PATH</code></td>
+<td dir="ltr">Unix 소켓 경로 (기본: <code>~/Library/Application Support/cmux/cmux.sock</code>)</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="tmux vs cmux" dir="auto" class="heading" id="tmux_vs_cmux_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>tmux vs cmux</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">구분</th>
+<th dir="ltr">tmux</th>
+<th dir="ltr">cmux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>플랫폼</strong></td>
+<td dir="ltr">Linux/macOS/Windows(WSL)</td>
+<td dir="ltr">macOS 14+ 전용</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>UI</strong></td>
+<td dir="ltr">TUI (텍스트 기반)</td>
+<td dir="ltr">네이티브 GUI (사이드바, 탭)</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>내장 브라우저</strong></td>
+<td dir="ltr">없음</td>
+<td dir="ltr">WebKit 내장 (DOM 조작, 스크린샷)</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>알림 시스템</strong></td>
+<td dir="ltr">없음</td>
+<td dir="ltr">사이드바 뱃지, 진행률, 알림</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>세션 지속성</strong></td>
+<td dir="ltr">detach/reattach (SSH 생존)</td>
+<td dir="ltr">레이아웃 복원 (프로세스 미복원)</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>프로그래밍 API</strong></td>
+<td dir="ltr">제한적 (control mode)</td>
+<td dir="ltr">Unix socket JSON-RPC + CLI</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>AI 에이전트 지원</strong></td>
+<td dir="ltr">범용</td>
+<td dir="ltr">Claude/Codex/Gemini 병렬 최적화</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>원격 서버</strong></td>
+<td dir="ltr">SSH에서 동작</td>
+<td dir="ltr">v0.63.0부터 SSH 원격 워크스페이스 지원</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p>tmux는 SSH 원격 서버, CI/CD, Linux에서 여전히 필수. cmux는 로컬 macOS에서 AI 에이전트를 운용하는 시나리오에 특화. 두 도구는 보완 관계.</p>
+</blockquote></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="작동 원리" dir="auto" class="heading" id="작동_원리_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>작동 원리</h2></div><div class="el-h3"><h3 data-heading="설치" dir="auto" class="heading" id="설치_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>설치</h3></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># Homebrew (권장)</span>
+brew tap manaflow-ai/cmux
+brew <span class="token function">install</span> <span class="token parameter variable">--cask</span> cmux
+
+<span class="token comment"># CLI 전역 사용 (선택)</span>
+<span class="token function">sudo</span> <span class="token function">ln</span> <span class="token parameter variable">-sf</span> <span class="token string">"/Applications/cmux.app/Contents/Resources/bin/cmux"</span> /usr/local/bin/cmux
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-p"><p dir="auto">macOS Gatekeeper 경고 시: 시스템 설정 &gt; 보안 &gt; "확인 없이 열기" 또는 <code>xattr -cr /Applications/cmux.app</code></p></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># 설치 확인</span>
+cmux version         <span class="token comment"># cmux 0.63.1 (...)</span>
+cmux identify        <span class="token comment"># 현재 workspace/pane/surface (JSON)</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="CLI 핵심 명령어" dir="auto" class="heading" id="CLI_핵심_명령어_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>CLI 핵심 명령어</h3></div><div class="el-h4"><h4 data-heading="워크스페이스 관리" dir="auto" class="heading" id="워크스페이스_관리_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>워크스페이스 관리</h4></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded">cmux new-workspace <span class="token punctuation">[</span>--cwd /path<span class="token punctuation">]</span> <span class="token punctuation">[</span>--command <span class="token string">"npm run dev"</span><span class="token punctuation">]</span>
+cmux rename-workspace <span class="token string">"my-project"</span>
+cmux list-workspaces
+cmux tree <span class="token punctuation">[</span>--all<span class="token punctuation">]</span>                  <span class="token comment"># 전체 계층 트리</span>
+cmux select-workspace <span class="token parameter variable">--workspace</span> workspace:2
+cmux close-workspace <span class="token parameter variable">--workspace</span> workspace:2
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h4"><h4 data-heading="패인 분할과 서피스" dir="auto" class="heading" id="패인_분할과_서피스_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>패인 분할과 서피스</h4></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded">cmux new-split right               <span class="token comment"># 우측 분할</span>
+cmux new-split down                <span class="token comment"># 하단 분할</span>
+cmux new-surface                   <span class="token comment"># 터미널 탭 추가</span>
+cmux new-surface <span class="token parameter variable">--type</span> browser <span class="token parameter variable">--url</span> https://localhost:3000  <span class="token comment"># 브라우저 탭</span>
+cmux list-panes
+cmux list-pane-surfaces
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h4"><h4 data-heading="텍스트 전송과 출력 캡처 (AI 에이전트 핵심)" dir="auto" class="heading" id="텍스트_전송과_출력_캡처_(AI_에이전트_핵심)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>텍스트 전송과 출력 캡처 (AI 에이전트 핵심)</h4></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># 전송</span>
+cmux send <span class="token string">"npm run dev<span class="token entity" title="\n">\n</span>"</span>                        <span class="token comment"># 현재 서피스 (\n = Enter)</span>
+cmux send <span class="token parameter variable">--surface</span> surface:2 <span class="token string">"npm test<span class="token entity" title="\n">\n</span>"</span>       <span class="token comment"># 특정 서피스</span>
+cmux send-key ctrl+c                              <span class="token comment"># 키 전송</span>
+
+<span class="token comment"># 캡처 (에이전트가 다른 패인 출력을 읽는 핵심 기능)</span>
+cmux read-screen <span class="token parameter variable">--lines</span> <span class="token number">30</span>                       <span class="token comment"># 최근 30줄</span>
+cmux read-screen <span class="token parameter variable">--scrollback</span>                     <span class="token comment"># 전체 스크롤백</span>
+cmux capture-pane <span class="token parameter variable">--surface</span> surface:2 <span class="token parameter variable">--lines</span> <span class="token number">50</span>  <span class="token comment"># tmux 호환 별칭</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h4"><h4 data-heading="동기화" dir="auto" class="heading" id="동기화_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>동기화</h4></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># 시그널 기반</span>
+cmux wait-for build-done <span class="token parameter variable">--timeout</span> <span class="token number">60</span>   <span class="token comment"># 대기 측</span>
+cmux wait-for <span class="token parameter variable">-S</span> build-done             <span class="token comment"># 시그널 측</span>
+
+<span class="token comment"># 폴링 기반</span>
+<span class="token keyword">while</span> <span class="token operator">!</span> cmux read-screen <span class="token parameter variable">--surface</span> surface:2 <span class="token parameter variable">--lines</span> <span class="token number">10</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-q</span> <span class="token string">"ready"</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+	<span class="token function">sleep</span> <span class="token number">1</span>
+<span class="token keyword">done</span>
+
+<span class="token comment"># 내용으로 서피스 검색</span>
+cmux find-window <span class="token parameter variable">--content</span> <span class="token string">"error"</span> <span class="token parameter variable">--select</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="내장 브라우저 (WebKit)" dir="auto" class="heading" id="내장_브라우저_(WebKit)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>내장 브라우저 (WebKit)</h3></div><div class="el-p"><p dir="auto">Playwright/Selenium 없이 터미널에서 웹 페이지를 직접 조작할 수 있다.</p></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># 네비게이션</span>
+cmux browser <span class="token function">open</span> http://localhost:3000
+cmux browser open-split http://localhost:3000    <span class="token comment"># 분할하여 열기</span>
+cmux browser goto http://localhost:3000/login
+cmux browser back / forward / reload / url
+
+<span class="token comment"># DOM 조작</span>
+cmux browser snapshot <span class="token parameter variable">-i</span>                          <span class="token comment"># 접근성 트리 기반 스냅샷</span>
+cmux browser click <span class="token string">"button#submit"</span> --snapshot-after
+cmux browser fill <span class="token string">"input[name='email']"</span> <span class="token string">"user@example.com"</span> --snapshot-after
+cmux browser <span class="token builtin class-name">type</span> <span class="token string">"#search"</span> <span class="token string">"검색어"</span>
+cmux browser get text <span class="token string">"h1"</span>
+cmux browser get html <span class="token string">".content"</span>
+
+<span class="token comment"># 대기와 JavaScript</span>
+cmux browser <span class="token function">wait</span> <span class="token parameter variable">--selector</span> <span class="token string">".loaded"</span>
+cmux browser <span class="token function">wait</span> <span class="token parameter variable">--text</span> <span class="token string">"Welcome"</span> --timeout-ms <span class="token number">5000</span>
+cmux browser <span class="token function">wait</span> --url-contains <span class="token string">"/dashboard"</span>
+cmux browser <span class="token builtin class-name">eval</span> <span class="token string">"document.title"</span>
+cmux browser screenshot <span class="token parameter variable">--out</span> ./capture.png
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="사이드바: 알림·진행률·상태" dir="auto" class="heading" id="사이드바_알림·진행률·상태_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>사이드바: 알림·진행률·상태</h3></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># 데스크톱 알림</span>
+cmux notify <span class="token parameter variable">--title</span> <span class="token string">"빌드 완료"</span> <span class="token parameter variable">--body</span> <span class="token string">"3분 소요"</span> <span class="token parameter variable">--subtitle</span> <span class="token string">"frontend"</span>
+
+<span class="token comment"># 사이드바 로그</span>
+cmux log <span class="token parameter variable">--level</span> success <span class="token parameter variable">--source</span> <span class="token string">"test"</span> <span class="token string">"42/42 테스트 통과"</span>
+cmux log <span class="token parameter variable">--level</span> error <span class="token parameter variable">--source</span> <span class="token string">"build"</span> <span class="token string">"TypeScript 컴파일 실패"</span>
+
+<span class="token comment"># 진행률</span>
+cmux set-progress <span class="token number">0.75</span> <span class="token parameter variable">--label</span> <span class="token string">"빌드 진행 중..."</span>
+cmux clear-progress
+
+<span class="token comment"># 상태 배지</span>
+cmux set-status <span class="token string">"phase"</span> <span class="token string">"testing"</span> <span class="token parameter variable">--icon</span> <span class="token string">"sparkle"</span> <span class="token parameter variable">--color</span> <span class="token string">"#28a745"</span>
+cmux clear-status <span class="token string">"phase"</span>
+
+<span class="token comment"># 마크다운 뷰어</span>
+cmux markdown ./README.md
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="설계 판단" dir="auto" class="heading" id="설계_판단_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>설계 판단</h2></div><div class="el-h3"><h3 data-heading="왜 tmux가 아닌 새로운 터미널인가" dir="auto" class="heading" id="왜_tmux가_아닌_새로운_터미널인가_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>왜 tmux가 아닌 새로운 터미널인가</h3></div><div class="el-p"><p dir="auto">tmux는 수십 년간 표준이었지만, AI 에이전트 운용 관점에서 구조적 한계가 있다:</p></div><div class="el-ol"><ol>
+<li data-line="0" dir="auto"><strong>브라우저 자동화 불가</strong> — 개발 서버 UI 확인에 별도 Playwright 설정 필요</li>
+<li data-line="1" dir="auto"><strong>사이드바 없음</strong> — 에이전트 진행 상황을 한눈에 파악 불가</li>
+<li data-line="2" dir="auto"><strong>프로그래밍 API 부재</strong> — <code>capture-pane</code> 파싱이 유일한 통신 수단</li>
+<li data-line="3" dir="auto"><strong>상태 연동 없음</strong> — 워크스페이스별 브랜치·PR 번호 표시 불가</li>
+</ol></div><div class="el-p"><p dir="auto">cmux는 이 문제들을 네이티브 레벨에서 해결한다. GPU 가속 렌더링(libghostty), WebKit 내장 브라우저, Unix Socket API를 하나의 앱에 통합했다.</p></div><div class="el-h3"><h3 data-heading="&quot;Primitive, Not Solution&quot; 철학" dir="auto" class="heading" id="&quot;Primitive,_Not_Solution&quot;_철학_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>"Primitive, Not Solution" 철학</h3></div><div class="el-p"><p dir="auto">Claude Squad나 Amux가 완성된 솔루션을 지향한다면, cmux는 원자적 빌딩 블록을 제공하고 조합은 사용자에게 맡긴다. Unix 철학의 "한 가지 일을 잘 하는 도구"와 맞닿아 있다.</p></div><div class="el-h3"><h3 data-heading="라이선스" dir="auto" class="heading" id="라이선스_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>라이선스</h3></div><div class="el-p"><p dir="auto">GPL-3.0-or-later 오픈소스. 별도 "Founder's Edition" 유료 구독(우선 지원, AI 기능 조기 접근, iOS 앱, 클라우드 VM)이 존재한다.</p></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="실전 적용" dir="auto" class="heading" id="실전_적용_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>실전 적용</h2></div><div class="el-h3"><h3 data-heading="Claude Code + cmux 연동" dir="auto" class="heading" id="Claude_Code_+_cmux_연동_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Claude Code + cmux 연동</h3></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># 왼쪽 패인: Claude Code, 오른쪽 패인: 서버</span>
+cmux new-split right
+cmux send <span class="token parameter variable">--surface</span> surface:2 <span class="token string">"python3 -m http.server 8000<span class="token entity" title="\n">\n</span>"</span>
+
+<span class="token comment"># Claude에게 요청:</span>
+<span class="token comment"># "오른쪽 패인(surface:2)에서 서버 로그를 cmux read-screen으로 읽어서 알려줘"</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-blockquote"><blockquote dir="auto">
+<p>AI 에이전트가 cmux를 tmux로 오인하는 경우가 있다. <code>CLAUDE.md</code>에 <code>"이 환경은 cmux입니다. tmux가 아닌 cmux CLI를 사용하세요."</code>를 추가하면 해결된다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="멀티에이전트 병렬 실행" dir="auto" class="heading" id="멀티에이전트_병렬_실행_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>멀티에이전트 병렬 실행</h3></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># 에이전트별 워크스페이스 생성</span>
+cmux new-workspace <span class="token parameter variable">--command</span> <span class="token string">"claude 'React 19 새 기능 조사해줘'"</span>
+cmux rename-workspace <span class="token string">"agent-react"</span>
+
+cmux new-workspace <span class="token parameter variable">--command</span> <span class="token string">"claude 'Next.js 15 마이그레이션 가이드 작성해줘'"</span>
+cmux rename-workspace <span class="token string">"agent-nextjs"</span>
+
+<span class="token comment"># 모니터링</span>
+cmux read-screen <span class="token parameter variable">--workspace</span> workspace:2 <span class="token parameter variable">--lines</span> <span class="token number">5</span>
+cmux find-window <span class="token parameter variable">--content</span> <span class="token string">"완료"</span> <span class="token parameter variable">--select</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-p"><p dir="auto"><strong><code>cmux claude-teams</code></strong> — <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code> 환경변수와 tmux 호환 심을 자동 주입하여 Agent Teams 모드를 활성화하는 통합 명령.</p></div><div class="el-h3"><h3 data-heading="개발서버 + 브라우저 E2E 검증" dir="auto" class="heading" id="개발서버_+_브라우저_E2E_검증_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>개발서버 + 브라우저 E2E 검증</h3></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded">cmux new-split right
+cmux send <span class="token parameter variable">--surface</span> surface:2 <span class="token string">"cd my-app &amp;&amp; npm run dev<span class="token entity" title="\n">\n</span>"</span>
+
+<span class="token comment"># 서버 준비 대기</span>
+<span class="token keyword">while</span> <span class="token operator">!</span> cmux read-screen <span class="token parameter variable">--surface</span> surface:2 <span class="token parameter variable">--lines</span> <span class="token number">10</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-q</span> <span class="token string">"ready"</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+	<span class="token function">sleep</span> <span class="token number">1</span>
+<span class="token keyword">done</span>
+
+<span class="token comment"># 브라우저 검증</span>
+cmux browser <span class="token function">open</span> http://localhost:3000
+cmux browser <span class="token function">wait</span> <span class="token parameter variable">--text</span> <span class="token string">"Welcome"</span> --timeout-ms <span class="token number">10000</span>
+cmux browser fill <span class="token string">"input[name='email']"</span> <span class="token string">"test@example.com"</span>
+cmux browser click <span class="token string">"button[type='submit']"</span> --snapshot-after
+cmux browser <span class="token function">wait</span> --url-contains <span class="token string">"/dashboard"</span> --timeout-ms <span class="token number">5000</span>
+cmux browser get text <span class="token string">"h1"</span>    <span class="token comment"># "Dashboard"면 성공</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="tmux → cmux 마이그레이션 매핑" dir="auto" class="heading" id="tmux_→_cmux_마이그레이션_매핑_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>tmux → cmux 마이그레이션 매핑</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">tmux 명령</th>
+<th dir="ltr">cmux 명령</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>tmux new-session -d -s name</code></td>
+<td dir="ltr"><code>cmux new-workspace</code> + <code>cmux rename-workspace name</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>tmux split-window -v / -h</code></td>
+<td dir="ltr"><code>cmux new-split down / right</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>tmux send-keys -t %1 "cmd" C-m</code></td>
+<td dir="ltr"><code>cmux send --surface surface:1 "cmd\n"</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>tmux capture-pane -t %1 -p</code></td>
+<td dir="ltr"><code>cmux capture-pane --surface surface:1</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>tmux kill-session -t name</code></td>
+<td dir="ltr"><code>cmux close-workspace --workspace workspace:1</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>tmux wait-for channel</code></td>
+<td dir="ltr"><code>cmux wait-for channel --timeout 30</code></td>
+</tr>
+<tr>
+<td dir="ltr"><em>(없음)</em></td>
+<td dir="ltr"><code>cmux browser open URL</code></td>
+</tr>
+<tr>
+<td dir="ltr"><em>(없음)</em></td>
+<td dir="ltr"><code>cmux identify</code></td>
+</tr>
+<tr>
+<td dir="ltr"><em>(없음)</em></td>
+<td dir="ltr"><code>cmux notify / log / set-progress</code></td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="CLAUDE.md / SKILL.md 설정 팁" dir="auto" class="heading" id="CLAUDE.md_/_SKILL.md_설정_팁_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>CLAUDE.md / SKILL.md 설정 팁</h3></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># .claude/skills/cmux/SKILL.md에 다음 내용 배치:</span>
+<span class="token comment"># 1. 계층 구조: Window &gt; Workspace &gt; Pane &gt; Surface</span>
+<span class="token comment"># 2. 환경변수: CMUX_WORKSPACE_ID, CMUX_SURFACE_ID (자동)</span>
+<span class="token comment"># 3. 핵심 명령어: identify, read-screen, send, browser snapshot</span>
+<span class="token comment"># 4. tmux → cmux 변환 규칙</span>
+<span class="token comment"># 5. SSH/CI에서는 cmux 불가 → tmux 폴백</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-pre"><pre class="language-bash"><code data-line="0" class="language-bash is-loaded"><span class="token comment"># cmux 감지 + tmux 폴백 패턴</span>
+<span class="token keyword">if</span> <span class="token builtin class-name">command</span> <span class="token parameter variable">-v</span> cmux <span class="token operator">&amp;&gt;</span>/dev/null <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> <span class="token parameter variable">-n</span> <span class="token string">"<span class="token variable">$CMUX_WORKSPACE_ID</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+	cmux new-split right
+	cmux send <span class="token parameter variable">--surface</span> surface:2 <span class="token string">"npm run dev<span class="token entity" title="\n">\n</span>"</span>
+<span class="token keyword">else</span>
+	tmux split-window <span class="token parameter variable">-h</span>
+	tmux send-keys <span class="token string">"npm run dev"</span> C-m
+<span class="token keyword">fi</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="배울 점" dir="auto" class="heading" id="배울_점_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>배울 점</h2></div><div class="el-h3"><h3 data-heading="경쟁 도구 비교 (2026-03 기준)" dir="auto" class="heading" id="경쟁_도구_비교_(2026-03_기준)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>경쟁 도구 비교 (2026-03 기준)</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">항목</th>
+<th dir="ltr">cmux</th>
+<th dir="ltr">Claude Squad</th>
+<th dir="ltr">Pane</th>
+<th dir="ltr">Amux</th>
+<th dir="ltr">Calyx</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">기반</td>
+<td dir="ltr">libghostty + Swift</td>
+<td dir="ltr">tmux 기반 Go 래퍼</td>
+<td dir="ltr">자체 터미널 (AGPL-3.0)</td>
+<td dir="ltr">tmux 기반 Python</td>
+<td dir="ltr">Ghostty + Tauri/React</td>
+</tr>
+<tr>
+<td dir="ltr">플랫폼</td>
+<td dir="ltr">macOS 14+</td>
+<td dir="ltr">macOS, Linux</td>
+<td dir="ltr">macOS, Linux, Windows</td>
+<td dir="ltr">tmux 환경</td>
+<td dir="ltr">macOS 26+</td>
+</tr>
+<tr>
+<td dir="ltr">브라우저 내장</td>
+<td dir="ltr">WebKit</td>
+<td dir="ltr">X</td>
+<td dir="ltr">X</td>
+<td dir="ltr">X</td>
+<td dir="ltr">X</td>
+</tr>
+<tr>
+<td dir="ltr">에이전트 API</td>
+<td dir="ltr">전용 CLI</td>
+<td dir="ltr">tmux 기반</td>
+<td dir="ltr">자체 API</td>
+<td dir="ltr">tmux 기반</td>
+<td dir="ltr">내장 MCP 서버</td>
+</tr>
+<tr>
+<td dir="ltr">라이선스</td>
+<td dir="ltr">GPL-3.0</td>
+<td dir="auto">-</td>
+<td dir="ltr">AGPL-3.0</td>
+<td dir="auto">-</td>
+<td dir="ltr">MIT</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="제한사항" dir="auto" class="heading" id="제한사항_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>제한사항</h3></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>macOS 전용</strong> — Swift + AppKit 기반 (커뮤니티 Linux/Windows 포트 존재)</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>세션 복원</strong> — 레이아웃·디렉토리·URL은 복원되지만 실행 중이던 프로세스는 미복원</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>초기 단계</strong> — v0.63.1, 1.0 이전이라 breaking change 가능</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>WKWebView 기반</strong> — CDP 전용 기능(CPU/메모리 프로파일링)은 불가</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span><strong>화면 스크래핑 방식</strong> — <code>read-screen</code>은 렌더링된 텍스트를 읽는 RPA 방식</li>
+</ul></div><div class="el-h3"><h3 data-heading="릴리스 히스토리 (주요)" dir="auto" class="heading" id="릴리스_히스토리_(주요)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>릴리스 히스토리 (주요)</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">버전</th>
+<th dir="ltr">날짜</th>
+<th dir="ltr">주요 변경</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">v0.63.1</td>
+<td dir="auto">2026-03-28</td>
+<td dir="ltr">레이아웃 크래시 수정, geometry persistence 버전 관리</td>
+</tr>
+<tr>
+<td dir="ltr">v0.63.0</td>
+<td dir="auto">2026-03-28</td>
+<td dir="ltr"><strong>SSH 원격 워크스페이스</strong>, 사이드바 틴트 컬러, 브라우저 데이터 임포트, 60+ PR 병합</td>
+</tr>
+<tr>
+<td dir="ltr">v0.62.2</td>
+<td dir="auto">2026-03-14</td>
+<td dir="ltr">사이드바 디테일 토글, 워크스페이스 색상, 메뉴바 숨김</td>
+</tr>
+<tr>
+<td dir="ltr">v0.61.0</td>
+<td dir="auto">2026-02-25</td>
+<td dir="ltr">라이트 모드, 커맨드 팔레트(Cmd+Shift+P), 세션 지속성</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="핵심 인사이트" dir="auto" class="heading" id="핵심_인사이트_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>핵심 인사이트</h3></div><div class="el-p"><p dir="auto">cmux는 도구 하나가 아니라 <strong>"개념의 신호탄"</strong>이다. "터미널끼리 말하게 하라"는 방향 — AI 에이전트가 다른 터미널의 출력을 읽고, 명령을 보내고, 브라우저를 조작하는 것 — 은 에이전트 시대의 인터페이스가 어떤 형태가 될지를 보여준다.</p></div><div class="el-hr"><hr></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="tip" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-flame"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></svg></div><div class="callout-title-inner">한 줄 요약</div></div><div class="callout-content">
+<p dir="auto">AI 에이전트 병렬 운용이 필요하다면 cmux의 <code>read-screen</code> + <code>send</code> + <code>browser</code> 조합이 tmux 단독보다 구조적으로 우위다. 단, macOS 전용이고 초기 단계이므로 원격 서버 작업에는 tmux와 병행 사용이 현실적이다.</p>
+</div></div></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="참고 자료" dir="auto" class="heading" id="참고_자료_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>참고 자료</h2></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><a data-tooltip-position="top" aria-label="https://cmux.com/" rel="noopener nofollow" class="external-link is-unresolved" href="https://cmux.com/" target="_self">cmux 공식 사이트</a></li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><a data-tooltip-position="top" aria-label="https://github.com/manaflow-ai/cmux" rel="noopener nofollow" class="external-link is-unresolved" href="https://github.com/manaflow-ai/cmux" target="_self">GitHub: manaflow-ai/cmux</a></li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><a data-tooltip-position="top" aria-label="https://github.com/manaflow-ai/cmux/releases" rel="noopener nofollow" class="external-link is-unresolved" href="https://github.com/manaflow-ai/cmux/releases" target="_self">cmux Releases</a></li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><a data-tooltip-position="top" aria-label="https://cmux.com/docs/getting-started" rel="noopener nofollow" class="external-link is-unresolved" href="https://cmux.com/docs/getting-started" target="_self">공식 문서: Getting Started</a></li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span><a data-tooltip-position="top" aria-label="https://cmux.com/docs/browser-automation" rel="noopener nofollow" class="external-link is-unresolved" href="https://cmux.com/docs/browser-automation" target="_self">공식 문서: Browser Automation</a></li>
+<li data-line="5" dir="auto"><span class="list-bullet"></span><a data-tooltip-position="top" aria-label="https://goddaehee.tistory.com/557" rel="noopener nofollow" class="external-link is-unresolved" href="https://goddaehee.tistory.com/557" target="_self">갓대희 블로그 원문</a></li>
+<li data-line="6" dir="auto"><span class="list-bullet"></span><a data-tooltip-position="top" aria-label="https://www.daleseo.com/cmux/" rel="noopener nofollow" class="external-link is-unresolved" href="https://www.daleseo.com/cmux/" target="_self">Dale Seo 블로그 — cmux 사용기</a></li>
+<li data-line="7" dir="auto"><span class="list-bullet"></span><a data-tooltip-position="top" aria-label="https://news.ycombinator.com/item?id=47079718" rel="noopener nofollow" class="external-link is-unresolved" href="https://news.ycombinator.com/item?id=47079718" target="_self">Hacker News Show HN 토론</a></li>
+</ul></div><div class="footer"><div class="data-bar"></div></div></div></div></div><div id="right-content" class="leaf" style="--sidebar-width: var(--sidebar-width-right);"><div id="right-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme-toggle-input" id=""><input class="theme-toggle-input" type="checkbox" id="theme-toggle-input"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="right-sidebar-content" class="leaf-content"><div class="graph-view-wrapper"><div class="feature-header"><div class="feature-title">Interactive Graph</div></div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<div class="graph-icon graph-global" role="button" aria-label="Global Graph" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-git-fork"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div id="outline" class=" tree-container"><div class="feature-header"><div class="feature-title">Table Of Contents</div><button class="clickable-icon nav-action-button tree-collapse-all" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#cmux_-_AI_에이전트를_위한_macOS_네이티브_터미널_0" data-path="#cmux_-_AI_에이전트를_위한_macOS_네이티브_터미널_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="cmux - AI 에이전트를 위한 macOS 네이티브 터미널">cmux - AI 에이전트를 위한 macOS 네이티브 터미널</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#한_줄_요약_0" data-path="#한_줄_요약_0"><div class="tree-item-inner heading-link" heading-name="한 줄 요약">한 줄 요약</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#도입_무엇을,_왜_0" data-path="#도입_무엇을,_왜_0"><div class="tree-item-inner heading-link" heading-name="도입: 무엇을, 왜">도입: 무엇을, 왜</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#핵심_구조_0" data-path="#핵심_구조_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="핵심 구조">핵심 구조</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#4단계_계층_0" data-path="#4단계_계층_0"><div class="tree-item-inner heading-link" heading-name="4단계 계층">4단계 계층</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#자동_환경변수_0" data-path="#자동_환경변수_0"><div class="tree-item-inner heading-link" heading-name="자동 환경변수">자동 환경변수</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#tmux_vs_cmux_0" data-path="#tmux_vs_cmux_0"><div class="tree-item-inner heading-link" heading-name="tmux vs cmux">tmux vs cmux</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#작동_원리_0" data-path="#작동_원리_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="작동 원리">작동 원리</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#설치_0" data-path="#설치_0"><div class="tree-item-inner heading-link" heading-name="설치">설치</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="3"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#CLI_핵심_명령어_0" data-path="#CLI_핵심_명령어_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="CLI 핵심 명령어">CLI 핵심 명령어</div></a><div class="tree-item-children"><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#워크스페이스_관리_0" data-path="#워크스페이스_관리_0"><div class="tree-item-inner heading-link" heading-name="워크스페이스 관리">워크스페이스 관리</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#패인_분할과_서피스_0" data-path="#패인_분할과_서피스_0"><div class="tree-item-inner heading-link" heading-name="패인 분할과 서피스">패인 분할과 서피스</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#텍스트_전송과_출력_캡처_(AI_에이전트_핵심)_0" data-path="#텍스트_전송과_출력_캡처_(AI_에이전트_핵심)_0"><div class="tree-item-inner heading-link" heading-name="텍스트 전송과 출력 캡처 (AI 에이전트 핵심)">텍스트 전송과 출력 캡처 (AI 에이전트 핵심)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#동기화_0" data-path="#동기화_0"><div class="tree-item-inner heading-link" heading-name="동기화">동기화</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#내장_브라우저_(WebKit)_0" data-path="#내장_브라우저_(WebKit)_0"><div class="tree-item-inner heading-link" heading-name="내장 브라우저 (WebKit)">내장 브라우저 (WebKit)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#사이드바_알림·진행률·상태_0" data-path="#사이드바_알림·진행률·상태_0"><div class="tree-item-inner heading-link" heading-name="사이드바: 알림·진행률·상태">사이드바: 알림·진행률·상태</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#설계_판단_0" data-path="#설계_판단_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="설계 판단">설계 판단</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#왜_tmux가_아닌_새로운_터미널인가_0" data-path="#왜_tmux가_아닌_새로운_터미널인가_0"><div class="tree-item-inner heading-link" heading-name="왜 tmux가 아닌 새로운 터미널인가">왜 tmux가 아닌 새로운 터미널인가</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#&quot;Primitive,_Not_Solution&quot;_철학_0" data-path="#&quot;Primitive,_Not_Solution&quot;_철학_0"><div class="tree-item-inner heading-link" heading-name="&quot;Primitive, Not Solution&quot; 철학">"Primitive, Not Solution" 철학</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#라이선스_0" data-path="#라이선스_0"><div class="tree-item-inner heading-link" heading-name="라이선스">라이선스</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#실전_적용_0" data-path="#실전_적용_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="실전 적용">실전 적용</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#Claude_Code_+_cmux_연동_0" data-path="#Claude_Code_+_cmux_연동_0"><div class="tree-item-inner heading-link" heading-name="Claude Code + cmux 연동">Claude Code + cmux 연동</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#멀티에이전트_병렬_실행_0" data-path="#멀티에이전트_병렬_실행_0"><div class="tree-item-inner heading-link" heading-name="멀티에이전트 병렬 실행">멀티에이전트 병렬 실행</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#개발서버_+_브라우저_E2E_검증_0" data-path="#개발서버_+_브라우저_E2E_검증_0"><div class="tree-item-inner heading-link" heading-name="개발서버 + 브라우저 E2E 검증">개발서버 + 브라우저 E2E 검증</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#tmux_→_cmux_마이그레이션_매핑_0" data-path="#tmux_→_cmux_마이그레이션_매핑_0"><div class="tree-item-inner heading-link" heading-name="tmux → cmux 마이그레이션 매핑">tmux → cmux 마이그레이션 매핑</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#CLAUDE.md_/_SKILL.md_설정_팁_0" data-path="#CLAUDE.md_/_SKILL.md_설정_팁_0"><div class="tree-item-inner heading-link" heading-name="CLAUDE.md / SKILL.md 설정 팁">CLAUDE.md / SKILL.md 설정 팁</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#배울_점_0" data-path="#배울_점_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="배울 점">배울 점</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#경쟁_도구_비교_(2026-03_기준)_0" data-path="#경쟁_도구_비교_(2026-03_기준)_0"><div class="tree-item-inner heading-link" heading-name="경쟁 도구 비교 (2026-03 기준)">경쟁 도구 비교 (2026-03 기준)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#제한사항_0" data-path="#제한사항_0"><div class="tree-item-inner heading-link" heading-name="제한사항">제한사항</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#릴리스_히스토리_(주요)_0" data-path="#릴리스_히스토리_(주요)_0"><div class="tree-item-inner heading-link" heading-name="릴리스 히스토리 (주요)">릴리스 히스토리 (주요)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#핵심_인사이트_0" data-path="#핵심_인사이트_0"><div class="tree-item-inner heading-link" heading-name="핵심 인사이트">핵심 인사이트</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html#참고_자료_0" data-path="#참고_자료_0"><div class="tree-item-inner heading-link" heading-name="참고 자료">참고 자료</div></a><div class="tree-item-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector("#right-sidebar"); rs.classList.toggle("is-collapsed", window.innerWidth < 768); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></div></div></body></html>

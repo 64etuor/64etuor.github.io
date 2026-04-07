@@ -1,0 +1,252 @@
+<!DOCTYPE html> <html lang="en"><head>
+<title>Argon2 — GPU와 ASIC을 무력화하는 패스워드 해싱</title>
+<base href="../..">
+<meta name="pathname" content="600_tech-stack/cryptography/argon2.html">
+<meta name="description" content="Obsidian - Argon2 — GPU와 ASIC을 무력화하는 패스워드 해싱">
+<meta property="og:title" content="Argon2 — GPU와 ASIC을 무력화하는 패스워드 해싱">
+<meta property="og:description" content="Obsidian - Argon2 — GPU와 ASIC을 무력화하는 패스워드 해싱">
+<meta property="og:type" content="website">
+<meta property="og:url" content="./https://64etuor.github.io/600_tech-stack/cryptography/argon2.html">
+<meta property="og:image" content="undefined">
+<meta name="author" content="Yangha Park"></head><body class="publish css-settings-manager styled-scrollbars show-inline-title show-ribbon"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="parsed-feature-container" style="display: contents;"><link itemprop="include" href="site-lib/html/custom-head-content-content.html"></div><meta charset="UTF-8"><meta property="og:site_name" content="Obsidian"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="./https://64etuor.github.io/site-lib/rss.xml"><script async="" id="webpage-script" src="site-lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-wasm-script" src="site-lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="site-lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="site-lib/media/favicon.png"><link rel="preload" href="site-lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/snippets.css"></noscript><link rel="stylesheet" href="site-lib/styles/obsidian.css"><link rel="stylesheet" href="site-lib/styles/theme.css"><link rel="preload" href="site-lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="site-lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/supported-plugins.css"></noscript><link rel="preload" href="site-lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/main-styles.css"></noscript><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-vertical-spacing:1.3em;--sidebar-margin:12px}:root{background-color:#202124}.sidebar{height:100%;font-size:14px;z-index:10;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));position:relative;overflow:hidden;overflow:clip;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}#left-sidebar{left:0}#right-sidebar{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}.sidebar.floating{position:absolute}.sidebar .leaf-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .leaf-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}#left-sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}#right-sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar #left-sidebar-content,.sidebar #right-sidebar-content{contain:none!important;container-type:normal!important;animation:none!important}.sidebar:has(.leaf-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:calc(2.3em + 2 * var(--sidebar-margin));width:var(--sidebar-width);padding:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}#left-sidebar .sidebar-topbar{left:0;flex-direction:row;border-top-right-radius:var(--radius-l)}#right-sidebar .sidebar-topbar{right:0;flex-direction:row-reverse;border-top-left-radius:var(--radius-l)}#left-sidebar .topbar-content{margin-right:calc(2.3em + var(--sidebar-margin));flex-direction:row}#right-sidebar .topbar-content{margin-left:calc(2.3em + var(--sidebar-margin));flex-direction:row-reverse}.topbar-content{overflow:hidden visible;overflow:clip visible;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:2px!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}#left-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}#right-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.feature-title{margin-left:1px;text-transform:uppercase;letter-spacing:.06em;margin-top:.75em;margin-bottom:.75em}.feature-header{display:flex;align-items:center;padding-top:0;font-size:1em;padding-left:0}body.floating-sidebars .sidebar{position:absolute}body{transition:background-color var(--color-fade-speed) ease-in-out}#navbar:not(:empty){display:flex;align-items:center;justify-content:space-between;padding:.5em 1em;width:100%}#main{display:flex;flex-direction:column;height:100%;width:100%;align-items:stretch;justify-content:center}#main-horizontal{display:flex;flex-direction:row;flex-grow:1;width:100%;align-items:stretch;justify-content:center}#center-content{flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0!important;transition:opacity .2s ease-in-out;pointer-events:none}#center-content>.obsidian-document{padding-left:2em;padding-right:1em;margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}body #center-content>.obsidian-document>.markdown-preview-sizer{padding-bottom:80vh;width:100%;max-width:var(--line-width);flex-basis:var(--line-width);transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document>div{width:100%!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document:not([data-type=markdown]).embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}#center-content>.obsidian-document:not([data-type=markdown]).embed>*{max-width:100%;max-height:100%;object-fit:contain}:not(h1,h2,h3,h4,h5,h6,li):has(> :is(.math,table)){overflow-x:auto!important}#center-content>.obsidian-document:not([data-type=markdown]){overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.obsidian-document[data-type=attachment]{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%}.obsidian-document[data-type=attachment]>*{outline:0;border:none;box-shadow:none}.obsidian-document[data-type=attachment] :is(img){max-width:90%;max-height:90%;object-fit:contain}.obsidian-document[data-type=attachment]>:is(audio){width:100%;max-width:min(90%,var(--line-width))}.obsidian-document[data-type=attachment]>:is(embed,iframe,video){width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}.canvas-wrapper>:is(.header,.footer){z-index:100;position:absolute;display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){let e=document.querySelectorAll("link[itemprop='include']");for(const t of e){let e=t.getAttribute("href");try{let o="";if(e.startsWith("https:")||e.startsWith("http:")||"file:"!=window.location.protocol){const n=await fetch(e);if(!n.ok){console.log("Could not include file: "+e),t?.remove();continue}o=await n.text()}else{const t=document.getElementById(btoa(encodeURI(e)));if(t){const e=JSON.parse(decodeURI(atob(t.getAttribute("value")??"")));o=e?.data??""}}let n=document.createRange().createContextualFragment(o);t.before(n),t.remove(),console.log("Included text: "+o),console.log("Included file: "+e)}catch(o){t?.remove(),console.log("Could not include file: "+e,o);continue}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script")));!function e(n){let l=o[n],c=n+1;l?(l&&"true"!=l.getAttribute("loaded")||n<o.length&&e(c),n<o.length&&l.addEventListener("load",(()=>e(c)))):n<o.length?e(c):t()}(0)}</script><div id="main"><div id="navbar"></div><div id="main-horizontal"><div id="left-content" class="leaf" style="--sidebar-width: var(--sidebar-width-left);"><div id="left-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><div id="search-container"><div id="search-wrapper"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div aria-label="Clear search" id="search-clear-button"></div></div></div></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="left-sidebar-content" class="leaf-content"><link itemprop="include" href="site-lib/html/file-tree-content.html"></div></div><script defer="">let ls = document.querySelector("#left-sidebar"); ls.classList.toggle("is-collapsed", window.innerWidth < 768); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div></div><div id="center-content" class="leaf"><div class="obsidian-document markdown-preview-view markdown-rendered node-insert-event allow-fold-headings allow-fold-lists show-indentation-guide show-properties is-readable-line-width" data-type="markdown"><style id="MJX-CHTML-styles"></style><pre class="frontmatter language-yaml" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Argon2 — GPU와 ASIC을 무력화하는 패스워드 해싱"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-07</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-07</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> output
+<span class="token key atrule">status</span><span class="token punctuation">:</span> done
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Yangha Park
+<span class="token key atrule">source</span><span class="token punctuation">:</span> <span class="token string">"https://datatracker.ietf.org/doc/html/rfc9106"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> dev
+  <span class="token punctuation">-</span> src/doc</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre><div class="markdown-preview-sizer markdown-preview-section"><div class="header"><h1 class="page-title heading inline-title" id="Argon2_—_GPU와_ASIC을_무력화하는_패스워드_해싱_0">Argon2 — GPU와 ASIC을 무력화하는 패스워드 해싱</h1><div class="data-bar"></div></div><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="el-p"><p dir="auto">2012년 6월, LinkedIn에서 유출된 650만 개의 패스워드 해시가 온라인에 공개됐다. SHA-1 단일 해싱이었고, 공격자들은 수 시간 만에 대부분을 평문으로 복원했다. 이 사건은 "빠른 해시 함수는 방어가 아니라 공격자의 무기"라는 사실을 증명한 대표적 사례다.</p></div><div class="el-h2"><h2 data-heading="SHA-1이 무너진 이유" dir="auto" class="heading" id="SHA-1이_무너진_이유_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>SHA-1이 무너진 이유</h2></div><div class="el-pre"><pre><code data-line="0"># SHA-1 해싱 — 단 한 번의 연산
+echo -n "password123" | sha1sum
+# -&gt; cbfdac6008f9cab4083784cbd1874f76618d2a97
+
+# GPU(RTX 4090) 기준 SHA-1 처리 속도: ~26 billion hashes/sec
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-pre"><pre><code data-line="0">SHA-1, MD5 같은 범용 해시 함수는 **속도를 목적으로 설계**됐다. 파일 무결성 검증, 체크섬 계산에는 빠를수록 좋다. 하지만 패스워드 해싱에서 속도는 곧 취약점이다. GPU 한 장으로 초당 수백억 개의 후보를 시도할 수 있기 때문이다.
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h2"><h2 data-heading="bcrypt와 PBKDF2도 부족한 이유" dir="auto" class="heading" id="bcrypt와_PBKDF2도_부족한_이유_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>bcrypt와 PBKDF2도 부족한 이유</h2></div><div class="el-pre"><pre><code data-line="0">bcrypt(1999)와 PBKDF2(2000)는 의도적으로 느린 해시 함수로, 반복 횟수(iteration count)를 높여 연산 비용을 올린다. 수년간 표준으로 쓰였고 지금도 많은 시스템에서 동작 중이다. 문제는 이들이 **CPU-bound**라는 점이다.
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>
+<p>bcrypt: 4KB 내부 상태만 사용 — GPU 코어 수천 개에 각각 올릴 수 있음</p>
+</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>
+<p>PBKDF2: 메모리 요구량이 사실상 0 — ASIC 설계가 용이</p>
+</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>
+<p>2024년 기준 ASIC 한 대가 bcrypt cost=12를 초당 수만 회 처리 가능</p>
+<p>연산 시간만 늘리는 전략은 병렬 하드웨어 앞에서 한계에 도달한다. 필요한 것은 시간뿐 아니라 <strong>메모리</strong>를 강제하는 함수다.</p>
+</li>
+</ul></div><div class="el-h2"><h2 data-heading="Argon2가 메모리를 무기로 쓰는 방법" dir="auto" class="heading" id="Argon2가_메모리를_무기로_쓰는_방법_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Argon2가 메모리를 무기로 쓰는 방법</h2></div><div class="el-pre"><pre><code data-line="0">2015년 Password Hashing Competition(PHC) 우승 알고리즘인 Argon2는 의도적으로 대량의 메모리를 할당한 뒤, 그 메모리 블록들을 반복적으로 참조한다. 핵심 아이디어는 단순하다.
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-pre"><pre><code data-line="0">[블록 0] -&gt; [블록 1] -&gt; [블록 2] -&gt; ... -&gt; [블록 N]
+   ^            |            ^                 |
+   +--- 이전 블록 참조 ---+--- 비순차 참조 ---+
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>
+<p>각 1KB 블록은 이전 블록과 데이터 의존적 인덱스의 블록을 입력으로 생성</p>
+</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>
+<p>메모리를 줄이면(trade-off attack) 같은 블록을 재계산해야 하므로 시간이 기하급수적으로 증가</p>
+</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>
+<p>GPU는 코어당 사용 가능한 메모리가 제한적 — 64MB를 요구하면 RTX 4090(24GB)에서 동시 인스턴스가 ~375개로 제한</p>
+<p>이것이 <strong>memory-hardness</strong>다. 연산만 빠르게 돌려서는 공격할 수 없다.</p>
+</li>
+</ul></div><div class="el-h2"><h2 data-heading="세 가지 변형: Argon2d, Argon2i, Argon2id" dir="auto" class="heading" id="세_가지_변형_Argon2d,_Argon2i,_Argon2id_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>세 가지 변형: Argon2d, Argon2i, Argon2id</h2></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">변형</th>
+<th dir="ltr">메모리 접근 패턴</th>
+<th dir="ltr">사이드채널 내성</th>
+<th dir="ltr">주요 용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>Argon2d</strong></td>
+<td dir="ltr">데이터 의존적 (data-dependent)</td>
+<td dir="ltr">낮음</td>
+<td dir="ltr">암호화폐 채굴, 서버 백엔드</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Argon2i</strong></td>
+<td dir="ltr">데이터 독립적 (data-independent)</td>
+<td dir="ltr">높음</td>
+<td dir="ltr">로그인 서버 (타이밍 공격 우려 시)</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Argon2id</strong></td>
+<td dir="ltr">첫 패스 Argon2i + 이후 Argon2d</td>
+<td dir="ltr">하이브리드</td>
+<td dir="ltr"><strong>RFC 9106 권장 기본값</strong></td>
+</tr>
+</tbody>
+</table></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>
+<p><strong>Argon2d</strong>: 비밀 값에 따라 메모리 접근 순서가 바뀜 — GPU 공격에 가장 강하지만 사이드채널(타이밍 분석)에 취약</p>
+</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>
+<p><strong>Argon2i</strong>: 접근 순서가 입력과 무관 — 사이드채널에 강하지만 GPU 내성이 Argon2d보다 약간 낮음</p>
+</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>
+<p><strong>Argon2id</strong>: 첫 번째 반복에서 Argon2i 패턴으로 사이드채널을 방어하고, 이후 Argon2d로 전환해 GPU 내성 확보</p>
+<p>실무에서는 <strong>Argon2id</strong>를 선택하면 된다. RFC 9106이 명시적으로 권장하는 변형이다.</p>
+</li>
+</ul></div><div class="el-h2"><h2 data-heading="파라미터 튜닝: 시간, 메모리, 병렬성" dir="auto" class="heading" id="파라미터_튜닝_시간,_메모리,_병렬성_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>파라미터 튜닝: 시간, 메모리, 병렬성</h2></div><div class="el-pre"><pre><code data-line="0">Argon2는 세 개의 파라미터로 비용을 조절한다.
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">파라미터</th>
+<th dir="ltr">의미</th>
+<th dir="ltr">OWASP 최소 권장값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>time_cost</strong> (t)</td>
+<td dir="ltr">반복 횟수</td>
+<td dir="ltr">1 (메모리가 충분할 때)</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>memory_cost</strong> (m)</td>
+<td dir="ltr">사용 메모리 (KiB)</td>
+<td dir="ltr">47,104 (46 MiB)</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>parallelism</strong> (p)</td>
+<td dir="ltr">스레드 수</td>
+<td dir="auto">1</td>
+</tr>
+</tbody>
+</table></div><div class="el-pre"><pre><code data-line="0">OWASP 2024 가이드라인이 제시하는 설정 조합:
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>
+<p><strong>1순위</strong>: <code>m=47104 (46 MiB), t=1, p=1</code> — 메모리 우선</p>
+</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>
+<p><strong>2순위</strong>: <code>m=19456 (19 MiB), t=2, p=1</code> — 메모리 제약 시</p>
+</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>
+<p><strong>3순위</strong>: <code>m=12288 (12 MiB), t=3, p=1</code> — 더 적은 메모리 환경</p>
+<p>튜닝 원칙은 명확하다: <strong>메모리를 먼저 최대한 올리고</strong>, 그래도 응답 시간이 남으면 time_cost를 올린다. 로그인 요청 기준 해싱에 0.5~1초가 소요되도록 맞추는 것이 일반적이다.</p>
+</li>
+</ul></div><div class="el-h2"><h2 data-heading="Python 구현 예제" dir="auto" class="heading" id="Python_구현_예제_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Python 구현 예제</h2></div><div class="el-pre"><pre class="language-python"><code data-line="0" class="language-python is-loaded"><span class="token keyword">from</span> argon2 <span class="token keyword">import</span> PasswordHasher
+
+<span class="token comment"># OWASP 권장 설정으로 초기화</span>
+ph <span class="token operator">=</span> PasswordHasher<span class="token punctuation">(</span>
+	time_cost<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>
+	memory_cost<span class="token operator">=</span><span class="token number">47104</span><span class="token punctuation">,</span>   <span class="token comment"># 46 MiB</span>
+	parallelism<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>
+	hash_len<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">,</span>
+	<span class="token builtin">type</span><span class="token operator">=</span>argon2<span class="token punctuation">.</span>Type<span class="token punctuation">.</span>ID  <span class="token comment"># Argon2id</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 해싱</span>
+password <span class="token operator">=</span> <span class="token string">"correct-horse-battery-staple"</span>
+hashed <span class="token operator">=</span> ph<span class="token punctuation">.</span><span class="token builtin">hash</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>hashed<span class="token punctuation">)</span>
+<span class="token comment"># $argon2id$v=19$m=47104,t=1,p=1$c29tZXNhbHQ$...</span>
+
+<span class="token comment"># 검증</span>
+<span class="token keyword">try</span><span class="token punctuation">:</span>
+	ph<span class="token punctuation">.</span>verify<span class="token punctuation">(</span>hashed<span class="token punctuation">,</span> password<span class="token punctuation">)</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"인증 성공"</span><span class="token punctuation">)</span>
+<span class="token keyword">except</span> argon2<span class="token punctuation">.</span>exceptions<span class="token punctuation">.</span>VerifyMismatchError<span class="token punctuation">:</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"패스워드 불일치"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 파라미터 변경 감지 (rehash 필요 여부)</span>
+<span class="token keyword">if</span> ph<span class="token punctuation">.</span>check_needs_rehash<span class="token punctuation">(</span>hashed<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	new_hash <span class="token operator">=</span> ph<span class="token punctuation">.</span><span class="token builtin">hash</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span>
+	<span class="token comment"># DB 업데이트</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-pre"><pre><code data-line="0">`argon2-cffi`는 해시 문자열 안에 알고리즘, 버전, 파라미터, salt를 모두 포함한다. 별도의 salt 컬럼이 필요 없고, `check_needs_rehash()`로 파라미터 업그레이드도 자동 감지한다.
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h2"><h2 data-heading="해시 함수 비교: MD5에서 Argon2까지" dir="auto" class="heading" id="해시_함수_비교_MD5에서_Argon2까지_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>해시 함수 비교: MD5에서 Argon2까지</h2></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">함수</th>
+<th dir="ltr">연도</th>
+<th dir="ltr">메모리 사용</th>
+<th dir="ltr">GPU 내성</th>
+<th dir="ltr">현재 상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">MD5</td>
+<td dir="auto">1992</td>
+<td dir="ltr">없음</td>
+<td dir="ltr">없음</td>
+<td dir="ltr">완전 폐기 — 충돌 공격 가능</td>
+</tr>
+<tr>
+<td dir="ltr">SHA-1</td>
+<td dir="auto">1995</td>
+<td dir="ltr">없음</td>
+<td dir="ltr">없음</td>
+<td dir="ltr">폐기 — 2017 SHAttered 공격</td>
+</tr>
+<tr>
+<td dir="ltr">bcrypt</td>
+<td dir="auto">1999</td>
+<td dir="ltr">4 KB</td>
+<td dir="ltr">낮음</td>
+<td dir="ltr">레거시 — ASIC 공격 가능</td>
+</tr>
+<tr>
+<td dir="ltr">scrypt</td>
+<td dir="auto">2009</td>
+<td dir="ltr">설정 가능</td>
+<td dir="ltr">중간</td>
+<td dir="ltr">사용 가능 — 파라미터 튜닝 복잡</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Argon2id</strong></td>
+<td dir="auto">2015</td>
+<td dir="ltr">설정 가능 (MB~GB)</td>
+<td dir="ltr"><strong>높음</strong></td>
+<td dir="ltr"><strong>RFC 9106 표준, OWASP 1순위 권장</strong></td>
+</tr>
+</tbody>
+</table></div><div class="el-h2"><h2 data-heading="Argon2와 [[HKDF]]의 역할 분담" dir="auto" class="heading" id="Argon2와_[[HKDF]]의_역할_분담_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Argon2와 <a data-href="HKDF" href="600_tech-stack/cryptography/hkdf.html" class="internal-link" target="_self" rel="noopener nofollow">HKDF</a>의 역할 분담</h2></div><div class="el-pre"><pre><code data-line="0">패스워드 기반 암호화 시스템에서 Argon2와 [[HKDF]]는 서로 다른 단계를 담당한다.
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-pre"><pre><code data-line="0">사용자 패스워드
+    │
+    ▼
+ [Argon2id] ──── 느리고 메모리 집약적 → intermediate key (IKM)
+    │
+    ▼
+ [HKDF-Extract] ─ salt + IKM → PRK (pseudorandom key)
+    │
+    ▼
+ [HKDF-Expand] ── PRK → encryption key, MAC key, IV 등
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>
+<p><strong>Argon2</strong>: 저엔트로피 패스워드를 공격 비용이 높은 중간 키로 변환 (rate-limiting)</p>
+</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>
+<p><strong><a data-href="HKDF" href="600_tech-stack/cryptography/hkdf.html" class="internal-link" target="_self" rel="noopener nofollow">HKDF</a></strong>: 중간 키에서 용도별 키를 안전하게 파생 (key separation)</p>
+<p><a data-href="Age" href="600_tech-stack/cryptography/age.html" class="internal-link" target="_self" rel="noopener nofollow">Age</a> 암호화 도구가 이 패턴을 사용한다 — scrypt/Argon2로 패스워드를 키로 변환한 뒤, HKDF로 파일 키를 파생한다.</p>
+</li>
+</ul></div><div class="el-h2"><h2 data-heading="도입 시 체크리스트" dir="auto" class="heading" id="도입_시_체크리스트_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>도입 시 체크리스트</h2></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>
+<p>Argon2id를 기본으로 선택한다 (RFC 9106 Section 4)</p>
+</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>
+<p>서버 메모리 예산 내에서 memory_cost를 최대한 높인다</p>
+</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>
+<p>해싱 시간이 로그인 UX에 영향을 주지 않는 선에서 time_cost를 조절한다</p>
+</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>
+<p>해시 문자열을 그대로 저장한다 — salt와 파라미터가 내장되어 있다</p>
+</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span>
+<p><code>check_needs_rehash()</code>로 기존 해시의 파라미터 업그레이드를 자동화한다</p>
+</li>
+<li data-line="5" dir="auto"><span class="list-bullet"></span>
+<p>패스워드에서 암호화 키를 파생해야 한다면, Argon2 출력을 <a data-href="HKDF" href="600_tech-stack/cryptography/hkdf.html" class="internal-link" target="_self" rel="noopener nofollow">HKDF</a>에 넘긴다</p>
+<p>패스워드 해싱의 목표는 해시를 깨지 못하게 만드는 것이 아니다. 공격 비용을 공격자의 예산보다 높게 만드는 것이다. Argon2id는 그 비용의 단위를 '시간'에서 '시간 x 메모리'로 바꿨고, 그것이 GPU 수천 장을 무력화하는 이유다.</p>
+</li>
+</ul></div><div class="footer"><div class="data-bar"></div></div></div></div></div><div id="right-content" class="leaf" style="--sidebar-width: var(--sidebar-width-right);"><div id="right-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme-toggle-input" id=""><input class="theme-toggle-input" type="checkbox" id="theme-toggle-input"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="right-sidebar-content" class="leaf-content"><div class="graph-view-wrapper"><div class="feature-header"><div class="feature-title">Interactive Graph</div></div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<div class="graph-icon graph-global" role="button" aria-label="Global Graph" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-git-fork"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div id="outline" class=" tree-container"><div class="feature-header"><div class="feature-title">Table Of Contents</div><button class="clickable-icon nav-action-button tree-collapse-all" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/cryptography/argon2.html#Argon2_—_GPU와_ASIC을_무력화하는_패스워드_해싱_0" data-path="#Argon2_—_GPU와_ASIC을_무력화하는_패스워드_해싱_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Argon2 — GPU와 ASIC을 무력화하는 패스워드 해싱">Argon2 — GPU와 ASIC을 무력화하는 패스워드 해싱</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cryptography/argon2.html#SHA-1이_무너진_이유_0" data-path="#SHA-1이_무너진_이유_0"><div class="tree-item-inner heading-link" heading-name="SHA-1이 무너진 이유">SHA-1이 무너진 이유</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cryptography/argon2.html#bcrypt와_PBKDF2도_부족한_이유_0" data-path="#bcrypt와_PBKDF2도_부족한_이유_0"><div class="tree-item-inner heading-link" heading-name="bcrypt와 PBKDF2도 부족한 이유">bcrypt와 PBKDF2도 부족한 이유</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cryptography/argon2.html#Argon2가_메모리를_무기로_쓰는_방법_0" data-path="#Argon2가_메모리를_무기로_쓰는_방법_0"><div class="tree-item-inner heading-link" heading-name="Argon2가 메모리를 무기로 쓰는 방법">Argon2가 메모리를 무기로 쓰는 방법</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cryptography/argon2.html#세_가지_변형_Argon2d,_Argon2i,_Argon2id_0" data-path="#세_가지_변형_Argon2d,_Argon2i,_Argon2id_0"><div class="tree-item-inner heading-link" heading-name="세 가지 변형: Argon2d, Argon2i, Argon2id">세 가지 변형: Argon2d, Argon2i, Argon2id</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cryptography/argon2.html#파라미터_튜닝_시간,_메모리,_병렬성_0" data-path="#파라미터_튜닝_시간,_메모리,_병렬성_0"><div class="tree-item-inner heading-link" heading-name="파라미터 튜닝: 시간, 메모리, 병렬성">파라미터 튜닝: 시간, 메모리, 병렬성</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cryptography/argon2.html#Python_구현_예제_0" data-path="#Python_구현_예제_0"><div class="tree-item-inner heading-link" heading-name="Python 구현 예제">Python 구현 예제</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cryptography/argon2.html#해시_함수_비교_MD5에서_Argon2까지_0" data-path="#해시_함수_비교_MD5에서_Argon2까지_0"><div class="tree-item-inner heading-link" heading-name="해시 함수 비교: MD5에서 Argon2까지">해시 함수 비교: MD5에서 Argon2까지</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cryptography/argon2.html#Argon2와_[[HKDF]]의_역할_분담_0" data-path="#Argon2와_[[HKDF]]의_역할_분담_0"><div class="tree-item-inner heading-link" heading-name="Argon2와 [[HKDF]]의 역할 분담">Argon2와 <span>HKDF</span>의 역할 분담</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/cryptography/argon2.html#도입_시_체크리스트_0" data-path="#도입_시_체크리스트_0"><div class="tree-item-inner heading-link" heading-name="도입 시 체크리스트">도입 시 체크리스트</div></a><div class="tree-item-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector("#right-sidebar"); rs.classList.toggle("is-collapsed", window.innerWidth < 768); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></div></div></body></html>

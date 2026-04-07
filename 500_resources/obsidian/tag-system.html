@@ -1,0 +1,1171 @@
+<!DOCTYPE html> <html lang="en"><head>
+<title>Tag System</title>
+<base href="../..">
+<meta name="pathname" content="500_resources/obsidian/tag-system.html">
+<meta name="description" content="Defines the MECE tag taxonomy (domain/source/action) with all valid tags, formatting rules, and legacy migration mappings">
+<meta property="og:title" content="Tag System">
+<meta property="og:description" content="Defines the MECE tag taxonomy (domain/source/action) with all valid tags, formatting rules, and legacy migration mappings">
+<meta property="og:type" content="website">
+<meta property="og:url" content="./https://64etuor.github.io/500_resources/obsidian/tag-system.html">
+<meta property="og:image" content="undefined">
+<meta name="author" content="Yangha Park"></head><body class="publish css-settings-manager styled-scrollbars show-inline-title show-ribbon"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="parsed-feature-container" style="display: contents;"><link itemprop="include" href="site-lib/html/custom-head-content-content.html"></div><meta charset="UTF-8"><meta property="og:site_name" content="Obsidian"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="./https://64etuor.github.io/site-lib/rss.xml"><script async="" id="webpage-script" src="site-lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-wasm-script" src="site-lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="site-lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="site-lib/media/favicon.png"><link rel="preload" href="site-lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/snippets.css"></noscript><link rel="stylesheet" href="site-lib/styles/obsidian.css"><link rel="stylesheet" href="site-lib/styles/theme.css"><link rel="preload" href="site-lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="site-lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/supported-plugins.css"></noscript><link rel="preload" href="site-lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/main-styles.css"></noscript><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-vertical-spacing:1.3em;--sidebar-margin:12px}:root{background-color:#202124}.sidebar{height:100%;font-size:14px;z-index:10;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));position:relative;overflow:hidden;overflow:clip;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}#left-sidebar{left:0}#right-sidebar{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}.sidebar.floating{position:absolute}.sidebar .leaf-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .leaf-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}#left-sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}#right-sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar #left-sidebar-content,.sidebar #right-sidebar-content{contain:none!important;container-type:normal!important;animation:none!important}.sidebar:has(.leaf-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:calc(2.3em + 2 * var(--sidebar-margin));width:var(--sidebar-width);padding:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}#left-sidebar .sidebar-topbar{left:0;flex-direction:row;border-top-right-radius:var(--radius-l)}#right-sidebar .sidebar-topbar{right:0;flex-direction:row-reverse;border-top-left-radius:var(--radius-l)}#left-sidebar .topbar-content{margin-right:calc(2.3em + var(--sidebar-margin));flex-direction:row}#right-sidebar .topbar-content{margin-left:calc(2.3em + var(--sidebar-margin));flex-direction:row-reverse}.topbar-content{overflow:hidden visible;overflow:clip visible;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:2px!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}#left-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}#right-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.feature-title{margin-left:1px;text-transform:uppercase;letter-spacing:.06em;margin-top:.75em;margin-bottom:.75em}.feature-header{display:flex;align-items:center;padding-top:0;font-size:1em;padding-left:0}body.floating-sidebars .sidebar{position:absolute}body{transition:background-color var(--color-fade-speed) ease-in-out}#navbar:not(:empty){display:flex;align-items:center;justify-content:space-between;padding:.5em 1em;width:100%}#main{display:flex;flex-direction:column;height:100%;width:100%;align-items:stretch;justify-content:center}#main-horizontal{display:flex;flex-direction:row;flex-grow:1;width:100%;align-items:stretch;justify-content:center}#center-content{flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0!important;transition:opacity .2s ease-in-out;pointer-events:none}#center-content>.obsidian-document{padding-left:2em;padding-right:1em;margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}body #center-content>.obsidian-document>.markdown-preview-sizer{padding-bottom:80vh;width:100%;max-width:var(--line-width);flex-basis:var(--line-width);transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document>div{width:100%!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document:not([data-type=markdown]).embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}#center-content>.obsidian-document:not([data-type=markdown]).embed>*{max-width:100%;max-height:100%;object-fit:contain}:not(h1,h2,h3,h4,h5,h6,li):has(> :is(.math,table)){overflow-x:auto!important}#center-content>.obsidian-document:not([data-type=markdown]){overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.obsidian-document[data-type=attachment]{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%}.obsidian-document[data-type=attachment]>*{outline:0;border:none;box-shadow:none}.obsidian-document[data-type=attachment] :is(img){max-width:90%;max-height:90%;object-fit:contain}.obsidian-document[data-type=attachment]>:is(audio){width:100%;max-width:min(90%,var(--line-width))}.obsidian-document[data-type=attachment]>:is(embed,iframe,video){width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}.canvas-wrapper>:is(.header,.footer){z-index:100;position:absolute;display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){let e=document.querySelectorAll("link[itemprop='include']");for(const t of e){let e=t.getAttribute("href");try{let o="";if(e.startsWith("https:")||e.startsWith("http:")||"file:"!=window.location.protocol){const n=await fetch(e);if(!n.ok){console.log("Could not include file: "+e),t?.remove();continue}o=await n.text()}else{const t=document.getElementById(btoa(encodeURI(e)));if(t){const e=JSON.parse(decodeURI(atob(t.getAttribute("value")??"")));o=e?.data??""}}let n=document.createRange().createContextualFragment(o);t.before(n),t.remove(),console.log("Included text: "+o),console.log("Included file: "+e)}catch(o){t?.remove(),console.log("Could not include file: "+e,o);continue}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script")));!function e(n){let l=o[n],c=n+1;l?(l&&"true"!=l.getAttribute("loaded")||n<o.length&&e(c),n<o.length&&l.addEventListener("load",(()=>e(c)))):n<o.length?e(c):t()}(0)}</script><div id="main"><div id="navbar"></div><div id="main-horizontal"><div id="left-content" class="leaf" style="--sidebar-width: var(--sidebar-width-left);"><div id="left-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><div id="search-container"><div id="search-wrapper"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div aria-label="Clear search" id="search-clear-button"></div></div></div></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="left-sidebar-content" class="leaf-content"><link itemprop="include" href="site-lib/html/file-tree-content.html"></div></div><script defer="">let ls = document.querySelector("#left-sidebar"); ls.classList.toggle("is-collapsed", window.innerWidth < 768); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div></div><div id="center-content" class="leaf"><div class="obsidian-document markdown-preview-view markdown-rendered node-insert-event allow-fold-headings allow-fold-lists show-indentation-guide show-properties is-readable-line-width" data-type="markdown"><style id="MJX-CHTML-styles"></style><pre class="frontmatter language-yaml" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Tag System"</span>
+<span class="token key atrule">description</span><span class="token punctuation">:</span> <span class="token string">"Defines the MECE tag taxonomy (domain/source/action) with all valid tags, formatting rules, and legacy migration mappings"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-04</span>
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Yangha Park
+<span class="token key atrule">type</span><span class="token punctuation">:</span> reference
+<span class="token key atrule">status</span><span class="token punctuation">:</span> active
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> infra/obsidian
+<span class="token key atrule">aliases</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> Tag System
+  <span class="token punctuation">-</span> tag<span class="token punctuation">-</span>system
+<span class="token key atrule">use_when</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token string">"Assigning tags to a new or existing note"</span>
+  <span class="token punctuation">-</span> <span class="token string">"Validating whether a tag follows the MECE system"</span>
+  <span class="token punctuation">-</span> <span class="token string">"Migrating old tags to the new taxonomy"</span></code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre><div class="markdown-preview-sizer markdown-preview-section"><div class="header"><h1 class="page-title heading inline-title" id="Tag_System_0">Tag System</h1><div class="data-bar"></div></div><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="el-h1"><h1 data-heading="Tag System" dir="auto" class="heading" id="Tag_System_1"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Tag System</h1></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="abstract" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-clipboard-list"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg></div><div class="callout-title-inner">Summary</div></div><div class="callout-content">
+<p dir="auto">This document defines the Obsidian vault's tag system.<br>
+Folders, properties, tags, and links form 4 layers, each with a distinct role, maximizing search efficiency and knowledge connectivity.<br>
+Design principle: MECE (Mutually Exclusive, Collectively Exhaustive) — dimensions don't overlap and collectively cover everything.</p>
+</div></div></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="1. Design Principles" dir="auto" class="heading" id="1._Design_Principles_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1. Design Principles</h2></div><div class="el-h3"><h3 data-heading="1.1 Four-Layer Separation" dir="auto" class="heading" id="1.1_Four-Layer_Separation_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1.1 Four-Layer Separation</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Layer</th>
+<th dir="ltr">Role</th>
+<th dir="ltr">Link Strength</th>
+<th dir="ltr">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>Folder</strong></td>
+<td dir="ltr">Document's <strong>structural location</strong> (where it lives)</td>
+<td dir="ltr">Medium</td>
+<td dir="ltr"><code>700_Studies/2501-2502 Challenge/</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Property</strong></td>
+<td dir="ltr">Document's <strong>metadata</strong> (what it is)</td>
+<td dir="auto">-</td>
+<td dir="ltr"><code>type: literature</code>, <code>status: done</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Tag</strong></td>
+<td dir="ltr">Document's <strong>topic/theme</strong> (what it's about)</td>
+<td dir="ltr">Loose</td>
+<td dir="ltr"><code>#data/sql</code>, <code>#src/lecture</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Link</strong></td>
+<td dir="ltr"><strong>Contextual relationship</strong> between documents (why they connect)</td>
+<td dir="ltr">Strong</td>
+<td dir="ltr"><code>[[Normalization Theory]]</code>, <code>[[SQL JOIN Guide]]</code></td>
+</tr>
+</tbody>
+</table></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="important" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-flame"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></svg></div><div class="callout-title-inner">Key Rules</div></div><div class="callout-content">
+<ul class="has-list-bullet">
+<li data-line="1" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><strong>Don't repeat with tags what the folder already says.</strong>
+<ul class="has-list-bullet">
+<li data-line="2" dir="auto"><span class="list-bullet"></span><del><code>#Books</code> tag inside <code>200_Books/</code> folder</del> -&gt; unnecessary</li>
+</ul>
+</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><strong>Structured values go in properties; free classification goes in tags.</strong>
+<ul class="has-list-bullet">
+<li data-line="4" dir="auto"><span class="list-bullet"></span><code>status: done</code> (property) -&gt; <del><code>#done</code> (tag)</del> </li>
+</ul>
+</li>
+<li data-line="5" dir="auto"><span class="list-bullet"></span><strong>Tags express only "what topic is this note about."</strong></li>
+</ul>
+</div></div></div><div class="el-h3"><h3 data-heading="1.2 Tag Formatting Rules" dir="auto" class="heading" id="1.2_Tag_Formatting_Rules_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1.2 Tag Formatting Rules</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Rule</th>
+<th dir="ltr">Description</th>
+<th dir="ltr">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>English only</strong></td>
+<td dir="ltr">AI auto-tagging compatible, global standard</td>
+<td dir="ltr"><code>#data/sql</code> ✅ / <del><code>#데이터/SQL</code></del></td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Lowercase</strong></td>
+<td dir="ltr">Prevents case confusion</td>
+<td dir="ltr"><code>#dev/java</code> ✅ / <del><code>#Dev/Java</code></del></td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Nested tags</strong></td>
+<td dir="ltr"><code>#parent/child</code> hierarchy</td>
+<td dir="ltr"><code>#ai/genai</code>, <code>#dev/python</code></td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Max 2 levels</strong></td>
+<td dir="ltr">Avoid 3+ levels</td>
+<td dir="ltr"><code>#data/sql</code> ✅ / <del><code>#data/sql/join</code></del></td>
+</tr>
+<tr>
+<td dir="ltr"><strong>3-8 per note</strong></td>
+<td dir="ltr">Prevent over-tagging</td>
+<td dir="ltr">domain 1-3 + source 1 + action 0-1</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Frontmatter only</strong></td>
+<td dir="ltr">Use <code>tags:</code> property, not inline tags</td>
+<td dir="ltr">YAML array format</td>
+</tr>
+</tbody>
+</table></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="2. Property Standard (Frontmatter)" dir="auto" class="heading" id="2._Property_Standard_(Frontmatter)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2. Property Standard (Frontmatter)</h2></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="tip" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-flame"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></svg></div><div class="callout-title-inner">Properties vs Tags</div></div><div class="callout-content">
+<p dir="auto">Properties are structured fields where you <strong>select from predefined values</strong>.<br>
+Optimized for Dataview queries; they serve as the note's "ID card."</p>
+</div></div></div><div class="el-h3"><h3 data-heading="2.1 Common Properties" dir="auto" class="heading" id="2.1_Common_Properties_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2.1 Common Properties</h3></div><div class="el-p"><p dir="auto"><strong>Required (7 fields):</strong></p></div><div class="el-pre"><pre class="language-yaml"><code data-line="0" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Document Title"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> permanent
+<span class="token key atrule">status</span><span class="token punctuation">:</span> active
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Yangha Park
+<span class="token key atrule">tags</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-p"><p dir="auto"><strong>Optional (add as needed):</strong></p></div><div class="el-pre"><pre class="language-yaml"><code data-line="0" class="language-yaml is-loaded"><span class="token key atrule">description</span><span class="token punctuation">:</span> <span class="token string">""</span>   <span class="token comment"># One-line summary (~100 chars) for AI indexing &amp; Dataview listing</span>
+<span class="token key atrule">source</span><span class="token punctuation">:</span> <span class="token string">""</span>        <span class="token comment"># URL or origin of the content</span>
+<span class="token key atrule">aliases</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>       <span class="token comment"># Alternative names for Obsidian search</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="tip" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-flame"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></svg></div><div class="callout-title-inner"><code>description</code> 활용</div></div><div class="callout-content">
+<ul class="has-list-bullet">
+<li data-line="1" dir="auto"><span class="list-bullet"></span>AI가 노트를 탐색할 때 본문 파싱 없이 관련성을 판단하는 첫 번째 단서</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>Dataview 테이블에서 <code>description</code> 컬럼으로 노트 목록 한눈에 파악</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>한 줄(~100자) 이내로 작성. 비워 둬도 무방 — AI 처리 시 자동 생성 가능</li>
+</ul>
+</div></div></div><div class="el-h3"><h3 data-heading="2.2 `type` Values" dir="auto" class="heading" id="2.2_`type`_Values_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2.2 <code>type</code> Values</h3></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="warning" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-alert-triangle"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></div><div class="callout-title-inner">type ≠ folder</div></div><div class="callout-content">
+<p dir="auto"><code>type</code> indicates the <strong>nature of the document</strong> (how it was written), not necessarily matching its folder location.<br>
+Example: a <code>permanent</code> note can exist in <code>700_Studies/</code>, and a <code>reference</code> can exist in <code>300_Projects/</code>.<br>
+The "typical locations" below are guidelines, not rules.</p>
+</div></div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Value</th>
+<th dir="ltr">Description</th>
+<th dir="ltr">Purpose</th>
+<th dir="ltr">Typical location (reference only)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>fleeting</code></td>
+<td dir="ltr">Temporary memo</td>
+<td dir="ltr">Quick capture, organize later</td>
+<td dir="ltr"><code>100_Inbox/</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>literature</code></td>
+<td dir="ltr">Literature note</td>
+<td dir="ltr"><strong>Note summarizing an external source</strong> — others' ideas rewritten in own words</td>
+<td dir="ltr"><code>200_Books/</code>, <code>700_Studies/</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>permanent</code></td>
+<td dir="ltr">Permanent note</td>
+<td dir="ltr"><strong>Self-authored knowledge</strong> — synthesized from multiple sources or original insight</td>
+<td dir="ltr"><code>600_Tech Stack/</code>, anywhere</td>
+</tr>
+<tr>
+<td dir="ltr"><code>reference</code></td>
+<td dir="ltr">Reference material</td>
+<td dir="ltr">Preserved external source (minimal processing)</td>
+<td dir="ltr"><code>500_Resources/</code>, <code>Clippings/</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>project</code></td>
+<td dir="ltr">Project document</td>
+<td dir="ltr">Project deliverables, plans, technical docs</td>
+<td dir="ltr"><code>300_Projects/</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>log</code></td>
+<td dir="ltr">Log/journal</td>
+<td dir="ltr">Diary, retrospective, meeting minutes</td>
+<td dir="ltr"><code>900_Writings/Diaries/</code></td>
+</tr>
+<tr>
+<td dir="ltr"><code>output</code></td>
+<td dir="ltr">Creative output</td>
+<td dir="ltr">Finished work: essays, creative writing</td>
+<td dir="ltr"><code>900_Writings/Essays/</code></td>
+</tr>
+</tbody>
+</table></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="tip" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-flame"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></svg></div><div class="callout-title-inner">Difference between <code>type</code> and <code>src/*</code> tags</div></div><div class="callout-content">
+<p dir="auto">These answer <strong>different questions</strong>:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Question</th>
+<th>Answer type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>type</code></strong></td>
+<td><strong>How</strong> was this note written? (format)</td>
+<td>Summarizing others vs own thinking</td>
+<td><code>literature</code>, <code>permanent</code></td>
+</tr>
+<tr>
+<td><strong><code>src/*</code></strong></td>
+<td><strong>What medium</strong> was the source? (channel)</td>
+<td>Book vs lecture vs video vs paper</td>
+<td><code>src/book</code>, <code>src/lecture</code></td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">The same <code>literature</code> note can be <code>src/book</code> (reading) or <code>src/lecture</code> (lecture).<br>
+The two dimensions are orthogonal — combine them for precise classification like "lecture-based literature note" (<code>type: literature</code> + <code>#src/lecture</code>).</p>
+</div></div></div><div class="el-h3"><h3 data-heading="2.3 `status` Values" dir="auto" class="heading" id="2.3_`status`_Values_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2.3 <code>status</code> Values</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Value</th>
+<th dir="ltr">Description</th>
+<th dir="ltr">When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>inbox</code></td>
+<td dir="ltr">Unprocessed</td>
+<td dir="ltr">Just created, not yet classified</td>
+</tr>
+<tr>
+<td dir="ltr"><code>draft</code></td>
+<td dir="ltr">Draft</td>
+<td dir="ltr">Started writing, incomplete</td>
+</tr>
+<tr>
+<td dir="ltr"><code>active</code></td>
+<td dir="ltr">Active</td>
+<td dir="ltr">Currently in progress or frequently referenced</td>
+</tr>
+<tr>
+<td dir="ltr"><code>review</code></td>
+<td dir="ltr">Needs review</td>
+<td dir="ltr">Content needs verification or update</td>
+</tr>
+<tr>
+<td dir="ltr"><code>done</code></td>
+<td dir="ltr">Done</td>
+<td dir="ltr">Writing complete, no further edits needed</td>
+</tr>
+<tr>
+<td dir="ltr"><code>archive</code></td>
+<td dir="ltr">Archived</td>
+<td dir="ltr">Inactive, reference only when needed</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="2.4 Content-Specific Properties" dir="auto" class="heading" id="2.4_Content-Specific_Properties_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2.4 Content-Specific Properties</h3></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="-" data-callout="example" class="callout is-collapsible is-collapsed"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-list"><path d="M3 5h.01"></path><path d="M3 12h.01"></path><path d="M3 19h.01"></path><path d="M8 5h13"></path><path d="M8 12h13"></path><path d="M8 19h13"></path></svg></div><div class="callout-title-inner">Book note (200_Books)</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg></div></div><div class="callout-content" style="display: none;">
+<pre class="language-yaml"><code data-line="1" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Book Title"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> literature
+<span class="token key atrule">status</span><span class="token punctuation">:</span> done
+<span class="token key atrule">author</span><span class="token punctuation">:</span> <span class="token string">"Author Name"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> src/book
+  <span class="token punctuation">-</span> dev/python
+<span class="token key atrule">category</span><span class="token punctuation">:</span> "domestic" <span class="token punctuation">|</span> "foreign"
+<span class="token key atrule">total_page</span><span class="token punctuation">:</span> <span class="token number">320</span>
+<span class="token key atrule">publish_date</span><span class="token punctuation">:</span> <span class="token datetime number">2025-01-15</span>
+<span class="token key atrule">cover_url</span><span class="token punctuation">:</span> <span class="token string">""</span>
+<span class="token key atrule">start_read_date</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-01</span>
+<span class="token key atrule">finish_read_date</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-20</span>
+<span class="token key atrule">my_rate</span><span class="token punctuation">:</span> <span class="token number">8</span>
+<span class="token key atrule">book_note</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</div></div></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="-" data-callout="example" class="callout is-collapsible is-collapsed"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-list"><path d="M3 5h.01"></path><path d="M3 12h.01"></path><path d="M3 19h.01"></path><path d="M8 5h13"></path><path d="M8 12h13"></path><path d="M8 19h13"></path></svg></div><div class="callout-title-inner">Project document (300_Projects)</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg></div></div><div class="callout-content" style="display: none;">
+<pre class="language-yaml"><code data-line="1" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Project Name"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> project
+<span class="token key atrule">status</span><span class="token punctuation">:</span> active
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Yangha Park
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> dev/java
+  <span class="token punctuation">-</span> infra/docker
+<span class="token key atrule">project_code</span><span class="token punctuation">:</span> <span class="token string">"2508"</span>
+<span class="token key atrule">deadline</span><span class="token punctuation">:</span> <span class="token datetime number">2026-06-30</span>
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</div></div></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="-" data-callout="example" class="callout is-collapsible is-collapsed"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-list"><path d="M3 5h.01"></path><path d="M3 12h.01"></path><path d="M3 19h.01"></path><path d="M8 5h13"></path><path d="M8 12h13"></path><path d="M8 19h13"></path></svg></div><div class="callout-title-inner">Study note (700_Studies)</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg></div></div><div class="callout-content" style="display: none;">
+<pre class="language-yaml"><code data-line="1" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Lecture Title"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> literature
+<span class="token key atrule">status</span><span class="token punctuation">:</span> active
+<span class="token key atrule">author</span><span class="token punctuation">:</span> <span class="token string">"Instructor Name"</span>
+<span class="token key atrule">source</span><span class="token punctuation">:</span> <span class="token string">"https://..."</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> data/stats
+  <span class="token punctuation">-</span> src/course
+<span class="token key atrule">course</span><span class="token punctuation">:</span> <span class="token string">"Metacode Data Analysis"</span>
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</div></div></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="3. MECE Tag System" dir="auto" class="heading" id="3._MECE_Tag_System_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3. MECE Tag System</h2></div><div class="el-p"><p dir="auto">Tags are composed of <strong>3 independent dimensions</strong>. Each dimension is orthogonal; combine them as needed.</p></div><div class="el-pre"><pre><code data-line="0">Tag = Domain(A) + Source(B) + Action(C)
+e.g.: #dev/python + #src/book + #action/practice
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="3.1 Dimension A — Domain" dir="auto" class="heading" id="3.1_Dimension_A_—_Domain_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3.1 Dimension A — Domain</h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p>"What <strong>field</strong> is this note about?"</p>
+</blockquote></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="note" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg></div><div class="callout-title-inner">Usage</div></div><div class="callout-content">
+<p dir="auto">Assign <strong>1-3</strong> domain tags per note.<br>
+If the parent tag is sufficient, don't use a subtag.<br>
+e.g.: Python in general -&gt; <code>#dev/python</code> / Software development in general -&gt; <code>#dev</code></p>
+</div></div></div><div class="el-h4"><h4 data-heading="`dev/` — Software Development" dir="auto" class="heading" id="`dev/`_—_Software_Development_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>dev/</code> — Software Development</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>dev</code></td>
+<td dir="ltr">General development (can be used alone)</td>
+</tr>
+<tr>
+<td dir="ltr"><code>dev/java</code></td>
+<td dir="ltr">Java, JDK, Spring</td>
+</tr>
+<tr>
+<td dir="ltr"><code>dev/python</code></td>
+<td dir="ltr">Python, Flask, Django</td>
+</tr>
+<tr>
+<td dir="ltr"><code>dev/js</code></td>
+<td dir="ltr">JavaScript, TypeScript, Vue, React</td>
+</tr>
+<tr>
+<td dir="ltr"><code>dev/sql</code></td>
+<td dir="ltr">SQL syntax, query writing (DB design -&gt; <code>dev/db</code>)</td>
+</tr>
+<tr>
+<td dir="ltr"><code>dev/db</code></td>
+<td dir="ltr">Database design, normalization, indexing</td>
+</tr>
+<tr>
+<td dir="ltr"><code>dev/oop</code></td>
+<td dir="ltr">OOP, SOLID, design patterns</td>
+</tr>
+<tr>
+<td dir="ltr"><code>dev/web</code></td>
+<td dir="ltr">Web development, HTML/CSS, API</td>
+</tr>
+<tr>
+<td dir="ltr"><code>dev/mobile</code></td>
+<td dir="ltr">Mobile app development, Flutter, Android</td>
+</tr>
+<tr>
+<td dir="ltr"><code>dev/test</code></td>
+<td dir="ltr">Testing, QA, debugging</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="`data/` — Data &amp; Analytics" dir="auto" class="heading" id="`data/`_—_Data_&amp;_Analytics_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>data/</code> — Data &amp; Analytics</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>data</code></td>
+<td dir="ltr">General data</td>
+</tr>
+<tr>
+<td dir="ltr"><code>data/analysis</code></td>
+<td dir="ltr">Data analysis methods, EDA, cohort analysis</td>
+</tr>
+<tr>
+<td dir="ltr"><code>data/stats</code></td>
+<td dir="ltr">Statistics, probability, hypothesis testing</td>
+</tr>
+<tr>
+<td dir="ltr"><code>data/viz</code></td>
+<td dir="ltr">Visualization, dashboards, Power BI, plotly</td>
+</tr>
+<tr>
+<td dir="ltr"><code>data/ml</code></td>
+<td dir="ltr">Machine learning, deep learning, modeling</td>
+</tr>
+<tr>
+<td dir="ltr"><code>data/engineering</code></td>
+<td dir="ltr">Data engineering, ETL, BigQuery, pipelines</td>
+</tr>
+<tr>
+<td dir="ltr"><code>data/preprocessing</code></td>
+<td dir="ltr">Data preprocessing, cleaning, crawling</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="`ai/` — Artificial Intelligence" dir="auto" class="heading" id="`ai/`_—_Artificial_Intelligence_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>ai/</code> — Artificial Intelligence</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>ai</code></td>
+<td dir="ltr">General AI</td>
+</tr>
+<tr>
+<td dir="ltr"><code>ai/genai</code></td>
+<td dir="ltr">Generative AI, LLMs, ChatGPT, Claude</td>
+</tr>
+<tr>
+<td dir="ltr"><code>ai/prompt</code></td>
+<td dir="ltr">Prompt engineering</td>
+</tr>
+<tr>
+<td dir="ltr"><code>ai/agent</code></td>
+<td dir="ltr">AI agents, autonomous systems</td>
+</tr>
+<tr>
+<td dir="ltr"><code>ai/mcp</code></td>
+<td dir="ltr">MCP (Model Context Protocol), tool integration</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="`infra/` — Infrastructure &amp; DevOps" dir="auto" class="heading" id="`infra/`_—_Infrastructure_&amp;_DevOps_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>infra/</code> — Infrastructure &amp; DevOps</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>infra</code></td>
+<td dir="ltr">General infrastructure</td>
+</tr>
+<tr>
+<td dir="ltr"><code>infra/docker</code></td>
+<td dir="ltr">Docker, containers, virtualization</td>
+</tr>
+<tr>
+<td dir="ltr"><code>infra/aws</code></td>
+<td dir="ltr">AWS services</td>
+</tr>
+<tr>
+<td dir="ltr"><code>infra/linux</code></td>
+<td dir="ltr">Linux, shell scripting</td>
+</tr>
+<tr>
+<td dir="ltr"><code>infra/git</code></td>
+<td dir="ltr">Git, GitHub, version control</td>
+</tr>
+<tr>
+<td dir="ltr"><code>infra/cicd</code></td>
+<td dir="ltr">CI/CD, GitHub Actions</td>
+</tr>
+<tr>
+<td dir="ltr"><code>infra/obsidian</code></td>
+<td dir="ltr">Obsidian settings, plugins, vault management</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="`biz/` — Business &amp; Management" dir="auto" class="heading" id="`biz/`_—_Business_&amp;_Management_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>biz/</code> — Business &amp; Management</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>biz</code></td>
+<td dir="ltr">General business</td>
+</tr>
+<tr>
+<td dir="ltr"><code>biz/marketing</code></td>
+<td dir="ltr">Marketing, CRM, customer analytics, AARRR</td>
+</tr>
+<tr>
+<td dir="ltr"><code>biz/strategy</code></td>
+<td dir="ltr">Business strategy, BCG matrix, planning</td>
+</tr>
+<tr>
+<td dir="ltr"><code>biz/pm</code></td>
+<td dir="ltr">Project management, PMBOK, Agile, Scrum</td>
+</tr>
+<tr>
+<td dir="ltr"><code>biz/hr</code></td>
+<td dir="ltr">HR, performance evaluation, org management</td>
+</tr>
+<tr>
+<td dir="ltr"><code>biz/startup</code></td>
+<td dir="ltr">Startups, government grants, business plans</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="`career/` — Career &amp; Professional Growth" dir="auto" class="heading" id="`career/`_—_Career_&amp;_Professional_Growth_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>career/</code> — Career &amp; Professional Growth</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>career</code></td>
+<td dir="ltr">General career</td>
+</tr>
+<tr>
+<td dir="ltr"><code>career/resume</code></td>
+<td dir="ltr">Resume, cover letter, applications</td>
+</tr>
+<tr>
+<td dir="ltr"><code>career/interview</code></td>
+<td dir="ltr">Interview prep, technical interviews</td>
+</tr>
+<tr>
+<td dir="ltr"><code>career/cert</code></td>
+<td dir="ltr">Certifications (SQLD, etc.)</td>
+</tr>
+<tr>
+<td dir="ltr"><code>career/portfolio</code></td>
+<td dir="ltr">Portfolio building</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="`lang/` — Language Learning" dir="auto" class="heading" id="`lang/`_—_Language_Learning_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>lang/</code> — Language Learning</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>lang</code></td>
+<td dir="ltr">General language learning</td>
+</tr>
+<tr>
+<td dir="ltr"><code>lang/english</code></td>
+<td dir="ltr">English study, conversation, grammar</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="`write/` — Writing &amp; Literature" dir="auto" class="heading" id="`write/`_—_Writing_&amp;_Literature_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>write/</code> — Writing &amp; Literature</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>write</code></td>
+<td dir="ltr">General writing</td>
+</tr>
+<tr>
+<td dir="ltr"><code>write/essay</code></td>
+<td dir="ltr">Essays, columns, book reviews</td>
+</tr>
+<tr>
+<td dir="ltr"><code>write/poem</code></td>
+<td dir="ltr">Poetry, verse</td>
+</tr>
+<tr>
+<td dir="ltr"><code>write/fiction</code></td>
+<td dir="ltr">Fiction, short stories, creative writing</td>
+</tr>
+<tr>
+<td dir="ltr"><code>write/diary</code></td>
+<td dir="ltr">Diary, personal records</td>
+</tr>
+<tr>
+<td dir="ltr"><code>write/review</code></td>
+<td dir="ltr">Reading reflections, retrospectives</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="`finance/` — Finance &amp; Investment" dir="auto" class="heading" id="`finance/`_—_Finance_&amp;_Investment_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>finance/</code> — Finance &amp; Investment</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>finance</code></td>
+<td dir="ltr">General finance</td>
+</tr>
+<tr>
+<td dir="ltr"><code>finance/tax</code></td>
+<td dir="ltr">Taxes, income tax</td>
+</tr>
+<tr>
+<td dir="ltr"><code>finance/invest</code></td>
+<td dir="ltr">Investment, real estate, stocks</td>
+</tr>
+<tr>
+<td dir="ltr"><code>finance/insurance</code></td>
+<td dir="ltr">Insurance, claims</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="`life/` — Lifestyle &amp; Self-Management" dir="auto" class="heading" id="`life/`_—_Lifestyle_&amp;_Self-Management_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><code>life/</code> — Lifestyle &amp; Self-Management</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>life</code></td>
+<td dir="ltr">General lifestyle</td>
+</tr>
+<tr>
+<td dir="ltr"><code>life/habit</code></td>
+<td dir="ltr">Habits, routines, self-improvement</td>
+</tr>
+<tr>
+<td dir="ltr"><code>life/health</code></td>
+<td dir="ltr">Health, exercise, psychology</td>
+</tr>
+<tr>
+<td dir="ltr"><code>life/hobby</code></td>
+<td dir="ltr">Hobbies, restaurants, photography, etc.</td>
+</tr>
+</tbody>
+</table></div><div class="el-hr"><hr></div><div class="el-h3"><h3 data-heading="3.2 Dimension B — Source" dir="auto" class="heading" id="3.2_Dimension_B_—_Source_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3.2 Dimension B — Source</h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p>"What is the <strong>origin</strong> of this note?"</p>
+</blockquote></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Description</th>
+<th dir="ltr">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>src/book</code></td>
+<td dir="ltr">Book</td>
+<td dir="ltr">Reading notes, reviews</td>
+</tr>
+<tr>
+<td dir="ltr"><code>src/article</code></td>
+<td dir="ltr">Web article, blog</td>
+<td dir="ltr">Clippings, scraps</td>
+</tr>
+<tr>
+<td dir="ltr"><code>src/lecture</code></td>
+<td dir="ltr">Lecture, class</td>
+<td dir="ltr">Bootcamp lecture notes</td>
+</tr>
+<tr>
+<td dir="ltr"><code>src/video</code></td>
+<td dir="ltr">Video</td>
+<td dir="ltr">YouTube, talks</td>
+</tr>
+<tr>
+<td dir="ltr"><code>src/course</code></td>
+<td dir="ltr">Course, program</td>
+<td dir="ltr">Bootcamp, challenge, reading group</td>
+</tr>
+<tr>
+<td dir="ltr"><code>src/paper</code></td>
+<td dir="ltr">Academic paper</td>
+<td dir="ltr">Research papers</td>
+</tr>
+<tr>
+<td dir="ltr"><code>src/doc</code></td>
+<td dir="ltr">Official documentation</td>
+<td dir="ltr">API docs, tech references</td>
+</tr>
+<tr>
+<td dir="ltr"><code>src/experience</code></td>
+<td dir="ltr">Direct experience</td>
+<td dir="ltr">Project work, practice, work tasks</td>
+</tr>
+</tbody>
+</table></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="tip" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-flame"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></svg></div><div class="callout-title-inner">Assign only <strong>1</strong> source tag per note. Pick the primary source.</div></div></div></div><div class="el-hr"><hr></div><div class="el-h3"><h3 data-heading="3.3 Dimension C — Action" dir="auto" class="heading" id="3.3_Dimension_C_—_Action_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3.3 Dimension C — Action</h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p>"Is there <strong>something to do</strong> with this note?" (optional)</p>
+</blockquote></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Tag</th>
+<th dir="ltr">Description</th>
+<th dir="ltr">When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>action/todo</code></td>
+<td dir="ltr">Has pending tasks</td>
+<td dir="ltr">Incomplete organization, needs writing</td>
+</tr>
+<tr>
+<td dir="ltr"><code>action/review</code></td>
+<td dir="ltr">Needs review</td>
+<td dir="ltr">Study note due for review</td>
+</tr>
+<tr>
+<td dir="ltr"><code>action/practice</code></td>
+<td dir="ltr">Needs practice</td>
+<td dir="ltr">Code exercises, problem solving</td>
+</tr>
+<tr>
+<td dir="ltr"><code>action/followup</code></td>
+<td dir="ltr">Needs follow-up</td>
+<td dir="ltr">Further research, contact needed</td>
+</tr>
+</tbody>
+</table></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="warning" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-alert-triangle"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></div><div class="callout-title-inner">Action tags are temporary.</div></div><div class="callout-content">
+<p dir="auto"><strong>Remove them</strong> once the action is complete.<br>
+For persistent states, use the <code>status</code> property instead.</p>
+</div></div></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="4. Domain Classification Decision Tree" dir="auto" class="heading" id="4._Domain_Classification_Decision_Tree_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4. Domain Classification Decision Tree</h2></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="question" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-help-circle"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg></div><div class="callout-title-inner">"Which domain tag should I assign?"</div></div></div></div><div class="el-pre"><div class="mermaid"><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 1993.16015625 1682.203125" height="1682.203125" class="flowchart" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="1993.16015625" id="meb5ac8bbb77ad3a3"><style>#meb5ac8bbb77ad3a3{font-family:var(--font-mermaid);font-size:16px;fill:#333;}#meb5ac8bbb77ad3a3 .error-icon{fill:#552222;}#meb5ac8bbb77ad3a3 .error-text{fill:#552222;stroke:#552222;}#meb5ac8bbb77ad3a3 .edge-thickness-normal{stroke-width:1px;}#meb5ac8bbb77ad3a3 .edge-thickness-thick{stroke-width:3.5px;}#meb5ac8bbb77ad3a3 .edge-pattern-solid{stroke-dasharray:0;}#meb5ac8bbb77ad3a3 .edge-thickness-invisible{stroke-width:0;fill:none;}#meb5ac8bbb77ad3a3 .edge-pattern-dashed{stroke-dasharray:3;}#meb5ac8bbb77ad3a3 .edge-pattern-dotted{stroke-dasharray:2;}#meb5ac8bbb77ad3a3 .marker{fill:#333333;stroke:#333333;}#meb5ac8bbb77ad3a3 .marker.cross{stroke:#333333;}#meb5ac8bbb77ad3a3 svg{font-family:var(--font-mermaid);font-size:16px;}#meb5ac8bbb77ad3a3 p{margin:0;}#meb5ac8bbb77ad3a3 .label{font-family:var(--font-mermaid);color:#333;}#meb5ac8bbb77ad3a3 .cluster-label text{fill:#333;}#meb5ac8bbb77ad3a3 .cluster-label span{color:#333;}#meb5ac8bbb77ad3a3 .cluster-label span p{background-color:transparent;}#meb5ac8bbb77ad3a3 .label text,#meb5ac8bbb77ad3a3 span{fill:#333;color:#333;}#meb5ac8bbb77ad3a3 .node rect,#meb5ac8bbb77ad3a3 .node circle,#meb5ac8bbb77ad3a3 .node ellipse,#meb5ac8bbb77ad3a3 .node polygon,#meb5ac8bbb77ad3a3 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#meb5ac8bbb77ad3a3 .rough-node .label text,#meb5ac8bbb77ad3a3 .node .label text,#meb5ac8bbb77ad3a3 .image-shape .label,#meb5ac8bbb77ad3a3 .icon-shape .label{text-anchor:middle;}#meb5ac8bbb77ad3a3 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#meb5ac8bbb77ad3a3 .rough-node .label,#meb5ac8bbb77ad3a3 .node .label,#meb5ac8bbb77ad3a3 .image-shape .label,#meb5ac8bbb77ad3a3 .icon-shape .label{text-align:center;}#meb5ac8bbb77ad3a3 .node.clickable{cursor:pointer;}#meb5ac8bbb77ad3a3 .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#meb5ac8bbb77ad3a3 .arrowheadPath{fill:#333333;}#meb5ac8bbb77ad3a3 .edgePath .path{stroke:#333333;stroke-width:2.0px;}#meb5ac8bbb77ad3a3 .flowchart-link{stroke:#333333;fill:none;}#meb5ac8bbb77ad3a3 .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#meb5ac8bbb77ad3a3 .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#meb5ac8bbb77ad3a3 .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#meb5ac8bbb77ad3a3 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#meb5ac8bbb77ad3a3 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#meb5ac8bbb77ad3a3 .cluster text{fill:#333;}#meb5ac8bbb77ad3a3 .cluster span{color:#333;}#meb5ac8bbb77ad3a3 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:var(--font-mermaid);font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#meb5ac8bbb77ad3a3 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#meb5ac8bbb77ad3a3 rect.text{fill:none;stroke-width:0;}#meb5ac8bbb77ad3a3 .icon-shape,#meb5ac8bbb77ad3a3 .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#meb5ac8bbb77ad3a3 .icon-shape p,#meb5ac8bbb77ad3a3 .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#meb5ac8bbb77ad3a3 .icon-shape rect,#meb5ac8bbb77ad3a3 .image-shape rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#meb5ac8bbb77ad3a3 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M961.039,62L961.039,66.167C961.039,70.333,961.039,78.667,961.109,86.417C961.18,94.167,961.32,101.334,961.39,104.917L961.461,108.501"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_C_1" d="M875.638,272.646L828.155,293.046C780.673,313.446,685.707,354.246,638.303,385.46C590.899,416.675,591.056,438.302,591.135,449.116L591.213,459.93"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C1_2" d="M537.281,551L470.734,571.307C404.188,591.615,271.094,632.229,204.547,672.703C138,713.177,138,753.51,138,773.677L138,793.844"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C2_3" d="M555.503,569.222L537.586,586.492C519.669,603.763,483.834,638.303,465.917,677.74C448,717.177,448,761.51,448,783.677L448,805.844"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C3_4" d="M626.981,569.222L644.732,586.492C662.482,603.763,697.983,638.303,715.734,679.74C733.484,721.177,733.484,769.51,733.484,793.677L733.484,817.844"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C4_5" d="M644.487,551.716L706.901,571.904C769.314,592.092,894.142,632.468,956.555,674.822C1018.969,717.177,1018.969,761.51,1018.969,783.677L1018.969,805.844"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_D_6" d="M1049.221,270.865L1100.692,291.562C1152.164,312.259,1255.107,353.653,1306.654,379.933C1358.2,406.214,1358.349,417.38,1358.423,422.964L1358.497,428.547"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_E_7" d="M1312.173,589.966L1300.481,603.779C1288.79,617.592,1265.406,645.218,1253.715,683.197C1242.023,721.177,1242.023,769.51,1242.023,793.677L1242.023,817.844"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_F_8" d="M1404.929,589.966L1416.454,603.779C1427.979,617.592,1451.028,645.218,1462.628,664.614C1474.227,684.011,1474.376,695.177,1474.45,700.761L1474.525,706.344"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_F_G_9" d="M1402.787,916.553L1383.335,934.601C1363.884,952.65,1324.981,988.747,1305.604,1012.379C1286.227,1036.011,1286.376,1047.177,1286.45,1052.761L1286.525,1058.344"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_G_H_10" d="M1244.17,1239.232L1235.739,1252.383C1227.308,1265.535,1210.447,1291.838,1202.017,1321.911C1193.586,1351.984,1193.586,1385.828,1193.586,1402.75L1193.586,1419.672"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_G_I_11" d="M1328.987,1239.232L1337.251,1252.383C1345.515,1265.535,1362.042,1291.838,1370.383,1313.143C1378.724,1334.448,1378.878,1350.755,1378.955,1358.909L1379.033,1367.063"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_I_J_12" d="M1349.818,1502.029L1341.905,1515.558C1333.992,1529.087,1318.166,1556.145,1310.253,1575.174C1302.34,1594.203,1302.34,1605.203,1302.34,1610.703L1302.34,1616.203"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_I_K_13" d="M1416.671,1493.68L1429.859,1508.601C1443.048,1523.521,1469.424,1553.362,1482.613,1573.783C1495.801,1594.203,1495.801,1605.203,1495.801,1610.703L1495.801,1616.203"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_F_L_14" d="M1545.364,917.558L1563.923,935.439C1582.481,953.32,1619.598,989.082,1638.233,1014.2C1656.867,1039.318,1657.02,1053.792,1657.096,1061.029L1657.173,1068.266"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_L_M_15" d="M1617.302,1231.806L1607.562,1246.195C1597.821,1260.584,1578.34,1289.362,1568.6,1320.673C1558.859,1351.984,1558.859,1385.828,1558.859,1402.75L1558.859,1419.672"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_L_N_16" d="M1697.127,1231.806L1706.701,1246.195C1716.275,1260.584,1735.423,1289.362,1745.071,1309.335C1754.719,1329.307,1754.868,1340.474,1754.943,1346.058L1755.017,1351.641"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_N_O_17" d="M1710.231,1501.864L1698.082,1515.42C1685.934,1528.977,1661.637,1556.09,1649.488,1575.147C1637.34,1594.203,1637.34,1605.203,1637.34,1610.703L1637.34,1616.203"></path><path marker-end="url(#meb5ac8bbb77ad3a3-meb5ac8bbb77ad3a3_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_N_P_18" d="M1798.283,1503.49L1809.242,1516.776C1820.2,1530.061,1842.118,1556.632,1853.076,1575.418C1864.035,1594.203,1864.035,1605.203,1864.035,1610.703L1864.035,1616.203"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g transform="translate(590.7421875, 395.046875)" class="edgeLabel"><g transform="translate(-12.2734375, -12)" class="label"><foreignObject height="24" width="24.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Yes</p></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g transform="translate(1358.05078125, 395.046875)" class="edgeLabel"><g transform="translate(-10.0859375, -12)" class="label"><foreignObject height="24" width="20.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>No</p></span></div></foreignObject></g></g><g transform="translate(1242.0234375, 672.84375)" class="edgeLabel"><g transform="translate(-12.2734375, -12)" class="label"><foreignObject height="24" width="24.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Yes</p></span></div></foreignObject></g></g><g transform="translate(1474.078125, 672.84375)" class="edgeLabel"><g transform="translate(-10.0859375, -12)" class="label"><foreignObject height="24" width="20.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>No</p></span></div></foreignObject></g></g><g transform="translate(1286.078125, 1024.84375)" class="edgeLabel"><g transform="translate(-12.2734375, -12)" class="label"><foreignObject height="24" width="24.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Yes</p></span></div></foreignObject></g></g><g transform="translate(1193.5859375, 1318.140625)" class="edgeLabel"><g transform="translate(-12.2734375, -12)" class="label"><foreignObject height="24" width="24.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Yes</p></span></div></foreignObject></g></g><g transform="translate(1378.5703125, 1318.140625)" class="edgeLabel"><g transform="translate(-10.0859375, -12)" class="label"><foreignObject height="24" width="20.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>No</p></span></div></foreignObject></g></g><g transform="translate(1302.33984375, 1583.203125)" class="edgeLabel"><g transform="translate(-12.2734375, -12)" class="label"><foreignObject height="24" width="24.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Yes</p></span></div></foreignObject></g></g><g transform="translate(1495.80078125, 1583.203125)" class="edgeLabel"><g transform="translate(-10.0859375, -12)" class="label"><foreignObject height="24" width="20.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>No</p></span></div></foreignObject></g></g><g transform="translate(1656.71484375, 1024.84375)" class="edgeLabel"><g transform="translate(-10.0859375, -12)" class="label"><foreignObject height="24" width="20.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>No</p></span></div></foreignObject></g></g><g transform="translate(1558.859375, 1318.140625)" class="edgeLabel"><g transform="translate(-12.2734375, -12)" class="label"><foreignObject height="24" width="24.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Yes</p></span></div></foreignObject></g></g><g transform="translate(1754.5703125, 1318.140625)" class="edgeLabel"><g transform="translate(-10.0859375, -12)" class="label"><foreignObject height="24" width="20.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>No</p></span></div></foreignObject></g></g><g transform="translate(1637.33984375, 1583.203125)" class="edgeLabel"><g transform="translate(-12.2734375, -12)" class="label"><foreignObject height="24" width="24.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Yes</p></span></div></foreignObject></g></g><g transform="translate(1864.03515625, 1583.203125)" class="edgeLabel"><g transform="translate(-10.0859375, -12)" class="label"><foreignObject height="24" width="20.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>No</p></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(961.0390625, 35)" id="flowchart-A-0" class="node default"><rect height="54" width="218.875" y="-27" x="-109.4375" style="" class="basic label-container"></rect><g transform="translate(-79.4375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="158.875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Core topic of the note?</p></span></div></foreignObject></g></g><g transform="translate(961.0390625, 235.0234375)" id="flowchart-B-1" class="node default"><polygon transform="translate(-123.0234375,123.0234375)" class="label-container" points="123.0234375,0 246.046875,-123.0234375 123.0234375,-246.046875 0,-123.0234375"></polygon><g transform="translate(-96.0234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="192.046875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Code/tech implementation?</p></span></div></foreignObject></g></g><g transform="translate(590.7421875, 533.9453125)" id="flowchart-C-3" class="node default"><polygon transform="translate(-70.515625,70.515625)" class="label-container" points="70.515625,0 141.03125,-70.515625 70.515625,-141.03125 0,-70.515625"></polygon><g transform="translate(-43.515625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="87.03125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Which tech?</p></span></div></foreignObject></g></g><g transform="translate(138, 848.84375)" id="flowchart-C1-5" class="node default"><rect height="102" width="260" y="-51" x="-130" style="" class="basic label-container"></rect><g transform="translate(-100, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Programming language/framework -&gt; dev/</p></span></div></foreignObject></g></g><g transform="translate(448, 848.84375)" id="flowchart-C2-7" class="node default"><rect height="78" width="260" y="-39" x="-130" style="" class="basic label-container"></rect><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Data processing/analysis -&gt; data/</p></span></div></foreignObject></g></g><g transform="translate(733.484375, 848.84375)" id="flowchart-C3-9" class="node default"><rect height="54" width="210.96875" y="-27" x="-105.484375" style="" class="basic label-container"></rect><g transform="translate(-75.484375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="150.96875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>AI/LLM related -&gt; ai/</p></span></div></foreignObject></g></g><g transform="translate(1018.96875, 848.84375)" id="flowchart-C4-11" class="node default"><rect height="78" width="260" y="-39" x="-130" style="" class="basic label-container"></rect><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Server/deploy/infra -&gt; infra/</p></span></div></foreignObject></g></g><g transform="translate(1358.05078125, 533.9453125)" id="flowchart-D-13" class="node default"><polygon transform="translate(-101.8984375,101.8984375)" class="label-container" points="101.8984375,0 203.796875,-101.8984375 101.8984375,-203.796875 0,-101.8984375"></polygon><g transform="translate(-74.8984375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="149.796875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Business/org related?</p></span></div></foreignObject></g></g><g transform="translate(1242.0234375, 848.84375)" id="flowchart-E-15" class="node default"><rect height="54" width="86.109375" y="-27" x="-43.0546875" style="" class="basic label-container"></rect><g transform="translate(-13.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="26.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>biz/</p></span></div></foreignObject></g></g><g transform="translate(1474.078125, 848.84375)" id="flowchart-F-17" class="node default"><polygon transform="translate(-139,139)" class="label-container" points="139,0 278,-139 139,-278 0,-139"></polygon><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Personal growth/management?</p></span></div></foreignObject></g></g><g transform="translate(1286.078125, 1171.4921875)" id="flowchart-G-19" class="node default"><polygon transform="translate(-109.6484375,109.6484375)" class="label-container" points="109.6484375,0 219.296875,-109.6484375 109.6484375,-219.296875 0,-109.6484375"></polygon><g transform="translate(-82.6484375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="165.296875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Directly career-related?</p></span></div></foreignObject></g></g><g transform="translate(1193.5859375, 1450.671875)" id="flowchart-H-21" class="node default"><rect height="54" width="109.75" y="-27" x="-54.875" style="" class="basic label-container"></rect><g transform="translate(-24.875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="49.75"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>career/</p></span></div></foreignObject></g></g><g transform="translate(1378.5703125, 1450.671875)" id="flowchart-I-23" class="node default"><polygon transform="translate(-80.109375,80.109375)" class="label-container" points="80.109375,0 160.21875,-80.109375 80.109375,-160.21875 0,-80.109375"></polygon><g transform="translate(-53.109375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="106.21875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Money/assets?</p></span></div></foreignObject></g></g><g transform="translate(1302.33984375, 1647.203125)" id="flowchart-J-25" class="node default"><rect height="54" width="117.453125" y="-27" x="-58.7265625" style="" class="basic label-container"></rect><g transform="translate(-28.7265625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="57.453125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>finance/</p></span></div></foreignObject></g></g><g transform="translate(1495.80078125, 1647.203125)" id="flowchart-K-27" class="node default"><rect height="54" width="87.46875" y="-27" x="-43.734375" style="" class="basic label-container"></rect><g transform="translate(-13.734375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="27.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>life/</p></span></div></foreignObject></g></g><g transform="translate(1656.71484375, 1171.4921875)" id="flowchart-L-29" class="node default"><polygon transform="translate(-99.7265625,99.7265625)" class="label-container" points="99.7265625,0 199.453125,-99.7265625 99.7265625,-199.453125 0,-99.7265625"></polygon><g transform="translate(-72.7265625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="145.453125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Creative expression?</p></span></div></foreignObject></g></g><g transform="translate(1558.859375, 1450.671875)" id="flowchart-M-31" class="node default"><rect height="54" width="100.359375" y="-27" x="-50.1796875" style="" class="basic label-container"></rect><g transform="translate(-20.1796875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="40.359375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>write/</p></span></div></foreignObject></g></g><g transform="translate(1754.5703125, 1450.671875)" id="flowchart-N-33" class="node default"><polygon transform="translate(-95.53125,95.53125)" class="label-container" points="95.53125,0 191.0625,-95.53125 95.53125,-191.0625 0,-95.53125"></polygon><g transform="translate(-68.53125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="137.0625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Language learning?</p></span></div></foreignObject></g></g><g transform="translate(1637.33984375, 1647.203125)" id="flowchart-O-35" class="node default"><rect height="54" width="95.609375" y="-27" x="-47.8046875" style="" class="basic label-container"></rect><g transform="translate(-17.8046875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="35.609375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>lang/</p></span></div></foreignObject></g></g><g transform="translate(1864.03515625, 1647.203125)" id="flowchart-P-37" class="node default"><rect height="54" width="242.25" y="-27" x="-121.125" style="" class="basic label-container"></rect><g transform="translate(-91.125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="182.25"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Pick the closest parent tag</p></span></div></foreignObject></g></g></g></g></g></svg></div></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="5. Legacy Tag Migration Map" dir="auto" class="heading" id="5._Legacy_Tag_Migration_Map_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5. Legacy Tag Migration Map</h2></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="info" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-info"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></div><div class="callout-title-inner">Migration Guide</div></div><div class="callout-content">
+<p dir="auto">Mapping of existing vault tags to the new system.</p>
+</div></div></div><div class="el-h3"><h3 data-heading="5.1 Development" dir="auto" class="heading" id="5.1_Development_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5.1 Development</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Old tag</th>
+<th dir="ltr">New tag</th>
+<th dir="ltr">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>#Java</code>, <code>#java</code>, <code>#자바개발</code>, <code>#JavaSyntax</code></td>
+<td dir="ltr"><code>dev/java</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#Python</code>, <code>#python</code>, <code>#파이썬</code></td>
+<td dir="ltr"><code>dev/python</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#JavaScript</code>, <code>#JS</code></td>
+<td dir="ltr"><code>dev/js</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#SQL</code>, <code>#sql</code>, <code>#query</code>, <code>#SQLSyntax</code></td>
+<td dir="ltr"><code>dev/sql</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#database</code>, <code>#데이터베이스</code>, <code>#indexing</code></td>
+<td dir="ltr"><code>dev/db</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#OOP</code>, <code>#Object-Oriented Programming</code>, <code>#SOLID</code></td>
+<td dir="ltr"><code>dev/oop</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#DesignPattern</code>, <code>#Software-Design</code></td>
+<td dir="ltr"><code>dev/oop</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#Flask</code>, <code>#Django</code></td>
+<td dir="ltr"><code>dev/python</code></td>
+<td dir="ltr">Framework -&gt; language tag</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#HTML</code>, <code>#API</code>, <code>#APIIntegration</code></td>
+<td dir="ltr"><code>dev/web</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#Flutter</code>, <code>#AndroidSDK</code></td>
+<td dir="ltr"><code>dev/mobile</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#Classes</code>, <code>#Methods</code>, <code>#ErrorHandling</code></td>
+<td dir="ltr"><code>dev/java</code> or <code>dev/python</code></td>
+<td dir="ltr">Use matching language tag</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="5.2 Data" dir="auto" class="heading" id="5.2_Data_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5.2 Data</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Old tag</th>
+<th dir="ltr">New tag</th>
+<th dir="ltr">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>#DataAnalysis</code>, <code>#data analysis</code>, <code>#데이터분석</code>, <code>#EDA</code></td>
+<td dir="ltr"><code>data/analysis</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#Statistics</code>, <code>#statistics</code>, <code>#probability</code></td>
+<td dir="ltr"><code>data/stats</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#HypothesisTesting</code>, <code>#ANOVA</code>, <code>#CentralLimitTheorem</code></td>
+<td dir="ltr"><code>data/stats</code></td>
+<td dir="ltr">Subtopics go in note body</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#DataVisualization</code>, <code>#Dashboard</code>, <code>#PowerBI</code></td>
+<td dir="ltr"><code>data/viz</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#MachineLearning</code>, <code>#머신러닝</code>, <code>#DeepLearning</code></td>
+<td dir="ltr"><code>data/ml</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#BigQuery</code>, <code>#DataWarehouse</code></td>
+<td dir="ltr"><code>data/engineering</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#DataCleansing</code>, <code>#DataPreprocessing</code>, <code>#crawling</code></td>
+<td dir="ltr"><code>data/preprocessing</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#CohortAnalysis</code>, <code>#FunnelAnalysis</code>, <code>#ABTesting</code></td>
+<td dir="ltr"><code>data/analysis</code></td>
+<td dir="ltr">Analysis methods merged</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="5.3 AI" dir="auto" class="heading" id="5.3_AI_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5.3 AI</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Old tag</th>
+<th dir="ltr">New tag</th>
+<th dir="ltr">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>#생성AI</code>, <code>#GenerativeAI</code></td>
+<td dir="ltr"><code>ai/genai</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#PromptEngineering</code></td>
+<td dir="ltr"><code>ai/prompt</code></td>
+<td dir="auto">-</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#AIAgent</code></td>
+<td dir="ltr"><code>ai/agent</code></td>
+<td dir="auto">-</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#MCP</code></td>
+<td dir="ltr"><code>ai/mcp</code></td>
+<td dir="auto">-</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="5.4 Infrastructure" dir="auto" class="heading" id="5.4_Infrastructure_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5.4 Infrastructure</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Old tag</th>
+<th dir="ltr">New tag</th>
+<th dir="ltr">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>#Git</code>, <code>#깃</code>, <code>#GitWorkflow</code>, <code>#GitCommands</code></td>
+<td dir="ltr"><code>infra/git</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#GitHub</code>, <code>#깃허브</code></td>
+<td dir="ltr"><code>infra/git</code></td>
+<td dir="ltr">Git/GitHub merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#docker</code></td>
+<td dir="ltr"><code>infra/docker</code></td>
+<td dir="auto">-</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#AWS</code>, <code>#cloud</code></td>
+<td dir="ltr"><code>infra/aws</code></td>
+<td dir="auto">-</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#linux</code></td>
+<td dir="ltr"><code>infra/linux</code></td>
+<td dir="auto">-</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#GithubActions</code></td>
+<td dir="ltr"><code>infra/cicd</code></td>
+<td dir="auto">-</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#obsidian</code></td>
+<td dir="ltr"><code>infra/obsidian</code></td>
+<td dir="auto">-</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="5.5 Business" dir="auto" class="heading" id="5.5_Business_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5.5 Business</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Old tag</th>
+<th dir="ltr">New tag</th>
+<th dir="ltr">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>#CustomerSegmentation</code>, <code>#CRM</code>, <code>#CustomerBehavior</code></td>
+<td dir="ltr"><code>biz/marketing</code></td>
+<td dir="ltr">Customer analytics -&gt; marketing</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#BCGMatrix</code>, <code>#4P</code>, <code>#BusinessStrategy</code></td>
+<td dir="ltr"><code>biz/strategy</code></td>
+<td dir="ltr">Strategy merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#projectManagement</code>, <code>#project</code></td>
+<td dir="ltr"><code>biz/pm</code></td>
+<td dir="ltr">PM merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#정부지원사업</code>, <code>#창업준비</code>, <code>#사업계획서</code></td>
+<td dir="ltr"><code>biz/startup</code></td>
+<td dir="ltr">Startup merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#HumanResources</code>, <code>#EmployeeAssessment</code></td>
+<td dir="ltr"><code>biz/hr</code></td>
+<td dir="ltr">HR merged</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="5.6 Other" dir="auto" class="heading" id="5.6_Other_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5.6 Other</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">Old tag</th>
+<th dir="ltr">New tag or property</th>
+<th dir="ltr">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>#TODO</code>, <code>#todo</code></td>
+<td dir="ltr"><code>action/todo</code></td>
+<td dir="ltr">Merged</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#issue</code>, <code>#bug</code></td>
+<td dir="ltr"><code>action/todo</code></td>
+<td dir="ltr">-&gt; action tag</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#reference</code>, <code>#process</code>, <code>#output</code>, <code>#archive</code></td>
+<td dir="ltr"><code>type</code> property</td>
+<td dir="ltr">Tag -&gt; property</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#Notes</code>, <code>#notes</code></td>
+<td dir="ltr">Remove</td>
+<td dir="ltr">Everything is a note</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#Books</code></td>
+<td dir="ltr">Remove</td>
+<td dir="ltr">Folder already says this</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#Bootcamp</code></td>
+<td dir="ltr"><code>src/course</code></td>
+<td dir="ltr">-&gt; source tag</td>
+</tr>
+<tr>
+<td dir="ltr"><code>#daily</code>, <code>#journal</code></td>
+<td dir="ltr"><code>write/diary</code></td>
+<td dir="ltr">-&gt; writing domain</td>
+</tr>
+</tbody>
+</table></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="6. Practical Examples" dir="auto" class="heading" id="6._Practical_Examples_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6. Practical Examples</h2></div><div class="el-h3"><h3 data-heading="6.1 Bootcamp SQL Lecture Note" dir="auto" class="heading" id="6.1_Bootcamp_SQL_Lecture_Note_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6.1 Bootcamp SQL Lecture Note</h3></div><div class="el-pre"><pre class="language-yaml"><code data-line="0" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"SQL JOIN Complete Guide"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-23</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> literature
+<span class="token key atrule">status</span><span class="token punctuation">:</span> done
+<span class="token key atrule">author</span><span class="token punctuation">:</span> <span class="token string">"Instructor Name"</span>
+<span class="token key atrule">source</span><span class="token punctuation">:</span> <span class="token string">"https://metacode.co.kr/..."</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> dev/sql
+  <span class="token punctuation">-</span> src/course
+<span class="token key atrule">course</span><span class="token punctuation">:</span> <span class="token string">"Metacode Data Analysis"</span>
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="6.2 Python Book Note" dir="auto" class="heading" id="6.2_Python_Book_Note_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6.2 Python Book Note</h3></div><div class="el-pre"><pre class="language-yaml"><code data-line="0" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Effective Python"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-15</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-20</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> literature
+<span class="token key atrule">status</span><span class="token punctuation">:</span> done
+<span class="token key atrule">author</span><span class="token punctuation">:</span> <span class="token string">"Brett Slatkin"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> dev/python
+  <span class="token punctuation">-</span> src/book
+<span class="token key atrule">category</span><span class="token punctuation">:</span> <span class="token string">"domestic"</span>
+<span class="token key atrule">total_page</span><span class="token punctuation">:</span> <span class="token number">480</span>
+<span class="token key atrule">my_rate</span><span class="token punctuation">:</span> <span class="token number">9</span>
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="6.3 Project Technical Document" dir="auto" class="heading" id="6.3_Project_Technical_Document_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6.3 Project Technical Document</h3></div><div class="el-pre"><pre class="language-yaml"><code data-line="0" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Mirrorless Kiosk Architecture"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-10</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-22</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> project
+<span class="token key atrule">status</span><span class="token punctuation">:</span> active
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Yangha Park
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> dev/java
+  <span class="token punctuation">-</span> infra/docker
+  <span class="token punctuation">-</span> dev/db
+<span class="token key atrule">project_code</span><span class="token punctuation">:</span> <span class="token string">"2508"</span>
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="6.4 Marketing Analysis Study Note" dir="auto" class="heading" id="6.4_Marketing_Analysis_Study_Note_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6.4 Marketing Analysis Study Note</h3></div><div class="el-pre"><pre class="language-yaml"><code data-line="0" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"AARRR Funnel Analysis Practice"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-18</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-03-18</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> literature
+<span class="token key atrule">status</span><span class="token punctuation">:</span> active
+<span class="token key atrule">author</span><span class="token punctuation">:</span> <span class="token string">"Instructor Name"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> biz/marketing
+  <span class="token punctuation">-</span> data/analysis
+  <span class="token punctuation">-</span> src/course
+  <span class="token punctuation">-</span> action/practice
+<span class="token key atrule">course</span><span class="token punctuation">:</span> <span class="token string">"Metacode Data Analysis"</span>
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="6.5 Self-Development Essay" dir="auto" class="heading" id="6.5_Self-Development_Essay_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6.5 Self-Development Essay</h3></div><div class="el-pre"><pre class="language-yaml"><code data-line="0" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"Changes Made by Good Habits"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-02-10</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-02-10</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> output
+<span class="token key atrule">status</span><span class="token punctuation">:</span> done
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Yangha Park
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> write/essay
+  <span class="token punctuation">-</span> life/habit
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="7. Dataview Query Examples" dir="auto" class="heading" id="7._Dataview_Query_Examples_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>7. Dataview Query Examples</h2></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="" data-callout="tip" class="callout"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-flame"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></svg></div><div class="callout-title-inner">Combine properties and tags for powerful queries.</div></div></div></div><div class="el-h3"><h3 data-heading="All active notes" dir="auto" class="heading" id="All_active_notes_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>All active notes</h3></div><div class="el-pre"><div class="block-language-dataview node-insert-event" style="overflow-x: auto;"><table class="dataview table-view-table"><thead class="table-view-thead"><tr class="table-view-tr-header"><th class="table-view-th"><span>File</span><span class="dataview small-text">34</span></th><th class="table-view-th"><span>title</span></th><th class="table-view-th"><span>type</span></th><th class="table-view-th"><span>tags</span></th></tr></thead><tbody class="table-view-tbody"><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/80_Phase_0a_Execution_Checklist.md" data-href="300_Projects/Private/2407 KH Project/Docs/80_Phase_0a_Execution_Checklist.md" href="300_projects/private/2407-kh-project/docs/80_phase_0a_execution_checklist.html" class="internal-link" target="_self" rel="noopener nofollow">80_Phase_0a_Execution_Checklist</a></span></td><td><span>KH Project — Phase 0a Execution Checklist</span></td><td><span>project</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>biz/strategy</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/61_ADR-2026-01_Single_Cell_Strategy.md" data-href="300_Projects/Private/2407 KH Project/Docs/61_ADR-2026-01_Single_Cell_Strategy.md" href="300_projects/private/2407-kh-project/docs/61_adr-2026-01_single_cell_strategy.html" class="internal-link" target="_self" rel="noopener nofollow">61_ADR-2026-01_Single_Cell_Strategy</a></span></td><td><span>ADR-2026-01: Phase 0a 단일 셀 전략 채택</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/architecture</span></li><li class="dataview-result-list-li"><span>biz/strategy</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="500_Resources/Obsidian/vault-map.md" data-href="500_Resources/Obsidian/vault-map.md" href="500_resources/obsidian/vault-map.html" class="internal-link" target="_self" rel="noopener nofollow">vault-map</a></span></td><td><span>Vault Map</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="CHANGELOG.md" data-href="CHANGELOG.md" href="changelog.html" class="internal-link" target="_self" rel="noopener nofollow">CHANGELOG</a></span></td><td><span>Changelog</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/00_README_Document_System.md" data-href="300_Projects/Private/2407 KH Project/Docs/00_README_Document_System.md" href="300_projects/private/2407-kh-project/docs/00_readme_document_system.html" class="internal-link" target="_self" rel="noopener nofollow">00_README_Document_System</a></span></td><td><span>KH Project(가제) 문서 체계</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/architecture</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/02_Program_Management_Plan.md" data-href="300_Projects/Private/2407 KH Project/Docs/02_Program_Management_Plan.md" href="300_projects/private/2407-kh-project/docs/02_program_management_plan.html" class="internal-link" target="_self" rel="noopener nofollow">02_Program_Management_Plan</a></span></td><td><span>KH Project(가제) — Program Management Plan</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>biz/strategy</span></li><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/01_Portfolio_Business_Case.md" data-href="300_Projects/Private/2407 KH Project/Docs/01_Portfolio_Business_Case.md" href="300_projects/private/2407-kh-project/docs/01_portfolio_business_case.html" class="internal-link" target="_self" rel="noopener nofollow">01_Portfolio_Business_Case</a></span></td><td><span>KH Project(가제) — Portfolio Business Case</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>biz/strategy</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/03_Master_Roadmap.md" data-href="300_Projects/Private/2407 KH Project/Docs/03_Master_Roadmap.md" href="300_projects/private/2407-kh-project/docs/03_master_roadmap.html" class="internal-link" target="_self" rel="noopener nofollow">03_Master_Roadmap</a></span></td><td><span>KH Project(가제) — Master Roadmap</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>biz/strategy</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/10_Product_Vision_and_Principles.md" data-href="300_Projects/Private/2407 KH Project/Docs/10_Product_Vision_and_Principles.md" href="300_projects/private/2407-kh-project/docs/10_product_vision_and_principles.html" class="internal-link" target="_self" rel="noopener nofollow">10_Product_Vision_and_Principles</a></span></td><td><span>KH Project(가제) — Product Vision and Principles</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/11_Core_Marketplace_PRD.md" data-href="300_Projects/Private/2407 KH Project/Docs/11_Core_Marketplace_PRD.md" href="300_projects/private/2407-kh-project/docs/11_core_marketplace_prd.html" class="internal-link" target="_self" rel="noopener nofollow">11_Core_Marketplace_PRD</a></span></td><td><span>KH Project(가제) — Core Marketplace PRD</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/13_Remittance_PRD.md" data-href="300_Projects/Private/2407 KH Project/Docs/13_Remittance_PRD.md" href="300_projects/private/2407-kh-project/docs/13_remittance_prd.html" class="internal-link" target="_self" rel="noopener nofollow">13_Remittance_PRD</a></span></td><td><span>KH Project(가제) — Remittance PRD</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>finance/fintech</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/14_Telecom_Marketplace_PRD.md" data-href="300_Projects/Private/2407 KH Project/Docs/14_Telecom_Marketplace_PRD.md" href="300_projects/private/2407-kh-project/docs/14_telecom_marketplace_prd.html" class="internal-link" target="_self" rel="noopener nofollow">14_Telecom_Marketplace_PRD</a></span></td><td><span>KH Project(가제) — Telecom Marketplace PRD</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/12_Safe_Transaction_PRD.md" data-href="300_Projects/Private/2407 KH Project/Docs/12_Safe_Transaction_PRD.md" href="300_projects/private/2407-kh-project/docs/12_safe_transaction_prd.html" class="internal-link" target="_self" rel="noopener nofollow">12_Safe_Transaction_PRD</a></span></td><td><span>KH Project(가제) — Safe Transaction PRD</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/15_Used_Car_Marketplace_PRD.md" data-href="300_Projects/Private/2407 KH Project/Docs/15_Used_Car_Marketplace_PRD.md" href="300_projects/private/2407-kh-project/docs/15_used_car_marketplace_prd.html" class="internal-link" target="_self" rel="noopener nofollow">15_Used_Car_Marketplace_PRD</a></span></td><td><span>KH Project(가제) — Used Car Marketplace PRD</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/20_Compliance_and_Licensing_Register.md" data-href="300_Projects/Private/2407 KH Project/Docs/20_Compliance_and_Licensing_Register.md" href="300_projects/private/2407-kh-project/docs/20_compliance_and_licensing_register.html" class="internal-link" target="_self" rel="noopener nofollow">20_Compliance_and_Licensing_Register</a></span></td><td><span>KH Project(가제) — Compliance and Licensing Register</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>biz/legal</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/21_Operating_Model.md" data-href="300_Projects/Private/2407 KH Project/Docs/21_Operating_Model.md" href="300_projects/private/2407-kh-project/docs/21_operating_model.html" class="internal-link" target="_self" rel="noopener nofollow">21_Operating_Model</a></span></td><td><span>KH Project(가제) — Operating Model</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>biz/operations</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/22_Trust_and_Safety_Policy.md" data-href="300_Projects/Private/2407 KH Project/Docs/22_Trust_and_Safety_Policy.md" href="300_projects/private/2407-kh-project/docs/22_trust_and_safety_policy.html" class="internal-link" target="_self" rel="noopener nofollow">22_Trust_and_Safety_Policy</a></span></td><td><span>KH Project(가제) — Trust and Safety Policy</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>biz/operations</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/30_Technical_Architecture_Blueprint.md" data-href="300_Projects/Private/2407 KH Project/Docs/30_Technical_Architecture_Blueprint.md" href="300_projects/private/2407-kh-project/docs/30_technical_architecture_blueprint.html" class="internal-link" target="_self" rel="noopener nofollow">30_Technical_Architecture_Blueprint</a></span></td><td><span>KH Project(가제) — Technical Architecture Blueprint</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/architecture</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/40_GTM_and_Partnerships.md" data-href="300_Projects/Private/2407 KH Project/Docs/40_GTM_and_Partnerships.md" href="300_projects/private/2407-kh-project/docs/40_gtm_and_partnerships.html" class="internal-link" target="_self" rel="noopener nofollow">40_GTM_and_Partnerships</a></span></td><td><span>KH Project(가제) — GTM and Partnerships</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>biz/marketing</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/31_Data_Analytics_and_KPI_Plan.md" data-href="300_Projects/Private/2407 KH Project/Docs/31_Data_Analytics_and_KPI_Plan.md" href="300_projects/private/2407-kh-project/docs/31_data_analytics_and_kpi_plan.html" class="internal-link" target="_self" rel="noopener nofollow">31_Data_Analytics_and_KPI_Plan</a></span></td><td><span>KH Project(가제) — Data, Analytics and KPI Plan</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>data/analytics</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/50_Risk_Register.md" data-href="300_Projects/Private/2407 KH Project/Docs/50_Risk_Register.md" href="300_projects/private/2407-kh-project/docs/50_risk_register.html" class="internal-link" target="_self" rel="noopener nofollow">50_Risk_Register</a></span></td><td><span>KH Project(가제) — Risk Register</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>biz/strategy</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/Docs/60_ADR_Template.md" data-href="300_Projects/Private/2407 KH Project/Docs/60_ADR_Template.md" href="300_projects/private/2407-kh-project/docs/60_adr_template.html" class="internal-link" target="_self" rel="noopener nofollow">60_ADR_Template</a></span></td><td><span>KH Project(가제) — ADR Template</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/architecture</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="300_Projects/Private/2407 KH Project/프로젝트 개요.md" data-href="300_Projects/Private/2407 KH Project/프로젝트 개요.md" href="300_projects/private/2407-kh-project/프로젝트-개요.html" class="internal-link" target="_self" rel="noopener nofollow">프로젝트 개요</a></span></td><td><span>KH Project(가제) — 프로젝트 개요</span></td><td><span>project</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>biz/strategy</span></li><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="500_Resources/Obsidian/index.md" data-href="500_Resources/Obsidian/index.md" href="500_resources/obsidian/index.html" class="internal-link" target="_self" rel="noopener nofollow">index</a></span></td><td><span>Vault Index</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="500_Resources/Obsidian/log.md" data-href="500_Resources/Obsidian/log.md" href="500_resources/obsidian/log.html" class="internal-link" target="_self" rel="noopener nofollow">log</a></span></td><td><span>Vault Log</span></td><td><span>log</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="500_Resources/Obsidian/programs/query-to-note.md" data-href="500_Resources/Obsidian/programs/query-to-note.md" href="500_resources/obsidian/programs/query-to-note.html" class="internal-link" target="_self" rel="noopener nofollow">query-to-note</a></span></td><td><span>Program: Query to Note</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li><li class="dataview-result-list-li"><span>ai/agent</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="600_Tech Stack/Architecture/XSS와 Injection 방어 - 시스템 경계에서 입력을 다루는 법.md" data-href="600_Tech Stack/Architecture/XSS와 Injection 방어 - 시스템 경계에서 입력을 다루는 법.md" href="600_tech-stack/architecture/xss와-injection-방어-시스템-경계에서-입력을-다루는-법.html" class="internal-link" target="_self" rel="noopener nofollow">XSS와 Injection 방어 - 시스템 경계에서 입력을 다루는 법</a></span></td><td><span>XSS와 Injection 방어 - 시스템 경계에서 입력을 다루는 법</span></td><td><span>permanent</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>dev/web</span></li><li class="dataview-result-list-li"><span>dev/sql</span></li><li class="dataview-result-list-li"><span>dev/java</span></li><li class="dataview-result-list-li"><span>src/experience</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="600_Tech Stack/Prompt Engineering/사업 아이디어 검증 프롬프트.md" data-href="600_Tech Stack/Prompt Engineering/사업 아이디어 검증 프롬프트.md" href="600_tech-stack/prompt-engineering/사업-아이디어-검증-프롬프트.html" class="internal-link" target="_self" rel="noopener nofollow">사업 아이디어 검증 프롬프트</a></span></td><td><span>Business Idea Stress-Test Prompt — McKinsey Strategy Edition</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>biz/strategy</span></li><li class="dataview-result-list-li"><span>dev/product</span></li><li class="dataview-result-list-li"><span>src/experience</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="600_Tech Stack/CLI/cmux - AI 에이전트를 위한 macOS 네이티브 터미널.md" data-href="600_Tech Stack/CLI/cmux - AI 에이전트를 위한 macOS 네이티브 터미널.md" href="600_tech-stack/cli/cmux-ai-에이전트를-위한-macos-네이티브-터미널.html" class="internal-link" target="_self" rel="noopener nofollow">cmux - AI 에이전트를 위한 macOS 네이티브 터미널</a></span></td><td><span>cmux - AI 에이전트를 위한 macOS 네이티브 터미널</span></td><td><span>permanent</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>ai/agent</span></li><li class="dataview-result-list-li"><span>infra/linux</span></li><li class="dataview-result-list-li"><span>dev/web</span></li><li class="dataview-result-list-li"><span>src/doc</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="500_Resources/Obsidian/programs/process-clipping.md" data-href="500_Resources/Obsidian/programs/process-clipping.md" href="500_resources/obsidian/programs/process-clipping.html" class="internal-link" target="_self" rel="noopener nofollow">process-clipping</a></span></td><td><span>Program: Process Clipping</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li><li class="dataview-result-list-li"><span>ai/agent</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="500_Resources/Obsidian/programs/process-book-note.md" data-href="500_Resources/Obsidian/programs/process-book-note.md" href="500_resources/obsidian/programs/process-book-note.html" class="internal-link" target="_self" rel="noopener nofollow">process-book-note</a></span></td><td><span>Program: Process Book Note</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li><li class="dataview-result-list-li"><span>ai/agent</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="500_Resources/Obsidian/programs/vault-maintenance.md" data-href="500_Resources/Obsidian/programs/vault-maintenance.md" href="500_resources/obsidian/programs/vault-maintenance.html" class="internal-link" target="_self" rel="noopener nofollow">vault-maintenance</a></span></td><td><span>Program: Vault Maintenance</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li><li class="dataview-result-list-li"><span>ai/agent</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="500_Resources/Obsidian/tag-system.md" data-href="500_Resources/Obsidian/tag-system.md" href="500_resources/obsidian/tag-system.html" class="internal-link" target="_self" rel="noopener nofollow">tag-system</a></span></td><td><span>Tag System</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li></ul></td></tr><tr><td><span><a data-tooltip-position="top" aria-label="500_Resources/Obsidian/template-catalog.md" data-href="500_Resources/Obsidian/template-catalog.md" href="500_resources/obsidian/template-catalog.html" class="internal-link" target="_self" rel="noopener nofollow">template-catalog</a></span></td><td><span>Template Catalog</span></td><td><span>reference</span></td><td><ul class="dataview dataview-ul dataview-result-list-ul"><li class="dataview-result-list-li"><span>infra/obsidian</span></li></ul></td></tr></tbody></table></div></div><div class="el-h3"><h3 data-heading="Data analysis study notes (from courses)" dir="auto" class="heading" id="Data_analysis_study_notes_(from_courses)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Data analysis study notes (from courses)</h3></div><div class="el-pre"><div class="block-language-dataview node-insert-event" style="overflow-x: auto;"><table class="dataview table-view-table"><thead class="table-view-thead"><tr class="table-view-tr-header"><th class="table-view-th"><span>File</span><span class="dataview small-text">0</span></th><th class="table-view-th"><span>title</span></th><th class="table-view-th"><span>author</span></th><th class="table-view-th"><span>course</span></th></tr></thead><tbody class="table-view-tbody"></tbody></table><div class="dataview dataview-error-box"><p class="dataview dataview-error-message">Dataview: No results to show for table query.</p></div></div></div><div class="el-h3"><h3 data-heading="Notes needing practice" dir="auto" class="heading" id="Notes_needing_practice_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Notes needing practice</h3></div><div class="el-pre"><div class="block-language-dataview node-insert-event" style="overflow-x: auto;"><table class="dataview table-view-table"><thead class="table-view-thead"><tr class="table-view-tr-header"><th class="table-view-th"><span>File</span><span class="dataview small-text">0</span></th><th class="table-view-th"><span>title</span></th><th class="table-view-th"><span>tags</span></th></tr></thead><tbody class="table-view-tbody"></tbody></table><div class="dataview dataview-error-box"><p class="dataview dataview-error-message">Dataview: No results to show for table query.</p></div></div></div><div class="el-h3"><h3 data-heading="Note count by domain" dir="auto" class="heading" id="Note_count_by_domain_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Note count by domain</h3></div><div class="el-pre"><div class="block-language-dataview node-insert-event" style="overflow-x: auto;"> <pre class="dataview dataview-error">Dataview: Every row during operation 'group' failed with an error; first 3:
+
+                - No implementation of 'choice' found for arguments: boolean, string, boolean, string, boolean, string, boolean, string, string
+- No implementation of 'choice' found for arguments: boolean, string, boolean, string, boolean, string, boolean, string, string
+- No implementation of 'choice' found for arguments: boolean, string, boolean, string, boolean, string, boolean, string, string</pre> </div></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="8. AI Auto-Tagging Prompt Guide" dir="auto" class="heading" id="8._AI_Auto-Tagging_Prompt_Guide_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>8. AI Auto-Tagging Prompt Guide</h2></div><div class="el-p"><p dir="auto">Update the <code>AI 태그 생성.md</code> template prompt with the rules below for MECE-compliant auto-tagging.</p></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="-" data-callout="example" class="callout is-collapsible is-collapsed"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-list"><path d="M3 5h.01"></path><path d="M3 12h.01"></path><path d="M3 19h.01"></path><path d="M8 5h13"></path><path d="M8 12h13"></path><path d="M8 19h13"></path></svg></div><div class="callout-title-inner">AI Tagging Prompt (for template update)</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg></div></div><div class="callout-content" style="display: none;">
+<pre><code data-line="1">You are a tag classification expert. Analyze the document and assign tags following these rules:
+
+## Tag System (3 dimensions, all in English lowercase)
+
+### Dimension A - Domain (1~3 tags, pick the most relevant):
+dev/, data/, ai/, infra/, biz/, career/, lang/, write/, finance/, life/
+
+Subtags:
+- dev: java, python, js, sql, db, oop, web, mobile, test
+- data: analysis, stats, viz, ml, engineering, preprocessing
+- ai: genai, prompt, agent, mcp
+- infra: docker, aws, linux, git, cicd, obsidian
+- biz: marketing, strategy, pm, hr, startup
+- career: resume, interview, cert, portfolio
+- lang: english
+- write: essay, poem, fiction, diary, review
+- finance: tax, invest, insurance
+- life: habit, health, hobby
+
+### Dimension B - Source (exactly 1 tag):
+src/book, src/article, src/lecture, src/video, src/course, src/paper, src/doc, src/experience
+
+### Dimension C - Action (0~1 tag, only if applicable):
+action/todo, action/review, action/practice, action/followup
+
+## Rules:
+- Use ONLY tags from the list above. Do not invent new tags.
+- Use the most specific subtag that applies (e.g., dev/python not just dev).
+- Output format: comma-separated tags without # prefix.
+- Total tags: 3~8 per note.
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+</div></div></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="9. Migration Roadmap" dir="auto" class="heading" id="9._Migration_Roadmap_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>9. Migration Roadmap</h2></div><div class="el-h3"><h3 data-heading="Phase 1: Immediate (new notes)" dir="auto" class="heading" id="Phase_1_Immediate_(new_notes)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Phase 1: Immediate (new notes)</h3></div><div class="el-ul"><ul class="contains-task-list has-list-bullet">
+<li data-line="0" data-task="" class="task-list-item" dir="auto"><span class="list-bullet"></span><input data-line="0" type="checkbox" class="task-list-item-checkbox">Apply this tag system to all new notes immediately</li>
+<li data-line="1" data-task="" class="task-list-item" dir="auto"><span class="list-bullet"></span><input data-line="1" type="checkbox" class="task-list-item-checkbox">Update frontmatter template (<code>tags</code> -&gt; YAML array, add <code>type</code>/<code>status</code> properties)</li>
+<li data-line="2" data-task="" class="task-list-item" dir="auto"><span class="list-bullet"></span><input data-line="2" type="checkbox" class="task-list-item-checkbox">Update AI tagging template prompt</li>
+</ul></div><div class="el-h3"><h3 data-heading="Phase 2: Gradual migration (existing notes)" dir="auto" class="heading" id="Phase_2_Gradual_migration_(existing_notes)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Phase 2: Gradual migration (existing notes)</h3></div><div class="el-ul"><ul class="contains-task-list has-list-bullet">
+<li data-line="0" data-task="" class="task-list-item" dir="auto"><span class="list-bullet"></span><input data-line="0" type="checkbox" class="task-list-item-checkbox">Unify property keys: <code>tag</code> -&gt; <code>tags</code>, <code>modification date</code> -&gt; <code>modified</code></li>
+<li data-line="1" data-task="" class="task-list-item" dir="auto"><span class="list-bullet"></span><input data-line="1" type="checkbox" class="task-list-item-checkbox">Convert old tags to new system on each edit (gradual, not batch)</li>
+<li data-line="2" data-task="" class="task-list-item" dir="auto"><span class="list-bullet"></span><input data-line="2" type="checkbox" class="task-list-item-checkbox">Use Tag Wrangler plugin for bulk renames where possible</li>
+</ul></div><div class="el-h3"><h3 data-heading="Phase 3: Automation &amp; verification" dir="auto" class="heading" id="Phase_3_Automation_&amp;_verification_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Phase 3: Automation &amp; verification</h3></div><div class="el-ul"><ul class="contains-task-list has-list-bullet">
+<li data-line="0" data-task="" class="task-list-item" dir="auto"><span class="list-bullet"></span><input data-line="0" type="checkbox" class="task-list-item-checkbox">Build Dataview dashboard for unclassified note monitoring</li>
+<li data-line="1" data-task="" class="task-list-item" dir="auto"><span class="list-bullet"></span><input data-line="1" type="checkbox" class="task-list-item-checkbox">Create non-standard tag detection query</li>
+<li data-line="2" data-task="" class="task-list-item" dir="auto"><span class="list-bullet"></span><input data-line="2" type="checkbox" class="task-list-item-checkbox">Include tag consistency check in weekly review</li>
+</ul></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="10. Full Tag Reference (Quick Lookup)" dir="auto" class="heading" id="10._Full_Tag_Reference_(Quick_Lookup)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>10. Full Tag Reference (Quick Lookup)</h2></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="-" data-callout="abstract" class="callout is-collapsible is-collapsed"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-clipboard-list"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg></div><div class="callout-title-inner">Domain tags (expand)</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg></div></div><div class="callout-content" style="display: none;">
+<table>
+<thead>
+<tr>
+<th>Parent</th>
+<th>Subtags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dev</code></td>
+<td><code>java</code>, <code>python</code>, <code>js</code>, <code>sql</code>, <code>db</code>, <code>oop</code>, <code>web</code>, <code>mobile</code>, <code>test</code></td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td><code>analysis</code>, <code>stats</code>, <code>viz</code>, <code>ml</code>, <code>engineering</code>, <code>preprocessing</code></td>
+</tr>
+<tr>
+<td><code>ai</code></td>
+<td><code>genai</code>, <code>prompt</code>, <code>agent</code>, <code>mcp</code></td>
+</tr>
+<tr>
+<td><code>infra</code></td>
+<td><code>docker</code>, <code>aws</code>, <code>linux</code>, <code>git</code>, <code>cicd</code>, <code>obsidian</code></td>
+</tr>
+<tr>
+<td><code>biz</code></td>
+<td><code>marketing</code>, <code>strategy</code>, <code>pm</code>, <code>hr</code>, <code>startup</code></td>
+</tr>
+<tr>
+<td><code>career</code></td>
+<td><code>resume</code>, <code>interview</code>, <code>cert</code>, <code>portfolio</code></td>
+</tr>
+<tr>
+<td><code>lang</code></td>
+<td><code>english</code></td>
+</tr>
+<tr>
+<td><code>write</code></td>
+<td><code>essay</code>, <code>poem</code>, <code>fiction</code>, <code>diary</code>, <code>review</code></td>
+</tr>
+<tr>
+<td><code>finance</code></td>
+<td><code>tax</code>, <code>invest</code>, <code>insurance</code></td>
+</tr>
+<tr>
+<td><code>life</code></td>
+<td><code>habit</code>, <code>health</code>, <code>hobby</code></td>
+</tr>
+</tbody>
+</table>
+</div></div></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="-" data-callout="abstract" class="callout is-collapsible is-collapsed"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-clipboard-list"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg></div><div class="callout-title-inner">Source tags (expand)</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg></div></div><div class="callout-content" style="display: none;">
+<p dir="auto"><code>src/book</code>, <code>src/article</code>, <code>src/lecture</code>, <code>src/video</code>, <code>src/course</code>, <code>src/paper</code>, <code>src/doc</code>, <code>src/experience</code></p>
+</div></div></div><div class="el-div"><div data-callout-metadata="" data-callout-fold="-" data-callout="abstract" class="callout is-collapsible is-collapsed"><div class="callout-title" dir="auto"><div class="callout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-clipboard-list"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg></div><div class="callout-title-inner">Action tags (expand)</div><div class="callout-fold is-collapsed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg></div></div><div class="callout-content" style="display: none;">
+<p dir="auto"><code>action/todo</code>, <code>action/review</code>, <code>action/practice</code>, <code>action/followup</code></p>
+</div></div></div><div class="footer"><div class="data-bar"></div></div></div></div></div><div id="right-content" class="leaf" style="--sidebar-width: var(--sidebar-width-right);"><div id="right-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme-toggle-input" id=""><input class="theme-toggle-input" type="checkbox" id="theme-toggle-input"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="right-sidebar-content" class="leaf-content"><div class="graph-view-wrapper"><div class="feature-header"><div class="feature-title">Interactive Graph</div></div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<div class="graph-icon graph-global" role="button" aria-label="Global Graph" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-git-fork"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div id="outline" class=" tree-container"><div class="feature-header"><div class="feature-title">Table Of Contents</div><button class="clickable-icon nav-action-button tree-collapse-all" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-item" data-depth="1"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#Tag_System_0" data-path="#Tag_System_0"><div class="tree-item-inner heading-link" heading-name="Tag System">Tag System</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/tag-system.html#Tag_System_1" data-path="#Tag_System_1"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Tag System">Tag System</div></a><div class="tree-item-children"><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/tag-system.html#1._Design_Principles_0" data-path="#1._Design_Principles_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="1. Design Principles">1. Design Principles</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#1.1_Four-Layer_Separation_0" data-path="#1.1_Four-Layer_Separation_0"><div class="tree-item-inner heading-link" heading-name="1.1 Four-Layer Separation">1.1 Four-Layer Separation</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#1.2_Tag_Formatting_Rules_0" data-path="#1.2_Tag_Formatting_Rules_0"><div class="tree-item-inner heading-link" heading-name="1.2 Tag Formatting Rules">1.2 Tag Formatting Rules</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/tag-system.html#2._Property_Standard_(Frontmatter)_0" data-path="#2._Property_Standard_(Frontmatter)_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="2. Property Standard (Frontmatter)">2. Property Standard (Frontmatter)</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#2.1_Common_Properties_0" data-path="#2.1_Common_Properties_0"><div class="tree-item-inner heading-link" heading-name="2.1 Common Properties">2.1 Common Properties</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#2.2_`type`_Values_0" data-path="#2.2_`type`_Values_0"><div class="tree-item-inner heading-link" heading-name="2.2 `type` Values">2.2 <code>type</code> Values</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#2.3_`status`_Values_0" data-path="#2.3_`status`_Values_0"><div class="tree-item-inner heading-link" heading-name="2.3 `status` Values">2.3 <code>status</code> Values</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#2.4_Content-Specific_Properties_0" data-path="#2.4_Content-Specific_Properties_0"><div class="tree-item-inner heading-link" heading-name="2.4 Content-Specific Properties">2.4 Content-Specific Properties</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/tag-system.html#3._MECE_Tag_System_0" data-path="#3._MECE_Tag_System_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="3. MECE Tag System">3. MECE Tag System</div></a><div class="tree-item-children"><div class="tree-item mod-collapsible" data-depth="3"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/tag-system.html#3.1_Dimension_A_—_Domain_0" data-path="#3.1_Dimension_A_—_Domain_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="3.1 Dimension A — Domain">3.1 Dimension A — Domain</div></a><div class="tree-item-children"><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`dev/`_—_Software_Development_0" data-path="#`dev/`_—_Software_Development_0"><div class="tree-item-inner heading-link" heading-name="`dev/` — Software Development"><code>dev/</code> — Software Development</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`data/`_—_Data_&amp;_Analytics_0" data-path="#`data/`_—_Data_&amp;_Analytics_0"><div class="tree-item-inner heading-link" heading-name="`data/` — Data &amp; Analytics"><code>data/</code> — Data &amp; Analytics</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`ai/`_—_Artificial_Intelligence_0" data-path="#`ai/`_—_Artificial_Intelligence_0"><div class="tree-item-inner heading-link" heading-name="`ai/` — Artificial Intelligence"><code>ai/</code> — Artificial Intelligence</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`infra/`_—_Infrastructure_&amp;_DevOps_0" data-path="#`infra/`_—_Infrastructure_&amp;_DevOps_0"><div class="tree-item-inner heading-link" heading-name="`infra/` — Infrastructure &amp; DevOps"><code>infra/</code> — Infrastructure &amp; DevOps</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`biz/`_—_Business_&amp;_Management_0" data-path="#`biz/`_—_Business_&amp;_Management_0"><div class="tree-item-inner heading-link" heading-name="`biz/` — Business &amp; Management"><code>biz/</code> — Business &amp; Management</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`career/`_—_Career_&amp;_Professional_Growth_0" data-path="#`career/`_—_Career_&amp;_Professional_Growth_0"><div class="tree-item-inner heading-link" heading-name="`career/` — Career &amp; Professional Growth"><code>career/</code> — Career &amp; Professional Growth</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`lang/`_—_Language_Learning_0" data-path="#`lang/`_—_Language_Learning_0"><div class="tree-item-inner heading-link" heading-name="`lang/` — Language Learning"><code>lang/</code> — Language Learning</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`write/`_—_Writing_&amp;_Literature_0" data-path="#`write/`_—_Writing_&amp;_Literature_0"><div class="tree-item-inner heading-link" heading-name="`write/` — Writing &amp; Literature"><code>write/</code> — Writing &amp; Literature</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`finance/`_—_Finance_&amp;_Investment_0" data-path="#`finance/`_—_Finance_&amp;_Investment_0"><div class="tree-item-inner heading-link" heading-name="`finance/` — Finance &amp; Investment"><code>finance/</code> — Finance &amp; Investment</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#`life/`_—_Lifestyle_&amp;_Self-Management_0" data-path="#`life/`_—_Lifestyle_&amp;_Self-Management_0"><div class="tree-item-inner heading-link" heading-name="`life/` — Lifestyle &amp; Self-Management"><code>life/</code> — Lifestyle &amp; Self-Management</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#3.2_Dimension_B_—_Source_0" data-path="#3.2_Dimension_B_—_Source_0"><div class="tree-item-inner heading-link" heading-name="3.2 Dimension B — Source">3.2 Dimension B — Source</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#3.3_Dimension_C_—_Action_0" data-path="#3.3_Dimension_C_—_Action_0"><div class="tree-item-inner heading-link" heading-name="3.3 Dimension C — Action">3.3 Dimension C — Action</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#4._Domain_Classification_Decision_Tree_0" data-path="#4._Domain_Classification_Decision_Tree_0"><div class="tree-item-inner heading-link" heading-name="4. Domain Classification Decision Tree">4. Domain Classification Decision Tree</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/tag-system.html#5._Legacy_Tag_Migration_Map_0" data-path="#5._Legacy_Tag_Migration_Map_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="5. Legacy Tag Migration Map">5. Legacy Tag Migration Map</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#5.1_Development_0" data-path="#5.1_Development_0"><div class="tree-item-inner heading-link" heading-name="5.1 Development">5.1 Development</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#5.2_Data_0" data-path="#5.2_Data_0"><div class="tree-item-inner heading-link" heading-name="5.2 Data">5.2 Data</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#5.3_AI_0" data-path="#5.3_AI_0"><div class="tree-item-inner heading-link" heading-name="5.3 AI">5.3 AI</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#5.4_Infrastructure_0" data-path="#5.4_Infrastructure_0"><div class="tree-item-inner heading-link" heading-name="5.4 Infrastructure">5.4 Infrastructure</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#5.5_Business_0" data-path="#5.5_Business_0"><div class="tree-item-inner heading-link" heading-name="5.5 Business">5.5 Business</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#5.6_Other_0" data-path="#5.6_Other_0"><div class="tree-item-inner heading-link" heading-name="5.6 Other">5.6 Other</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/tag-system.html#6._Practical_Examples_0" data-path="#6._Practical_Examples_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="6. Practical Examples">6. Practical Examples</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#6.1_Bootcamp_SQL_Lecture_Note_0" data-path="#6.1_Bootcamp_SQL_Lecture_Note_0"><div class="tree-item-inner heading-link" heading-name="6.1 Bootcamp SQL Lecture Note">6.1 Bootcamp SQL Lecture Note</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#6.2_Python_Book_Note_0" data-path="#6.2_Python_Book_Note_0"><div class="tree-item-inner heading-link" heading-name="6.2 Python Book Note">6.2 Python Book Note</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#6.3_Project_Technical_Document_0" data-path="#6.3_Project_Technical_Document_0"><div class="tree-item-inner heading-link" heading-name="6.3 Project Technical Document">6.3 Project Technical Document</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#6.4_Marketing_Analysis_Study_Note_0" data-path="#6.4_Marketing_Analysis_Study_Note_0"><div class="tree-item-inner heading-link" heading-name="6.4 Marketing Analysis Study Note">6.4 Marketing Analysis Study Note</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#6.5_Self-Development_Essay_0" data-path="#6.5_Self-Development_Essay_0"><div class="tree-item-inner heading-link" heading-name="6.5 Self-Development Essay">6.5 Self-Development Essay</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/tag-system.html#7._Dataview_Query_Examples_0" data-path="#7._Dataview_Query_Examples_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="7. Dataview Query Examples">7. Dataview Query Examples</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#All_active_notes_0" data-path="#All_active_notes_0"><div class="tree-item-inner heading-link" heading-name="All active notes">All active notes</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#Data_analysis_study_notes_(from_courses)_0" data-path="#Data_analysis_study_notes_(from_courses)_0"><div class="tree-item-inner heading-link" heading-name="Data analysis study notes (from courses)">Data analysis study notes (from courses)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#Notes_needing_practice_0" data-path="#Notes_needing_practice_0"><div class="tree-item-inner heading-link" heading-name="Notes needing practice">Notes needing practice</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#Note_count_by_domain_0" data-path="#Note_count_by_domain_0"><div class="tree-item-inner heading-link" heading-name="Note count by domain">Note count by domain</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#8._AI_Auto-Tagging_Prompt_Guide_0" data-path="#8._AI_Auto-Tagging_Prompt_Guide_0"><div class="tree-item-inner heading-link" heading-name="8. AI Auto-Tagging Prompt Guide">8. AI Auto-Tagging Prompt Guide</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="500_resources/obsidian/tag-system.html#9._Migration_Roadmap_0" data-path="#9._Migration_Roadmap_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="9. Migration Roadmap">9. Migration Roadmap</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#Phase_1_Immediate_(new_notes)_0" data-path="#Phase_1_Immediate_(new_notes)_0"><div class="tree-item-inner heading-link" heading-name="Phase 1: Immediate (new notes)">Phase 1: Immediate (new notes)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#Phase_2_Gradual_migration_(existing_notes)_0" data-path="#Phase_2_Gradual_migration_(existing_notes)_0"><div class="tree-item-inner heading-link" heading-name="Phase 2: Gradual migration (existing notes)">Phase 2: Gradual migration (existing notes)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#Phase_3_Automation_&amp;_verification_0" data-path="#Phase_3_Automation_&amp;_verification_0"><div class="tree-item-inner heading-link" heading-name="Phase 3: Automation &amp; verification">Phase 3: Automation &amp; verification</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="500_resources/obsidian/tag-system.html#10._Full_Tag_Reference_(Quick_Lookup)_0" data-path="#10._Full_Tag_Reference_(Quick_Lookup)_0"><div class="tree-item-inner heading-link" heading-name="10. Full Tag Reference (Quick Lookup)">10. Full Tag Reference (Quick Lookup)</div></a><div class="tree-item-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector("#right-sidebar"); rs.classList.toggle("is-collapsed", window.innerWidth < 768); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></div></div></body></html>
