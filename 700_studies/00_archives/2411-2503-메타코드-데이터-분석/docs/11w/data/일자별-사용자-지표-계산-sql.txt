@@ -1,0 +1,26 @@
+
+-- 각 날짜별 DAU, WAU, MAU를 계산하고 결과를 테이블에 저장
+CREATE OR REPLACE TABLE`datafashion-241006.ga4_241222_test.daily_user_metrics` AS
+-- 여러분의 프로젝트명과 데이터셋 이름을 입력해주세요! 
+WITH date_series AS (
+  SELECT
+    format_date("%Y%m%d", date_add(PARSE_DATE('%Y-%m-%d', '2020-12-01'), INTERVAL day_offset DAY)) AS target_date
+  FROM
+    UNNEST(GENERATE_ARRAY(0, 30)) AS day_offset
+),
+metrics AS (
+  SELECT
+    target_date,
+    COUNT(DISTINCT CASE WHEN _TABLE_SUFFIX = target_date THEN user_pseudo_id END) AS DAU,
+    COUNT(DISTINCT CASE WHEN _TABLE_SUFFIX BETWEEN format_date("%Y%m%d", DATE_SUB(PARSE_DATE('%Y%m%d', target_date), INTERVAL 6 DAY)) AND target_date THEN user_pseudo_id END) AS WAU,
+    COUNT(DISTINCT CASE WHEN _TABLE_SUFFIX BETWEEN format_date("%Y%m%d", DATE_SUB(PARSE_DATE('%Y%m%d', target_date), INTERVAL 29 DAY)) AND target_date THEN user_pseudo_id END) AS MAU
+  FROM
+    `datafashion-241006.ga4_241222_test.events_*`,
+    -- 여러분의 프로젝트명과 데이터셋 이름을 입력해주세요!     
+    date_series
+  WHERE
+    _table_suffix between format_date('%Y%m%d', date_sub(parse_date('%Y-%m-%d','2020-12-01'), interval 29 day)) and '20201231'
+  GROUP BY
+    target_date
+)
+SELECT * FROM metrics;

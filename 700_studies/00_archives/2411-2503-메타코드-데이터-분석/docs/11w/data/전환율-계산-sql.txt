@@ -1,0 +1,48 @@
+CREATE OR REPLACE TABLE `datafashion-241006.ga4_241222_test.daily_conversion_rate` AS
+-- 여러분의 프로젝트명과 데이터셋 이름을 입력해주세요! 
+WITH daily_events AS (
+  SELECT
+    DATE(TIMESTAMP_MICROS(event_timestamp)) AS event_date,
+    event_name,
+    user_pseudo_id
+  FROM
+    `datafashion-241006.ga4_241222_test.events_*`
+    -- 여러분의 프로젝트명과 데이터셋 이름을 입력해주세요! 
+  WHERE
+    _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'
+),
+sessions AS (
+  SELECT
+    event_date,
+    COUNT(DISTINCT user_pseudo_id) AS sessions
+  FROM
+    daily_events
+  WHERE
+    event_name = 'session_start'
+  GROUP BY
+    event_date
+),
+purchases AS (
+  SELECT
+    event_date,
+    COUNT(DISTINCT user_pseudo_id) AS purchases
+  FROM
+    daily_events
+  WHERE
+    event_name = 'purchase'
+  GROUP BY
+    event_date
+)
+SELECT
+  s.event_date,
+  s.sessions,
+  IFNULL(p.purchases, 0) AS purchases,
+  IFNULL(ROUND((p.purchases / s.sessions) * 100, 2), 0) AS conversion_rate
+FROM
+  sessions s
+LEFT JOIN
+  purchases p
+ON
+  s.event_date = p.event_date
+ORDER BY
+  s.event_date;
