@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" width="560" height="360">
+  <defs>
+    <style>
+      .axis      { stroke: #1f2937; stroke-width: 1.8; fill: none; }
+      .cost      { stroke: #2c5f7f; stroke-width: 2.4; fill: none; stroke-linejoin: round; }
+      .rev       { stroke: #c0392b; stroke-width: 2.4; fill: none; stroke-linejoin: round; }
+      .plan      { stroke-dasharray: 5 4; stroke-width: 1.6; opacity: 0.55; }
+      .bep-plan  { fill: #ffffff; stroke: #1f2937; stroke-width: 1.8; }
+      .bep-real  { fill: #c0392b; stroke: #1f2937; stroke-width: 1.4; }
+      .gap       { stroke: #b45309; stroke-width: 1.5; fill: none; }
+      .gap-arrow { fill: #b45309; }
+      .title     { font: 700 16px 'Inter','Segoe UI',sans-serif; fill: #1f2937; text-anchor: middle; }
+      .note      { font: 700 12px 'Inter','Segoe UI',sans-serif; fill: #1f2937; text-anchor: middle; }
+      .gap-lbl   { font: 700 12px 'Inter','Segoe UI',sans-serif; fill: #b45309; text-anchor: middle; }
+      .lbl       { font: 600 11px 'Inter','Segoe UI',sans-serif; fill: #1f2937; }
+      .axis-lbl  { font: 500 11px 'Inter','Segoe UI',sans-serif; fill: #666;    text-anchor: middle; }
+      .legend    { font: 500 11px 'Inter','Segoe UI',sans-serif; fill: #555; }
+    </style>
+  </defs>
+  <rect width="560" height="360" fill="#ffffff"/>
+
+  <!-- Axes -->
+  <line class="axis" x1="60"  y1="250" x2="510" y2="250"/>
+  <line class="axis" x1="60"  y1="60"  x2="60"  y2="250"/>
+
+  <!-- Planned: dashed straight lines -->
+  <line class="cost plan" x1="70" y1="193" x2="490" y2="107"/>
+  <line class="rev plan"  x1="70" y1="240" x2="490" y2="79"/>
+
+  <!-- Actual cost: monotonic, but rises faster than plan early -->
+  <polyline class="cost" points="70,193 133,174 217,155 301,136 385,121 448,111 490,107"/>
+
+  <!-- Actual revenue: monotonic, slow start then late surge -->
+  <polyline class="rev" points="70,240 154,231 238,208 322,170 406,127 469,85 490,79"/>
+
+  <!-- Planned BEP marker -->
+  <circle class="bep-plan" cx="332" cy="140" r="5.5"/>
+  <text class="note" x="332" y="128" fill="#666">BEP (계획)</text>
+
+  <!-- Actual BEP marker -->
+  <circle class="bep-real" cx="425" cy="114" r="5.5"/>
+  <text class="note" x="425" y="102">BEP (실제)</text>
+
+  <!-- Gap indicator -->
+  <line class="gap" x1="338" y1="263" x2="419" y2="263"/>
+  <polygon class="gap-arrow" points="332,263 342,259 342,267"/>
+  <polygon class="gap-arrow" points="425,263 415,259 415,267"/>
+  <text class="gap-lbl" x="378" y="282">지연 = 평균의 거짓말</text>
+
+  <!-- Curve labels -->
+  <text class="lbl" x="498" y="100" fill="#2c5f7f">총비용</text>
+  <text class="lbl" x="498" y="72"  fill="#c0392b">총매출</text>
+
+  <!-- Axis labels -->
+  <text class="axis-lbl" x="285" y="305">시간 / 매출량</text>
+  <text class="axis-lbl" transform="rotate(-90 40 155)" x="40" y="155">누적 금액</text>
+
+  <!-- Legend -->
+  <g transform="translate(155,330)">
+    <line x1="0" y1="0" x2="22" y2="0" stroke="#666" stroke-width="1.6" stroke-dasharray="5 4"/>
+    <text x="28" y="4" class="legend">평균선 (계획)</text>
+    <line x1="125" y1="0" x2="147" y2="0" stroke="#666" stroke-width="2.4"/>
+    <text x="153" y="4" class="legend">실제 (들쭉날쭉)</text>
+  </g>
+</svg>
