@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="680" height="360">
+  <defs>
+    <style>
+      .axis     { stroke: #1f2937; stroke-width: 1.8; fill: none; }
+      .grid     { stroke: #e5e7eb; stroke-width: 1; fill: none; }
+      .cost     { stroke: #2c5f7f; stroke-width: 2.2; fill: none; }
+      .rev      { stroke: #c0392b; stroke-width: 2.2; fill: none; }
+      .cost-j   { stroke: #2c5f7f; stroke-width: 1.6; fill: none; opacity: 0.85; }
+      .rev-j    { stroke: #c0392b; stroke-width: 1.6; fill: none; opacity: 0.85; }
+      .bep-dot  { fill: #c0392b; stroke: #1f2937; stroke-width: 1.2; }
+      .bep-band { fill: #fde68a; opacity: 0.45; }
+      .title    { font: 700 17px 'Inter','Segoe UI',sans-serif; fill: #1f2937; text-anchor: middle; }
+      .sub      { font: 500 12px 'Inter','Segoe UI',sans-serif; fill: #555;    text-anchor: middle; }
+      .note     { font: 700 12px 'Inter','Segoe UI',sans-serif; fill: #c0392b; text-anchor: middle; }
+      .lbl      { font: 600 11px 'Inter','Segoe UI',sans-serif; fill: #1f2937; }
+      .axis-lbl { font: 500 11px 'Inter','Segoe UI',sans-serif; fill: #666;    text-anchor: middle; }
+      .sep      { stroke: #d1d5db; stroke-width: 1; fill: none; stroke-dasharray: 4 4; }
+    </style>
+  </defs>
+  <rect width="680" height="360" fill="#ffffff"/>
+
+  <line class="sep" x1="340" y1="30" x2="340" y2="310"/>
+
+  <!-- LEFT: 평균 (smoothed) -->
+  <g>
+    <line class="axis" x1="60"  y1="250" x2="320" y2="250"/>
+    <line class="axis" x1="60"  y1="60"  x2="60"  y2="250"/>
+
+    <!-- Cost line (smooth) -->
+    <line class="cost" x1="70" y1="195" x2="310" y2="135"/>
+    <!-- Revenue line (smooth) -->
+    <line class="rev"  x1="70" y1="235" x2="310" y2="70"/>
+
+    <!-- BEP dot -->
+    <circle class="bep-dot" cx="186" cy="166" r="5"/>
+    <text class="note" x="186" y="158">BEP</text>
+
+    <!-- inline labels -->
+    <text class="lbl" x="285" y="128" fill="#2c5f7f">총비용</text>
+    <text class="lbl" x="285" y="62"  fill="#c0392b">총매출</text>
+
+    <text class="axis-lbl" x="190" y="268">시간 / 매출량</text>
+    <text class="axis-lbl" transform="rotate(-90 40 155)" x="40" y="155">금액</text>
+
+    <text class="title" x="190" y="295">평균선</text>
+    <text class="sub"   x="190" y="313">BEP가 한 점으로 깔끔하다</text>
+  </g>
+
+  <!-- RIGHT: 현실 (jagged) -->
+  <g>
+    <line class="axis" x1="380" y1="250" x2="650" y2="250"/>
+    <line class="axis" x1="380" y1="60"  x2="380" y2="250"/>
+
+    <!-- BEP uncertainty band -->
+    <rect class="bep-band" x="468" y="60" width="80" height="190"/>
+    <text class="note" x="508" y="55">BEP?</text>
+
+    <!-- Faint smoothed reference -->
+    <line class="sep" x1="390" y1="195" x2="640" y2="135"/>
+    <line class="sep" x1="390" y1="235" x2="640" y2="70"/>
+
+    <!-- Cost (jagged) -->
+    <polyline class="cost-j" points="
+      390,195 405,182 420,200 435,170 450,188 465,162
+      480,180 495,158 510,170 525,150 540,162 555,142
+      570,155 585,138 600,150 615,132 630,140 640,135
+    "/>
+
+    <!-- Revenue (jagged) -->
+    <polyline class="rev-j" points="
+      390,235 405,212 420,228 435,190 450,205 465,170
+      480,188 495,148 510,168 525,128 540,142 555,108
+      570,120 585,92  600,108 615,78  630,82  640,70
+    "/>
+
+    <text class="lbl" x="615" y="128" fill="#2c5f7f">총비용</text>
+    <text class="lbl" x="615" y="62"  fill="#c0392b">총매출</text>
+
+    <text class="axis-lbl" x="515" y="268">시간 / 매출량</text>
+    <text class="axis-lbl" transform="rotate(-90 360 155)" x="360" y="155">금액</text>
+
+    <text class="title" x="515" y="295">현실</text>
+    <text class="sub"   x="515" y="313">BEP는 점이 아니라 흔들리는 구간이다</text>
+  </g>
+</svg>

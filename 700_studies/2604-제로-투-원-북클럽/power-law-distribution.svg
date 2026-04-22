@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="680" height="340">
+  <defs>
+    <style>
+      .axis     { stroke: #1f2937; stroke-width: 1.8; fill: none; }
+      .tick     { stroke: #1f2937; stroke-width: 1.2; fill: none; }
+      .bell     { fill: #cfe6f3; fill-opacity: 0.7; stroke: #2c5f7f; stroke-width: 2; }
+      .bar      { fill: #f3cfcf; stroke: #8b3a3a; stroke-width: 1.5; }
+      .bar-top  { fill: #f3cfcf; stroke: #c0392b; stroke-width: 2.2; }
+      .title    { font: 700 17px 'Inter', 'Segoe UI', sans-serif; fill: #1f2937; text-anchor: middle; }
+      .sub      { font: 500 12px 'Inter', 'Segoe UI', sans-serif; fill: #555;    text-anchor: middle; }
+      .note     { font: 700 12px 'Inter', 'Segoe UI', sans-serif; fill: #c0392b; text-anchor: middle; }
+      .axis-lbl { font: 500 11px 'Inter', 'Segoe UI', sans-serif; fill: #666;    text-anchor: middle; }
+      .sep      { stroke: #d1d5db; stroke-width: 1; fill: none; stroke-dasharray: 4 4; }
+    </style>
+  </defs>
+  <rect width="680" height="340" fill="#ffffff"/>
+
+  <line class="sep" x1="340" y1="30" x2="340" y2="300"/>
+
+  <!-- LEFT: Perceived (Normal Distribution) -->
+  <g>
+    <!-- axes -->
+    <line class="axis" x1="60"  y1="240" x2="320" y2="240"/>
+    <line class="axis" x1="60"  y1="60"  x2="60"  y2="240"/>
+
+    <!-- bell curve -->
+    <path class="bell"
+          d="M 70 240
+             Q 115 240 145 195
+             Q 175 95 190 95
+             Q 205 95 235 195
+             Q 265 240 310 240
+             Z"/>
+
+    <text class="axis-lbl" x="190" y="258">수익</text>
+    <text class="axis-lbl" transform="rotate(-90 40 150)" x="40" y="150">빈도</text>
+
+    <text class="title" x="190" y="285">Perceived</text>
+    <text class="sub"   x="190" y="303">정규분포를 기대한다</text>
+  </g>
+
+  <!-- RIGHT: Actual (Power Law) -->
+  <g>
+    <!-- axes -->
+    <line class="axis" x1="380" y1="240" x2="650" y2="240"/>
+    <line class="axis" x1="380" y1="60"  x2="380" y2="240"/>
+
+    <!-- power-law bars -->
+    <rect class="bar-top" x="390" y="75"  width="28" height="165"/>
+    <rect class="bar"     x="422" y="165" width="28" height="75"/>
+    <rect class="bar"     x="454" y="198" width="28" height="42"/>
+    <rect class="bar"     x="486" y="215" width="28" height="25"/>
+    <rect class="bar"     x="518" y="224" width="28" height="16"/>
+    <rect class="bar"     x="550" y="230" width="28" height="10"/>
+    <rect class="bar"     x="582" y="234" width="28" height="6"/>
+    <rect class="bar"     x="614" y="236" width="28" height="4"/>
+
+    <text class="note" x="404" y="68">1등</text>
+
+    <text class="axis-lbl" x="515" y="258">순위</text>
+    <text class="axis-lbl" transform="rotate(-90 360 150)" x="360" y="150">수익</text>
+
+    <text class="title" x="515" y="285">Actual</text>
+    <text class="sub"   x="515" y="303">거듭제곱이 실제로 작동한다</text>
+  </g>
+</svg>
