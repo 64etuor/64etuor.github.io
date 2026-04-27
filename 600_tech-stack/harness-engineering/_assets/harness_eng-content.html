@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Meta Tags -->
+    <title>AI 에이전트 하네스 엔지니어링: 안전한 자율 시스템의 설계</title>
+    <meta name="description" content="AI 에이전트가 외부 환경과 통제된 상태로 안전하게 상호작용할 수 있도록 제어하고 검증하는 인프라, 하네스 엔지니어링의 핵심 원리와 구조를 배웁니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://harness-learn.netlify.app">
+    <meta property="og:title" content="AI 에이전트 하네스 엔지니어링 완벽 가이드">
+    <meta property="og:description" content="AI 통제 불능을 막는 핵심 미들웨어, 하네스의 구조와 원리 파헤치기">
+    <meta property="og:image" content="https://harness-learn.netlify.app/thumbnail.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:site_name" content="harness.learn">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://harness-learn.netlify.app">
+    <meta name="twitter:title" content="AI 에이전트 하네스 엔지니어링">
+    <meta name="twitter:description" content="AI 통제 불능을 막는 핵심 미들웨어, 하네스의 구조와 원리 파헤치기">
+    <meta name="twitter:image" content="https://harness-learn.netlify.app/thumbnail.jpg">
+    <link rel="canonical" href="https://harness-learn.netlify.app">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #111111;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --code-bg: #f9fafb;
+            --accent: #2563eb;
+            --accent-light: #eff6ff;
+            --accent-mid: #bfdbfe;
+            --success: #16a34a;
+            --warn: #d97706;
+            --code-block-bg: #0f172a;
+            --code-block-header: #1e293b;
+            
+            --radius-md: 8px;
+            --radius-lg: 10px;
+            --transition: all 0.25s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            height: 56px;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+        }
+
+        nav .container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 56px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--accent-light);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 64px;
+        }
+
+        .toc h3 {
+            font-size: 1rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toc ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+        }
+
+        .toc .num {
+            background-color: var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        /* Sections */
+        section {
+            padding: 64px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        section:first-of-type { border-top: none; padding-top: 0; }
+
+        .step-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .step-label i { width: 16px; height: 16px; }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        h2 .hl { color: var(--accent); }
+
+        p { margin-bottom: 16px; }
+
+        /* Typography */
+        .inline-code {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.9em;
+            color: var(--accent);
+        }
+
+        /* Callouts */
+        .callout {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            border: 1px solid;
+            margin: 24px 0;
+        }
+
+        .callout-icon { flex-shrink: 0; margin-top: 2px; }
+        .callout-content p:last-child { margin-bottom: 0; }
+
+        .callout.info {
+            background-color: var(--accent-light);
+            border-color: var(--accent-mid);
+        }
+        .callout.info .callout-icon { color: var(--accent); }
+
+        .callout.warn {
+            background-color: #fffbeb;
+            border-color: #fde68a;
+        }
+        .callout.warn .callout-icon { color: var(--warn); }
+
+        .callout.success {
+            background-color: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+        .callout.success .callout-icon { color: var(--success); }
+
+        /* Diagrams */
+        .diagram-wrap {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            margin: 32px 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+        .btn-primary:hover { background-color: #1d4ed8; }
+
+        .btn-secondary {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        .btn-secondary:hover { border-color: var(--muted); }
+
+        /* Demo Box */
+        .demo-box {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin: 32px 0;
+            background-color: #fff;
+        }
+
+        .demo-header {
+            background-color: var(--code-bg);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .demo-body { padding: 32px 24px; }
+
+        /* Sequence Simulator (D01) */
+        .seq-sim-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .seq-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .seq-progress {
+            height: 6px;
+            background-color: var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        
+        .seq-bar {
+            height: 100%;
+            background-color: var(--accent);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .seq-nodes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .seq-nodes::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 0; right: 0;
+            height: 2px;
+            background-color: var(--border);
+            z-index: 0;
+        }
+
+        .seq-node {
+            background-color: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 120px;
+            transition: var(--transition);
+        }
+
+        .seq-node.active {
+            border-color: var(--accent);
+            background-color: var(--accent-light);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .seq-node.error {
+            border-color: var(--warn);
+            background-color: #fffbeb;
+        }
+
+        .seq-log {
+            background-color: var(--code-block-bg);
+            color: #e2e8f0;
+            font-family: 'SF Mono', monospace;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .log-entry {
+            opacity: 0;
+            transform: translateY(8px);
+            animation: fadeInUp 0.3s forwards;
+        }
+
+        .log-entry.red { color: #f87171; }
+        .log-entry.green { color: #4ade80; }
+        .log-entry.blue { color: #60a5fa; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scenario Comparator (D12) */
+        .comp-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media(max-width: 640px) {
+            .comp-panel { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .seq-nodes { flex-direction: column; gap: 32px; }
+            .seq-nodes::before {
+                top: 0; bottom: 0; left: 50%; right: auto;
+                width: 2px; height: 100%;
+            }
+        }
+
+        .comp-card {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .comp-card:hover {
+            border-color: var(--accent-mid);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .comp-card.selected {
+            border-color: var(--accent);
+            background-color: var(--accent-light);
+        }
+
+        .comp-result {
+            margin-top: 24px;
+            padding: 24px;
+            border-radius: var(--radius-md);
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            min-height: 120px;
+        }
+
+        .comp-result .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        /* Mastery Card */
+        .mastery-card {
+            background-color: var(--accent-light);
+            border: 1px solid var(--accent-mid);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-top: 32px;
+        }
+        .mastery-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .mastery-card ul {
+            list-style: none;
+        }
+        .mastery-card li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .mastery-card li i {
+            color: var(--success);
+            margin-top: 2px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">
+                <i data-lucide="layers"></i> harness.learn
+            </a>
+            <div class="nav-links">
+                <a href="#intro">도입</a>
+                <a href="#concept">개념</a>
+                <a href="#architecture">구조</a>
+                <a href="#mechanism">시뮬레이션</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero container">
+        <div class="hero-badge">
+            <i data-lucide="shield-check"></i> 프로덕션 레벨 에이전트 설계
+        </div>
+        <h1>고삐 풀린 AI에<br>통제 장치를 달다</h1>
+        <p>강력한 엔진(LLM)을 탑재한 경주용 자동차가 트랙을 벗어나지 않고 안전하게 완주할 수 있도록 돕는 <strong>하네스 엔지니어링(Harness Engineering)</strong>의 원리를 배웁니다.</p>
+    </header>
+
+    <main class="container">
+        
+        <div class="toc">
+            <h3><i data-lucide="list"></i> 학습 목차</h3>
+            <ul>
+                <li><a href="#intro"><span class="num">1</span> 야생의 에이전트: 왜 통제가 필요한가?</a></li>
+                <li><a href="#concept"><span class="num">2</span> 하네스 엔지니어링이란?</a></li>
+                <li><a href="#architecture"><span class="num">3</span> 하네스의 핵심 구성요소 4가지</a></li>
+                <li><a href="#mechanism"><span class="num">4</span>[시뮬레이터] 도구 호출 개입 파이프라인</a></li>
+                <li><a href="#comparison"><span class="num">5</span> [비교] 하네스 유무에 따른 결과 차이</a></li>
+                <li><a href="#conclusion"><span class="num">6</span> 안전한 시스템을 향하여</a></li>
+            </ul>
+        </div>
+
+        <!-- Section 1: Intro -->
+        <section id="intro">
+            <div class="step-label"><i data-lucide="circle-dot"></i>Step 01</div>
+            <h2>야생의 에이전트: <span class="hl">왜 통제가 필요한가?</span></h2>
+            
+            <p>최근 LLM(대형 언어 모델)은 단순한 텍스트 답변을 넘어, 스스로 도구(API, 데이터베이스 등)를 호출하고 행동하는 <strong>자율형 에이전트(Autonomous Agent)</strong>로 진화했습니다.</p>
+            <p>하지만 에이전트의 자율성은 양날의 검입니다. 에이전트에게 데이터베이스 접속 권한을 주었을 때, 모델의 환각(Hallucination)이나 잘못된 판단으로 인해 <code>DROP TABLE users;</code>와 같은 파괴적인 명령을 실행할 위험이 항상 존재합니다.</p>
+
+            <div class="callout info">
+                <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
+                <div class="callout-content">
+                    <p><strong>비유하자면</strong><br>LLM이 <strong>'초고성능 엔진'</strong>이라면, 도구 호출(Tool Calling)은 <strong>'바퀴'</strong>입니다. 엔진과 바퀴만 있는 차는 속도를 낼 수 있지만 벽에 부딪히기 십상입니다. 사고를 막으려면 올바른 방향으로만 조작되도록 돕는 <strong>'조향 장치와 브레이크'</strong>가 필요합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Concept -->
+        <section id="concept">
+            <div class="step-label"><i data-lucide="circle-dot"></i>Step 02</div>
+            <h2><span class="hl">하네스 엔지니어링</span>이란?</h2>
+            
+            <p><strong>하네스(Harness)</strong>는 본래 '마구'나 '안전벨트'를 뜻합니다. AI 에이전트 분야에서 하네스 엔지니어링은 <strong>에이전트가 외부 환경과 안전하고 일관되게 상호작용하도록 제어, 모니터링, 검증하는 미들웨어 인프라</strong>를 설계하는 기술입니다.</p>
+            
+            <p>에이전트가 내린 결정(Action)이 실제 시스템(DB, API)에 도달하기 전에 중간에 가로채어 정책에 위배되지 않는지 검사하는 '안전망' 역할을 수행합니다.</p>
+
+            <div class="callout warn">
+                <div class="callout-icon"><i data-lucide="triangle-alert"></i></div>
+                <div class="callout-content">
+                    <p><strong>흔한 오해: 프롬프트 엔지니어링과의 혼동</strong><br>시스템 프롬프트에 <em>"절대 데이터를 삭제하지 마"</em>라고 적는 것은 프롬프트 엔지니어링입니다. 하지만 이는 모델이 무시할 확률이 존재합니다. 하네스 엔지니어링은 프롬프트가 아닌 <strong>인프라(코드 레벨)</strong>에서 실행 자체를 강제로 차단하는 확실한 통제 수단입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Architecture -->
+        <section id="architecture">
+            <div class="step-label"><i data-lucide="circle-dot"></i>Step 03</div>
+            <h2>하네스의 <span class="hl">핵심 구성요소</span></h2>
+            
+            <p>하네스 시스템은 에이전트와 외부 도구 사이에서 문지기 역할을 합니다. 이를 가능하게 하는 4가지 핵심 요소를 살펴봅시다.</p>
+
+            <div class="diagram-wrap">
+                <div class="mermaid">
+                    flowchart LR
+                        A[AI 에이전트] -->|Action| H
+                        subgraph H[하네스 미들웨어]
+                            direction TB
+                            I(Interceptor<br>가로채기) --> V(Validator<br>검증기/가드레일)
+                            V --> C(Context Mgr<br>문맥 관리)
+                            V -.-> L(Telemetry<br>로거/추적)
+                        end
+                        H -->|Validated Action| E[(외부 도구 / API)]
+                        E -->|Result| H
+                        H -->|Feedback| A
+                        
+                        style H fill:#eff6ff,stroke:#2563eb,stroke-width:2px
+                        style V fill:#fef3c7,stroke:#d97706
+                </div>
+            </div>
+
+            <ul>
+                <li><strong>Interceptor (인터셉터):</strong> 에이전트가 생성한 도구 호출 요청을 실제 환경으로 가기 전에 낚아챕니다.</li>
+                <li><strong>Validator (가드레일/검증기):</strong> 요청된 파라미터가 안전한지, 권한이 있는지, 포맷이 맞는지 검사합니다. 위험 요소 발견 시 즉시 차단합니다.</li>
+                <li><strong>Context Manager:</strong> 에이전트가 작업을 수행하는 데 필요한 현재 상태나 세션 정보를 안전하게 주입합니다.</li>
+                <li><strong>Telemetry (로거):</strong> 에이전트의 모든 결정 과정과 하네스의 검증 결과를 기록하여 사후 감사(Audit)를 가능하게 합니다.</li>
+            </ul>
+        </section>
+
+        <!-- Section 4: Mechanism (Simulation) -->
+        <section id="mechanism">
+            <div class="step-label"><i data-lucide="circle-dot"></i>Step 04</div>
+            <h2>하네스 개입 파이프라인 <span class="hl">시뮬레이션</span></h2>
+            
+            <p>에이전트가 치명적인 명령(예: 사용자 테이블 삭제)을 내렸을 때, 하네스가 이 파이프라인에서 어떻게 개입하고 시스템을 보호하는지 직접 실행해 보세요.</p>
+
+            <div class="demo-box">
+                <div class="demo-header">
+                    <span><i data-lucide="terminal"></i> 하네스 인터셉트 파이프라인</span>
+                    <button class="btn btn-secondary" id="sim-reset" style="padding: 4px 10px; font-size: 0.8rem;"><i data-lucide="rotate-ccw"></i> 초기화</button>
+                </div>
+                <div class="demo-body">
+                    <div class="seq-sim-wrapper">
+                        <div class="seq-progress">
+                            <div class="seq-bar" id="sim-bar"></div>
+                        </div>
+
+                        <div class="seq-nodes" id="sim-nodes">
+                            <div class="seq-node" data-step="1">1. AI 에이전트<br><span style="font-size:0.8em; color:var(--muted)">명령 생성</span></div>
+                            <div class="seq-node" data-step="2">2. Interceptor<br><span style="font-size:0.8em; color:var(--muted)">요청 캡처</span></div>
+                            <div class="seq-node" data-step="3">3. Validator<br><span style="font-size:0.8em; color:var(--muted)">정책 검증</span></div>
+                            <div class="seq-node" data-step="4">4. 외부 DB<br><span style="font-size:0.8em; color:var(--muted)">실행</span></div>
+                        </div>
+
+                        <div class="seq-controls" style="justify-content: center; margin-top: 16px;">
+                            <button class="btn btn-primary" id="sim-run"><i data-lucide="play"></i> 위험 명령 실행 시뮬레이션</button>
+                        </div>
+
+                        <div class="seq-log" id="sim-log">
+                            <div style="color:var(--muted);">시스템 대기 중...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Comparison -->
+        <section id="comparison">
+            <div class="step-label"><i data-lucide="circle-dot"></i>Step 05</div>
+            <h2>하네스 <span class="hl">유무 비교</span></h2>
+            
+            <p>만약 동일한 상황에서 하네스가 적용되지 않았다면 어떤 일이 벌어졌을까요? 시나리오를 클릭하여 결과를 비교해 보세요.</p>
+            <p><strong>상황:</strong> 에이전트가 사용자 질의를 오해하여 <code>"모든 사용자 데이터를 삭제해줘"</code>라는 작업을 수행하려고 시도합니다.</p>
+
+            <div class="demo-box">
+                <div class="demo-header">
+                    <span><i data-lucide="columns-2"></i> 아키텍처 비교기</span>
+                </div>
+                <div class="demo-body">
+                    <div class="comp-panel">
+                        <div class="comp-card" onclick="selectScenario('without')">
+                            <h3 style="display:flex; align-items:center; gap:8px;"><i data-lucide="x-circle" style="color:var(--warn)"></i> 하네스 미적용</h3>
+                            <p style="font-size: 0.9rem; color:var(--muted);">에이전트가 직접 데이터베이스 API를 호출합니다.</p>
+                        </div>
+                        <div class="comp-card selected" onclick="selectScenario('with')">
+                            <h3 style="display:flex; align-items:center; gap:8px;"><i data-lucide="shield-check" style="color:var(--success)"></i> 하네스 적용됨</h3>
+                            <p style="font-size: 0.9rem; color:var(--muted);">모든 호출이 하네스의 검증기(Validator)를 통과해야 합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="comp-result" id="comp-result">
+                        <!-- Result injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Conclusion -->
+        <section id="conclusion">
+            <div class="step-label"><i data-lucide="circle-dot"></i>Step 06</div>
+            <h2>안전한 <span class="hl">AI 시스템을 향하여</span></h2>
+            
+            <p>자율형 에이전트가 실험실을 벗어나 실제 비즈니스 환경(Production)에서 동작하려면, 에이전트의 지능을 높이는 것만큼이나 <strong>실행의 안전성을 보장하는 인프라</strong>가 중요합니다. 하네스 엔지니어링은 바로 그 신뢰의 기반을 다지는 필수적인 기술입니다.</p>
+
+            <div class="mastery-card">
+                <h3><i data-lucide="graduation-cap"></i> 학습 목표 달성 확인</h3>
+                <ul>
+                    <li><i data-lucide="check"></i> AI 에이전트와 외부 도구 사이에 위치하는 하네스의 구조를 설명할 수 있다.</li>
+                    <li><i data-lucide="check"></i> 프롬프트 엔지니어링만으로 막을 수 없는 위험 상황을 식별할 수 있다.</li>
+                    <li><i data-lucide="check"></i> 도구 호출을 가로채고(Intercept), 검증(Validate)하는 프로세스를 이해한다.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 harness.learn. Designed for AI Agent Engineers.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <script>
+        // 1. Mermaid Init
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#eff6ff',
+                primaryTextColor: '#111111',
+                primaryBorderColor: '#2563eb',
+                lineColor: '#94a3b8',
+                fontFamily: 'Pretendard, sans-serif'
+            }
+        });
+
+        // 2. Window Load - Lucide & Demos
+        window.addEventListener('load', () => {
+            lucide.createIcons();
+            
+            // Initialize Default Scenario
+            selectScenario('with');
+        });
+
+        // D01: Sequence Simulator Logic
+        const simRunBtn = document.getElementById('sim-run');
+        const simResetBtn = document.getElementById('sim-reset');
+        const simBar = document.getElementById('sim-bar');
+        const simNodes = document.querySelectorAll('.seq-node');
+        const simLog = document.getElementById('sim-log');
+
+        let isAnimating = false;
+
+        const logMessage = (msg, typeClass = '') => {
+            const div = document.createElement('div');
+            div.className = `log-entry ${typeClass}`;
+            div.textContent = `> ${msg}`;
+            simLog.appendChild(div);
+            simLog.scrollTop = simLog.scrollHeight;
+        };
+
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        const resetSim = () => {
+            if (isAnimating) return;
+            simBar.style.width = '0%';
+            simNodes.forEach(node => {
+                node.classList.remove('active', 'error');
+            });
+            simLog.innerHTML = '<div style="color:var(--muted);">시스템 대기 중...</div>';
+        };
+
+        const runSimulation = async () => {
+            if (isAnimating) return;
+            isAnimating = true;
+            simLog.innerHTML = '';
+            
+            try {
+                // Step 1: Agent
+                simBar.style.width = '10%';
+                simNodes[0].classList.add('active');
+                logMessage('에이전트가 도구 호출을 결정했습니다.', 'blue');
+                logMessage('Payload: { tool: "execute_sql", query: "DROP TABLE users;" }');
+                await sleep(1000);
+
+                // Step 2: Interceptor
+                simBar.style.width = '40%';
+                simNodes[0].classList.remove('active');
+                simNodes[1].classList.add('active');
+                logMessage('Interceptor가 외부 통신을 캡처했습니다.');
+                logMessage('요청을 Validator로 라우팅합니다...');
+                await sleep(1200);
+
+                // Step 3: Validator (Block)
+                simBar.style.width = '70%';
+                simNodes[1].classList.remove('active');
+                simNodes[2].classList.add('error');
+                logMessage('Validator 검증 시작...', 'blue');
+                await sleep(800);
+                logMessage('⚠️ [위험 감지] 권한 없는 DDL 명령어(DROP)가 포함되어 있습니다.', 'red');
+                logMessage('실행을 차단하고 에이전트에게 에러 피드백을 반환합니다.', 'red');
+                
+                // Step 4 (DB not reached)
+                await sleep(1000);
+                simBar.style.width = '0%';
+                simNodes[2].classList.remove('error');
+                simNodes[0].classList.add('error');
+                logMessage('에이전트 수신: "작업 실패 - 권한 부족으로 쿼리 실행이 거부되었습니다."');
+                
+            } finally {
+                isAnimating = false;
+                setTimeout(() => { simNodes[0].classList.remove('error'); }, 2000);
+            }
+        };
+
+        simRunBtn.addEventListener('click', runSimulation);
+        simResetBtn.addEventListener('click', resetSim);
+
+
+        // D12: Scenario Comparator Logic
+        function selectScenario(type) {
+            document.querySelectorAll('.comp-card').forEach(card => card.classList.remove('selected'));
+            event.currentTarget?.classList.add('selected');
+            
+            const resultBox = document.getElementById('comp-result');
+            
+            if (type === 'without') {
+                resultBox.innerHTML = `
+                    <div class="status-badge" style="background-color: #fef2f2; color: #dc2626; border: 1px solid #fecaca;">
+                        <i data-lucide="triangle-alert" style="width:14px; height:14px;"></i> 대참사 발생
+                    </div>
+                    <div style="font-family: monospace; font-size: 0.9rem; margin-bottom: 12px;">
+                        <span style="color:var(--muted);">[Query]</span> DROP TABLE users;<br>
+                        <span style="color:#dc2626;">[Result] Success. 0 rows returned.</span>
+                    </div>
+                    <p style="font-size: 0.95rem;"><strong>결과:</strong> 에이전트의 판단에 어떠한 필터도 없기 때문에 파괴적인 명령이 그대로 데이터베이스에 도달하여 전체 데이터가 삭제되었습니다. 복구에 엄청난 비용이 발생합니다.</p>
+                `;
+            } else {
+                resultBox.innerHTML = `
+                    <div class="status-badge" style="background-color: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0;">
+                        <i data-lucide="shield-check" style="width:14px; height:14px;"></i> 안전 방어됨
+                    </div>
+                    <div style="font-family: monospace; font-size: 0.9rem; margin-bottom: 12px;">
+                        <span style="color:var(--muted);">[Interceptor]</span> Request Captured.<br>
+                        <span style="color:var(--warn);">[Validator] Blocked: Unauthorized DDL command detected.</span><br>
+                        <span style="color:#16a34a;">[Action]</span> Return Context Error to Agent.
+                    </div>
+                    <p style="font-size: 0.95rem;"><strong>결과:</strong> 하네스의 가드레일이 위험 쿼리를 사전에 차단했습니다. DB는 안전하게 유지되며, 에이전트는 "권한 없음" 피드백을 받고 다른 방식(예: 관리자 호출)을 탐색하도록 유도됩니다.</p>
+                `;
+            }
+            
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

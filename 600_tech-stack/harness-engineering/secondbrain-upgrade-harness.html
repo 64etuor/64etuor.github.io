@@ -1,0 +1,1009 @@
+<!DOCTYPE html> <html lang="en"><head>
+<title>SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용</title>
+<base href="../..">
+<meta name="pathname" content="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html">
+<meta name="description" content="Obsidian 볼트를 AI가 인식·검색·관리할 수 있도록 재구성한 과정에 하네스 엔지니어링 프레임을 적용한 프로젝트 회고">
+<meta property="og:title" content="SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용">
+<meta property="og:description" content="Obsidian 볼트를 AI가 인식·검색·관리할 수 있도록 재구성한 과정에 하네스 엔지니어링 프레임을 적용한 프로젝트 회고">
+<meta property="og:type" content="website">
+<meta property="og:url" content="./https://64etuor.github.io/600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html">
+<meta property="og:image" content="undefined">
+<meta name="author" content="Yangha Park"></head><body class="publish css-settings-manager styled-scrollbars show-inline-title show-ribbon"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="parsed-feature-container" style="display: contents;"><link itemprop="include" href="site-lib/html/custom-head-content-content.html"></div><meta charset="UTF-8"><meta property="og:site_name" content="David's Vault"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="./https://64etuor.github.io/site-lib/rss.xml"><script async="" id="webpage-script" src="site-lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-wasm-script" src="site-lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="site-lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="site-lib/media/favicon.png"><link rel="preload" href="site-lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/snippets.css"></noscript><link rel="stylesheet" href="site-lib/styles/obsidian.css"><link rel="stylesheet" href="site-lib/styles/theme.css"><link rel="preload" href="site-lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="site-lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/supported-plugins.css"></noscript><link rel="preload" href="site-lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/main-styles.css"></noscript><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-vertical-spacing:1.3em;--sidebar-margin:12px}:root{background-color:#202124}.sidebar{height:100%;font-size:14px;z-index:10;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));position:relative;overflow:hidden;overflow:clip;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}#left-sidebar{left:0}#right-sidebar{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}.sidebar.floating{position:absolute}.sidebar .leaf-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .leaf-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}#left-sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}#right-sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar #left-sidebar-content,.sidebar #right-sidebar-content{contain:none!important;container-type:normal!important;animation:none!important}.sidebar:has(.leaf-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:calc(2.3em + 2 * var(--sidebar-margin));width:var(--sidebar-width);padding:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}#left-sidebar .sidebar-topbar{left:0;flex-direction:row;border-top-right-radius:var(--radius-l)}#right-sidebar .sidebar-topbar{right:0;flex-direction:row-reverse;border-top-left-radius:var(--radius-l)}#left-sidebar .topbar-content{margin-right:calc(2.3em + var(--sidebar-margin));flex-direction:row}#right-sidebar .topbar-content{margin-left:calc(2.3em + var(--sidebar-margin));flex-direction:row-reverse}.topbar-content{overflow:hidden visible;overflow:clip visible;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:2px!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}#left-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}#right-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.feature-title{margin-left:1px;text-transform:uppercase;letter-spacing:.06em;margin-top:.75em;margin-bottom:.75em}.feature-header{display:flex;align-items:center;padding-top:0;font-size:1em;padding-left:0}body.floating-sidebars .sidebar{position:absolute}body{transition:background-color var(--color-fade-speed) ease-in-out}#navbar:not(:empty){display:flex;align-items:center;justify-content:space-between;padding:.5em 1em;width:100%}#main{display:flex;flex-direction:column;height:100%;width:100%;align-items:stretch;justify-content:center}#main-horizontal{display:flex;flex-direction:row;flex-grow:1;width:100%;align-items:stretch;justify-content:center}#center-content{flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0!important;transition:opacity .2s ease-in-out;pointer-events:none}#center-content>.obsidian-document{padding-left:2em;padding-right:1em;margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}body #center-content>.obsidian-document>.markdown-preview-sizer{padding-bottom:80vh;width:100%;max-width:var(--line-width);flex-basis:var(--line-width);transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document>div{width:100%!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document:not([data-type=markdown]).embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}#center-content>.obsidian-document:not([data-type=markdown]).embed>*{max-width:100%;max-height:100%;object-fit:contain}:not(h1,h2,h3,h4,h5,h6,li):has(> :is(.math,table)){overflow-x:auto!important}#center-content>.obsidian-document:not([data-type=markdown]){overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.obsidian-document[data-type=attachment]{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%}.obsidian-document[data-type=attachment]>*{outline:0;border:none;box-shadow:none}.obsidian-document[data-type=attachment] :is(img){max-width:90%;max-height:90%;object-fit:contain}.obsidian-document[data-type=attachment]>:is(audio){width:100%;max-width:min(90%,var(--line-width))}.obsidian-document[data-type=attachment]>:is(embed,iframe,video){width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}.canvas-wrapper>:is(.header,.footer){z-index:100;position:absolute;display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){let e=document.querySelectorAll("link[itemprop='include']");for(const t of e){let e=t.getAttribute("href");try{let o="";if(e.startsWith("https:")||e.startsWith("http:")||"file:"!=window.location.protocol){const n=await fetch(e);if(!n.ok){console.log("Could not include file: "+e),t?.remove();continue}o=await n.text()}else{const t=document.getElementById(btoa(encodeURI(e)));if(t){const e=JSON.parse(decodeURI(atob(t.getAttribute("value")??"")));o=e?.data??""}}let n=document.createRange().createContextualFragment(o);t.before(n),t.remove(),console.log("Included text: "+o),console.log("Included file: "+e)}catch(o){t?.remove(),console.log("Could not include file: "+e,o);continue}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script")));!function e(n){let l=o[n],c=n+1;l?(l&&"true"!=l.getAttribute("loaded")||n<o.length&&e(c),n<o.length&&l.addEventListener("load",(()=>e(c)))):n<o.length?e(c):t()}(0)}</script><div id="main"><div id="navbar"></div><div id="main-horizontal"><div id="left-content" class="leaf" style="--sidebar-width: var(--sidebar-width-left);"><div id="left-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><div id="search-container"><div id="search-wrapper"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div aria-label="Clear search" id="search-clear-button"></div></div></div></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="left-sidebar-content" class="leaf-content"><link itemprop="include" href="site-lib/html/file-tree-content.html"></div></div><script defer="">let ls = document.querySelector("#left-sidebar"); ls.classList.toggle("is-collapsed", window.innerWidth < 768); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div></div><div id="center-content" class="leaf"><div class="obsidian-document markdown-preview-view markdown-rendered node-insert-event is-readable-line-width allow-fold-headings allow-fold-lists show-indentation-guide show-properties" data-type="markdown"><style id="MJX-CHTML-styles">mjx-c.mjx-c1D44E.TEX-I::before{padding:.441em .529em .01em 0;content:"a"}mjx-c.mjx-c28.TEX-S3::before{padding:1.45em .736em .949em 0;content:"("}mjx-c.mjx-c1D44A.TEX-I::before{padding:.683em 1.048em .022em 0;content:"W"}mjx-c.mjx-c29.TEX-S3::before{padding:1.45em .736em .949em 0;content:")"}mjx-c.mjx-c1D44F.TEX-I::before{padding:.694em .429em .011em 0;content:"b"}mjx-c.mjx-c22C5::before{padding:.31em .278em 0 0;content:"⋅"}mjx-c.mjx-c6C::before{padding:.694em .278em 0 0;content:"l"}mjx-c.mjx-c6F::before{padding:.448em .5em .01em 0;content:"o"}mjx-c.mjx-c67::before{padding:.453em .5em .206em 0;content:"g"}mjx-c.mjx-c2061::before{padding:0;content:""}mjx-c.mjx-c1D436.TEX-I::before{padding:.705em .76em .022em 0;content:"C"}mjx-c.mjx-c1D437.TEX-I::before{padding:.683em .828em 0 0;content:"D"}mjx-c.mjx-cD7::before{padding:.491em .778em 0 0;content:"×"}mjx-c.mjx-c1D43F.TEX-I::before{padding:.683em .681em 0 0;content:"L"}mjx-c.mjx-c1D441.TEX-I::before{padding:.683em .888em 0 0;content:"N"}mjx-c.mjx-c36::before{padding:.666em .5em .022em 0;content:"6"}mjx-c.mjx-c49::before{padding:.683em .361em 0 0;content:"I"}mjx-c.mjx-c56::before{padding:.683em .75em .022em 0;content:"V"}mjx-c.mjx-c1D434.TEX-I::before{padding:.716em .75em 0 0;content:"A"}mjx-c.mjx-c1D435.TEX-I::before{padding:.683em .759em 0 0;content:"B"}mjx-c.mjx-c37::before{padding:.676em .5em .022em 0;content:"7"}mjx-mtext{display:inline-block;text-align:left}mjx-c.mjx-c1D44C.TEX-I::before{padding:.683em .763em 0 0;content:"Y"}mjx-c.mjx-c1D716.TEX-I::before{padding:.431em .406em .011em 0;content:"ϵ"}mjx-c.mjx-c3A::before{padding:.43em .278em 0 0;content:":"}mjx-c.mjx-c1D43C.TEX-I::before{padding:.683em .504em 0 0;content:"I"}mjx-c.mjx-c1D461.TEX-I::before{padding:.626em .361em .011em 0;content:"t"}mjx-c.mjx-c1D452.TEX-I::before{padding:.442em .466em .011em 0;content:"e"}mjx-c.mjx-c1D45F.TEX-I::before{padding:.442em .451em .011em 0;content:"r"}mjx-c.mjx-c1D450.TEX-I::before{padding:.442em .433em .011em 0;content:"c"}mjx-c.mjx-c1D45D.TEX-I::before{padding:.442em .503em .194em 0;content:"p"}mjx-c.mjx-c1D446.TEX-I::before{padding:.705em .645em .022em 0;content:"S"}mjx-c.mjx-c1D459.TEX-I::before{padding:.694em .298em .011em 0;content:"l"}mjx-c.mjx-c1D45C.TEX-I::before{padding:.441em .485em .011em 0;content:"o"}mjx-c.mjx-c1D438.TEX-I::before{padding:.68em .764em 0 0;content:"E"}mjx-c.mjx-c1D447.TEX-I::before{padding:.677em .704em 0 0;content:"T"}mjx-c.mjx-c1D45A.TEX-I::before{padding:.442em .878em .011em 0;content:"m"}mjx-c.mjx-c5E::before{padding:.694em .5em 0 0;content:"^"}mjx-c.mjx-c53::before{padding:.705em .556em .022em 0;content:"S"}mjx-c.mjx-c45::before{padding:.68em .681em 0 0;content:"E"}mjx-c.mjx-c1D445.TEX-I::before{padding:.683em .759em .021em 0;content:"R"}mjx-c.mjx-c2E::before{padding:.12em .278em 0 0;content:"."}mjx-c.mjx-c38::before{padding:.666em .5em .022em 0;content:"8"}mjx-c.mjx-c35::before{padding:.666em .5em .022em 0;content:"5"}mjx-container[jax=CHTML]{line-height:0}mjx-container [space="1"]{margin-left:.111em}mjx-container [space="2"]{margin-left:.167em}mjx-container [space="3"]{margin-left:.222em}mjx-container [space="4"]{margin-left:.278em}mjx-container [space="5"]{margin-left:.333em}mjx-container [rspace="1"]{margin-right:.111em}mjx-container [rspace="2"]{margin-right:.167em}mjx-container [rspace="3"]{margin-right:.222em}mjx-container [rspace="4"]{margin-right:.278em}mjx-container [rspace="5"]{margin-right:.333em}mjx-container [size="s"]{font-size:70.7%}mjx-container [size=ss]{font-size:50%}mjx-container [size=Tn]{font-size:60%}mjx-container [size=sm]{font-size:85%}mjx-container [size=lg]{font-size:120%}mjx-container [size=Lg]{font-size:144%}mjx-container [size=LG]{font-size:173%}mjx-container [size=hg]{font-size:207%}mjx-container [size=HG]{font-size:249%}mjx-container [width=full]{width:100%}mjx-box{display:inline-block}mjx-block{display:block}mjx-itable{display:inline-table}mjx-row{display:table-row}mjx-row>*{display:table-cell}mjx-mtext{display:inline-block}mjx-mstyle{display:inline-block}mjx-merror{display:inline-block;color:red;background-color:#ff0}mjx-mphantom{visibility:hidden}mjx-assistive-mml{top:0;left:0;clip:rect(1px,1px,1px,1px);user-select:none;position:absolute!important;padding:1px 0 0!important;border:0!important;display:block!important;width:auto!important;overflow:hidden!important}mjx-assistive-mml[display=block]{width:100%!important}mjx-math{display:inline-block;text-align:left;line-height:0;text-indent:0;font-style:normal;font-weight:400;font-size:100%;font-size-adjust:none;letter-spacing:normal;border-collapse:collapse;overflow-wrap:normal;word-spacing:normal;white-space:nowrap;direction:ltr;padding:1px 0}mjx-container[jax=CHTML][display=true]{display:block;text-align:center;margin:1em 0}mjx-container[jax=CHTML][display=true][width=full]{display:flex}mjx-container[jax=CHTML][display=true] mjx-math{padding:0}mjx-container[jax=CHTML][justify=left]{text-align:left}mjx-container[jax=CHTML][justify=right]{text-align:right}mjx-mi{display:inline-block;text-align:left}mjx-c{display:inline-block}mjx-utext{display:inline-block;padding:.75em 0 .2em}mjx-mo{display:inline-block;text-align:left}mjx-stretchy-h{display:inline-table;width:100%}mjx-stretchy-h>*{display:table-cell;width:0}mjx-stretchy-h>*>mjx-c{display:inline-block;transform:scaleX(1)}mjx-stretchy-h>*>mjx-c::before{display:inline-block;width:initial}mjx-stretchy-h>mjx-ext{overflow:clip visible;width:100%}mjx-stretchy-h>mjx-ext>mjx-c::before{transform:scaleX(500)}mjx-stretchy-h>mjx-ext>mjx-c{width:0}mjx-stretchy-h>mjx-beg>mjx-c{margin-right:-.1em}mjx-stretchy-h>mjx-end>mjx-c{margin-left:-.1em}mjx-stretchy-v{display:inline-block}mjx-stretchy-v>*{display:block}mjx-stretchy-v>mjx-beg{height:0}mjx-stretchy-v>mjx-end>mjx-c{display:block}mjx-stretchy-v>*>mjx-c{transform:scaleY(1);transform-origin:left center;overflow:hidden}mjx-stretchy-v>mjx-ext{display:block;height:100%;box-sizing:border-box;border:0 solid transparent;overflow:visible clip}mjx-stretchy-v>mjx-ext>mjx-c::before{width:initial;box-sizing:border-box}mjx-stretchy-v>mjx-ext>mjx-c{transform:scaleY(500) translateY(.075em);overflow:visible}mjx-mark{display:inline-block;height:0}mjx-msub{display:inline-block;text-align:left}mjx-mn{display:inline-block;text-align:left}mjx-msubsup{display:inline-block;text-align:left}mjx-script{display:inline-block;padding-right:.05em;padding-left:.033em}mjx-script>mjx-spacer{display:block}mjx-mfrac{display:inline-block;text-align:left}mjx-frac{display:inline-block;vertical-align:.17em;padding:0 .22em}mjx-frac[type="d"]{vertical-align:.04em}mjx-frac[delims]{padding:0 .1em}mjx-frac[atop]{padding:0 .12em}mjx-frac[atop][delims]{padding:0}mjx-dtable{display:inline-table;width:100%}mjx-dtable>*{font-size:2000%}mjx-dbox{display:block;font-size:5%}mjx-num{display:block;text-align:center}mjx-den{display:block;text-align:center}mjx-mfrac[bevelled]>mjx-num{display:inline-block}mjx-mfrac[bevelled]>mjx-den{display:inline-block}mjx-den[align=right],mjx-num[align=right]{text-align:right}mjx-den[align=left],mjx-num[align=left]{text-align:left}mjx-nstrut{display:inline-block;height:.054em;width:0;vertical-align:-.054em}mjx-nstrut[type="d"]{height:.217em;vertical-align:-.217em}mjx-dstrut{display:inline-block;height:.505em;width:0}mjx-dstrut[type="d"]{height:.726em}mjx-line{display:block;box-sizing:border-box;min-height:1px;height:.06em;border-top:.06em solid;margin:.06em -.1em;overflow:hidden}mjx-line[type="d"]{margin:.18em -.1em}mjx-mrow{display:inline-block;text-align:left}mjx-texatom{display:inline-block;text-align:left}mjx-mover{display:inline-block;text-align:left}mjx-mover:not([limits=false]){padding-top:.1em}mjx-mover:not([limits=false])>*{display:block;text-align:left}mjx-munderover{display:inline-block;text-align:left}mjx-munderover:not([limits=false]){padding-top:.1em}mjx-munderover:not([limits=false])>*{display:block}mjx-munder{display:inline-block;text-align:left}mjx-over{text-align:left}mjx-munder:not([limits=false]){display:inline-table}mjx-munder>mjx-row{text-align:left}mjx-under{padding-bottom:.1em}mjx-msup{display:inline-block;text-align:left}mjx-c::before{display:block;width:0}.MJX-TEX{font-family:MJXZERO,MJXTEX}.TEX-B{font-family:MJXZERO,MJXTEX-B}.TEX-I{font-family:MJXZERO,MJXTEX-I}.TEX-MI{font-family:MJXZERO,MJXTEX-MI}.TEX-BI{font-family:MJXZERO,MJXTEX-BI}.TEX-S1{font-family:MJXZERO,MJXTEX-S1}.TEX-S2{font-family:MJXZERO,MJXTEX-S2}.TEX-S3{font-family:MJXZERO,MJXTEX-S3}.TEX-S4{font-family:MJXZERO,MJXTEX-S4}.TEX-A{font-family:MJXZERO,MJXTEX-A}.TEX-C{font-family:MJXZERO,MJXTEX-C}.TEX-CB{font-family:MJXZERO,MJXTEX-CB}.TEX-FR{font-family:MJXZERO,MJXTEX-FR}.TEX-FRB{font-family:MJXZERO,MJXTEX-FRB}.TEX-SS{font-family:MJXZERO,MJXTEX-SS}.TEX-SSB{font-family:MJXZERO,MJXTEX-SSB}.TEX-SSI{font-family:MJXZERO,MJXTEX-SSI}.TEX-SC{font-family:MJXZERO,MJXTEX-SC}.TEX-T{font-family:MJXZERO,MJXTEX-T}.TEX-V{font-family:MJXZERO,MJXTEX-V}.TEX-VB{font-family:MJXZERO,MJXTEX-VB}mjx-stretchy-h mjx-c,mjx-stretchy-v mjx-c{font-family:MJXZERO,MJXTEX-S1,MJXTEX-S4,MJXTEX,MJXTEX-A!important}@font-face{font-family:MJXZERO;src:url("site-lib/fonts/mathjax_zero.woff") format("woff")}@font-face{font-family:MJXTEX;src:url("site-lib/fonts/mathjax_main-regular.woff") format("woff")}@font-face{font-family:MJXTEX-B;src:url("site-lib/fonts/mathjax_main-bold.woff") format("woff")}@font-face{font-family:MJXTEX-I;src:url("site-lib/fonts/mathjax_math-italic.woff") format("woff")}@font-face{font-family:MJXTEX-MI;src:url("site-lib/fonts/mathjax_main-italic.woff") format("woff")}@font-face{font-family:MJXTEX-BI;src:url("site-lib/fonts/mathjax_math-bolditalic.woff") format("woff")}@font-face{font-family:MJXTEX-S1;src:url("site-lib/fonts/mathjax_size1-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S2;src:url("site-lib/fonts/mathjax_size2-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S3;src:url("site-lib/fonts/mathjax_size3-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S4;src:url("site-lib/fonts/mathjax_size4-regular.woff") format("woff")}@font-face{font-family:MJXTEX-A;src:url("site-lib/fonts/mathjax_ams-regular.woff") format("woff")}@font-face{font-family:MJXTEX-C;src:url("site-lib/fonts/mathjax_calligraphic-regular.woff") format("woff")}@font-face{font-family:MJXTEX-CB;src:url("site-lib/fonts/mathjax_calligraphic-bold.woff") format("woff")}@font-face{font-family:MJXTEX-FR;src:url("site-lib/fonts/mathjax_fraktur-regular.woff") format("woff")}@font-face{font-family:MJXTEX-FRB;src:url("site-lib/fonts/mathjax_fraktur-bold.woff") format("woff")}@font-face{font-family:MJXTEX-SS;src:url("site-lib/fonts/mathjax_sansserif-regular.woff") format("woff")}@font-face{font-family:MJXTEX-SSB;src:url("site-lib/fonts/mathjax_sansserif-bold.woff") format("woff")}@font-face{font-family:MJXTEX-SSI;src:url("site-lib/fonts/mathjax_sansserif-italic.woff") format("woff")}@font-face{font-family:MJXTEX-SC;src:url("site-lib/fonts/mathjax_script-regular.woff") format("woff")}@font-face{font-family:MJXTEX-T;src:url("site-lib/fonts/mathjax_typewriter-regular.woff") format("woff")}@font-face{font-family:MJXTEX-V;src:url("site-lib/fonts/mathjax_vector-regular.woff") format("woff")}@font-face{font-family:MJXTEX-VB;src:url("site-lib/fonts/mathjax_vector-bold.woff") format("woff")}mjx-c.mjx-c1D466.TEX-I::before{padding:.442em .49em .205em 0;content:"y"}mjx-c.mjx-c3D::before{padding:.583em .778em .082em 0;content:"="}mjx-c.mjx-c1D453.TEX-I::before{padding:.705em .55em .205em 0;content:"f"}mjx-c.mjx-c28::before{padding:.75em .389em .25em 0;content:"("}mjx-c.mjx-c1D465.TEX-I::before{padding:.442em .572em .011em 0;content:"x"}mjx-c.mjx-c31::before{padding:.666em .5em 0 0;content:"1"}mjx-c.mjx-c2C::before{padding:.121em .278em .194em 0;content:","}mjx-c.mjx-c32::before{padding:.666em .5em 0 0;content:"2"}mjx-c.mjx-c2026::before{padding:.12em 1.172em 0 0;content:"…"}mjx-c.mjx-c1D458.TEX-I::before{padding:.694em .521em .011em 0;content:"k"}mjx-c.mjx-c29::before{padding:.75em .389em .25em 0;content:")"}mjx-c.mjx-c1D6FD.TEX-I::before{padding:.705em .566em .194em 0;content:"β"}mjx-c.mjx-c30::before{padding:.666em .5em .022em 0;content:"0"}mjx-c.mjx-c2B::before{padding:.583em .778em .082em 0;content:"+"}mjx-c.mjx-c33::before{padding:.665em .5em .022em 0;content:"3"}mjx-c.mjx-c1D700.TEX-I::before{padding:.452em .466em .022em 0;content:"ε"}mjx-c.mjx-c2212::before{padding:.583em .778em .082em 0;content:"−"}mjx-c.mjx-c1D456.TEX-I::before{padding:.661em .345em .011em 0;content:"i"}mjx-c.mjx-c1D44B.TEX-I::before{padding:.683em .852em 0 0;content:"X"}mjx-c.mjx-cAF::before{padding:.59em .5em 0 0;content:"¯"}mjx-c.mjx-c394::before{padding:.716em .833em 0 0;content:"Δ"}mjx-c.mjx-c2F::before{padding:.75em .5em .25em 0;content:"/"}mjx-c.mjx-c2211.TEX-S1::before{padding:.75em 1.056em .25em 0;content:"∑"}mjx-c.mjx-c2211.TEX-S2::before{padding:.95em 1.444em .45em 0;content:"∑"}mjx-c.mjx-c3C::before{padding:.54em .778em .04em 0;content:"<"}mjx-c.mjx-c1D457.TEX-I::before{padding:.661em .412em .204em 0;content:"j"}mjx-c.mjx-c2217::before{padding:.465em .5em 0 0;content:"∗"}mjx-c.mjx-c1D715::before{padding:.715em .566em .022em 0;content:"∂"}mjx-c.mjx-c1D401.TEX-B::before{padding:.686em .818em 0 0;content:"B"}mjx-c.mjx-cB1::before{padding:.666em .778em 0 0;content:"±"}mjx-c.mjx-c1D6FC.TEX-I::before{padding:.442em .64em .011em 0;content:"α"}mjx-c.mjx-c1D45B.TEX-I::before{padding:.442em .6em .011em 0;content:"n"}mjx-c.mjx-c1D439.TEX-I::before{padding:.68em .749em 0 0;content:"F"}mjx-c.mjx-c34::before{padding:.677em .5em 0 0;content:"4"}</style><pre class="frontmatter language-yaml" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용"</span>
+<span class="token key atrule">description</span><span class="token punctuation">:</span> <span class="token string">"Obsidian 볼트를 AI가 인식·검색·관리할 수 있도록 재구성한 과정에 하네스 엔지니어링 프레임을 적용한 프로젝트 회고"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-07</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-22</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> reference
+<span class="token key atrule">status</span><span class="token punctuation">:</span> done
+<span class="token key atrule">author</span><span class="token punctuation">:</span> <span class="token string">"Yangha Park"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> infra/obsidian
+  <span class="token punctuation">-</span> ai/agent
+  <span class="token punctuation">-</span> src/experience</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre><div class="markdown-preview-sizer markdown-preview-section"><div class="header"><h1 class="page-title heading inline-title" id="SecondBrain_볼트_AI_친화적_업그레이드_—_하네스_엔지니어링_전체_적용_0">SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용</h1><div class="data-bar"></div></div><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="el-h1"><h1 data-heading="SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용" dir="auto" class="heading" id="SecondBrain_볼트_AI_친화적_업그레이드_—_하네스_엔지니어링_전체_적용_1"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용</h1></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>프로젝트명</strong>: SecondBrain 볼트 AI 친화적 업그레이드</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>한 줄 정의</strong>: 기존 SecondBrain Obsidian 볼트를 AI가 인식·검색·관리할 수 있도록 구조 개선 + 연동 프로젝트 통합 전환</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>팀 구성</strong>: 사용자(볼트 오너) + AI 에이전트(Claude)</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>작성일</strong>: 2026-04-07</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span><strong>레퍼런스</strong>: <a rel="noopener nofollow" class="external-link is-unresolved" href="https://github.com/johnfkoo951/cmds-system-files" target="_self">https://github.com/johnfkoo951/cmds-system-files</a> (CMDS 시스템)</li>
+</ul></div><div class="el-hr"><hr></div><div class="el-h1"><h1 data-heading="1단계: 요구사항 수집" dir="auto" class="heading" id="1단계_요구사항_수집_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1단계: 요구사항 수집</h1></div><div class="el-h2"><h2 data-heading="수집 원칙" dir="auto" class="heading" id="수집_원칙_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>수집 원칙</h2></div><div class="el-blockquote"><blockquote dir="auto">
+<p>고객이 말하고 싶은 것을 다 말하게 한다. 기술적 필터링 하지 않는다.</p>
+</blockquote></div><div class="el-h2"><h2 data-heading="수집된 요구사항 (날것 그대로)" dir="auto" class="heading" id="수집된_요구사항_(날것_그대로)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>수집된 요구사항 (날것 그대로)</h2></div><div class="el-h3"><h3 data-heading="발언 요약" dir="auto" class="heading" id="발언_요약_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>발언 요약</h3></div><div class="el-blockquote"><blockquote dir="auto">
+<ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>"AI가 인식하고 찾고 관리하기 편하게 하고 싶은건데"</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>"내가 생각한 것과 외부에서 퍼온 자료를 구분하고 싶거든"</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>"폴더 구조도 좀 마음에 안들긴하거든. 특히 memo과 contents, 그리고 TIL"</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>"이걸 건들면 다른 프로젝트까지 다 변경을 해줘야 해"</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span>"에세이와 아티클이 좀 겹쳐" → Published로 통합, type으로 구분</li>
+<li data-line="5" dir="auto"><span class="list-bullet"></span>"아웃풋 종류가 많은데 정리를 못한거야"</li>
+<li data-line="6" dir="auto"><span class="list-bullet"></span>"완료조건: 자동분류 에이전트 + tarelog/openclaw 수정까지"</li>
+<li data-line="7" dir="auto"><span class="list-bullet"></span>"카테고리 도입도 괜찮을거 같은데"</li>
+<li data-line="8" dir="auto"><span class="list-bullet"></span>"프로젝트가 템플릿을 참조해서 만들게 하는거지. 지금은 프롬프트 안에 들어있어서"</li>
+<li data-line="9" dir="auto"><span class="list-bullet"></span>"현재 볼트 백업을 꼭 넣고"</li>
+<li data-line="10" dir="auto"><span class="list-bullet"></span>"백업볼트도 깃을 걸면 좋겠어"</li>
+<li data-line="11" dir="auto"><span class="list-bullet"></span>"심링크 만들고 안정되면 실제로 옮기자" → 실제로는 새 폴더로 이동 후 옛 경로에 심링크</li>
+</ul>
+</blockquote></div><div class="el-h3"><h3 data-heading="질문을 통해 분해된 구성요소" dir="auto" class="heading" id="질문을_통해_분해된_구성요소_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>질문을 통해 분해된 구성요소</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">구성요소</th>
+<th dir="ltr">역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">새 폴더 구조 (00-92)</td>
+<td dir="ltr">물리적 노트 정리, 내것/외부 분리</td>
+</tr>
+<tr>
+<td dir="ltr">프론트매터 표준 (TARE 6필드)</td>
+<td dir="ltr">AI가 노트를 이해하는 메타데이터</td>
+</tr>
+<tr>
+<td dir="ltr">심링크 전략</td>
+<td dir="ltr">프로젝트 순차 마이그레이션 안전장치</td>
+</tr>
+<tr>
+<td dir="ltr">템플릿 통합 (91 Templates/agents/)</td>
+<td dir="ltr">프로젝트들의 Single Source of Truth</td>
+</tr>
+<tr>
+<td dir="ltr">6개 프로젝트 경로/형식 수정</td>
+<td dir="ltr">새 구조에 맞게 전환</td>
+</tr>
+<tr>
+<td dir="ltr">CLAUDE.md</td>
+<td dir="ltr">AI에게 볼트 구조를 알려주는 가이드</td>
+</tr>
+<tr>
+<td dir="ltr">TARE 카테고리 노트 (29개 + personal)</td>
+<td dir="ltr">주제별 인덱스 (MOC)</td>
+</tr>
+<tr>
+<td dir="ltr">자동 분류 에이전트</td>
+<td dir="ltr">Inbox → 적절한 폴더 자동 이동</td>
+</tr>
+<tr>
+<td dir="ltr">3중 백업 (원본 + 백업볼트 + git)</td>
+<td dir="ltr">안전망</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="사용자별 핵심 페인포인트" dir="auto" class="heading" id="사용자별_핵심_페인포인트_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>사용자별 핵심 페인포인트</h3></div><div class="el-h4"><h4 data-heading="볼트 사용자 (본인)" dir="auto" class="heading" id="볼트_사용자_(본인)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>볼트 사용자 (본인)</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">단계</th>
+<th dir="ltr">현재 경험</th>
+<th dir="ltr">느끼는 감정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">노트 분류</td>
+<td dir="ltr">memo, contents, Fleet에 뒤죽박죽</td>
+<td dir="ltr">"내 생각인지 외부 자료인지 구분이 안 돼"</td>
+</tr>
+<tr>
+<td dir="ltr">산출물 관리</td>
+<td dir="ltr">에세이만 04 Outputs, 나머지 산재</td>
+<td dir="ltr">"아웃풋이 많은데 정리를 못했어"</td>
+</tr>
+<tr>
+<td dir="ltr">프로젝트 수정</td>
+<td dir="ltr">폴더 바꾸면 6개 프로젝트 전부 깨짐</td>
+<td dir="ltr">"건들면 다른 프로젝트까지 다 변경해야 해"</td>
+</tr>
+<tr>
+<td dir="ltr">템플릿 수정</td>
+<td dir="ltr">각 프로젝트 코드 안에 하드코딩</td>
+<td dir="ltr">"일일이 에이전트든 프로그램이든 들어가서 고쳐야 해"</td>
+</tr>
+</tbody>
+</table></div><div class="el-h4"><h4 data-heading="AI 에이전트" dir="auto" class="heading" id="AI_에이전트_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>AI 에이전트</h4></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">단계</th>
+<th dir="ltr">현재 경험</th>
+<th dir="ltr">문제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">노트 검색</td>
+<td dir="ltr">프론트매터가 제각각</td>
+<td dir="ltr">일관된 필터링 불가</td>
+</tr>
+<tr>
+<td dir="ltr">폴더 판단</td>
+<td dir="ltr">memo에 가이드+메모+처방전 혼재</td>
+<td dir="ltr">경로만으로 내용 유형 추론 불가</td>
+</tr>
+<tr>
+<td dir="ltr">자동 분류</td>
+<td dir="ltr">기준 없음</td>
+<td dir="ltr">분류 로직 구현 불가</td>
+</tr>
+</tbody>
+</table></div><div class="el-h2"><h2 data-heading="현재 볼트 생태계" dir="auto" class="heading" id="현재_볼트_생태계_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>현재 볼트 생태계</h2></div><div class="el-h3"><h3 data-heading="볼트에 노트를 만드는 프로젝트들 (6개)" dir="auto" class="heading" id="볼트에_노트를_만드는_프로젝트들_(6개)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>볼트에 노트를 만드는 프로젝트들 (6개)</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">프로젝트</th>
+<th dir="ltr">하는 일</th>
+<th dir="ltr">현재 출력 경로</th>
+<th dir="ltr">실행 방식</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">study_records</td>
+<td dir="ltr">일일 TIL 자동 생성</td>
+<td dir="ltr"><code>05 TIL/daily/</code></td>
+<td dir="ltr">LaunchAgent 03:00</td>
+</tr>
+<tr>
+<td dir="ltr">tarelog</td>
+<td dir="ltr">생활 로그 통합 (캘린더, Todoist, 날씨)</td>
+<td dir="ltr"><code>05 TIL/</code> 전체</td>
+<td dir="ltr">LaunchAgent</td>
+</tr>
+<tr>
+<td dir="ltr">obsidian-scrap</td>
+<td dir="ltr">Clippings → Claude로 정리</td>
+<td dir="ltr"><code>06 contents/</code></td>
+<td dir="ltr">LaunchAgent 실시간</td>
+</tr>
+<tr>
+<td dir="ltr">people-obsidian</td>
+<td dir="ltr">macOS 연락처 동기화</td>
+<td dir="ltr"><code>07 people/</code></td>
+<td dir="ltr">LaunchAgent 07:30</td>
+</tr>
+<tr>
+<td dir="ltr">후추봇 (OpenClaw)</td>
+<td dir="ltr">텔레그램 메모 → 볼트</td>
+<td dir="ltr"><code>88 memo/</code></td>
+<td dir="ltr">온디맨드</td>
+</tr>
+<tr>
+<td dir="ltr">Claude Code /topkm</td>
+<td dir="ltr">가이드/블로그 내보내기</td>
+<td dir="ltr"><code>88 memo/</code></td>
+<td dir="ltr">온디맨드</td>
+</tr>
+<tr>
+<td dir="ltr">stock-scrapper</td>
+<td dir="ltr">투자 분석 (deprecated)</td>
+<td dir="ltr"><code>77. investment/</code></td>
+<td dir="ltr">비활성화</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="프론트매터 현황 (제각각)" dir="auto" class="heading" id="프론트매터_현황_(제각각)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>프론트매터 현황 (제각각)</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">프로젝트</th>
+<th dir="ltr">date 필드</th>
+<th dir="ltr">type 필드</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">study_records</td>
+<td dir="ltr"><code>created: YYYY-MM-DD</code></td>
+<td dir="ltr">없음</td>
+</tr>
+<tr>
+<td dir="ltr">후추봇</td>
+<td dir="ltr"><code>created_at: ISO 8601</code></td>
+<td dir="ltr"><code>type: memo</code></td>
+</tr>
+<tr>
+<td dir="ltr">people-obsidian</td>
+<td dir="ltr"><code>created_at: ISO 8601</code></td>
+<td dir="ltr"><code>type: person</code></td>
+</tr>
+<tr>
+<td dir="ltr">Obsidian 템플릿</td>
+<td dir="ltr"><code>created: &lt;% tp... %&gt;</code></td>
+<td dir="ltr"><code>type: fleet/permanent/book</code></td>
+</tr>
+<tr>
+<td dir="ltr">/topkm</td>
+<td dir="ltr"><code>created_at: ISO 8601</code></td>
+<td dir="ltr"><code>type: doc/post</code></td>
+</tr>
+</tbody>
+</table></div><div class="el-h2"><h2 data-heading="확정된 새 폴더 구조" dir="auto" class="heading" id="확정된_새_폴더_구조_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>확정된 새 폴더 구조</h2></div><div class="el-pre"><pre><code data-line="0">SecondBrain/
+├── 00 Inbox/              ← 분류 전 임시 보관
+├── 01 Daily Notes/        ← 자동 생성 일일 로그
+├── 02 Fleet/              ← 빠른 메모 (기존 99 Fleet + 88 memo)
+├── 03 Clippings/          ← 웹 클리핑
+├── 04 AI Agent/           ← AI 산출물
+├── 10 Journals/           ← MOC/인덱스
+├── 11 Daily/              ← 일기 (기존 02 Journals)
+├── 12 Reviews/            ← 회고 (daily/weekly/monthly/quarterly/OKR)
+├── 20 External/           ← MOC/인덱스
+├── 21 References/         ← 책, 논문, 학습자료
+├── 22 Contents/           ← 외부 콘텐츠 요약
+├── 23 People/             ← 연락처 DB
+├── 24 Meetings/           ← 회의록
+├── 30 Notes/              ← 영구 노트, 개인 사색
+├── 31 Docs/               ← 내가 만든 기술 문서
+├── 40 Published/          ← 완성된 글 (에세이+아티클)
+├── 41 Courses/            ← 강의자료
+├── 42 Consulting/         ← 컨설팅 결과물
+├── 43 Presentations/      ← 발표자료
+├── 44 Projects/           ← 프로젝트 (서브폴더: YYMM_프로젝트명/)
+├── 80 Assets/             ← 첨부파일
+├── 81 Excalidraw/         ← 다이어그램
+├── 90 Settings/           ← 시스템 설정
+├── 91 Templates/          ← 템플릿 (obsidian/ + agents/)
+└── 92 Archive/            ← investment, 옛 자료
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="기존 → 신규 매핑" dir="auto" class="heading" id="기존_→_신규_매핑_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>기존 → 신규 매핑</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">기존</th>
+<th dir="ltr">→ 신규</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">99 Fleet + 88 memo</td>
+<td dir="ltr">→ 02 Fleet</td>
+</tr>
+<tr>
+<td dir="ltr">05 TIL (로그)</td>
+<td dir="ltr">→ 01 Daily Notes</td>
+</tr>
+<tr>
+<td dir="ltr">05 TIL (회고 서브폴더)</td>
+<td dir="ltr">→ 12 Reviews</td>
+</tr>
+<tr>
+<td dir="ltr">02 Journals</td>
+<td dir="ltr">→ 11 Daily</td>
+</tr>
+<tr>
+<td dir="ltr">01 Reference</td>
+<td dir="ltr">→ 21 References</td>
+</tr>
+<tr>
+<td dir="ltr">06 contents</td>
+<td dir="ltr">→ 22 Contents</td>
+</tr>
+<tr>
+<td dir="ltr">07 people</td>
+<td dir="ltr">→ 23 People</td>
+</tr>
+<tr>
+<td dir="ltr">00 Notes</td>
+<td dir="ltr">→ 30 Notes</td>
+</tr>
+<tr>
+<td dir="ltr">04 Outputs</td>
+<td dir="ltr">→ 40 Published</td>
+</tr>
+<tr>
+<td dir="ltr">_attachments</td>
+<td dir="ltr">→ 80 Assets</td>
+</tr>
+<tr>
+<td dir="ltr">Excalidraw</td>
+<td dir="ltr">→ 81 Excalidraw</td>
+</tr>
+<tr>
+<td dir="ltr">templates</td>
+<td dir="ltr">→ 91 Templates</td>
+</tr>
+<tr>
+<td dir="ltr">77. investment</td>
+<td dir="ltr">→ 92 Archive</td>
+</tr>
+<tr>
+<td dir="ltr">언젠간 쓸일이 있을 것들</td>
+<td dir="ltr">→ 92 Archive</td>
+</tr>
+<tr>
+<td dir="ltr">linked_notes</td>
+<td dir="ltr">→ 삭제</td>
+</tr>
+</tbody>
+</table></div><div class="el-h2"><h2 data-heading="확정된 프론트매터 표준" dir="auto" class="heading" id="확정된_프론트매터_표준_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>확정된 프론트매터 표준</h2></div><div class="el-pre"><pre class="language-yaml"><code data-line="0" class="language-yaml is-loaded"><span class="token punctuation">---</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> memo                          <span class="token comment"># 필수 — 노트 종류</span>
+<span class="token key atrule">aliases</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>                         <span class="token comment"># 필수 — 별칭</span>
+<span class="token key atrule">author</span><span class="token punctuation">:</span> <span class="token string">"[[사이시옷]]"</span>               <span class="token comment"># 필수 — 작성자</span>
+<span class="token key atrule">date created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-07</span>            <span class="token comment"># 필수 — 생성일 (YYYY-MM-DD)</span>
+<span class="token key atrule">date modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-07</span>           <span class="token comment"># 필수 — 수정일</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>메모<span class="token punctuation">,</span> AI<span class="token punctuation">]</span>                     <span class="token comment"># 필수 — 태그</span>
+<span class="token key atrule">status</span><span class="token punctuation">:</span> completed                   <span class="token comment"># 선택 — 상태</span>
+<span class="token key atrule">source</span><span class="token punctuation">:</span> telegram                    <span class="token comment"># 선택 — 출처</span>
+<span class="token key atrule">category</span><span class="token punctuation">:</span> <span class="token string">"[[📚 501 Generative AI]]"</span>  <span class="token comment"># 선택 — 주제 카테고리</span>
+<span class="token key atrule">index</span><span class="token punctuation">:</span> <span class="token string">"[[🏷 Fleet]]"</span>                <span class="token comment"># 선택 — 용도 모음</span>
+<span class="token key atrule">published</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>                      <span class="token comment"># 선택 — 발행 여부 (40 Published/ 노트용)</span>
+<span class="token key atrule">publishedAt</span><span class="token punctuation">:</span> 더배러 블로그              <span class="token comment"># 선택 — 발행 채널</span>
+<span class="token key atrule">publishedDate</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-07</span>            <span class="token comment"># 선택 — 발행일</span>
+<span class="token punctuation">---</span>
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h2"><h2 data-heading="확정된 마이그레이션 전략" dir="auto" class="heading" id="확정된_마이그레이션_전략_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>확정된 마이그레이션 전략</h2></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>심링크 전략: 새 폴더로 실제 이동 → 옛 경로에 심링크 → 프로젝트 하나씩 수정 → 심링크 제거</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>3중 백업: 원본 볼트(~/Desktop/SecondBrain) + 백업볼트(SecondBrain-backup/) + git</li>
+</ul></div><div class="el-h2"><h2 data-heading="소크라테스 수렴 게이트" dir="auto" class="heading" id="소크라테스_수렴_게이트_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>소크라테스 수렴 게이트</h2></div><div class="el-h3"><h3 data-heading="모호함 평가" dir="auto" class="heading" id="모호함_평가_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>모호함 평가</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">항목</th>
+<th dir="ltr">clarity</th>
+<th dir="ltr">비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">문제 정의</td>
+<td dir="auto">0.9</td>
+<td dir="ltr">폴더+프론트매터+프로젝트경로+템플릿통합+자동분류</td>
+</tr>
+<tr>
+<td dir="ltr">완료 조건</td>
+<td dir="auto">0.8</td>
+<td dir="ltr">5 Phase 로드맵, 자동 분류 에이전트까지</td>
+</tr>
+<tr>
+<td dir="ltr">사용자 정의</td>
+<td dir="auto">0.9</td>
+<td dir="ltr">본인 + 6개 자동화 프로젝트</td>
+</tr>
+<tr>
+<td dir="ltr">핵심 개념</td>
+<td dir="auto">0.8</td>
+<td dir="ltr">폴더 확정, 프론트매터 확정, TARE 카테고리는 Phase 4</td>
+</tr>
+<tr>
+<td dir="ltr">범위 경계</td>
+<td dir="auto">0.8</td>
+<td dir="ltr">stock-scrapper 제외, 6개 프로젝트 포함</td>
+</tr>
+<tr>
+<td dir="ltr">우선순위</td>
+<td dir="auto">0.7</td>
+<td dir="ltr">Phase 0→5 순서 합의</td>
+</tr>
+</tbody>
+</table></div><div class="el-p"><p dir="auto"><strong>Ambiguity Score</strong>: 0.17<br>
+<strong>판정</strong>: ✅ 수렴 완료</p></div><div class="el-hr"><hr></div><div class="el-h1"><h1 data-heading="2단계: 플랜 수립" dir="auto" class="heading" id="2단계_플랜_수립_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2단계: 플랜 수립</h1></div><div class="el-h2"><h2 data-heading="2-1. 미팅 로그" dir="auto" class="heading" id="2-1._미팅_로그_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-1. 미팅 로그</h2></div><div class="el-h3"><h3 data-heading="미팅 1회차 — 전체 요구사항 및 구조 설계" dir="auto" class="heading" id="미팅_1회차_—_전체_요구사항_및_구조_설계_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>미팅 1회차 — 전체 요구사항 및 구조 설계</h3></div><div class="el-p"><p dir="auto"><strong>참석자</strong>: 사용자, Claude</p></div><div class="el-p"><p dir="auto">요구사항 수집부터 구조 확정까지 한 회차로 진행. 핵심 판단들:</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>직접 만들 것</strong>: 폴더 구조, 프론트매터 표준, 심링크 전략, 템플릿 통합, CLAUDE.md, 자동 분류 에이전트</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>구매/외부 솔루션</strong>: 없음 (전부 자체 구현)</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>잘된 점</strong>: 폴더 구조 확정, CMDS 레퍼런스 분석, 기존 프로젝트 생태계 전수 파악</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>부족한 점</strong>: CMDS 카테고리 상세 설계, 자동 분류 에이전트 스펙, memo→Fleet/Docs 분류 기준</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span><strong>다음까지</strong>: Phase별 상세 실행 계획 수립</li>
+</ul></div><div class="el-h2"><h2 data-heading="2-2. CPS 문서" dir="auto" class="heading" id="2-2._CPS_문서_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-2. CPS 문서</h2></div><div class="el-h3"><h3 data-heading="CPS 1회차" dir="auto" class="heading" id="CPS_1회차_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>CPS 1회차</h3></div><div class="el-p"><p dir="auto"><strong>Context</strong></p></div><div class="el-blockquote"><blockquote dir="auto">
+<p>사용자는 4,000+ 노트의 Obsidian 볼트(SecondBrain)를 운영 중. 6개 자동화 프로젝트가 볼트에 노트를 생성함. CMDS 시스템(요한님 프로젝트)을 참고해 업그레이드하고자 함.</p>
+</blockquote></div><div class="el-p"><p dir="auto"><strong>Problem</strong></p></div><div class="el-blockquote"><blockquote dir="auto">
+<ol>
+<li data-line="0" dir="auto">"내 생각"과 "외부 자료"가 폴더 곳곳에 혼재</li>
+<li data-line="1" dir="auto">산출물이 에세이 외에는 정리되지 않음</li>
+<li data-line="2" dir="auto">프론트매터가 프로젝트마다 제각각</li>
+<li data-line="3" dir="auto">템플릿이 각 프로젝트 코드에 하드코딩</li>
+<li data-line="4" dir="auto">폴더 변경 시 6개 프로젝트 경로가 동시에 깨짐</li>
+</ol>
+</blockquote></div><div class="el-p"><p dir="auto"><strong>Solution</strong></p></div><div class="el-blockquote"><blockquote dir="auto">
+<ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>00-92 번호 기반 폴더 구조 (내것/외부 분리)</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>TARE 프론트매터 6필드 표준</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>심링크 전략으로 프로젝트 순차 전환</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>91 Templates/agents/에 템플릿 통합 (Single Source of Truth)</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span>5 Phase 로드맵</li>
+</ul>
+</blockquote></div><div class="el-h2"><h2 data-heading="2-3. PRD" dir="auto" class="heading" id="2-3._PRD_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-3. PRD</h2></div><div class="el-h3"><h3 data-heading="개요" dir="auto" class="heading" id="개요_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>개요</h3></div><div class="el-p"><p dir="auto">SecondBrain Obsidian 볼트를 AI 친화적 구조로 전환하고, 연동된 6개 프로젝트의 경로·프론트매터·템플릿을 통합 표준화하며, 최종적으로 자동 분류 에이전트를 구축한다.</p></div><div class="el-h3"><h3 data-heading="타겟 사용자" dir="auto" class="heading" id="타겟_사용자_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>타겟 사용자</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">사용자</th>
+<th dir="ltr">페르소나</th>
+<th dir="ltr">핵심 니즈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">볼트 오너</td>
+<td dir="ltr">PKM 실천자, 다수 산출물 생산</td>
+<td dir="ltr">내 생각/외부 자료 분리, 산출물 체계적 관리</td>
+</tr>
+<tr>
+<td dir="ltr">AI 에이전트</td>
+<td dir="ltr">볼트 검색·생성·분류 수행자</td>
+<td dir="ltr">일관된 메타데이터, 명확한 폴더 규칙</td>
+</tr>
+<tr>
+<td dir="ltr">자동화 프로젝트</td>
+<td dir="ltr">노트 생성 파이프라인</td>
+<td dir="ltr">안정적 출력 경로, 표준 템플릿</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="기능 목록" dir="auto" class="heading" id="기능_목록_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>기능 목록</h3></div><div class="el-p"><p dir="auto"><strong>Phase 0 — 준비 (완료)</strong></p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>✅ 볼트 백업 (1.1GB)</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>✅ Git 초기화</li>
+</ul></div><div class="el-p"><p dir="auto"><strong>Phase 1 — 폴더 구조 변경 + 심링크</strong></p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>P0: 새 폴더 생성 (00-92), 노트 이동, 심링크 생성</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>P1: 대표폴더 MOC, memo 분류 (Fleet/Docs 분리)</li>
+</ul></div><div class="el-p"><p dir="auto"><strong>Phase 2 — 프로젝트 경로 수정 (하나씩)</strong></p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>P0: tarelog, study_records, obsidian-scrap, people-obsidian, 후추봇, /topkm 순차 수정</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>P0: 심링크 제거</li>
+</ul></div><div class="el-p"><p dir="auto"><strong>Phase 3 — 프론트매터 표준화 + 템플릿 통합</strong></p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>P0: 에이전트 템플릿 작성, Obsidian 템플릿 갱신, 프로젝트 연결</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>P1: 기존 4,000개 노트 프론트매터 보정, Journals 날짜 추출</li>
+</ul></div><div class="el-p"><p dir="auto"><strong>Phase 4 — CLAUDE.md + TARE 카테고리</strong></p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>P0: CLAUDE.md 작성</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>P1: 카테고리 MOC 노트 생성</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>P2: 기존 노트 카테고리 태깅</li>
+</ul></div><div class="el-p"><p dir="auto"><strong>Phase 5 — 자동 분류 에이전트</strong></p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>P0: 분류 로직 설계, 에이전트 구현</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>P1: 사용자 승인 플로우</li>
+</ul></div><div class="el-h3"><h3 data-heading="범위 외 (Out of Scope)" dir="auto" class="heading" id="범위_외_(Out_of_Scope)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>범위 외 (Out of Scope)</h3></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>원본 볼트 직접 수정</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>Obsidian 플러그인 추가/변경</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>CMDS 시스템 그대로 복사 (TARE만의 카테고리 설계 완료)</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>새로운 자동화 프로젝트 개발</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span>stock-scrapper 수정 (deprecated)</li>
+</ul></div><div class="el-hr"><hr></div><div class="el-h1"><h1 data-heading="3단계: 설계 분석" dir="auto" class="heading" id="3단계_설계_분석_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3단계: 설계 분석</h1></div><div class="el-h2"><h2 data-heading="3-1. 원칙 (Principles)" dir="auto" class="heading" id="3-1._원칙_(Principles)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-1. 원칙 (Principles)</h2></div><div class="el-h3"><h3 data-heading="코어 철학" dir="auto" class="heading" id="코어_철학_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>코어 철학</h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>"호기심이 지식을 모으고, 연결이 나를 만들며, 그 경험이 누군가의 등대가 된다."</strong></p>
+</blockquote></div><div class="el-h3"><h3 data-heading="지식 프로세스: TARE 4C" dir="auto" class="heading" id="지식_프로세스_TARE_4C_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>지식 프로세스: TARE 4C</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">단계</th>
+<th dir="ltr">이름</th>
+<th dir="ltr">의미</th>
+<th dir="ltr">폴더 대응</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="auto">1</td>
+<td dir="ltr"><strong>Collect</strong></td>
+<td dir="ltr">호기심으로 모은다</td>
+<td dir="ltr">00번대</td>
+</tr>
+<tr>
+<td dir="auto">2</td>
+<td dir="ltr"><strong>Connect</strong></td>
+<td dir="ltr">연결하여 나를 만든다</td>
+<td dir="ltr">20-30번대</td>
+</tr>
+<tr>
+<td dir="auto">3</td>
+<td dir="ltr"><strong>Create</strong></td>
+<td dir="ltr">경험을 결과물로 만든다</td>
+<td dir="ltr">40번대</td>
+</tr>
+<tr>
+<td dir="auto">4</td>
+<td dir="ltr"><strong>Cast</strong></td>
+<td dir="ltr">세상에 비춘다 (등대)</td>
+<td dir="ltr">발행/공유</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="시스템 원칙 (5대 원칙)" dir="auto" class="heading" id="시스템_원칙_(5대_원칙)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>시스템 원칙 (5대 원칙)</h3></div><div class="el-table" dir="auto" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="auto">#</th>
+<th dir="ltr">원칙</th>
+<th dir="ltr">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="auto">1</td>
+<td dir="ltr"><strong>내것과 남의것은 섞지 않는다</strong></td>
+<td dir="ltr">내 생각(30번대)과 외부 자료(20번대)는 폴더 레벨에서 분리</td>
+</tr>
+<tr>
+<td dir="auto">2</td>
+<td dir="ltr"><strong>구조가 먼저, AI는 따라온다</strong></td>
+<td dir="ltr">폴더·프론트매터·템플릿이 일관되면 AI는 자동으로 잘 작동</td>
+</tr>
+<tr>
+<td dir="auto">3</td>
+<td dir="ltr"><strong>하나를 고치면 전체가 따라온다</strong></td>
+<td dir="ltr">템플릿이 Single Source of Truth. 중복 정의 금지</td>
+</tr>
+<tr>
+<td dir="auto">4</td>
+<td dir="ltr"><strong>연결을 끊지 않으면서 바꾼다</strong></td>
+<td dir="ltr">심링크로 호환 유지하며 하나씩 전환</td>
+</tr>
+<tr>
+<td dir="auto">5</td>
+<td dir="ltr"><strong>과거의 생각은 그 자체로 가치다</strong></td>
+<td dir="ltr">기존 노트 본문 절대 수정 안 함</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="AI 원칙 (A1-A6)" dir="auto" class="heading" id="AI_원칙_(A1-A6)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>AI 원칙 (A1-A6)</h3></div><div class="el-table" dir="auto" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="auto">#</th>
+<th dir="ltr">원칙</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">A1</td>
+<td dir="ltr">CLAUDE.md를 먼저 읽는다</td>
+</tr>
+<tr>
+<td dir="ltr">A2</td>
+<td dir="ltr">템플릿을 참조해서 생성한다</td>
+</tr>
+<tr>
+<td dir="ltr">A3</td>
+<td dir="ltr">폴더 번호로 범위를 먼저 좁힌다</td>
+</tr>
+<tr>
+<td dir="ltr">A4</td>
+<td dir="ltr">자동 분류는 제안만, 실행은 승인 후</td>
+</tr>
+<tr>
+<td dir="ltr">A5</td>
+<td dir="ltr">모르면 00 Inbox/에 넣는다</td>
+</tr>
+<tr>
+<td dir="ltr">A6</td>
+<td dir="ltr">기존 패턴을 존중한다</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="파일 생성 Pre-flight 체크리스트" dir="auto" class="heading" id="파일_생성_Pre-flight_체크리스트_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>파일 생성 Pre-flight 체크리스트</h3></div><div class="el-ol"><ol>
+<li data-line="0" dir="auto">대상 폴더가 맞는가? (내것→30, 외부→20, 임시→00, 산출물→40)</li>
+<li data-line="1" dir="auto">템플릿을 참조했는가? (91 Templates/agents/)</li>
+<li data-line="2" dir="auto">필수 프론트매터 6필드가 있는가? (type, aliases, author, date created, date modified, tags)</li>
+<li data-line="3" dir="auto">YAML 인덴테이션이 2스페이스인가?</li>
+<li data-line="4" dir="auto">YAML 내 위키링크에 따옴표를 붙였는가? ("<a data-href="링크" href=".html" class="internal-link" target="_self" rel="noopener nofollow">링크</a>")</li>
+<li data-line="5" dir="auto">날짜가 ISO 8601인가? (YYYY-MM-DD)</li>
+<li data-line="6" dir="auto">파일명이 규칙을 따르는가?</li>
+<li data-line="7" dir="auto">복합 프로퍼티가 camelCase인가?</li>
+<li data-line="8" dir="auto">배열이 하이픈+스페이스 형식인가?</li>
+<li data-line="9" dir="auto">Markdown 본문이 탭 인덴테이션인가?</li>
+</ol></div><div class="el-h3"><h3 data-heading="안전 원칙 (마이그레이션 한정 — 원본 전환 후 제거)" dir="auto" class="heading" id="안전_원칙_(마이그레이션_한정_—_원본_전환_후_제거)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>안전 원칙 (마이그레이션 한정 — 원본 전환 후 제거)</h3></div><div class="el-table" dir="auto" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="auto">#</th>
+<th dir="ltr">원칙</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">S1</td>
+<td dir="ltr">원본 불가침 (백업볼트에서 작업)</td>
+</tr>
+<tr>
+<td dir="ltr">S2</td>
+<td dir="ltr">Phase마다 커밋</td>
+</tr>
+<tr>
+<td dir="ltr">S3</td>
+<td dir="ltr">심링크 기간 최소화</td>
+</tr>
+<tr>
+<td dir="ltr">S4</td>
+<td dir="ltr">3중 백업 유지</td>
+</tr>
+</tbody>
+</table></div><div class="el-h2"><h2 data-heading="3-2. 개념 정의 (Definitions)" dir="auto" class="heading" id="3-2._개념_정의_(Definitions)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-2. 개념 정의 (Definitions)</h2></div><div class="el-h3"><h3 data-heading="4C 프로세스 용어" dir="auto" class="heading" id="4C_프로세스_용어_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4C 프로세스 용어</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">용어</th>
+<th dir="ltr">정의</th>
+<th dir="ltr">금지 표현</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">Collect</td>
+<td dir="ltr">호기심에서 시작된 모든 수집. 00번대</td>
+<td dir="ltr">"저장"</td>
+</tr>
+<tr>
+<td dir="ltr">Connect</td>
+<td dir="ltr">수집한 지식을 연결·내재화. 20-30번대</td>
+<td dir="ltr">"정리"</td>
+</tr>
+<tr>
+<td dir="ltr">Create</td>
+<td dir="ltr">연결된 지식으로 결과물 생성. 40번대</td>
+<td dir="ltr">"작성"</td>
+</tr>
+<tr>
+<td dir="ltr">Cast</td>
+<td dir="ltr">결과물을 세상에 비추는 행위</td>
+<td dir="ltr">"공유"</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="시스템 명칭" dir="auto" class="heading" id="시스템_명칭_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>시스템 명칭</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">용어</th>
+<th dir="ltr">정의</th>
+<th dir="ltr">금지 표현</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">TARE System</td>
+<td dir="ltr">이 볼트의 지식 관리 시스템 전체</td>
+<td dir="ltr">"CMDS"</td>
+</tr>
+<tr>
+<td dir="ltr">category</td>
+<td dir="ltr">프론트매터 주제 분류 필드</td>
+<td dir="ltr">"CMDS"</td>
+</tr>
+<tr>
+<td dir="ltr">index</td>
+<td dir="ltr">프론트매터 용도/모음집 분류 필드</td>
+<td dir="ltr">"폴더"와 혼동 금지</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="3축 분류 체계" dir="auto" class="heading" id="3축_분류_체계_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3축 분류 체계</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">축</th>
+<th dir="ltr">역할</th>
+<th dir="ltr">형식</th>
+<th dir="ltr">개수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>category</strong></td>
+<td dir="ltr">주제 (뭐에 대한 건가)</td>
+<td dir="ltr"><code>"[[📚 501 Generative AI]]"</code></td>
+<td dir="ltr">1~2개</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>tags</strong></td>
+<td dir="ltr">키워드 (뭐와 관련되나)</td>
+<td dir="ltr"><code>[AI, 프롬프트, Claude]</code></td>
+<td dir="ltr">3~7개</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>index</strong></td>
+<td dir="ltr">용도 (어떤 모음에 넣나)</td>
+<td dir="ltr"><code>"[[🏷 Guides]]"</code></td>
+<td dir="ltr">1~2개</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="노트 타입 (type 값) — 20종" dir="auto" class="heading" id="노트_타입_(type_값)_—_20종_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>노트 타입 (type 값) — 20종</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">type</th>
+<th dir="ltr">정의</th>
+<th dir="ltr">폴더</th>
+<th dir="ltr">4C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">fleet</td>
+<td dir="ltr">빠른 캡처</td>
+<td dir="ltr">02 Fleet/</td>
+<td dir="ltr">Collect</td>
+</tr>
+<tr>
+<td dir="ltr">daily-note</td>
+<td dir="ltr">자동 생성 작업 로그</td>
+<td dir="ltr">01 Daily Notes/</td>
+<td dir="ltr">Collect</td>
+</tr>
+<tr>
+<td dir="ltr">journal</td>
+<td dir="ltr">개인 일기</td>
+<td dir="ltr">11 Daily/</td>
+<td dir="ltr">Collect</td>
+</tr>
+<tr>
+<td dir="ltr">review</td>
+<td dir="ltr">주기적 회고</td>
+<td dir="ltr">12 Reviews/</td>
+<td dir="ltr">Connect</td>
+</tr>
+<tr>
+<td dir="ltr">reference</td>
+<td dir="ltr">외부 학습자료</td>
+<td dir="ltr">21 References/</td>
+<td dir="ltr">Connect</td>
+</tr>
+<tr>
+<td dir="ltr">book</td>
+<td dir="ltr">책 노트</td>
+<td dir="ltr">21 References/</td>
+<td dir="ltr">Connect</td>
+</tr>
+<tr>
+<td dir="ltr">content</td>
+<td dir="ltr">외부 콘텐츠 AI 정리본</td>
+<td dir="ltr">22 Contents/</td>
+<td dir="ltr">Connect</td>
+</tr>
+<tr>
+<td dir="ltr">person</td>
+<td dir="ltr">연락처/인물</td>
+<td dir="ltr">23 People/</td>
+<td dir="ltr">Connect</td>
+</tr>
+<tr>
+<td dir="ltr">meeting</td>
+<td dir="ltr">회의록</td>
+<td dir="ltr">24 Meetings/</td>
+<td dir="ltr">Connect</td>
+</tr>
+<tr>
+<td dir="ltr">permanent</td>
+<td dir="ltr">내 생각, 영구 노트</td>
+<td dir="ltr">30 Notes/</td>
+<td dir="ltr">Connect</td>
+</tr>
+<tr>
+<td dir="ltr">guide</td>
+<td dir="ltr">기술 가이드/매뉴얼</td>
+<td dir="ltr">31 Docs/</td>
+<td dir="ltr">Create</td>
+</tr>
+<tr>
+<td dir="ltr">doc</td>
+<td dir="ltr">작업 문서</td>
+<td dir="ltr">31 Docs/</td>
+<td dir="ltr">Create</td>
+</tr>
+<tr>
+<td dir="ltr">essay</td>
+<td dir="ltr">개인 에세이</td>
+<td dir="ltr">40 Published/</td>
+<td dir="ltr">Cast</td>
+</tr>
+<tr>
+<td dir="ltr">article</td>
+<td dir="ltr">블로그/아티클</td>
+<td dir="ltr">40 Published/</td>
+<td dir="ltr">Cast</td>
+</tr>
+<tr>
+<td dir="ltr">course</td>
+<td dir="ltr">강의자료</td>
+<td dir="ltr">41 Courses/</td>
+<td dir="ltr">Cast</td>
+</tr>
+<tr>
+<td dir="ltr">consulting</td>
+<td dir="ltr">컨설팅 결과물</td>
+<td dir="ltr">42 Consulting/</td>
+<td dir="ltr">Cast</td>
+</tr>
+<tr>
+<td dir="ltr">presentation</td>
+<td dir="ltr">발표자료</td>
+<td dir="ltr">43 Presentations/</td>
+<td dir="ltr">Cast</td>
+</tr>
+<tr>
+<td dir="ltr">project</td>
+<td dir="ltr">프로젝트 문서</td>
+<td dir="ltr">44 Projects/</td>
+<td dir="ltr">Create/Cast</td>
+</tr>
+<tr>
+<td dir="ltr">moc</td>
+<td dir="ltr">Map of Content 인덱스</td>
+<td dir="ltr">대표폴더</td>
+<td dir="auto">-</td>
+</tr>
+<tr>
+<td dir="ltr">tare-category</td>
+<td dir="ltr">카테고리 인덱스 노트</td>
+<td dir="ltr">90 Settings/</td>
+<td dir="auto">-</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="TARE 카테고리 — 8대분류 29서브 + personal" dir="auto" class="heading" id="TARE_카테고리_—_8대분류_29서브_+_personal_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>TARE 카테고리 — 8대분류 29서브 + personal</h3></div><div class="el-p"><p dir="auto"><strong>100 Self — 나를 아는 것</strong><br>
+| 코드 | 이름 | 4C |<br>
+|------|------|-----|<br>
+| 101 | Identity &amp; Values | Connect |<br>
+| 102 | Reflection | Collect/Connect |<br>
+| 103 | Religion &amp; Spirituality | Connect |<br>
+| 104 | Growth Mindset | Connect |</p></div><div class="el-p"><p dir="auto"><strong>200 Body — 몸과 건강</strong><br>
+| 코드 | 이름 | 4C |<br>
+|------|------|-----|<br>
+| 201 | Nervous System &amp; Stress | Collect/Connect |<br>
+| 202 | Movement &amp; Sports | Collect/Create |<br>
+| 203 | Rehab &amp; Body Mechanics | Collect/Connect |<br>
+| 204 | Sleep, Food &amp; Recovery | Collect |</p></div><div class="el-p"><p dir="auto"><strong>300 Life — 살아가는 방식</strong><br>
+| 코드 | 이름 | 4C |<br>
+|------|------|-----|<br>
+| 301 | Family &amp; Parenting | Connect |<br>
+| 302 | Home &amp; Living | Collect |<br>
+| 303 | Finance &amp; Investing | Collect/Connect |</p></div><div class="el-p"><p dir="auto"><strong>400 Think — 지식과 사유</strong><br>
+| 코드 | 이름 | 4C |<br>
+|------|------|-----|<br>
+| 401 | Books &amp; Reading | Collect/Connect |<br>
+| 402 | Ideas &amp; Frameworks | Connect |<br>
+| 403 | PKM &amp; Knowledge Systems | Connect/Create |<br>
+| 404 | Learning &amp; Pedagogy | Connect/Create |</p></div><div class="el-p"><p dir="auto"><strong>500 Build — 만들고 구축하기</strong><br>
+| 코드 | 이름 | 4C |<br>
+|------|------|-----|<br>
+| 501 | Generative AI | Collect/Connect |<br>
+| 502 | AI Agents &amp; Automation | Create |<br>
+| 503 | Development &amp; Coding | Create |<br>
+| 504 | Infrastructure | Create |</p></div><div class="el-p"><p dir="auto"><strong>600 Work — 일과 조직</strong><br>
+| 코드 | 이름 | 4C |<br>
+|------|------|-----|<br>
+| 601 | Work Innovation | Connect/Create |<br>
+| 602 | Marketing &amp; Strategy | Connect/Create |<br>
+| 603 | Consulting &amp; Coaching | Create/Cast |</p></div><div class="el-p"><p dir="auto"><strong>700 Community — 커뮤니티와 표현</strong><br>
+| 코드 | 이름 | 4C |<br>
+|------|------|-----|<br>
+| 701 | Community Design | Connect/Create |<br>
+| 702 | Programs &amp; Cohorts | Create/Cast |<br>
+| 703 | Writing &amp; Editorial | Create/Cast |<br>
+| 704 | Teaching &amp; Speaking | Create/Cast |</p></div><div class="el-p"><p dir="auto"><strong>800 Culture — 취향과 영감</strong><br>
+| 코드 | 이름 | 4C |<br>
+|------|------|-----|<br>
+| 801 | Music &amp; Bass | Collect/Create |<br>
+| 802 | Style &amp; Aesthetics | Collect |<br>
+| 803 | Inspiration &amp; References | Collect |</p></div><div class="el-p"><p dir="auto"><strong>personal</strong> — 카테고리 미분류 생활 잡메모</p></div><div class="el-h3"><h3 data-heading="index 14종" dir="auto" class="heading" id="index_14종_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>index 14종</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">index</th>
+<th dir="ltr">모이는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">🏷 Daily Logs</td>
+<td dir="ltr">일일 작업 로그</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Reviews</td>
+<td dir="ltr">회고</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Journals</td>
+<td dir="ltr">개인 일기</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Reading Notes</td>
+<td dir="ltr">책/독서 노트</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Meeting Notes</td>
+<td dir="ltr">회의록</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Guides</td>
+<td dir="ltr">가이드/매뉴얼</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Lectures</td>
+<td dir="ltr">강의자료</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Published</td>
+<td dir="ltr">발행된 글</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 People</td>
+<td dir="ltr">인물 프로필</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Projects</td>
+<td dir="ltr">프로젝트</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Prompts</td>
+<td dir="ltr">프롬프트 모음</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Code Snippets</td>
+<td dir="ltr">코드 조각</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Clippings</td>
+<td dir="ltr">웹 클리핑</td>
+</tr>
+<tr>
+<td dir="ltr">🏷 Fleet</td>
+<td dir="ltr">빠른 캡처</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="status 값" dir="auto" class="heading" id="status_값_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>status 값</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">status</th>
+<th dir="ltr">의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">unread</td>
+<td dir="ltr">아직 안 봄</td>
+</tr>
+<tr>
+<td dir="ltr">reading</td>
+<td dir="ltr">읽는 중</td>
+</tr>
+<tr>
+<td dir="ltr">inProgress</td>
+<td dir="ltr">작업 중</td>
+</tr>
+<tr>
+<td dir="ltr">completed</td>
+<td dir="ltr">완료</td>
+</tr>
+<tr>
+<td dir="ltr">archived</td>
+<td dir="ltr">보관</td>
+</tr>
+</tbody>
+</table></div><div class="el-h2"><h2 data-heading="3-3. 구조 (Structure)" dir="auto" class="heading" id="3-3._구조_(Structure)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-3. 구조 (Structure)</h2></div><div class="el-h3"><h3 data-heading="시스템 아키텍처" dir="auto" class="heading" id="시스템_아키텍처_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>시스템 아키텍처</h3></div><div class="el-pre"><pre><code data-line="0">┌──────────────────── SecondBrain 볼트 ────────────────────┐
+│                                                           │
+│  ┌─ Collect (00번대) ─┐  ┌─ Connect (10-30번대) ────────┐ │
+│  │ 00 Inbox           │  │ 10 Journals MOC              │ │
+│  │ 01 Daily Notes     │  │ 11 Daily (일기)              │ │
+│  │ 02 Fleet           │  │ 12 Reviews (회고)            │ │
+│  │ 03 Clippings       │  │ 20 External MOC              │ │
+│  │ 04 AI Agent        │  │ 21 References                │ │
+│  └────────┬───────────┘  │ 22 Contents                  │ │
+│           │              │ 23 People                     │ │
+│           │              │ 24 Meetings                   │ │
+│           │              │ 30 Notes (영구 노트)          │ │
+│           │              │ 31 Docs (기술 문서)           │ │
+│           │              └──────────────┬───────────────┘ │
+│           │                             │                 │
+│           │  ┌─ Create/Cast (40번대) ───┘                 │
+│           │  │ 40 Published                               │
+│           │  │ 41 Courses                                 │
+│           │  │ 42 Consulting                              │
+│           │  │ 43 Presentations                           │
+│           │  │ 44 Projects/                               │
+│           │  └────────────────────────────────────────┐   │
+│  ┌─ 인프라 ───────────────────────────────────────────┤   │
+│  │ 80 Assets | 81 Excalidraw                          │   │
+│  │ 90 Settings | 91 Templates/ | 92 Archive           │   │
+│  │ CLAUDE.md (AI 가이드)                               │   │
+│  └────────────────────────────────────────────────────┘   │
+└───────────────────────────────────────────────────────────┘
+                        │ 참조
+    ┌───────────────────┼──────────────────────────┐
+    │  study_records ──→ 01 Daily Notes/            │
+    │  tarelog ────────→ 01 Daily Notes/ + 12 Reviews│
+    │  obsidian-scrap ─→ 03 Clippings → 22 Contents │
+    │  people-obsidian → 23 People/                  │
+    │  후추봇 ─────────→ 02 Fleet/                   │
+    │  /topkm ─────────→ 31 Docs/                    │
+    │  전부 91 Templates/agents/ 참조                 │
+    └──────────────────────────────────────────────┘
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="3축 분류 흐름" dir="auto" class="heading" id="3축_분류_흐름_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3축 분류 흐름</h3></div><div class="el-pre"><pre><code data-line="0">category = 서랍 라벨    → "이건 AI 서랍에"
+tags     = 포스트잇     → "에이전트, Claude, 자동화"
+index    = 바인더       → "가이드 모음집에 철해둬"
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h2"><h2 data-heading="3-4. 유저 멘탈 모델" dir="auto" class="heading" id="3-4._유저_멘탈_모델_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-4. 유저 멘탈 모델</h2></div><div class="el-p"><p dir="auto"><strong>볼트 오너</strong></p></div><div class="el-blockquote"><blockquote dir="auto">
+<p>"내 지식의 흐름이 보인다. 호기심이 생기면 00번대에 던지고(Collect), 외부 자료는 20번대, 내 생각은 30번대로 갈라지며(Connect), 40번대에서 결과물이 나와(Create) 세상에 내보낸다(Cast). category로 주제를, tags로 키워드를, index로 모음집을 걸어두면 AI가 뭐든 찾아준다."</p>
+</blockquote></div><div class="el-p"><p dir="auto"><strong>AI 에이전트</strong></p></div><div class="el-blockquote"><blockquote dir="auto">
+<p>"CLAUDE.md를 읽으면 규칙을 안다. 폴더 번호로 범위를 좁히고, category→tags→index 순서로 필터링한다. 노트를 만들 때는 Pre-flight 10항목을 확인한다. 확실하지 않으면 00 Inbox/에 넣고 물어본다."</p>
+</blockquote></div><div class="el-p"><p dir="auto"><strong>자동화 프로젝트</strong></p></div><div class="el-blockquote"><blockquote dir="auto">
+<p>"나는 정해진 폴더에 노트를 넣는다. 프론트매터는 91 Templates/agents/에서 템플릿을 읽어 따른다. 템플릿이 바뀌면 다음 실행부터 자동 반영된다."</p>
+</blockquote></div><div class="el-h2"><h2 data-heading="3-5. 소크라테스 수렴 게이트" dir="auto" class="heading" id="3-5._소크라테스_수렴_게이트_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-5. 소크라테스 수렴 게이트</h2></div><div class="el-p"><p dir="auto"><strong>Ambiguity Score</strong>: 0.105<br>
+<strong>판정</strong>: ✅ 수렴 완료</p></div><div class="footer"><div class="data-bar"></div></div></div></div></div><div id="right-content" class="leaf" style="--sidebar-width: var(--sidebar-width-right);"><div id="right-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme-toggle-input" id=""><input class="theme-toggle-input" type="checkbox" id="theme-toggle-input"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="right-sidebar-content" class="leaf-content"><div class="graph-view-wrapper"><div class="feature-header"><div class="feature-title">Interactive Graph</div></div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<div class="graph-icon graph-global" role="button" aria-label="Global Graph" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-git-fork"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div id="outline" class=" tree-container"><div class="feature-header"><div class="feature-title">Table Of Contents</div><button class="clickable-icon nav-action-button tree-collapse-all" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-item" data-depth="1"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#SecondBrain_볼트_AI_친화적_업그레이드_—_하네스_엔지니어링_전체_적용_0" data-path="#SecondBrain_볼트_AI_친화적_업그레이드_—_하네스_엔지니어링_전체_적용_0"><div class="tree-item-inner heading-link" heading-name="SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용">SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="1"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#SecondBrain_볼트_AI_친화적_업그레이드_—_하네스_엔지니어링_전체_적용_1" data-path="#SecondBrain_볼트_AI_친화적_업그레이드_—_하네스_엔지니어링_전체_적용_1"><div class="tree-item-inner heading-link" heading-name="SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용">SecondBrain 볼트 AI 친화적 업그레이드 — 하네스 엔지니어링 전체 적용</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#1단계_요구사항_수집_0" data-path="#1단계_요구사항_수집_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="1단계: 요구사항 수집">1단계: 요구사항 수집</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#수집_원칙_0" data-path="#수집_원칙_0"><div class="tree-item-inner heading-link" heading-name="수집 원칙">수집 원칙</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#수집된_요구사항_(날것_그대로)_0" data-path="#수집된_요구사항_(날것_그대로)_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="수집된 요구사항 (날것 그대로)">수집된 요구사항 (날것 그대로)</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#발언_요약_0" data-path="#발언_요약_0"><div class="tree-item-inner heading-link" heading-name="발언 요약">발언 요약</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#질문을_통해_분해된_구성요소_0" data-path="#질문을_통해_분해된_구성요소_0"><div class="tree-item-inner heading-link" heading-name="질문을 통해 분해된 구성요소">질문을 통해 분해된 구성요소</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="3"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#사용자별_핵심_페인포인트_0" data-path="#사용자별_핵심_페인포인트_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="사용자별 핵심 페인포인트">사용자별 핵심 페인포인트</div></a><div class="tree-item-children"><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#볼트_사용자_(본인)_0" data-path="#볼트_사용자_(본인)_0"><div class="tree-item-inner heading-link" heading-name="볼트 사용자 (본인)">볼트 사용자 (본인)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="4"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#AI_에이전트_0" data-path="#AI_에이전트_0"><div class="tree-item-inner heading-link" heading-name="AI 에이전트">AI 에이전트</div></a><div class="tree-item-children"></div></div></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#현재_볼트_생태계_0" data-path="#현재_볼트_생태계_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="현재 볼트 생태계">현재 볼트 생태계</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#볼트에_노트를_만드는_프로젝트들_(6개)_0" data-path="#볼트에_노트를_만드는_프로젝트들_(6개)_0"><div class="tree-item-inner heading-link" heading-name="볼트에 노트를 만드는 프로젝트들 (6개)">볼트에 노트를 만드는 프로젝트들 (6개)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#프론트매터_현황_(제각각)_0" data-path="#프론트매터_현황_(제각각)_0"><div class="tree-item-inner heading-link" heading-name="프론트매터 현황 (제각각)">프론트매터 현황 (제각각)</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#확정된_새_폴더_구조_0" data-path="#확정된_새_폴더_구조_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="확정된 새 폴더 구조">확정된 새 폴더 구조</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#기존_→_신규_매핑_0" data-path="#기존_→_신규_매핑_0"><div class="tree-item-inner heading-link" heading-name="기존 → 신규 매핑">기존 → 신규 매핑</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#확정된_프론트매터_표준_0" data-path="#확정된_프론트매터_표준_0"><div class="tree-item-inner heading-link" heading-name="확정된 프론트매터 표준">확정된 프론트매터 표준</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#확정된_마이그레이션_전략_0" data-path="#확정된_마이그레이션_전략_0"><div class="tree-item-inner heading-link" heading-name="확정된 마이그레이션 전략">확정된 마이그레이션 전략</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#소크라테스_수렴_게이트_0" data-path="#소크라테스_수렴_게이트_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="소크라테스 수렴 게이트">소크라테스 수렴 게이트</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#모호함_평가_0" data-path="#모호함_평가_0"><div class="tree-item-inner heading-link" heading-name="모호함 평가">모호함 평가</div></a><div class="tree-item-children"></div></div></div></div></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#2단계_플랜_수립_0" data-path="#2단계_플랜_수립_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="2단계: 플랜 수립">2단계: 플랜 수립</div></a><div class="tree-item-children"><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#2-1._미팅_로그_0" data-path="#2-1._미팅_로그_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="2-1. 미팅 로그">2-1. 미팅 로그</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#미팅_1회차_—_전체_요구사항_및_구조_설계_0" data-path="#미팅_1회차_—_전체_요구사항_및_구조_설계_0"><div class="tree-item-inner heading-link" heading-name="미팅 1회차 — 전체 요구사항 및 구조 설계">미팅 1회차 — 전체 요구사항 및 구조 설계</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#2-2._CPS_문서_0" data-path="#2-2._CPS_문서_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="2-2. CPS 문서">2-2. CPS 문서</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#CPS_1회차_0" data-path="#CPS_1회차_0"><div class="tree-item-inner heading-link" heading-name="CPS 1회차">CPS 1회차</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#2-3._PRD_0" data-path="#2-3._PRD_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="2-3. PRD">2-3. PRD</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#개요_0" data-path="#개요_0"><div class="tree-item-inner heading-link" heading-name="개요">개요</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#타겟_사용자_0" data-path="#타겟_사용자_0"><div class="tree-item-inner heading-link" heading-name="타겟 사용자">타겟 사용자</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#기능_목록_0" data-path="#기능_목록_0"><div class="tree-item-inner heading-link" heading-name="기능 목록">기능 목록</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#범위_외_(Out_of_Scope)_0" data-path="#범위_외_(Out_of_Scope)_0"><div class="tree-item-inner heading-link" heading-name="범위 외 (Out of Scope)">범위 외 (Out of Scope)</div></a><div class="tree-item-children"></div></div></div></div></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#3단계_설계_분석_0" data-path="#3단계_설계_분석_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="3단계: 설계 분석">3단계: 설계 분석</div></a><div class="tree-item-children"><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#3-1._원칙_(Principles)_0" data-path="#3-1._원칙_(Principles)_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="3-1. 원칙 (Principles)">3-1. 원칙 (Principles)</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#코어_철학_0" data-path="#코어_철학_0"><div class="tree-item-inner heading-link" heading-name="코어 철학">코어 철학</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#지식_프로세스_TARE_4C_0" data-path="#지식_프로세스_TARE_4C_0"><div class="tree-item-inner heading-link" heading-name="지식 프로세스: TARE 4C">지식 프로세스: TARE 4C</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#시스템_원칙_(5대_원칙)_0" data-path="#시스템_원칙_(5대_원칙)_0"><div class="tree-item-inner heading-link" heading-name="시스템 원칙 (5대 원칙)">시스템 원칙 (5대 원칙)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#AI_원칙_(A1-A6)_0" data-path="#AI_원칙_(A1-A6)_0"><div class="tree-item-inner heading-link" heading-name="AI 원칙 (A1-A6)">AI 원칙 (A1-A6)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#파일_생성_Pre-flight_체크리스트_0" data-path="#파일_생성_Pre-flight_체크리스트_0"><div class="tree-item-inner heading-link" heading-name="파일 생성 Pre-flight 체크리스트">파일 생성 Pre-flight 체크리스트</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#안전_원칙_(마이그레이션_한정_—_원본_전환_후_제거)_0" data-path="#안전_원칙_(마이그레이션_한정_—_원본_전환_후_제거)_0"><div class="tree-item-inner heading-link" heading-name="안전 원칙 (마이그레이션 한정 — 원본 전환 후 제거)">안전 원칙 (마이그레이션 한정 — 원본 전환 후 제거)</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#3-2._개념_정의_(Definitions)_0" data-path="#3-2._개념_정의_(Definitions)_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="3-2. 개념 정의 (Definitions)">3-2. 개념 정의 (Definitions)</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#4C_프로세스_용어_0" data-path="#4C_프로세스_용어_0"><div class="tree-item-inner heading-link" heading-name="4C 프로세스 용어">4C 프로세스 용어</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#시스템_명칭_0" data-path="#시스템_명칭_0"><div class="tree-item-inner heading-link" heading-name="시스템 명칭">시스템 명칭</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#3축_분류_체계_0" data-path="#3축_분류_체계_0"><div class="tree-item-inner heading-link" heading-name="3축 분류 체계">3축 분류 체계</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#노트_타입_(type_값)_—_20종_0" data-path="#노트_타입_(type_값)_—_20종_0"><div class="tree-item-inner heading-link" heading-name="노트 타입 (type 값) — 20종">노트 타입 (type 값) — 20종</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#TARE_카테고리_—_8대분류_29서브_+_personal_0" data-path="#TARE_카테고리_—_8대분류_29서브_+_personal_0"><div class="tree-item-inner heading-link" heading-name="TARE 카테고리 — 8대분류 29서브 + personal">TARE 카테고리 — 8대분류 29서브 + personal</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#index_14종_0" data-path="#index_14종_0"><div class="tree-item-inner heading-link" heading-name="index 14종">index 14종</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#status_값_0" data-path="#status_값_0"><div class="tree-item-inner heading-link" heading-name="status 값">status 값</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#3-3._구조_(Structure)_0" data-path="#3-3._구조_(Structure)_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="3-3. 구조 (Structure)">3-3. 구조 (Structure)</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#시스템_아키텍처_0" data-path="#시스템_아키텍처_0"><div class="tree-item-inner heading-link" heading-name="시스템 아키텍처">시스템 아키텍처</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#3축_분류_흐름_0" data-path="#3축_분류_흐름_0"><div class="tree-item-inner heading-link" heading-name="3축 분류 흐름">3축 분류 흐름</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#3-4._유저_멘탈_모델_0" data-path="#3-4._유저_멘탈_모델_0"><div class="tree-item-inner heading-link" heading-name="3-4. 유저 멘탈 모델">3-4. 유저 멘탈 모델</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html#3-5._소크라테스_수렴_게이트_0" data-path="#3-5._소크라테스_수렴_게이트_0"><div class="tree-item-inner heading-link" heading-name="3-5. 소크라테스 수렴 게이트">3-5. 소크라테스 수렴 게이트</div></a><div class="tree-item-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector("#right-sidebar"); rs.classList.toggle("is-collapsed", window.innerWidth < 768); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></div></div></body></html>

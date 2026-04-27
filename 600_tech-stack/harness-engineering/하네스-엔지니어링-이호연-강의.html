@@ -1,0 +1,945 @@
+<!DOCTYPE html> <html lang="en"><head>
+<title>하네스 엔지니어링 강의 — AI가 잘 일하는 환경을 설계하는 기술</title>
+<base href="../..">
+<meta name="pathname" content="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html">
+<meta name="description" content="Team Attention 이호연 Builder의 Harness Engineering 라이브 강의를 기반으로, 배경 이론·기업 사례·실전 패턴을 하나로 통합한 완성본 강의 자료">
+<meta property="og:title" content="하네스 엔지니어링 강의 — AI가 잘 일하는 환경을 설계하는 기술">
+<meta property="og:description" content="Team Attention 이호연 Builder의 Harness Engineering 라이브 강의를 기반으로, 배경 이론·기업 사례·실전 패턴을 하나로 통합한 완성본 강의 자료">
+<meta property="og:type" content="website">
+<meta property="og:url" content="./https://64etuor.github.io/600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html">
+<meta property="og:image" content="./https://64etuor.github.io/600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_07.png">
+<meta name="author" content="Yangha Park"></head><body class="publish css-settings-manager styled-scrollbars show-inline-title show-ribbon"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="parsed-feature-container" style="display: contents;"><link itemprop="include" href="site-lib/html/custom-head-content-content.html"></div><meta charset="UTF-8"><meta property="og:site_name" content="David's Vault"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="./https://64etuor.github.io/site-lib/rss.xml"><script async="" id="webpage-script" src="site-lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-wasm-script" src="site-lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="site-lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="site-lib/media/favicon.png"><link rel="preload" href="site-lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/snippets.css"></noscript><link rel="stylesheet" href="site-lib/styles/obsidian.css"><link rel="stylesheet" href="site-lib/styles/theme.css"><link rel="preload" href="site-lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="site-lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/supported-plugins.css"></noscript><link rel="preload" href="site-lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/main-styles.css"></noscript><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-vertical-spacing:1.3em;--sidebar-margin:12px}:root{background-color:#202124}.sidebar{height:100%;font-size:14px;z-index:10;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));position:relative;overflow:hidden;overflow:clip;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}#left-sidebar{left:0}#right-sidebar{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}.sidebar.floating{position:absolute}.sidebar .leaf-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .leaf-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}#left-sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}#right-sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar #left-sidebar-content,.sidebar #right-sidebar-content{contain:none!important;container-type:normal!important;animation:none!important}.sidebar:has(.leaf-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:calc(2.3em + 2 * var(--sidebar-margin));width:var(--sidebar-width);padding:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}#left-sidebar .sidebar-topbar{left:0;flex-direction:row;border-top-right-radius:var(--radius-l)}#right-sidebar .sidebar-topbar{right:0;flex-direction:row-reverse;border-top-left-radius:var(--radius-l)}#left-sidebar .topbar-content{margin-right:calc(2.3em + var(--sidebar-margin));flex-direction:row}#right-sidebar .topbar-content{margin-left:calc(2.3em + var(--sidebar-margin));flex-direction:row-reverse}.topbar-content{overflow:hidden visible;overflow:clip visible;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:2px!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}#left-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}#right-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.feature-title{margin-left:1px;text-transform:uppercase;letter-spacing:.06em;margin-top:.75em;margin-bottom:.75em}.feature-header{display:flex;align-items:center;padding-top:0;font-size:1em;padding-left:0}body.floating-sidebars .sidebar{position:absolute}body{transition:background-color var(--color-fade-speed) ease-in-out}#navbar:not(:empty){display:flex;align-items:center;justify-content:space-between;padding:.5em 1em;width:100%}#main{display:flex;flex-direction:column;height:100%;width:100%;align-items:stretch;justify-content:center}#main-horizontal{display:flex;flex-direction:row;flex-grow:1;width:100%;align-items:stretch;justify-content:center}#center-content{flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0!important;transition:opacity .2s ease-in-out;pointer-events:none}#center-content>.obsidian-document{padding-left:2em;padding-right:1em;margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}body #center-content>.obsidian-document>.markdown-preview-sizer{padding-bottom:80vh;width:100%;max-width:var(--line-width);flex-basis:var(--line-width);transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document>div{width:100%!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document:not([data-type=markdown]).embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}#center-content>.obsidian-document:not([data-type=markdown]).embed>*{max-width:100%;max-height:100%;object-fit:contain}:not(h1,h2,h3,h4,h5,h6,li):has(> :is(.math,table)){overflow-x:auto!important}#center-content>.obsidian-document:not([data-type=markdown]){overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.obsidian-document[data-type=attachment]{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%}.obsidian-document[data-type=attachment]>*{outline:0;border:none;box-shadow:none}.obsidian-document[data-type=attachment] :is(img){max-width:90%;max-height:90%;object-fit:contain}.obsidian-document[data-type=attachment]>:is(audio){width:100%;max-width:min(90%,var(--line-width))}.obsidian-document[data-type=attachment]>:is(embed,iframe,video){width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}.canvas-wrapper>:is(.header,.footer){z-index:100;position:absolute;display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){let e=document.querySelectorAll("link[itemprop='include']");for(const t of e){let e=t.getAttribute("href");try{let o="";if(e.startsWith("https:")||e.startsWith("http:")||"file:"!=window.location.protocol){const n=await fetch(e);if(!n.ok){console.log("Could not include file: "+e),t?.remove();continue}o=await n.text()}else{const t=document.getElementById(btoa(encodeURI(e)));if(t){const e=JSON.parse(decodeURI(atob(t.getAttribute("value")??"")));o=e?.data??""}}let n=document.createRange().createContextualFragment(o);t.before(n),t.remove(),console.log("Included text: "+o),console.log("Included file: "+e)}catch(o){t?.remove(),console.log("Could not include file: "+e,o);continue}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script")));!function e(n){let l=o[n],c=n+1;l?(l&&"true"!=l.getAttribute("loaded")||n<o.length&&e(c),n<o.length&&l.addEventListener("load",(()=>e(c)))):n<o.length?e(c):t()}(0)}</script><div id="main"><div id="navbar"></div><div id="main-horizontal"><div id="left-content" class="leaf" style="--sidebar-width: var(--sidebar-width-left);"><div id="left-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><div id="search-container"><div id="search-wrapper"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div aria-label="Clear search" id="search-clear-button"></div></div></div></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="left-sidebar-content" class="leaf-content"><link itemprop="include" href="site-lib/html/file-tree-content.html"></div></div><script defer="">let ls = document.querySelector("#left-sidebar"); ls.classList.toggle("is-collapsed", window.innerWidth < 768); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div></div><div id="center-content" class="leaf"><div class="obsidian-document markdown-preview-view markdown-rendered node-insert-event is-readable-line-width allow-fold-headings allow-fold-lists show-indentation-guide show-properties" data-type="markdown"><style id="MJX-CHTML-styles">mjx-c.mjx-c1D44E.TEX-I::before{padding:.441em .529em .01em 0;content:"a"}mjx-c.mjx-c28.TEX-S3::before{padding:1.45em .736em .949em 0;content:"("}mjx-c.mjx-c1D44A.TEX-I::before{padding:.683em 1.048em .022em 0;content:"W"}mjx-c.mjx-c29.TEX-S3::before{padding:1.45em .736em .949em 0;content:")"}mjx-c.mjx-c1D44F.TEX-I::before{padding:.694em .429em .011em 0;content:"b"}mjx-c.mjx-c22C5::before{padding:.31em .278em 0 0;content:"⋅"}mjx-c.mjx-c6C::before{padding:.694em .278em 0 0;content:"l"}mjx-c.mjx-c6F::before{padding:.448em .5em .01em 0;content:"o"}mjx-c.mjx-c67::before{padding:.453em .5em .206em 0;content:"g"}mjx-c.mjx-c2061::before{padding:0;content:""}mjx-c.mjx-c1D436.TEX-I::before{padding:.705em .76em .022em 0;content:"C"}mjx-c.mjx-c1D437.TEX-I::before{padding:.683em .828em 0 0;content:"D"}mjx-c.mjx-cD7::before{padding:.491em .778em 0 0;content:"×"}mjx-c.mjx-c1D43F.TEX-I::before{padding:.683em .681em 0 0;content:"L"}mjx-c.mjx-c1D441.TEX-I::before{padding:.683em .888em 0 0;content:"N"}mjx-c.mjx-c36::before{padding:.666em .5em .022em 0;content:"6"}mjx-c.mjx-c49::before{padding:.683em .361em 0 0;content:"I"}mjx-c.mjx-c56::before{padding:.683em .75em .022em 0;content:"V"}mjx-c.mjx-c1D434.TEX-I::before{padding:.716em .75em 0 0;content:"A"}mjx-c.mjx-c1D435.TEX-I::before{padding:.683em .759em 0 0;content:"B"}mjx-c.mjx-c37::before{padding:.676em .5em .022em 0;content:"7"}mjx-mtext{display:inline-block;text-align:left}mjx-c.mjx-c1D44C.TEX-I::before{padding:.683em .763em 0 0;content:"Y"}mjx-c.mjx-c1D716.TEX-I::before{padding:.431em .406em .011em 0;content:"ϵ"}mjx-c.mjx-c3A::before{padding:.43em .278em 0 0;content:":"}mjx-c.mjx-c1D43C.TEX-I::before{padding:.683em .504em 0 0;content:"I"}mjx-c.mjx-c1D461.TEX-I::before{padding:.626em .361em .011em 0;content:"t"}mjx-c.mjx-c1D452.TEX-I::before{padding:.442em .466em .011em 0;content:"e"}mjx-c.mjx-c1D45F.TEX-I::before{padding:.442em .451em .011em 0;content:"r"}mjx-c.mjx-c1D450.TEX-I::before{padding:.442em .433em .011em 0;content:"c"}mjx-c.mjx-c1D45D.TEX-I::before{padding:.442em .503em .194em 0;content:"p"}mjx-c.mjx-c1D446.TEX-I::before{padding:.705em .645em .022em 0;content:"S"}mjx-c.mjx-c1D459.TEX-I::before{padding:.694em .298em .011em 0;content:"l"}mjx-c.mjx-c1D45C.TEX-I::before{padding:.441em .485em .011em 0;content:"o"}mjx-c.mjx-c1D438.TEX-I::before{padding:.68em .764em 0 0;content:"E"}mjx-c.mjx-c1D447.TEX-I::before{padding:.677em .704em 0 0;content:"T"}mjx-c.mjx-c1D45A.TEX-I::before{padding:.442em .878em .011em 0;content:"m"}mjx-c.mjx-c5E::before{padding:.694em .5em 0 0;content:"^"}mjx-c.mjx-c53::before{padding:.705em .556em .022em 0;content:"S"}mjx-c.mjx-c45::before{padding:.68em .681em 0 0;content:"E"}mjx-c.mjx-c1D445.TEX-I::before{padding:.683em .759em .021em 0;content:"R"}mjx-c.mjx-c2E::before{padding:.12em .278em 0 0;content:"."}mjx-c.mjx-c38::before{padding:.666em .5em .022em 0;content:"8"}mjx-c.mjx-c35::before{padding:.666em .5em .022em 0;content:"5"}mjx-container[jax=CHTML]{line-height:0}mjx-container [space="1"]{margin-left:.111em}mjx-container [space="2"]{margin-left:.167em}mjx-container [space="3"]{margin-left:.222em}mjx-container [space="4"]{margin-left:.278em}mjx-container [space="5"]{margin-left:.333em}mjx-container [rspace="1"]{margin-right:.111em}mjx-container [rspace="2"]{margin-right:.167em}mjx-container [rspace="3"]{margin-right:.222em}mjx-container [rspace="4"]{margin-right:.278em}mjx-container [rspace="5"]{margin-right:.333em}mjx-container [size="s"]{font-size:70.7%}mjx-container [size=ss]{font-size:50%}mjx-container [size=Tn]{font-size:60%}mjx-container [size=sm]{font-size:85%}mjx-container [size=lg]{font-size:120%}mjx-container [size=Lg]{font-size:144%}mjx-container [size=LG]{font-size:173%}mjx-container [size=hg]{font-size:207%}mjx-container [size=HG]{font-size:249%}mjx-container [width=full]{width:100%}mjx-box{display:inline-block}mjx-block{display:block}mjx-itable{display:inline-table}mjx-row{display:table-row}mjx-row>*{display:table-cell}mjx-mtext{display:inline-block}mjx-mstyle{display:inline-block}mjx-merror{display:inline-block;color:red;background-color:#ff0}mjx-mphantom{visibility:hidden}mjx-assistive-mml{top:0;left:0;clip:rect(1px,1px,1px,1px);user-select:none;position:absolute!important;padding:1px 0 0!important;border:0!important;display:block!important;width:auto!important;overflow:hidden!important}mjx-assistive-mml[display=block]{width:100%!important}mjx-math{display:inline-block;text-align:left;line-height:0;text-indent:0;font-style:normal;font-weight:400;font-size:100%;font-size-adjust:none;letter-spacing:normal;border-collapse:collapse;overflow-wrap:normal;word-spacing:normal;white-space:nowrap;direction:ltr;padding:1px 0}mjx-container[jax=CHTML][display=true]{display:block;text-align:center;margin:1em 0}mjx-container[jax=CHTML][display=true][width=full]{display:flex}mjx-container[jax=CHTML][display=true] mjx-math{padding:0}mjx-container[jax=CHTML][justify=left]{text-align:left}mjx-container[jax=CHTML][justify=right]{text-align:right}mjx-mi{display:inline-block;text-align:left}mjx-c{display:inline-block}mjx-utext{display:inline-block;padding:.75em 0 .2em}mjx-mo{display:inline-block;text-align:left}mjx-stretchy-h{display:inline-table;width:100%}mjx-stretchy-h>*{display:table-cell;width:0}mjx-stretchy-h>*>mjx-c{display:inline-block;transform:scaleX(1)}mjx-stretchy-h>*>mjx-c::before{display:inline-block;width:initial}mjx-stretchy-h>mjx-ext{overflow:clip visible;width:100%}mjx-stretchy-h>mjx-ext>mjx-c::before{transform:scaleX(500)}mjx-stretchy-h>mjx-ext>mjx-c{width:0}mjx-stretchy-h>mjx-beg>mjx-c{margin-right:-.1em}mjx-stretchy-h>mjx-end>mjx-c{margin-left:-.1em}mjx-stretchy-v{display:inline-block}mjx-stretchy-v>*{display:block}mjx-stretchy-v>mjx-beg{height:0}mjx-stretchy-v>mjx-end>mjx-c{display:block}mjx-stretchy-v>*>mjx-c{transform:scaleY(1);transform-origin:left center;overflow:hidden}mjx-stretchy-v>mjx-ext{display:block;height:100%;box-sizing:border-box;border:0 solid transparent;overflow:visible clip}mjx-stretchy-v>mjx-ext>mjx-c::before{width:initial;box-sizing:border-box}mjx-stretchy-v>mjx-ext>mjx-c{transform:scaleY(500) translateY(.075em);overflow:visible}mjx-mark{display:inline-block;height:0}mjx-msub{display:inline-block;text-align:left}mjx-mn{display:inline-block;text-align:left}mjx-msubsup{display:inline-block;text-align:left}mjx-script{display:inline-block;padding-right:.05em;padding-left:.033em}mjx-script>mjx-spacer{display:block}mjx-mfrac{display:inline-block;text-align:left}mjx-frac{display:inline-block;vertical-align:.17em;padding:0 .22em}mjx-frac[type="d"]{vertical-align:.04em}mjx-frac[delims]{padding:0 .1em}mjx-frac[atop]{padding:0 .12em}mjx-frac[atop][delims]{padding:0}mjx-dtable{display:inline-table;width:100%}mjx-dtable>*{font-size:2000%}mjx-dbox{display:block;font-size:5%}mjx-num{display:block;text-align:center}mjx-den{display:block;text-align:center}mjx-mfrac[bevelled]>mjx-num{display:inline-block}mjx-mfrac[bevelled]>mjx-den{display:inline-block}mjx-den[align=right],mjx-num[align=right]{text-align:right}mjx-den[align=left],mjx-num[align=left]{text-align:left}mjx-nstrut{display:inline-block;height:.054em;width:0;vertical-align:-.054em}mjx-nstrut[type="d"]{height:.217em;vertical-align:-.217em}mjx-dstrut{display:inline-block;height:.505em;width:0}mjx-dstrut[type="d"]{height:.726em}mjx-line{display:block;box-sizing:border-box;min-height:1px;height:.06em;border-top:.06em solid;margin:.06em -.1em;overflow:hidden}mjx-line[type="d"]{margin:.18em -.1em}mjx-mrow{display:inline-block;text-align:left}mjx-texatom{display:inline-block;text-align:left}mjx-mover{display:inline-block;text-align:left}mjx-mover:not([limits=false]){padding-top:.1em}mjx-mover:not([limits=false])>*{display:block;text-align:left}mjx-munderover{display:inline-block;text-align:left}mjx-munderover:not([limits=false]){padding-top:.1em}mjx-munderover:not([limits=false])>*{display:block}mjx-munder{display:inline-block;text-align:left}mjx-over{text-align:left}mjx-munder:not([limits=false]){display:inline-table}mjx-munder>mjx-row{text-align:left}mjx-under{padding-bottom:.1em}mjx-msup{display:inline-block;text-align:left}mjx-c::before{display:block;width:0}.MJX-TEX{font-family:MJXZERO,MJXTEX}.TEX-B{font-family:MJXZERO,MJXTEX-B}.TEX-I{font-family:MJXZERO,MJXTEX-I}.TEX-MI{font-family:MJXZERO,MJXTEX-MI}.TEX-BI{font-family:MJXZERO,MJXTEX-BI}.TEX-S1{font-family:MJXZERO,MJXTEX-S1}.TEX-S2{font-family:MJXZERO,MJXTEX-S2}.TEX-S3{font-family:MJXZERO,MJXTEX-S3}.TEX-S4{font-family:MJXZERO,MJXTEX-S4}.TEX-A{font-family:MJXZERO,MJXTEX-A}.TEX-C{font-family:MJXZERO,MJXTEX-C}.TEX-CB{font-family:MJXZERO,MJXTEX-CB}.TEX-FR{font-family:MJXZERO,MJXTEX-FR}.TEX-FRB{font-family:MJXZERO,MJXTEX-FRB}.TEX-SS{font-family:MJXZERO,MJXTEX-SS}.TEX-SSB{font-family:MJXZERO,MJXTEX-SSB}.TEX-SSI{font-family:MJXZERO,MJXTEX-SSI}.TEX-SC{font-family:MJXZERO,MJXTEX-SC}.TEX-T{font-family:MJXZERO,MJXTEX-T}.TEX-V{font-family:MJXZERO,MJXTEX-V}.TEX-VB{font-family:MJXZERO,MJXTEX-VB}mjx-stretchy-h mjx-c,mjx-stretchy-v mjx-c{font-family:MJXZERO,MJXTEX-S1,MJXTEX-S4,MJXTEX,MJXTEX-A!important}@font-face{font-family:MJXZERO;src:url("site-lib/fonts/mathjax_zero.woff") format("woff")}@font-face{font-family:MJXTEX;src:url("site-lib/fonts/mathjax_main-regular.woff") format("woff")}@font-face{font-family:MJXTEX-B;src:url("site-lib/fonts/mathjax_main-bold.woff") format("woff")}@font-face{font-family:MJXTEX-I;src:url("site-lib/fonts/mathjax_math-italic.woff") format("woff")}@font-face{font-family:MJXTEX-MI;src:url("site-lib/fonts/mathjax_main-italic.woff") format("woff")}@font-face{font-family:MJXTEX-BI;src:url("site-lib/fonts/mathjax_math-bolditalic.woff") format("woff")}@font-face{font-family:MJXTEX-S1;src:url("site-lib/fonts/mathjax_size1-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S2;src:url("site-lib/fonts/mathjax_size2-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S3;src:url("site-lib/fonts/mathjax_size3-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S4;src:url("site-lib/fonts/mathjax_size4-regular.woff") format("woff")}@font-face{font-family:MJXTEX-A;src:url("site-lib/fonts/mathjax_ams-regular.woff") format("woff")}@font-face{font-family:MJXTEX-C;src:url("site-lib/fonts/mathjax_calligraphic-regular.woff") format("woff")}@font-face{font-family:MJXTEX-CB;src:url("site-lib/fonts/mathjax_calligraphic-bold.woff") format("woff")}@font-face{font-family:MJXTEX-FR;src:url("site-lib/fonts/mathjax_fraktur-regular.woff") format("woff")}@font-face{font-family:MJXTEX-FRB;src:url("site-lib/fonts/mathjax_fraktur-bold.woff") format("woff")}@font-face{font-family:MJXTEX-SS;src:url("site-lib/fonts/mathjax_sansserif-regular.woff") format("woff")}@font-face{font-family:MJXTEX-SSB;src:url("site-lib/fonts/mathjax_sansserif-bold.woff") format("woff")}@font-face{font-family:MJXTEX-SSI;src:url("site-lib/fonts/mathjax_sansserif-italic.woff") format("woff")}@font-face{font-family:MJXTEX-SC;src:url("site-lib/fonts/mathjax_script-regular.woff") format("woff")}@font-face{font-family:MJXTEX-T;src:url("site-lib/fonts/mathjax_typewriter-regular.woff") format("woff")}@font-face{font-family:MJXTEX-V;src:url("site-lib/fonts/mathjax_vector-regular.woff") format("woff")}@font-face{font-family:MJXTEX-VB;src:url("site-lib/fonts/mathjax_vector-bold.woff") format("woff")}mjx-c.mjx-c1D466.TEX-I::before{padding:.442em .49em .205em 0;content:"y"}mjx-c.mjx-c3D::before{padding:.583em .778em .082em 0;content:"="}mjx-c.mjx-c1D453.TEX-I::before{padding:.705em .55em .205em 0;content:"f"}mjx-c.mjx-c28::before{padding:.75em .389em .25em 0;content:"("}mjx-c.mjx-c1D465.TEX-I::before{padding:.442em .572em .011em 0;content:"x"}mjx-c.mjx-c31::before{padding:.666em .5em 0 0;content:"1"}mjx-c.mjx-c2C::before{padding:.121em .278em .194em 0;content:","}mjx-c.mjx-c32::before{padding:.666em .5em 0 0;content:"2"}mjx-c.mjx-c2026::before{padding:.12em 1.172em 0 0;content:"…"}mjx-c.mjx-c1D458.TEX-I::before{padding:.694em .521em .011em 0;content:"k"}mjx-c.mjx-c29::before{padding:.75em .389em .25em 0;content:")"}mjx-c.mjx-c1D6FD.TEX-I::before{padding:.705em .566em .194em 0;content:"β"}mjx-c.mjx-c30::before{padding:.666em .5em .022em 0;content:"0"}mjx-c.mjx-c2B::before{padding:.583em .778em .082em 0;content:"+"}mjx-c.mjx-c33::before{padding:.665em .5em .022em 0;content:"3"}mjx-c.mjx-c1D700.TEX-I::before{padding:.452em .466em .022em 0;content:"ε"}mjx-c.mjx-c2212::before{padding:.583em .778em .082em 0;content:"−"}mjx-c.mjx-c1D456.TEX-I::before{padding:.661em .345em .011em 0;content:"i"}mjx-c.mjx-c1D44B.TEX-I::before{padding:.683em .852em 0 0;content:"X"}mjx-c.mjx-cAF::before{padding:.59em .5em 0 0;content:"¯"}mjx-c.mjx-c394::before{padding:.716em .833em 0 0;content:"Δ"}mjx-c.mjx-c2F::before{padding:.75em .5em .25em 0;content:"/"}mjx-c.mjx-c2211.TEX-S1::before{padding:.75em 1.056em .25em 0;content:"∑"}mjx-c.mjx-c2211.TEX-S2::before{padding:.95em 1.444em .45em 0;content:"∑"}mjx-c.mjx-c3C::before{padding:.54em .778em .04em 0;content:"<"}mjx-c.mjx-c1D457.TEX-I::before{padding:.661em .412em .204em 0;content:"j"}mjx-c.mjx-c2217::before{padding:.465em .5em 0 0;content:"∗"}mjx-c.mjx-c1D715::before{padding:.715em .566em .022em 0;content:"∂"}mjx-c.mjx-c1D401.TEX-B::before{padding:.686em .818em 0 0;content:"B"}mjx-c.mjx-cB1::before{padding:.666em .778em 0 0;content:"±"}mjx-c.mjx-c1D6FC.TEX-I::before{padding:.442em .64em .011em 0;content:"α"}mjx-c.mjx-c1D45B.TEX-I::before{padding:.442em .6em .011em 0;content:"n"}mjx-c.mjx-c1D439.TEX-I::before{padding:.68em .749em 0 0;content:"F"}mjx-c.mjx-c34::before{padding:.677em .5em 0 0;content:"4"}</style><pre class="frontmatter language-yaml" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">"하네스 엔지니어링 강의 — AI가 잘 일하는 환경을 설계하는 기술"</span>
+<span class="token key atrule">description</span><span class="token punctuation">:</span> <span class="token string">"Team Attention 이호연 Builder의 Harness Engineering 라이브 강의를 기반으로, 배경 이론·기업 사례·실전 패턴을 하나로 통합한 완성본 강의 자료"</span>
+<span class="token key atrule">created</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-23</span>
+<span class="token key atrule">modified</span><span class="token punctuation">:</span> <span class="token datetime number">2026-04-23</span>
+<span class="token key atrule">type</span><span class="token punctuation">:</span> reference
+<span class="token key atrule">status</span><span class="token punctuation">:</span> done
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Yangha Park
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> ai/agent
+  <span class="token punctuation">-</span> ai/prompt
+  <span class="token punctuation">-</span> dev/architecture
+  <span class="token punctuation">-</span> src/lecture
+<span class="token key atrule">source</span><span class="token punctuation">:</span> <span class="token string">"Team Attention · 이호연 · 2026.04.07 발표자료"</span></code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre><div class="markdown-preview-sizer markdown-preview-section"><div class="header"><h1 class="page-title heading inline-title" id="하네스_엔지니어링_강의_—_AI가_잘_일하는_환경을_설계하는_기술_0">하네스 엔지니어링 강의 — AI가 잘 일하는 환경을 설계하는 기술</h1><div class="data-bar"></div></div><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="el-h1"><h1 data-heading="하네스 엔지니어링 — AI가 잘 일하는 환경을 설계하는 기술" dir="auto" class="heading" id="하네스_엔지니어링_—_AI가_잘_일하는_환경을_설계하는_기술_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>하네스 엔지니어링 — AI가 잘 일하는 환경을 설계하는 기술</h1></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>"에이전트에게 자유를 주려면, 먼저 경계를 설계하라."</strong><br>
+— AI 에이전트 시대의 핵심 엔지니어링 원칙</p>
+</blockquote></div><div class="el-p"><p dir="auto"><strong>연사</strong>: 이호연 · Builder, Team Attention · 2026.04.07</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>전) Contents Technologies, Tech Lead</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>전) Terminal X, Tech Lead</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>전) Socar, Senior Data Engineer</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>전) 컨텐츠 크리에이터 (인프런/클래스101 수강생 10K+)</li>
+</ul></div><div class="el-p"><p dir="auto">이 자료는 이호연 Builder의 Harness Engineering 라이브 강의(55p)를 본(本)으로 삼고, 개념·이론·사례 문서인 <a data-href="하네스 엔지니어링(Harness Engineering)" href="600_tech-stack/harness-engineering/하네스-엔지니어링(harness-engineering).html" class="internal-link" target="_self" rel="noopener nofollow">하네스 엔지니어링(Harness Engineering)</a>, 실전 분석 <a data-href="Decision Tree Architect - Claude Code Harness 해부" href="600_tech-stack/harness-engineering/decision-tree-architect-claude-code-harness-해부.html" class="internal-link" target="_self" rel="noopener nofollow">Decision Tree Architect - Claude Code Harness 해부</a>, 문서화 관점 <a data-href="260406 AI 에이전트 문서화와 하네스 설계" href="600_tech-stack/harness-engineering/260406-ai-에이전트-문서화와-하네스-설계.html" class="internal-link" target="_self" rel="noopener nofollow">260406 AI 에이전트 문서화와 하네스 설계</a>, 실전 적용 사례 <a data-href="secondbrain-upgrade-harness" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html" class="internal-link" target="_self" rel="noopener nofollow">secondbrain-upgrade-harness</a> 를 통합해 <strong>강의자료 한 편으로 완성</strong>한 문서다. 원본 슬라이드는 <code>_assets/ralphton_slides/</code> 에 1:1로 보존되어 있으며, 본문에서 필요한 도해를 그대로 인용한다.</p></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="0. 프롤로그 — 왜 지금 Harness인가" dir="auto" class="heading" id="0._프롤로그_—_왜_지금_Harness인가_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>0. 프롤로그 — 왜 지금 Harness인가</h2></div><div class="el-h3"><h3 data-heading="0-1. 프롬프트만으로는 부족하다" dir="auto" class="heading" id="0-1._프롬프트만으로는_부족하다_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>0-1. 프롬프트만으로는 부족하다</h3></div><div class="el-p"><p dir="auto">AI와의 협업은 짧은 기간에 세 레벨을 거쳐 왔다.</p></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_07.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_07.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 760px; max-width: 100%;"><img alt="slide_07.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_07.png" target="_self" style="width: 760px; max-width: 100%;"></span><br>
+&lt;<em>프롬프트 → 컨텍스트 → 하네스. AI와 일하는 방법의 추상화 레벨이 올라간다.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">레벨</th>
+<th dir="ltr">패러다임</th>
+<th dir="ltr">질문</th>
+<th dir="ltr">대표 도구</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="auto">1</td>
+<td dir="ltr"><strong>Prompt Engineering</strong></td>
+<td dir="ltr">"이렇게 말해봐"</td>
+<td dir="ltr">프롬프트 템플릿</td>
+</tr>
+<tr>
+<td dir="auto">2</td>
+<td dir="ltr"><strong>Context Engineering</strong></td>
+<td dir="ltr">"이런 배경지식을 줘봐"</td>
+<td dir="ltr">RAG, 지식베이스</td>
+</tr>
+<tr>
+<td dir="auto">3</td>
+<td dir="ltr"><strong>Harness Engineering</strong></td>
+<td dir="ltr">"환경 자체를 설계하자"</td>
+<td dir="ltr">스캐폴딩·규칙·검증 루프</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p>프롬프트가 <em>무엇을 말할 것인가</em>의 문제라면, 컨텍스트는 <em>무엇을 알게 할 것인가</em>의 문제다. 하네스는 그 둘을 품고 <strong>"에이전트가 어떤 공간 안에서 움직이게 할 것인가"</strong> 를 다룬다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="0-2. 빠른 테크 회사들의 데이터 포인트" dir="auto" class="heading" id="0-2._빠른_테크_회사들의_데이터_포인트_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>0-2. 빠른 테크 회사들의 데이터 포인트</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_06.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_06.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_06.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_06.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>같은 모델, 다른 하네스 — 이미 빠른 회사들은 하네스에 베팅하고 있다.</em>&gt;</p></div><div></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>LangChain</strong> — 모델 고정, 하네스만 바꿔서 TerminalBench 52.8→66.5%, 벤치마크 순위 30위 → Top 5</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>OpenAI Codex 팀</strong> — 엔지니어 3~7명이 5개월 동안 <strong>단 한 줄도 수동 코드 없이 100만 줄 프로덕션 코드</strong> 를 구축. 쓴 시간은 "더 좋은 모델 찾기"가 아니라 전부 환경 설계였다</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>Anthropic</strong> — 싱글 에이전트 $9 실패 vs 3-에이전트 하네스 6h/$200 완성. 모델이 아니라 하네스가 차이를 만든다</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>Stripe</strong> — 매주 1,000 PR 머지. 전문화된 소형 에이전트 + 6계층 하네스(격리 VM → 린터 → CI → 상한 → 하이브리드 → 인간 리뷰)</li>
+</ul></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>모델 교체로 5% 개선하는 것보다, 하네스 설계로 15% 개선하는 것이 현실적이다.</strong></p>
+</blockquote></div><div class="el-h3"><h3 data-heading="0-3. 정의 — &quot;작업 환경을 만들어주는 것&quot;" dir="auto" class="heading" id="0-3._정의_—_&quot;작업_환경을_만들어주는_것&quot;_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>0-3. 정의 — "작업 환경을 만들어주는 것"</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_08.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_08.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_08.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_08.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Harness Engineering의 정의 — 맥락·제한·작업 흐름·검증을 포괄하는 환경 설계.</em>&gt;</p></div><div></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>Harness Engineering</strong>: <em>AI가 혼자서도 잘 일할 수 있는 작업 환경을 만들어주는 것.</em></p>
+</blockquote></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>OpenAI</strong>: "사람이 방향을 잡고, 에이전트가 실행한다."</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>Anthropic</strong>: "규율은 코드가 아니라 스캐폴딩에서 드러난다."</li>
+</ul></div><div class="el-p"><p dir="auto">좁은 의미에서 Harness는 가드레일·툴셋·플러그인이지만, <strong>이 강의에서 말하는 Harness는 그 모두를 품는 "작업 환경 자체의 설계"</strong> 다. 특정 스킬 하나, 특정 에이전트 조합 하나가 아니라 맥락·제한·흐름·검증을 관통하는 개념이다.</p></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="Agenda — Harness의 6개 축" dir="auto" class="heading" id="Agenda_—_Harness의_6개_축_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Agenda — Harness의 6개 축</h2></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_10.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_10.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_10.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_10.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Harness의 6개 축 — 순환 구조. 한 바퀴 돌고 나면 다음 바퀴가 더 좋아진다.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">축</th>
+<th dir="ltr">영문</th>
+<th dir="ltr">질문</th>
+<th dir="ltr">본문</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">구조</td>
+<td dir="ltr"><strong>Scaffolding</strong></td>
+<td dir="ltr">뭘 깔아두는가</td>
+<td dir="auto">§1</td>
+</tr>
+<tr>
+<td dir="ltr">맥락</td>
+<td dir="ltr"><strong>Context</strong></td>
+<td dir="ltr">AI가 뭘 아는가</td>
+<td dir="auto">§2</td>
+</tr>
+<tr>
+<td dir="ltr">계획</td>
+<td dir="ltr"><strong>Planning</strong></td>
+<td dir="ltr">뭘 할지 정하는가</td>
+<td dir="auto">§3</td>
+</tr>
+<tr>
+<td dir="ltr">실행</td>
+<td dir="ltr"><strong>Execution</strong></td>
+<td dir="ltr">어떻게 시키는가</td>
+<td dir="auto">§4</td>
+</tr>
+<tr>
+<td dir="ltr">검증</td>
+<td dir="ltr"><strong>Verification</strong></td>
+<td dir="ltr">어떻게 믿는가</td>
+<td dir="auto">§5</td>
+</tr>
+<tr>
+<td dir="ltr">개선</td>
+<td dir="ltr"><strong>Compounding</strong></td>
+<td dir="ltr">어떻게 나아지는가</td>
+<td dir="auto">§6</td>
+</tr>
+</tbody>
+</table></div><div class="el-p"><p dir="auto">이 6개 축은 선형(線形)이 아니라 <strong>순환 루프</strong>다. 검증 결과가 맥락에 돌아가고, 개선이 구조를 다시 다듬는다. 한 사이클을 돌수록 팀 생산성의 저점이 올라간다.</p></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="1. 구조(Scaffolding) — 한 번 깔아두면 계속 쓰는 것" dir="auto" class="heading" id="1._구조(Scaffolding)_—_한_번_깔아두면_계속_쓰는_것_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1. 구조(Scaffolding) — 한 번 깔아두면 계속 쓰는 것</h2></div><div class="el-h3"><h3 data-heading="1-1. 프로젝트 구조가 품질을 결정한다" dir="auto" class="heading" id="1-1._프로젝트_구조가_품질을_결정한다_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1-1. 프로젝트 구조가 품질을 결정한다</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_14.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_14.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_14.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_14.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>폴더링 &amp; 아키텍처 — 3개월 후, 구조 없는 프로젝트는 30%, 클린 아키텍처는 85%의 AI 품질 유지율을 보인다.</em>&gt;</p></div><div></div><div class="el-p"><p dir="auto">핵심 원리 3가지:</p></div><div class="el-ol"><ol>
+<li data-line="0" dir="auto"><strong>Monorepo로 묶기</strong> — 소스코드·문서·테스트·설정을 한 프로젝트에서 관리해 AI가 전체 맥락을 한 눈에 본다</li>
+<li data-line="1" dir="auto"><strong>역할별 폴더링</strong> — 목적이 명확한 폴더 구조. AI는 "테스트 작성해줘"라는 말을 듣자마자 <code>tests/</code> 로 간다</li>
+<li data-line="2" dir="auto"><strong>아키텍처가 품질을 결정한다</strong> — 레이어별 책임이 분리된 클린 아키텍처일수록 시간이 갈수록 AI 산출물의 품질이 <strong>올라간다</strong>. 구조가 없으면 파일 100개가 평면적으로 쌓이면서 품질이 <strong>떨어진다</strong></li>
+</ol></div><div class="el-p"><p dir="auto">표준 스캐폴딩:</p></div><div class="el-pre"><pre><code data-line="0">my-project/
+├── src/        # 비즈니스 로직
+├── docs/       # AI가 참고할 문서
+├── tests/      # 검증 인프라
+├── .dev/       # 개발 도구·스크립트
+├── .claude/    # AI 설정
+├── out/        # 빌드 산출물
+└── CLAUDE.md   # 프로젝트 지도
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="1-2. 사람의 문서 vs AI의 문서 — 분리해서 관리" dir="auto" class="heading" id="1-2._사람의_문서_vs_AI의_문서_—_분리해서_관리_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1-2. 사람의 문서 vs AI의 문서 — 분리해서 관리</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_15.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_15.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_15.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_15.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>docs/는 사람의 책임, .dev/는 AI의 흔적. 설정 파일은 그 둘을 참조하고 지탱한다.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">위치</th>
+<th dir="ltr">담당</th>
+<th dir="ltr">역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>docs/</code></td>
+<td dir="ltr">사람</td>
+<td dir="ltr">비즈니스 룰·도메인 정의·체크리스트·ADR·API 스펙</td>
+</tr>
+<tr>
+<td dir="ltr"><code>.dev/</code></td>
+<td dir="ltr">AI</td>
+<td dir="ltr">learnings, troubleshooting 기록, 작업 로그, 디버깅 히스토리, 실험 결과</td>
+</tr>
+<tr>
+<td dir="ltr"><code>CLAUDE.md</code></td>
+<td dir="ltr">사람</td>
+<td dir="ltr">프로젝트 지도(~100줄) — <code>docs/</code> 와 <code>.claude/rules/</code> 로 포인팅</td>
+</tr>
+<tr>
+<td dir="ltr"><code>.claude/rules/</code></td>
+<td dir="ltr">사람</td>
+<td dir="ltr">코딩 규칙·테스트 컨벤션. glob 패턴으로 조건부 로드</td>
+</tr>
+<tr>
+<td dir="ltr"><code>.claude/skills/</code></td>
+<td dir="ltr">사람+AI</td>
+<td dir="ltr">반복 작업 레시피 (<code>/commit</code>, <code>/review</code> 등)</td>
+</tr>
+<tr>
+<td dir="ltr"><code>.claude/*</code> 외</td>
+<td dir="ltr">사람</td>
+<td dir="ltr">hooks, agents, MCP, plugins</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>한 줄 원칙</strong>: 사람의 관리가 멈추는 순간 AI도 엉뚱한 맥락으로 일한다. <code>docs/</code> 는 사람의 책임이다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="1-3. AI 도구 배치하기" dir="auto" class="heading" id="1-3._AI_도구_배치하기_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1-3. AI 도구 배치하기</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_16.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_16.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_16.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_16.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>구조에 맞춰 도구를 배치 — Skills · Hooks · Agents · MCP · Plugins.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">컴포넌트</th>
+<th dir="ltr">역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>Skills</strong></td>
+<td dir="ltr">반복 작업의 레시피화. <code>/commit</code>, <code>/review</code> 같은 슬래시 명령</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Hooks</strong></td>
+<td dir="ltr">자동 안전장치. Pre(차단) / Post(검사) / Stop(일지) / Notification(알림)</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Agents</strong></td>
+<td dir="ltr">전문가 팀원. 서브에이전트 파견 또는 팀 구성</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>MCP</strong></td>
+<td dir="ltr">외부 시스템 연결. DB · Slack · Linear 등 연동</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Plugins</strong></td>
+<td dir="ltr">위 컴포넌트를 한 패키지로 묶어 배포·공유</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="1-4. 경계 설정 — 뭘 알려줄지, 어디까지 허용할지, 뭘 막을지" dir="auto" class="heading" id="1-4._경계_설정_—_뭘_알려줄지,_어디까지_허용할지,_뭘_막을지_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1-4. 경계 설정 — 뭘 알려줄지, 어디까지 허용할지, 뭘 막을지</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_17.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_17.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_17.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_17.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>3단 경계 — 알리는 층(CLAUDE.md) · 허용 층(Permission Mode) · 차단 층(Hooks).</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">층</th>
+<th dir="ltr">도구</th>
+<th dir="ltr">예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>뭘 알려줄까</strong></td>
+<td dir="ltr"><code>CLAUDE.md</code> · <code>.claude/rules/</code></td>
+<td dir="ltr">프로젝트 규칙·코딩 스타일·금기사항</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>어디까지 허용할까</strong></td>
+<td dir="ltr"><code>settings.json</code>(permission mode: plan/auto/bypass)</td>
+<td dir="ltr">"읽기는 자동, 쓰기는 승인"</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>뭘 막을까</strong></td>
+<td dir="ltr"><code>.claude/hooks/</code></td>
+<td dir="ltr">위험 명령을 실행 전에 자동 차단</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>이중 안전장치 예</strong>: CLAUDE.md에 "직접 main push 금지" 작성 + Hook으로 <code>git push --force</code> 차단 → 사람이 잊어도 시스템이 기억한다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="1-5. Try It — 구조 설계를 도와주는 스킬" dir="auto" class="heading" id="1-5._Try_It_—_구조_설계를_도와주는_스킬_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>1-5. Try It — 구조 설계를 도와주는 스킬</h3></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong><code>/scaffold</code></strong> (Harness Plugin) — 프로젝트 초기 구성을 자동으로 잡아준다. CLAUDE.md·rules·폴더 구조까지 한 번에 생성</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong><code>/check-harness</code></strong> (Harness Plugin) — 현재 프로젝트의 Harness 상태를 체크리스트로 진단. 빠진 설정, 개선 포인트를 알려준다</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong><code>/skill-creator</code></strong> (Anthropic 공식) — 스킬 생성 + 성능 점검 도구</li>
+</ul></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="2. 맥락(Context) — AI가 뭘 알고 일하는가" dir="auto" class="heading" id="2._맥락(Context)_—_AI가_뭘_알고_일하는가_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2. 맥락(Context) — AI가 뭘 알고 일하는가</h2></div><div class="el-h3"><h3 data-heading="2-1. 설정 파일 한눈에 보기" dir="auto" class="heading" id="2-1._설정_파일_한눈에_보기_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-1. 설정 파일 한눈에 보기</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_19.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_19.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_19.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_19.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>아래로 갈수록 범위가 좁아지고 우선순위가 높아진다.</em>&gt;</p></div><div></div><div class="el-pre"><pre><code data-line="0">~/.claude/CLAUDE.md         ← 나만 적용 · 모든 프로젝트
+└── my-app/
+    ├── CLAUDE.md           ← 팀 공유 · Git 커밋
+    ├── .claude/
+    │   └── rules/          ← 주제별 분리 · glob으로 조건부 적용
+    │       ├── code-style.md    (*.ts, *.tsx)
+    │       ├── testing.md       (*.test.*, __tests__/**)
+    │       └── security.md      (**/auth/**, *.sql)
+    └── src/auth/
+        └── CLAUDE.md       ← 이 폴더 작업 시에만 자동 로드
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="2-2. 상속 구조 — 하위가 상위를 덮어쓴다" dir="auto" class="heading" id="2-2._상속_구조_—_하위가_상위를_덮어쓴다_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-2. 상속 구조 — 하위가 상위를 덮어쓴다</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_20.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_20.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_20.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_20.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>User → Project → Folder. 좁은 범위가 우선한다.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">스코프</th>
+<th dir="ltr">위치</th>
+<th dir="ltr">용도</th>
+<th dir="ltr">덮어쓰기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>User</strong></td>
+<td dir="ltr"><code>~/.claude/CLAUDE.md</code></td>
+<td dir="ltr">모든 프로젝트 공통 (내 습관, 스타일)</td>
+<td dir="ltr">기본</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Project</strong></td>
+<td dir="ltr"><code>my-app/CLAUDE.md</code></td>
+<td dir="ltr">이 프로젝트 전용 (스택, 컨벤션)</td>
+<td dir="ltr">User를 오버라이드</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Folder</strong></td>
+<td dir="ltr"><code>src/auth/CLAUDE.md</code></td>
+<td dir="ltr">특정 모듈의 특수 규칙</td>
+<td dir="ltr">Project를 오버라이드</td>
+</tr>
+</tbody>
+</table></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>User에 "camelCase 사용" → 모든 프로젝트 적용</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>Project에 "snake_case 사용" → 이 프로젝트만 snake_case</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>Folder에 "JWT만 사용" → <code>auth/</code> 작업 시만 적용</li>
+</ul></div><div class="el-h3"><h3 data-heading="2-3. CLAUDE.md 실전 가이드" dir="auto" class="heading" id="2-3._CLAUDE.md_실전_가이드_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-3. CLAUDE.md 실전 가이드</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">스코프</th>
+<th dir="ltr">담는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">User</td>
+<td dir="ltr">내 작업 습관, 선호 코딩 스타일, 공통 규칙</td>
+</tr>
+<tr>
+<td dir="ltr">Project</td>
+<td dir="ltr">이 프로젝트의 기술 스택, 컨벤션, 중요한 제약</td>
+</tr>
+<tr>
+<td dir="ltr">Folder</td>
+<td dir="ltr">특정 모듈의 특수 규칙</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>팁</strong>: 최대 200줄 정도를 유지하며 계속 업데이트하라. 너무 길어지면 AI 성능이 급격히 저하된다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="2-4. 맥락 관리의 핵심 원칙" dir="auto" class="heading" id="2-4._맥락_관리의_핵심_원칙_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-4. 맥락 관리의 핵심 원칙</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_25.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_25.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_25.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_25.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Progressive Disclosure · .claude/rules/ · Scope 계층. 한꺼번에 다 주면 AI도 헷갈린다.</em>&gt;</p></div><div></div><div class="el-ol"><ol>
+<li data-line="0" dir="auto"><strong>Progressive Disclosure</strong> — 필요한 것만 필요할 때 보여주기</li>
+<li data-line="1" dir="auto"><strong>.claude/rules/</strong> — 상황별로 세분화된 규칙. CLAUDE.md가 길어지면 분리</li>
+<li data-line="2" dir="auto"><strong>Scope 계층</strong> — User / Project / Folder 각 레벨에 맞는 정보 배치</li>
+</ol></div><div class="el-h3"><h3 data-heading="2-5. Progressive Disclosure — 덜 주고 정확히 가리키기" dir="auto" class="heading" id="2-5._Progressive_Disclosure_—_덜_주고_정확히_가리키기_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-5. Progressive Disclosure — 덜 주고 정확히 가리키기</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_26.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_26.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_26.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_26.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>다 때려넣지 말고, "이런 상황에서는 이걸 참고해"라고 가이드한다.</em>&gt;</p></div><div></div><div class="el-p"><p dir="auto"><strong>핵심 아이디어</strong>: 프롬프트에 <em>"이 상황에서는 이 문서를 읽어"</em> 라고 가이드를 주면, AI가 동적으로 필요한 문서만 읽는다.</p></div><div class="el-pre"><pre><code data-line="0">SKILL.md 또는 CLAUDE.md 안에서
+	코드 작성 시 → references/code-style.md 참고
+	테스트 시   → references/testing-guide.md 참고
+	API 설계 시 → references/api-convention.md 참고
+	배포 시     → references/deploy-checklist.md 참고
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-pre"><pre><code data-line="0">my-skill/
+	SKILL.md
+	references/
+		code-style.md
+		testing-guide.md
+		api-convention.md
+		deploy-checklist.md
+
+CLAUDE.md (핵심만 30줄)
+docs/
+	architecture.md
+	conventions.md
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>결과</strong>: SKILL/CLAUDE.md에 다 넣는 게 아니라 폴더로 분리하고 상황별로 참조시킨다 → 컨텍스트 절약. 이 패턴은 <a data-href="260406 AI 에이전트 문서화와 하네스 설계" href="600_tech-stack/harness-engineering/260406-ai-에이전트-문서화와-하네스-설계.html" class="internal-link" target="_self" rel="noopener nofollow">260406 AI 에이전트 문서화와 하네스 설계</a>의 "토큰 경제학" 논의와 맞닿는다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="2-6. 세션 맥락 관리 — 쌓이면 비워라" dir="auto" class="heading" id="2-6._세션_맥락_관리_—_쌓이면_비워라_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-6. 세션 맥락 관리 — 쌓이면 비워라</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_27.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_27.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_27.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_27.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>컨텍스트는 채우는 것만큼 비우는 것도 중요하다.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">사용률</th>
+<th dir="ltr">상태</th>
+<th dir="ltr">행동</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="auto">~20%</td>
+<td dir="ltr">쾌적</td>
+<td dir="ltr">그대로 진행</td>
+</tr>
+<tr>
+<td dir="auto">~50%</td>
+<td dir="ltr">주의</td>
+<td dir="ltr"><code>/compact</code></td>
+</tr>
+<tr>
+<td dir="auto">~80%</td>
+<td dir="ltr">위험</td>
+<td dir="ltr"><code>/clear</code> 또는 새 세션</td>
+</tr>
+</tbody>
+</table></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">명령</th>
+<th dir="ltr">용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>/clear</code></td>
+<td dir="ltr">컨텍스트 완전 초기화. 다른 주제로 전환할 때</td>
+</tr>
+<tr>
+<td dir="ltr"><code>/compact</code></td>
+<td dir="ltr">오래된 대화를 요약·압축. 같은 주제를 이어갈 때</td>
+</tr>
+<tr>
+<td dir="ltr"><code>handoff</code></td>
+<td dir="ltr">현재 세션의 맥락을 파일로 저장 → 새 세션에서 이어받기. 맥락 손실 없이 전환</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>이호연 기준</strong>: 20~30% 되면 새로 시작. 아예 다른 맥락의 작업을 하면 <code>/clear</code>, 이어가야 하면 <code>handoff</code> 로 맥락을 넘긴다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="2-7. `.claude/rules/` 가이드" dir="auto" class="heading" id="2-7._`.claude/rules/`_가이드_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-7. <code>.claude/rules/</code> 가이드</h3></div><div class="el-p"><p dir="auto">작동 방식: <code>.claude/rules/</code> 폴더에 <code>.md</code> 파일을 놓으면 Claude Code가 자동으로 읽는다. 파일명에 <strong>glob 패턴</strong>을 넣으면 해당 파일 작업 시에만 로드된다.</p></div><div class="el-pre"><pre><code data-line="0"># .claude/rules/ 구조
+code-style.md   # 항상 로드
+testing.md      # 항상 로드
+react-*.md      # *.tsx 작업 시만
+api-design.md   # routes/ 작업 시만
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-p"><p dir="auto">규칙 파일 상단에 glob 패턴을 지정하면 조건부 로드가 된다.</p></div><div class="el-pre"><pre><code data-line="0">security.md
+glob: **/*.sql, **/auth/**
+→ .env 직접 수정 금지, SQL은 반드시 parameterized query
+
+testing.md
+glob: **/*.test.*, **/__tests__/**
+→ 커버리지 80%+, mock 최소화, 통합테스트 우선
+
+code-style.md
+(항상 로드)
+→ 함수 20줄 이내, camelCase, 주석은 영어
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="2-8. 주기적으로 점검하기" dir="auto" class="heading" id="2-8._주기적으로_점검하기_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>2-8. 주기적으로 점검하기</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_29.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_29.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_29.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_29.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Skill · MCP는 Context를 먹는다. 안 쓰는 것은 주기적으로 정리하자.</em>&gt;</p></div><div></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>Skill · MCP는 Context를 먹는다</strong> — 생각보다 context를 많이 차지하고 pollution이 생길 수 있다. <code>/context</code> 로 현재 사용량을 확인하자</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>CLAUDE.md가 비대해질 때</strong> — 관리 안 되면 중복·대치되는 내용이 쌓인다. AI한테 직접 점검시킨다:
+<blockquote dir="auto">
+<p>"CLAUDE.md, .claude/rules를 분석해서 논리적으로 문제가 없는지 + 중복되거나 대치되는 내용은 없는지 분석해줘"</p>
+</blockquote>
+</li>
+</ul></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>쌓는 것만큼 점검하고 비우는 것</strong> 도 Context Engineering이다.</p>
+</blockquote></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="3. 계획(Planning) — AI에게 일 시키기 전에, 무엇을 할지 함께 정하기" dir="auto" class="heading" id="3._계획(Planning)_—_AI에게_일_시키기_전에,_무엇을_할지_함께_정하기_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3. 계획(Planning) — AI에게 일 시키기 전에, 무엇을 할지 함께 정하기</h2></div><div class="el-h3"><h3 data-heading="3-1. 핵심 흐름: 계획 → 실행 → 검증" dir="auto" class="heading" id="3-1._핵심_흐름_계획_→_실행_→_검증_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-1. 핵심 흐름: 계획 → 실행 → 검증</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_31.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_31.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_31.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_31.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>한 번에 완벽하게가 아니라, 반복해서 수렴하는 구조.</em>&gt;</p></div><div></div><div class="el-h3"><h3 data-heading="3-2. &quot;해줘&quot;의 함정" dir="auto" class="heading" id="3-2._&quot;해줘&quot;의_함정_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-2. "해줘"의 함정</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_32.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_32.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_32.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_32.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>"해줘" 안티패턴 vs "같이 계획부터" — 시간만 날리기 vs 높은 성공률.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">안티패턴: "해줘"</th>
+<th dir="ltr">권장: "같이 계획부터"</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">"이거 만들어줘"</td>
+<td dir="ltr">"~~할 건데 같이 계획 세워보자"</td>
+</tr>
+<tr>
+<td dir="ltr">AI가 알아서 만듦</td>
+<td dir="ltr">AI가 계획 작성</td>
+</tr>
+<tr>
+<td dir="ltr">검수 → "아닌데..."</td>
+<td dir="ltr">사람이 검토 → 수정 → 승인</td>
+</tr>
+<tr>
+<td dir="ltr">다시 시킴 → 검수 → 다시...</td>
+<td dir="ltr">승인된 계획대로 실행</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>시간만 날림</strong></td>
+<td dir="ltr"><strong>높은 성공률</strong></td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p>계획과 실행을 분리하면 검수 횟수가 줄고, 결과의 예측 가능성이 올라간다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="3-3. AskUserQuestion — 나에게 질문하게 만들기" dir="auto" class="heading" id="3-3._AskUserQuestion_—_나에게_질문하게_만들기_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-3. AskUserQuestion — 나에게 질문하게 만들기</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_33.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_33.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_33.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_33.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>"해줘"가 아니라 "물어봐" — AI가 스스로 맥락을 채우게 한다.</em>&gt;</p></div><div></div><div class="el-p"><p dir="auto"><strong>왜 질문이 중요한가</strong>: 사람은 자기 머릿속의 전제를 프롬프트에 다 담지 못한다. AI가 질문을 해야 빠진 맥락이 드러난다.</p></div><div class="el-p"><p dir="auto"><strong>커스텀 Plan 스킬에서</strong>: 인터뷰 단계를 넣으면 AI가 자동으로 AskUserQuestion을 사용해 모호한 점을 물어본다. 스킬 프롬프트에 다음 문장을 넣는다:</p></div><div class="el-blockquote"><blockquote dir="auto">
+<p>"이해한 것을 미러링하고, 모호한 점을 질문해서 명확하게 해줘"</p>
+</blockquote></div><div class="el-p"><p dir="auto">예시 대화:</p></div><div class="el-pre"><pre><code data-line="0">USER: 나 결제 시스템을 리팩토링하려고 해. 네가 지금 이해한 게 뭔지
+      정리해주고, 모호한 점이 없도록 내게 계속 질문해서 명확하게 해줘
+
+AI:   이해한 것: 결제 모듈의 기존 구조를 개선하려는 것
+      질문 1: 현재 PG사 연동이 단일인가요, 멀티인가요?
+      질문 2: 구독 결제도 포함되나요?
+      질문 3: DB 스키마 변경도 허용 범위인가요?
+
+USER: 멀티 PG, 구독 포함, DB 스키마는 건드리지 마
+
+AI:   명확해졌습니다. 그러면 계획을 세우겠습니다...
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-h3"><h3 data-heading="3-4. 계획의 진화 — 커스텀 Plan 스킬" dir="auto" class="heading" id="3-4._계획의_진화_—_커스텀_Plan_스킬_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-4. 계획의 진화 — 커스텀 Plan 스킬</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_34.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_34.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_34.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_34.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>기본 Plan → 커스텀 Plan 스킬. 인터뷰 + 요구사항 도출 + 플랜 파일까지 자동화.</em>&gt;</p></div><div></div><div class="el-ol"><ol>
+<li data-line="0" dir="auto"><strong>Plan Mode (기본)</strong> — 계획과 실행 분리. 하지만 사람이 모든 걸 프롬프트에 담을 수 없다</li>
+<li data-line="1" dir="auto"><strong>커스텀 Plan 스킬</strong> — 인터뷰 + 요구사항 도출 + 플랜 파일까지 자동화하는 전용 스킬을 만든다</li>
+</ol></div><div class="el-p"><p dir="auto">예시: <code>/specify</code> 스킬의 내부 흐름</p></div><div class="el-pre"><pre><code data-line="0">1. 목표 확인  — 사용자의 의도를 미러링
+2. 인터뷰   — 모호한 지점을 질문으로 끌어내기
+3. 요구사항 + 태스크 도출
+4. 플랜 파일로 떨구기 → /execute 로 실행
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-blockquote"><blockquote dir="auto">
+<p>핵심 전환: <strong>implicit(머릿속) → explicit(플랜 파일)</strong>.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="3-5. Try It — 계획을 더 잘 세우기 위한 스킬" dir="auto" class="heading" id="3-5._Try_It_—_계획을_더_잘_세우기_위한_스킬_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>3-5. Try It — 계획을 더 잘 세우기 위한 스킬</h3></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong><code>/specify</code></strong> — 스펙 파일을 더 잘 얻기 위한 스킬. 인터뷰 → 요구사항 도출 → 플랜 파일까지 자동화</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong><code>/deep-interview</code></strong> — 깊이 있는 인터뷰로 unknown-unknown을 줄인다. 미처 생각 못한 엣지 케이스까지 끌어낸다</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong><code>/clarify</code></strong> (plugins-for-claude-natives) — 요구사항을 명확하게 하고 싶을 때. 모호한 지시를 구체적인 스펙으로 변환</li>
+</ul></div><div class="el-blockquote"><blockquote dir="auto">
+<p>계획 단계에서 <strong>모호함을 줄이는 것</strong> 이 실행 품질을 결정한다.</p>
+</blockquote></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="4. 실행(Execution · Orchestration) — 혼자 vs 부하 파견 vs 팀" dir="auto" class="heading" id="4._실행(Execution_·_Orchestration)_—_혼자_vs_부하_파견_vs_팀_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4. 실행(Execution · Orchestration) — 혼자 vs 부하 파견 vs 팀</h2></div><div class="el-h3"><h3 data-heading="4-1. 실행 패턴 3종" dir="auto" class="heading" id="4-1._실행_패턴_3종_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4-1. 실행 패턴 3종</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_35.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_35.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_35.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_35.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Single · Subagent · Team Mode. 90%는 단일/서브에이전트로 충분하고, Team Mode는 토큰이 ~7배 든다.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">패턴</th>
+<th dir="ltr">구조</th>
+<th dir="ltr">적합한 상황</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>혼자(Single)</strong></td>
+<td dir="ltr">AI 1명 → 결과물</td>
+<td dir="ltr">단순 작업. 대부분의 일상 작업</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>부하 파견(Subagent)</strong></td>
+<td dir="ltr">메인 → [조사·작업·검증] 병렬 → 메인이 종합</td>
+<td dir="ltr">병렬·전문화가 필요한 작업</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>팀 협업(Team Mode)</strong></td>
+<td dir="ltr">PM·개발·디자인·QA가 상호 소통</td>
+<td dir="ltr">다관점·복잡. 에이전트 간 통신 필요</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>비용 감각</strong>: 90%는 단일/서브에이전트로 충분하다. Team Mode는 토큰이 약 7배 든다 — 정말 필요한 복잡도에만 쓴다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="4-2. 상황별 오케스트레이션 패턴" dir="auto" class="heading" id="4-2._상황별_오케스트레이션_패턴_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4-2. 상황별 오케스트레이션 패턴</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_36.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_36.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_36.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_36.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>순차 파이프라인 · 병렬 Subagent · Team Mode — 상황에 따라 다른 패턴을 쓴다.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">패턴</th>
+<th dir="ltr">상황</th>
+<th dir="ltr">명령 / 동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>순차 파이프라인</strong></td>
+<td dir="ltr">블로그 글: 조사 → 초안 → 퇴고 → 발행 순서가 중요</td>
+<td dir="ltr"><code>TaskCreate</code> 로 체크박스 생성, 하나씩 직렬 수행</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>병렬 Subagent</strong></td>
+<td dir="ltr">경쟁사 3곳의 랜딩 페이지를 동시에 분석(서로 독립)</td>
+<td dir="ltr"><code>Agent 3개 spawn</code>, 병렬 분석 후 메인이 취합</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Team Mode</strong></td>
+<td dir="ltr">새 기능을 설계자·구현자·리뷰어가 동시에 협업</td>
+<td dir="ltr"><code>TeamCreate</code> 로 팀 생성, 에이전트 간 직접 소통</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="4-3. Ralph Loop — 될 때까지 반복" dir="auto" class="heading" id="4-3._Ralph_Loop_—_될_때까지_반복_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4-3. Ralph Loop — 될 때까지 반복</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_37.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_37.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_37.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_37.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>완료 기준을 정하고, 충족할 때까지 AI가 알아서 돈다.</em>&gt;</p></div><div></div><div class="el-pre"><pre><code data-line="0">1. 완료 기준 합의  ←  사람이 한 일
+2. AI가 작업
+3. 기준 충족? — NO → 2번으로
+          — YES → 끝
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre></div><div class="el-p"><p dir="auto"><strong>예시: "랜딩 페이지 만들어줘"</strong></p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>완료 기준: 모바일 반응형 + Lighthouse 90점 이상 + 카피 3번 이상 퇴고</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>1차: 페이지 완성, Lighthouse 72점 → 실패</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>2차: 92점, 모바일 레이아웃 깨짐 → 실패</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>3차: 레이아웃 수정, 카피 퇴고 2회만 → 실패</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span>4차: 전항목 충족 → <strong>PASS</strong></li>
+</ul></div><div class="el-blockquote"><blockquote dir="auto">
+<p>사람이 한 일: 기준 정하기 1번. 나머지는 AI가 알아서.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="4-4. Auto Research — 자율 실험 루프" dir="auto" class="heading" id="4-4._Auto_Research_—_자율_실험_루프_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4-4. Auto Research — 자율 실험 루프</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_38.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_38.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_38.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_38.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>karpathy/autoresearch — 사람은 방향만 정하고, AI가 밤새 실험을 돌린다.</em>&gt;</p></div><div></div><div class="el-p"><p dir="auto">핵심 패턴: <strong>코드 수정(train.py) → 실행(5분 학습) → 평가(성능 비교) → 판단(유지/폐기) → 다음 실험</strong>.</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><code>program.md</code> 에 연구 방향 작성 (스킬과 같은 역할)</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>AI가 <code>train.py</code> 만 수정 — 아키텍처, 하이퍼파라미터 변경</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>시간당 ~12개 실험 자율 수행, 밤새 무인 운영</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>성능 개선되면 유지, 아니면 폐기 → 다음 실험</li>
+</ul></div><div class="el-blockquote"><blockquote dir="auto">
+<p>Ralph Loop의 확장판: 사람이 일정 시간 손을 떼도 성과가 수렴한다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="4-5. Try It — 실행을 도와주는 도구들" dir="auto" class="heading" id="4-5._Try_It_—_실행을_도와주는_도구들_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>4-5. Try It — 실행을 도와주는 도구들</h3></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong><code>/agent-orchestrate</code></strong> (Harness Plugin) — 현재 문제에 최적화된 오케스트레이션 패턴을 자동 적용. 단일/병렬/파이프라인 선택</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong><code>ralph</code></strong> (Claude Code 공식 Plugin) — 실행 결과를 자동 검증하는 공식 플러그인</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong><code>autoresearch</code></strong> (karpathy) — 자율 실험 루프</li>
+</ul></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="5. 검증(Verification) — 결과물을 어떻게 믿을 것인가" dir="auto" class="heading" id="5._검증(Verification)_—_결과물을_어떻게_믿을_것인가_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5. 검증(Verification) — 결과물을 어떻게 믿을 것인가</h2></div><div class="el-h3"><h3 data-heading="5-1. 원칙 01 — 기준이 있어야 검증이 가능하다" dir="auto" class="heading" id="5-1._원칙_01_—_기준이_있어야_검증이_가능하다_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5-1. 원칙 01 — 기준이 있어야 검증이 가능하다</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_42.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_42.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_42.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_42.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Sprint Contract — 작업 전에 "뭘 만들고 어떻게 검증할지" 합의한다.</em>&gt;</p></div><div></div><div class="el-ol"><ol>
+<li data-line="0" dir="auto"><strong>완료 조건을 먼저 정한다</strong> — "이 3가지가 되면 끝" 을 시작 전에 합의</li>
+<li data-line="1" dir="auto"><strong>조건을 측정 가능하게 쓴다</strong> — "잘 되게" 말고 "테스트 통과 + 빌드 성공"</li>
+<li data-line="2" dir="auto"><strong>미달이면 다시 돌린다</strong> — 기준이 있으니 자동 반복이 가능해진다(Ralph Loop)</li>
+</ol></div><div class="el-h3"><h3 data-heading="5-2. 원칙 02 — 컨텍스트를 나누고, 관점을 분리한다" dir="auto" class="heading" id="5-2._원칙_02_—_컨텍스트를_나누고,_관점을_분리한다_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5-2. 원칙 02 — 컨텍스트를 나누고, 관점을 분리한다</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_43.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_43.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_43.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_43.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Generator vs Evaluator — 같은 컨텍스트에서 만들고 평가하면 안 된다.</em>&gt;</p></div><div></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>Anthropic</strong>: <em>"만든 AI와 확인하는 AI를 분리하는 것이 가장 강력한 레버다."</em><br>
+<em>"Evaluator를 회의적으로 튜닝하는 게, Generator를 자기비판적으로 만드는 것보다 훨씬 쉽다."</em></p>
+</blockquote></div><div class="el-p"><p dir="auto">자기 작업을 평가하는 AI는 quality가 mediocre해도 자신 있게 칭찬한다. <strong>관점을 물리적으로 분리해야 한다.</strong> 이는 <a data-href="하네스 엔지니어링(Harness Engineering)" href="600_tech-stack/harness-engineering/하네스-엔지니어링(harness-engineering).html" class="internal-link" target="_self" rel="noopener nofollow">하네스 엔지니어링(Harness Engineering)</a> 이 다루는 "아키텍처 제약으로서의 검증 레이어"와 같은 원리다.</p></div><div class="el-h3"><h3 data-heading="5-3. 원칙 03 — 모델도 나누고, 역할도 나눈다" dir="auto" class="heading" id="5-3._원칙_03_—_모델도_나누고,_역할도_나눈다_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5-3. 원칙 03 — 모델도 나누고, 역할도 나눈다</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_44.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_44.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_44.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_44.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Codex · Gemini · Opus/Sonnet — 다른 모델, 다른 역할로 교차 검증.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">모델</th>
+<th dir="ltr">역할</th>
+<th dir="ltr">강점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>Codex</strong></td>
+<td dir="ltr">코드 리뷰</td>
+<td dir="ltr">로직 오류, 보안 취약점, 테스트 누락 검출</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Gemini</strong></td>
+<td dir="ltr">문서 리뷰</td>
+<td dir="ltr">일관성, 정확성, 구조 검증</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Opus / Sonnet</strong></td>
+<td dir="ltr">성능별 분업</td>
+<td dir="ltr">Opus: 복잡한 판단·아키텍처 / Sonnet: 빠른 확인·반복 검증</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p><em>"Out of the box, Claude is a poor QA agent."</em> — 검증 에이전트도 튜닝이 필요하다. 기준을 구체적으로, 회의적으로 설정해야 쓸 수 있다.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="5-4. 원칙 04 — 에이전트에게 눈을 달아주기" dir="auto" class="heading" id="5-4._원칙_04_—_에이전트에게_눈을_달아주기_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5-4. 원칙 04 — 에이전트에게 눈을 달아주기</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_45.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_45.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_45.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_45.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Browser Agent · Computer Use · 시각 검증 루프 — 코드뿐 아니라 화면도 본다.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">도구</th>
+<th dir="ltr">용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>Browser Agent</strong> (chrome-cdp / agent-browser)</td>
+<td dir="ltr">실제 Chrome 제어. DOM 탐색, 클릭, 스크린샷, 네비게이션. 웹앱 UX 직접 검증</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Computer Use</strong> (built-in MCP)</td>
+<td dir="ltr">스크린샷 + 마우스/키보드. 네이티브 앱·디자인 도구도 검증</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>시각 검증 루프</strong></td>
+<td dir="ltr"><code>generate → screenshot → evaluate → 수정</code> 루프. 사람이 눈으로 하는 것을 AI가 대신</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="5-5. 안전장치" dir="auto" class="heading" id="5-5._안전장치_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5-5. 안전장치</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_47.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_47.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_47.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_47.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>되돌릴 수 있는 환경 · 위험한 건 사람이 확인 · Dry-run 먼저.</em>&gt;</p></div><div></div><div class="el-ol"><ol>
+<li data-line="0" dir="auto"><strong>되돌릴 수 있는 환경</strong> — 브랜치/Worktree 격리에서 작업. 실수해도 메인은 안전 (<code>git worktree add</code>)</li>
+<li data-line="1" dir="auto"><strong>위험한 건 사람이 확인</strong> — 삭제·배포·외부 발송은 승인 후 실행 (Runtime Gate)</li>
+<li data-line="2" dir="auto"><strong>Dry-run 먼저</strong> — "이렇게 할 건데 맞나?" 미리보기 후 실행 (<code>--dry-run</code>)</li>
+</ol></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>"실수해도 괜찮은 구조"</strong> 를 만드는 것이 핵심.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="5-6. Try It — 검증을 도와주는 도구들" dir="auto" class="heading" id="5-6._Try_It_—_검증을_도와주는_도구들_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>5-6. Try It — 검증을 도와주는 도구들</h3></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong><code>/qa</code></strong> (Harness Plugin) — Browser Agent·Computer Use 도구를 활용해 QA를 자동화하는 스킬. 화면을 직접 보고, 클릭하고, 검증</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>verify 레퍼런스</strong> (team-attention/hoyeon) — 검증 스킬을 더 깊이 이해하고 싶다면. 검증 전략·패턴·실제 적용 사례 정리</li>
+</ul></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="6. 개선(Compounding) — 어떻게 계속 나아질 것인가" dir="auto" class="heading" id="6._개선(Compounding)_—_어떻게_계속_나아질_것인가_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6. 개선(Compounding) — 어떻게 계속 나아질 것인가</h2></div><div class="el-h3"><h3 data-heading="6-1. 관측 → 패턴 발견 → Skill/Rule로 승격" dir="auto" class="heading" id="6-1._관측_→_패턴_발견_→_Skill/Rule로_승격_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6-1. 관측 → 패턴 발견 → Skill/Rule로 승격</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_49.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_49.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_49.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_49.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>작업 → 관측(세션+사용 패턴) → 패턴 발견 → Skill 또는 Rule → 더 나은 작업.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">관측하기</th>
+<th dir="ltr">개선하기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>세션 분석</strong> — 프롬프트 패턴 + Skill/Agent 호출 빈도 분석. 어디서 시간을 쓰는지, 어디서 실패하는지</td>
+<td dir="ltr"><strong>3번 반복 → Skill로</strong> — 같은 작업을 3번 반복하면 자동화할 타이밍. 스킬로 만들어서 재사용</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>AI Slop 감지</strong> — 작업하다 보면 불필요한 코드, 중복 설정, 안 쓰는 규칙이 쌓인다. 이게 AI slop</td>
+<td dir="ltr"><strong>3번 틀리면 → Rule 또는 CLAUDE.md에</strong> — 같은 실수 반복 → <code>.claude/rules/</code> 에 규칙 추가하거나 CLAUDE.md에 명시</td>
+</tr>
+<tr>
+<td dir="auto"></td>
+<td dir="ltr"><strong>Skill 개선 루프</strong> — 만들기 → 사용 → 세션 분석 → 병목 → 개선. 스킬도 계속 다듬는다</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="6-2. 단순화하기" dir="auto" class="heading" id="6-2._단순화하기_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6-2. 단순화하기</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_50.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_50.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_50.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_50.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>-1 · 안 쓰는 건 치운다. ↑ 모델이 좋아지면 Harness를 재평가. ! 과설계 신호를 인식하기.</em>&gt;</p></div><div></div><div class="el-ol"><ol>
+<li data-line="0" dir="auto"><strong>안 쓰는 건 치운다</strong> — 필요 없어진 Skill·MCP·Rule은 바로 삭제. 쌓이면 AI slop</li>
+<li data-line="1" dir="auto"><strong>모델이 좋아지면 Harness를 재평가</strong> — 예전에 필요했던 가드레일이 지금은 불필요할 수 있다</li>
+<li data-line="2" dir="auto"><strong>과설계 신호를 인식하기</strong> — 설정이 너무 복잡하면 뭔가 잘못된 것. 점점 단순해져야 정상</li>
+</ol></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>Anthropic</strong>: <em>"Harness의 공간은 모델이 좋아져도 줄어들지 않는다. 이동할 뿐이다."</em></p>
+</blockquote></div><div class="el-h3"><h3 data-heading="6-3. 자가 진단 — 잘 가고 있나" dir="auto" class="heading" id="6-3._자가_진단_—_잘_가고_있나_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6-3. 자가 진단 — 잘 가고 있나</h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_51.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_51.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_51.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_51.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>잘 가고 있다는 신호 vs 실패하고 있다는 징후.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">+ 잘 가고 있다</th>
+<th dir="ltr">− 실패 징후</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">같은 말을 두 번 하지 않는다 (맥락 전달이 잘 되고 있다)</td>
+<td dir="ltr">검수에 시간이 더 오래 걸린다 (검증 자동화 필요 신호)</td>
+</tr>
+<tr>
+<td dir="ltr">실수가 규칙이 된다 (개선 루프가 돌고 있다)</td>
+<td dir="ltr">시켰는데 원하는 결과가 안 나온다 (맥락 전달 또는 계획 단계 부족)</td>
+</tr>
+<tr>
+<td dir="ltr">차단 장치가 뭔가를 막고 있다 (사고가 구조적으로 예방되고 있다)</td>
+<td dir="ltr">스킬·에이전트가 많은데 잘 안 쓴다 (context pollution + 제대로 동작 안 함)</td>
+</tr>
+<tr>
+<td dir="ltr">불필요한 것이 줄어든다 (복잡해지는 게 아니라 단순해지고 있다)</td>
+<td dir="ltr">가이드 파일이 길어지고 관리 안 된다 (CLAUDE.md·docs 분리/정리 없이 쌓임)</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>좋은 Harness는 점점 단순해진다.</strong> 복잡해지고 있다면 뭔가 잘못된 것.</p>
+</blockquote></div><div class="el-h3"><h3 data-heading="6-4. Try It — `session-wrap`" dir="auto" class="heading" id="6-4._Try_It_—_`session-wrap`_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>6-4. Try It — <code>session-wrap</code></h3></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_52.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_52.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_52.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_52.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>Claude Code 세션 종료 후 세션을 분석해 패턴·실수·자동화 기회를 자동으로 뽑아낸다.</em>&gt;</p></div><div></div><div class="el-p"><p dir="auto"><strong><code>session-wrap</code></strong> (plugins-for-claude-natives): Claude Code 세션이 끝난 뒤, 세션 내용을 분석해 인사이트를 추출하는 플러그인.</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>패턴 발견</strong> — 반복 작업 패턴을 감지해서 Skill 후보로 제안</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>실수 추출</strong> — 세션 중 실수를 정리해서 Rule 후보로 제안</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>문서 업데이트</strong> — CLAUDE.md·docs 업데이트 필요 항목 감지</li>
+</ul></div><div class="el-blockquote"><blockquote dir="auto">
+<p>세션 분석 → 패턴 발견 → Skill/Rule 추가 — 이것이 개선 루프의 핵심.</p>
+</blockquote></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="7. 통합 관점 — 배경 이론과 기업 사례" dir="auto" class="heading" id="7._통합_관점_—_배경_이론과_기업_사례_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>7. 통합 관점 — 배경 이론과 기업 사례</h2></div><div class="el-h3"><h3 data-heading="7-1. 진화 흐름과 개념의 계보" dir="auto" class="heading" id="7-1._진화_흐름과_개념의_계보_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>7-1. 진화 흐름과 개념의 계보</h3></div><div class="el-p"><p dir="auto">이호연이 강의 서두에서 언급한 "Prompt → Context → Harness" 3-레벨은 <a data-href="하네스 엔지니어링(Harness Engineering)" href="600_tech-stack/harness-engineering/하네스-엔지니어링(harness-engineering).html" class="internal-link" target="_self" rel="noopener nofollow">하네스 엔지니어링(Harness Engineering)</a> 이 정리한 세 패러다임 진화표와 동일한 축에 놓인다.</p></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">패러다임</th>
+<th dir="ltr">시기</th>
+<th dir="ltr">작업 대상</th>
+<th dir="ltr">핵심 도구</th>
+<th dir="ltr">한계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">프롬프트 엔지니어링</td>
+<td dir="auto">2022~</td>
+<td dir="ltr">에이전트 입력 문구</td>
+<td dir="ltr">프롬프트 템플릿</td>
+<td dir="ltr">비결정론적, 확장 불가</td>
+</tr>
+<tr>
+<td dir="ltr">컨텍스트 엔지니어링</td>
+<td dir="auto">2024~</td>
+<td dir="ltr">에이전트가 참조하는 정보</td>
+<td dir="ltr">RAG, 지식베이스</td>
+<td dir="ltr">환경 제약이 없어 일관성 부재</td>
+</tr>
+<tr>
+<td dir="ltr">하네스 엔지니어링</td>
+<td dir="auto">2026~</td>
+<td dir="ltr">에이전트를 둘러싼 전체 환경</td>
+<td dir="ltr">린터·CI·GC 에이전트·아키텍처 규칙</td>
+<td dir="ltr">초기 설계 비용 높음</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="7-2. Martin Fowler가 정리한 하네스의 3대 구성" dir="auto" class="heading" id="7-2._Martin_Fowler가_정리한_하네스의_3대_구성_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>7-2. Martin Fowler가 정리한 하네스의 3대 구성</h3></div><div class="el-p"><p dir="auto">OpenAI 블로그를 Martin Fowler / Birgitta Böckeler 팀이 재해석한 분류는 이호연 강의의 6개 축을 더 상위에서 관통한다.</p></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">구성 요소</th>
+<th dir="ltr">이호연 강의 대응 축</th>
+<th dir="ltr">대표 장치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>Context Engineering</strong></td>
+<td dir="ltr">구조(§1) + 맥락(§2)</td>
+<td dir="ltr">AGENTS.md·CLAUDE.md, ADR, 실행 계획 artifact, 동적 컨텍스트</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Architectural Constraints</strong></td>
+<td dir="ltr">계획(§3) + 검증(§5) 안전장치</td>
+<td dir="ltr">커스텀 린터, 구조적 테스트, 피드백 루프 설계</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Garbage Collection</strong></td>
+<td dir="ltr">개선(§6)</td>
+<td dir="ltr">문서-코드 불일치 탐지, 미사용 코드 제거, 아키텍처 위반 스캔</td>
+</tr>
+</tbody>
+</table></div><div class="el-p"><p dir="auto">특히 <strong>린터 에러 메시지 자체를 "에이전트에게 다음 행동을 지시하는 프롬프트"로 재설계하는 것</strong> 이 가장 큰 레버리지 포인트라는 OpenAI의 관찰은, 이호연의 "3번 틀리면 Rule로 승격" 루프의 메커니즘적 설명이다.</p></div><div class="el-h3"><h3 data-heading="7-3. 역설 — 제약이 자율성을 확장한다" dir="auto" class="heading" id="7-3._역설_—_제약이_자율성을_확장한다_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>7-3. 역설 — 제약이 자율성을 확장한다</h3></div><div class="el-blockquote"><blockquote dir="auto">
+<p><em>"에이전트가 능력이 없어서 실패하는 게 아니라, 환경이 충분히 명세되지 않아서 실패한다."</em> — OpenAI Codex 팀</p>
+</blockquote></div><div class="el-p"><p dir="auto">이호연이 마무리 슬라이드에서 "<strong>너무 옥죄지 말 것, 자유도를 높게 주고 안 되는 것만 제한하기</strong>" 라고 경고하는 이유가 여기에 있다. 경계는 에이전트를 가두는 벽이 아니라, 그 안에서 자유롭게 움직일 수 있게 해주는 스캐폴딩이다.</p></div><div class="el-h3"><h3 data-heading="7-4. 기업 사례 속의 6개 축 매핑" dir="auto" class="heading" id="7-4._기업_사례_속의_6개_축_매핑_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>7-4. 기업 사례 속의 6개 축 매핑</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">사례</th>
+<th dir="ltr">구조</th>
+<th dir="ltr">맥락</th>
+<th dir="ltr">계획</th>
+<th dir="ltr">실행</th>
+<th dir="ltr">검증</th>
+<th dir="ltr">개선</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>OpenAI Codex</strong> (5개월, 100만 줄)</td>
+<td dir="ltr">레이어드 의존성, 커스텀 린터</td>
+<td dir="ltr">AGENTS.md, ADR, Execution Plan</td>
+<td dir="ltr">1급 플랜 artifact</td>
+<td dir="ltr">병렬 에이전트 + GC 에이전트</td>
+<td dir="ltr">린터 메시지 → 에이전트 컨텍스트 주입</td>
+<td dir="ltr">Codex 자신이 린터를 생성</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Stripe</strong> (주 1,000 PR)</td>
+<td dir="ltr">MCP로 400+ 내부 도구 연결</td>
+<td dir="ltr">팀 단위 런북</td>
+<td dir="ltr">작업 상한(Pragmatic Ceiling)</td>
+<td dir="ltr">소형 전문 에이전트 다수</td>
+<td dir="ltr">6계층 하네스(VM→린터→CI→상한→하이브리드→인간)</td>
+<td dir="ltr">하이브리드 워크플로우 반복 튜닝</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>Manus</strong> (6개월 5번 재설계)</td>
+<td dir="auto">—</td>
+<td dir="auto">—</td>
+<td dir="auto">—</td>
+<td dir="auto">—</td>
+<td dir="ltr">자가 검증 루프, doom-loop 감지</td>
+<td dir="ltr">6개월간 5번 Harness 재설계</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>LangChain</strong> (+14%p)</td>
+<td dir="auto">—</td>
+<td dir="auto">—</td>
+<td dir="auto">—</td>
+<td dir="ltr">에이전트 구성 최적화</td>
+<td dir="ltr">자동 수집 + 툴 루프 탐지</td>
+<td dir="ltr">모델 고정, 하네스만 바꿈</td>
+</tr>
+</tbody>
+</table></div><div class="el-h3"><h3 data-heading="7-5. 역할의 재정의" dir="auto" class="heading" id="7-5._역할의_재정의_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>7-5. 역할의 재정의</h3></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">이전 역할</th>
+<th dir="ltr">하네스 시대의 역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">코드 타이피스트</td>
+<td dir="ltr">환경 설계자</td>
+</tr>
+<tr>
+<td dir="ltr">버그 수정자</td>
+<td dir="ltr">피드백 루프 설계자</td>
+</tr>
+<tr>
+<td dir="ltr">아키텍처 구현자</td>
+<td dir="ltr">아키텍처 제약 인코더</td>
+</tr>
+<tr>
+<td dir="ltr">코드 리뷰어</td>
+<td dir="ltr">에이전트 의도 명세자</td>
+</tr>
+<tr>
+<td dir="ltr">기술 부채 상환자</td>
+<td dir="ltr">GC 에이전트 설계자</td>
+</tr>
+</tbody>
+</table></div><div class="el-p"><p dir="auto">토스는 이를 "<strong>조직 생산성의 저점을 높이는 작업</strong>" 이라고 표현한다. 개인 역량 차이가 아니라, 팀 전체가 기본 이상의 생산성을 발휘하도록 <strong>시스템을 만드는 것</strong> 이 핵심 엔지니어링 과제다.</p></div><div class="el-h3"><h3 data-heading="7-6. 한계와 주의사항" dir="auto" class="heading" id="7-6._한계와_주의사항_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>7-6. 한계와 주의사항</h3></div><div class="el-p"><p dir="auto">하네스는 만능이 아니다.</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>초기 비용</strong> — OpenAI는 하네스 구축에만 5개월을 썼다. 소규모 실험·단기 프로토타입에는 과잉 설계가 된다</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>과도한 제약 리스크</strong> — 너무 좁은 해결 공간은 창의적 해결을 억제한다. 점진적으로 추가하며 관찰할 것</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>하네스 자체의 유지보수 부담</strong> — 하네스도 코드다. 시스템이 진화하면 하네스도 업데이트해야 한다</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>GC 에이전트 오작동</strong> — 유효한 코드를 잘못 삭제할 수 있다. PR 기반 인간 승인은 유지할 것</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span><strong>AGENTS.md의 효과 논란</strong> — ETH 취리히 연구에서 AGENTS.md가 기대만큼 성능에 기여하지 않는다는 결과가 나왔다. 모든 하네스 요소가 동등한 효과를 갖지는 않는다</li>
+</ul></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="8. 마무리 — 앞으로 사람이 해야 할 일" dir="auto" class="heading" id="8._마무리_—_앞으로_사람이_해야_할_일_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>8. 마무리 — 앞으로 사람이 해야 할 일</h2></div><div class="el-center"><center></center></div><div class="el-p"><p dir="auto"><span alt="slide_53.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_53.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 820px; max-width: 100%;"><img alt="slide_53.png" src="600_tech-stack/harness-engineering/_assets/ralphton_slides/slide_53.png" target="_self" style="width: 820px; max-width: 100%;"></span><br>
+&lt;<em>구조 · 맥락 · 개선 — AI가 코드를 쓰는 시대, 사람의 역할은 "잘 짜기"에서 "잘 일하는 환경 만들기"로.</em>&gt;</p></div><div></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">영역</th>
+<th dir="ltr">앞으로 해야 할 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><strong>구조 (Scaffold)</strong></td>
+<td dir="ltr">비즈니스 요구사항이 바뀔 때마다 코드베이스 구조를 발전시키기. 새 도구/서비스 도입 시 폴더링과 경계 재설계. AI가 따라올 수 있는 아키텍처 유지</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>맥락 (Context)</strong></td>
+<td dir="ltr">CLAUDE.md와 docs/를 코드와 함께 갱신. 새 컨벤션이 생기면 rules/에 추가. 오래된 규칙은 정리 — 가비지 컬렉션</td>
+</tr>
+<tr>
+<td dir="ltr"><strong>개선 (Compound)</strong></td>
+<td dir="ltr">AI 산출물의 품질을 지속적으로 모니터링. 반복 실수 → 규칙으로, 반복 작업 → 스킬로. 안 쓰는 건 치우고, 쓰는 건 날카롭게</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>AI가 코드를 쓰는 시대, 사람의 역할은 "잘 짜기"에서 "잘 일하는 환경을 만들기"로 바뀐다.</strong></p>
+</blockquote></div><div class="el-h3"><h3 data-heading="지금 할 수 있는 것" dir="auto" class="heading" id="지금_할_수_있는_것_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>지금 할 수 있는 것</h3></div><div class="el-ol"><ol>
+<li data-line="0" dir="auto"><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span><strong>이미 잘 만들어진 도구부터 써보기</strong>
+<ul class="has-list-bullet">
+<li data-line="1" dir="auto"><span class="list-bullet"></span><code>gstack</code> — github.com/garrytan/gstack</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><code>superpowers</code> — github.com/obra/superpowers</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><code>oh-my-claudecode</code> — github.com/Yeachan-Heo/oh-my-claudecode</li>
+</ul>
+</li>
+<li data-line="4" dir="auto"><strong>내 현재 상태 진단하기</strong> — 본인이 이해 가능한 형태로 Harness를 사용하는 것이 중요하다</li>
+<li data-line="5" dir="auto"><strong>개선하고 점검하기 반복</strong> — 한꺼번에 다 바꾸려 하지 말 것. 불편한 지점만 하나씩</li>
+</ol></div><div class="el-blockquote"><blockquote dir="auto">
+<p>⚠️ <strong>조심할 점</strong>: Harness를 설계할 때 너무 옥죄려 하지 말 것. 자유도를 높게 주고, 안 되는 것만 제한하기. 생각보다 Agent는 예측 가능하게 잘 움직인다.</p>
+</blockquote></div><div class="el-hr"><hr></div><div class="el-h2"><h2 data-heading="부록 A. 참고 자료 &amp; 리소스" dir="auto" class="heading" id="부록_A._참고_자료_&amp;_리소스_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>부록 A. 참고 자료 &amp; 리소스</h2></div><div class="el-p"><p dir="auto">강의에서 공유된 팀 레포:</p></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">이름</th>
+<th dir="ltr">설명</th>
+<th dir="ltr">용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr"><code>team-attention/harness</code></td>
+<td dir="ltr">materials/slides 강의자료 · harness-checklist.md 기본 체크리스트</td>
+<td dir="ltr">Plugin · Slides</td>
+</tr>
+<tr>
+<td dir="ltr"><code>team-attention/hoyeon</code></td>
+<td dir="ltr">이호연 개인 Harness 전체 구성</td>
+<td dir="ltr">Example</td>
+</tr>
+<tr>
+<td dir="ltr"><code>plugins-for-claude-natives</code></td>
+<td dir="ltr">Team Attention에서 자주 쓰는 플러그인 모음. 실무 검증 도구들</td>
+<td dir="ltr">Plugins</td>
+</tr>
+</tbody>
+</table></div><div class="el-blockquote"><blockquote dir="auto">
+<p><strong>사용법</strong>: 플러그인 설치 또는 Claude Code에 git 주소 넣고 "분석해줘" — 둘 다 됩니다.</p>
+</blockquote></div><div class="el-h2"><h2 data-heading="부록 B. Harness 체크리스트 (요약)" dir="auto" class="heading" id="부록_B._Harness_체크리스트_(요약)_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>부록 B. Harness 체크리스트 (요약)</h2></div><div class="el-table" dir="ltr" style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th dir="ltr">축</th>
+<th dir="ltr">체크 포인트</th>
+<th dir="ltr">도구 후보</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td dir="ltr">구조</td>
+<td dir="ltr">Monorepo로 묶여 있는가 / 역할별 폴더가 명확한가 / <code>docs/</code>·<code>.dev/</code> 가 분리돼 있는가 / <code>CLAUDE.md</code> 가 100줄 이내인가</td>
+<td dir="ltr"><code>/scaffold</code>, <code>/check-harness</code></td>
+</tr>
+<tr>
+<td dir="ltr">맥락</td>
+<td dir="ltr">User/Project/Folder 스코프가 활용되는가 / <code>.claude/rules/</code> 가 glob 분리돼 있는가 / Progressive Disclosure로 참조되는가 / 세션 사용률을 20~30%로 관리하는가</td>
+<td dir="ltr"><code>/context</code>, <code>/clear</code>, <code>/compact</code>, <code>handoff</code></td>
+</tr>
+<tr>
+<td dir="ltr">계획</td>
+<td dir="ltr">"해줘" 대신 "같이 계획" 으로 시작하는가 / AI가 질문을 하게 하는가 / 계획을 파일로 떨구는가</td>
+<td dir="ltr"><code>/specify</code>, <code>/deep-interview</code>, <code>/clarify</code></td>
+</tr>
+<tr>
+<td dir="ltr">실행</td>
+<td dir="ltr">상황에 맞는 패턴(Single/Subagent/Team)을 선택하는가 / 완료 기준이 있는가 / Ralph Loop가 가능한가</td>
+<td dir="ltr"><code>/agent-orchestrate</code>, <code>ralph</code>, <code>autoresearch</code></td>
+</tr>
+<tr>
+<td dir="ltr">검증</td>
+<td dir="ltr">완료 조건이 측정 가능한가 / Generator와 Evaluator가 분리돼 있는가 / 다른 모델로 교차 검증하는가 / Dry-run·Worktree·Runtime Gate가 있는가</td>
+<td dir="ltr"><code>/qa</code>, Browser Agent, Computer Use</td>
+</tr>
+<tr>
+<td dir="ltr">개선</td>
+<td dir="ltr">세션을 분석하는가 / 3번 반복 → Skill, 3번 틀림 → Rule 로 올리는가 / 안 쓰는 건 치우는가 / 단순해지고 있는가</td>
+<td dir="ltr"><code>session-wrap</code></td>
+</tr>
+</tbody>
+</table></div><div class="el-h2"><h2 data-heading="부록 C. 함께 볼 자료" dir="auto" class="heading" id="부록_C._함께_볼_자료_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>부록 C. 함께 볼 자료</h2></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><a data-href="하네스 엔지니어링(Harness Engineering)" href="600_tech-stack/harness-engineering/하네스-엔지니어링(harness-engineering).html" class="internal-link" target="_self" rel="noopener nofollow">하네스 엔지니어링(Harness Engineering)</a> — 개념 정의, 진화 계보, Martin Fowler 3대 구성, 기업 사례 상세, 각주 참고문헌</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><a data-href="Decision Tree Architect - Claude Code Harness 해부" href="600_tech-stack/harness-engineering/decision-tree-architect-claude-code-harness-해부.html" class="internal-link" target="_self" rel="noopener nofollow">Decision Tree Architect - Claude Code Harness 해부</a> — DAG 기반 의사결정 트리 Claude Code 멀티에이전트 하네스의 5축 스코어링 설계 사례</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><a data-href="260406 AI 에이전트 문서화와 하네스 설계" href="600_tech-stack/harness-engineering/260406-ai-에이전트-문서화와-하네스-설계.html" class="internal-link" target="_self" rel="noopener nofollow">260406 AI 에이전트 문서화와 하네스 설계</a> — 토큰 경제학·문서화 전략·Progressive Disclosure의 비판적 분석</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><a data-href="secondbrain-upgrade-harness" href="600_tech-stack/harness-engineering/secondbrain-upgrade-harness.html" class="internal-link" target="_self" rel="noopener nofollow">secondbrain-upgrade-harness</a> — Obsidian 볼트를 AI 친화적으로 재설계하면서 Harness Engineering 프레임을 전체 적용한 프로젝트 회고</li>
+</ul></div><div class="el-h2"><h2 data-heading="부록 D. 원본 슬라이드" dir="auto" class="heading" id="부록_D._원본_슬라이드_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>부록 D. 원본 슬라이드</h2></div><div class="el-p"><p dir="auto">55p 원본 PDF(<code>ralphton 이호연 AI Agent 발표 자료 하네스 엔지니어링.pdf</code>)와 페이지별 PNG(<code>_assets/ralphton_slides/slide_01.png</code> ~ <code>slide_55.png</code>)가 같은 폴더에 보존돼 있다. 이 강의자료에 인용되지 않은 섹션 표지, 라이브 데모 슬라이드(slide_11, 12)와 엔딩 슬라이드(slide_55)는 원본에서 바로 참조할 수 있다.</p></div><div class="footer"><div class="data-bar"></div></div></div></div></div><div id="right-content" class="leaf" style="--sidebar-width: var(--sidebar-width-right);"><div id="right-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme-toggle-input" id=""><input class="theme-toggle-input" type="checkbox" id="theme-toggle-input"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="right-sidebar-content" class="leaf-content"><div class="graph-view-wrapper"><div class="feature-header"><div class="feature-title">Interactive Graph</div></div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<div class="graph-icon graph-global" role="button" aria-label="Global Graph" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-git-fork"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div id="outline" class=" tree-container"><div class="feature-header"><div class="feature-title">Table Of Contents</div><button class="clickable-icon nav-action-button tree-collapse-all" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-item" data-depth="1"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#하네스_엔지니어링_강의_—_AI가_잘_일하는_환경을_설계하는_기술_0" data-path="#하네스_엔지니어링_강의_—_AI가_잘_일하는_환경을_설계하는_기술_0"><div class="tree-item-inner heading-link" heading-name="하네스 엔지니어링 강의 — AI가 잘 일하는 환경을 설계하는 기술">하네스 엔지니어링 강의 — AI가 잘 일하는 환경을 설계하는 기술</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#하네스_엔지니어링_—_AI가_잘_일하는_환경을_설계하는_기술_0" data-path="#하네스_엔지니어링_—_AI가_잘_일하는_환경을_설계하는_기술_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="하네스 엔지니어링 — AI가 잘 일하는 환경을 설계하는 기술">하네스 엔지니어링 — AI가 잘 일하는 환경을 설계하는 기술</div></a><div class="tree-item-children"><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#0._프롤로그_—_왜_지금_Harness인가_0" data-path="#0._프롤로그_—_왜_지금_Harness인가_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="0. 프롤로그 — 왜 지금 Harness인가">0. 프롤로그 — 왜 지금 Harness인가</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#0-1._프롬프트만으로는_부족하다_0" data-path="#0-1._프롬프트만으로는_부족하다_0"><div class="tree-item-inner heading-link" heading-name="0-1. 프롬프트만으로는 부족하다">0-1. 프롬프트만으로는 부족하다</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#0-2._빠른_테크_회사들의_데이터_포인트_0" data-path="#0-2._빠른_테크_회사들의_데이터_포인트_0"><div class="tree-item-inner heading-link" heading-name="0-2. 빠른 테크 회사들의 데이터 포인트">0-2. 빠른 테크 회사들의 데이터 포인트</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#0-3._정의_—_&quot;작업_환경을_만들어주는_것&quot;_0" data-path="#0-3._정의_—_&quot;작업_환경을_만들어주는_것&quot;_0"><div class="tree-item-inner heading-link" heading-name="0-3. 정의 — &quot;작업 환경을 만들어주는 것&quot;">0-3. 정의 — "작업 환경을 만들어주는 것"</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#Agenda_—_Harness의_6개_축_0" data-path="#Agenda_—_Harness의_6개_축_0"><div class="tree-item-inner heading-link" heading-name="Agenda — Harness의 6개 축">Agenda — Harness의 6개 축</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#1._구조(Scaffolding)_—_한_번_깔아두면_계속_쓰는_것_0" data-path="#1._구조(Scaffolding)_—_한_번_깔아두면_계속_쓰는_것_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="1. 구조(Scaffolding) — 한 번 깔아두면 계속 쓰는 것">1. 구조(Scaffolding) — 한 번 깔아두면 계속 쓰는 것</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#1-1._프로젝트_구조가_품질을_결정한다_0" data-path="#1-1._프로젝트_구조가_품질을_결정한다_0"><div class="tree-item-inner heading-link" heading-name="1-1. 프로젝트 구조가 품질을 결정한다">1-1. 프로젝트 구조가 품질을 결정한다</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#1-2._사람의_문서_vs_AI의_문서_—_분리해서_관리_0" data-path="#1-2._사람의_문서_vs_AI의_문서_—_분리해서_관리_0"><div class="tree-item-inner heading-link" heading-name="1-2. 사람의 문서 vs AI의 문서 — 분리해서 관리">1-2. 사람의 문서 vs AI의 문서 — 분리해서 관리</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#1-3._AI_도구_배치하기_0" data-path="#1-3._AI_도구_배치하기_0"><div class="tree-item-inner heading-link" heading-name="1-3. AI 도구 배치하기">1-3. AI 도구 배치하기</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#1-4._경계_설정_—_뭘_알려줄지,_어디까지_허용할지,_뭘_막을지_0" data-path="#1-4._경계_설정_—_뭘_알려줄지,_어디까지_허용할지,_뭘_막을지_0"><div class="tree-item-inner heading-link" heading-name="1-4. 경계 설정 — 뭘 알려줄지, 어디까지 허용할지, 뭘 막을지">1-4. 경계 설정 — 뭘 알려줄지, 어디까지 허용할지, 뭘 막을지</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#1-5._Try_It_—_구조_설계를_도와주는_스킬_0" data-path="#1-5._Try_It_—_구조_설계를_도와주는_스킬_0"><div class="tree-item-inner heading-link" heading-name="1-5. Try It — 구조 설계를 도와주는 스킬">1-5. Try It — 구조 설계를 도와주는 스킬</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#2._맥락(Context)_—_AI가_뭘_알고_일하는가_0" data-path="#2._맥락(Context)_—_AI가_뭘_알고_일하는가_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="2. 맥락(Context) — AI가 뭘 알고 일하는가">2. 맥락(Context) — AI가 뭘 알고 일하는가</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#2-1._설정_파일_한눈에_보기_0" data-path="#2-1._설정_파일_한눈에_보기_0"><div class="tree-item-inner heading-link" heading-name="2-1. 설정 파일 한눈에 보기">2-1. 설정 파일 한눈에 보기</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#2-2._상속_구조_—_하위가_상위를_덮어쓴다_0" data-path="#2-2._상속_구조_—_하위가_상위를_덮어쓴다_0"><div class="tree-item-inner heading-link" heading-name="2-2. 상속 구조 — 하위가 상위를 덮어쓴다">2-2. 상속 구조 — 하위가 상위를 덮어쓴다</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#2-3._CLAUDE.md_실전_가이드_0" data-path="#2-3._CLAUDE.md_실전_가이드_0"><div class="tree-item-inner heading-link" heading-name="2-3. CLAUDE.md 실전 가이드">2-3. CLAUDE.md 실전 가이드</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#2-4._맥락_관리의_핵심_원칙_0" data-path="#2-4._맥락_관리의_핵심_원칙_0"><div class="tree-item-inner heading-link" heading-name="2-4. 맥락 관리의 핵심 원칙">2-4. 맥락 관리의 핵심 원칙</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#2-5._Progressive_Disclosure_—_덜_주고_정확히_가리키기_0" data-path="#2-5._Progressive_Disclosure_—_덜_주고_정확히_가리키기_0"><div class="tree-item-inner heading-link" heading-name="2-5. Progressive Disclosure — 덜 주고 정확히 가리키기">2-5. Progressive Disclosure — 덜 주고 정확히 가리키기</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#2-6._세션_맥락_관리_—_쌓이면_비워라_0" data-path="#2-6._세션_맥락_관리_—_쌓이면_비워라_0"><div class="tree-item-inner heading-link" heading-name="2-6. 세션 맥락 관리 — 쌓이면 비워라">2-6. 세션 맥락 관리 — 쌓이면 비워라</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#2-7._`.claude/rules/`_가이드_0" data-path="#2-7._`.claude/rules/`_가이드_0"><div class="tree-item-inner heading-link" heading-name="2-7. `.claude/rules/` 가이드">2-7. <code>.claude/rules/</code> 가이드</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#2-8._주기적으로_점검하기_0" data-path="#2-8._주기적으로_점검하기_0"><div class="tree-item-inner heading-link" heading-name="2-8. 주기적으로 점검하기">2-8. 주기적으로 점검하기</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#3._계획(Planning)_—_AI에게_일_시키기_전에,_무엇을_할지_함께_정하기_0" data-path="#3._계획(Planning)_—_AI에게_일_시키기_전에,_무엇을_할지_함께_정하기_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="3. 계획(Planning) — AI에게 일 시키기 전에, 무엇을 할지 함께 정하기">3. 계획(Planning) — AI에게 일 시키기 전에, 무엇을 할지 함께 정하기</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#3-1._핵심_흐름_계획_→_실행_→_검증_0" data-path="#3-1._핵심_흐름_계획_→_실행_→_검증_0"><div class="tree-item-inner heading-link" heading-name="3-1. 핵심 흐름: 계획 → 실행 → 검증">3-1. 핵심 흐름: 계획 → 실행 → 검증</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#3-2._&quot;해줘&quot;의_함정_0" data-path="#3-2._&quot;해줘&quot;의_함정_0"><div class="tree-item-inner heading-link" heading-name="3-2. &quot;해줘&quot;의 함정">3-2. "해줘"의 함정</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#3-3._AskUserQuestion_—_나에게_질문하게_만들기_0" data-path="#3-3._AskUserQuestion_—_나에게_질문하게_만들기_0"><div class="tree-item-inner heading-link" heading-name="3-3. AskUserQuestion — 나에게 질문하게 만들기">3-3. AskUserQuestion — 나에게 질문하게 만들기</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#3-4._계획의_진화_—_커스텀_Plan_스킬_0" data-path="#3-4._계획의_진화_—_커스텀_Plan_스킬_0"><div class="tree-item-inner heading-link" heading-name="3-4. 계획의 진화 — 커스텀 Plan 스킬">3-4. 계획의 진화 — 커스텀 Plan 스킬</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#3-5._Try_It_—_계획을_더_잘_세우기_위한_스킬_0" data-path="#3-5._Try_It_—_계획을_더_잘_세우기_위한_스킬_0"><div class="tree-item-inner heading-link" heading-name="3-5. Try It — 계획을 더 잘 세우기 위한 스킬">3-5. Try It — 계획을 더 잘 세우기 위한 스킬</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#4._실행(Execution_·_Orchestration)_—_혼자_vs_부하_파견_vs_팀_0" data-path="#4._실행(Execution_·_Orchestration)_—_혼자_vs_부하_파견_vs_팀_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="4. 실행(Execution · Orchestration) — 혼자 vs 부하 파견 vs 팀">4. 실행(Execution · Orchestration) — 혼자 vs 부하 파견 vs 팀</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#4-1._실행_패턴_3종_0" data-path="#4-1._실행_패턴_3종_0"><div class="tree-item-inner heading-link" heading-name="4-1. 실행 패턴 3종">4-1. 실행 패턴 3종</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#4-2._상황별_오케스트레이션_패턴_0" data-path="#4-2._상황별_오케스트레이션_패턴_0"><div class="tree-item-inner heading-link" heading-name="4-2. 상황별 오케스트레이션 패턴">4-2. 상황별 오케스트레이션 패턴</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#4-3._Ralph_Loop_—_될_때까지_반복_0" data-path="#4-3._Ralph_Loop_—_될_때까지_반복_0"><div class="tree-item-inner heading-link" heading-name="4-3. Ralph Loop — 될 때까지 반복">4-3. Ralph Loop — 될 때까지 반복</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#4-4._Auto_Research_—_자율_실험_루프_0" data-path="#4-4._Auto_Research_—_자율_실험_루프_0"><div class="tree-item-inner heading-link" heading-name="4-4. Auto Research — 자율 실험 루프">4-4. Auto Research — 자율 실험 루프</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#4-5._Try_It_—_실행을_도와주는_도구들_0" data-path="#4-5._Try_It_—_실행을_도와주는_도구들_0"><div class="tree-item-inner heading-link" heading-name="4-5. Try It — 실행을 도와주는 도구들">4-5. Try It — 실행을 도와주는 도구들</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#5._검증(Verification)_—_결과물을_어떻게_믿을_것인가_0" data-path="#5._검증(Verification)_—_결과물을_어떻게_믿을_것인가_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="5. 검증(Verification) — 결과물을 어떻게 믿을 것인가">5. 검증(Verification) — 결과물을 어떻게 믿을 것인가</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#5-1._원칙_01_—_기준이_있어야_검증이_가능하다_0" data-path="#5-1._원칙_01_—_기준이_있어야_검증이_가능하다_0"><div class="tree-item-inner heading-link" heading-name="5-1. 원칙 01 — 기준이 있어야 검증이 가능하다">5-1. 원칙 01 — 기준이 있어야 검증이 가능하다</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#5-2._원칙_02_—_컨텍스트를_나누고,_관점을_분리한다_0" data-path="#5-2._원칙_02_—_컨텍스트를_나누고,_관점을_분리한다_0"><div class="tree-item-inner heading-link" heading-name="5-2. 원칙 02 — 컨텍스트를 나누고, 관점을 분리한다">5-2. 원칙 02 — 컨텍스트를 나누고, 관점을 분리한다</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#5-3._원칙_03_—_모델도_나누고,_역할도_나눈다_0" data-path="#5-3._원칙_03_—_모델도_나누고,_역할도_나눈다_0"><div class="tree-item-inner heading-link" heading-name="5-3. 원칙 03 — 모델도 나누고, 역할도 나눈다">5-3. 원칙 03 — 모델도 나누고, 역할도 나눈다</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#5-4._원칙_04_—_에이전트에게_눈을_달아주기_0" data-path="#5-4._원칙_04_—_에이전트에게_눈을_달아주기_0"><div class="tree-item-inner heading-link" heading-name="5-4. 원칙 04 — 에이전트에게 눈을 달아주기">5-4. 원칙 04 — 에이전트에게 눈을 달아주기</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#5-5._안전장치_0" data-path="#5-5._안전장치_0"><div class="tree-item-inner heading-link" heading-name="5-5. 안전장치">5-5. 안전장치</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#5-6._Try_It_—_검증을_도와주는_도구들_0" data-path="#5-6._Try_It_—_검증을_도와주는_도구들_0"><div class="tree-item-inner heading-link" heading-name="5-6. Try It — 검증을 도와주는 도구들">5-6. Try It — 검증을 도와주는 도구들</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#6._개선(Compounding)_—_어떻게_계속_나아질_것인가_0" data-path="#6._개선(Compounding)_—_어떻게_계속_나아질_것인가_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="6. 개선(Compounding) — 어떻게 계속 나아질 것인가">6. 개선(Compounding) — 어떻게 계속 나아질 것인가</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#6-1._관측_→_패턴_발견_→_Skill/Rule로_승격_0" data-path="#6-1._관측_→_패턴_발견_→_Skill/Rule로_승격_0"><div class="tree-item-inner heading-link" heading-name="6-1. 관측 → 패턴 발견 → Skill/Rule로 승격">6-1. 관측 → 패턴 발견 → Skill/Rule로 승격</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#6-2._단순화하기_0" data-path="#6-2._단순화하기_0"><div class="tree-item-inner heading-link" heading-name="6-2. 단순화하기">6-2. 단순화하기</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#6-3._자가_진단_—_잘_가고_있나_0" data-path="#6-3._자가_진단_—_잘_가고_있나_0"><div class="tree-item-inner heading-link" heading-name="6-3. 자가 진단 — 잘 가고 있나">6-3. 자가 진단 — 잘 가고 있나</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#6-4._Try_It_—_`session-wrap`_0" data-path="#6-4._Try_It_—_`session-wrap`_0"><div class="tree-item-inner heading-link" heading-name="6-4. Try It — `session-wrap`">6-4. Try It — <code>session-wrap</code></div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#7._통합_관점_—_배경_이론과_기업_사례_0" data-path="#7._통합_관점_—_배경_이론과_기업_사례_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="7. 통합 관점 — 배경 이론과 기업 사례">7. 통합 관점 — 배경 이론과 기업 사례</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#7-1._진화_흐름과_개념의_계보_0" data-path="#7-1._진화_흐름과_개념의_계보_0"><div class="tree-item-inner heading-link" heading-name="7-1. 진화 흐름과 개념의 계보">7-1. 진화 흐름과 개념의 계보</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#7-2._Martin_Fowler가_정리한_하네스의_3대_구성_0" data-path="#7-2._Martin_Fowler가_정리한_하네스의_3대_구성_0"><div class="tree-item-inner heading-link" heading-name="7-2. Martin Fowler가 정리한 하네스의 3대 구성">7-2. Martin Fowler가 정리한 하네스의 3대 구성</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#7-3._역설_—_제약이_자율성을_확장한다_0" data-path="#7-3._역설_—_제약이_자율성을_확장한다_0"><div class="tree-item-inner heading-link" heading-name="7-3. 역설 — 제약이 자율성을 확장한다">7-3. 역설 — 제약이 자율성을 확장한다</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#7-4._기업_사례_속의_6개_축_매핑_0" data-path="#7-4._기업_사례_속의_6개_축_매핑_0"><div class="tree-item-inner heading-link" heading-name="7-4. 기업 사례 속의 6개 축 매핑">7-4. 기업 사례 속의 6개 축 매핑</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#7-5._역할의_재정의_0" data-path="#7-5._역할의_재정의_0"><div class="tree-item-inner heading-link" heading-name="7-5. 역할의 재정의">7-5. 역할의 재정의</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#7-6._한계와_주의사항_0" data-path="#7-6._한계와_주의사항_0"><div class="tree-item-inner heading-link" heading-name="7-6. 한계와 주의사항">7-6. 한계와 주의사항</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#8._마무리_—_앞으로_사람이_해야_할_일_0" data-path="#8._마무리_—_앞으로_사람이_해야_할_일_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="8. 마무리 — 앞으로 사람이 해야 할 일">8. 마무리 — 앞으로 사람이 해야 할 일</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#지금_할_수_있는_것_0" data-path="#지금_할_수_있는_것_0"><div class="tree-item-inner heading-link" heading-name="지금 할 수 있는 것">지금 할 수 있는 것</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#부록_A._참고_자료_&amp;_리소스_0" data-path="#부록_A._참고_자료_&amp;_리소스_0"><div class="tree-item-inner heading-link" heading-name="부록 A. 참고 자료 &amp; 리소스">부록 A. 참고 자료 &amp; 리소스</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#부록_B._Harness_체크리스트_(요약)_0" data-path="#부록_B._Harness_체크리스트_(요약)_0"><div class="tree-item-inner heading-link" heading-name="부록 B. Harness 체크리스트 (요약)">부록 B. Harness 체크리스트 (요약)</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#부록_C._함께_볼_자료_0" data-path="#부록_C._함께_볼_자료_0"><div class="tree-item-inner heading-link" heading-name="부록 C. 함께 볼 자료">부록 C. 함께 볼 자료</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="600_tech-stack/harness-engineering/하네스-엔지니어링-이호연-강의.html#부록_D._원본_슬라이드_0" data-path="#부록_D._원본_슬라이드_0"><div class="tree-item-inner heading-link" heading-name="부록 D. 원본 슬라이드">부록 D. 원본 슬라이드</div></a><div class="tree-item-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector("#right-sidebar"); rs.classList.toggle("is-collapsed", window.innerWidth < 768); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></div></div></body></html>
