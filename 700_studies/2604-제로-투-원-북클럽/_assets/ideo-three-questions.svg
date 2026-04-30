@@ -1,0 +1,50 @@
+<svg width="100%" viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <!--
+    Geometry (equilateral, d=120, r=140):
+      A (Desirability) center (290, 220)
+      B (Feasibility)  center (410, 220)
+      C (Viability)    center (350, 324)
+
+    Pairwise vertices (intersection of two circles inside the third):
+      V_AB inside C: (350, 346.5)     ; bottom
+      V_BC inside A: (270.45, 208.71) ; upper-left
+      V_AC inside B: (429.55, 208.71) ; upper-right
+  -->
+
+  <!-- Three overlapping circles -->
+  <circle cx="290" cy="220" r="140" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5" fill-opacity="0.4"/>
+  <circle cx="410" cy="220" r="140" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5" fill-opacity="0.4"/>
+  <circle cx="350" cy="324" r="140" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5" fill-opacity="0.4"/>
+
+  <!-- Three-way intersection: outward-bulging arcs through V_AB, V_BC, V_AC.
+       Traversed visually clockwise; each arc uses sweep-flag=1, large-arc-flag=0. -->
+  <path d="M 350 346.5
+           A 140 140 0 0 1 270.45 208.71
+           A 140 140 0 0 1 429.55 208.71
+           A 140 140 0 0 1 350 346.5 Z"
+        fill="#444441" fill-opacity="0.85"/>
+
+  <!-- Single-circle labels (inside lobe-only regions) -->
+  <text x="210" y="200" text-anchor="middle" font-size="14" font-weight="500" fill="#085041">Desirability</text>
+  <text x="210" y="220" text-anchor="middle" font-size="12" fill="#0F6E56">바람직함 · 고객</text>
+
+  <text x="490" y="200" text-anchor="middle" font-size="14" font-weight="500" fill="#3C3489">Feasibility</text>
+  <text x="490" y="220" text-anchor="middle" font-size="12" fill="#534AB7">실현가능성 · 기술</text>
+
+  <text x="350" y="425" text-anchor="middle" font-size="14" font-weight="500" fill="#633806">Viability</text>
+  <text x="350" y="445" text-anchor="middle" font-size="12" fill="#854F0B">생존가능성 · 수익</text>
+
+  <!-- Pairwise labels (inside pairwise-only regions) -->
+  <text x="350" y="135" text-anchor="middle" font-size="12" fill="#444441">Functional</text>
+  <text x="350" y="151" text-anchor="middle" font-size="12" fill="#444441">Innovation</text>
+
+  <text x="250" y="290" text-anchor="middle" font-size="12" fill="#444441">Emotional</text>
+  <text x="250" y="306" text-anchor="middle" font-size="12" fill="#444441">Innovation</text>
+
+  <text x="450" y="290" text-anchor="middle" font-size="12" fill="#444441">Process</text>
+  <text x="450" y="306" text-anchor="middle" font-size="12" fill="#444441">Innovation</text>
+
+  <!-- Center: Experience Innovation (white text on dark fill) -->
+  <text x="350" y="248" text-anchor="middle" font-size="14" font-weight="500" fill="#FFFFFF">Experience</text>
+  <text x="350" y="266" text-anchor="middle" font-size="14" font-weight="500" fill="#FFFFFF">Innovation</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" role="img" aria-label="기관 없는 신체 스펙트럼">
+  <defs>
+    <style>
+      .axis { stroke: #4a4a4a; stroke-width: 2.5; fill: none; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 16px; font-weight: 600; fill: #2a2a2a; }
+      .anchor-fill { fill: #cfd8d3; stroke: #6e8b80; stroke-width: 1.5; }
+      .anchor-cancer { fill: #e8d9c0; stroke: #b59668; stroke-width: 1.5; }
+      .anchor-empty { fill: #ddd6d0; stroke: #888080; stroke-width: 1.5; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 14px; font-weight: 600; fill: #2a2a2a; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #6a6a6a; }
+      .caption { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 12px; fill: #6a6a6a; font-style: italic; }
+    </style>
+    <marker id="arrL" viewBox="0 0 10 10" refX="1" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M10,0 L0,5 L10,10 z" fill="#4a4a4a"/>
+    </marker>
+    <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4a4a4a"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="400" y="40" text-anchor="middle">기관 없는 신체의 스펙트럼</text>
+
+  <!-- axis -->
+  <line class="axis" x1="80" y1="150" x2="720" y2="150" marker-start="url(#arrL)" marker-end="url(#arrR)"/>
+
+  <!-- left anchor: full BwO -->
+  <circle class="anchor-fill" cx="160" cy="150" r="22"/>
+  <text class="label" x="160" y="110" text-anchor="middle">충만 BwO</text>
+  <text class="sub" x="160" y="195" text-anchor="middle">강도가 흐르고</text>
+  <text class="sub" x="160" y="210" text-anchor="middle">새 결합이 발생</text>
+
+  <!-- middle anchor: cancerous -->
+  <circle class="anchor-cancer" cx="400" cy="150" r="22"/>
+  <text class="label" x="400" y="110" text-anchor="middle">암적 BwO</text>
+  <text class="sub" x="400" y="195" text-anchor="middle">한 기관이 무한 증식</text>
+  <text class="sub" x="400" y="210" text-anchor="middle">다른 흐름을 막음</text>
+
+  <!-- right anchor: empty -->
+  <circle class="anchor-empty" cx="640" cy="150" r="22"/>
+  <text class="label" x="640" y="110" text-anchor="middle">텅 빈 BwO</text>
+  <text class="sub" x="640" y="195" text-anchor="middle">모든 강도가 0으로</text>
+  <text class="sub" x="640" y="210" text-anchor="middle">긴장증·과용·붕괴</text>
+
+  <text class="caption" x="400" y="255" text-anchor="middle">BwO는 만들어가는 실험이며 — 너무 멀리 가면 충만이 아니라 텅 빔으로 추락한다.</text>
+</svg>

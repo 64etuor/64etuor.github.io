@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" role="img" aria-label="영토 - 탈영토화 - 재영토화 운동">
+  <defs>
+    <style>
+      .frame { fill: none; stroke: #d8d8d2; stroke-width: 1.5; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 16px; font-weight: 600; fill: #2a2a2a; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 13px; fill: #2a2a2a; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #6a6a6a; }
+      .terr-a { fill: #e8d9c0; fill-opacity: 0.7; stroke: #b59668; stroke-width: 1.5; }
+      .terr-b { fill: #cfd8d3; fill-opacity: 0.7; stroke: #6e8b80; stroke-width: 1.5; }
+      .flow { fill: none; stroke: #4a4a4a; stroke-width: 2.5; }
+      .flow-light { fill: none; stroke: #4a4a4a; stroke-width: 1.5; stroke-dasharray: 4 3; }
+      .caption { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 12px; fill: #6a6a6a; font-style: italic; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4a4a4a"/>
+    </marker>
+  </defs>
+
+  <!-- territory A -->
+  <ellipse class="terr-a" cx="160" cy="180" rx="120" ry="90"/>
+  <text class="label" x="160" y="180" text-anchor="middle">영토 A</text>
+  <text class="sub" x="160" y="200" text-anchor="middle">코드화된 의미 영역</text>
+
+  <!-- mid: deterritorialization -->
+  <text class="title" x="400" y="80" text-anchor="middle">탈영토화 → 재영토화</text>
+  <path class="flow" d="M 280 180 C 340 130, 460 130, 520 180" marker-end="url(#arrow)"/>
+  <text class="sub" x="400" y="125" text-anchor="middle">코드가 풀린 흐름</text>
+
+  <!-- territory B -->
+  <ellipse class="terr-b" cx="640" cy="180" rx="120" ry="90"/>
+  <text class="label" x="640" y="180" text-anchor="middle">영토 B</text>
+  <text class="sub" x="640" y="200" text-anchor="middle">새 코드 안에 자리 잡음</text>
+
+  <!-- absolute deterritorialization arrow (downward escape) -->
+  <path class="flow-light" d="M 400 195 C 400 250, 400 280, 400 320" marker-end="url(#arrow)"/>
+  <text class="sub" x="420" y="260">절대적 탈영토화</text>
+  <text class="sub" x="420" y="276">(좌표 없는 흐름 — 위험)</text>
+
+  <text class="caption" x="400" y="345" text-anchor="middle">상대적 탈영토화는 늘 어딘가로 재영토화된다 — 어디로 가는가가 운동의 의미를 결정한다.</text>
+</svg>

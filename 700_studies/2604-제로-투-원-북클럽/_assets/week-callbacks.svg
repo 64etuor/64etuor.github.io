@@ -1,0 +1,78 @@
+<svg width="100%" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="callback-arrow" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .col-title { font-size: 13px; font-weight: 700; fill: #444441; }
+      .week-label { font-size: 11px; font-weight: 700; fill: #8A6F12; letter-spacing: 0.5px; }
+      .pill-text-bold { font-size: 12px; font-weight: 600; fill: #2a2a28; }
+      .pill-text { font-size: 11px; fill: #5F5E5A; }
+      .quote-text { font-size: 10px; fill: #8A6F12; font-style: italic; }
+      .source-pill { fill: #FAF8F2; stroke: #C9A227; stroke-width: 1.5; }
+      .target-pill { fill: #FFFFFF; stroke: #5F5E5A; stroke-width: 1.5; }
+      .divider { stroke: #D9D6CC; stroke-width: 1; fill: none; stroke-dasharray: 3 4; }
+    </style>
+  </defs>
+
+  <text class="col-title" x="200" y="40" text-anchor="middle">앞 주차에서 정립한 개념</text>
+  <text class="col-title" x="560" y="40" text-anchor="middle">4주차 본문에서 다시 호출되는 자리</text>
+
+  <line class="divider" x1="380" y1="60" x2="380" y2="440"/>
+
+  <!-- 1주차 -->
+  <text class="week-label" x="60" y="100">1주차</text>
+  <rect class="source-pill" x="60" y="110" width="280" height="42" rx="6"/>
+  <text class="pill-text-bold" x="200" y="129" text-anchor="middle">0 → 1  vs  1 → n</text>
+  <text class="pill-text" x="200" y="144" text-anchor="middle">수직 진보 · 수평 진보</text>
+
+  <!-- 2주차 -->
+  <text class="week-label" x="60" y="190">2주차</text>
+  <rect class="source-pill" x="60" y="200" width="280" height="42" rx="6"/>
+  <text class="pill-text-bold" x="200" y="219" text-anchor="middle">Creating · Delivering · Capturing</text>
+  <text class="pill-text" x="200" y="234" text-anchor="middle">가치의 3박자, 곱셈으로 작동</text>
+
+  <!-- 3주차 -->
+  <text class="week-label" x="60" y="280">3주차</text>
+  <rect class="source-pill" x="60" y="290" width="280" height="36" rx="6"/>
+  <text class="pill-text-bold" x="200" y="312" text-anchor="middle">마인드시프트</text>
+
+  <rect class="source-pill" x="60" y="346" width="280" height="36" rx="6"/>
+  <text class="pill-text-bold" x="200" y="368" text-anchor="middle">익스트림 파레토</text>
+
+  <!-- 4주차 targets -->
+  <rect class="target-pill" x="420" y="110" width="280" height="48" rx="6"/>
+  <text class="pill-text-bold" x="560" y="128" text-anchor="middle">회사를 세우면 고객이 올까</text>
+  <text class="quote-text" x="560" y="144" text-anchor="middle">"테크놀로지 vs 세일즈"의 3박자 표</text>
+
+  <rect class="target-pill" x="420" y="195" width="280" height="48" rx="6"/>
+  <text class="pill-text-bold" x="560" y="213" text-anchor="middle">너드와 세일즈맨, 세 가지 질문</text>
+  <text class="quote-text" x="560" y="229" text-anchor="middle">"3주차의 마인드시프트를 떠올려 보자"</text>
+
+  <rect class="target-pill" x="420" y="280" width="280" height="48" rx="6"/>
+  <text class="pill-text-bold" x="560" y="298" text-anchor="middle">네 개의 유통 채널, 그리고 데드존</text>
+  <text class="quote-text" x="560" y="314" text-anchor="middle">"3주차의 익스트림 파레토가 그대로 적용"</text>
+
+  <rect class="target-pill" x="420" y="365" width="280" height="48" rx="6"/>
+  <text class="pill-text-bold" x="560" y="383" text-anchor="middle">하이프 사이클과 S커브</text>
+  <text class="quote-text" x="560" y="399" text-anchor="middle">"1주차의 두 종류의 진보 — 수직 · 수평"</text>
+
+  <!-- arrows: source → target -->
+  <!-- 1주차 → 하이프 사이클 (crosses all the way down) -->
+  <path d="M 340 131 C 380 131, 380 389, 420 389"
+        fill="none" stroke="#C9A227" stroke-width="1.8" marker-end="url(#callback-arrow)"/>
+
+  <!-- 2주차 → 회사를 세우면 (upward short) -->
+  <path d="M 340 221 C 380 221, 380 134, 420 134"
+        fill="none" stroke="#C9A227" stroke-width="1.8" marker-end="url(#callback-arrow)"/>
+
+  <!-- 3주차 마인드시프트 → 너드와 세일즈맨 (upward) -->
+  <path d="M 340 308 C 380 308, 380 219, 420 219"
+        fill="none" stroke="#C9A227" stroke-width="1.8" marker-end="url(#callback-arrow)"/>
+
+  <!-- 3주차 익스트림 파레토 → 네 개의 유통 채널 -->
+  <path d="M 340 364 C 380 364, 380 304, 420 304"
+        fill="none" stroke="#C9A227" stroke-width="1.8" marker-end="url(#callback-arrow)"/>
+</svg>

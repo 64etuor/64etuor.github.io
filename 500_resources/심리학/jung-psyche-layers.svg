@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="융의 정신 구조 동심원 - 페르소나, 자아, 개인무의식, 집단무의식, 그리고 중심의 자기">
+	<defs>
+		<style>
+			.label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; fill: #2b2b2b; }
+			.layer-label { font-size: 15px; font-weight: 600; }
+			.sub-label { font-size: 12px; fill: #555; font-style: italic; }
+			.axis-label { font-size: 11px; fill: #888; }
+			.center-label { font-size: 13px; font-weight: 700; fill: #1a1a1a; }
+			.persona { fill: #e8d5c4; fill-opacity: 0.55; stroke: #b89878; stroke-width: 1.5; }
+			.ego { fill: #c8d8e4; fill-opacity: 0.6; stroke: #6f8fa8; stroke-width: 1.5; }
+			.personal { fill: #b8c5a8; fill-opacity: 0.55; stroke: #6b7a5a; stroke-width: 1.5; }
+			.collective { fill: #9a8db0; fill-opacity: 0.5; stroke: #5a4a78; stroke-width: 1.5; }
+			.self-dot { fill: #d4a017; stroke: #8a6a08; stroke-width: 2; }
+			.self-axis { stroke: #d4a017; stroke-width: 1.5; stroke-dasharray: 4 3; fill: none; opacity: 0.7; }
+			.depth-arrow { stroke: #888; stroke-width: 1.5; fill: none; }
+			.element-dot { fill: #5a4a78; }
+		</style>
+		<marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+			<path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+		</marker>
+	</defs>
+
+	<!-- Concentric layers from outermost to innermost -->
+	<circle class="persona" cx="300" cy="300" r="260"/>
+	<circle class="ego" cx="300" cy="300" r="200"/>
+	<circle class="personal" cx="300" cy="300" r="140"/>
+	<circle class="collective" cx="300" cy="300" r="80"/>
+
+	<!-- Self axis (vertical dashed line through center) -->
+	<line class="self-axis" x1="300" y1="40" x2="300" y2="560"/>
+
+	<!-- Self center dot -->
+	<circle class="self-dot" cx="300" cy="300" r="7"/>
+	<text class="label center-label" x="312" y="304">자기 (Self)</text>
+
+	<!-- Layer labels (placed on the upper edge of each ring) -->
+	<text class="label layer-label" x="300" y="58" text-anchor="middle" fill="#8a6a48">페르소나 (가면)</text>
+	<text class="label layer-label" x="300" y="118" text-anchor="middle" fill="#3f5a72">자아 (Ego)</text>
+	<text class="label layer-label" x="300" y="178" text-anchor="middle" fill="#4a5a3a">개인무의식</text>
+	<text class="label layer-label" x="300" y="238" text-anchor="middle" fill="#3a2a58">집단무의식</text>
+
+	<!-- Element markers inside personal unconscious (shadow) -->
+	<circle class="element-dot" cx="220" cy="340" r="3.5"/>
+	<text class="label sub-label" x="212" y="356" text-anchor="end">그림자</text>
+
+	<!-- Element markers inside collective unconscious (anima/animus, archetypes) -->
+	<circle class="element-dot" cx="350" cy="280" r="3.5"/>
+	<text class="label sub-label" x="358" y="278">아니마/아니무스</text>
+	<circle class="element-dot" cx="270" cy="340" r="3.5"/>
+	<text class="label sub-label" x="262" y="354" text-anchor="end">원형들</text>
+
+	<!-- Depth axis on the left -->
+	<text class="label axis-label" x="30" y="80">표층</text>
+	<line class="depth-arrow" x1="40" y1="95" x2="40" y2="510" marker-end="url(#arrowhead)"/>
+	<text class="label axis-label" x="30" y="528">심층</text>
+	<text class="label axis-label" x="20" y="300" transform="rotate(-90 20 300)" text-anchor="middle">의식 접근 난이도 ↑</text>
+
+	<!-- Self axis label -->
+	<text class="label axis-label" x="308" y="48" fill="#8a6a08">자기 축 (모든 층 관통)</text>
+</svg>
