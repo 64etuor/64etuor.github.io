@@ -1,0 +1,76 @@
+<svg width="100%" viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Axes -->
+  <line x1="80" y1="400" x2="690" y2="400" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="80" y1="400" x2="80"  y2="40"  stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Axis labels -->
+  <text x="385" y="430" text-anchor="middle" font-size="12" fill="#444441">시간</text>
+  <text x="40"  y="220" text-anchor="middle" font-size="12" fill="#444441" transform="rotate(-90 40 220)">성능 · 가치</text>
+
+  <!-- Customer acceptance band (shaded between min and max lines) -->
+  <path d="M80 320 L640 240 L640 140 L80 220 Z"
+        fill="#F4F1E9" opacity="0.55"/>
+  <text x="200" y="280" font-size="11" fill="#854F0B" opacity="0.85">고객이 받아주는 구간</text>
+
+  <!-- Lower acceptance line (min) -->
+  <line x1="80" y1="320" x2="640" y2="240" stroke="#854F0B" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="92" y="338" font-size="11" fill="#633806">고객 수용 최소선</text>
+
+  <!-- Upper acceptance line (max) -->
+  <line x1="80" y1="220" x2="640" y2="140" stroke="#854F0B" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="92" y="212" font-size="11" fill="#633806">고객 수용 최대선 — 넘으면 오버슈팅</text>
+
+  <!-- Sideways normal distribution at right edge (showing acceptance distribution between two lines) -->
+  <path d="M640 140
+           C 672 150, 678 175, 660 190
+           C 642 200, 678 215, 660 232
+           C 650 240, 660 240, 640 240"
+        fill="#F1EBD8" stroke="#854F0B" stroke-width="0.8" opacity="0.75"/>
+  <text x="668" y="195" font-size="10" fill="#854F0B">수용</text>
+  <text x="668" y="208" font-size="10" fill="#854F0B">분포</text>
+
+  <!-- Incumbent (대기업, sustaining) curve — climbs hard, crosses max line, overshoots -->
+  <path d="M100 250
+           C 200 235, 280 200, 360 170
+           C 430 140, 510 95, 600 60"
+        fill="none" stroke="#0C447C" stroke-width="3"/>
+  <text x="600" y="48" text-anchor="end" font-size="12" font-weight="500" fill="#0C447C">대기업 (Sustaining)</text>
+
+  <!-- Mark overshoot crossing -->
+  <circle cx="438" cy="170" r="5" fill="#0C447C"/>
+  <line x1="438" y1="170" x2="438" y2="125" stroke="#0C447C" stroke-width="0.8" stroke-dasharray="2 3"/>
+  <text x="446" y="118" font-size="11" fill="#0C447C">오버슈팅 시작 — 자기 와해</text>
+
+  <!-- Entrant (low-end disruptor) curve — slow climb from below min, crosses into acceptance band -->
+  <path d="M100 385
+           C 200 378, 280 360, 360 330
+           C 430 305, 510 270, 600 230"
+        fill="none" stroke="#0F6E56" stroke-width="3"/>
+  <text x="600" y="222" text-anchor="end" font-size="12" font-weight="500" fill="#085041">신참 (Low-end Entrant)</text>
+
+  <!-- Mark mainstream entry (crosses min line) -->
+  <circle cx="510" cy="263" r="5" fill="#0F6E56"/>
+  <line x1="510" y1="263" x2="510" y2="305" stroke="#0F6E56" stroke-width="0.8" stroke-dasharray="2 3"/>
+  <text x="518" y="320" font-size="11" fill="#085041">주류 시장 진입</text>
+
+  <!-- "로우엔드" annotation near entrant start -->
+  <text x="108" y="378" font-size="10" fill="#444441">로우엔드</text>
+  <text x="108" y="390" font-size="10" fill="#5F5E5A">(처음엔 무시당함)</text>
+
+  <!-- Legend -->
+  <g transform="translate(80, 460)">
+    <line x1="0" y1="0" x2="24" y2="0" stroke="#0C447C" stroke-width="3"/>
+    <text x="30" y="4" font-size="11" fill="#0C447C">대기업 곡선 — 수용 최대선을 넘어가며 자기 와해</text>
+
+    <line x1="380" y1="0" x2="404" y2="0" stroke="#0F6E56" stroke-width="3"/>
+    <text x="410" y="4" font-size="11" fill="#085041">신참 곡선 — 로우엔드에서 수용 최소선 안으로 진입</text>
+  </g>
+</svg>

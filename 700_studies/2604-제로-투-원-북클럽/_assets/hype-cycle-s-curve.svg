@@ -36,28 +36,28 @@
   <circle cx="660" cy="167" r="4" fill="#C9A227"/>
   <text   x="660" y="151" text-anchor="middle" font-size="11" fill="#8A6F12">생산성의 고원</text>
 
-  <!-- S-curve (foreground, overlaid) -->
+  <!-- S-curve (foreground, overlaid) — plateaus before the right edge -->
   <path d="M80 380
-           C 220 380, 260 380, 340 360
-           C 400 345, 430 200, 500 130
-           C 560 75,  610 70,  690 70"
+           C 180 380, 230 380, 290 360
+           C 340 343, 360 230, 400 170
+           C 440 110, 480 100, 540 100"
         fill="none" stroke="#0F6E56" stroke-width="3"/>
 
   <!-- S-curve stage labels -->
-  <text x="200" y="370" text-anchor="middle" font-size="12" font-weight="500" fill="#085041">도입기</text>
-  <text x="420" y="270" text-anchor="middle" font-size="12" font-weight="500" fill="#085041">성장기</text>
-  <text x="620" y="100" text-anchor="middle" font-size="12" font-weight="500" fill="#085041">성숙기</text>
+  <text x="180" y="370" text-anchor="middle" font-size="12" font-weight="500" fill="#085041">도입기</text>
+  <text x="350" y="280" text-anchor="middle" font-size="12" font-weight="500" fill="#085041">성장기</text>
+  <text x="500" y="92"  text-anchor="middle" font-size="12" font-weight="500" fill="#085041">성숙기</text>
 
-  <!-- Inflection point (next S-curve hand-off) -->
-  <circle cx="500" cy="130" r="5" fill="#0F6E56"/>
-  <text   x="500" y="115" text-anchor="middle" font-size="11" fill="#085041">변곡점</text>
+  <!-- Hand-off marker (where the next S-curve takes over, slightly below the plateau) -->
+  <circle cx="520" cy="120" r="5" fill="#185FA5"/>
+  <text   x="510" y="142" text-anchor="end" font-size="11" fill="#0C447C">인계점</text>
 
-  <!-- Next S-curve (dotted, smaller, jumping off the inflection) -->
-  <path d="M500 200
-           C 560 200, 600 200, 640 180
-           C 670 165, 685 110, 700 60"
+  <!-- Next S-curve (dotted) — starts slightly below the end of the first curve and rises higher -->
+  <path d="M520 120
+           C 580 120, 600 120, 620 110
+           C 645 95, 665 65, 690 55"
         fill="none" stroke="#185FA5" stroke-width="2" stroke-dasharray="4 4"/>
-  <text x="640" y="215" text-anchor="middle" font-size="11" fill="#0C447C">다음 S커브</text>
+  <text x="660" y="78" text-anchor="middle" font-size="11" fill="#0C447C">다음 S커브</text>
 
   <!-- Legend (placed below x-axis to avoid overlap with curves and labels) -->
   <g transform="translate(80, 460)">

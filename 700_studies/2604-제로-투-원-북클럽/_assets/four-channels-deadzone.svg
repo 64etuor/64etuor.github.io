@@ -16,42 +16,42 @@
   <text x="60"  y="220" text-anchor="middle" font-size="12" fill="#444441" transform="rotate(-90 60 220)">건당 거래 규모</text>
 
   <!-- Channel 1: Complex Sales (top-left, biggest deal size, fewest customers) -->
-  <rect x="130" y="60" width="200" height="56" rx="8"
+  <rect x="120" y="70" width="180" height="50" rx="8"
         fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
-  <text x="230" y="80" text-anchor="middle" dominant-baseline="central"
+  <text x="210" y="88" text-anchor="middle" dominant-baseline="central"
         font-size="14" font-weight="500" fill="#085041">Complex sales</text>
-  <text x="230" y="100" text-anchor="middle" dominant-baseline="central"
+  <text x="210" y="106" text-anchor="middle" dominant-baseline="central"
         font-size="12" fill="#0F6E56">$10M+ · CEO 직접</text>
 
   <!-- Channel 2: Personal Sales -->
-  <rect x="220" y="140" width="200" height="56" rx="8"
+  <rect x="190" y="145" width="180" height="50" rx="8"
         fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
-  <text x="320" y="160" text-anchor="middle" dominant-baseline="central"
+  <text x="280" y="163" text-anchor="middle" dominant-baseline="central"
         font-size="14" font-weight="500" fill="#0C447C">Personal sales</text>
-  <text x="320" y="180" text-anchor="middle" dominant-baseline="central"
+  <text x="280" y="181" text-anchor="middle" dominant-baseline="central"
         font-size="12" fill="#185FA5">$10K – $100K · 세일즈팀</text>
 
-  <!-- Dead zone (small narrow bridge between Personal and Marketing) -->
-  <rect x="320" y="220" width="60" height="56" rx="8"
+  <!-- Dead zone (own x-band: x 380-435, disjoint from every other rect's x range) -->
+  <rect x="380" y="215" width="55" height="32" rx="6"
         fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5" stroke-dasharray="4 3"/>
-  <text x="350" y="240" text-anchor="middle" dominant-baseline="central"
-        font-size="12" fill="#444441">Dead</text>
-  <text x="350" y="258" text-anchor="middle" dominant-baseline="central"
-        font-size="12" fill="#444441">zone</text>
+  <text x="407" y="227" text-anchor="middle" dominant-baseline="central"
+        font-size="11" fill="#444441">Dead</text>
+  <text x="407" y="240" text-anchor="middle" dominant-baseline="central"
+        font-size="11" fill="#444441">zone</text>
 
   <!-- Channel 3: Marketing -->
-  <rect x="380" y="220" width="200" height="56" rx="8"
+  <rect x="445" y="265" width="180" height="50" rx="8"
         fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
-  <text x="480" y="240" text-anchor="middle" dominant-baseline="central"
+  <text x="535" y="283" text-anchor="middle" dominant-baseline="central"
         font-size="14" font-weight="500" fill="#633806">Marketing</text>
-  <text x="480" y="260" text-anchor="middle" dominant-baseline="central"
+  <text x="535" y="301" text-anchor="middle" dominant-baseline="central"
         font-size="12" fill="#854F0B">$100 – $1,000 · 광고</text>
 
   <!-- Channel 4: Viral -->
-  <rect x="430" y="300" width="200" height="56" rx="8"
+  <rect x="455" y="335" width="180" height="50" rx="8"
         fill="#FBEAF0" stroke="#993556" stroke-width="0.5"/>
-  <text x="530" y="320" text-anchor="middle" dominant-baseline="central"
+  <text x="545" y="353" text-anchor="middle" dominant-baseline="central"
         font-size="14" font-weight="500" fill="#72243E">Viral marketing</text>
-  <text x="530" y="340" text-anchor="middle" dominant-baseline="central"
+  <text x="545" y="371" text-anchor="middle" dominant-baseline="central"
         font-size="12" fill="#993556">~$100 · 친구가 친구를</text>
 </svg>
