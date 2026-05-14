@@ -1,0 +1,135 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1778570973428,
+  "projectRoot": "C:\\Blog",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "assets"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "200_books": {
+      "path": "200_books",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1778570973390,
+      "keyFiles": [
+        "독서-bases.html",
+        "독서-대시보드.html"
+      ]
+    },
+    "300_projects": {
+      "path": "300_projects",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1778570973391,
+      "keyFiles": []
+    },
+    "400_areas": {
+      "path": "400_areas",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1778570973392,
+      "keyFiles": []
+    },
+    "500_resources": {
+      "path": "500_resources",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1778570973394,
+      "keyFiles": []
+    },
+    "600_tech-stack": {
+      "path": "600_tech-stack",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1778570973394,
+      "keyFiles": []
+    },
+    "700_studies": {
+      "path": "700_studies",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1778570973395,
+      "keyFiles": []
+    },
+    "900_writings": {
+      "path": "900_writings",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1778570973396,
+      "keyFiles": []
+    },
+    "assets": {
+      "path": "assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1778570973397,
+      "keyFiles": []
+    },
+    "settings": {
+      "path": "settings",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1778570973397,
+      "keyFiles": []
+    },
+    "site-lib": {
+      "path": "site-lib",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1778570973398,
+      "keyFiles": [
+        "metadata.json",
+        "rss.xml",
+        "search-index.json"
+      ]
+    },
+    "settings\\assets": {
+      "path": "settings\\assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1778570973402,
+      "keyFiles": []
+    },
+    "site-lib\\scripts": {
+      "path": "site-lib\\scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 4,
+      "lastAccessed": 1778570973403,
+      "keyFiles": [
+        "graph-render-worker.js",
+        "graph-wasm.js",
+        "graph-wasm.wasm"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}

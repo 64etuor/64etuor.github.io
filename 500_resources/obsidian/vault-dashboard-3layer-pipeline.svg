@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" role="img" aria-label="Obsidian Vault Dashboard 3-layer render pipeline — Data and Style layers converge into Render layer through two declared interfaces (JSON file, cssclasses).">
+	<defs>
+		<style>
+			.canvas       { fill: #FBFBFA; }
+			.card         { fill: #FFFFFF; stroke: #EAEAEA; stroke-width: 1; }
+			.title        { font: 600 16px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #2F3437; }
+			.subtitle     { font: 400 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #787774; }
+			.hdr          { font: 600 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #2F3437; }
+			.body         { font: 400 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #2F3437; }
+			.muted        { font: 400 11px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #787774; }
+			.mono         { font: 400 11px/1 ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace; fill: #2F3437; }
+			.mono-muted   { font: 400 10.5px/1 ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace; fill: #787774; }
+			.pill         { fill: rgba(176, 137, 0, 0.08); stroke: #EBDFB7; stroke-width: 1; }
+			.pill-text    { font: 600 10.5px/1 ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace; fill: #b08900; letter-spacing: 0.04em; }
+			.inner-tile   { fill: #F7F6F3; stroke: #EAEAEA; stroke-width: 1; }
+			.arrow        { stroke: #2F3437; stroke-width: 1.25; fill: none; }
+			.arrow-thin   { stroke: #787774; stroke-width: 1; fill: none; }
+			.iface-bg     { fill: #FBFBFA; stroke: #2F3437; stroke-width: 1; }
+		</style>
+		<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+			<path d="M0,0 L10,5 L0,10 z" fill="#2F3437"/>
+		</marker>
+		<marker id="ah-thin" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+			<path d="M0,0 L10,5 L0,10 z" fill="#787774"/>
+		</marker>
+	</defs>
+
+	<rect class="canvas" x="0" y="0" width="800" height="460"/>
+
+	<!-- Header -->
+	<text x="400" y="34" text-anchor="middle" class="title">3-Layer Render Pipeline</text>
+	<text x="400" y="54" text-anchor="middle" class="subtitle">세 레이어는 각자 다른 주기로 살고, 두 개의 명시된 인터페이스에서 만난다</text>
+
+	<!-- ============ DATA LAYER (top-left) ============ -->
+	<rect class="card" x="60" y="92" width="290" height="118" rx="8"/>
+	<text x="80" y="118" class="hdr">데이터 레이어</text>
+	<rect class="pill" x="216" y="102" width="118" height="20" rx="3"/>
+	<text x="275" y="116" text-anchor="middle" class="pill-text">WEEKLY CRON</text>
+
+	<rect class="inner-tile" x="80" y="138" width="118" height="34" rx="4"/>
+	<text x="139" y="159" text-anchor="middle" class="mono">vault_dashboard.py</text>
+
+	<line class="arrow-thin" x1="203" y1="155" x2="223" y2="155" marker-end="url(#ah-thin)"/>
+
+	<rect class="inner-tile" x="228" y="138" width="102" height="34" rx="4"/>
+	<text x="279" y="159" text-anchor="middle" class="mono">metrics.json</text>
+
+	<text x="80" y="194" class="muted">무거운 계산을 미리 끝내 단일 JSON으로 굳힘</text>
+
+	<!-- ============ STYLE LAYER (bottom-left) ============ -->
+	<rect class="card" x="60" y="244" width="290" height="118" rx="8"/>
+	<text x="80" y="270" class="hdr">스타일 레이어</text>
+	<rect class="pill" x="220" y="254" width="114" height="20" rx="3"/>
+	<text x="277" y="268" text-anchor="middle" class="pill-text">ON DESIGN CHANGE</text>
+
+	<rect class="inner-tile" x="80" y="290" width="118" height="34" rx="4"/>
+	<text x="139" y="311" text-anchor="middle" class="mono">design tokens</text>
+
+	<line class="arrow-thin" x1="203" y1="307" x2="223" y2="307" marker-end="url(#ah-thin)"/>
+
+	<rect class="inner-tile" x="228" y="290" width="102" height="34" rx="4"/>
+	<text x="279" y="311" text-anchor="middle" class="mono">snippet.css</text>
+
+	<text x="80" y="346" class="muted">모든 컴포넌트의 색·간격을 한 곳에서 정의</text>
+
+	<!-- ============ RENDER LAYER (right) ============ -->
+	<rect class="card" x="500" y="168" width="240" height="118" rx="8"/>
+	<text x="520" y="194" class="hdr">렌더 레이어</text>
+	<rect class="pill" x="632" y="178" width="92" height="20" rx="3"/>
+	<text x="678" y="192" text-anchor="middle" class="pill-text">EVERY REOPEN</text>
+
+	<rect class="inner-tile" x="520" y="216" width="100" height="34" rx="4"/>
+	<text x="570" y="237" text-anchor="middle" class="mono">DataviewJS</text>
+
+	<rect class="inner-tile" x="628" y="216" width="100" height="34" rx="4"/>
+	<text x="678" y="237" text-anchor="middle" class="mono-muted">*.md notes</text>
+
+	<text x="520" y="270" class="muted">JSON 읽고 CSS 입혀 DOM 새로 빌드</text>
+
+	<!-- ============ INTERFACE ARROWS ============ -->
+	<!-- Data → Render: smooth curve from data card right edge to render card left edge -->
+	<path class="arrow" d="M 350 155 C 420 155, 430 215, 500 225" marker-end="url(#ah)"/>
+	<rect class="iface-bg" x="380" y="170" width="118" height="22" rx="3"/>
+	<text x="439" y="186" text-anchor="middle" class="mono">dv.io.load</text>
+
+	<!-- Style → Render -->
+	<path class="arrow" d="M 350 307 C 420 307, 430 247, 500 237" marker-end="url(#ah)"/>
+	<rect class="iface-bg" x="368" y="270" width="146" height="22" rx="3"/>
+	<text x="441" y="286" text-anchor="middle" class="mono">cssclasses 약속</text>
+
+	<!-- ============ FOOTER ============ -->
+	<text x="400" y="406" text-anchor="middle" class="subtitle">데이터는 cron이, 스타일은 CSS 한 파일이, 렌더는 .md만 건드린다.</text>
+	<text x="400" y="424" text-anchor="middle" class="subtitle">어느 한 레이어를 갈아엎어도 다른 두 레이어가 살아남는다.</text>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 620" role="img" aria-label="SSOT boundary diagram: OMC, Vault, and Memory layers each own a non-overlapping territory">
+  <defs>
+    <style>
+      .bg { fill: #fafaf7; }
+      .region { stroke-width: 1.5; fill-opacity: 0.10; }
+      .region-omc { fill: #6b8e9e; stroke: #6b8e9e; }
+      .region-vault { fill: #b08968; stroke: #b08968; }
+      .region-memory { fill: #8a9a7b; stroke: #8a9a7b; }
+      .gap { stroke: #c8c4ba; stroke-width: 1.5; stroke-dasharray: 4 4; fill: none; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 17px; font-weight: 600; fill: #2a2a2a; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #6a6a66; letter-spacing: 0.5px; }
+      .item { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 12.5px; fill: #3a3a3a; }
+      .rule { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11.5px; fill: #5a5a56; font-style: italic; }
+      .arrow { stroke: #9a9690; stroke-width: 1.2; fill: none; }
+      .dot-omc { fill: #6b8e9e; }
+      .dot-vault { fill: #b08968; }
+      .dot-memory { fill: #8a9a7b; }
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9a9690"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="720" height="620"/>
+
+  <!-- OMC region: top-left -->
+  <rect class="region region-omc" x="40" y="50" width="290" height="220" rx="14"/>
+  <text class="sub" x="58" y="78">LAYER 1</text>
+  <text class="title" x="58" y="100">OMC</text>
+  <text class="sub" x="58" y="118">~/.claude/CLAUDE.md</text>
+  <circle class="dot-omc" cx="62" cy="148" r="3"/>
+  <text class="item" x="74" y="152">agent delegation</text>
+  <circle class="dot-omc" cx="62" cy="174" r="3"/>
+  <text class="item" x="74" y="178">model routing (haiku / sonnet / opus)</text>
+  <circle class="dot-omc" cx="62" cy="200" r="3"/>
+  <text class="item" x="74" y="204">execution modes (autopilot, ralph)</text>
+  <circle class="dot-omc" cx="62" cy="226" r="3"/>
+  <text class="item" x="74" y="230">scope: code refactor work</text>
+
+  <!-- Vault region: top-right -->
+  <rect class="region region-vault" x="390" y="50" width="290" height="220" rx="14"/>
+  <text class="sub" x="408" y="78">LAYER 2</text>
+  <text class="title" x="408" y="100">Vault</text>
+  <text class="sub" x="408" y="118">AGENTS.md / 000_System/</text>
+  <circle class="dot-vault" cx="412" cy="148" r="3"/>
+  <text class="item" x="424" y="152">frontmatter standard</text>
+  <circle class="dot-vault" cx="412" cy="174" r="3"/>
+  <text class="item" x="424" y="178">tag taxonomy + wikilinks</text>
+  <circle class="dot-vault" cx="412" cy="200" r="3"/>
+  <text class="item" x="424" y="204">note body, Related decision rule</text>
+  <circle class="dot-vault" cx="412" cy="226" r="3"/>
+  <text class="item" x="424" y="230">scope: knowledge artifacts</text>
+
+  <!-- Memory region: bottom-center -->
+  <rect class="region region-memory" x="215" y="340" width="290" height="220" rx="14"/>
+  <text class="sub" x="233" y="368">LAYER 3</text>
+  <text class="title" x="233" y="390">Memory</text>
+  <text class="sub" x="233" y="408">auto-memory / MEMORY.md</text>
+  <circle class="dot-memory" cx="237" cy="438" r="3"/>
+  <text class="item" x="249" y="442">user preferences</text>
+  <circle class="dot-memory" cx="237" cy="464" r="3"/>
+  <text class="item" x="249" y="468">recurring feedback</text>
+  <circle class="dot-memory" cx="237" cy="490" r="3"/>
+  <text class="item" x="249" y="494">cross-session personal facts</text>
+  <circle class="dot-memory" cx="237" cy="516" r="3"/>
+  <text class="item" x="249" y="520">scope: the human, not the artifact</text>
+
+  <!-- Boundary gaps: dashed dividers in the negative space between regions -->
+  <!-- Vertical gap between OMC and Vault -->
+  <line class="gap" x1="360" y1="80" x2="360" y2="240"/>
+  <!-- Diagonal-ish gap separating top pair from Memory -->
+  <line class="gap" x1="80" y1="300" x2="640" y2="300"/>
+
+  <!-- Decision-rule labels along boundaries -->
+  <text class="rule" x="360" y="72" text-anchor="middle">non-overlapping</text>
+
+  <!-- Routing arrow: from a central "in doubt?" point to each region -->
+  <g>
+    <circle cx="360" cy="305" r="4" fill="#5a5a56"/>
+    <text class="rule" x="360" y="328" text-anchor="middle">In doubt: useful to me as a person → Memory · as an artifact → Vault · as agent behavior → OMC</text>
+  </g>
+
+  <!-- Subtle connector lines from decision node to each region (no overlap, just routing) -->
+  <path class="arrow" d="M 340 295 Q 260 270 200 270" marker-end="url(#arrowhead)"/>
+  <path class="arrow" d="M 380 295 Q 460 270 520 270" marker-end="url(#arrowhead)"/>
+  <path class="arrow" d="M 360 320 L 360 340" marker-end="url(#arrowhead)"/>
+
+  <!-- Footer caption -->
+  <text class="sub" x="360" y="595" text-anchor="middle">Three territories, three contracts — never duplicate across layers.</text>
+</svg>

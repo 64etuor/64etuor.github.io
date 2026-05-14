@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" role="img" aria-label="Knowledge representation spectrum from controlled vocabulary to ontology, showing increasing commitment strength.">
+  <defs>
+    <style>
+      /* Palette baseline for the article (reuse in subsequent SVGs)
+         --ink:    #1f2933  (primary text)
+         --muted:  #6b7280  (secondary text, axes)
+         --rule:   #d1d5db  (faint rules)
+         --accent: #2f6f9f  (primary accent, deepens left→right)
+         --warm:   #b86b3a  (highlight / example chip)
+         --bg-soft:#f3f5f8  (chip background)
+         Typography: system sans-serif, 14px base, 12px small, 16px section.
+         Stroke widths: 1.5 default, 2.5 emphasis.
+      */
+      .axis     { stroke: #6b7280; stroke-width: 1.5; fill: none; }
+      .rule     { stroke: #d1d5db; stroke-width: 1; fill: none; stroke-dasharray: 2 4; }
+      .tick     { stroke: #6b7280; stroke-width: 1.5; fill: none; }
+      .label    { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 14px; fill: #1f2933; }
+      .anchor   { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 15px; font-weight: 600; fill: #1f2933; }
+      .sub      { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 12px; fill: #4b5563; }
+      .small    { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #6b7280; }
+      .axistitle{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 13px; font-weight: 600; fill: #4b5563; letter-spacing: 0.4px; }
+      .chip     { fill: #f3f5f8; stroke: #d1d5db; stroke-width: 1; }
+      .chiptext { font-family: ui-monospace, "SF Mono", "Consolas", monospace; font-size: 11px; fill: #b86b3a; }
+      .iconStroke { stroke: #2f6f9f; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .iconFill   { fill: #2f6f9f; }
+      .dot      { fill: #2f6f9f; stroke: #ffffff; stroke-width: 2; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+
+  <!-- Axis title (top) -->
+  <text x="440" y="28" class="axistitle" text-anchor="middle">FORMALITY  /  COMMITMENT STRENGTH  →</text>
+
+  <!-- Spectrum bar: thickens left→right to encode cumulative intensity -->
+  <path d="M 80 178 L 800 162 L 800 198 L 80 182 Z" fill="#2f6f9f" fill-opacity="0.10" stroke="none"/>
+  <path d="M 80 180 L 800 180" class="axis" marker-end="url(#arrow)"/>
+
+  <!-- Anchor 1: Controlled Vocabulary  (x = 140) -->
+  <line x1="140" y1="172" x2="140" y2="188" class="tick"/>
+  <circle cx="140" cy="180" r="6" class="dot"/>
+  <text x="140" y="142" class="anchor" text-anchor="middle">Controlled Vocabulary</text>
+  <text x="140" y="160" class="sub"    text-anchor="middle">컨트롤드 보캐뷸러리 · 용어 통일</text>
+  <!-- icon: flat list -->
+  <g transform="translate(112,222)">
+    <line x1="0"  y1="4"  x2="56" y2="4"  class="iconStroke"/>
+    <line x1="0"  y1="16" x2="56" y2="16" class="iconStroke"/>
+    <line x1="0"  y1="28" x2="56" y2="28" class="iconStroke"/>
+    <line x1="0"  y1="40" x2="56" y2="40" class="iconStroke"/>
+  </g>
+  <text x="140" y="286" class="small" text-anchor="middle">flat list</text>
+  <rect x="100"  y="300" width="80" height="22" rx="4" class="chip"/>
+  <text x="140" y="315" class="chiptext" text-anchor="middle">ICD codes</text>
+
+  <!-- Anchor 2: Taxonomy  (x = 360) -->
+  <line x1="360" y1="172" x2="360" y2="188" class="tick"/>
+  <circle cx="360" cy="180" r="7" class="dot"/>
+  <text x="360" y="142" class="anchor" text-anchor="middle">Taxonomy</text>
+  <text x="360" y="160" class="sub"    text-anchor="middle">택소노미 · + 계층 (is-a)</text>
+  <!-- icon: tree -->
+  <g transform="translate(332,222)">
+    <circle cx="28" cy="4"  r="3" class="iconFill"/>
+    <circle cx="10" cy="32" r="3" class="iconFill"/>
+    <circle cx="28" cy="32" r="3" class="iconFill"/>
+    <circle cx="46" cy="32" r="3" class="iconFill"/>
+    <path d="M 28 7  L 10 29  M 28 7  L 28 29  M 28 7  L 46 29" class="iconStroke"/>
+  </g>
+  <text x="360" y="286" class="small" text-anchor="middle">tree</text>
+  <rect x="312"  y="300" width="96" height="22" rx="4" class="chip"/>
+  <text x="360" y="315" class="chiptext" text-anchor="middle">생물 분류</text>
+
+  <!-- Anchor 3: Thesaurus  (x = 580) -->
+  <line x1="580" y1="172" x2="580" y2="188" class="tick"/>
+  <circle cx="580" cy="180" r="8" class="dot"/>
+  <text x="580" y="142" class="anchor" text-anchor="middle">Thesaurus</text>
+  <text x="580" y="160" class="sub"    text-anchor="middle">시소러스 · + 동의·관련어</text>
+  <!-- icon: graph -->
+  <g transform="translate(552,220)">
+    <path d="M 12 8  L 44 8  M 12 8  L 28 26  M 44 8  L 28 26  M 12 8  L 12 38  M 44 8  L 44 38  M 12 38 L 28 26  M 44 38 L 28 26" class="iconStroke"/>
+    <circle cx="12" cy="8"  r="3" class="iconFill"/>
+    <circle cx="44" cy="8"  r="3" class="iconFill"/>
+    <circle cx="28" cy="26" r="3" class="iconFill"/>
+    <circle cx="12" cy="38" r="3" class="iconFill"/>
+    <circle cx="44" cy="38" r="3" class="iconFill"/>
+  </g>
+  <text x="580" y="286" class="small" text-anchor="middle">graph</text>
+  <rect x="540"  y="300" width="80" height="22" rx="4" class="chip"/>
+  <text x="580" y="315" class="chiptext" text-anchor="middle">WordNet</text>
+
+  <!-- Anchor 4: Ontology  (x = 780) -->
+  <line x1="780" y1="172" x2="780" y2="188" class="tick"/>
+  <circle cx="780" cy="180" r="9" class="dot"/>
+  <text x="780" y="142" class="anchor" text-anchor="middle">Ontology</text>
+  <text x="780" y="160" class="sub"    text-anchor="middle">온톨로지 · + 공리·제약·추론</text>
+  <!-- icon: logic graph (nodes + labelled edges with ∀ axiom mark) -->
+  <g transform="translate(750,218)">
+    <path d="M 8 10  L 36 10  M 8 10  L 22 34  M 36 10  L 22 34  M 8 10  L 52 34  M 36 10  L 52 34" class="iconStroke"/>
+    <circle cx="8"  cy="10" r="3" class="iconFill"/>
+    <circle cx="36" cy="10" r="3" class="iconFill"/>
+    <circle cx="22" cy="34" r="3" class="iconFill"/>
+    <circle cx="52" cy="34" r="3" class="iconFill"/>
+    <text x="44" y="6" font-family="ui-monospace, Consolas, monospace" font-size="10" fill="#b86b3a">∀</text>
+    <text x="14" y="26" font-family="ui-monospace, Consolas, monospace" font-size="9"  fill="#6b7280">is-a</text>
+  </g>
+  <text x="780" y="286" class="small" text-anchor="middle">logic graph</text>
+  <rect x="720"  y="300" width="120" height="22" rx="4" class="chip"/>
+  <text x="780" y="315" class="chiptext" text-anchor="middle">OWL · SUMO · Cyc</text>
+
+  <!-- Cumulative-strength annotation under axis -->
+  <text x="80"  y="348" class="small" text-anchor="start">low commitment · loose semantics</text>
+  <text x="800" y="348" class="small" text-anchor="end">high commitment · machine-reasoning</text>
+</svg>

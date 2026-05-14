@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 560" role="img" aria-label="Vault rule strata: from llmwiki minimal foundation at the bottom to accumulated fragile rules at the top">
+  <defs>
+    <style>
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; fill: #f5efe4; }
+      .layer-title { font-size: 14px; font-weight: 600; }
+      .layer-body { font-size: 12px; fill-opacity: 0.92; }
+      .layer-tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 10px; letter-spacing: 0.08em; fill: #f5efe4; fill-opacity: 0.7; }
+      .annot { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 12px; font-style: italic; fill: #2a3340; }
+      .annot-strong { font-weight: 600; fill: #6b3e1e; }
+      .arrow { stroke: #2a3340; stroke-width: 1.5; fill: none; }
+      .arrow-strong { stroke: #6b3e1e; stroke-width: 2; fill: none; }
+      .stratum-base { fill: #1d2a3a; }
+      .stratum-2 { fill: #2c4055; }
+      .stratum-3 { fill: #3d566f; }
+      .stratum-4 { fill: #5a7186; fill-opacity: 0.85; }
+      .stratum-5 { fill: #8095a8; fill-opacity: 0.7; stroke: #5a7186; stroke-width: 1; stroke-dasharray: 4 3; }
+      .accent { fill: #c9a063; }
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2a3340"/>
+    </marker>
+    <marker id="arrowhead-strong" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b3e1e"/>
+    </marker>
+  </defs>
+
+  <!-- Layer 5 (top, most fragile) — thinnest, dashed -->
+  <rect class="stratum-5" x="120" y="50" width="380" height="50" rx="2"/>
+  <text class="label layer-tag" x="132" y="68">LAYER 5  ·  FRAGILE</text>
+  <text class="label layer-title" x="132" y="84">Query Op auto-trigger 4점제 · description 영어 강제</text>
+  <text class="label layer-body" x="132" y="98">백틱 wikilink 금지 · querySources / queryOrigin</text>
+
+  <!-- Layer 4 -->
+  <rect class="stratum-4" x="110" y="110" width="400" height="62" rx="2"/>
+  <text class="label layer-tag" x="122" y="129">LAYER 4  ·  ACCUMULATED</text>
+  <text class="label layer-title" x="122" y="146">Related 섹션 strict rule · Visual Aids 결정 절차</text>
+  <text class="label layer-body" x="122" y="162">폴더-bound source 태그 · 파일명 특수문자 표</text>
+
+  <!-- Layer 3 (genuine value-add) -->
+  <rect class="stratum-3" x="100" y="182" width="420" height="78" rx="2"/>
+  <text class="label layer-tag" x="112" y="202">LAYER 3  ·  VALUE-ADD</text>
+  <text class="label layer-title" x="112" y="221">태그 (domain / source / action)</text>
+  <text class="label layer-body" x="112" y="239">라우팅 테이블 · Pre-Flight 체크리스트</text>
+
+  <!-- Layer 2 (necessary scaffolding) -->
+  <rect class="stratum-2" x="90" y="270" width="440" height="92" rx="2"/>
+  <text class="label layer-tag" x="102" y="291">LAYER 2  ·  SCAFFOLDING</text>
+  <text class="label layer-title" x="102" y="312">Templater 7개 frontmatter</text>
+  <text class="label layer-body" x="102" y="331">ISO 8601 날짜 · 폴더 구조</text>
+
+  <!-- Foundation (thickest, darkest) -->
+  <rect class="stratum-base" x="80" y="372" width="460" height="118" rx="2"/>
+  <rect class="accent" x="80" y="372" width="6" height="118"/>
+  <text class="label layer-tag" x="98" y="396">FOUNDATION  ·  llmwiki MINIMAL SPEC</text>
+  <text class="label layer-title" x="98" y="420" style="font-size:16px;">3-layer · 3-op · index / log</text>
+  <text class="label layer-body" x="98" y="440" style="font-size:13px; fill-opacity:0.85;">Karpathy minimal compounding-loop spec</text>
+  <text class="label layer-body" x="98" y="460" style="font-size:12px; fill-opacity:0.7;">이 층 위에서만 다른 모든 규칙이 의미를 가진다</text>
+
+  <!-- Right-side annotation: top is removable -->
+  <path class="arrow" d="M 525 90 L 565 90 L 565 165 L 525 165" marker-end="url(#arrowhead)"/>
+  <text class="annot" x="572" y="115">이 위는</text>
+  <text class="annot" x="572" y="131">떼어내도</text>
+  <text class="annot" x="572" y="147">본질이</text>
+  <text class="annot" x="572" y="163">살아남는다</text>
+
+  <!-- Left-side annotation: bottom is essential -->
+  <path class="arrow-strong" d="M 65 490 L 25 490 L 25 380 L 65 380" marker-end="url(#arrowhead-strong)"/>
+  <text class="annot annot-strong" x="20" y="445" transform="rotate(-90 20 445)">이 아래가 무너지면 컴파운딩이 깨진다</text>
+
+  <!-- Vertical depth axis hint -->
+  <text class="label layer-tag" x="320" y="525" text-anchor="middle" style="fill:#2a3340; fill-opacity:0.55;">DEPTH  ↓  ESSENTIAL  ·  HEIGHT  ↑  ACCUMULATED</text>
+</svg>

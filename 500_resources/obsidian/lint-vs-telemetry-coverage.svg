@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-label="Structural vs behavioral note rot: lint covers the left half, telemetry covers the bottom half">
+  <defs>
+    <style>
+      .bg { fill: #fafafa; }
+      .axis { stroke: #555; stroke-width: 1.5; fill: none; }
+      .grid { stroke: #cccccc; stroke-width: 1; fill: none; stroke-dasharray: 3 3; }
+      .lint-cover { fill: #3a6ea5; fill-opacity: 0.16; }
+      .tel-cover  { fill: #c2693a; fill-opacity: 0.16; }
+      .overlap-frame { fill: none; stroke: #555; stroke-width: 1.5; stroke-dasharray: 4 3; }
+      .quad-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 13px; fill: #222; font-weight: 600; }
+      .quad-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #444; }
+      .axis-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 12px; fill: #333; font-weight: 600; }
+      .axis-tick { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #555; }
+      .legend-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #222; }
+      .cover-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; font-weight: 600; }
+      .lint-text { fill: #2a5687; }
+      .tel-text { fill: #9a4f24; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="600" height="480"/>
+
+  <!-- Chart bounds: left=80, right=560, top=70, bottom=400. center x=320, y=235 -->
+
+  <!-- Lint covers LEFT half (structurally broken column) -->
+  <rect class="lint-cover" x="80" y="70" width="240" height="330"/>
+  <!-- Telemetry covers BOTTOM half (behaviorally dead row) -->
+  <rect class="tel-cover" x="80" y="235" width="480" height="165"/>
+
+  <!-- Overlap emphasis: bottom-left quadrant -->
+  <rect class="overlap-frame" x="80" y="235" width="240" height="165"/>
+
+  <!-- Axes -->
+  <line class="axis" x1="80" y1="70" x2="80" y2="400"/>
+  <line class="axis" x1="80" y1="400" x2="560" y2="400"/>
+  <!-- Cross lines -->
+  <line class="grid" x1="320" y1="70" x2="320" y2="400"/>
+  <line class="grid" x1="80" y1="235" x2="560" y2="235"/>
+
+  <!-- Axis titles -->
+  <text class="axis-title" x="320" y="438" text-anchor="middle">구조 (frontmatter / wikilink / tag)</text>
+  <text class="axis-tick" x="200" y="420" text-anchor="middle">망가짐</text>
+  <text class="axis-tick" x="440" y="420" text-anchor="middle">정상</text>
+
+  <text class="axis-title" x="0" y="0" transform="translate(40 235) rotate(-90)" text-anchor="middle">행동 (읽힘 / 인바운드 링크)</text>
+  <text class="axis-tick" x="0" y="0" transform="translate(62 152) rotate(-90)" text-anchor="middle">살아있음</text>
+  <text class="axis-tick" x="0" y="0" transform="translate(62 318) rotate(-90)" text-anchor="middle">죽음</text>
+
+  <!-- Quadrant labels -->
+  <!-- Top-left: broken + alive -->
+  <text class="quad-label" x="200" y="115" text-anchor="middle">lint이 잡는다</text>
+  <text class="quad-sub" x="200" y="135" text-anchor="middle">frontmatter 누락,</text>
+  <text class="quad-sub" x="200" y="150" text-anchor="middle">깨진 wikilink, tag 위반</text>
+  <text class="quad-sub" x="200" y="180" text-anchor="middle" font-style="italic">읽히지만 형식 위반</text>
+
+  <!-- Top-right: healthy -->
+  <text class="quad-label" x="440" y="115" text-anchor="middle">건강한 노트</text>
+  <text class="quad-sub" x="440" y="135" text-anchor="middle">둘 다 통과</text>
+  <text class="quad-sub" x="440" y="180" text-anchor="middle" font-style="italic">목표 상태</text>
+
+  <!-- Bottom-left: broken + dead — strongest archive signal -->
+  <text class="quad-label" x="200" y="280" text-anchor="middle">둘 다 잡는다</text>
+  <text class="quad-sub" x="200" y="300" text-anchor="middle">빠른 archive 후보</text>
+  <text class="quad-sub" x="200" y="320" text-anchor="middle">형식도 깨졌고</text>
+  <text class="quad-sub" x="200" y="335" text-anchor="middle">아무도 안 읽음</text>
+  <text class="quad-sub" x="200" y="370" text-anchor="middle" font-style="italic">교집합 = 강한 신호</text>
+
+  <!-- Bottom-right: healthy form but dead — telemetry only -->
+  <text class="quad-label" x="440" y="280" text-anchor="middle">telemetry가 잡는다</text>
+  <text class="quad-sub" x="440" y="300" text-anchor="middle">dead notes,</text>
+  <text class="quad-sub" x="440" y="315" text-anchor="middle">0 inbound, 0 read</text>
+  <text class="quad-sub" x="440" y="370" text-anchor="middle" font-style="italic">형식만 멀쩡한 유령</text>
+
+  <!-- Coverage band labels -->
+  <text class="cover-label lint-text" x="92" y="84" text-anchor="start">vault-lint.py</text>
+  <text class="cover-label tel-text"  x="548" y="394" text-anchor="end">read_log.py + dead_notes.py</text>
+
+  <!-- Legend -->
+  <g transform="translate(80 452)">
+    <rect class="lint-cover" x="0" y="0" width="16" height="12"/>
+    <text class="legend-text" x="22" y="10">정적 lint 커버 (좌측 절반)</text>
+    <rect class="tel-cover" x="190" y="0" width="16" height="12"/>
+    <text class="legend-text" x="212" y="10">read telemetry 커버 (하단 절반)</text>
+  </g>
+</svg>

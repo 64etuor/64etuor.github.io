@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" role="img" aria-label="Cache vs Live data-resolution choice for Obsidian dashboards — a single horizontal axis from 'live is enough' to 'cache becomes necessary', with three real dashboards placed as markers along it, flanked by Live-mode and Cache-mode summary cards.">
+	<defs>
+		<style>
+			.canvas        { fill: #FBFBFA; }
+			.card          { fill: #FFFFFF; stroke: #EAEAEA; stroke-width: 1; }
+			.card-cache    { fill: #FFFFFF; stroke: #EBDFB7; stroke-width: 1; }
+			.title         { font: 600 16px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #2F3437; }
+			.subtitle      { font: 400 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #787774; }
+			.hdr           { font: 600 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #2F3437; }
+			.hdr-accent    { font: 600 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #b08900; }
+			.body          { font: 400 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #2F3437; }
+			.muted         { font: 400 11px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #787774; }
+			.faint         { font: 400 11px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #b4b1ab; }
+			.mono          { font: 400 10.5px/1 ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace; fill: #787774; }
+			.axis          { stroke: #2F3437; stroke-width: 1.5; }
+			.axis-gradient { stroke: url(#axisGrad); stroke-width: 4; }
+			.tick          { stroke: #b4b1ab; stroke-width: 1; }
+			.marker        { fill: #2F3437; stroke: #FBFBFA; stroke-width: 2; }
+			.marker-label  { font: 600 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #2F3437; }
+			.marker-sub    { font: 400 10.5px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #787774; }
+			.footnote      { font: italic 400 11px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; fill: #787774; }
+			.divider       { stroke: #EAEAEA; stroke-width: 1; }
+			.divider-cache { stroke: #EBDFB7; stroke-width: 1; }
+		</style>
+		<linearGradient id="axisGrad" x1="0" y1="0" x2="1" y2="0">
+			<stop offset="0%" stop-color="#2F3437" stop-opacity="0.15"/>
+			<stop offset="50%" stop-color="#2F3437" stop-opacity="0.45"/>
+			<stop offset="100%" stop-color="#b08900" stop-opacity="0.85"/>
+		</linearGradient>
+	</defs>
+
+	<rect class="canvas" x="0" y="0" width="800" height="360"/>
+
+	<!-- Header -->
+	<text x="400" y="34" text-anchor="middle" class="title">Live vs Cache</text>
+	<text x="400" y="54" text-anchor="middle" class="subtitle">세 대시보드가 한 슬라이더 위에 자기 자리를 잡는다</text>
+
+	<!-- ============ LEFT CARD: Live mode ============ -->
+	<rect class="card" x="50" y="84" width="240" height="124" rx="8"/>
+	<text x="70" y="112" class="hdr">Live 모드</text>
+	<text x="70" y="130" class="muted">dv.pages 한 줄로 그리는 모드</text>
+	<line class="divider" x1="70" y1="142" x2="270" y2="142"/>
+	<text x="70" y="162" class="body">수백 노트 이내 · 100ms</text>
+	<text x="70" y="180" class="body">추가 즉시 반영</text>
+	<text x="70" y="198" class="muted">JSON 캐시·cron 없음</text>
+
+	<!-- ============ RIGHT CARD: Cache mode ============ -->
+	<rect class="card-cache" x="510" y="84" width="240" height="124" rx="8"/>
+	<text x="530" y="112" class="hdr-accent">Cache 모드</text>
+	<text x="530" y="130" class="muted">JSON 굳혀두고 읽는 모드</text>
+	<line class="divider-cache" x1="530" y1="142" x2="730" y2="142"/>
+	<text x="530" y="162" class="body">노트 1k+ · 풀스캔</text>
+	<text x="530" y="180" class="body">weekly cron</text>
+	<text x="530" y="198" class="muted">Python·JSON·cron 한 묶음</text>
+
+	<!-- ============ 1D AXIS ============ -->
+	<!-- Gradient stripe behind the line to suggest "darker → mustard" continuum -->
+	<line class="axis-gradient" x1="80" y1="270" x2="720" y2="270" stroke-linecap="round"/>
+	<!-- Hairline axis on top -->
+	<line class="axis" x1="80" y1="270" x2="720" y2="270"/>
+
+	<!-- Endpoint labels -->
+	<text x="80" y="296" class="muted">라이브로 충분</text>
+	<text x="720" y="296" text-anchor="end" class="muted">캐시가 필요</text>
+	<text x="80" y="310" class="faint">단순 dv.pages 필터</text>
+	<text x="720" y="310" text-anchor="end" class="faint">lint full scan · 그래프 분석</text>
+
+	<!-- ============ MARKERS (3 dashboards) ============ -->
+	<!-- 독서 대시보드 — far left -->
+	<line class="tick" x1="170" y1="262" x2="170" y2="278"/>
+	<circle class="marker" cx="170" cy="270" r="6"/>
+	<text x="170" y="246" text-anchor="middle" class="marker-label">독서 대시보드</text>
+	<text x="170" y="232" text-anchor="middle" class="marker-sub">200권 · 즉시 반영</text>
+
+	<!-- knowledge perspective — center-right -->
+	<line class="tick" x1="470" y1="262" x2="470" y2="278"/>
+	<circle class="marker" cx="470" cy="270" r="6"/>
+	<text x="470" y="246" text-anchor="middle" class="marker-label">knowledge</text>
+	<text x="470" y="232" text-anchor="middle" class="marker-sub">전체 그래프 traverse</text>
+
+	<!-- vault health — far right -->
+	<line class="tick" x1="640" y1="262" x2="640" y2="278"/>
+	<circle class="marker" cx="640" cy="270" r="6"/>
+	<text x="640" y="246" text-anchor="middle" class="marker-label">health</text>
+	<text x="640" y="232" text-anchor="middle" class="marker-sub">lint full scan · 주 1회</text>
+
+	<!-- Footnote -->
+	<text x="400" y="342" text-anchor="middle" class="footnote">무거운 계산이 있을 때만 캐시 레이어 추가 — Live가 가능하면 Live가 항상 더 단순하다.</text>
+</svg>

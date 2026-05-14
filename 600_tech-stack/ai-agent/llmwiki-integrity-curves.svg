@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-label="시간에 따른 무결성 변화 — 카파시 최소 스펙은 매끄럽게 감쇠하고, 본 볼트는 lint 강제로 톱니 패턴을 그리며 천천히 감쇠한다">
+  <defs>
+    <style>
+      /* Palette baseline (shared by sister SVGs in this article) */
+      /* Ink:        #1f2a44  deep navy            */
+      /* Slate:      #4a5b78  slate-blue           */
+      /* Muted:      #8a93a6  cool gray-blue       */
+      /* Beige:      #f3ead8  warm beige (paper)   */
+      /* Accent:     #b4593a  terracotta           */
+      /* Danger:     #e9c2b4  warning beige-red    */
+
+      .frame      { fill: none; stroke: #1f2a44; stroke-width: 1.5; }
+      .axis       { stroke: #1f2a44; stroke-width: 1.5; fill: none; }
+      .axis-arrow { fill: #1f2a44; }
+      .grid       { stroke: #8a93a6; stroke-width: 0.5; stroke-dasharray: 2 3; fill: none; opacity: 0.55; }
+
+      .danger-band { fill: #e9c2b4; opacity: 0.45; }
+      .danger-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 10px; fill: #b4593a; letter-spacing: 0.12em; font-weight: 600; }
+
+      .curve-a { stroke: #b4593a; stroke-width: 2; fill: none; stroke-dasharray: 6 4; stroke-linecap: round; }
+      .curve-b { stroke: #1f2a44; stroke-width: 2.2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+
+      .axis-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 13px; fill: #1f2a44; font-weight: 600; }
+      .axis-end   { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #4a5b78; }
+      .tick       { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 10px; fill: #4a5b78; }
+
+      .annot       { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 12px; fill: #1f2a44; }
+      .annot-accent { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 12px; fill: #b4593a; font-weight: 600; }
+      .annot-small { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 10px; fill: #4a5b78; font-style: italic; }
+
+      .legend-box  { fill: none; stroke: #1f2a44; stroke-width: 1; }
+      .legend-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 12px; fill: #1f2a44; }
+
+      .lint-marker { fill: #1f2a44; }
+    </style>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2a44"/>
+    </marker>
+    <marker id="ah-thin" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4a5b78"/>
+    </marker>
+  </defs>
+
+  <!-- Plot area: x 90..680 (width 590), y 50..360 (height 310)
+       y=50  → 100% integrity
+       y=360 → 0% integrity   (so 1% = 3.1px)
+       Danger zone: < 60% → y > 50 + 0.4*310 = 174 -->
+
+  <!-- Danger band (below 60%) -->
+  <rect x="90" y="174" width="590" height="186" class="danger-band" />
+  <text class="danger-label" x="672" y="190" text-anchor="end">DANGER  ·  &lt; 60%</text>
+
+  <!-- Plot frame -->
+  <rect x="90" y="50" width="590" height="310" class="frame" />
+
+  <!-- Horizontal gridlines at 25/50/75 -->
+  <line class="grid" x1="90" y1="127.5" x2="680" y2="127.5" />
+  <line class="grid" x1="90" y1="205"   x2="680" y2="205" />
+  <line class="grid" x1="90" y1="282.5" x2="680" y2="282.5" />
+
+  <!-- Y-axis ticks -->
+  <text class="tick" x="84" y="54"  text-anchor="end">100</text>
+  <text class="tick" x="84" y="131" text-anchor="end">75</text>
+  <text class="tick" x="84" y="208" text-anchor="end">50</text>
+  <text class="tick" x="84" y="286" text-anchor="end">25</text>
+  <text class="tick" x="84" y="363" text-anchor="end">0</text>
+
+  <!-- X-axis ticks -->
+  <text class="tick" x="90"  y="378" text-anchor="middle">t = 0</text>
+  <text class="tick" x="385" y="378" text-anchor="middle">t = 6mo</text>
+  <text class="tick" x="680" y="378" text-anchor="middle">t = ∞</text>
+
+  <!-- Axis titles -->
+  <text class="axis-title" x="385" y="402" text-anchor="middle">시간 →</text>
+  <text class="axis-title" x="36"  y="205" text-anchor="middle" transform="rotate(-90 36 205)">무결성 (%)  →</text>
+
+  <!--
+    Curve A — Karpathy minimal spec (no enforcement, smooth decay)
+    Smooth exponential-like decay from (90, 50) → (680, 224)  [100% → ~44%]
+  -->
+  <path class="curve-a"
+        d="M 90 50
+           C 200 60, 320 110, 420 160
+           S 580 215, 680 224"
+        marker-end="url(#ah)" />
+
+  <!--
+    Curve B — Vault with lint enforcement (saw-tooth, slowly trending down)
+    Each saw-tooth: small dip (drift) followed by a rebound (lint) back to ~95-98%.
+    Net trend: from y=50 (100%) at t=0 → y=120 (~77%) at t=∞.
+    Sequence of lint enforcement points (x, y_after_lint).
+  -->
+  <path class="curve-b"
+        d="M 90 50
+           L 130 70
+           L 165 56
+           L 215 78
+           L 250 62
+           L 300 86
+           L 335 70
+           L 385 92
+           L 420 78
+           L 470 100
+           L 505 86
+           L 555 108
+           L 590 96
+           L 640 116
+           L 680 105"
+        marker-end="url(#ah)" />
+
+  <!-- Lint enforcement markers (rebound peaks on Curve B) -->
+  <circle class="lint-marker" cx="165" cy="56" r="3" />
+  <circle class="lint-marker" cx="250" cy="62" r="3" />
+  <circle class="lint-marker" cx="335" cy="70" r="3" />
+  <circle class="lint-marker" cx="420" cy="78" r="3" />
+  <circle class="lint-marker" cx="505" cy="86" r="3" />
+  <circle class="lint-marker" cx="590" cy="96" r="3" />
+
+  <!-- Lint enforcement callout (one is enough; arrow pointing to one rebound) -->
+  <path d="M 268 32 L 252 56" stroke="#1f2a44" stroke-width="1" fill="none" marker-end="url(#ah-thin)" />
+  <text class="annot" x="272" y="30">lint enforcement  ·  주기적 강제 복원</text>
+  <text class="annot-small" x="272" y="44">(각 점 = vault-lint.py 실행 후 정정)</text>
+
+  <!-- Curve A annotation: drift compounds -->
+  <path d="M 540 240 L 590 218" stroke="#b4593a" stroke-width="1" fill="none" marker-end="url(#ah-thin)" />
+  <text class="annot-accent" x="412" y="240">no enforcement → drift compounds</text>
+
+  <!-- End-state callouts -->
+  <text class="annot-accent" x="690" y="228">~44%</text>
+  <text class="annot"        x="690" y="109">~77%</text>
+
+  <!-- Legend (top-right inside plot) -->
+  <g transform="translate(450 60)">
+    <rect class="legend-box" x="0" y="0" width="220" height="56" rx="2" />
+    <line x1="12" y1="20" x2="48" y2="20" class="curve-a" />
+    <text class="legend-text" x="56" y="24">카파시 spec (강제 없음)</text>
+    <line x1="12" y1="42" x2="48" y2="42" class="curve-b" />
+    <text class="legend-text" x="56" y="46">본 볼트 (lint 강제)</text>
+  </g>
+
+  <!-- Caption-ish bottom note -->
+  <text class="annot-small" x="385" y="430" text-anchor="middle">곡선의 모양 자체가 논증 — 톱니의 진폭과 빈도가 강제의 강도를 결정한다.</text>
+</svg>

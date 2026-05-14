@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-label="볼트 규칙을 사용 빈도와 유지 비용 두 축으로 평가하는 결정 매트릭스">
+  <defs>
+    <style>
+      /* Palette baseline (shared by sister SVGs in this article) */
+      /* Ink:        #1f2a44  deep navy            */
+      /* Slate:      #4a5b78  slate-blue           */
+      /* Muted:      #8a93a6  cool gray-blue       */
+      /* Beige:      #f3ead8  warm beige (paper)   */
+      /* BeigeWarm:  #f0dcc6  warmer beige         */
+      /* BeigeRed:   #ecd3c4  beige with red tint  */
+      /* BeigeBlue:  #e1e6e7  beige with blue tint */
+      /* Accent:     #b4593a  terracotta           */
+
+      .bg-keep   { fill: #e1e6e7; }
+      .bg-reduce { fill: #f0dcc6; }
+      .bg-defer  { fill: #f3ead8; }
+      .bg-cut    { fill: #ecd3c4; }
+
+      .frame      { fill: none; stroke: #1f2a44; stroke-width: 1.5; }
+      .axis       { stroke: #1f2a44; stroke-width: 1.5; fill: none; }
+      .axis-arrow { fill: #1f2a44; }
+
+      .axis-title    { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 13px; fill: #1f2a44; font-weight: 600; }
+      .axis-end      { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #4a5b78; }
+      .quadrant-tag  { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 15px; fill: #1f2a44; font-weight: 700; letter-spacing: 0.5px; }
+      .quadrant-sub  { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #4a5b78; }
+      .point-label   { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; font-size: 11px; fill: #1f2a44; }
+      .dot           { fill: #1f2a44; }
+      .dot-cut       { fill: #b4593a; }
+    </style>
+  </defs>
+
+  <!-- Plot area: x 80..600, y 60..460  (width 520, height 400) -->
+  <!-- Quadrants -->
+  <rect x="80"  y="60"  width="260" height="200" class="bg-cut" />
+  <rect x="340" y="60"  width="260" height="200" class="bg-reduce" />
+  <rect x="80"  y="260" width="260" height="200" class="bg-defer" />
+  <rect x="340" y="260" width="260" height="200" class="bg-keep" />
+
+  <!-- Frame -->
+  <rect x="80" y="60" width="520" height="400" class="frame" />
+
+  <!-- Center axes -->
+  <line x1="340" y1="60"  x2="340" y2="460" class="axis" />
+  <line x1="80"  y1="260" x2="600" y2="260" class="axis" />
+
+  <!-- Axis arrows -->
+  <polygon class="axis-arrow" points="600,260 590,256 590,264" />
+  <polygon class="axis-arrow" points="340,60 336,70 344,70" />
+
+  <!-- Axis titles + endpoints -->
+  <text class="axis-title" x="340" y="492" text-anchor="middle">사용 빈도 →</text>
+  <text class="axis-end"   x="90"  y="478">Low</text>
+  <text class="axis-end"   x="590" y="478" text-anchor="end">High</text>
+
+  <text class="axis-title" x="28" y="260" text-anchor="middle" transform="rotate(-90 28 260)">유지·이해 비용 →</text>
+  <text class="axis-end"   x="60" y="72"  text-anchor="end">High</text>
+  <text class="axis-end"   x="60" y="456" text-anchor="end">Low</text>
+
+  <!-- Quadrant tags (corners) -->
+  <text class="quadrant-tag" x="92"  y="84">CUT</text>
+  <text class="quadrant-sub" x="92"  y="100">제거 — 비용만 큼</text>
+
+  <text class="quadrant-tag" x="588" y="84"  text-anchor="end">REDUCE</text>
+  <text class="quadrant-sub" x="588" y="100" text-anchor="end">단순화 — 살리되 가볍게</text>
+
+  <text class="quadrant-tag" x="92"  y="448">DEFER</text>
+  <text class="quadrant-sub" x="92"  y="432">보류 — 당장 손대지 말 것</text>
+
+  <text class="quadrant-tag" x="588" y="448" text-anchor="end">KEEP</text>
+  <text class="quadrant-sub" x="588" y="432" text-anchor="end">유지 — 코어</text>
+
+  <!-- ===== Plot points ===== -->
+
+  <!-- CUT quadrant (low freq, high cost) : x 95..330, y 115..245 -->
+  <circle class="dot-cut" cx="135" cy="135" r="3.5" />
+  <text class="point-label" x="144" y="139">Query Op auto-trigger 4점제</text>
+
+  <circle class="dot-cut" cx="180" cy="170" r="3.5" />
+  <text class="point-label" x="189" y="174">description 영어 강제</text>
+
+  <circle class="dot-cut" cx="120" cy="205" r="3.5" />
+  <text class="point-label" x="129" y="209">백틱 wikilink 금지 항목</text>
+
+  <circle class="dot-cut" cx="155" cy="240" r="3.5" />
+  <text class="point-label" x="164" y="244">폴더-bound source 태그 enforcement</text>
+
+  <!-- REDUCE quadrant (high freq, high cost) : x 350..585, y 115..245 -->
+  <circle class="dot" cx="395" cy="135" r="3.5" />
+  <text class="point-label" x="404" y="139">Pre-Flight 11개 항목</text>
+
+  <circle class="dot" cx="430" cy="180" r="3.5" />
+  <text class="point-label" x="439" y="184">Related strict rule (— 설명 의무)</text>
+
+  <circle class="dot" cx="380" cy="230" r="3.5" />
+  <text class="point-label" x="389" y="234">frontmatter 7필드</text>
+
+  <!-- DEFER quadrant (low freq, low cost) : x 95..330, y 285..435 -->
+  <circle class="dot" cx="140" cy="320" r="3.5" />
+  <text class="point-label" x="149" y="324">querySources / queryOrigin</text>
+
+  <circle class="dot" cx="180" cy="395" r="3.5" />
+  <text class="point-label" x="189" y="399">Visual Aids 결정 절차</text>
+
+  <!-- KEEP quadrant (high freq, low cost) : x 350..585, y 285..435 -->
+  <circle class="dot" cx="395" cy="305" r="3.5" />
+  <text class="point-label" x="404" y="309">ISO 8601 날짜</text>
+
+  <circle class="dot" cx="450" cy="345" r="3.5" />
+  <text class="point-label" x="459" y="349">태그 3축</text>
+
+  <circle class="dot" cx="385" cy="390" r="3.5" />
+  <text class="point-label" x="394" y="394">라우팅 테이블</text>
+
+  <circle class="dot" cx="430" cy="425" r="3.5" />
+  <text class="point-label" x="439" y="429">inline wikilink</text>
+</svg>

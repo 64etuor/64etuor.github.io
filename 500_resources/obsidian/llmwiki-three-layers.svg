@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 620" role="img" aria-label="3-Layer LLM Wiki Architecture: Hub, Maps, Programs stacked by load frequency">
+  <defs>
+    <style>
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif; fill: #222; }
+      .h1 { font-size: 17px; font-weight: 600; }
+      .h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; }
+      .body { font-size: 12px; fill: #444; }
+      .meta { font-size: 11px; fill: #777; font-style: italic; }
+      .axis { font-size: 11px; fill: #999; letter-spacing: 1px; }
+      .layer-hub { fill: #2a4d6e; fill-opacity: 0.92; }
+      .layer-maps { fill: #6e8aa6; fill-opacity: 0.85; }
+      .layer-prog { fill: #c9a96e; fill-opacity: 0.80; }
+      .text-on-dark { fill: #f5f1ea; }
+      .text-on-mid { fill: #ffffff; }
+      .text-on-light { fill: #3a2e1a; }
+      .frame { fill: none; stroke: #999; stroke-width: 1; }
+      .divider { stroke: #d4d0c8; stroke-width: 1; stroke-dasharray: 3 3; }
+      .arrow-auto { stroke: #2a4d6e; fill: none; stroke-width: 3; }
+      .arrow-ondemand { stroke: #6e8aa6; fill: none; stroke-width: 2; stroke-dasharray: 6 4; }
+      .arrow-trigger { stroke: #b8884a; fill: none; stroke-width: 1.5; stroke-dasharray: 2 3; }
+      .llm-fill { fill: #f5f1ea; stroke: #2a4d6e; stroke-width: 1.8; }
+    </style>
+    <marker id="arrHub" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2a4d6e"/>
+    </marker>
+    <marker id="arrMaps" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6e8aa6"/>
+    </marker>
+    <marker id="arrProg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b8884a"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="440" y="34" text-anchor="middle" class="label h1">3-Layer LLM Wiki Architecture</text>
+  <text x="440" y="54" text-anchor="middle" class="label meta">layer width = load frequency (narrow &amp; constant → wide &amp; rare)</text>
+
+  <!-- Vertical axis: frequency / abstraction -->
+  <line x1="60" y1="100" x2="60" y2="560" stroke="#bbb" stroke-width="1"/>
+  <polygon points="60,96 56,106 64,106" fill="#bbb"/>
+  <text x="48" y="110" text-anchor="end" class="label axis" transform="rotate(-90 48 110)">FREQUENT · ABSTRACT</text>
+  <text x="48" y="555" text-anchor="end" class="label axis" transform="rotate(-90 48 555)">RARE · CONCRETE</text>
+
+  <!-- LLM actor (left) -->
+  <g transform="translate(140 310)">
+    <circle cx="0" cy="-22" r="14" class="llm-fill"/>
+    <path d="M -18 18 Q -18 -4 0 -4 Q 18 -4 18 18 Z" class="llm-fill"/>
+    <text x="0" y="44" text-anchor="middle" class="label h2" fill="#2a4d6e">LLM</text>
+    <text x="0" y="60" text-anchor="middle" class="label meta">매 턴</text>
+  </g>
+
+  <!-- LAYER 1 — HUB (top, narrow) -->
+  <polygon points="340,100 620,100 600,170 360,170" class="layer-hub"/>
+  <text x="480" y="128" text-anchor="middle" class="label h2 text-on-dark">LAYER 1 · HUB</text>
+  <text x="480" y="148" text-anchor="middle" class="label body text-on-dark">AGENTS.md · MEMORY.md</text>
+  <text x="480" y="163" text-anchor="middle" class="label meta" fill="#cdd6e0">routing table + 필수 규칙</text>
+
+  <!-- LAYER 2 — MAPS (middle, wider) -->
+  <polygon points="290,200 670,200 650,330 310,330" class="layer-maps"/>
+  <text x="480" y="228" text-anchor="middle" class="label h2 text-on-mid">LAYER 2 · MAPS</text>
+  <text x="480" y="252" text-anchor="middle" class="label body text-on-mid">000_System/schema/</text>
+  <text x="480" y="272" text-anchor="middle" class="label body text-on-mid">tag-system.md  ·  vault-map.md</text>
+  <text x="480" y="290" text-anchor="middle" class="label body text-on-mid">template-catalog.md</text>
+  <text x="480" y="316" text-anchor="middle" class="label meta" fill="#e8eef4">참조용 스키마 — 작업 유형에 맞춰 1–3개</text>
+
+  <!-- LAYER 3 — PROGRAMS (bottom, widest) -->
+  <polygon points="220,360 740,360 720,540 240,540" class="layer-prog"/>
+  <text x="480" y="390" text-anchor="middle" class="label h2 text-on-light">LAYER 3 · PROGRAMS</text>
+  <text x="480" y="414" text-anchor="middle" class="label body text-on-light">.claude/skills/*/SKILL.md</text>
+  <text x="480" y="442" text-anchor="middle" class="label body text-on-light">process-book-note  ·  query-to-note</text>
+  <text x="480" y="460" text-anchor="middle" class="label body text-on-light">vault-lint  ·  clip-to-vault  ·  related-cleanup</text>
+  <text x="480" y="478" text-anchor="middle" class="label body text-on-light">write-deep-article  ·  write-essay  ·  …</text>
+  <text x="480" y="520" text-anchor="middle" class="label meta" fill="#6e5a2e">실행 가능한 워크플로우 — 키워드 트리거로 발화</text>
+
+  <!-- SSOT boundary markers between layers -->
+  <line x1="280" y1="185" x2="680" y2="185" class="divider"/>
+  <text x="690" y="189" class="label meta">SSOT 경계</text>
+  <line x1="210" y1="345" x2="750" y2="345" class="divider"/>
+  <text x="760" y="349" class="label meta">SSOT 경계</text>
+
+  <!-- Arrows from LLM to each layer (differentiated by style) -->
+  <!-- to Hub: solid thick (every turn) -->
+  <path d="M 160 290 Q 250 200 350 135" class="arrow-auto" marker-end="url(#arrHub)"/>
+  <text x="200" y="225" class="label body" fill="#2a4d6e">매 턴 자동</text>
+  <text x="200" y="240" class="label meta" fill="#2a4d6e">always loaded</text>
+
+  <!-- to Maps: medium dashed (on-demand) -->
+  <path d="M 165 310 Q 230 290 295 275" class="arrow-ondemand" marker-end="url(#arrMaps)"/>
+  <text x="172" y="358" class="label body" fill="#6e8aa6">on-demand</text>
+  <text x="172" y="372" class="label meta" fill="#6e8aa6">max 3 / task</text>
+
+  <!-- to Programs: thin dotted (trigger) -->
+  <path d="M 160 340 Q 200 430 235 460" class="arrow-trigger" marker-end="url(#arrProg)"/>
+  <text x="55" y="470" class="label body" fill="#b8884a">키워드 트리거</text>
+  <text x="55" y="484" class="label meta" fill="#b8884a">on match only</text>
+
+  <!-- Legend (right side) -->
+  <g transform="translate(770 105)">
+    <text x="0" y="0" class="label h2" fill="#444">화살표</text>
+    <line x1="0" y1="18" x2="34" y2="18" class="arrow-auto" marker-end="url(#arrHub)"/>
+    <text x="0" y="38" class="label meta">상시</text>
+    <line x1="0" y1="58" x2="34" y2="58" class="arrow-ondemand" marker-end="url(#arrMaps)"/>
+    <text x="0" y="78" class="label meta">선택적</text>
+    <line x1="0" y1="98" x2="34" y2="98" class="arrow-trigger" marker-end="url(#arrProg)"/>
+    <text x="0" y="118" class="label meta">트리거</text>
+  </g>
+
+  <!-- Footer note -->
+  <text x="440" y="590" text-anchor="middle" class="label meta">세 층은 SSOT 경계로 책임이 분리된다 — Hub는 무엇을 어디서 찾을지, Maps는 어떻게 분류·배치할지, Programs는 어떻게 실행할지를 소유한다.</text>
+</svg>
