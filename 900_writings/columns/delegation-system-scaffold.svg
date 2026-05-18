@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 480" role="img" aria-label="좋은 위임은 목표·맥락·기준·권한·검증 다섯 기둥이 떠받치는 시스템이라는 구조">
+  <defs>
+    <style>
+      .bg    { fill: #faf8f3; }
+      .ink   { fill: #20242b; font-family: 'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; }
+      .sub   { fill: #5b6570; font-family: 'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; }
+      .title { font-size: 20px; font-weight: 700; }
+      .h     { font-size: 16px; font-weight: 700; }
+      .t     { font-size: 13px; }
+      .cap   { font-size: 13px; font-style: italic; }
+      .top   { fill: #20242b; }
+      .ontop { fill: #ffffff; }
+      .pillar{ fill: #ffffff; stroke: #2f6f4f; stroke-width: 1.6; }
+      .pcap  { fill: #2f6f4f; font-weight: 700; }
+      .base  { fill: #eef3ee; stroke: #2f6f4f; stroke-width: 1.4; }
+      .arrow { stroke: #2f6f4f; stroke-width: 2.4; fill: none; }
+    </style>
+    <marker id="up" viewBox="0 0 10 10" refX="5" refY="2" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 10 L5 0 L10 10 z" fill="#2f6f4f"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="820" height="480" rx="10"/>
+
+  <!-- outcome -->
+  <text class="ink title" x="410" y="44" text-anchor="middle">좋은 판단 · 반복되는 좋은 결과</text>
+  <path class="arrow" d="M410 96 L410 60" marker-end="url(#up)"/>
+
+  <!-- worker -->
+  <rect class="top" x="280" y="98" width="260" height="60" rx="10"/>
+  <text class="ontop h" x="410" y="134" text-anchor="middle">작업자  ·  AI · 사람</text>
+
+  <!-- pillars -->
+  <g>
+    <rect class="pillar" x="44"  y="190" width="138" height="150" rx="9"/>
+    <text class="ink h pcap" x="113" y="222" text-anchor="middle">목표</text>
+    <text class="sub t" x="113" y="252" text-anchor="middle">무엇이</text>
+    <text class="sub t" x="113" y="272" text-anchor="middle">달라져야</text>
+    <text class="sub t" x="113" y="292" text-anchor="middle">하는가</text>
+
+    <rect class="pillar" x="196" y="190" width="138" height="150" rx="9"/>
+    <text class="ink h pcap" x="265" y="222" text-anchor="middle">맥락</text>
+    <text class="sub t" x="265" y="252" text-anchor="middle">최신 기준과</text>
+    <text class="sub t" x="265" y="272" text-anchor="middle">폐기 자료를</text>
+    <text class="sub t" x="265" y="292" text-anchor="middle">구분해 줌</text>
+
+    <rect class="pillar" x="348" y="190" width="138" height="150" rx="9"/>
+    <text class="ink h pcap" x="417" y="222" text-anchor="middle">기준</text>
+    <text class="sub t" x="417" y="252" text-anchor="middle">성공의 정의를</text>
+    <text class="sub t" x="417" y="272" text-anchor="middle">사전에</text>
+    <text class="sub t" x="417" y="292" text-anchor="middle">합의</text>
+
+    <rect class="pillar" x="500" y="190" width="138" height="150" rx="9"/>
+    <text class="ink h pcap" x="569" y="222" text-anchor="middle">권한</text>
+    <text class="sub t" x="569" y="252" text-anchor="middle">결정과 책임의</text>
+    <text class="sub t" x="569" y="272" text-anchor="middle">범위가</text>
+    <text class="sub t" x="569" y="292" text-anchor="middle">명확</text>
+
+    <rect class="pillar" x="652" y="190" width="138" height="150" rx="9"/>
+    <text class="ink h pcap" x="721" y="222" text-anchor="middle">검증</text>
+    <text class="sub t" x="721" y="252" text-anchor="middle">중간 점검과</text>
+    <text class="sub t" x="721" y="272" text-anchor="middle">평가 지표가</text>
+    <text class="sub t" x="721" y="292" text-anchor="middle">있음</text>
+  </g>
+
+  <!-- base -->
+  <rect class="base" x="44" y="356" width="746" height="44" rx="9"/>
+  <text class="ink h" x="417" y="384" text-anchor="middle">시스템 · 하네스 — 결과가 우연이 아니라 반복되게 만드는 구조</text>
+
+  <text class="sub cap" x="410" y="438" text-anchor="middle">기둥 다섯이 빠진 자리를 "알아서"라는 한마디가 대신 메웁니다.</text>
+  <text class="sub cap" x="410" y="462" text-anchor="middle">좋은 위임은 지시가 아니라, 상대가 판단할 수 있는 환경을 까는 일입니다.</text>
+</svg>

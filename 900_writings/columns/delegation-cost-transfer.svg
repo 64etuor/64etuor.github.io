@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 470" role="img" aria-label="모호한 위임이 탐색 비용을 AI와 사람에게 전가하는 구조">
+  <defs>
+    <style>
+      .bg    { fill: #faf8f3; }
+      .ink   { fill: #20242b; font-family: 'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; }
+      .sub   { fill: #5b6570; font-family: 'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; }
+      .title { font-size: 21px; font-weight: 700; }
+      .h     { font-size: 17px; font-weight: 700; }
+      .t     { font-size: 14px; }
+      .s     { font-size: 13px; }
+      .cap   { font-size: 13px; font-style: italic; }
+      .src   { fill: #ffffff; }
+      .panel { fill: #ffffff; stroke: #d9d2c4; stroke-width: 1.5; }
+      .warn  { fill: #fbeee9; stroke: #c0563a; stroke-width: 1.5; }
+      .flow  { stroke: #b9543b; stroke-width: 2.4; fill: none; }
+      .src-box { fill: #20242b; }
+    </style>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#b9543b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="820" height="470" rx="10"/>
+
+  <!-- source instruction -->
+  <rect class="src-box" x="250" y="26" width="320" height="74" rx="10"/>
+  <text class="src title" x="410" y="55" text-anchor="middle">"알아서 해줘"</text>
+  <text class="src s" x="410" y="80" text-anchor="middle" opacity="0.85">기존 거 참고해서 · 대충 방향 알지 · 관련된 거 찾아서</text>
+
+  <!-- split flows -->
+  <path class="flow" d="M410 100 L410 128 L210 128 L210 168" marker-end="url(#ah)"/>
+  <path class="flow" d="M410 100 L410 128 L610 128 L610 168" marker-end="url(#ah)"/>
+  <text class="sub h" x="410" y="122" text-anchor="middle">탐색 비용 전가</text>
+
+  <!-- AI panel -->
+  <rect class="warn" x="40" y="172" width="340" height="208" rx="12"/>
+  <text class="ink h" x="210" y="202" text-anchor="middle">AI가 치르는 비용</text>
+  <line x1="70" y1="216" x2="350" y2="216" stroke="#c0563a" stroke-width="1" opacity="0.4"/>
+  <text class="ink t" x="70" y="248">· 어떤 파일·문서가 기준인지 몰라 과잉 검색</text>
+  <text class="ink t" x="70" y="284">· 컨텍스트 창을 무관한 정보로 소모</text>
+  <text class="ink t" x="70" y="320">· 잡음에 흐려진 판단 → 환각으로 빈칸 채움</text>
+  <text class="sub s" x="70" y="356">토큰 · 컨텍스트가 새어 나갑니다</text>
+
+  <!-- Human panel -->
+  <rect class="warn" x="440" y="172" width="340" height="208" rx="12"/>
+  <text class="ink h" x="610" y="202" text-anchor="middle">사람이 치르는 비용</text>
+  <line x1="470" y1="216" x2="750" y2="216" stroke="#c0563a" stroke-width="1" opacity="0.4"/>
+  <text class="ink t" x="470" y="248">· 담당자·최신본·기준을 먼저 복원</text>
+  <text class="ink t" x="470" y="284">· 방향이 맞는지 반복 확인</text>
+  <text class="ink t" x="470" y="320">· 묻기 전 눈치, 정치적 부담까지 계산</text>
+  <text class="sub s" x="470" y="356">시간 · 주의력 · 감정 에너지가 새어 나갑니다</text>
+
+  <!-- bottom takeaway -->
+  <rect class="panel" x="120" y="404" width="580" height="46" rx="10"/>
+  <text class="ink t" x="410" y="432" text-anchor="middle">이것은 <tspan font-weight="700">실행이 아니라 탐색</tspan>입니다. 그리고 탐색은 결코 공짜가 아닙니다.</text>
+</svg>
